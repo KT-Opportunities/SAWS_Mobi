@@ -188,6 +188,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./Pages/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
   },
+
+  {
+    path: 'sigmet_airmet',
+    loadChildren: () =>
+      import('./Pages/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
+  },
 ];
 
 @NgModule({
