@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, catchError } from 'rxjs';
 
@@ -9,6 +9,8 @@ import { Observable, catchError } from 'rxjs';
 export class APIService {
   User: any;
   token: any;
+
+
   constructor(private http: HttpClient) {
     var stringUser = sessionStorage.getItem('User');
     if (stringUser) {

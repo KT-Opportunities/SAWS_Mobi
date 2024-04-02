@@ -119,7 +119,9 @@ export class AppComponent {
     const currentRoute = this.router.url;
     return (
       currentRoute.includes('/subscription-package') ||
-      currentRoute.includes('/web-cam') || currentRoute.includes('/observation')
+      currentRoute.includes('/web-cam') ||
+      currentRoute.includes('/observation') ||
+      currentRoute.includes('/provide-feedback')
     );
   }
 }

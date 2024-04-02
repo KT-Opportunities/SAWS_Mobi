@@ -5,6 +5,7 @@ import { Feedback } from '../Models/message.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { fileDataFeedback } from 'src/app/Models/File';
 interface Message {
   feedback?: string;
   response?: string;
@@ -32,7 +33,15 @@ export class ChatPage implements OnInit {
   userEmail: any;
   userId: any;
   isBroadcastMessage: boolean = false;
+  files: fileDataFeedback[] = [];
 
+  selectedFile: File | undefined;
+  selectedFileName: string | undefined;
+  selectedFileSrc: string | ArrayBuffer | null = null;
+  selectedFileType: string | undefined;
+
+  fileFeedback: any = {};
+  addFile: boolean = false;
   @ViewChild('scroll') scroll: any;
 
   constructor(
@@ -167,6 +176,50 @@ export class ChatPage implements OnInit {
       this.fdMessages.some((message: any) => message.broadcast === null)
     );
   }
+  updateFileData(
+    fileDataToUpdate: fileDataFeedback,
+    newFile: File,
+    docTypeName: string
+  ) {
+    if (newFile) {
+      fileDataToUpdate.file = newFile;
+      fileDataToUpdate.DocTypeName = docTypeName;
 
-  
+      const index = this.files.findIndex(
+        (file) => file.DocTypeName === docTypeName
+      );
+
+      if (index !== -1) {
+        this.files[index] = fileDataToUpdate;
+      } else {
+        this.files.push(fileDataToUpdate);
+      }
+    }
+  }
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    this.selectedFileName = file.name;
+    this.selectedFileType = file.type;
+
+    if (file.size <= 26214400) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedFileSrc = reader.result;
+        this.addFile = true;
+      };
+
+      reader.onerror = (error) => {
+        console.error('File reading error:', error);
+      };
+      reader.readAsDataURL(file);
+
+      this.updateFileData(this.fileFeedback, event.target.files[0], 'Feedback');
+    } else {
+      // this.alertFileMessage("Feedback",`${file.type}`)
+      // this.resetFilesInp();
+    }
+
+    event.target.value = null;
+  }
 }

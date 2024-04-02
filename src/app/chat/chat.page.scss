@@ -2878,7 +2878,7 @@
   padding: 20px;
   width: 35px;
   height: 35px;
-  margin-left: -75px;
+  margin-left: -100px;
   border: none;
 }
 
@@ -3914,20 +3914,26 @@
 }
 
 @media screen and (max-width: 479px) {
+  .attachment {
+    position: relative;
+    right: 60px;
+    right: 112px;
+    color: #ffffff;
+  }
 
   .uploaded-files-container {
     margin-top: 20px;
   }
-  
+
   .uploaded-files-container h2 {
     font-size: 1.2rem;
   }
-  
+
   .uploaded-files-container ul {
     list-style-type: none;
     padding: 0;
   }
-  
+
   .uploaded-files-container li {
     margin-bottom: 5px;
   }
