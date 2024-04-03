@@ -11,6 +11,11 @@ export class FlightBriefingPage implements OnInit {
   isLogged: boolean = false;
   isFlight: boolean = true;
   isexportImport: boolean = false;
+  isdeparture: boolean = false;
+  isDropdownOpen: boolean = false;
+  selectedOption: string = 'Select flight';
+
+ 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {}
@@ -21,6 +26,30 @@ export class FlightBriefingPage implements OnInit {
   importExport() {
     this.isFlight = false;
     this.isexportImport = true;
+  }
+  departure() {
+    this.isFlight = false;
+    this.isdeparture = true;
+  }
+  flightDropdown(dropdown: string) {
+    if (dropdown === 'dropdown1') {
+      this.isDropdownOpen = !this.isDropdownOpen;
+     
+    }
+  }
+
+  selectOption(option: string, dropdown: string) {
+    if (dropdown === 'dropdown') {
+      this.selectedOption = option;
+     
+    } 
+   
+    
+    // if (dropdown === 'dropdown4') {
+    //   this.selectedOption4 = option;
+    //   this.isDropdownOpen2 = false;
+    // }
+   
   }
 
   forecastPage() {
