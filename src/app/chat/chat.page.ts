@@ -1,10 +1,20 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { Feedback } from '../Models/message.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { fileDataFeedback } from 'src/app/Models/File';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AttachmentFilePage } from './attachment-file/attachment-file.page';
 interface Message {
   feedback?: string;
   response?: string;
@@ -32,8 +42,19 @@ export class ChatPage implements OnInit {
   userEmail: any;
   userId: any;
   isBroadcastMessage: boolean = false;
+  files: fileDataFeedback[] = [];
 
+  selectedFile: File | undefined;
+  selectedFileName: string | undefined;
+  selectedFileSrc: string | ArrayBuffer | null = null;
+  selectedFileType: string | undefined;
+
+  fileFeedback: any = {};
+  addFile: boolean = false;
+  feedbackData: any;
   @ViewChild('scroll') scroll: any;
+  @ViewChild('myFileInput') myFileInputVariable!: ElementRef;
+  @ViewChild('content') content!: ElementRef;
 
   constructor(
     private router: Router,
@@ -42,7 +63,9 @@ export class ChatPage implements OnInit {
     private formBuilder: FormBuilder,
     private authS: AuthService,
     private alertController: AlertController,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) {
     this.feedbackForm = this.formBuilder.group({
       feedbackId: [],
@@ -57,14 +80,22 @@ export class ChatPage implements OnInit {
       isdeleted: [],
       deleted_at: [],
       isresponded: [],
+      feedbackFile: [''],
       responseMessage: ['', Validators.required],
       FeedbackMessages: [[]],
     });
   }
 
   ngOnInit() {
+    this.Id = this.route.snapshot.paramMap.get('Id');
+    this.username = this.route.snapshot.paramMap.get('usname');
     this.getFeedback();
+    this.APIService.getFeedbackData().subscribe((data) => {
+      this.feedbackData = data;
+      this.feedbackForm.patchValue(data);
 
+      this.shouldScrollToBottom = true;
+    });
     var user: any = this.authS.getCurrentUser();
 
     if (user) {
@@ -75,8 +106,8 @@ export class ChatPage implements OnInit {
   }
 
   getFeedback() {
-    this.Id = this.route.snapshot.paramMap.get('Id');
-    this.username = this.route.snapshot.paramMap.get('usname');
+    // this.Id = this.route.snapshot.paramMap.get('Id');
+    // this.username = this.route.snapshot.paramMap.get('usname');
 
     console.log('id: ', this.Id);
     console.log('id: ', this.username);
@@ -89,40 +120,133 @@ export class ChatPage implements OnInit {
       this.cdr.detectChanges();
     });
   }
-
+  getSafeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
   onSubmit() {
     const formValues = this.feedbackForm.value;
+    if (formValues != null) {
+      const body = {
+        feedbackId: formValues.feedbackId,
+        fullname: formValues.fullname,
+        senderId: formValues.senderId,
+        senderEmail: formValues.senderEmail,
+        responderId: this.userId,
+        responderEmail: this.userEmail,
+        created_at: formValues.created_at,
+        title: formValues.title,
+        isresponded: true,
+        FeedbackMessages: [
+          {
+            senderId: formValues.senderId,
+            senderEmail: formValues.senderEmail,
+            responderId: this.userId,
+            responderEmail: this.userEmail,
+            feedback: formValues.responseMessage,
+            response: '',
+            feedbackAttachment: formValues.responseMessage,
+            feedbackAttachmentFileName: this.selectedFileName,
+            responseAttachment: '',
+            responseAttachmentFileName: '',
+          },
+        ],
+      };
 
-    const body = {
-      feedbackId: formValues.feedbackId,
-      fullname: formValues.fullname,
-      senderId: formValues.senderId,
-      senderEmail: formValues.senderEmail,
-      responderId: this.userId,
-      responderEmail: this.userEmail,
-      created_at: formValues.created_at,
-      title: formValues.title,
-      isresponded: true,
-      FeedbackMessages: [
-        {
-          senderId: formValues.senderId,
-          senderEmail: formValues.senderEmail,
-          responderId: this.userId,
-          responderEmail: this.userEmail,
-          feedback: formValues.responseMessage,
-          response: '',
-        },
-      ],
-    };
-
-    this.updateFeedbackForm(body);
+      this.updateFeedbackForm(body);
+    } else {
+      alert('you cannot send empty message');
+    }
   }
+  onSubmitAttachment() {
+    debugger;
+    if (this.selectedFile) {
+      const formValues = this.feedbackForm.value;
 
+      const body = {
+        feedbackId: formValues.feedbackId,
+        fullname: formValues.fullname,
+        senderId: formValues.senderId,
+        senderEmail: formValues.senderEmail,
+        responderId: this.userId,
+        responderEmail: this.userEmail,
+        created_at: formValues.created_at,
+        title: formValues.title,
+        isresponded: true,
+        FeedbackMessages: [
+          {
+            senderId: formValues.senderId,
+            senderEmail: formValues.senderEmail,
+            responderId: this.userId,
+            responderEmail: this.userEmail,
+            feedback: '',
+            response: '',
+            feedbackAttachment: formValues.responseMessage,
+            feedbackAttachmentFileName: this.selectedFileName,
+            responseAttachment: '',
+            responseAttachmentFileName: '',
+          },
+        ],
+      };
+      this.updateFeedbackFormWithAttachment(body);
+    } else {
+      return;
+    }
+  }
+  onUpload(id: number) {
+    if (this.files.length > 0) {
+      this.files[0].Id = 0;
+      this.files[0].feedbackMessageId = id;
+
+      const formData = new FormData();
+
+      for (let i = 0; i < this.files.length; i++) {
+        formData.append(`files[${i}].id`, JSON.stringify(this.files[i].Id));
+        formData.append(
+          `files[${i}].feedbackMessageId`,
+          JSON.stringify(this.files[i].feedbackMessageId)
+        );
+        formData.append(`files[${i}].DocTypeName`, this.files[i].DocTypeName);
+        formData.append(`files[${i}].file`, this.files[i].file);
+      }
+
+      this.APIService.PostDocsForFeedback(formData).subscribe(
+        (event: any) => {
+          this.resetFilesInp();
+        },
+        (err) => {
+          console.log('file upload failed: ', err);
+        }
+      );
+    }
+  }
   updateFeedbackForm(body: any) {
-    this.APIService.postInsertNewFeedback(body).subscribe((data: any) => {
-      this.feedbackForm.reset();
-      this.getFeedback();
-    });
+    this.APIService.postInsertNewFeedback(body).subscribe(
+      (data: any) => {
+        this.feedbackForm.reset();
+        this.getFeedback();
+      },
+      (err) => {
+        console.log('Error:', err);
+        alert('Unsuccessful');
+      }
+    );
+  }
+  updateFeedbackFormWithAttachment(body: any) {
+    this.APIService.postInsertNewFeedback(body).subscribe(
+      (data: any) => {
+        this.feedbackForm.reset();
+        this.onUpload(
+          data.DetailDescription.FeedbackMessages[0].feedbackMessageId
+        );
+      },
+      (err: any) => {
+        console.log('Error:', err);
+        alert('Unsuccessful');
+      }
+    );
+  }
+  resetFilesInp() {
+    this.myFileInputVariable.nativeElement.value = '';
   }
 
   home() {
@@ -167,6 +291,99 @@ export class ChatPage implements OnInit {
       this.fdMessages.some((message: any) => message.broadcast === null)
     );
   }
+  updateFileData(
+    fileDataToUpdate: fileDataFeedback,
+    newFile: File,
+    docTypeName: string
+  ) {
+    if (newFile) {
+      fileDataToUpdate.file = newFile;
+      fileDataToUpdate.DocTypeName = docTypeName;
 
-  
+      const index = this.files.findIndex(
+        (file) => file.DocTypeName === docTypeName
+      );
+
+      if (index !== -1) {
+        this.files[index] = fileDataToUpdate;
+      } else {
+        this.files.push(fileDataToUpdate);
+      }
+    }
+  }
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    this.selectedFileName = file.name;
+    this.selectedFileType = file.type;
+
+    if (file.size <= 26214400) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedFileSrc = reader.result;
+        this.addFile = true;
+      };
+
+      reader.onerror = (error) => {
+        console.error('File reading error:', error);
+      };
+      reader.readAsDataURL(file);
+
+      this.updateFileData(this.fileFeedback, event.target.files[0], 'Feedback');
+    } else {
+      alert('File exceeds 25mb,please upload a smaller size file');
+      this.resetFilesInp();
+    }
+
+    event.target.value = null;
+  }
+  fileType: any = '';
+  shouldScrollToBottom: boolean = true;
+  openAttachmentDialog(
+    element: any,
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ) {
+    this.fileType = this.APIService.getFileType(
+      element.file_mimetype || this.selectedFileType
+    );
+
+    this.shouldScrollToBottom = false;
+
+    const formValues = this.feedbackForm.value;
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+
+    const dialogRef = this.dialog.open(AttachmentFilePage, {
+      data: {
+        feedbackData: element,
+        imageSRC: this.selectedFileSrc || element.file_url,
+        message: formValues.responseMessage || '',
+        responderEmail: this.userEmail,
+        resonderId: this.userId,
+        addFile: this.addFile,
+        fileType: this.fileType,
+      },
+      enterAnimationDuration,
+      exitAnimationDuration,
+      width: '85%',
+      // height:'80%',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 'submit') {
+        this.onSubmitAttachment();
+        this.shouldScrollToBottom = true;
+      }
+
+      this.selectedFile = undefined;
+      this.selectedFileSrc = null;
+      this.selectedFileType = undefined;
+      this.addFile = false;
+      // this.feedbackForm.reset();
+    });
+  }
 }

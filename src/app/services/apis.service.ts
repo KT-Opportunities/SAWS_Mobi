@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError,BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,9 @@ import { Observable, catchError } from 'rxjs';
 export class APIService {
   User: any;
   token: any;
+  private feedbackSubject = new BehaviorSubject<any | null>(null);
+  public feedbackObservable$ = this.feedbackSubject.asObservable();
+
   constructor(private http: HttpClient) {
     var stringUser = sessionStorage.getItem('User');
     if (stringUser) {
@@ -29,7 +33,9 @@ export class APIService {
       body
     );
   }
-
+  setFeedbackData(data: any): void {
+    this.feedbackSubject.next(data);
+  }
   RequestPasswordReset(form: any) {
     return this.http
       .post<any>(
@@ -74,7 +80,13 @@ export class APIService {
         `Feedback/GetFeedbackMessagesBySenderId?Id=${senderId}`
     );
   }
+  PostDocsForFeedback(formData: any) {
 
+    return this.http.post<any>(
+      environment.serverAPI + "FileManager/PostDocsForFeedback",
+      formData
+    );
+  }
   // Method to fetch advertisement by ID
   getAdvertByAdvertId(id: number) {
     return this.http.get<any>(
@@ -149,5 +161,8 @@ export class APIService {
     } else {
       return "Unknown";
     }
+  }
+  getFeedbackData(): Observable<any> {
+    return this.feedbackObservable$;
   }
 }

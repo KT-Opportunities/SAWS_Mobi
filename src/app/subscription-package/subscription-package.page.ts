@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { APIService } from 'src/app/services/apis.service';
+import { take, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-subscription-package',
@@ -51,8 +52,24 @@ export class SubscriptionPackagePage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.subscriptionId = +params['id'];
+      this.subscriptionId = params['id'];
       // Optionally, you can perform any actions based on the subscription package ID here
+    });
+
+    this.authService.loginEvent.subscribe((loggedIn: boolean) => {
+      // If the user is logged in
+      if (loggedIn) {
+        // Check if a subscription package ID is set
+        if (this.selectedSubscriptionPackageId !== undefined) {
+          // Call the subscribe method if a subscription package ID is set
+          if (this.subscriptionId == 1) {
+            this.subscribe(180, this.subscriptionId);
+          } else if (this.subscriptionId == 2) {
+            this.subscribe(380, this.subscriptionId, 'Regulated');
+          }
+          // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
+        }
+      }
     });
     this.selectedPaymentType = 'monthly';
 
@@ -61,12 +78,6 @@ export class SubscriptionPackagePage implements OnInit {
     var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
     console.log(landingPage + 'landing-page');
     this.subsObj.returnUrl = landingPage + 'landing-page';
-
-    if (this.subscriptionId == 1) {
-      this.subscribe(180, this.subscriptionId);
-    } else if (this.subscriptionId == 2) {
-      this.subscribe(380, this.subscriptionId, 'Regulated');
-    }
   }
 
   openInAppBrowser(url: string) {
@@ -116,32 +127,49 @@ export class SubscriptionPackagePage implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-  // provideFeedback() {
-  //   if (this.authService.getIsLoggedIn()) {
-  //     // If user is logged in, redirect to subscription package page with ID parameter
-  //     this.authService.setRedirectUrl('/subscription-package');
-  //   } else {
-  //     // If user is not logged in, set the redirect URL and navigate to the login page
-  //     this.authService.setRedirectUrl('/subscription-package');
-  //     this.router.navigate(['/login']);
-  //   }
-  // }
   provideFeedback(subscriptionPackageId: number, amount?: number) {
-    // Check if the user is logged in
     if (!this.authService.getIsLoggedIn()) {
-      // If not logged in, set redirect URL with subscriptionPackageId and navigate to login page
       const redirectUrl = `/subscription-package?id=${subscriptionPackageId}`;
       this.authService.setRedirectUrl(redirectUrl);
-      this.router.navigate(['/login'], { queryParams: { redirectUrl } });
       this.authService.setIsFromSubscription(true);
-      return; // Exit the method
+      this.router.navigate(['/login'], { queryParams: { redirectUrl } });
+  
+      // Create a promise that resolves when the user logs in
+      const loginPromise = new Promise<void>((resolve, reject) => {
+        const subscription = this.authService.loginEvent.subscribe({
+          next: (loggedIn: boolean) => {
+            if (loggedIn) {
+              console.log('Login status changed:', loggedIn);
+              // Once logged in, resolve the promise
+              resolve();
+              // Clean up subscription
+              subscription.unsubscribe();
+            }
+          },
+          error: (error: any) => {
+            console.error('Error occurred during login event subscription:', error);
+            // Reject the promise if an error occurs
+            reject(error);
+          }
+        });
+      });
+  
+      // Once the user logs in, proceed with subscription
+      loginPromise.then(() => {
+        this.selectedSubscriptionPackageId = subscriptionPackageId;
+        this.subscribe(amount!, subscriptionPackageId);
+      }).catch(error => {
+        // Handle error appropriately
+      });
+  
     } else {
-      // If logged in, call the subscribe method
+      // If already logged in, directly set the selectedSubscriptionPackageId
+      this.selectedSubscriptionPackageId = subscriptionPackageId;
+      // Proceed with subscription
       this.subscribe(amount!, subscriptionPackageId);
     }
-    // Set the selectedSubscriptionPackageId
-    this.selectedSubscriptionPackageId = subscriptionPackageId;
   }
+  
 
   displayIcon(): boolean {
     return this.isSubscriber; // Return true if the user is a subscriber, false otherwise

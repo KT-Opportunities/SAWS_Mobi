@@ -109,10 +109,300 @@
                         </h4>
                       </div>
                     </div>
+
+                    <div
+                      *ngIf="message.responseAttachmentFileName"
+                      id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7dd-4350eb02"
+                    >
+                      <h4 class="heading-name">Admin</h4>
+                      <div class="w-layout-grid grid-37">
+                        <div
+                          id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e1-4350eb02"
+                        >
+                          <div class="w-layout-grid grid-39">
+                            <div
+                              id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e3-4350eb02"
+                              class="div-block-445"
+                            >
+                              <img
+                                src="../../assets/Group-5146.svg"
+                                loading="lazy"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e5-4350eb02"
+                              class="div-block-444"
+                            >
+                              <div
+                                class="div-block-451"
+                                (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                              >
+                                <img
+                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
+                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  loading="lazy"
+                                  width="327"
+                                  sizes="(max-width: 479px) 69vw, 327px"
+                                  [alt]="message.responseAttachmentFileName"
+                                  class="image-10"
+                                />
+
+                                <audio
+                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
+                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  autoplay
+                                  controls
+                                  class="image-10"
+                                >
+                                  <!-- <source [src]="fileBaseUrl"> -->
+                                </audio>
+
+                                <video
+                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
+                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  width="327"
+                                  sizes="(max-width: 479px) 69vw, 327px"
+                                  class="image-10"
+                                ></video>
+
+                                <iframe
+                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
+                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  width="327"
+                                  sizes="(max-width: 479px) 69vw, 327px"
+                                  class="image-10"
+                                  style="border: none"
+                                >
+                                </iframe>
+                                <!-- [src]="fileBaseUrl"
+                        width="500"
+                        height="auto" -->
+
+                                <!-- <embed 
+                          *ngIf="feedbacks.DocFeedbacks[0].file_mimetype.includes('application')" 
+                          [src]="getSafeUrl(feedbacks.DocFeedbacks[0].file_url)"
+                          type="application/pdf"
+                          width="327" 
+                          sizes="(max-width: 479px) 69vw, 327px"
+                          class="image-10"
+                        />  -->
+                              </div>
+                              <p class="paragraph-12">
+                                {{ message.responseAttachment }}
+                              </p>
+                              <div>
+                                <h4 class="time-heading">
+                                  {{ message.created_at | date : "short" }}
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!--Attachment  admin-->
+            <div
+              *ngIf="message.responseAttachmentFileName"
+              id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7dd-4350eb02"
+            >
+              <h4 class="heading-name">Admin</h4>
+              <div class="w-layout-grid grid-37">
+                <div id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e1-4350eb02">
+                  <div class="w-layout-grid grid-39">
+                    <div
+                      id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e3-4350eb02"
+                      class="div-block-445"
+                    >
+                      <img
+                        src="../../assets/Group-5146.svg"
+                        loading="lazy"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e5-4350eb02"
+                      class="div-block-444"
+                    >
+                      <div
+                        class="div-block-451"
+                        (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                      >
+                        <img
+                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
+                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          loading="lazy"
+                          width="327"
+                          sizes="(max-width: 479px) 69vw, 327px"
+                          [alt]="message.responseAttachmentFileName"
+                          class="image-10"
+                        />
+
+                        <audio
+                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
+                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          autoplay
+                          controls
+                          class="image-10"
+                        >
+                          <!-- <source [src]="fileBaseUrl"> -->
+                        </audio>
+
+                        <video
+                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
+                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          width="327"
+                          sizes="(max-width: 479px) 69vw, 327px"
+                          class="image-10"
+                        ></video>
+
+                        <iframe
+                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
+                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          width="327"
+                          sizes="(max-width: 479px) 69vw, 327px"
+                          class="image-10"
+                          style="border: none"
+                        >
+                        </iframe>
+                        <!-- [src]="fileBaseUrl"
+                  width="500"
+                  height="auto" -->
+
+                        <!-- <embed 
+                    *ngIf="feedbacks.DocFeedbacks[0].file_mimetype.includes('application')" 
+                    [src]="getSafeUrl(feedbacks.DocFeedbacks[0].file_url)"
+                    type="application/pdf"
+                    width="327" 
+                    sizes="(max-width: 479px) 69vw, 327px"
+                    class="image-10"
+                  />  -->
+                      </div>
+                      <p class="paragraph-12">
+                        {{ message.responseAttachment }}
+                      </p>
+                      <div>
+                        <h4 class="time-heading">
+                          {{ message.created_at | date : "short" }}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Attachment me-->
+            <div
+              *ngIf="message.feedbackAttachmentFileName"
+              id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7eb-4350eb02"
+            >
+              <h4 class="adm">Me</h4>
+              <div class="w-layout-grid grid-35">
+                <div
+                  id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7ef-4350eb02"
+                  class="div-block-449"
+                ></div>
+                <div id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7f0-4350eb02">
+                  <div class="w-layout-grid grid-36">
+                    <div
+                      id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7f2-4350eb02"
+                      class="div-block-446"
+                    >
+                    <div
+                    id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e5-4350eb02"
+                    class="div-block-444"
+                  >
+                    <div
+                      class="div-block-451"
+                      (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                    >
+                      <img
+                        *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
+                        [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                        loading="lazy"
+                        width="327"
+                        sizes="(max-width: 479px) 69vw, 327px"
+                        [alt]="message.responseAttachmentFileName"
+                        class="image-10"
+                      />
+
+                      <audio
+                        *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
+                        [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                        autoplay
+                        controls
+                        class="image-10"
+                      >
+                        <!-- <source [src]="fileBaseUrl"> -->
+                      </audio>
+
+                      <video
+                        *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
+                        [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                        width="327"
+                        sizes="(max-width: 479px) 69vw, 327px"
+                        class="image-10"
+                      ></video>
+
+                      <iframe
+                        *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
+                        [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                        width="327"
+                        sizes="(max-width: 479px) 69vw, 327px"
+                        class="image-10"
+                        style="border: none"
+                      >
+                      </iframe>
+                      <!-- [src]="fileBaseUrl"
+            width="500"
+            height="auto" -->
+
+                      <!-- <embed 
+              *ngIf="feedbacks.DocFeedbacks[0].file_mimetype.includes('application')" 
+              [src]="getSafeUrl(feedbacks.DocFeedbacks[0].file_url)"
+              type="application/pdf"
+              width="327" 
+              sizes="(max-width: 479px) 69vw, 327px"
+              class="image-10"
+            />  -->
+                    </div>
+                    <p class="paragraph-12">
+                      {{ message.responseAttachment }}
+                    </p>
+                    <div>
+                      <h4 class="time-heading">
+                        {{ message.created_at | date : "short" }}
+                      </h4>
+                    </div>
+                  </div>
+                      <p class="paragraph-12">{{message.feedback}}</p>
+                      <h4 class="time-heading-copy">
+                        {{message.created_at | date : "short"}}
+                      </h4>
+                    </div>
+                    <div
+                      id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7f7-4350eb02"
+                      class="div-block-445"
+                    >
+                      <img
+                        src="../../assets/Group-4959.svg"
+                        loading="lazy"
+                        alt=""
+                      />
+                    </div>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!---------------------->
+
+            <!--Attachment-->
           </ng-container>
         </div>
         <div
@@ -132,11 +422,6 @@
             >
               <div class="div-block-450">
                 <input
-                  type="file"
-                  #myFileInput
-                  formControlName="feedbackFile"
-                />
-                <input
                   formControlName="responseMessage"
                   class="text-field-4 w-input"
                   maxlength="256"
@@ -146,7 +431,39 @@
                   type="text"
                   id="name"
                 />
-
+                <svg
+                  (click)="myFileInput.click()"
+                  class="attachment"
+                  width="26.992"
+                  height="30.849"
+                  version="1.1"
+                  id="Layer_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 280.067 280.067"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <path
+                      style="fill: #ffffff"
+                      d="M149.823,257.142c-31.398,30.698-81.882,30.576-113.105-0.429
+		c-31.214-30.987-31.337-81.129-0.42-112.308l-0.026-0.018L149.841,31.615l14.203-14.098c23.522-23.356,61.65-23.356,85.172,0
+		s23.522,61.221,0,84.586l-125.19,123.02l-0.044-0.035c-15.428,14.771-40.018,14.666-55.262-0.394
+		c-15.244-15.069-15.34-39.361-0.394-54.588l-0.044-0.053l13.94-13.756l69.701-68.843l13.931,13.774l-83.632,82.599
+		c-7.701,7.596-7.701,19.926,0,27.53s20.188,7.604,27.88,0L235.02,87.987l-0.035-0.026l0.473-0.403
+		c15.682-15.568,15.682-40.823,0-56.39s-41.094-15.568-56.776,0l-0.42,0.473l-0.026-0.018l-14.194,14.089L50.466,158.485
+		c-23.522,23.356-23.522,61.221,0,84.577s61.659,23.356,85.163,0l99.375-98.675l14.194-14.089l14.194,14.089l-14.194,14.098
+		l-99.357,98.675C149.841,257.159,149.823,257.142,149.823,257.142z"
+                    />
+                  </g>
+                </svg>
+                <input
+                  type="file"
+                  #myFileInput
+                  (change)="onFileSelected($event)"
+                  formControlName="feedbackFile"
+                  style="display: none"
+                />
                 <input
                   type="submit"
                   data-wait="Please wait..."
