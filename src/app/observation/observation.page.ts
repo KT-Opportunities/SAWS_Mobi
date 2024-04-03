@@ -26,6 +26,7 @@ export class ObservationPage implements OnInit {
   isRecentMetar:boolean = false;
   isRecentTafs:boolean = false;
   isMetarHistory: boolean = false;
+  isWeatherMap:boolean = false;
   isDropdownOpen1: boolean = false;
   isDropdownOpen2: boolean = false;
   isDropdownOpen3: boolean = false;
@@ -33,6 +34,7 @@ export class ObservationPage implements OnInit {
   isDropdownOpen5: boolean = false;
   isDropdownOpen6: boolean = false;
   isDropdownOpen7: boolean = false;
+  isDropdownOpen8: boolean = false;
   isDropdownOpen: boolean = false;
   selectedOption1: string = 'Animation Type';
   selectedOption2: string = '2024-03-20 13:15';
@@ -41,6 +43,7 @@ export class ObservationPage implements OnInit {
   selectedOption5: string = 'Select saved Template';
   selectedOption6: string = 'Last Hour';
   selectedOption7: string = '5 Min';
+  selectedOption8: string = '2024-03-20 13:15';
   webcamActive: boolean = false;
 
   
@@ -68,6 +71,10 @@ export class ObservationPage implements OnInit {
     this.isMetar = false;
     this.isSpeci = true
   }
+  weathermap () {
+    this.isMetar = false;
+    this.isWeatherMap = true
+  }
   recentmeter(){
     
   }
@@ -81,7 +88,8 @@ export class ObservationPage implements OnInit {
     this.isSpeci = false;
     this.isMetarHistory = false;
     this.isRecentMetar = false;
-    this.isRecentTafs= false
+    this.isRecentTafs= false;
+    this.isWeatherMap = false;
   }
 
   colorcoded () {
@@ -115,6 +123,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen2 = false;
       this.isDropdownOpen3 = false;
       this.isDropdownOpen4 = false;
+      this.isDropdownOpen5 = false;
    
     }
 
@@ -123,6 +132,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen1 = false;
       this.isDropdownOpen3 = false;
       this.isDropdownOpen4 = false;
+      
     
     }
     
@@ -175,7 +185,15 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen5 = false;
     
     }
-   
+    if (dropdown === 'dropdown8') {
+      this.isDropdownOpen = !this.isDropdownOpen;
+      this.isDropdownOpen1 = false;
+      this.isDropdownOpen2 = false;
+      this.isDropdownOpen3 = false;
+      this.isDropdownOpen4 = false;
+      this.isDropdownOpen5 = false;
+    
+    }
    
   }
   selectOption(option: string, dropdown: string) {

@@ -83,13 +83,13 @@
         >
           <h1 class="heading-5">Satellite</h1>
         </div>
-        <a
+        <div (click)="weathermap()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Access to real-time AWS</h1>
-        </a>
+          <h1 class="heading-5">Weather Map</h1>
+        </div>
       </div>
     </div></div>
  
@@ -1628,7 +1628,7 @@
 
         <div class="cloud-cover">
           <h1 class="heading-12"
-          style="">SAWS Satelite</h1>
+          >SAWS Satelite</h1>
 
           <div class="w-layout-grid metar-history-grid" style="margin-right: 18px; 
           margin-right: 18px;
@@ -2444,6 +2444,118 @@
     </div>
   </section>
 
+  <!-- Weather Map -->
+  <section class="ob-metar-history" *ngIf="isWeatherMap">
+    <div class="cloud-cover">
+      <h1 class="heading-6">
+        Current METAR/SYNOP temperatures and weather
+      </h1>
+
+      <div class="w-layout-grid metar-history-grid">
+        <div
+          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
+          class="div-block-15"
+        >
+          <div class="div-block-14"></div>
+        </div>
+        <div
+          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
+          class="form-block w-form"
+        >
+          <div class="w-form">
+            <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
+              <label for="" class="field-label">Last Updated:</label>
+            </div>
+            <div>
+              <form
+                id="email-form-3"
+                name="email-form-3"
+                data-name="Email Form 3"
+                method="get"
+                class="form-3"
+                data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+                data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
+              >
+                <div>
+                  <div
+                    data-hover="false"
+                    data-delay="0"
+                    class="text-field-blue w-dropdown"
+                    (click)="toggleDropdown('dropdown8')"
+                    style="z-index: 1000; position: relative"
+                  >
+                    <div class="w-dropdown-toggle">
+                      <div
+                        class="icon-2 w-icon-dropdown-toggle"
+                        id="icon2"
+                      ></div>
+                      <div class="text-block">{{selectedOption8}}</div>
+                    </div>
+                    <nav class="dropdown-list1"
+                  
+                    *ngIf="isDropdownOpen">
+                    
+                      
+                      <div
+                        class="w-dropdown-link"
+                        (click)="selectOption('', 'dropdown8')"
+                        >2024-03-20 13:15</div>
+                      
+                    
+                    </nav>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div>
+            
+            </div>
+
+            <div class="w-form-done">
+              <div></div>
+            </div>
+            <div class="w-form-fail">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-15">
+        <div>
+          <div class="">
+            <div class="rows-wrap">
+              <div
+                data-delay="4000"
+                data-animation="slide"
+                class="slider-2 w-slider"
+                data-autoplay="false"
+                data-easing="ease"
+                data-hide-arrows="false"
+                data-disable-swipe="false"
+                data-autoplay-limit="0"
+                data-nav-spacing="3"
+                data-duration="500"
+                data-infinite="true"
+              >
+                <div class="w-slider-mask">
+                  <div class="w-slide"></div>
+                  <div class="w-slide"></div>
+                </div>
+                <div class="w-slider-arrow-left">
+                  <div class="w-icon-slider-left"></div>
+                </div>
+                <div class="w-slider-arrow-right">
+                  <div class="w-icon-slider-right"></div>
+                </div>
+                <div class="w-slider-nav w-round w-num"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <div class="bottomdiv" style="margin-top: 147% !important;">
       <img
