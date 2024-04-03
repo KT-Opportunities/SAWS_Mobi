@@ -15,6 +15,10 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'attachment-file',
+    loadChildren: () => import('./chat/attachment-file/attachment-file.module').then( m => m.AttachmentFilePageModule)
+  },
+  {
     path: 'subscription-package/:id', // Define the route with the ID parameter
     loadChildren: () =>
       import('./subscription-package/subscription-package.module').then(
