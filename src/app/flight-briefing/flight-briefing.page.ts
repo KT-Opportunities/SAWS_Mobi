@@ -12,8 +12,9 @@ export class FlightBriefingPage implements OnInit {
   isFlight: boolean = true;
   isexportImport: boolean = false;
   isdeparture: boolean = false;
-  isDropdownOpen: boolean = false;
-  selectedOption: string = 'Select flight';
+  isDropdownOpen1: boolean = false;
+  isSharedflight: boolean = false;
+  selectedOption1: string = 'Select flight';
 
  
   constructor(private router: Router, private authService: AuthService) {}
@@ -31,28 +32,46 @@ export class FlightBriefingPage implements OnInit {
     this.isFlight = false;
     this.isdeparture = true;
   }
-  flightDropdown(dropdown: string) {
-    if (dropdown === 'dropdown1') {
-      this.isDropdownOpen = !this.isDropdownOpen;
-     
-    }
+  shareflieght() {
+    this.isFlight = false;
+    this.isSharedflight = true;
   }
+ 
 
-  selectOption(option: string, dropdown: string) {
-    if (dropdown === 'dropdown') {
-      this.selectedOption = option;
-     
-    } 
-   
-    
-    // if (dropdown === 'dropdown4') {
-    //   this.selectedOption4 = option;
-    //   this.isDropdownOpen2 = false;
-    // }
-   
-  }
+  
 
   forecastPage() {
     this.router.navigate(['/landing-page']);
   }
+
+  flieghtBrief() {
+    this.isFlight = true;
+   this.isexportImport = false;
+  this.isdeparture = false;
+  this.isDropdownOpen1 = false;
+  this.isSharedflight = false;
+  }
+
+  selectOption(option: string, dropdown: string) {
+    if (dropdown === 'dropdown1') {
+      this.selectedOption1 = option;
+    } 
+   
+  }
+
+  selectDropdown(dropdown: string) {
+    if (dropdown === 'dropdown1') {
+      this.isDropdownOpen1 = !this.isDropdownOpen1;
+      
+    
+    }
+   
 }
+  closeAllDropdowns() {
+    this.isDropdownOpen1 = false;
+ 
+  }
+
+}
+
+

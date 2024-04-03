@@ -47,7 +47,7 @@
         >
           <h1 class="heading-5">Flight:Save</h1>
         </div>
-        <div
+        <div (click)="shareflieght()"
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           
           class="link-block-3 w-inline-block"
@@ -84,18 +84,18 @@
               <div class="div-block-44">
                 <div class="div-block-43"><label for="field-3" class="field-label-2">Choose a flight to be exported to a file:</label>
                   <div data-hover="false"
-                   data-delay="0" (click)="flightDropdown('dropdown')" 
+                   data-delay="0" (click)="selectDropdown('dropdown1')" 
                    class="text-field-blue-copy w-dropdown">
                     <div class="w-dropdown-toggle">
                       <div class="icon-2 w-icon-dropdown-toggle"
                       id="icon2"></div>
-                      <div class="text-block">{{selectedOption}}</div>
+                      <div class="text-block">{{selectedOption1}}</div>
                     </div>
                     <nav class="dropdown-list1"
-                    *ngIf="isDropdownOpen">
-                      <a href="#" class="w-dropdown-link" (click)="selectOption('','dropdown')">Link 1</a>
-                      <a href="#" class="w-dropdown-link" (click)="selectOption('','dropdown')">Link 2</a>
-                      <a href="#" class="w-dropdown-link" (click)="selectOption ('','dropdown')">Link 3</a>
+                    *ngIf="isDropdownOpen1">
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown1')">Link 1</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown1')">Link 2</div>
+                      <div class="w-dropdown-link" (click)="selectOption ('','dropdown1')">Link 3</div>
                     </nav>
                   </div>
                 </div>
@@ -343,7 +343,7 @@
       
 
         <div class="div-block-469">
-          <a href="#" class="button-2-copy w-button">Submit</a>
+          <div style="margin-top: 3px !important;" class="button-2-copy w-button">Submit</div>
         </div>
       </div>
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
@@ -355,14 +355,45 @@
       </div>
     </section>
 
+    <!-- Share Flieght -->
+    <section class="shared-flight" *ngIf="isSharedflight">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <div class="import-and-export-main-div">
+        <h1 class="heading-6">Folder sharing</h1>
+        <div class="w-layout-grid trand-grid">
+          <div id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba3-b80dd68f" class="div-block-15">
+            <div class="div-block-14"></div>
+          </div>
+          <h1 class="sub-heading-share-flight">Shared users are able to view (but not edit and save) your flights.</h1>
+          <h1 id="w-node-d9fe79e2-2e25-5a60-a725-9b5aeb764182-b80dd68f" class="sub-heading-share-flight">You do not have any users shared at the moment.</h1>
+          <div id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba7-b80dd68f" class="form-block w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2" data-wf-page-id="66053bcf8df3e25ab80dd68f" data-wf-element-id="3d077699-f5ce-4c2f-6a31-1953017efba8">
+              <div class="div-block-44">
+                <div class="div-block-43"><label for="field-2" class="field-label-2"><strong>Enter a username to share</strong></label>
+                  <input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" style="margin-top: -5px;"></div>
+                <div class="button-2-copy w-button">Export</div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+        <div class="footerdiv">
+          <div class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+            <h6 class="heading-10">Forecast</h6>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    
 
-   
-
-
-     <div class="bottomdiv" style="margin-top: 156%"
-     *ngIf="!isFlight">
+    <div class="bottomdiv" style="margin-top: 147% !important;">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -371,13 +402,23 @@
         class="image"
       />
       <div class="footerdiv">
-        <a (click)="forecastPage()" class="w-inline-block"
+        <a class="w-inline-block" (click)="flieghtBrief()"
           ><img src="../../assets/Group-3489.svg" loading="lazy" alt=""
         /></a>
       </div>
+    </div>
+
+    <div class="bottomdiv" style="margin-top: 147%" *ngIf="!isFlight">
+      <img
+        src="../../assets/Path-3447.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image"
+      />
 
       <div class="footerdiv" id="footerdivid1" >
-        <a    (click)="forecastPage()" class="link-block-5 w-inline-block"
+        <a    (click)=" flieghtBrief()" class="link-block-5 w-inline-block"
           ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
           <h6 class="heading-10-copy" id="styleh6"
           style="    color: #fff;
@@ -386,10 +427,15 @@
           font-family: Montserrat, sans-serif;
           text-decoration: none;
           font-size: 12px;
-          margin-top: 4px;"  >Observation</h6></a
+          margin-top: 4px;"  >Flight Briefing</h6></a
         >
       </div>
-    </div> 
+    </div>
+
+   
+
+
+   
     
     
     </section
