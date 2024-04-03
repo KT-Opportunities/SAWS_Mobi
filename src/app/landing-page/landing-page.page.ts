@@ -23,6 +23,7 @@ interface AdvertResponse {
     DetailDescription: {
       DocAdverts: {
         Id: number;
+        URL: string; // Assuming URL is the property name for the advertisement link
       }[];
     };
   };
@@ -142,9 +143,11 @@ loadAllAdvertisements() {
     (data: any[]) => {
       console.log('getAllAdverts', data);
       this.advertisements = data.map(ad => {
-        // Prevent security vulnerabilities, creating a safe URL for the image.
+        // Prevent security vulnerabilities, create a safe URL for the image.
         const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
-        return { imageUrl, link: ad.advert_url } as Advertisement;
+        // Ensure the URL is valid and does not start with "http://localhost"
+        const advertUrl = this.ensureValidURL(ad.advert_url);
+        return { imageUrl, link: advertUrl } as Advertisement;
       });
       console.log('advertisements', this.advertisements);
 
@@ -161,7 +164,18 @@ loadAllAdvertisements() {
     }
   );
 }
+ // Ensure URL is valid
+ ensureValidURL(url: string): string {
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+  }
+  return url;
+}
 
+  // Launch advertisement link
+  launchAdvertLink(advertUrl: string) {
+    window.open(advertUrl, "_blank");
+  }
 
 
 
