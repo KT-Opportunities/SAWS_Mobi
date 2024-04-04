@@ -1043,7 +1043,9 @@
   margin-top: -17px;
   font-family: Montserrat, sans-serif;
 }
-
+#icon2 {
+  margin-left: 293px !important;
+}
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
@@ -2488,8 +2490,10 @@
 }
 
 .slider-2 {
-  width: 61vw;
+  width: 88vw;
   max-width: 153vw;
+  margin-left: -2px;
+  margin-top: 14px;
 }
 
 @media screen and (min-width: 1280px) {

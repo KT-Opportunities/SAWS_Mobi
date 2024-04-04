@@ -1944,7 +1944,7 @@
 .text-field-blue {
   width: 30vw;
   height: 32px;
-  color: #fff;
+  color: white;
   background-image: linear-gradient(#00386c, #00386c);
   border-radius: 5px;
   flex-direction: row;
@@ -1953,6 +1953,7 @@
   font-family: Open Sans, sans-serif;
   display: block;
   box-shadow: 0 2px 5px #00386c;
+  background-color: white;
 }
 
 .form-2 {
@@ -2078,8 +2079,9 @@
 }
 
 .grid-27 {
-  grid-column-gap: 3px;
-  grid-template-rows: auto;
+  flex-flow: column;
+  display: flex;
+  width: 23em;
 }
 
 .heading-18-copy-copy {
@@ -2094,6 +2096,10 @@
   background-image: linear-gradient(#00386c, #00386c);
   border-radius: 5px;
   padding: 10px;
+}
+#grid27{
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
 }
 
 .div-block-48 {
@@ -2210,6 +2216,7 @@
   padding-right: 10px;
   font-family: Open Sans, sans-serif;
   box-shadow: 0 2px 5px #00386c;
+  background-color: white;
 }
 
 .adv-text-f {
@@ -3329,18 +3336,19 @@
 }
 
 .text-field-blue-borders {
-  width: 30vw;
+  width: 10em;
   height: 32px;
-  color: #00386c;
+  color:grey;
   border: 2px solid #003362;
   border-radius: 5px;
   margin-top: 10px;
-  margin-bottom: 0;
-  padding-top: 0;
+  margin-bottom: 10px;
+  padding-top: 4px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: Open Sans, sans-serif;
   box-shadow: 0 2px 5px #00386c;
+  background-color: white;
 }
 
 .div-block-470 {
@@ -3350,18 +3358,19 @@
 }
 
 .text-field-blue-borders-copy {
-  width: 8vw;
+  width: 10em !important;
   height: 32px;
-  color: #00386c;
+  color: grey;
   border: 2px solid #003362;
   border-radius: 5px;
   margin-top: 10px;
-  margin-bottom: 0;
-  padding-top: 0;
+  margin-bottom: 10px;
+  padding-top: 4px;
   padding-left: 10px;
   padding-right: 10px;
   font-family: Open Sans, sans-serif;
   box-shadow: 0 2px 5px #00386c;
+  background-color: white;
 }
 
 .div-white-and-borders {
@@ -3390,7 +3399,7 @@
 .text-field-blue-copy {
   width: 30vw;
   height: 32px;
-  color: #fff;
+  color: white;
   background-image: linear-gradient(#00386c, #00386c);
   border-radius: 5px;
   flex-direction: row;
@@ -3400,6 +3409,7 @@
   font-family: Open Sans, sans-serif;
   display: block;
   box-shadow: 0 2px 5px #00386c;
+  background-color: white;
 }
 
 @media screen and (min-width: 1280px) {
