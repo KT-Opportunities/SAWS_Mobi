@@ -26,7 +26,8 @@
     *ngIf="isImage"
     [src]="fileBaseUrl"
     alt="Selected Image"
-    width="auto"
+    width="100%"
+    height="100%"
   />
 
   <video *ngIf="isVideo" [src]="fileBaseUrl" autoplay loop controls></video>

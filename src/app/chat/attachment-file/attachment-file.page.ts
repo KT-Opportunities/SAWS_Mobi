@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +15,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./attachment-file.page.scss'],
 })
 export class AttachmentFilePage implements OnInit {
-
   fileBaseUrl: any;
   date: Date;
   isImage: boolean = false;
@@ -19,7 +22,7 @@ export class AttachmentFilePage implements OnInit {
   isAudio: boolean = false;
   isApplication: boolean = false;
 
-  constructor (
+  constructor(
     private formBuilder: FormBuilder,
     private authApi: AuthService,
     private router: Router,
@@ -27,33 +30,31 @@ export class AttachmentFilePage implements OnInit {
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<AttachmentFilePage>,
     @Inject(MAT_DIALOG_DATA) public data: any
-    ) {
-        const currentDate = new Date();
-        
-        this.fileBaseUrl =
-        this.sanitizer.bypassSecurityTrustResourceUrl(
-          data.imageSRC
-        );
+  ) {
+    const currentDate = new Date();
 
-        this.date = currentDate;
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      data.imageSRC
+    );
 
-        this.isImage = data.fileType == 'Image';
-        this.isVideo = data.fileType == 'Video';
-        this.isAudio = data.fileType == 'Audio';
-        this.isApplication = data.fileType == 'Application';
+    this.date = currentDate;
 
-      }
-      
-      ngOnInit() {
-  
-      }
+    this.isImage = data.fileType == 'Image';
+    this.isVideo = data.fileType == 'Video';
+    this.isAudio = data.fileType == 'Audio';
+    this.isApplication = data.fileType == 'Application';
+  }
 
-      closeImageDialog() {
-        this.dialogRef.close('close');
-      }
+  ngOnInit() {
+    debugger;
+    console.log('DATA++++', this.data);
+  }
 
-      closeSubmitDialog() {       
-        this.dialogRef.close('submit');
-      }
+  closeImageDialog() {
+    this.dialogRef.close('close');
+  }
 
+  closeSubmitDialog() {
+    this.dialogRef.close('submit');
+  }
 }

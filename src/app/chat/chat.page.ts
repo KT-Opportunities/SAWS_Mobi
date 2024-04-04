@@ -90,12 +90,7 @@ export class ChatPage implements OnInit {
     this.Id = this.route.snapshot.paramMap.get('Id');
     this.username = this.route.snapshot.paramMap.get('usname');
     this.getFeedback();
-    this.APIService.getFeedbackData().subscribe((data) => {
-      this.feedbackData = data;
-      this.feedbackForm.patchValue(data);
 
-      this.shouldScrollToBottom = true;
-    });
     var user: any = this.authS.getCurrentUser();
 
     if (user) {
@@ -223,6 +218,7 @@ export class ChatPage implements OnInit {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
         this.feedbackForm.reset();
+
         this.getFeedback();
       },
       (err) => {
@@ -238,6 +234,7 @@ export class ChatPage implements OnInit {
         this.onUpload(
           data.DetailDescription.FeedbackMessages[0].feedbackMessageId
         );
+        this.getFeedback();
       },
       (err: any) => {
         console.log('Error:', err);
@@ -312,6 +309,7 @@ export class ChatPage implements OnInit {
     }
   }
   onFileSelected(event: any) {
+    debugger;
     const file = event.target.files[0];
     this.selectedFile = file;
     this.selectedFileName = file.name;
@@ -322,6 +320,8 @@ export class ChatPage implements OnInit {
       reader.onload = () => {
         this.selectedFileSrc = reader.result;
         this.addFile = true;
+        console.log('DATA CHECK::', this.feedback);
+        this.openAttachmentDialog(this.feedback, '500ms', '500ms');
       };
 
       reader.onerror = (error) => {
@@ -344,6 +344,11 @@ export class ChatPage implements OnInit {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ) {
+    if (!element) {
+      // If feedback data is not available, return or handle appropriately
+      return;
+    }
+
     this.fileType = this.APIService.getFileType(
       element.file_mimetype || this.selectedFileType
     );
@@ -370,7 +375,7 @@ export class ChatPage implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
       width: '85%',
-      // height:'80%',
+      height: '50%',
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -383,7 +388,7 @@ export class ChatPage implements OnInit {
       this.selectedFileSrc = null;
       this.selectedFileType = undefined;
       this.addFile = false;
-      // this.feedbackForm.reset();
+      this.feedbackForm.reset();
     });
   }
 }
