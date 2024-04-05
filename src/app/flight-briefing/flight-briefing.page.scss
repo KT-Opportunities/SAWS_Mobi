@@ -24,11 +24,28 @@
   position: relative;
   top: 67px;
 }
+.zz {
+  background-image: linear-gradient(#002e59, #002e59);
+  border: 5px solid #00284d;
+  width: 20px;
+  height: 20px;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  padding: 10px;
+}
+.w-checkbox-input {
+  float: left;
+  margin: 4px 0 0 -20px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    margin-left: -20px;
+  line-height: normal;
+}
 
 .w-checkbox {
   margin-bottom: 5px;
-  padding-left: 20px;
-  display: block;
+  
 }
 
 .w-checkbox:before {
@@ -1051,13 +1068,56 @@
 .div-block-16 {
   padding: 10px;
 }
+.w-form {
+  margin: 0 0 15px;
+}
 
 .heading-7-copy {
   color: #00386c;
   font-family: Montserrat, sans-serif;
   font-size: 20px;
 }
-
+#w-node-efc03fed-2f85-2dba-f792-0c6cb6252284-07cb82d5, #w-node-bd43f010-b171-9960-9038-04840b1c159c-07cb82d5, #w-node-c301402c-e281-a283-d877-41dd902c1be8-07cb82d5, #w-node-c5cf66c6-a6b4-59fc-bdba-80e505b9246f-07cb82d5, #w-node-aefede39-07b6-5ee7-7b5e-7b48aac0c383-07cb82d5, #w-node-d415e410-eac3-fafe-d196-dd6250301fd6-07cb82d5 {
+  grid-area: span 1 / span 1 / span 1 / span 1;
+}
+.checkbox-field-6 {
+  align-self: center;
+  align-items: center;
+  display: flex;
+}
+.checkbox-field-6 {
+  padding-left: 0;
+}
+.grid-45 {
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+}
+// .div-block-477 {
+//   justify-content: center;
+//   align-items: center;
+//   display: flex;
+// }
+.div-block-478 {
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+.w-radio {
+  display: block;
+  margin-bottom: 5px;
+  padding-left: 20px;
+}
+.w-radio-input {
+  margin-top: 3px;
+}
+.w-radio-input {
+  margin: 4px 0 0;
+  line-height: normal;
+  float: left;
+  margin-left: -20px;
+}
 .view-decoded {
   color: #00386c;
   margin-top: 0;
@@ -1269,6 +1329,18 @@
 .grid-13 {
   grid-template-columns: 1fr;
 }
+.checkbox-label-2-copy {
+  align-items: center;
+  margin-top: 14px;
+  padding-left: 10px;
+  display: flex;
+}
+.w-form-label {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
 
 .columns {
   background-image: linear-gradient(#8295c2, #8295c2);
@@ -1360,6 +1432,22 @@
   margin-bottom: 10px;
   font-family: Montserrat, sans-serif;
   line-height: 22px;
+}
+.heading-49 {
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+}
+.div-block-471 {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+#w-node-f0d9d6d5-5c8a-19cb-657c-78eea791915e-07cb82d5 {
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 .news {
@@ -1617,7 +1705,9 @@
   padding: 10px;
   display: flex;
 }
-
+#icon2 {
+  margin-left: 251px !important;
+}
 .selection {
   color: #fff;
   background-color: #00386c;
@@ -1711,6 +1801,12 @@
 .div-block-38 {
   background-image: linear-gradient(#abb9c6, #abb9c6);
 }
+.edit-flight-div {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
 
 .heading-25 {
   color: #00386c;
@@ -1754,6 +1850,7 @@
   display: flex;
 }
 
+
 .grid-23, .grid-24 {
   grid-template-rows: auto;
 }
@@ -1763,7 +1860,17 @@
   margin-top: -17px;
   font-family: Montserrat, sans-serif;
 }
-
+.div-block-471 {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+#w-node-f0d9d6d5-5c8a-19cb-657c-78eea791915e-07cb82d5 {
+  grid-area: 1 / 1 / 2 / 2;
+}
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
@@ -2182,6 +2289,13 @@
   right: 0%;
 }
 
+#fieldb{
+  color: grey;
+  border: 2px solid #003362;
+  border-radius: 5px;
+  
+}
+
 .advisoires-main-div {
   flex-direction: column;
   justify-content: center;
@@ -2470,6 +2584,36 @@
   padding-bottom: 0;
   padding-left: 10px;
   padding-right: 0;
+}
+.search-copy {
+  align-items: center;
+  width: 31vw;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+}
+.edit-flight-grid {
+  flex-flow: column;
+  align-items: stretch;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+}
+.template-select {
+  color: #fff;
+  background-image: linear-gradient(#00386c, #00386c);
+  border-radius: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80vw;
+  height: 32px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 4px 10px;
+  font-family: Open Sans, sans-serif;
+  display: block;
+  box-shadow: 0 2px 5px #00386c;
 }
 
 .dropdown-link-2, .dropdown-link-3 {
@@ -3350,11 +3494,43 @@
   box-shadow: 0 2px 5px #00386c;
   background-color: white;
 }
+.w-checkbox:before {
+  content: " ";
+  grid-area: 1 / 1 / 2 / 2;
+  display: table;
+}
+.w-checkbox:after {
+  content: " ";
+  clear: both;
+  grid-area: 1 / 1 / 2 / 2;
+  display: table;
+}
+.w-form-label {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+.div-block-48-copy {
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: block;
+}
 
-.div-block-470 {
-  justify-content: flex-start;
+.div-block-477 {
+  justify-content: center;
   align-items: center;
   display: flex;
+}
+.div-block-474{
+flex-flow: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    display: block !important;
+    margin-left: 29px;
 }
 
 .text-field-blue-borders-copy {
@@ -3956,6 +4132,9 @@
 @media screen and (max-width: 767px) {
   .image {
     margin-top: 0;
+  }
+  .edit-flight-div {
+    margin-bottom: 20px;
   }
 
   .div-block-2 {
@@ -4613,6 +4792,33 @@
 }
 
 @media screen and (max-width: 479px) {
+  .div-block-470 {
+    flex-flow: inherit;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  .checkbox-label-2-copy {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+}
+.div-block-48-copy {
+  flex-flow: row;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+  .search-copy {
+    align-items: flex-start;
+    width: 86vw;
+  }
+  .edit-flight-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
   .sub-heading-share-flight {
     text-align: center;
     margin-top: 10px;
@@ -4706,6 +4912,7 @@
   .subscribe {
     width: 79vw;
   }
+
 
   .prev {
     width: auto;
@@ -5796,7 +6003,7 @@
   }
 
   .text-field-blue-borders {
-    width: 40vw;
+    width: 85vw;
   }
 
   .text-field-blue-borders-copy {

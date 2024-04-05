@@ -13,8 +13,12 @@ export class FlightBriefingPage implements OnInit {
   isexportImport: boolean = false;
   isdeparture: boolean = false;
   isDropdownOpen1: boolean = false;
+  isDropdownOpen2: boolean = false;
   isSharedflight: boolean = false;
+  isEditFlight: boolean = false;
+  isSavedTemplate: boolean = false; 
   selectedOption1: string = 'Select flight';
+  selectedOption2: string = 'Select templatet';
 
  
   constructor(private router: Router, private authService: AuthService) {}
@@ -36,7 +40,10 @@ export class FlightBriefingPage implements OnInit {
     this.isFlight = false;
     this.isSharedflight = true;
   }
- 
+  EditFlight() {
+    this.isFlight = false;
+    this.isEditFlight = true;
+  }
 
   
 
@@ -50,25 +57,34 @@ export class FlightBriefingPage implements OnInit {
   this.isdeparture = false;
   this.isDropdownOpen1 = false;
   this.isSharedflight = false;
+  this.isEditFlight = false;
   }
 
   selectOption(option: string, dropdown: string) {
     if (dropdown === 'dropdown1') {
       this.selectedOption1 = option;
+     
     } 
+    if (dropdown === 'dropdown2') {
+      this.selectedOption2 = option;
+     
+    }
    
   }
 
   selectDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
       this.isDropdownOpen1 = !this.isDropdownOpen1;
-      
-    
     }
+    if (dropdown === 'dropdown2') {
+      this.isDropdownOpen2 = !this.isDropdownOpen2;
+    }
+    
    
 }
   closeAllDropdowns() {
     this.isDropdownOpen1 = false;
+    this.isDropdownOpen2 = false;
  
   }
 

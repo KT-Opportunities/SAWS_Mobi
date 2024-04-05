@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41" height="41" viewBox="0 0 41 41">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1022" data-name="Rectangle 1022" width="41" height="41" transform="translate(409 365)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_28" data-name="Mask Group 28" transform="translate(-409 -365)" clip-path="url(#clip-path)">
+    <g id="flight-date" transform="translate(406 362)">
+      <path id="Path_3540" data-name="Path 3540" d="M27.924,45.521c4.058-.023,8.011-.2,11.851-.549a4.64,4.64,0,0,0,3.269-1.841,1.36,1.36,0,0,0-.534-2.059l-3.645-1.616a7.462,7.462,0,0,0-3.276-.661c-2.127.06-4.313.188-6.56.368-4.073.331-8.341.842-12.745,1.5L12.5,35H9.5l1.939,6.455a1.979,1.979,0,0,0-1.42,2.39,1.329,1.329,0,0,0,1.187,1c1.443.113,2.878.218,4.306.3l2.788.1" transform="translate(-2.361 -8.698)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <path id="Path_3541" data-name="Path 3541" d="M32.5,47l-7.44,6.763H21.308L24.314,47" transform="translate(-5.296 -11.681)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <path id="Path_3542" data-name="Path 3542" d="M23.314,38,21.308,34.99h3.757l6.9,4.171" transform="translate(-5.296 -8.696)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <path id="Path_3543" data-name="Path 3543" d="M12,26.035V8H42.059V29.785H30.787" transform="translate(-2.982 -1.988)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_114" data-name="Line 114" x2="25" transform="translate(11 11)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_115" data-name="Line 115" x2="2.254" transform="translate(13.902 14.278)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_116" data-name="Line 116" x2="2.254" transform="translate(13.902 17.284)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_117" data-name="Line 117" x2="2.254" transform="translate(13.902 20.29)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_118" data-name="Line 118" x2="2.254" transform="translate(19.914 14.278)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_119" data-name="Line 119" x2="2.254" transform="translate(19.914 17.284)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_120" data-name="Line 120" x2="2.254" transform="translate(19.914 20.29)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_121" data-name="Line 121" x2="2.254" transform="translate(25.926 14.278)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_122" data-name="Line 122" x2="2.254" transform="translate(25.926 17.284)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_123" data-name="Line 123" x2="2.254" transform="translate(25.926 20.29)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_124" data-name="Line 124" x2="2.254" transform="translate(31.938 14.278)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_125" data-name="Line 125" x2="2.254" transform="translate(31.938 17.284)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_126" data-name="Line 126" x2="2.254" transform="translate(31.938 20.29)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_127" data-name="Line 127" y2="3" transform="translate(14 5)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <line id="Line_128" data-name="Line 128" y2="3" transform="translate(34 5)" fill="none" stroke="#00386c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <rect id="Rectangle_1021" data-name="Rectangle 1021" width="48" height="48" fill="none"/>
+    </g>
+  </g>
+</svg>
