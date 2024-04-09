@@ -3412,6 +3412,22 @@
   left: 0%;
   right: 0%;
 }
+.flightScrol{
+  overflow-x: auto;
+    height: 28em;
+    width: 26em;
+}
+.mat-mdc-table{
+  // background-color: steelblue !important;
+}
+
+
+.table-contain{
+  overflow:inherit;
+  width: 55em;
+  position: relative;
+  // left: 55px;
+}
 
 .div-block-468 {
   border: 2px solid #002950;
@@ -3478,9 +3494,14 @@
   font-family: Open Sans, sans-serif;
   box-shadow: 0 2px 5px #00386c;
 }
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+}
 
 .text-field-blue-borders {
-  width: 10em;
+  width: 10em !important;
   height: 32px;
   color:grey;
   border: 2px solid #003362;

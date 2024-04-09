@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-flight-briefing',
@@ -8,6 +9,11 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./flight-briefing.page.scss'],
 })
 export class FlightBriefingPage implements OnInit {
+  dataSource = new MatTableDataSource<any>();
+  displayedColumns: string[] = ['Flight','departure', 
+  'destination','etd','vfr','edit'];
+  
+
   isLogged: boolean = false;
   isFlight: boolean = true;
   isexportImport: boolean = false;
@@ -16,9 +22,12 @@ export class FlightBriefingPage implements OnInit {
   isDropdownOpen2: boolean = false;
   isSharedflight: boolean = false;
   isEditFlight: boolean = false;
+  isSavedFlight : boolean = false;
+  isSheduleFlight : boolean = false;
   isSavedTemplate: boolean = false; 
   selectedOption1: string = 'Select flight';
-  selectedOption2: string = 'Select templatet';
+  selectedOption2: string = 'Select template';
+// displayedColumns: any;
 
  
   constructor(private router: Router, private authService: AuthService) {}
@@ -45,6 +54,15 @@ export class FlightBriefingPage implements OnInit {
     this.isEditFlight = true;
   }
 
+  SavedFlight() {
+    this.isFlight = false;
+    this.isSavedFlight = true;
+  }
+  SheduleFlight () {
+    this.isFlight = false;
+    this.isSheduleFlight = true;
+  }
+
   
 
   forecastPage() {
@@ -58,6 +76,9 @@ export class FlightBriefingPage implements OnInit {
   this.isDropdownOpen1 = false;
   this.isSharedflight = false;
   this.isEditFlight = false;
+  this.isSavedFlight = false;
+  this.isSharedflight = false;
+  this.isSheduleFlight = false;
   }
 
   selectOption(option: string, dropdown: string) {
