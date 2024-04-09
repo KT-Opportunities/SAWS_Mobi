@@ -139,7 +139,7 @@ export class ChatPage implements OnInit {
             responderEmail: this.userEmail,
             feedback: formValues.responseMessage,
             response: '',
-            feedbackAttachment: formValues.responseMessage,
+            feedbackAttachment: formValues.feedbackMessage,
             feedbackAttachmentFileName: this.selectedFileName,
             responseAttachment: '',
             responseAttachmentFileName: '',
@@ -148,12 +148,12 @@ export class ChatPage implements OnInit {
       };
 
       this.updateFeedbackForm(body);
+      this.getFeedback();
     } else {
       alert('you cannot send empty message');
     }
   }
   onSubmitAttachment() {
-    debugger;
     if (this.selectedFile) {
       const formValues = this.feedbackForm.value;
 
@@ -183,6 +183,8 @@ export class ChatPage implements OnInit {
         ],
       };
       this.updateFeedbackFormWithAttachment(body);
+  
+      this.getFeedback();
     } else {
       return;
     }
@@ -309,7 +311,6 @@ export class ChatPage implements OnInit {
     }
   }
   onFileSelected(event: any) {
-    debugger;
     const file = event.target.files[0];
     this.selectedFile = file;
     this.selectedFileName = file.name;

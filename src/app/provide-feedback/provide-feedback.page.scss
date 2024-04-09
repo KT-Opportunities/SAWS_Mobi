@@ -76,3 +76,51 @@
   font-size: 12px;
   font-family: verdana, regular;
 }
+.attachment {
+  position: relative;
+  right: 60px;
+  right: -203px;
+  top: -100px;
+}
+
+/* Styling for file attachment */
+.attachment-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.attachment-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.attachment-input {
+  display: none; /* Hide the file input */
+}
+
+.attachment-label {
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Optional: Styling for selected file name display */
+.selected-file {
+  font-size: 14px;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Styling for submit button */
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}

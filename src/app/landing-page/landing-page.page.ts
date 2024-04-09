@@ -75,7 +75,7 @@ export class LandingPage implements OnInit {
       this.currentAdvertisement = this.advertisements[this.currentAdvertisementIndex];
     }
     if (this.currentAdvertisement) {
-      console.log('Current advertisement URL', this.currentAdvertisement.link);
+      // console.log('Current advertisement URL', this.currentAdvertisement.link);
     }
 
   }
@@ -149,7 +149,7 @@ loadAllAdvertisements() {
         const advertUrl = this.ensureValidURL(ad.advert_url);
         return { imageUrl, link: advertUrl } as Advertisement;
       });
-      console.log('advertisements', this.advertisements);
+      //console.log('advertisements', this.advertisements);
 
       // Set the currentAdvertisement to the first advertisement in the array
       if (this.advertisements.length > 0) {
@@ -182,7 +182,7 @@ loadAllAdvertisements() {
 initializeSwiper() {
   console.log('Initializing Swiper');
   if (this.advertisements.length > 0 && this.swiperElement) {
-    console.log('Creating Swiper instance');
+    //console.log('Creating Swiper instance');
     this.swiper = new Swiper(this.swiperElement.nativeElement, {
       direction: 'vertical',
       loop: true, // Enable looping to seamlessly rotate banners
