@@ -12,7 +12,7 @@ export class DomesticPage implements OnInit {
   isLogged: boolean = false;
   isHourlyCharts: boolean = false;
   isLowLevel:Boolean = false;
-
+  isWindCharts: boolean = false;
   isTakeOff: boolean = false;
   isDropdownOpen5: boolean = false;
   selectedOption5: string = 'CCCC';
@@ -34,6 +34,11 @@ export class DomesticPage implements OnInit {
 
   }
 
+  WindCharts(){
+    this.isDomestic = false;
+    this.isWindCharts = true;
+  }
+
   takeoff(){
     this.isDomestic = false;
     this.isTakeOff = true;
@@ -52,6 +57,7 @@ export class DomesticPage implements OnInit {
     this.isHourlyCharts = false;
     this.isLowLevel = false;
     this.isTakeOff = false; 
+    this.isWindCharts = false;
   }
   
   domesticPage() {
