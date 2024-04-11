@@ -183,16 +183,16 @@ export class ChatPage implements OnInit {
         ],
       };
       this.updateFeedbackFormWithAttachment(body);
-  
+
       this.getFeedback();
     } else {
       return;
     }
   }
-  onUpload(id: number) {
+  async uploadFile(feedbackId: number) {
     if (this.files.length > 0) {
       this.files[0].Id = 0;
-      this.files[0].feedbackMessageId = id;
+      this.files[0].feedbackMessageId = feedbackId;
 
       const formData = new FormData();
 
@@ -206,14 +206,12 @@ export class ChatPage implements OnInit {
         formData.append(`files[${i}].file`, this.files[i].file);
       }
 
-      this.APIService.PostDocsForFeedback(formData).subscribe(
-        (event: any) => {
-          this.resetFilesInp();
-        },
-        (err) => {
-          console.log('file upload failed: ', err);
-        }
-      );
+      try {
+        await this.APIService.PostDocsForFeedback(formData).toPromise();
+      } catch (error) {
+        console.error('Error uploading files:', error);
+        throw error;
+      }
     }
   }
   updateFeedbackForm(body: any) {
@@ -233,7 +231,7 @@ export class ChatPage implements OnInit {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
         this.feedbackForm.reset();
-        this.onUpload(
+        this.uploadFile(
           data.DetailDescription.FeedbackMessages[0].feedbackMessageId
         );
         this.getFeedback();
