@@ -148,20 +148,20 @@ export class ProvideFeedbackPage implements OnInit {
 
       const body = {
         feedbackId: formValues.feedbackId,
-        fullname: formValues.fullname,
-        senderId: formValues.senderId,
-        senderEmail: formValues.senderEmail,
-        responderId: this.userId,
-        responderEmail: this.userEmail,
+        fullname: this.fullname,
+        senderId: this.userId,
+        senderEmail: this.userEmail,
+        responderId: '',
+        responderEmail: '',
         created_at: formValues.created_at,
         title: formValues.title,
-        isresponded: true,
+        isresponded: false,
         FeedbackMessages: [
           {
             senderId: formValues.senderId,
             senderEmail: formValues.senderEmail,
-            responderId: this.userId,
-            responderEmail: this.userEmail,
+            responderId: '',
+            responderEmail: '',
             feedback: '',
             response: '',
             feedbackAttachment: formValues.responseMessage,
@@ -219,7 +219,9 @@ export class ProvideFeedbackPage implements OnInit {
   updateFeedbackFormWithAttachment(body: any) {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
+        debugger;
         this.feedbackForm.reset();
+        
         this.uploadFile(
           data.DetailDescription.FeedbackMessages[0].feedbackMessageId
         );
