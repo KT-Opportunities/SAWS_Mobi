@@ -50,7 +50,7 @@ export class ProvideFeedbackPage implements OnInit {
   selectedFileName: string | undefined;
   selectedFileSrc: string | ArrayBuffer | null = null;
   selectedFileType: string | undefined;
-
+  responseData: any;
   fileFeedback: any = {};
   addFile: boolean = false;
   feedbackData: any;
@@ -130,9 +130,10 @@ export class ProvideFeedbackPage implements OnInit {
         (data: any) => {
           const feedbackId = data.DetailDescription.feedbackId;
           this.uploadFile(feedbackId);
-          this.presentSuccessAlert();
-          this.feedbackForm.reset();
 
+          this.feedbackForm.reset();
+          this.responseData = data;
+          console.log(' this.responseData', this.responseData);
           this.openAttachmentDialog(data.DetailDescription, '500ms', '500ms');
         },
         (error) => {
@@ -147,24 +148,25 @@ export class ProvideFeedbackPage implements OnInit {
       const formValues = this.feedbackForm.value;
 
       const body = {
-        feedbackId: formValues.feedbackId,
+        feedbackId: this.responseData.DetailDescription.feedbackId,
         fullname: this.fullname,
         senderId: this.userId,
         senderEmail: this.userEmail,
         responderId: '',
         responderEmail: '',
-        created_at: formValues.created_at,
-        title: formValues.title,
+        created_at: this.responseData.DetailDescription.created_at,
+        title: this.responseData.DetailDescription.title,
         isresponded: false,
         FeedbackMessages: [
           {
-            senderId: formValues.senderId,
-            senderEmail: formValues.senderEmail,
+            senderId: this.responseData.DetailDescription.senderId,
+            senderEmail: this.responseData.DetailDescription.senderEmail,
             responderId: '',
             responderEmail: '',
             feedback: '',
             response: '',
-            feedbackAttachment: formValues.responseMessage,
+            feedbackAttachment:
+              this.responseData.DetailDescription.responseMessage,
             feedbackAttachmentFileName: this.selectedFileName,
             responseAttachment: '',
             responseAttachmentFileName: '',
@@ -172,6 +174,7 @@ export class ProvideFeedbackPage implements OnInit {
         ],
       };
       this.updateFeedbackFormWithAttachment(body);
+      this.presentSuccessAlert();
 
       this.getFeedback();
     } else {
@@ -221,7 +224,7 @@ export class ProvideFeedbackPage implements OnInit {
       (data: any) => {
         debugger;
         this.feedbackForm.reset();
-        
+
         this.uploadFile(
           data.DetailDescription.FeedbackMessages[0].feedbackMessageId
         );
