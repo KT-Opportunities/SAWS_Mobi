@@ -333,6 +333,14 @@ font-size: 12px;
   margin-right: 0;
 }
 @media screen and (max-width: 479px) {
+  .heading-25 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 5px;
+    font-size: 12px;
+    line-height: 20px;
+  }
   .heading-copy {
    
     display: flex;
