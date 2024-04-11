@@ -1,6 +1,7 @@
 <ion-content
   ><section class="list-page">
-    <div
+    <div class="" *ngIf="isDomestic"> 
+      <div
       class=""
       
       [ngClass]="{'applied-styles': !isLoggedIn}"
@@ -14,80 +15,819 @@
       </h1>
       <div class="w-layout-grid grid-list"
       style="overflow-y: auto; max-height: 498px; -ms-overflow-style: none">
-        <a
+        <div
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Flight Document</h1>
-        </a>
-        <a
+        </div>
+        <div (click)="hourlyChart()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Hourly Charts</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">ICAO Locations</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR Maps</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">QNH CHart</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">SIGWX Charts</h1>
-        </a>
-        <a
+        </div>
+        <div (click)="takeoff()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Take-off Data</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Warnings</h1>
-        </a>
-        <a
+        </div>
+        <div
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           href="#"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Winds Charts</h1>
-        </a>
+        </div>
        
-       
+        <div (click)="lowlevel()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">Low-level Wind Profile for Upper
+            Air stations</h1>
+        </div>
+   
+        
       
       </div>
     </div>
+ 
+   
 
     <div class="list-div" *ngIf="isLoggedIn==false">
     
     </div>
+  </div>
 
-    <div class="bottomdiv" style=" margin-top: 156%;">
+
+    <!-- Hourly Charts -->
+    <section class="hourly-charts-section" 
+    *ngIf="isHourlyCharts">
+   
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <h1 class="heading-6"><strong>Hourly Charts</strong></h1>
+      <div style="overflow-y: auto; height: 32em;">
+        <div class="hourly-charts-div">
+          <div class="div-block-473">
+        
+            <div class="charts-div-sub">
+              <h4 class="heading-6-copy"><strong>QNH Colour</strong></h4>
+              <div class="button-2-copy w-button"  style="position: relative;
+              left: 13px;"
+              >Most Recent</div>
+            </div>
+            <div class="" id="grid">
+              <div id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec66-3e57d814" class="div-block-48-copy">
+                <div class="w-form">
+                  <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec68">
+                    <div class="div-blue-copy"></div>
+                  </form>
+                  <div class="w-form-done">
+                    <!-- <div>Thank you! Your submission has been received!</div> -->
+                  </div>
+                  <div class="w-form-fail">
+                    <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                  </div>
+                </div>
+                <div id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec70-3e57d814" class="div-block-48-copy">
+                  <div class="w-form">
+                    <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec72">
+                      <div class="div-block-470">
+                        <h4 class="qnh-heading">00Z</h4>
+                        <h4 class="qnh-heading">O1Z</h4>
+                        <h4 class="qnh-heading">02Z</h4>
+                        <h4 class="qnh-heading">03Z</h4>
+                        <h4 class="qnh-heading">04Z</h4>
+                        <h4 class="qnh-heading">05Z</h4>
+                      </div>
+                      <div class="div-block-470">
+                        <h4 class="qnh-heading">06Z</h4>
+                        <h4 class="qnh-heading">07Z</h4>
+                        <h4 class="qnh-heading">08Z</h4>
+                        <h4 class="qnh-heading">09Z</h4>
+                        <h4 class="qnh-heading">10Z</h4>
+                        <h4 class="qnh-heading">11Z</h4>
+                      </div>
+                      <div class="div-block-470">
+                        <h4 class="qnh-heading">12Z</h4>
+                        <h4 class="qnh-heading">13Z</h4>
+                        <h4 class="qnh-heading">14Z</h4>
+                        <h4 class="qnh-heading">15Z</h4>
+                        <h4 class="qnh-heading">16Z</h4>
+                        <h4 class="qnh-heading">17Z</h4>
+                      </div>
+                      <div class="div-block-470">
+                        <h4 class="qnh-heading">18Z</h4>
+                        <h4 class="qnh-heading">19Z</h4>
+                        <h4 class="qnh-heading">20Z</h4>
+                        <h4 class="qnh-heading">21Z</h4>
+                        <h4 class="qnh-heading">22Z</h4>
+                        <h4 class="qnh-heading">23Z</h4>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <!-- <div>Thank you! Your submission has been received!</div> -->
+                    </div>
+                    <div class="w-form-fail">
+                      <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      
+      <div class="charts-div-sub">
+        <h4 class="heading-6-copy"><strong>QNH Greyscale</strong></h4>
+        <div class="button-2-copy w-button">Most Recent</div>
+      </div>
+      <div class="" id="grid">
+        <div id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec66-3e57d814" class="div-block-48-copy">
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec68">
+              <div class="div-blue-copy"></div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec70-3e57d814" class="div-block-48-copy">
+            <div class="w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec72">
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">00Z</h4>
+                  <h4 class="qnh-heading">O1Z</h4>
+                  <h4 class="qnh-heading">02Z</h4>
+                  <h4 class="qnh-heading">03Z</h4>
+                  <h4 class="qnh-heading">04Z</h4>
+                  <h4 class="qnh-heading">05Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">06Z</h4>
+                  <h4 class="qnh-heading">07Z</h4>
+                  <h4 class="qnh-heading">08Z</h4>
+                  <h4 class="qnh-heading">09Z</h4>
+                  <h4 class="qnh-heading">10Z</h4>
+                  <h4 class="qnh-heading">11Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">12Z</h4>
+                  <h4 class="qnh-heading">13Z</h4>
+                  <h4 class="qnh-heading">14Z</h4>
+                  <h4 class="qnh-heading">15Z</h4>
+                  <h4 class="qnh-heading">16Z</h4>
+                  <h4 class="qnh-heading">17Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">18Z</h4>
+                  <h4 class="qnh-heading">19Z</h4>
+                  <h4 class="qnh-heading">20Z</h4>
+                  <h4 class="qnh-heading">21Z</h4>
+                  <h4 class="qnh-heading">22Z</h4>
+                  <h4 class="qnh-heading">23Z</h4>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="charts-div-sub">
+        <h4 class="heading-6-copy"><strong>Air Temperature <br>Colour</strong></h4>
+        <div class="button-2-copy w-button">Most Recent</div>
+      </div>
+      <div class="" id="grid">
+        <div id="w-node-_9a769e24-31d1-3e5b-9f75-fa18a61370c7-3e57d814" class="div-block-48-copy">
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="9a769e24-31d1-3e5b-9f75-fa18a61370c9">
+              <div class="div-blue-copy"></div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-_9a769e24-31d1-3e5b-9f75-fa18a61370d1-3e57d814" class="div-block-48-copy">
+            <div class="w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="9a769e24-31d1-3e5b-9f75-fa18a61370d3">
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">00Z</h4>
+                  <h4 class="qnh-heading">O1Z</h4>
+                  <h4 class="qnh-heading">02Z</h4>
+                  <h4 class="qnh-heading">03Z</h4>
+                  <h4 class="qnh-heading">04Z</h4>
+                  <h4 class="qnh-heading">05Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">06Z</h4>
+                  <h4 class="qnh-heading">07Z</h4>
+                  <h4 class="qnh-heading">08Z</h4>
+                  <h4 class="qnh-heading">09Z</h4>
+                  <h4 class="qnh-heading">10Z</h4>
+                  <h4 class="qnh-heading">11Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">12Z</h4>
+                  <h4 class="qnh-heading">13Z</h4>
+                  <h4 class="qnh-heading">14Z</h4>
+                  <h4 class="qnh-heading">15Z</h4>
+                  <h4 class="qnh-heading">16Z</h4>
+                  <h4 class="qnh-heading">17Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">18Z</h4>
+                  <h4 class="qnh-heading">19Z</h4>
+                  <h4 class="qnh-heading">20Z</h4>
+                  <h4 class="qnh-heading">21Z</h4>
+                  <h4 class="qnh-heading">22Z</h4>
+                  <h4 class="qnh-heading">23Z</h4>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="charts-div-sub">
+        <h4 class="heading-6-copy"><strong>Air Temperature <br>Greyscale</strong></h4>
+        <div class="button-2-copy w-button">Most Recent</div>
+      </div>
+      <div class="" id="grid">
+        <div id="w-node-_5e201edc-b7f5-a40c-bda1-ccf0e4954a7c-3e57d814" class="div-block-48-copy">
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="5e201edc-b7f5-a40c-bda1-ccf0e4954a7e">
+              <div class="div-blue-copy"></div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-_5e201edc-b7f5-a40c-bda1-ccf0e4954a86-3e57d814" class="div-block-48-copy">
+            <div class="w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="5e201edc-b7f5-a40c-bda1-ccf0e4954a88">
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">00Z</h4>
+                  <h4 class="qnh-heading">O1Z</h4>
+                  <h4 class="qnh-heading">02Z</h4>
+                  <h4 class="qnh-heading">03Z</h4>
+                  <h4 class="qnh-heading">04Z</h4>
+                  <h4 class="qnh-heading">05Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">06Z</h4>
+                  <h4 class="qnh-heading">07Z</h4>
+                  <h4 class="qnh-heading">08Z</h4>
+                  <h4 class="qnh-heading">09Z</h4>
+                  <h4 class="qnh-heading">10Z</h4>
+                  <h4 class="qnh-heading">11Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">12Z</h4>
+                  <h4 class="qnh-heading">13Z</h4>
+                  <h4 class="qnh-heading">14Z</h4>
+                  <h4 class="qnh-heading">15Z</h4>
+                  <h4 class="qnh-heading">16Z</h4>
+                  <h4 class="qnh-heading">17Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">18Z</h4>
+                  <h4 class="qnh-heading">19Z</h4>
+                  <h4 class="qnh-heading">20Z</h4>
+                  <h4 class="qnh-heading">21Z</h4>
+                  <h4 class="qnh-heading">22Z</h4>
+                  <h4 class="qnh-heading">23Z</h4>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="charts-div-sub">
+        <h4 class="heading-6-copy"><strong>Dewpoint Temperature <br>Colour</strong></h4>
+        <div class="button-2-copy w-button">Most Recent</div>
+      </div>
+      <div class="" id="grid">
+        <div id="w-node-cf6b9d3b-1133-771e-609f-23b2c7d23728-3e57d814" class="div-block-48-copy">
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="cf6b9d3b-1133-771e-609f-23b2c7d2372a">
+              <div class="div-blue-copy"></div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-cf6b9d3b-1133-771e-609f-23b2c7d23732-3e57d814" class="div-block-48-copy">
+            <div class="w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="cf6b9d3b-1133-771e-609f-23b2c7d23734">
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">00Z</h4>
+                  <h4 class="qnh-heading">O1Z</h4>
+                  <h4 class="qnh-heading">02Z</h4>
+                  <h4 class="qnh-heading">03Z</h4>
+                  <h4 class="qnh-heading">04Z</h4>
+                  <h4 class="qnh-heading">05Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">06Z</h4>
+                  <h4 class="qnh-heading">07Z</h4>
+                  <h4 class="qnh-heading">08Z</h4>
+                  <h4 class="qnh-heading">09Z</h4>
+                  <h4 class="qnh-heading">10Z</h4>
+                  <h4 class="qnh-heading">11Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">12Z</h4>
+                  <h4 class="qnh-heading">13Z</h4>
+                  <h4 class="qnh-heading">14Z</h4>
+                  <h4 class="qnh-heading">15Z</h4>
+                  <h4 class="qnh-heading">16Z</h4>
+                  <h4 class="qnh-heading">17Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">18Z</h4>
+                  <h4 class="qnh-heading">19Z</h4>
+                  <h4 class="qnh-heading">20Z</h4>
+                  <h4 class="qnh-heading">21Z</h4>
+                  <h4 class="qnh-heading">22Z</h4>
+                  <h4 class="qnh-heading">23Z</h4>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="charts-div-sub">
+        <h4 class="heading-6-copy"><strong>Dewpoint Temperature <br>Greyscale</strong></h4>
+        <div class="button-2-copy w-button">Most Recent</div>
+      </div>
+      <div class="" id="grid">
+        <div id="w-node-c416995a-81cf-a44d-7153-def48cabaf2b-3e57d814" class="div-block-48-copy">
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="c416995a-81cf-a44d-7153-def48cabaf2d">
+              <div class="div-blue-copy"></div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-c416995a-81cf-a44d-7153-def48cabaf35-3e57d814" class="div-block-48-copy">
+            <div class="w-form">
+              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="660d3cc3aa83ef783e57d814" data-wf-element-id="c416995a-81cf-a44d-7153-def48cabaf37">
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">00Z</h4>
+                  <h4 class="qnh-heading">O1Z</h4>
+                  <h4 class="qnh-heading">02Z</h4>
+                  <h4 class="qnh-heading">03Z</h4>
+                  <h4 class="qnh-heading">04Z</h4>
+                  <h4 class="qnh-heading">05Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">06Z</h4>
+                  <h4 class="qnh-heading">07Z</h4>
+                  <h4 class="qnh-heading">08Z</h4>
+                  <h4 class="qnh-heading">09Z</h4>
+                  <h4 class="qnh-heading">10Z</h4>
+                  <h4 class="qnh-heading">11Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">12Z</h4>
+                  <h4 class="qnh-heading">13Z</h4>
+                  <h4 class="qnh-heading">14Z</h4>
+                  <h4 class="qnh-heading">15Z</h4>
+                  <h4 class="qnh-heading">16Z</h4>
+                  <h4 class="qnh-heading">17Z</h4>
+                </div>
+                <div class="div-block-470">
+                  <h4 class="qnh-heading">18Z</h4>
+                  <h4 class="qnh-heading">19Z</h4>
+                  <h4 class="qnh-heading">20Z</h4>
+                  <h4 class="qnh-heading">21Z</h4>
+                  <h4 class="qnh-heading">22Z</h4>
+                  <h4 class="qnh-heading">23Z</h4>
+                </div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+        <div class="footerdiv">
+          <div  class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+            <h6 class="heading-10"></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+
+    <!-- Low Level Wind profile -->
+    <section class="low_level-wind-section"
+    *ngIf="isLowLevel">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <h1 class="heading-6">Low-level Wind Profile for Upper <br>Air stations</h1>
+      <div  style="overflow-y: auto; height: 32em;
+      padding: 15px; width: 25em;" >
+        <div class="low-level-main-div">
+
+          <div class="div-block-466">
+            <div class="w-layout-grid lowlevel-grid">
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83a-b2ace610" class="div-block-35">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83b-b2ace610" class="w-layout-grid low-grid">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83c-b2ace610" class="div-block-36">
+                    <h4 class="heading-24" id="heading24">Wind Profile</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83f-b2ace610" class="div-block-36">
+                    <h4 class="heading-24" id="heading24">View Image</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a842-b2ace610" class="div-block-36"></div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a843-b2ace610" class="div-block-36"></div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a844-b2ace610" class="div-block-452">
+                <div class="w-layout-grid wind-grid">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a846-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FAIR</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a849-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a84c-b2ace610" class="div-block-38">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a84e-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FACT</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a851-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a854-b2ace610" class="div-block-453">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a856-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FADN</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a859-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a85c-b2ace610" class="div-block-38">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a85e-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FAPE</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a861-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a864-b2ace610" class="div-block-454">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a866-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FABL</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a869-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a86c-b2ace610" class="div-block-38">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a86e-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FABM</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a871-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a874-b2ace610" class="div-block-455">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a876-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FADY</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a879-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View</div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a87c-b2ace610" class="div-block-38">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a87e-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FASB</h4>
+                  </div>
+                  <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a881-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e4-b2ace610" class="div-block-455">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e6-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FAPP</h4>
+                  </div>
+                  <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e9-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View</div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba3-b2ace610" class="div-block-38">
+                <div class="w-layout-grid grid-22">
+                  <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba5-b2ace610" class="div-block-37">
+                    <h4 class="heading-25">FAUP</h4>
+                  </div>
+                  <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba8-b2ace610" class="div-block-37">
+                    <div class="button-2-copy w-button">View </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="div-block-479">
+              <p class="paragraph-13"><strong>Note:</strong> Not all stations do ascents every day (or twice daily). <br>Availability of a profile depends on the time of day <br>and season.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+        <div class="footerdiv">
+          <div class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+        
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Take Off param -->
+    <section class="take-off-section" style="margin-top: 0px !important;" 
+    *ngIf="isTakeOff">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <h1 class="heading-6">Take - Off Parameters</h1>
+      <div
+      class="overflow-y:auto;height:32em;">
+        
+      </div>
+      <div class="tafs-div" style="overflow-y:auto;height:32em;">
+     
+        <div class="w-layout-grid grid-6">
+          <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408" class="w-layout-grid grid-take-off" id="take">
+            <div id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408" class="div-off">
+              <div class="button-2-copy w-button"
+              style="position: relative;
+              left: -12px;">Document</div>
+            </div>
+            <div id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408" class="div-off">
+              <div class="w-form">
+                <form  style="width: 67px !important;"  id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="65c08511e6e9943ba17d1408" data-wf-element-id="0890f4e6-efeb-3cd1-742e-9e36574c2616">
+                  <div class="select-container">
+                   
+                    <div class="text-field-blue w-dropdown" (click)="toggleDropdown('dropdown5')" id="bluew">
+                      <div class="dropdown-toggle w-dropdown-toggle" style="font-size: 12px;
+                      padding-top: 6px;">
+                        <div class="icon-2-copy w-icon-dropdown-toggle" id="icon3"></div>
+                        <div class="text-block" style="position: relative;left: 17px;">{{ selectedOption5 }}</div>
+                      </div>
+                      <nav class="dropdown-list1" *ngIf="isDropdownOpen5" style="width: 100px;
+                      margin-left: -10px;">
+                        <div class="w-dropdown-link" (click)="selectOption('CCCC')">CCCC</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FAPE')">FAPE</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FABL')">FABL</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FACT')">FACT</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FALE')">FALE</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FALA')">FALA</div>
+                        <div class="w-dropdown-link" (click)="selectOption('FAOR')">FAOR</div>
+                      </nav>
+                    </div>
+                  </div>
+                  
+                </form>
+                <div class="w-form-done">
+                  <!-- <div>Thank you! Your submission has been received!</div> -->
+                </div>
+                <div class="w-form-fail">
+                  <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408" class="div-off">
+              <div class="button-2-copy w-button" style="position: relative;
+              left: 10px;">Reload</div>
+            </div>
+          </div>
+          <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408" class="div-block-15">
+            <div class="div-block-14">
+              <div class="w-layout-grid " style="height: 48px;">
+                <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408" class="div-block-34">
+                  <h1 class="heading-23">CCCC:</h1>
+                  <h1 class="heading-23-copy" id="fact">FACT</h1>
+                </div>
+                <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408" class="div-block-34">
+                  <h1 class="heading-23" >Issued at:</h1>
+                  <h1 class="heading-23-copy"  id="fact">2024/02/ 12:00Z</h1>
+                </div>
+              </div>
+            </div>
+            <h1 class="datacape" style="color: #00386c; font-size: 12px;font-weight: 387 !important; "><P class="">TAKE-OFF DATA CAPE TOWN 
+              <br>INTERNATIONAL AIRPORT</P></h1>
+            <div class="w-layout-grid grid-20" id="grid20">
+              <div id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408" class="div-block-35">
+                <div id="w-node-_1290a973-af24-2a59-897b-d7d3e1d83441-a17d1408" class="w-layout-grid grid-21-copy">
+                  <div id="w-node-_030b0f65-b194-ad25-8a08-a35ff57158e2-a17d1408" class="div-block-36">
+                    <h4 class="heading-24">Time</h4>
+                  </div>
+                  <div id="w-node-ed37abd8-4ca0-87f1-cd6a-4e3c5695df38-a17d1408" class="div-block-36">
+                    <h4 class="heading-24">Temp</h4>
+                  </div>
+                  <div id="w-node-_0da84331-7add-d63a-dc29-b62efb53d455-a17d1408" class="div-block-36">
+                    <h4 class="heading-24">QNH</h4>
+                  </div>
+                  <div id="w-node-_0d050491-2a26-b337-0b99-272987035cba-a17d1408" class="div-block-36">
+                    <h4 class="heading-24">QAN</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
+                <div class="w-layout-grid grid-43">
+                  <div id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">13Z</h4>
+                  </div>
+                  <div id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">26</h4>
+                  </div>
+                  <div id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">1013</h4>
+                  </div>
+                  <div id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">18015KT</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-d9148515-91a8-eaec-3676-5c6304736b21-a17d1408" class="div-block-38">
+                <div class="w-layout-grid grid-43">
+                  <div id="w-node-d9148515-91a8-eaec-3676-5c6304736b23-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">13Z</h4>
+                  </div>
+                  <div id="w-node-d9148515-91a8-eaec-3676-5c6304736b26-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">26</h4>
+                  </div>
+                  <div id="w-node-d9148515-91a8-eaec-3676-5c6304736b29-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">1013</h4>
+                  </div>
+                  <div id="w-node-d9148515-91a8-eaec-3676-5c6304736b2c-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">18015KT</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a3-a17d1408">
+                <div class="w-layout-grid grid-43">
+                  <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a5-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">13Z</h4>
+                  </div>
+                  <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a8-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">26</h4>
+                  </div>
+                  <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7ab-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">1013</h4>
+                  </div>
+                  <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7ae-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">18015KT</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baaa-a17d1408" class="div-block-38">
+                <div class="w-layout-grid grid-43">
+                  <div id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baac-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">13Z</h4>
+                  </div>
+                  <div id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baaf-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">26</h4>
+                  </div>
+                  <div id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48bab2-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">1013</h4>
+                  </div>
+                  <div id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48bab5-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">18015KT</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-e257892b-0aee-5955-6d9c-77fae509665b-a17d1408">
+                <div class="w-layout-grid grid-43">
+                  <div id="w-node-e257892b-0aee-5955-6d9c-77fae509665d-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">13Z</h4>
+                  </div>
+                  <div id="w-node-e257892b-0aee-5955-6d9c-77fae5096660-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">26</h4>
+                  </div>
+                  <div id="w-node-e257892b-0aee-5955-6d9c-77fae5096663-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">1013</h4>
+                  </div>
+                  <div id="w-node-e257892b-0aee-5955-6d9c-77fae5096666-a17d1408" class="div-block-37">
+                    <h4 class="heading-25">18015KT</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomdiv"><img src="images/Path-3447.svg" 
+        loading="lazy" width="1216" alt="" class="image" *ngIf="!isDomestic">
+        <div class="footerdiv">
+          <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+            <h6 class="heading-10">Forecast</h6>
+          </a>
+        </div>
+      </div>
+    </section>
+    <div class="bottomdiv"  style="margin-top: 147% !important" *ngIf="isDomestic">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -96,11 +836,42 @@
         class="image"
       />
       <div class="footerdiv">
-        <a (click)="domesticPage()" class="w-inline-block"
+        <div (click)="domesticPage()" class="w-inline-block"
           ><img src="../../assets/Group-3489.svg" loading="lazy" alt=""
-        /></a>
+        /></div>
       </div>
     </div>
+
+
+
+    <div class="bottomdiv" style="margin-top: 147% !important" *ngIf="!isDomestic" >
+      <img
+        src="../../assets/Path-3447.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image" 
+      />
+
+      <div class="footerdiv" id="footerdivid1" >
+        <div   (click)=" DomesticBack()" class="link-block-5 w-inline-block"
+          ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+          <h6 class="heading-10-copy" id="styleh6"
+          style="    color: #fff;
+          margin-top: 10px;
+          margin-bottom: 0;
+          font-family: Montserrat, sans-serif;
+          text-decoration: none;
+          font-size: 12px;
+          margin-top: 4px;"  >Domestic</h6></div
+        >
+      </div>
+    </div>
+
+
+
+
+
     
     </section
 >
