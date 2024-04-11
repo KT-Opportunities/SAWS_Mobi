@@ -16,6 +16,7 @@ export class DomesticPage implements OnInit {
   isTakeOff: boolean = false;
   isWarning: boolean = false;
   isDropdownOpen5: boolean = false;
+  isSIGWX: boolean = false;
   selectedOption5: string = 'CCCC';
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -52,6 +53,10 @@ export class DomesticPage implements OnInit {
     this.isDomestic= false;
     this.isLowLevel = true;
   }
+  SIGWX() {
+    this.isDomestic = false;
+    this.isSIGWX = true;
+  }
 
   hourlyChart() {
     this.isDomestic = false;
@@ -64,6 +69,7 @@ export class DomesticPage implements OnInit {
     this.isTakeOff = false; 
     this.isWindCharts = false;
     this.isWarning = false;
+    this.isSIGWX = false;
   }
   
   domesticPage() {

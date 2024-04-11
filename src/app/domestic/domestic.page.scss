@@ -282,6 +282,33 @@ font-size: 12px;
   font-size: 12px;
   line-height: 20px;
 }
+.sigwx-grid {
+  grid-row-gap: 0px;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
+  grid-template-columns: 1fr;
+  margin-bottom: 10px;
+}
+#sig{
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+.sigwx-div {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+#symbol{
+  text-align: center;
+    background-color: #00386c;
+    margin: 10px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+}
 .heading-copy {
   grid-column-gap: 16px;
   grid-row-gap: 16px;
