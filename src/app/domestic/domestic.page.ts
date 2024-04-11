@@ -8,8 +8,14 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./domestic.page.scss'],
 })
 export class DomesticPage implements OnInit {
-isLogged: boolean = false;
+  isDomestic: boolean = true;
+  isLogged: boolean = false;
+  isHourlyCharts: boolean = false;
+  isLowLevel:Boolean = false;
 
+  isTakeOff: boolean = false;
+  isDropdownOpen5: boolean = false;
+  selectedOption5: string = 'CCCC';
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -24,8 +30,42 @@ isLogged: boolean = false;
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
+  DomeDomestic(){
+
+  }
+
+  takeoff(){
+    this.isDomestic = false;
+    this.isTakeOff = true;
+  }
+  lowlevel(){
+    this.isDomestic= false;
+    this.isLowLevel = true;
+  }
+
+  hourlyChart() {
+    this.isDomestic = false;
+    this.isHourlyCharts = true
+  }
+  DomesticBack() {
+    this.isDomestic = true;
+    this.isHourlyCharts = false;
+    this.isLowLevel = false;
+    this.isTakeOff = false; 
+  }
   
   domesticPage() {
+    
     this.router.navigate(['/landing-page']);
+  }
+  toggleDropdown(dropdown: string) {
+    if (dropdown === 'dropdown5') {
+      this.isDropdownOpen5 = !this.isDropdownOpen5;
+    }
+  }
+  
+  selectOption(option: string) {
+    this.selectedOption5 = option;
+    this.isDropdownOpen5 = false;
   }
 }
