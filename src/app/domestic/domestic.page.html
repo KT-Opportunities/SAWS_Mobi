@@ -64,16 +64,16 @@
         >
           <h1 class="heading-5">Take-off Data</h1>
         </div>
-        <div
+        <div (click)="Warning()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          href="#"
+         
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Warnings</h1>
         </div>
         <div (click)="WindCharts()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+       
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Winds Charts</h1>
@@ -1276,6 +1276,47 @@
       </div>
     </section>
 
+    <!-- Warning -->
+    <section class="domestic-warnings-section" 
+    *ngIf="isWarning">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <h1 class="heading-6">Aerodrome Warning</h1>
+      <div style="overflow-y: auto;
+      height: 32em;">
+ <div class="warning-div">
+        
+  <div class="w-layout-grid grid-warning">
+    <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8" class="div-block-15">
+      <div class="div-block-14"></div>
+    </div>
+    <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
+      <h4 class="heading-18-copy"><strong>WARNING FOR FAPE - 20240409 18:00</strong></h4>
+      <div class="w-layout-grid heading-copy">
+        <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8" class="cct-copy-copy">
+          <h1 class="heading-21">FAPE AD WRNG 1 VALID 091800/100300 SFC WSPD 25KT MAX 35KT FCST NC=</h1>
+        </div>
+      </div>
+    </div>
+    <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
+      <h4 class="heading-18-copy"><strong>WARNING FOR FALE - 20240409 16:05</strong></h4>
+      <div class="w-layout-grid heading-copy">
+        <div id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8" class="cct-copy-copy">
+          <h1 class="heading-21">FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+     
+      <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+        <div class="footerdiv">
+          <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+            <h6 class="heading-10">Forecast</h6>
+          </a>
+        </div>
+      </div>
+    </section>
 
 
     <div class="bottomdiv"  style="margin-top: 147% !important" *ngIf="isDomestic">

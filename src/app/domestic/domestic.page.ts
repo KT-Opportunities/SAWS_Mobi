@@ -14,6 +14,7 @@ export class DomesticPage implements OnInit {
   isLowLevel:Boolean = false;
   isWindCharts: boolean = false;
   isTakeOff: boolean = false;
+  isWarning: boolean = false;
   isDropdownOpen5: boolean = false;
   selectedOption5: string = 'CCCC';
 
@@ -32,6 +33,10 @@ export class DomesticPage implements OnInit {
   }
   DomeDomestic(){
 
+  }
+  Warning() {
+    this.isDomestic = false;
+    this.isWarning = true;
   }
 
   WindCharts(){
@@ -58,6 +63,7 @@ export class DomesticPage implements OnInit {
     this.isLowLevel = false;
     this.isTakeOff = false; 
     this.isWindCharts = false;
+    this.isWarning = false;
   }
   
   domesticPage() {
