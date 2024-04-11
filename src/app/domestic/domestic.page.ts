@@ -12,9 +12,11 @@ export class DomesticPage implements OnInit {
   isLogged: boolean = false;
   isHourlyCharts: boolean = false;
   isLowLevel:Boolean = false;
-
+  isWindCharts: boolean = false;
   isTakeOff: boolean = false;
+  isWarning: boolean = false;
   isDropdownOpen5: boolean = false;
+  isSIGWX: boolean = false;
   selectedOption5: string = 'CCCC';
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -33,6 +35,15 @@ export class DomesticPage implements OnInit {
   DomeDomestic(){
 
   }
+  Warning() {
+    this.isDomestic = false;
+    this.isWarning = true;
+  }
+
+  WindCharts(){
+    this.isDomestic = false;
+    this.isWindCharts = true;
+  }
 
   takeoff(){
     this.isDomestic = false;
@@ -41,6 +52,10 @@ export class DomesticPage implements OnInit {
   lowlevel(){
     this.isDomestic= false;
     this.isLowLevel = true;
+  }
+  SIGWX() {
+    this.isDomestic = false;
+    this.isSIGWX = true;
   }
 
   hourlyChart() {
@@ -52,6 +67,9 @@ export class DomesticPage implements OnInit {
     this.isHourlyCharts = false;
     this.isLowLevel = false;
     this.isTakeOff = false; 
+    this.isWindCharts = false;
+    this.isWarning = false;
+    this.isSIGWX = false;
   }
   
   domesticPage() {
