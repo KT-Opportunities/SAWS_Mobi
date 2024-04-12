@@ -30,7 +30,7 @@ export class InternationalPage implements OnInit {
   isDropdownOpen3: boolean = false;
   isDropdownOpen4: boolean = false;
   isDropdownOpen5: boolean = false;
-  selectedOption1: string = 'Wind';
+  selectedOption1: string = 'West';
   selectedOption2: string = 'Surface';
   selectedOption3: string = 'Temperature';
   selectedOption4: string = 'Total cloud';

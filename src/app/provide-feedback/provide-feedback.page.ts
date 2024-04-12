@@ -118,8 +118,8 @@ export class ProvideFeedbackPage implements OnInit {
             response: '',
             broadcast: null,
             broadcastId: null,
-            feedbackAttachment: this.selectedFileName || '',
-            feedbackAttachmentFileName: this.selectedFileName || '',
+            feedbackAttachment: '',
+            feedbackAttachmentFileName: '',
             responseAttachment: '',
             responseAttachmentFileName: '',
           },
@@ -133,8 +133,16 @@ export class ProvideFeedbackPage implements OnInit {
 
           this.feedbackForm.reset();
           this.responseData = data;
-          console.log(' this.responseData', this.responseData);
-          this.openAttachmentDialog(data.DetailDescription, '500ms', '500ms');
+          console.log('this.responseData', this.responseData);
+
+          if (this.fileFeedback.file) {
+            // Check if file is selected
+            this.feedbackForm.reset();
+            this.openAttachmentDialog(data.DetailDescription, '500ms', '500ms');
+          } else {
+            this.feedbackForm.reset();
+            alert('Successfully Created');
+          }
         },
         (error) => {
           console.error('Error submitting feedback:', error);
@@ -143,6 +151,7 @@ export class ProvideFeedbackPage implements OnInit {
       );
     }
   }
+
   onSubmitAttachment() {
     if (this.selectedFile) {
       const formValues = this.feedbackForm.value;
