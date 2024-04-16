@@ -170,7 +170,7 @@ export class InternationalPage implements OnInit {
     this.isCloudForecast = false;
     this.isTSProbability = false;
   }
-  SpotGraphToggle() {
+  MaximumWind() {
     // this.isKwazulNatal=true;
     this.isFormVisible2 = false;
     this.isFormVisible = false;
@@ -190,11 +190,21 @@ export class InternationalPage implements OnInit {
     this.isCloudForecast = false;
     this.isTSProbability = true;
   }
+  SigmetArmet() {
+    // this.isKwazulNatal=true;
+    this.isFormVisible2 = false;
+    this.isFormVisible = false;
+    this.isKwazulNatal = false;
+    this.isFormVisible = false;
+    this.isSpotGfraph = false;
+    this.isCloudForecast = false;
+    this.isTSProbability = true;
+  }
   aerosportPage() {
     this.router.navigate(['/landing-page']);
   }
 
-  CloudForecast() {
+  Humidity() {
     this.isCloudForecast = true;
     this.isFormVisible = false;
     this.isKwazulNatal = false;

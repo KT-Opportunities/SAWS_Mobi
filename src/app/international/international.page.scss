@@ -7015,6 +7015,18 @@ th {
 }
 
 @media screen and (max-width: 479px) {
+  .sub-headings-wind {
+    color: #002b53;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    line-height: 50px;
+    display: flex;
+  }
   #footerdivid {
     margin-top: -25%;
   }
@@ -8074,7 +8086,7 @@ html.w-mod-touch * {
 
 .w-button {
   display: inline-block;
-  padding: 9px 15px;
+  padding: 9px 32px;
   background-color: #00386c;
   color: white;
   border: 0;
@@ -13768,6 +13780,7 @@ textarea.w-select {
   .prev {
     background-color: #008c1d;
     color: #fff;
+    margin-left: -16px;
   }
   .icon-5 {
     margin-left: 45px;
