@@ -17,6 +17,8 @@ export class DomesticPage implements OnInit {
   isWarning: boolean = false;
   isDropdownOpen5: boolean = false;
   isSIGWX: boolean = false;
+  isLocation: boolean = false;
+  isFlightDocument: boolean = false;
   selectedOption5: string = 'CCCC';
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -39,10 +41,18 @@ export class DomesticPage implements OnInit {
     this.isDomestic = false;
     this.isWarning = true;
   }
+  FlightDocument(){
+    this.isDomestic = false;
+    this.isFlightDocument = true;
+  }
 
   WindCharts(){
     this.isDomestic = false;
     this.isWindCharts = true;
+  }
+  location() {
+  this.isDomestic = false;
+  this.isLocation = true;
   }
 
   takeoff(){
@@ -70,6 +80,8 @@ export class DomesticPage implements OnInit {
     this.isWindCharts = false;
     this.isWarning = false;
     this.isSIGWX = false;
+    this.isFlightDocument = false;
+    this.isLocation = false;
   }
   
   domesticPage() {

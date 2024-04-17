@@ -15,9 +15,9 @@
       </h1>
       <div class="w-layout-grid grid-list"
       style="overflow-y: auto; max-height: 498px; -ms-overflow-style: none">
-        <div
+        <div (click)="FlightDocument()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Flight Document</h1>
@@ -29,9 +29,9 @@
         >
           <h1 class="heading-5">Hourly Charts</h1>
         </div>
-        <div
+        <div (click)="location()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">ICAO Locations</h1>
@@ -1685,6 +1685,232 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- FlightDocument -->
+    <section class="domestic-documents-flight-section"
+    *ngIf="isFlightDocument">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <div class="documents-flight-div">
+        <h1 class="heading-6">Domestic/Regional Flight <br>Documentation</h1>
+        <div class="div-block-473">
+          <h1 class="heading-6"><strong>General Requests</strong></h1>
+          <div class="w-layout-grid grid-45" id="actual">
+            <div id="w-node-_7ef7e14a-47f6-1f70-930a-1506cdf970ea-3338f96e" class="div-block-48-copy">
+              <div class="w-form">
+                <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="7ef7e14a-47f6-1f70-930a-1506cdf970ec">
+                  <div class="div-blue-copy" id="bluecopy" >
+                    <div class="div-block-477">
+                      <h1 class="heading-50"><strong>Forecasts / Actuals</strong></h1>
+                    </div>
+                  </div>
+                </form>
+                <div class="w-form-done">
+                  <!-- <div>Thank you! Your submission has been received!</div> -->
+                </div>
+                <div class="w-form-fail">
+                  <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                </div>
+              </div>
+              <div id="w-node-_7ef7e14a-47f6-1f70-930a-1506cdf970f9-3338f96e" class="div-block-48-copy">
+                <div class="w-form">
+                  <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="7ef7e14a-47f6-1f70-930a-1506cdf970fb">
+                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SPECI</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Warnings</span></label></div>
+                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Sigment / Airmet</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Take-Off Data</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">QNH Chart</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">AMO</span></label></div>
+                  </form>
+                  <div class="w-form-done">
+                    <!-- <div>Thank you! Your submission has been received!</div> -->
+                  </div>
+                  <div class="w-form-fail">
+                    <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_76f5a702-393a-ccc9-d236-f1305b1d4f60-3338f96e" class="div-block-48-copy">
+              <div class="w-form">
+                <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="76f5a702-393a-ccc9-d236-f1305b1d4f62">
+                  <div class="div-blue-copy">
+                    <div class="div-block-477">
+                      <h1 class="heading-50"><strong>Forecasts Winds</strong></h1>
+                    </div>
+                  </div>
+                </form>
+                <div class="w-form-done">
+                  <div>Thank you! Your submission has been received!</div>
+                </div>
+                <div class="w-form-fail">
+                  <div>Oops! Something went wrong while submitting the form.</div>
+                </div>
+              </div>
+              <div id="w-node-_76f5a702-393a-ccc9-d236-f1305b1d4f6e-3338f96e" class="div-block-48-copy">
+                <div class="w-form">
+                  <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="76f5a702-393a-ccc9-d236-f1305b1d4f70">
+                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SPECI</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Warnings</span></label></div>
+                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Sigment / Airmet</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Take-Off Data</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">QNH Chart</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">AMO</span></label></div>
+                  </form>
+                  <div class="w-form-done">
+                    <div>Thank you! Your submission has been received!</div>
+                  </div>
+                  <div class="w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+        <div class="footerdiv">
+          <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+            <h6 class="heading-10">Forecast</h6>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="pop---up-cao-section" 
+    *ngIf="isLocation">
+    <h1 class="heading-6">FAAB - Alexander Bay</h1>
+    <div style="overflow-y: auto; height: 32em;">
+      <div class="icao-grid">
+ 
+        <div class="div-block-473-copy">
+          <h1 class="sub-headings-wind"><strong>METAR</strong></h1>
+          <h1 class="sub-headings-wind"><strong>FAAB 150800Z AUTO 17002KT //// // ////// 12/11 Q1018</strong></h1>
+        </div>
+        <div class="w-layout-grid icao-location-grid" style="display: block !important;
+        width: 93%;
+       margin-left: 15px;">
+          <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0684d-e142aa38" class="div-block-35">
+            <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0684e-e142aa38" class="w-layout-grid grid-21" 
+            id="id21">
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0684f-e142aa38" class="div-block-36">
+                <h4 class="heading-24" style="font-size: 12px;"><strong>Meteograms</strong></h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06853-e142aa38" class="div-block-36">
+                <h4 class="heading-24" style="font-size: 12px;margin-left: 28px;"><strong>Download Image</strong></h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06856-e142aa38" class="div-block-36"></div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06857-e142aa38" class="div-block-36"></div>
+            </div>
+          </div>
+          <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06858-e142aa38" class="div-block-452">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0685a-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Pressure Last 24 Hours</h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0685d-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06860-e142aa38" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06862-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Temperature Last 24 Hours</h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06865-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06868-e142aa38" class="div-block-453">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0686a-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Dewpoint Last 24 Hours</h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc0686d-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06870-e142aa38" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06872-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Windspeed Last 24 Hours</h4>
+              </div>
+              <div id="w-node-_9033b787-e3f7-362f-3d1f-8a4d6cc06875-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_8249a3b0-8adf-41d2-210b-a3b208a7970e-e142aa38" class="div-block-453">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_8249a3b0-8adf-41d2-210b-a3b208a79710-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Visibility Last 24 Hours</h4>
+              </div>
+              <div id="w-node-_8249a3b0-8adf-41d2-210b-a3b208a79713-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_07471e5d-4f10-0235-dbc6-9fe276924a70-e142aa38" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_07471e5d-4f10-0235-dbc6-9fe276924a72-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Pressure Last Week</h4>
+              </div>
+              <div id="w-node-_07471e5d-4f10-0235-dbc6-9fe276924a75-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_42a68fdd-187e-47a3-fbed-a7e231ecdbb6-e142aa38" class="div-block-452">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_42a68fdd-187e-47a3-fbed-a7e231ecdbb8-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Temperature Last Week</h4>
+              </div>
+              <div id="w-node-_42a68fdd-187e-47a3-fbed-a7e231ecdbbb-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_74a4c07e-a159-846b-ce36-1882b4acaf37-e142aa38" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_74a4c07e-a159-846b-ce36-1882b4acaf39-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Dewpoint Last Week</h4>
+              </div>
+              <div id="w-node-_74a4c07e-a159-846b-ce36-1882b4acaf3c-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-e77bb0ed-ebd8-a6ea-b7b5-bc6d0e4d5600-e142aa38" class="div-block-452">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-e77bb0ed-ebd8-a6ea-b7b5-bc6d0e4d5602-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Windspeed Last Week</h4>
+              </div>
+              <div id="w-node-e77bb0ed-ebd8-a6ea-b7b5-bc6d0e4d5605-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_373be6ae-65a5-c8e2-3581-0c4e3c7bcc24-e142aa38" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_373be6ae-65a5-c8e2-3581-0c4e3c7bcc26-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Windspeed Last Week</h4>
+              </div>
+              <div id="w-node-_373be6ae-65a5-c8e2-3581-0c4e3c7bcc29-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-c3e59c7f-17cc-8319-5d37-b061d44d526c-e142aa38" class="div-block-452">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-c3e59c7f-17cc-8319-5d37-b061d44d526e-e142aa38" class="div-block-37-copy">
+                <h4 class="heading-25">Visibility Last Week</h4>
+              </div>
+              <div id="w-node-c3e59c7f-17cc-8319-5d37-b061d44d5271-e142aa38" class="div-block-37">
+                <div class="button-2-copy w-button" id="download">Download</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
     </section>
 
 
