@@ -20,6 +20,8 @@ export class DomesticPage implements OnInit {
   isLocation: boolean = false;
   isFlightDocument: boolean = false;
   selectedOption5: string = 'CCCC';
+  showImage: boolean = false;
+  showImage1: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -82,11 +84,22 @@ export class DomesticPage implements OnInit {
     this.isSIGWX = false;
     this.isFlightDocument = false;
     this.isLocation = false;
+    this.showImage = false;
+    this.showImage1 = false;
   }
   
   domesticPage() {
     
     this.router.navigate(['/landing-page']);
+  }
+  toggleImageVisibility() {
+    this.isDomestic = false;
+    this.showImage = !this.showImage;
+  }
+
+  toggleImageVisibility1() {
+    this.isDomestic = false;
+    this.showImage1 = !this.showImage1;
   }
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown5') {
