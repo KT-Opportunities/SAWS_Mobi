@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { APIService } from 'src/app/services/apis.service';
 
 @Component({
   selector: 'app-forecast',
@@ -37,13 +38,45 @@ export class ForecastPage implements OnInit {
   selectedOption1: string = 'select saved Template';
   selectedOption2: string = 'Last Hour';
   selectedOption3: string = '5 minutes';
+
+  AirmetArray: any = [];
+  SigmetArray: any = [];
+  VermetArray:any=[];
   constructor(
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
     private iab: InAppBrowser,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private APIService: APIService
+  ) {
+    debugger;
+    this.APIService.GetSourceTextFolderFiles('airmet').subscribe((Response) => {
+      this.AirmetArray = Response;
+      console.log('Response ', this.AirmetArray);
+      if (this.AirmetArray && this.AirmetArray.length > 0) {
+        const firstItem = this.AirmetArray[0]; // Assuming you want to use the date from the first item
+        const lastModifiedDate = firstItem.lastmodified; // Get the 'lastmodified' date
+
+        // Now you can use 'lastModifiedDate' in further processing
+        console.log('Last Modified Date:', lastModifiedDate);
+
+        // Example: Use this date in a function or assign to a variable
+        // this.someFunctionUsingDate(lastModifiedDate);
+        // this.lastModified = lastModifiedDate;
+      } else {
+        console.log('AirmetArray is empty or undefined');
+      }
+    });
+    this.APIService.GetSourceTextFolderFiles('sigmet').subscribe((Response) => {
+      this.SigmetArray = Response;
+      console.log('Response ', this.SigmetArray);
+    });
+    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
+      this.VermetArray = Response;
+      console.log('Response ', this.VermetArray);
+    });
+  }
 
   ngOnInit() {}
   get isLoggedIn(): boolean {
@@ -114,6 +147,12 @@ export class ForecastPage implements OnInit {
     }
   }
   ColorCoded() {
+    // debugger;
+    this.APIService.GetSourceTextFolderFiles('airmet').subscribe((Response) => {
+      debugger;
+      this.AirmetArray = Response;
+      console.log('Response ', this.AirmetArray);
+    });
     this.iscodeTafs = true;
     this.isFormVisible = false;
     this.isSigmentAirmet = false;
@@ -209,8 +248,7 @@ export class ForecastPage implements OnInit {
 
     debugger;
     this.spinner.show();
-      this.router.navigate(['/advisories']);
-
+    this.router.navigate(['/advisories']);
   }
   Warning() {
     this.iscodeTafs = false;
