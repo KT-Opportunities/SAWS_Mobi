@@ -56,13 +56,14 @@
   font-weight: bold;
   margin-left: 47px;
 }
+
 .feedback-div {
   margin-bottom: 20px;
-  margin-left: -35px;
-  margin-top: -50px;
+  margin-left: -17px;
+  margin-top: -110px;
 }
 .form-input {
-  width: calc(100% + 169px);
+  width: calc(100% + 159px);
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -123,4 +124,27 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+}
+.form-group {
+  position: relative; /* Ensure relative positioning for child elements */
+}
+
+.file-input-container {
+  position: relative; /* Position relative for child elements */
+  display: inline-block; /* Display as inline block */
+}
+
+.form-input {
+  position: relative; /* Ensure relative positioning */
+}
+
+.selected-file-name {
+  position: absolute; /* Position absolutely relative to parent */
+  top: 50%; /* Position vertically at 50% of parent */
+  left: 5px; /* Adjust left offset for spacing */
+  transform: translateY(-50%); /* Center vertically */
+
+  overflow: hidden; /* Hide overflow text */
+  white-space: nowrap; /* Prevent text wrapping */
+  text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
 }
