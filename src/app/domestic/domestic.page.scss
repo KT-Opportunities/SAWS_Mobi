@@ -258,6 +258,11 @@ p {
   position: relative;
   top: -9px;
 }
+
+#FAAD{
+  position: relative;
+  top: -9px;
+}
 #block{
 font-size: 12px;
 }
@@ -338,6 +343,7 @@ font-size: 12px;
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-left: 3px;
 }
 
 #id21{
@@ -497,11 +503,53 @@ font-size: 12px;
   width: 24em;
   margin-left: 10px;
 }
+#grid121{
+  grid-template-rows: auto !important;
+  grid-template-columns: 1fr 1fr !important;
+}
+#air{
+  padding-right: 0;
+  font-size: 13px;
+  position: relative;
+  top: 3px;
+}
+
+#ICAO {
+  padding-left: 54px;
+  padding-right: 0;
+  font-size: 13px;
+  position: relative;
+  top: 3px;
+}
+
+#searchform {
+  position: relative;
+  top: -17px;
+}
+#wind{
+  margin-left: 20px;
+}
+#Serch1{
+  background-color: #00386c;
+  // background-image: url('../images/Icon-awesome-search.svg');
+  background-position: 0%;
+  background-repeat: repeat-y;
+  background-size: 0;
+  border-radius: 10px;
+  margin-top: -9px;
+  margin-left: -15px;
+}
+
 #sch{
   width: 7em;
 }
 #ViR{
   width: 8em;
+}
+#locatio {
+  width: 93%;
+  margin-left: 12px;
+  display: block !important;
 }
 .div-bloc11{
   margin-left: 13px;
