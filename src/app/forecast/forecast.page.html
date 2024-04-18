@@ -1,4 +1,5 @@
 <ion-content>
+  <div *ngIf="loading" class="loading-indicator">Loading...</div>
   <section class="list-page">
     <!-- <div class="div-block-2">
       <ion-menu-button class="left-aligned-menu-button"></ion-menu-button>
@@ -1339,14 +1340,15 @@
                   name="field-2"
                   data-name="Field 2"
                   class="selection w-select"
+                  (change)="onAirportCodeChange($event)"
+                  [(ngModel)]="selectedAirportCode"
                 >
-                  <option value="">CCCC</option>
-                  <option value="First">FAPE</option>
-                  <option value="Second">FABL</option>
-                  <option value="Third">FACT</option>
-                  <option value="Another option">FALE</option>
-                  <option value="Another option">FALA</option>
-                  <option value="Another option">FAOR</option>
+                  <option value="FAPE">FAPE</option>
+                  <option value="FABL">FABL</option>
+                  <option value="FACT">FACT</option>
+                  <option value="FALE">FALE</option>
+                  <option value="FALA">FALA</option>
+                  <option value="FAOR">FAOR</option>
                 </select>
               </form>
             </div>
@@ -1358,34 +1360,30 @@
             <button class="button-2-copy w-button">Reload</button>
           </div>
         </div>
-        <div
-          id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
-          class="div-block-15"
-          *ngFor="let item of VermetArray"
-        >
-          <div class="div-block-14">
+        <div *ngFor="let item of VermetArray" class="div-block-15">
+          <div *ngIf="shouldDisplayItem(item)">
+          <div class="div-block-14" >
             <div class="w-layout-grid grid-19">
-              <div
-                id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
-                class="div-block-34"
-              >
+              <div class="div-block-34">
                 <h1 class="heading-23">CCCC:</h1>
-                <h1 class="heading-23-copy">FACT</h1>
+                <h1 class="heading-23-copy">
+                  {{ getAirportCode(item.filename) }}
+                </h1>
               </div>
-              <div
-                id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
-                class="div-block-34"
-              >
+              <div class="div-block-34">
                 <h1 class="heading-23">Issued at:</h1>
-                <h1 class="heading-23-copy">2024/02/ 12:00Z</h1>
+                <h1 class="heading-23-copy">
+                  {{ item.lastmodified | date: 'yyyy/MM/dd HH:mm' }}
+                </h1>
               </div>
             </div>
           </div>
           <h1 class="heading-22">
-            <strong class="bold-text-4"
-              >TAKE-OFF DATA CAPE TOWN INTERNATIONAL AIRPORT</strong
-            >
+            <strong class="bold-text-4">
+              {{ extractTakeOffData(item.filetextcontent) }}
+            </strong>
           </h1>
+
           <div class="w-layout-grid grid-20">
             <div
               id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
@@ -1423,152 +1421,40 @@
               </div>
             </div>
             <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
-              <div class="w-layout-grid grid-22-copy">
+              <div
+                class="w-layout-grid grid-22-copy"
+                *ngFor="let airportData of item.vermetTableData.slice(1); let i = index"
+                [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+              >
                 <div
                   id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408"
                   class="div-block-37"
                 >
-                  <h4 class="heading-25">13Z</h4>
+                  <h4 class="heading-25">{{ airportData.time }}</h4>
                 </div>
                 <div
                   id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408"
                   class="div-block-37"
                 >
-                  <h4 class="heading-25">26</h4>
+                  <h4 class="heading-25">{{ airportData.temp }}</h4>
                 </div>
                 <div
                   id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408"
                   class="div-block-37"
                 >
-                  <h4 class="heading-25">1013</h4>
+                  <h4 class="heading-25">{{ airportData.qnh }}</h4>
                 </div>
                 <div
                   id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408"
                   class="div-block-37"
                 >
-                  <h4 class="heading-25">18015KT</h4>
-                </div>
-              </div>
-            </div>
-            <div
-              id="w-node-d9148515-91a8-eaec-3676-5c6304736b21-a17d1408"
-              class="div-block-38"
-            >
-              <div class="w-layout-grid grid-22">
-                <div
-                  id="w-node-d9148515-91a8-eaec-3676-5c6304736b23-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">13Z</h4>
-                </div>
-                <div
-                  id="w-node-d9148515-91a8-eaec-3676-5c6304736b26-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">26</h4>
-                </div>
-                <div
-                  id="w-node-d9148515-91a8-eaec-3676-5c6304736b29-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">1013</h4>
-                </div>
-                <div
-                  id="w-node-d9148515-91a8-eaec-3676-5c6304736b2c-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">18015KT</h4>
-                </div>
-              </div>
-            </div>
-            <div id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a3-a17d1408">
-              <div class="w-layout-grid grid-22">
-                <div
-                  id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a5-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">13Z</h4>
-                </div>
-                <div
-                  id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7a8-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">26</h4>
-                </div>
-                <div
-                  id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7ab-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">1013</h4>
-                </div>
-                <div
-                  id="w-node-_1728b2a6-d9b0-165f-4a17-c168527da7ae-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">18015KT</h4>
-                </div>
-              </div>
-            </div>
-            <div
-              id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baaa-a17d1408"
-              class="div-block-38"
-            >
-              <div class="w-layout-grid grid-22">
-                <div
-                  id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baac-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">13Z</h4>
-                </div>
-                <div
-                  id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48baaf-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">26</h4>
-                </div>
-                <div
-                  id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48bab2-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">1013</h4>
-                </div>
-                <div
-                  id="w-node-_4fe6fbe9-4024-916f-849f-acec0c48bab5-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">18015KT</h4>
-                </div>
-              </div>
-            </div>
-            <div id="w-node-e257892b-0aee-5955-6d9c-77fae509665b-a17d1408">
-              <div class="w-layout-grid grid-22">
-                <div
-                  id="w-node-e257892b-0aee-5955-6d9c-77fae509665d-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">13Z</h4>
-                </div>
-                <div
-                  id="w-node-e257892b-0aee-5955-6d9c-77fae5096660-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">26</h4>
-                </div>
-                <div
-                  id="w-node-e257892b-0aee-5955-6d9c-77fae5096663-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">1013</h4>
-                </div>
-                <div
-                  id="w-node-e257892b-0aee-5955-6d9c-77fae5096666-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">18015KT</h4>
+                  <h4 class="heading-25">{{ airportData.qan }}</h4>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+          <!-- forecast.page.html -->
         </div>
       </div>
     </section>
