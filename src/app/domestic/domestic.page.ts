@@ -16,10 +16,20 @@ export class DomesticPage implements OnInit {
   isTakeOff: boolean = false;
   isWarning: boolean = false;
   isDropdownOpen5: boolean = false;
+  isDropdownOpen6: boolean = false;
+  isDropdownOpen2: boolean = false;
+  isDropdownOpen3: boolean = false;
+  isDropdownOpen4: boolean = false;
   isSIGWX: boolean = false;
   isLocation: boolean = false;
   isFlightDocument: boolean = false;
+    
+  selectedOption2: string = 'XXX';
+  selectedOption3: string = 'XXX';
+  selectedOption4: string = 'XXX';
   selectedOption5: string = 'CCCC';
+  selectedOption6: string = 'Stations';
+  
   showImage: boolean = false;
   showImage1: boolean = false;
 
@@ -104,6 +114,40 @@ export class DomesticPage implements OnInit {
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown5') {
       this.isDropdownOpen5 = !this.isDropdownOpen5;
+      this.isDropdownOpen6 = false;
+      this.isDropdownOpen4 = false;
+      this.isDropdownOpen3 = false;
+      this.isDropdownOpen2 = false;
+    }
+    if (dropdown === 'dropdown2') {
+      this.isDropdownOpen2 = !this.isDropdownOpen2;
+      this.isDropdownOpen6 = false;
+      this.isDropdownOpen4 = false;
+      this.isDropdownOpen3 = false;
+      this.isDropdownOpen5 = false;
+    }
+    if (dropdown === 'dropdown3') {
+      this.isDropdownOpen3 = !this.isDropdownOpen3;
+      this.isDropdownOpen6 = false;
+      this.isDropdownOpen4 = false;
+      this.isDropdownOpen2 = false;
+      this.isDropdownOpen5 = false;
+      
+    }
+    if (dropdown === 'dropdown4') {
+      this.isDropdownOpen4 = !this.isDropdownOpen4;
+      this.isDropdownOpen6 = false;
+      this.isDropdownOpen2 = false;
+      this.isDropdownOpen3 = false;
+      this.isDropdownOpen5 = false;
+      
+    }
+    if (dropdown === 'dropdown6') {
+      this.isDropdownOpen6 = !this.isDropdownOpen6;
+      this.isDropdownOpen2 = false;
+      this.isDropdownOpen4 = false;
+      this.isDropdownOpen3 = false;
+      this.isDropdownOpen5 = false;
     }
   }
   
@@ -111,4 +155,5 @@ export class DomesticPage implements OnInit {
     this.selectedOption5 = option;
     this.isDropdownOpen5 = false;
   }
+
 }

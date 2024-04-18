@@ -15,7 +15,7 @@
       </h1>
       <div class="w-layout-grid grid-list"
       style="overflow-y: auto; max-height: 498px; -ms-overflow-style: none">
-        <div 
+        <div (click)="FlightDocument()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           
           class="link-block-3 w-inline-block"
@@ -1692,8 +1692,11 @@
     <section class="domestic-documents-flight-section" 
     *ngIf="isFlightDocument">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+      <h1 class="heading-6">Domestic/Regional Flight <br>Documentation</h1>
+    
+    <div style="overflow-y: auto; height: 32em;">
       <div class="documents-flight-div">
-        <h1 class="heading-6">Domestic/Regional Flight <br>Documentation</h1>
+        
         <div class="div-block-473">
           <h1 class="heading-6"><strong>General Requests</strong></h1>
           <div class="w-layout-grid grid-45" id="grid455">
@@ -1716,8 +1719,8 @@
               <div id="w-node-_7ef7e14a-47f6-1f70-930a-1506cdf970f9-3338f96e" class="">
                 <div class="w-form">
                   <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="7ef7e14a-47f6-1f70-930a-1506cdf970fb">
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SPECI</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Warnings</span></label></div>
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Sigment / Airmet</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Take-Off Data</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">QNH Chart</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">AMO</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SPECI</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Warnings</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Sigment / Airmet</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Take-Off Data</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">QNH Chart</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">AMO</span></label></div>
                   </form>
                   <div class="w-form-done">
                     <!-- <div>Thank you! Your submission has been received!</div> -->
@@ -1748,22 +1751,25 @@
                 <h1 class="heading-21-copy">Block Winds</h1>
                 <div class="w-form">
                   <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="76f5a702-393a-ccc9-d236-f1305b1d4f70">
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL010-240</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL210-450</span></label></div>
-                    <div><label for="" class="field-label-5">FCST Hour</label>
-                      <div data-hover="false" data-delay="0" class="w-dropdown">
-                        <div class="text-field-blue w-dropdown-toggle">
-                          <div class="w-icon-dropdown-toggle"></div>
-                          <div>xx</div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL010-240</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL210-450</span></label></div>
+                    <div><label for="" class="field-label" id="flow">FCST Hour</label>
+                      <div data-hover="false" 
+                      (click)="toggleDropdown('dropdown2')"data-delay="0" class="w-dropdown" id="drop"
+                      >
+                        <div class="text-field-blue w-dropdown-toggle" id="name" >
+                          <div class="w-icon-dropdown-toggle" id="icon3"></div>
+                          <div class="text-block">{{selectedOption2}}</div>
                         </div>
-                        <nav class="w-dropdown-list">
-                          <a href="#" class="w-dropdown-link">Link 1</a>
-                          <a href="#" class="w-dropdown-link">Link 2</a>
-                          <a href="#" class="w-dropdown-link">Link 3</a>
+                        <nav class="dropdown-list1 "
+                        *ngIf="isDropdownOpen2">
+                          <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 3')">Link 3</div>
                         </nav>
                       </div>
                     </div>
                     <h1 class="heading-21-copy">Vector Winds</h1>
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL010-210</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL210-450</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL010-210</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">FL210-450</span></label></div>
                   </form>
                   <div class="w-form-done">
                     <!-- <div>Thank you! Your submission has been received!</div> -->
@@ -1774,12 +1780,12 @@
                 </div>
               </div>
             </div>
-            <div id="w-node-eaba5add-82cc-742d-b0c3-33923d82e2a8-3338f96e" class="div-block-48-copy">
+            <div id="w-node-eaba5add-82cc-742d-b0c3-33923d82e2a8-3338f96e" class="div-block-48">
               <div class="w-form">
                 <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="eaba5add-82cc-742d-b0c3-33923d82e2aa">
                   <div class="div-blue-copy">
                     <div class="div-block-477">
-                      <h1 class="heading-50"><strong>Sigwx Charts</strong></h1>
+                      <h1 class="heading-50" ><strong>Sigwx Charts</strong></h1>
                     </div>
                   </div>
                 </form>
@@ -1790,27 +1796,28 @@
                   <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
                 </div>
               </div>
-              <div id="w-node-eaba5add-82cc-742d-b0c3-33923d82e2b6-3338f96e" class="div-block-48-copy">
+              <div id="w-node-eaba5add-82cc-742d-b0c3-33923d82e2b6-3338f96e" class="div-block-48">
                 <h1 class="heading-21-copy">A4 Size</h1>
                 <div class="w-form">
                   <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="eaba5add-82cc-742d-b0c3-33923d82e2ba">
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">ADD Low</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Low</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">High</span></label></div>
-                    <div><label for="" class="field-label-5">Chart Hour</label>
-                      <div data-hover="false" data-delay="0" class="w-dropdown">
-                        <div class="text-field-blue w-dropdown-toggle">
-                          <div class="w-icon-dropdown-toggle"></div>
-                          <div>xx</div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">ADD Low</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Low</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">High</span></label></div>
+                    <div><label for="" class="field-label-5" id="hour">Chart Hour</label>
+                      <div data-hover="false" 
+                      (click)="toggleDropdown('dropdown3')"data-delay="0" class="w-dropdown" id="drop">
+                        <div class="text-field-blue w-dropdown-toggle" id="name">
+                          <div class="w-icon-dropdown-toggle" id="icon3"></div>
+                          <div class="text-block">{{selectedOption3}}</div>
                         </div>
-                        <nav class="w-dropdown-list">
-                          <a href="#" class="w-dropdown-link">Link 1</a>
-                          <a href="#" class="w-dropdown-link">Link 2</a>
-                          <a href="#" class="w-dropdown-link">Link 3</a>
+                        <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
+                          <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 3')">Link 3</div>
                         </nav>
                       </div>
                     </div>
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Include Sysmbols</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Include Cover page</span></label></div>
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Use Page Breaks</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Rotate Images</span></label></div>
-                    <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Include Sysmbols</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Include Cover page</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Use Page Breaks</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Rotate Images</span></label></div>
+                    <div class="div-block-1"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">Select All</span></label></div>
                   </form>
                   <div class="w-form-done">
                     <!-- <div>Thank you! Your submission has been received!</div> -->
@@ -1823,80 +1830,89 @@
             </div>
           </div>
           <h1 class="heading-6"><strong>Locations</strong></h1>
-          <div id="w-node-f4ce1a79-902c-39cd-128a-8486a087e4f9-3338f96e" class="div-block-48-copy">
+          <div id="w-node-f4ce1a79-902c-39cd-128a-8486a087e4f9-3338f96e" class="div-block-48">
             <div class="w-form">
               <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="f4ce1a79-902c-39cd-128a-8486a087e4fb">
                 <div class="div-blue-copy"></div>
               </form>
               <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
+                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
               </div>
             </div>
-            <div id="w-node-d1671c8d-e414-3e93-b39c-db07f1420121-3338f96e" class="div-block-48-copy">
+            <div id="w-node-d1671c8d-e414-3e93-b39c-db07f1420121-3338f96e" class="div-block-48">
               <div class="w-form">
                 <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="d1671c8d-e414-3e93-b39c-db07f1420123">
                   <div class="div-block-470-copy">
-                    <div><label for="" class="field-label-5-copy">Chart Hour</label>
-                      <div data-hover="false" data-delay="0" class="w-dropdown">
-                        <div class="text-field-blue w-dropdown-toggle">
-                          <div class="w-icon-dropdown-toggle"></div>
-                          <div>xx</div>
+                    <div><label for="" class="field-label-5-copy" id="hour">Chart Hour</label>
+                      <div data-hover="false"   
+                      (click)="toggleDropdown('dropdown4')"data-delay="0" class="w-dropdown" id="drop">
+                        <div class="text-field-blue w-dropdown-toggle" id="name">
+                          <div class="w-icon-dropdown-toggle" id="icon3"></div>
+                          <div class="text-block">{{selectedOption4}}</div>
                         </div>
-                        <nav class="w-dropdown-list">
-                          <a href="#" class="w-dropdown-link">Link 1</a>
-                          <a href="#" class="w-dropdown-link">Link 2</a>
-                          <a href="#" class="w-dropdown-link">Link 3</a>
+                        <nav class="dropdown-list1" 
+                        *ngIf="isDropdownOpen4">
+                          <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
+                          <div class="w-dropdown-link" (click)="selectOption('Link 3')">Link 3</div>
                         </nav>
                       </div>
                     </div>
                   </div>
                   <div class="div-block-470-copy">
-                    <a href="#" class="button-2-copy w-button">Add</a>
-                    <a href="#" class="remove-button w-button">Remove</a>
+                    <div class="button-2-copy w-button" id="add">Add</div>
+                    <div class="remove-button w-button">Remove</div>
                   </div>
                   <div>
-                    <div class="div-block-482"><label for="" class="field-label-5-copy">Station List</label>
-                      <div data-hover="false" data-delay="0" class="w-dropdown">
-                        <div class="text-field-blue w-dropdown-toggle">
-                          <div class="w-icon-dropdown-toggle"></div>
-                          <div>Stations</div>
+                    <div  class="div-block-470-copy">
+                      <div class="">
+                        <label for="" class="field-label-5-copy" id="hour">Station List</label>
+                        <div data-hover="false" data-delay="0"  
+                        (click)="toggleDropdown('dropdown6')" class="w-dropdown" id="drop">
+                          <div class="text-field-blue w-dropdown-toggle" id="name" >
+                            <div class="w-icon-dropdown-toggle" id="icon3"></div>
+                          
+                            <div class="text-block">{{selectedOption6}}</div>
+                          </div>
+                          
+                          <nav class="dropdown-list1" *ngIf="isDropdownOpen6" >
+                            <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
+                            <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
+                            <div class="w-dropdown-link" (click)="selectOption('Link 3')">Link 3</div>
+                          </nav>
                         </div>
-                        <nav class="w-dropdown-list">
-                          <a href="#" class="w-dropdown-link">Link 1</a>
-                          <a href="#" class="w-dropdown-link">Link 2</a>
-                          <a href="#" class="w-dropdown-link">Link 3</a>
-                        </nav>
-                      </div>
-                    </div><textarea placeholder="Example Text" maxlength="5000" id="field-2" name="field-2" data-name="Field 2" class="text-field-blue-fcopy w-input"></textarea>
-                  </div>
+                      </div><textarea placeholder="Example Text" maxlength="5000" id="field-2" name="field-2" data-name="Field 2" class="text-field-blue-fcopy w-input"></textarea>
+                    </div>
+                    </div >
+                    
                 </form>
                 <div class="w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
+                  <!-- <div>Thank you! Your submission has been received!</div> -->
                 </div>
                 <div class="w-form-fail">
-                  <div>Oops! Something went wrong while submitting the form.</div>
+                  <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
                 </div>
               </div>
             </div>
             <div class="div-block-470-copy">
-              <a href="#" class="remove-button w-button">Clear</a>
-              <a href="#" class="button-2-copy w-button">Sort</a>
-              <a href="#" class="button-2 w-button">Save values</a>
+              <div class="remove-button w-button">Clear</div>
+              <div class="button-2-copy w-button" id="sort">Sort</div>
+              <div class="button-2 w-button" id="save">Save values</div>
             </div>
           </div>
           <h1 class="heading-6"><strong>Schedule</strong></h1>
-          <div id="w-node-f4ce1a79-902c-39cd-128a-8486a087e507-3338f96e" class="div-block-48-copy">
+          <div id="w-node-f4ce1a79-902c-39cd-128a-8486a087e507-3338f96e" class="div-block-48">
             <div class="w-form">
               <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="661794e944dbeb803338f96e" data-wf-element-id="f4ce1a79-902c-39cd-128a-8486a087e50b">
                 <div class="div-block-483">
-                  <div class="w-layout-grid flight-document-schedule-grid">
+                  <div class="w-layout-grid flight-document-schedule-grid" id="schedule-grid">
                     <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001040a-3338f96e" class="div-block-38">
                       <div class="w-layout-grid grid-22">
                         <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001040c-3338f96e" class="div-block-37-copy">
-                          <h4 class="heading-25"><strong>ETD (UCT) (HHMM)</strong></h4>
+                          <h4 class="heading-25" id="UCT"><strong>ETD (UCT) (HHMM)</strong></h4>
                         </div>
                         <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001040f-3338f96e" class="div-block-37"><input class="text-field-blue-borders w-input" maxlength="256" name="field-3" data-name="Field 3" placeholder="" type="text" id="field-3" required=""></div>
                       </div>
@@ -1906,7 +1922,7 @@
                         <div id="w-node-fdd3df23-3294-e1be-47ab-d032c0010414-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Sunday</h4>
                         </div>
-                        <div id="w-node-fdd3df23-3294-e1be-47ab-d032c0010417-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-fdd3df23-3294-e1be-47ab-d032c0010417-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001041a-3338f96e" class="div-block-38">
@@ -1914,7 +1930,7 @@
                         <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001041c-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Monday</h4>
                         </div>
-                        <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001041f-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-fdd3df23-3294-e1be-47ab-d032c001041f-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-_2360b714-1778-55fc-7fbe-f479c8b4803a-3338f96e" class="div-block-453">
@@ -1922,7 +1938,7 @@
                         <div id="w-node-_2360b714-1778-55fc-7fbe-f479c8b4803c-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Tuesday</h4>
                         </div>
-                        <div id="w-node-_2360b714-1778-55fc-7fbe-f479c8b4803f-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-_2360b714-1778-55fc-7fbe-f479c8b4803f-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-_105e0146-910e-7ddd-46f8-c1b11ceb2e34-3338f96e" class="div-block-38">
@@ -1930,7 +1946,7 @@
                         <div id="w-node-_105e0146-910e-7ddd-46f8-c1b11ceb2e36-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Wednesday </h4>
                         </div>
-                        <div id="w-node-_105e0146-910e-7ddd-46f8-c1b11ceb2e39-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-_105e0146-910e-7ddd-46f8-c1b11ceb2e39-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-_9f7ba2c8-c131-667b-f427-008b10381087-3338f96e" class="div-block-453">
@@ -1938,7 +1954,7 @@
                         <div id="w-node-_9f7ba2c8-c131-667b-f427-008b10381089-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Thursday</h4>
                         </div>
-                        <div id="w-node-_9f7ba2c8-c131-667b-f427-008b1038108c-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-_9f7ba2c8-c131-667b-f427-008b1038108c-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-e5deb527-1504-45ec-6c53-49ae4bdbb172-3338f96e" class="div-block-38">
@@ -1946,7 +1962,7 @@
                         <div id="w-node-e5deb527-1504-45ec-6c53-49ae4bdbb174-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Wednesday </h4>
                         </div>
-                        <div id="w-node-e5deb527-1504-45ec-6c53-49ae4bdbb177-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-e5deb527-1504-45ec-6c53-49ae4bdbb177-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-_3cd67794-ab56-fef2-d9b0-1a0ca3192a26-3338f96e" class="div-block-453">
@@ -1954,7 +1970,7 @@
                         <div id="w-node-_3cd67794-ab56-fef2-d9b0-1a0ca3192a28-3338f96e" class="div-block-37-copy">
                           <h4 class="heading-25">Friday</h4>
                         </div>
-                        <div id="w-node-_3cd67794-ab56-fef2-d9b0-1a0ca3192a2b-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2">Select All</span></label></div>
+                        <div id="w-node-_3cd67794-ab56-fef2-d9b0-1a0ca3192a2b-3338f96e" class="div-block-37"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy-copy w-form-label" for="checkbox-2"></span></label></div>
                       </div>
                     </div>
                     <div id="w-node-_2486a268-5c6d-0737-46d8-411bb6c39a69-3338f96e" class="div-block-38">
@@ -1974,27 +1990,29 @@
                       </div>
                     </div>
                   </div>
-                  <p class="paragraph-14">* These fields are required for scheduling. Multiple email addresses (up to 5) <br>must be separated with a comma(,).</p>
-                  <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2"><strong>Resend document if weather changes</strong></span></label></div>
+                  <p class="paragraph-14" id="param">* These fields are required for scheduling. Multiple email addresses (up to 5) <br>must be separated with a comma(,).</p>
+                  <div class="div-bloc11"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2"><strong>Resend document if weather changes</strong></span></label></div>
                   <h1 class="heading-21-copy">Monitor</h1>
-                  <div class="div-block-470"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SIGMET / AIRMET</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAKE-OFF</span></label></div>
+                  <div class="div-bloc11"><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">METAR</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">SIGMET / AIRMET</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAF</span></label><label class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input zz"><span class="checkbox-label-2-copy w-form-label" for="checkbox-2">TAKE-OFF</span></label></div>
                 </div>
               </form>
               <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
+                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
               </div>
             </div>
           </div>
           <div class="div-block-470-copy">
-            <a href="#" class="button-2-copy w-button">Schedule</a>
-            <a href="#" class="button-2-copy w-button">View Report</a>
-            <a href="#" class="button-2-copy w-button">Download PDF</a>
+            <div class="button-2-copy w-button" id="sch">Schedule</div>
+            <div class="button-2-copy w-button" id="ViR">View Report</div>
+            <div class="button-2-copy w-button">Download PDF</div>
           </div>
         </div>
       </div>
+    </div>
+     
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
         <div class="footerdiv">
           <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
