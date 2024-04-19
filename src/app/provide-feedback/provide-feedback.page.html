@@ -27,8 +27,8 @@
       <h1 class="heading-12" id="feedback-heading">Feedback</h1>
       <div class="w-form">
         <form
-          [formGroup]="userForm"
-          (ngSubmit)="onSubmitFeedback()"
+          [formGroup]="feedbackForm"
+          (ngSubmit)="onSubmit()"
           id="email-form1"
           name="email-form"
           data-name="Email Form"
@@ -64,9 +64,28 @@
               class="form-input"
               placeholder="Enter your feedback message"
               formControlName="message"
-              style="height: 200px"
+              style="height: 180px"
             ></textarea>
           </div>
+          <div class="form-group">
+            <label for="feedbackFile" class="form-label">Attachment:</label>
+
+            <div class="file-input-container">
+              <input
+                style="color: #fff"
+                #myFileInput
+                type="file"
+                id="feedbackFile"
+                class="form-input"
+                formControlName="feedbackFile"
+                (change)="onFileSelected($event)"
+              />
+              <span *ngIf="selectedFileName" class="selected-file-name"
+                >{{ selectedFileName }}</span
+              >
+            </div>
+          </div>
+
           <br /><input
             type="submit"
             data-wait="Please wait..."
@@ -84,7 +103,66 @@
       </div>
     </div>
   </div>
-  <div class="bottomdiv">
+  <!-- <div class="feedback-div">
+    <div class="div-block-26">
+      <h1 class="heading-12" id="feedback-heading">Feedback</h1>
+      <div class="w-form" style="margin-top: -50px; width: 101%">
+        <form
+          [formGroup]="feedbackForm"
+          (ngSubmit)="onSubmit()"
+          id="email-form1"
+          name="email-form"
+          data-name="Email Form"
+          method="get"
+          data-wf-page-id="65b37dc83e5b85e23fc5ea08"
+          data-wf-element-id="250cd369-1376-16af-4b58-4f9ff70033f3"
+        >
+        
+          <div class="form-group">
+            <label for="email" class="form-label">Subject:</label>
+            <input
+              type="text"
+              id="email"
+              class="form-input"
+              placeholder="Enter your subject"
+              formControlName="title"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Message:</label>
+
+            <textarea
+              class="form-input"
+              placeholder="Enter your feedback message"
+              formControlName="message"
+              style="height: 200px"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="feedbackFile" class="form-label">Attachment:</label>
+            <input
+              #myFileInput
+              type="file"
+              id="feedbackFile"
+              class="form-input"
+              formControlName="feedbackFile"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+
+          <input
+            type="submit"
+            data-wait="Please wait..."
+            class="submit-button-2 w-button"
+            value="Submit"
+            id="submitbutton"
+          />
+        </form>
+      </div>
+    </div>
+  </div> -->
+  <div class="bottomdiv" style="margin-top: 210%">
     <img
       src="../../assets/Path-3447.svg"
       loading="lazy"

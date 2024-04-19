@@ -23,6 +23,7 @@ interface AdvertResponse {
     DetailDescription: {
       DocAdverts: {
         Id: number;
+        URL: string; // Assuming URL is the property name for the advertisement link
       }[];
     };
   };
@@ -74,7 +75,7 @@ export class LandingPage implements OnInit {
       this.currentAdvertisement = this.advertisements[this.currentAdvertisementIndex];
     }
     if (this.currentAdvertisement) {
-      console.log('Current advertisement URL', this.currentAdvertisement.link);
+      // console.log('Current advertisement URL', this.currentAdvertisement.link);
     }
 
   }
@@ -142,11 +143,13 @@ loadAllAdvertisements() {
     (data: any[]) => {
       console.log('getAllAdverts', data);
       this.advertisements = data.map(ad => {
-        // Prevent security vulnerabilities, creating a safe URL for the image.
+        // Prevent security vulnerabilities, create a safe URL for the image.
         const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
-        return { imageUrl, link: ad.advert_url } as Advertisement;
+        // Ensure the URL is valid and does not start with "http://localhost"
+        const advertUrl = this.ensureValidURL(ad.advert_url);
+        return { imageUrl, link: advertUrl } as Advertisement;
       });
-      console.log('advertisements', this.advertisements);
+      //console.log('advertisements', this.advertisements);
 
       // Set the currentAdvertisement to the first advertisement in the array
       if (this.advertisements.length > 0) {
@@ -161,14 +164,25 @@ loadAllAdvertisements() {
     }
   );
 }
+ // Ensure URL is valid
+ ensureValidURL(url: string): string {
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+  }
+  return url;
+}
 
+  // Launch advertisement link
+  launchAdvertLink(advertUrl: string) {
+    window.open(advertUrl, "_blank");
+  }
 
 
 
 initializeSwiper() {
   console.log('Initializing Swiper');
   if (this.advertisements.length > 0 && this.swiperElement) {
-    console.log('Creating Swiper instance');
+    //console.log('Creating Swiper instance');
     this.swiper = new Swiper(this.swiperElement.nativeElement, {
       direction: 'vertical',
       loop: true, // Enable looping to seamlessly rotate banners

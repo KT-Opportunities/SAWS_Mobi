@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ChatPage
+  },  {
+    path: 'attachment-file',
+    loadChildren: () => import('./attachment-file/attachment-file.module').then( m => m.AttachmentFilePageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,0 +1,134 @@
+<mat-dialog-content class="attachment-file grid-13">
+  <span (click)="closeImageDialog()" class="cancel-icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+    >
+      <path
+        id="Icon_material-cancel"
+        data-name="Icon material-cancel"
+        d="M18,3A15,15,0,1,0,33,18,14.986,14.986,0,0,0,18,3Zm7.5,20.385L23.385,25.5,18,20.115,12.615,25.5,10.5,23.385,15.885,18,10.5,12.615,12.615,10.5,18,15.885,23.385,10.5,25.5,12.615,20.115,18Z"
+        transform="translate(-3 -3)"
+        fill="#e03c32"
+      />
+    </svg>
+  </span>
+
+  <!-- <img 
+        [src]="fileBaseUrl" 
+        alt="Selected Image"
+        > -->
+
+  <img
+    class="fileImage"
+    *ngIf="isImage"
+    [src]="fileBaseUrl"
+    alt="Selected Image"
+    width="100%"
+    height="100%"
+  />
+
+  <video *ngIf="isVideo" [src]="fileBaseUrl" autoplay loop controls></video>
+
+  <audio *ngIf="isAudio" [src]="fileBaseUrl" autoplay loop controls>
+    <source [src]="fileBaseUrl" />
+  </audio>
+
+  <!-- width="500"
+        height="auto" -->
+  <iframe *ngIf="isApplication" [src]="fileBaseUrl" width="100%" height="800">
+  </iframe>
+
+  <div
+    id="w-node-d6e462d1-76fb-9d89-7c68-0a48cdb81add-bf38b96b"
+    *ngIf="data.message && data.addFile"
+  >
+    <h4 class="adm">{{ data.responderEmail }}</h4>
+    <div class="w-layout-grid grid-16">
+      <div
+        id="w-node-_68c2ba2d-a180-6d5d-bc2e-dfc8d4e9ef8b-bf38b96b"
+        class="div-block-448"
+      ></div>
+      <div id="w-node-_3891c89a-c05f-88ae-0e87-eb0330273651-bf38b96b">
+        <div class="w-layout-grid grid-17">
+          <div
+            id="w-node-bb567ea0-417d-ba11-69bd-8fd873445a44-bf38b96b"
+            class="div-block-446"
+          >
+            <p class="paragraph-3">{{ data.message }}</p>
+          </div>
+          <div
+            id="w-node-_5ddf5ebf-8f5e-e5f5-cd98-b70df93808a4-bf38b96b"
+            class="div-block-445"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="52.025"
+              height="48.611"
+              viewBox="0 0 52.025 48.611"
+            >
+              <g
+                id="Group_5146"
+                data-name="Group 5146"
+                transform="translate(-732 -362.389)"
+              >
+                <path
+                  id="Icon_simple-hipchat"
+                  data-name="Icon simple-hipchat"
+                  d="M8.664,40.353A21.2,21.2,0,0,1,0,23.621C0,11.232,11.647,1.18,26.006,1.18s26.019,10.052,26.019,22.44S40.383,46.069,26.017,46.069a29.831,29.831,0,0,1-5.471-.494l-.568-.1A27.074,27.074,0,0,1,6.347,49.791a1.4,1.4,0,0,1-1.2-2.393C6.555,45.675,9.02,40.624,8.664,40.353Z"
+                  transform="translate(732 361.208)"
+                  fill="#8295c2"
+                />
+                <circle
+                  id="Ellipse_212"
+                  data-name="Ellipse 212"
+                  cx="3.5"
+                  cy="3.5"
+                  r="3.5"
+                  transform="translate(743 383)"
+                  fill="#fff"
+                />
+                <circle
+                  id="Ellipse_213"
+                  data-name="Ellipse 213"
+                  cx="3.5"
+                  cy="3.5"
+                  r="3.5"
+                  transform="translate(754 383)"
+                  fill="#fff"
+                />
+                <circle
+                  id="Ellipse_214"
+                  data-name="Ellipse 214"
+                  cx="3.5"
+                  cy="3.5"
+                  r="3.5"
+                  transform="translate(767 383)"
+                  fill="#fff"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    *ngIf="data.addFile"
+    class="submit-button w-button"
+    (click)="closeSubmitDialog()"
+  >
+    Send
+  </button>
+</mat-dialog-content>
+
+<!-- <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">AttachmentFile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content> -->

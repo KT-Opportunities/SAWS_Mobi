@@ -14,82 +14,82 @@
       </h1>
       <div
         class="w-layout-grid grid-list"
-        style="overflow-y: auto; max-height: 499px; -ms-overflow-style: none"
+        style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none"
       >
         <div (click)="ObservMeter()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR</h1>
         </div>
 
-        <a
+        <div
           (click)="observMetarPage()"
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Webcams</h1>
-        </a>
+        </div>
 
         <div (click)="colorcoded()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR: Color Coded</h1>
         </div>
 
-        <a
+        <div (click)="RecentMetar()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR: Recent</h1>
-        </a>
-        <a
+        </div>
+        <div (click)="MetarHistory()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR: History</h1>
-        </a>
+        </div>
 
         <div (click)="speci()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">SPECI</h1>
         </div>
-        <a
+        <div (click)="RecentTafs()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR/TAF : Recent</h1>
-        </a>
+        </div>
         <div (click)="metar()"
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Radar</h1>
         </div>
         <div  (click)="satelite()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Satellite</h1>
         </div>
-        <a
+        <div (click)="weathermap()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Access to real-time AWS</h1>
-        </a>
+          <h1 class="heading-5">Weather Map</h1>
+        </div>
       </div>
     </div></div>
  
@@ -99,18 +99,18 @@
       <div class="w-layout-grid grid-list">
         <div 
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
+          
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">METAR</h1>
         </div>
-        <a
+        <div
           (click)="observMetarPage()"
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Webcams</h1>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -119,7 +119,7 @@
     <section class="ob-randar"
     *ngIf="isRanderImages">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
-      <div class="metar-history-main-div">
+      <div class="metar-history-main-div" id="maindiv">
         <h1 class="heading-6" id="RaderImages">Radar Images</h1>
         <div>
           <div class="w-layout-grid grid-20">
@@ -141,7 +141,7 @@
                   <h4 class="heading-25">FABL</h4>
                 </div>
                 <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4565-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@
                   <h4 class="heading-25">FABM</h4>
                 </div>
                 <div id="w-node-_5586f8de-500c-3d0d-41e6-8fc6e92cb068-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@
                   <h4 class="heading-25">FACT</h4>
                 </div>
                 <div id="w-node-e7c9e1d2-4d07-0cf8-ea26-9a926eb740ec-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
                   <h4 class="heading-25">FADN</h4>
                 </div>
                 <div id="w-node-_782976cf-bafb-5f5e-9603-d16b861e96af-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -181,7 +181,7 @@
                   <h4 class="heading-25">FADY</h4>
                 </div>
                 <div id="w-node-_35a877aa-3c3a-5cd6-9810-4b38617c6d8b-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -191,7 +191,7 @@
                   <h4 class="heading-25">FADN</h4>
                 </div>
                 <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da85b-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@
                   <h4 class="heading-25">FADY</h4>
                 </div>
                 <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
-                  <a  class="button-2 w-button">View Image</a>
+                  <div  class="button-2 w-button">View Image</div>
                 </div>
               </div>
             </div>
@@ -241,10 +241,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -254,7 +254,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -270,7 +270,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -286,7 +286,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -302,10 +302,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -315,7 +315,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -331,7 +331,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -347,7 +347,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -363,7 +363,7 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
                     <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
@@ -376,7 +376,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -392,7 +392,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -408,7 +408,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -424,10 +424,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -437,7 +437,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -453,7 +453,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -469,7 +469,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -486,10 +486,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -499,7 +499,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -515,7 +515,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -531,7 +531,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -547,10 +547,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -560,7 +560,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -576,7 +576,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -592,7 +592,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -608,10 +608,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -621,7 +621,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -637,7 +637,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -653,7 +653,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -669,10 +669,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -682,7 +682,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -698,7 +698,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -714,7 +714,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -730,10 +730,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -759,7 +759,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -775,7 +775,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -791,10 +791,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -804,7 +804,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -820,7 +820,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -853,10 +853,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -882,7 +882,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -898,7 +898,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -914,10 +914,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -927,7 +927,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -943,7 +943,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -975,10 +975,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -988,7 +988,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1004,7 +1004,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1020,7 +1020,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1036,10 +1036,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1049,7 +1049,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1065,7 +1065,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1097,10 +1097,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div  class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1110,7 +1110,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1126,7 +1126,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1142,7 +1142,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a  class="button-2-copy w-button">View Decoded</a>
+                    <div  class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1158,10 +1158,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a  class="button w-button" id="Normal">Normal</a>
+                    <div  class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a  class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1222,11 +1222,6 @@
       </div>
       <div class="bottomdiv" style="margin-top: 147% !important;">
         <img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-        <div class="footerdiv">
-          <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
-            <h6 class="heading-10">Forecast</h6>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -1264,10 +1259,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
+                    <div class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1277,7 +1272,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1293,7 +1288,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1309,7 +1304,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1325,10 +1320,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
+                    <div class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1338,7 +1333,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1354,7 +1349,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1370,7 +1365,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1386,10 +1381,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
+                    <div class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2 w-button"  id="style">Colour / Style Index</a>
+                    <div class="button-2 w-button"  id="style">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1399,7 +1394,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1415,7 +1410,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1431,7 +1426,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1493,10 +1488,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
+                    <div class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2 w-button" >Colour / Style Index</a>
+                    <div class="button-2 w-button" >Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1506,7 +1501,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1522,7 +1517,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1538,7 +1533,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1554,10 +1549,10 @@
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
+                    <div class="button w-button" id="Normal">Normal</div>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2 w-button">Colour / Style Index</a>
+                    <div class="button-2 w-button">Colour / Style Index</div>
                   </div>
                 </div>
               </div>
@@ -1567,7 +1562,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1583,7 +1578,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1599,7 +1594,7 @@
                     <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
+                    <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
                 <div class="w-layout-grid grid-18">
@@ -1615,11 +1610,11 @@
       
       </div>
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-        <div class="footerdiv">
+        <!-- <div class="footerdiv">
           <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
             <h6 class="heading-10">Forecast</h6>
           </a>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -1627,9 +1622,12 @@
     <section class="taf-accuracy" *ngIf="issatelite">
 
         <div class="cloud-cover">
-          <h1 class="heading-6">SAWS Satelite</h1>
+          <h1 class="heading-12"
+          >SAWS Satelite</h1>
 
-          <div class="w-layout-grid metar-history-grid" style="margin-right: 18px;">
+          <div class="w-layout-grid metar-history-grid" style="margin-right: 18px; 
+          margin-right: 18px;
+           margin-top: 171px;">
             <div
               id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
               class="div-block-15"
@@ -1665,29 +1663,29 @@
                         <div class="text-block">{{selectedOption1}}</div>
                       </div>
                       <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('Low', 'dropdown1')"
-                          >IR108_RSA</a
+                          >IR108_RSA</div
                         >
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('Middle', 'dropdown1')"
-                          >IR108_GLOBE</a
+                          >IR108_GLOBE</div
                         >
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('High', 'dropdown1')"
-                          >FOG</a
+                          >FOG</div
                         >
-                        <a
-                        href="#"
+                        <div
+                        
                         class="w-dropdown-link"
                         (click)="selectOption('High', 'dropdown1')"
-                        >Day Natural Colours</a
+                        >Day Natural Colours</div
                       >
                       </nav>
                     </div>
@@ -1718,24 +1716,24 @@
                         <div class="text-block">{{selectedOption2}}</div>
                       </div>
                       <nav class="dropdown-list1" *ngIf="isDropdownOpen2">
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('Low', 'dropdown1')"
-                          >2024-03-20 20:00</a
+                          >2024-03-20 20:00</div
                           >
                         
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('Middle', 'dropdown1')"
-                          >2024-03-20 20:00</a
+                          >2024-03-20 20:00</div
                         >
-                        <a
-                          href="#"
+                        <div
+                          
                           class="w-dropdown-link"
                           (click)="selectOption('High', 'dropdown1')"
-                          >2024-03-20 20:00</a
+                          >2024-03-20 20:00</div
                         >
                       </nav>
                     </div>
@@ -1789,11 +1787,770 @@
      
     </section>
     
+<!-- RecentMetar- -->
+<section class="re" *ngIf="isRecentMetar">
+  <!-- <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div> -->
+  <div class="recent-tafs">
+    <h1 class="heading-6" id="heading7">Recent TAFs</h1>
+    <div class="w-layout-grid1 grid-6-copy">
+      <div id="w-node-c8da85be-f06f-2243-5777-654520b149b0-9377a649" class="div-block-15">
+        <div class="div-block-14">
+          <div class="w-layout-grid grid-19">
+            <div id="w-node-c8da85be-f06f-2243-5777-654520b149b3-9377a649" class="div-block-34">
+              <h1 class="heading-23">Date:</h1>
+              <h1 class="heading-23-copy">2024 -02-05</h1>
+            </div>
+            <div id="w-node-c8da85be-f06f-2243-5777-654520b149b8-9377a649" class="div-block-34">
+              <h1 class="heading-23">Time</h1>
+              <h1 class="heading-23-copy">2024/02/ 12:00Z</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  class="ObservScrol">
+      <div id="w-node-a4a2a6b3-fb94-67a5-1e0f-a72ba37feb73-9377a649" class="form-block w-form">
+        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="a4a2a6b3-fb94-67a5-1e0f-a72ba37feb74"
+        >
+          <div class="grid-24">
+            <div id="w-node-ca5eddba-f83b-3b16-a8ac-5450b410e804-9377a649" class="div-block-41"><label for="field-2" class="field-label">Tempalate Name</label><input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="" type="text" id="field-2" required=""></div>
+            <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649"><label for="" class="field-label">Select Template</label>
+              <div data-hover="false" data-delay="0" 
+              class="text-field-blue w-dropdown"
+              (click)="selectDropdown('dropdown5')">
+                <div class="w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                  <div class="text-block">{{selectedOption5}}</div>
+                </div>
+                <nav class="dropdown-list1"
+                *ngIf="isDropdownOpen5">
+                  <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 1</div>
+                  <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 2</div>
+                  <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 3</div>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="div-block-39"><input type="submit" data-wait="Please wait..." class="submit-button-3-copy w-button" value="Save"><input type="submit" data-wait="Please wait..." class="submit-button-3 w-button" value="Cancel"></div>
+          <div class="div-block-40">
+            <!-- <h4 class="heading-45">Successfully added a template</h4> -->
+          </div>
+        </form>
+        <div class="">
+          <!-- <div>Thank you! Your submission has been received!</div> -->
+        </div>
+        <div class="">
+          <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+        </div>
+      </div>
+      <div id="w-node-_38257011-dae8-5f44-9e44-5a2e6988a1a7-9377a649" >
+        <div id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649" class="div-block-14">
+          <h5 class="heading-9">Query TAFs</h5>
+          <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit" class="search-button w-button" value="Search"></form>
+        </div>
+        <div class="w-form">
+          <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75">
+            <div class="w-layout-grid grid-25">
+              <div id="w-node-_5ca72a72-b198-e603-e4a9-5569bcb17122-9377a649"><label for="" class="field-label">Time</label>
+                <div data-hover="false"
+                 data-delay="0" class="text-field-blue w-dropdown"
+                 (click)="selectDropdown('dropdown6')"
+               >
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                    <div class="text-block">{{selectedOption6}}</div>
+                  </div>
+                  <nav class="dropdown-list1"
+                  *ngIf="isDropdownOpen6">
+                    <div  class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 1</div>
+                    <div class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 2</div>
+                    <div class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 3</div>
+                  </nav>
+                </div>
+              </div>
+              <div id="w-node-_3e49d3ec-67c7-cead-1c50-d5e7fa7f12d9-9377a649"><label for="" class="field-label">Refresh This page every</label>
+                <div data-hover="false" data-delay="0" 
+                class="text-field-blue w-dropdown"
+                (click)="selectDropdown('dropdown7')">
+                  <div class="dropdown-toggle w-dropdown-toggle">
+                    <div class="icon-2-copy w-icon-dropdown-toggle" id="icon2"></div>
+                    <div class="text-block">{{selectedOption7}}</div>
+                  </div>
+                  <nav class="dropdown-list1" 
+                  *ngIf="isDropdownOpen7">
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">1 Min</div>
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">2 Min</div>
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">3 Min</div>
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">4 Min</div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="div-block-15" id="block-15">
+        <h1 class="heading-22">Gauteng</h1>
+        <div class="div-block-32">
+          <div class="w-layout-grid ccta-grid">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
+              <div class="button w-button">Normal</div>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649" class="cct-copy">
+              <div class="button-2 w-button">Colour / Style Index</div>
+            </div>
+          </div>
+        </div>
+        <div class="div-block-45">
+          <div class="w-layout-grid heading-text">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649" class="cct-copy-copy">
+              <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649" class="cct-copy">
+              <div class="button-2-copy w-button">View Decoded</div>
+            </div>
+          </div>
+          <div class="w-layout-grid grid-18">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d6-9377a649" class="div-block-16">
+              <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e2-9377a649" class="div-block-17"></div>
+          </div>
+        </div>
+        <div>
+          <div class="w-layout-grid heading-text">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e5-9377a649" class="cct-copy-copy">
+              <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e8-9377a649" class="cct-copy">
+              <div class="button-2-copy w-button">View Decoded</div>
+            </div>
+          </div>
+          <div class="w-layout-grid grid-18">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ec-9377a649" class="div-block-16">
+              <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062f8-9377a649" class="div-block-17"></div>
+          </div>
+        </div>
+        <div>
+          <div class="w-layout-grid heading-text">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fb-9377a649" class="cct-copy-copy">
+              <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fe-9377a649" class="cct-copy">
+              <div class="button-2-copy w-button">View Decoded</div>
+            </div>
+          </div>
+          <div class="w-layout-grid grid-18">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f06302-9377a649" class="div-block-16">
+              <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f0630e-9377a649" class="div-block-17"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    
+    </div>
+     
+  
+ 
 
 
 
 
+  <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+    <div class="footerdiv">
+      <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+        <!-- <h6 class="heading-10">Forecast</h6> -->
+      </a>
+    </div>
+  </div>
+</section>
 
+  <!-- MetarHistory -->
+  <section class="ob-metar-history" *ngIf="isMetarHistory">
+    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image">
+    <div class="metar-history-main-div">
+      <h1 class="heading-6">Metar History For FAOR</h1>
+   
+        <div >
+          <div id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22c1-a9068d94" class="div-block-15">
+            <div class="div-block-14"></div>
+          </div>
+          <div id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22ce-a9068d94" class="form-block w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="65c9ee145d072c23a9068d94" data-wf-element-id="a3e89a9d-706c-301b-ed7f-a8d1997c22cf">
+              <div class=" grid-24">
+                <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649"><label for="" class="field-label">Select Template</label>
+                  <div data-hover="false" data-delay="0" 
+                  class="text-field-blue w-dropdown"
+                  (click)="selectDropdown('dropdown5')">
+                    <div class="w-dropdown-toggle">
+                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption5}}</div>
+                    </div>
+                    <nav class="dropdown-list1"
+                    *ngIf="isDropdownOpen5">
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 1</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 2</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 3</div>
+                    </nav>
+                  </div>
+                </div>
+                <div id="w-node-_9bfb377b-e0d8-05d4-3338-378b893cc2eb-a9068d94"><label for="" class="field-label">Plot meteogram</label>
+                 
+                   <div data-hover="false" 
+                  data-delay="0" class="text-field-blue w-dropdown"
+                  (click)="selectDropdown('dropdown')">
+                    <div class="w-dropdown-toggle">
+                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption}}</div>
+                    </div>
+                    <nav class="dropdown-list1"
+                    *ngIf="isDropdownOpen">
+                      <div  class="w-dropdown-link" (click)="selectOption('', 'dropdown')">Link 1</div>
+                      <div   class="w-dropdown-link" (click)="selectOption('', 'dropdown')">Link 2</div>
+                      <div  class="w-dropdown-link" (click)="selectOption('', 'dropdown')">Link 3</div>
+                    </nav>
+                  </div> 
+                </div>
+              </div>
+              <div class="div-block-451">
+                <div  class=" w-button" id="button-2">Download</div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+            
+          </div>
+  
+       
+  
+        </div>
+        <div class="w-layout-grid grid-6" id="layout">
+         <div class="ObservScrol">
+          <div class="div-block-15">
+            <div>
+              <div class="">
+                <div class="rows-wrap">
+                  <div class="table-wrapper">
+                    <div class="table-row head">
+                      <div class="table-box">
+                        <div class="table-heading">Full Name</div>
+                      </div>
+                      <div class="table-box">
+                        <div class="table-heading">Email</div>
+                      </div>
+                      <div class="table-box">
+                        <div class="table-heading">Phone</div>
+                      </div>
+                      <div class="table-box">
+                        <div class="table-heading">Role</div>
+                      </div>
+                      <div class="table-box _11">
+                        <div class="table-heading">Last update</div>
+                      </div>
+                      <div class="table-box action">
+                        <div class="table-heading">Status</div>
+                      </div>
+                      <div class="table-box action">
+                        <div class="table-heading">Action</div>
+                      </div>
+                    </div>
+                    <div class="table-container">
+                      <div class="table-data-wrapper">
+                        <div class="scroll-container">
+                          <div class="scroll-table-content">
+                            <div class="table-row head hide">
+                              <div class="div-block-406"></div>
+                              <div class="table-box">
+                                <div class="table-heading">Name</div>
+                              </div>
+                              <div class="table-box">
+                                <div class="table-heading">Email</div>
+                              </div>
+                              <div class="table-box">
+                                <div class="table-heading">Phone</div>
+                              </div>
+                              <div class="table-box">
+                                <div class="table-heading">Country</div>
+                              </div>
+                              <div class="table-box _11">
+                                <div class="table-heading">Last Update</div>
+                              </div>
+                              <div class="table-box action">
+                                <div class="table-heading">Status</div>
+                              </div>
+                              <div class="table-box action">
+                                <div class="table-heading">Action</div>
+                              </div>
+                            </div>
+                            <div class="table-row">
+                              <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt="" class="image-7">
+                                <div class="table-data name">Walter A. Price</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data link">email.com</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">813-200-2741</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">United States</div>
+                              </div>
+                              <div class="table-box _2 small">
+                                <div class="table-data">May 22, 2020</div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a715288e" class="togglebutton active w-inline-block">
+                                  <div class="buttontoggle _2"></div>
+                                </div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"  class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt="" class="table-action-icon"></div>
+                              </div>
+                            </div>
+                            <div class="table-row">
+                              <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt="" class="image-7">
+                                <div class="table-data name">Walter A. Price</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data link">wpriceemail.com</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">813-200-2741</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">United States</div>
+                              </div>
+                              <div class="table-box _2 small">
+                                <div class="table-data">May 22, 2020</div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528a7" class="togglebutton active w-inline-block">
+                                  <div class="buttontoggle _2"></div>
+                                </div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"  class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt="" class="table-action-icon"></div>
+                              </div>
+                            </div>
+                            <div class="table-row">
+                              <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt="" class="image-7">
+                                <div class="table-data name">Walter A. Price</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data link">wpriceemail.com</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">813-200-2741</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">United States</div>
+                              </div>
+                              <div class="table-box _2 small">
+                                <div class="table-data">May 22, 2020</div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528c0" class="togglebutton active w-inline-block">
+                                  <div class="buttontoggle _2"></div>
+                                </div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"  class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt="" class="table-action-icon"></div>
+                              </div>
+                            </div>
+                            <div class="table-row">
+                              <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt="" class="image-7">
+                                <div class="table-data name">John Smith</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data link">jsmithemail.com</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">813-200-2741</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">United Kingdom</div>
+                              </div>
+                              <div class="table-box _2 small">
+                                <div class="table-data">May 16, 2020</div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528d9" class="togglebutton active w-inline-block">
+                                  <div class="buttontoggle _2"></div>
+                                </div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"  class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt="" class="table-action-icon"></div>
+                              </div>
+                            </div>
+                            <div class="table-row">
+                              <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt="" class="image-7">
+                                <div class="table-data name">Bianca Rossi</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data link">brossiemail.com</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">813-200-2741</div>
+                              </div>
+                              <div class="table-box _2">
+                                <div class="table-data">Italy</div>
+                              </div>
+                              <div class="table-box _2 small">
+                                <div class="table-data">May 04, 2020</div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f2" class="togglebutton w-inline-block">
+                                  <div class="buttontoggle"></div>
+                                </div>
+                              </div>
+                              <div class="table-box _2 action">
+                                <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"  class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt="" class="table-action-icon"></div>
+  
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      
+        </div>
+       
+      </div>
+        
+    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+      <!-- <div class="footerdiv">
+        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+          <h6 class="heading-10">Forecast</h6>
+        </a>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- RecentTafs -->
+  <section class="re" *ngIf="isRecentTafs">
+    <!-- <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div> -->
+    <div class="recent-tafs">
+      <h1 class="heading-6" id="heading7">Recent METAR/TAFs</h1>
+      <div class="w-layout-grid1 grid-6-copy">
+        <div id="w-node-c8da85be-f06f-2243-5777-654520b149b0-9377a649" class="div-block-15">
+          <div class="div-block-14">
+            <div class="w-layout-grid grid-19">
+              <div id="w-node-c8da85be-f06f-2243-5777-654520b149b3-9377a649" class="div-block-34">
+                <h1 class="heading-23">Date:</h1>
+                <h1 class="heading-23-copy">2024 -02-05</h1>
+              </div>
+              <div id="w-node-c8da85be-f06f-2243-5777-654520b149b8-9377a649" class="div-block-34">
+                <h1 class="heading-23">Time</h1>
+                <h1 class="heading-23-copy">2024/02/ 12:00Z</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div  class="ObservScrol">
+        <div id="w-node-a4a2a6b3-fb94-67a5-1e0f-a72ba37feb73-9377a649" class="form-block w-form">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="a4a2a6b3-fb94-67a5-1e0f-a72ba37feb74"
+          >
+            <div class="grid-24">
+              <div id="w-node-ca5eddba-f83b-3b16-a8ac-5450b410e804-9377a649" class="div-block-41"><label for="field-2" class="field-label">Tempalate Name</label><input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="" type="text" id="field-2" required=""></div>
+              <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649"><label for="" class="field-label">Select Template</label>
+                <div data-hover="false" data-delay="0" 
+                class="text-field-blue w-dropdown"
+                (click)="selectDropdown('dropdown5')">
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                    <div class="text-block">{{selectedOption5}}</div>
+                  </div>
+                  <nav class="dropdown-list1"
+                  *ngIf="isDropdownOpen5">
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 1</div>
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 2</div>
+                    <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 3</div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div class="div-block-39"><input type="submit" data-wait="Please wait..." class="submit-button-3-copy w-button" value="Save"><input type="submit" data-wait="Please wait..." class="submit-button-3 w-button" value="Cancel"></div>
+            <div class="div-block-40">
+              <!-- <h4 class="heading-45">Successfully added a template</h4> -->
+            </div>
+          </form>
+          <div class="">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div id="w-node-_38257011-dae8-5f44-9e44-5a2e6988a1a7-9377a649" >
+          <div id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649" class="div-block-14">
+            <h5 class="heading-9">Query TAFs</h5>
+            <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit" class="search-button w-button" value="Search"></form>
+          </div>
+          <div class="w-form">
+            <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75">
+              <div class="w-layout-grid grid-25">
+                <div id="w-node-_5ca72a72-b198-e603-e4a9-5569bcb17122-9377a649"><label for="" class="field-label">Time</label>
+                  <div data-hover="false"
+                   data-delay="0" class="text-field-blue w-dropdown"
+                   (click)="selectDropdown('dropdown6')"
+                 >
+                    <div class="w-dropdown-toggle">
+                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption6}}</div>
+                    </div>
+                    <nav class="dropdown-list1"
+                    *ngIf="isDropdownOpen6">
+                      <div  class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 1</div>
+                      <div class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 2</div>
+                      <div class="w-dropdown-link" (click)="selectOption('', 'dropdown6')">Link 3</div>
+                    </nav>
+                  </div>
+                </div>
+                <div id="w-node-_3e49d3ec-67c7-cead-1c50-d5e7fa7f12d9-9377a649"><label for="" class="field-label">Refresh This page every</label>
+                  <div data-hover="false" data-delay="0" 
+                  class="text-field-blue w-dropdown"
+                  (click)="selectDropdown('dropdown7')">
+                    <div class="dropdown-toggle w-dropdown-toggle">
+                      <div class="icon-2-copy w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption7}}</div>
+                    </div>
+                    <nav class="dropdown-list1" 
+                    *ngIf="isDropdownOpen7">
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">1 Min</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">2 Min</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">3 Min</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown7')">4 Min</div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+  
+        <div class="div-block-15" id="block-15">
+          <h1 class="heading-22">Gauteng</h1>
+          <div class="div-block-32">
+            <div class="w-layout-grid ccta-grid">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
+                <div class="button w-button">Normal</div>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649" class="cct-copy">
+                <div class="button-2 w-button">Colour / Style Index</div>
+              </div>
+            </div>
+          </div>
+          <div class="div-block-45">
+            <div class="w-layout-grid heading-text">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649" class="cct-copy-copy">
+                <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649" class="cct-copy">
+                <div class="button-2-copy w-button">View Decoded</div>
+              </div>
+            </div>
+            <div class="w-layout-grid grid-18">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d6-9377a649" class="div-block-16">
+                <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e2-9377a649" class="div-block-17"></div>
+            </div>
+          </div>
+          <div>
+            <div class="w-layout-grid heading-text">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e5-9377a649" class="cct-copy-copy">
+                <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e8-9377a649" class="cct-copy">
+                <div class="button-2-copy w-button">View Decoded</div>
+              </div>
+            </div>
+            <div class="w-layout-grid grid-18">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ec-9377a649" class="div-block-16">
+                <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062f8-9377a649" class="div-block-17"></div>
+            </div>
+          </div>
+          <div>
+            <div class="w-layout-grid heading-text">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fb-9377a649" class="cct-copy-copy">
+                <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fe-9377a649" class="cct-copy">
+                <div class="button-2-copy w-button">View Decoded</div>
+              </div>
+            </div>
+            <div class="w-layout-grid grid-18">
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f06302-9377a649" class="div-block-16">
+                <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
+              </div>
+              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f0630e-9377a649" class="div-block-17"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      
+      </div>
+       
+    
+   
+  
+  
+  
+  
+    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+      <div class="footerdiv">
+        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+          <h6 class="heading-10">Forecast</h6>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weather Map -->
+  <section class="ob-metar-history" *ngIf="isWeatherMap">
+    <div class="cloud-cover">
+      <h1 class="heading-6">
+        Current METAR/SYNOP temperatures and weather
+      </h1>
+
+      <div class="w-layout-grid metar-history-grid">
+        <div
+          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
+          class="div-block-15"
+        >
+          <div class="div-block-14"></div>
+        </div>
+        <div
+          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
+          class="form-block w-form"
+        >
+          <div class="w-form">
+            <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
+              <label for="" class="field-label">Last Updated:</label>
+            </div>
+            <div>
+              <form
+                id="email-form-3"
+                name="email-form-3"
+                data-name="Email Form 3"
+                method="get"
+                class="form-3"
+                data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+                data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
+              >
+                <div>
+                  <div
+                    data-hover="false"
+                    data-delay="0"
+                    class="text-field-blue w-dropdown"
+                    (click)="toggleDropdown('dropdown8')"
+                    style="z-index: 1000; position: relative"
+                  >
+                    <div class="w-dropdown-toggle">
+                      <div
+                        class="icon-2 w-icon-dropdown-toggle"
+                        id="icon2"
+                      ></div>
+                      <div class="text-block">{{selectedOption8}}</div>
+                    </div>
+                    <nav class="dropdown-list1"
+                  
+                    *ngIf="isDropdownOpen">
+                    
+                      
+                      <div
+                        class="w-dropdown-link"
+                        (click)="selectOption('', 'dropdown8')"
+                        >2024-03-20 13:15</div>
+                      
+                    
+                    </nav>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div>
+            
+            </div>
+
+            <div class="w-form-done">
+              <div></div>
+            </div>
+            <div class="w-form-fail">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-15">
+        <div>
+          <div class="">
+            <div class="rows-wrap">
+              <div
+                data-delay="4000"
+                data-animation="slide"
+                class="slider-2 w-slider"
+                data-autoplay="false"
+                data-easing="ease"
+                data-hide-arrows="false"
+                data-disable-swipe="false"
+                data-autoplay-limit="0"
+                data-nav-spacing="3"
+                data-duration="500"
+                data-infinite="true"
+              >
+                <div class="w-slider-mask">
+                  <div class="w-slide"></div>
+                  <div class="w-slide"></div>
+                </div>
+                <div class="w-slider-arrow-left">
+                  <div class="w-icon-slider-left"></div>
+                </div>
+                <div class="w-slider-arrow-right">
+                  <div class="w-icon-slider-right"></div>
+                </div>
+                <div class="w-slider-nav w-round w-num"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <div class="bottomdiv" style="margin-top: 147% !important;">
       <img
@@ -1819,8 +2576,8 @@
         class="image"
       />
 
-      <div class="footerdiv" id="footerdivid" >
-        <a (click)=" observatPage()" class="link-block-5 w-inline-block"
+      <div class="footerdiv" id="footerdivid1" >
+        <div    (click)=" observatPage()" class="link-block-5 w-inline-block"
           ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
           <h6 class="heading-10-copy" id="styleh6"
           style="    color: #fff;
@@ -1829,7 +2586,7 @@
           font-family: Montserrat, sans-serif;
           text-decoration: none;
           font-size: 12px;
-          margin-top: 4px;"  >Observation</h6></a
+          margin-top: 4px;"  >Observation</h6></div
         >
       </div>
     </div>

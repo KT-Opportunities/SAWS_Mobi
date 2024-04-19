@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserLoggedIn } from '../Models/User.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  loginEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private loginEventSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loginEvent$: Observable<boolean> = this.loginEventSubject.asObservable();
+
+  logout() {
+    // Logic for logging out
+    this.isLoggedIn = false;
+  }
   login(form: any) {
     const body = { UserName: form.username, Password: form.password };
     const httpOptions = {
@@ -27,8 +36,15 @@ export class AuthService {
     );
   }
   private isLoggedIn = false;
-  private isFromSubscription=false;
+  private isFromSubscription = false;
+  private subscriptionPackageIdSubject = new BehaviorSubject<
+    number | undefined
+  >(undefined);
+  subscriptionPackageId$ = this.subscriptionPackageIdSubject.asObservable();
 
+  setSubscriptionPackageId(subscriptionPackageId: number) {
+    this.subscriptionPackageIdSubject.next(subscriptionPackageId);
+  }
 
   getIsLoggedIn(): boolean {
     return this.isLoggedIn;
@@ -42,6 +58,7 @@ export class AuthService {
   }
   setLoggedInStatus(status: boolean): void {
     this.isLoggedIn = status;
+    this.loginEventSubject.next(status);
   }
   setUserData(userData: any) {
     this.userData = userData;
@@ -60,12 +77,12 @@ export class AuthService {
   }
 
   saveCurrentUser(user: UserLoggedIn): string {
-    sessionStorage.setItem("CurrentUser", JSON.stringify(user));
+    sessionStorage.setItem('CurrentUser', JSON.stringify(user));
     // sessionStorage.setItem("token", user.token);
-    return "User Saved";
+    return 'User Saved';
   }
 
   getCurrentUser() {
-    return sessionStorage.getItem("CurrentUser");
+    return sessionStorage.getItem('CurrentUser');
   }
 }
