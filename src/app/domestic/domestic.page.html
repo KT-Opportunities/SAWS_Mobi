@@ -1789,7 +1789,7 @@
                           <div class="w-icon-dropdown-toggle" id="icon3"></div>
                           <div class="text-block">{{selectedOption2}}</div>
                         </div>
-                        <nav class="dropdown-list1 "
+                        <nav class="dropdown-list1 " style="width: 23em !important;"
                         *ngIf="isDropdownOpen2">
                           <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
                           <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
@@ -1839,7 +1839,8 @@
                           <div class="w-icon-dropdown-toggle" id="icon3"></div>
                           <div class="text-block">{{selectedOption3}}</div>
                         </div>
-                        <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
+                        <nav class="dropdown-list1" 
+                        *ngIf="isDropdownOpen3" style="width: 23em !important;">
                           <div class="w-dropdown-link" (click)="selectOption('Link 1')" >Link 1</div>
                           <div class="w-dropdown-link" (click)="selectOption('Link 2')" >Link 2</div>
                           <div class="w-dropdown-link" (click)="selectOption('Link 3')">Link 3</div>

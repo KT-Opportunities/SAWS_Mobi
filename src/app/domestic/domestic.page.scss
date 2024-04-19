@@ -181,10 +181,11 @@
   background-image: linear-gradient(#bfcdda, #bfcdda);
   border-radius: 10px;
   margin-top: 10px;
-  width: 94% !important;
+  // width: 94% !important;
   margin-left: 1px !important;
-  width: 105%;
+  width: 95%;
   position: absolute !important;
+  left: 3px !important;
   z-index: 999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -512,6 +513,9 @@ font-size: 12px;
   display: block;
   text-align: left;
   margin-left: 0px !important;
+  font-size: 14px;
+  position: relative;
+  top: -6px;
 }
 #drop{
   position: relative;
@@ -527,9 +531,9 @@ font-size: 12px;
     background-image: linear-gradient(#bfcdda, #bfcdda);
     border-radius: 10px;
     margin-top: 10px;
-    width: 94% !important;
+    // width: 94% !important;
     margin-left: 1px !important;
-    width: 105%;
+    // width: 105%;
     position: relative;
     z-index: 999;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
