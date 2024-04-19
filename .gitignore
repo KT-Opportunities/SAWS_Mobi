@@ -25,6 +25,8 @@ log.txt
 /android
 /android_
 
+/android_
+
 # Compiled output
 /dist
 /tmp

@@ -165,4 +165,12 @@ export class APIService {
   getFeedbackData(): Observable<any> {
     return this.feedbackObservable$;
   }
+  PostInsertSubscription(body: any) {
+    console.log('postInsertSub: ', body);
+    debugger;
+    return this.http.post<any>(
+      environment.serverAPI + 'Subscription/PostInsertSubscription',
+      body
+    );
+  }
 }

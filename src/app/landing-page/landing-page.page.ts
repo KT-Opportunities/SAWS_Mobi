@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { APIService } from '../services/apis.service';
 import {} from '@ionic/angular';
 import { SwiperModule } from 'swiper/types';
 import { Swiper } from 'swiper';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
 
 import 'swiper/css';
 
@@ -29,6 +28,7 @@ interface AdvertResponse {
   };
 }
 
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -43,41 +43,79 @@ export class LandingPage implements OnInit {
 
   swiperConfig: any;
 
+  updateSub: any ={
+    subscriptionId: '',
+  userprofileid: 0,
+  package_name: '',
+  package_id: 0,
+  package_price: 0,
+  start_date: '',
+  end_date: '',
+  subscription_duration: 0,
+  };
+
+  user: any;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
-
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     // Load all advertisements
     this.loadAllAdvertisements();
-  
+
     // Call rotateAdvertisements immediately after loading advertisements
     this.rotateAdvertisements();
-  
+
     // Set interval to rotate the advertisements every 10 seconds
     setInterval(() => {
       this.rotateAdvertisements();
     }, 6000);
+
+    this.route.queryParams.subscribe((params) => {
+      if (params['amount']) {
+        var oneYearFromNow = new Date();
+        console.log('from subs', params['amount']);
+        debugger;
+         var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+        this.updateSub.package_price = Number(params['amount']);
+        this.updateSub.package_id = Number(params['packageId']);
+        this.updateSub.package_name = params['packageName'];
+        this.updateSub.subscriptionId = Number(params['packageId']);
+        this.updateSub.start_date = Date.now().toString();
+        this.updateSub.end_date = oneYearFromNow.setFullYear(
+          oneYearFromNow.getFullYear() + 1
+        ).toString();
+        this.updateSub.subscription_duration = params['subscription_duration'];
+        this.updateSub.userprofileid = Number(userLoginDetails?.aspUserID);
+         console.log('updateSub', this.updateSub);
+        this.apiService.PostInsertSubscription(this.updateSub).subscribe((data: any) =>{
+          console.log("postSub: ", data);
+        }, err =>{
+          console.log("postSub err: ", err);
+        })
+      }
+    });
   }
-  
-  
+
   rotateAdvertisements() {
-       // It checks if there are advertisements available 
-    if (this.advertisements.length > 0)
-     {
+    // It checks if there are advertisements available
+    if (this.advertisements.length > 0) {
       // if so, it updates the currentAdvertisement to the next advertisement in the array
-      this.currentAdvertisementIndex = (this.currentAdvertisementIndex + 1) % this.advertisements.length;
+      this.currentAdvertisementIndex =
+        (this.currentAdvertisementIndex + 1) % this.advertisements.length;
       // is used to keep track of which advertisement is currently being displayed.
-      this.currentAdvertisement = this.advertisements[this.currentAdvertisementIndex];
+      this.currentAdvertisement =
+        this.advertisements[this.currentAdvertisementIndex];
     }
     if (this.currentAdvertisement) {
       // console.log('Current advertisement URL', this.currentAdvertisement.link);
     }
-
   }
 
   get isLoggedIn(): boolean {
@@ -133,79 +171,51 @@ export class LandingPage implements OnInit {
       this.authService.setRedirectUrl('/domestic');
       this.router.navigate(['/login']);
     }
-    
   }
 
-// This method fetches all advertisements 
-loadAllAdvertisements() {
-  // Make an HTTP request to fetch advertisements.
-  this.apiService.getAllAdverts().subscribe(
-    (data: any[]) => {
-      console.log('getAllAdverts', data);
-      this.advertisements = data.map(ad => {
-        // Prevent security vulnerabilities, create a safe URL for the image.
-        const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
-        // Ensure the URL is valid and does not start with "http://localhost"
-        const advertUrl = this.ensureValidURL(ad.advert_url);
-        return { imageUrl, link: advertUrl } as Advertisement;
-      });
-      //console.log('advertisements', this.advertisements);
+  // This method fetches all advertisements
+  loadAllAdvertisements() {
+    // Make an HTTP request to fetch advertisements.
+    this.apiService.getAllAdverts().subscribe(
+      (data: any[]) => {
+        console.log('getAllAdverts', data);
+        this.advertisements = data.map((ad) => {
+          // Prevent security vulnerabilities, creating a safe URL for the image.
+          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            ad.file_url
+          );
+          return { imageUrl, link: ad.advert_url } as Advertisement;
+        });
+        console.log('advertisements', this.advertisements);
 
-      // Set the currentAdvertisement to the first advertisement in the array
-      if (this.advertisements.length > 0) {
-        this.currentAdvertisement = this.advertisements[0];
-      }
+        // Set the currentAdvertisement to the first advertisement in the array
+        if (this.advertisements.length > 0) {
+          this.currentAdvertisement = this.advertisements[0];
+        }
 
-      // Initialize Swiper after loading advertisements
-      this.initializeSwiper();
-    },
-    (error: any) => {
-      console.error('Error fetching all advertisements:', error);
-    }
-  );
-}
- // Ensure URL is valid
- ensureValidURL(url: string): string {
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    url = 'https://' + url;
-  }
-  return url;
-}
-
-  // Launch advertisement link
-  launchAdvertLink(advertUrl: string) {
-    window.open(advertUrl, "_blank");
-  }
-
-
-
-initializeSwiper() {
-  console.log('Initializing Swiper');
-  if (this.advertisements.length > 0 && this.swiperElement) {
-    //console.log('Creating Swiper instance');
-    this.swiper = new Swiper(this.swiperElement.nativeElement, {
-      direction: 'vertical',
-      loop: true, // Enable looping to seamlessly rotate banners
-      autoplay: {
-        delay: 10000, // Set autoplay delay to 10 seconds
-        disableOnInteraction: false,
+        // Initialize Swiper after loading advertisements
+        this.initializeSwiper();
       },
-      navigation: false,
-      allowTouchMove: true, // Allow users to swipe if needed
-    });
-  } 
+      (error: any) => {
+        console.error('Error fetching all advertisements:', error);
+      }
+    );
+  }
+
+  initializeSwiper() {
+    console.log('Initializing Swiper');
+    if (this.advertisements.length > 0 && this.swiperElement) {
+      console.log('Creating Swiper instance');
+      this.swiper = new Swiper(this.swiperElement.nativeElement, {
+        direction: 'vertical',
+        loop: true, // Enable looping to seamlessly rotate banners
+        autoplay: {
+          delay: 10000, // Set autoplay delay to 10 seconds
+          disableOnInteraction: false,
+        },
+        navigation: false,
+        allowTouchMove: true, // Allow users to swipe if needed
+      });
+    }
+  }
 }
-
-
-
-
-
-
-}
-
-
- 
-  
- 
-  
-

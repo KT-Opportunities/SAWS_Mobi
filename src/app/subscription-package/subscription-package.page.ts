@@ -26,7 +26,7 @@ export class SubscriptionPackagePage implements OnInit {
 
   subsObj: any = {
     returnUrl: '',
-    cancelUrl: '',
+    CancelUrl: '',
     notifyUrl: '',
     name_first: 'test_User',
     name_last: 'test',
@@ -40,6 +40,8 @@ export class SubscriptionPackagePage implements OnInit {
     recurring_amount: 500.0,
     frequency: 'annual',
   };
+
+  return: any;
 
   constructor(
     private router: Router,
@@ -56,9 +58,9 @@ export class SubscriptionPackagePage implements OnInit {
       // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    this.authService.loginEvent.subscribe((loggedIn: boolean) => {
+    // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
       // If the user is logged in
-      if (loggedIn) {
+      if (this.subscriptionId) {
         // Check if a subscription package ID is set
         if (this.selectedSubscriptionPackageId !== undefined) {
           // Call the subscribe method if a subscription package ID is set
@@ -70,14 +72,25 @@ export class SubscriptionPackagePage implements OnInit {
           // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
         }
       }
-    });
+    // });
     this.selectedPaymentType = 'monthly';
 
     const currentUrl = window.location.href;
     console.log(currentUrl);
-    var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
-    console.log(landingPage + 'landing-page');
-    this.subsObj.returnUrl = landingPage + 'landing-page';
+    this.return = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
+
+    var bck = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+
+    console.log(this.return + 'landing-page');
+    console.log(bck + 'landing-page2');
+
+    this.subsObj.CancelUrl = this.return + 'subscription-package';
+
+    if (this.subscriptionId == 1) {
+      this.subscribe(180, this.subscriptionId);
+    } else if (this.subscriptionId == 2) {
+      this.subscribe(380, this.subscriptionId, 'Regulated');
+    }
   }
 
   openInAppBrowser(url: string) {
@@ -87,6 +100,18 @@ export class SubscriptionPackagePage implements OnInit {
       hardwareback: 'yes',
       zoom: 'no',
       //hideurlbar: 'yes',
+    });
+
+    browser.on('loadstop').subscribe((data: any) => {
+      var loc = data.url;
+
+      //when url is changed check if the url contains your specific callbackURL
+      if (loc.search('landing-page') >= 0) {
+        //at this point close your inapp browser
+        //you will land on the index page within your application.
+        browser.close();
+        //your code after successful authentication
+      }
     });
   }
 
@@ -109,6 +134,13 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.m_payment_id = subscriptionId.toString();
     this.subsObj.item_name = subscriptionType;
     this.subsObj.item_description = subscriptionType;
+    if (this.showAnnuallySection && !this.showMonthlySection) {
+      this.subsObj.frequency = 'annual';
+    } else {
+      this.subsObj.frequency = 'monthly';
+    }
+
+    this.subsObj.returnUrl = `${this.return}landing-page?amount=${amount}&packageId=${subscriptionId}&packageName=${subscriptionType}&subscription_duration=${this.subsObj.frequency}&aspUserID${userLoginDetails.aspUserID}`;
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -133,7 +165,7 @@ export class SubscriptionPackagePage implements OnInit {
       this.authService.setRedirectUrl(redirectUrl);
       this.authService.setIsFromSubscription(true);
       this.router.navigate(['/login'], { queryParams: { redirectUrl } });
-  
+
       // Create a promise that resolves when the user logs in
       const loginPromise = new Promise<void>((resolve, reject) => {
         const subscription = this.authService.loginEvent.subscribe({
@@ -153,7 +185,7 @@ export class SubscriptionPackagePage implements OnInit {
           }
         });
       });
-  
+
       // Once the user logs in, proceed with subscription
       loginPromise.then(() => {
         this.selectedSubscriptionPackageId = subscriptionPackageId;
@@ -161,7 +193,7 @@ export class SubscriptionPackagePage implements OnInit {
       }).catch(error => {
         // Handle error appropriately
       });
-  
+
     } else {
       // If already logged in, directly set the selectedSubscriptionPackageId
       this.selectedSubscriptionPackageId = subscriptionPackageId;
@@ -169,7 +201,7 @@ export class SubscriptionPackagePage implements OnInit {
       this.subscribe(amount!, subscriptionPackageId);
     }
   }
-  
+
 
   displayIcon(): boolean {
     return this.isSubscriber; // Return true if the user is a subscriber, false otherwise
@@ -191,7 +223,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.router.navigate(['/landing-page']);
   }
   forecastPage2() {
-    this.router.navigate(['/alnding-page']);
+    this.router.navigate(['/landing-page']);
   }
   monthlypage() {
     this.selectedPaymentType = 'monthly'; // Update selected payment type
