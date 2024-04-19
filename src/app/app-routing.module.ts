@@ -112,6 +112,13 @@ const routes: Routes = [
         (m) => m.SubscriptionPackagePageModule
       ),
   },
+   {
+    path: 'subscription-Successful',
+    loadChildren: () =>
+      import('./subscription-package/subscription-package.module').then(
+        (m) => m.SubscriptionPackagePageModule
+      ),
+  },
   {
     path: 'provide-feedback',
     loadChildren: () =>

@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { APIService } from 'src/app/services/apis.service';
 import { take, filter } from 'rxjs/operators';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-subscription-package',
@@ -41,14 +42,52 @@ export class SubscriptionPackagePage implements OnInit {
     frequency: 'annual',
   };
 
+  browser: any;
+
+  updateSub: any = {
+    subscriptionId: '',
+    userprofileid: 0,
+    package_name: '',
+    package_id: 0,
+    package_price: 0,
+    start_date: Date.now(),
+    end_date: Date.now(),
+    subscription_duration: 0,
+  };
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private iab: InAppBrowser,
     private APIService: APIService,
     private route: ActivatedRoute,
-    private api: APIService
+    private api: APIService,
+    public plat: Platform
   ) {}
+
+  ionViewWillEnter() {
+    this.route.queryParams.subscribe((params) => {
+      this.subscriptionId = params['id'];
+      // Optionally, you can perform any actions based on the subscription package ID here
+    });
+
+    debugger;
+    // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
+    //   // If the user is logged in
+    if (this.subscriptionId) {
+      // Check if a subscription package ID is set
+      // if (this.selectedSubscriptionPackageId !== undefined) {
+      // Call the subscribe method if a subscription package ID is set
+      if (this.subscriptionId == 1) {
+        this.subscribe(180, this.subscriptionId);
+      } else if (this.subscriptionId == 2) {
+        this.subscribe(380, this.subscriptionId, 'Regulated');
+      }
+
+      // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
+      // }
+    }
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -56,38 +95,58 @@ export class SubscriptionPackagePage implements OnInit {
       // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    this.authService.loginEvent.subscribe((loggedIn: boolean) => {
-      // If the user is logged in
-      if (loggedIn) {
-        // Check if a subscription package ID is set
-        if (this.selectedSubscriptionPackageId !== undefined) {
-          // Call the subscribe method if a subscription package ID is set
-          if (this.subscriptionId == 1) {
-            this.subscribe(180, this.subscriptionId);
-          } else if (this.subscriptionId == 2) {
-            this.subscribe(380, this.subscriptionId, 'Regulated');
-          }
-          // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
-        }
+    debugger;
+    // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
+    //   // If the user is logged in
+    if (this.subscriptionId) {
+      // Check if a subscription package ID is set
+      // if (this.selectedSubscriptionPackageId !== undefined) {
+      // Call the subscribe method if a subscription package ID is set
+      if (this.subscriptionId == 1) {
+        this.subscribe(180, this.subscriptionId);
+      } else if (this.subscriptionId == 2) {
+        this.subscribe(380, this.subscriptionId, 'Regulated');
       }
-    });
+
+      // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
+      // }
+    }
+    // });
     this.selectedPaymentType = 'monthly';
 
     const currentUrl = window.location.href;
     console.log(currentUrl);
     var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
-    console.log(landingPage + 'landing-page');
-    this.subsObj.returnUrl = landingPage + 'landing-page';
+    console.log(landingPage + 'subscription-Successful');
+    this.subsObj.returnUrl = landingPage + 'subscription-Successful';
+    this.subsObj.cancelUrl = landingPage + 'subscription-package';
   }
 
   openInAppBrowser(url: string) {
-    const browser = this.iab.create(url, '_blank', {
+    this.browser = this.iab.create(url, '_blank', {
       location: 'no',
       hidden: 'no',
       hardwareback: 'yes',
       zoom: 'no',
       //hideurlbar: 'yes',
     });
+
+    //this.browser.addEventListener('loadstart', this.loadStartCallBack);
+
+    this.browser.on('loadstart').subscribe((event: any) => {
+      this.loadStartCallBack(event);
+    });
+  }
+
+  loadStartCallBack(event: any) {
+    /* Close InAppBrowser if loading the predefined close URL */
+    if (event.url == this.subsObj.returnUrl) {
+      debugger;
+      this.browser.close();
+      this.saveSub();
+    } else if (event.url == this.subsObj.cancelUrl) {
+      this.browser.close();
+    }
   }
 
   subscribe(amount: number, subscriptionId: number, subscriptionType?: string) {
@@ -133,7 +192,7 @@ export class SubscriptionPackagePage implements OnInit {
       this.authService.setRedirectUrl(redirectUrl);
       this.authService.setIsFromSubscription(true);
       this.router.navigate(['/login'], { queryParams: { redirectUrl } });
-  
+
       // Create a promise that resolves when the user logs in
       const loginPromise = new Promise<void>((resolve, reject) => {
         const subscription = this.authService.loginEvent.subscribe({
@@ -147,21 +206,25 @@ export class SubscriptionPackagePage implements OnInit {
             }
           },
           error: (error: any) => {
-            console.error('Error occurred during login event subscription:', error);
+            console.error(
+              'Error occurred during login event subscription:',
+              error
+            );
             // Reject the promise if an error occurs
             reject(error);
-          }
+          },
         });
       });
-  
+
       // Once the user logs in, proceed with subscription
-      loginPromise.then(() => {
-        this.selectedSubscriptionPackageId = subscriptionPackageId;
-        this.subscribe(amount!, subscriptionPackageId);
-      }).catch(error => {
-        // Handle error appropriately
-      });
-  
+      loginPromise
+        .then(() => {
+          this.selectedSubscriptionPackageId = subscriptionPackageId;
+          this.subscribe(amount!, subscriptionPackageId);
+        })
+        .catch((error) => {
+          // Handle error appropriately
+        });
     } else {
       // If already logged in, directly set the selectedSubscriptionPackageId
       this.selectedSubscriptionPackageId = subscriptionPackageId;
@@ -169,7 +232,40 @@ export class SubscriptionPackagePage implements OnInit {
       this.subscribe(amount!, subscriptionPackageId);
     }
   }
-  
+
+  saveSub() {
+    var oneYearFromNow = new Date();
+
+    debugger;
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+    this.updateSub.package_price = this.subsObj.recurring_amount;
+    this.updateSub.package_id = Number(this.subsObj.m_payment_id);
+    this.updateSub.package_name =
+      this.selectedPaymentType + ' ' + this.subsObj.item_name;
+    this.updateSub.subscriptionId = 0;
+    this.updateSub.start_date = new Date(Date.now());
+    this.updateSub.end_date = new Date(oneYearFromNow.setFullYear(
+      oneYearFromNow.getFullYear() + 1
+    ));
+    this.updateSub.subscription_duration = Number(
+      this.daysBtnDates(this.updateSub.start_date, this.updateSub.end_date)
+    );
+    this.updateSub.userprofileid = userLoginDetails?.aspUserID;
+   //this.updateSub.userprofileid = 119;
+
+    console.log('updateSub', this.updateSub);
+    debugger;
+    this.APIService.PostInsertSubscription(this.updateSub).subscribe(
+      (data: any) => {
+        console.log('postSub: ', data);
+        this.router.navigate(['/landing-page']);
+      },
+      (err) => {
+        console.log('postSub err: ', err);
+      }
+    );
+  }
 
   displayIcon(): boolean {
     return this.isSubscriber; // Return true if the user is a subscriber, false otherwise
@@ -234,5 +330,18 @@ export class SubscriptionPackagePage implements OnInit {
   }
   GoToObservation() {
     this.router.navigate(['/observation']);
+  }
+
+  daysBtnDates(date1: any, date2: any) {
+    let Difference_In_Time =
+      new Date(date2).getTime() - new Date(date1).getTime();
+
+    // Calculating the no. of days between
+    // two dates
+    let Difference_In_Days = Math.round(
+      Difference_In_Time / (1000 * 3600 * 24)
+    );
+
+    return Difference_In_Days;
   }
 }

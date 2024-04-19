@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, catchError,BehaviorSubject } from 'rxjs';
-
+import { Observable, catchError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,9 +80,8 @@ export class APIService {
     );
   }
   PostDocsForFeedback(formData: any) {
-
     return this.http.post<any>(
-      environment.serverAPI + "FileManager/PostDocsForFeedback",
+      environment.serverAPI + 'FileManager/PostDocsForFeedback',
       formData
     );
   }
@@ -138,31 +136,59 @@ export class APIService {
     );
   }
 
-  GetSourceTextFolderFiles(foldername:string) {
+  GetSourceTextFolderFiles(foldername: string) {
     return this.http.get<any>(
-      environment.serverAPI + `RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+      environment.serverAPI +
+        `RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
 
   getFileType(fileMimetype: string): string {
-    const videoMimeTypes = ["video/mp4", "video/quicktime", "video/x-msvideo", "video/x-ms-wmv"];
-    const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/jpg", "image/svg+xml"];
-    const applicationMimeTypes = ["application/pdf"];
-    const audioMimeTypes = ["audio/mpeg", "audio/mp4", "audio/ogg", "audio/wav",  "audio/mp3"];
+    const videoMimeTypes = [
+      'video/mp4',
+      'video/quicktime',
+      'video/x-msvideo',
+      'video/x-ms-wmv',
+    ];
+    const imageMimeTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/bmp',
+      'image/jpg',
+      'image/svg+xml',
+    ];
+    const applicationMimeTypes = ['application/pdf'];
+    const audioMimeTypes = [
+      'audio/mpeg',
+      'audio/mp4',
+      'audio/ogg',
+      'audio/wav',
+      'audio/mp3',
+    ];
 
     if (videoMimeTypes.includes(fileMimetype)) {
-      return "Video";
+      return 'Video';
     } else if (imageMimeTypes.includes(fileMimetype)) {
-      return "Image";
+      return 'Image';
     } else if (applicationMimeTypes.includes(fileMimetype)) {
-      return "Application";
+      return 'Application';
     } else if (audioMimeTypes.includes(fileMimetype)) {
-      return "Audio";
+      return 'Audio';
     } else {
-      return "Unknown";
+      return 'Unknown';
     }
   }
   getFeedbackData(): Observable<any> {
     return this.feedbackObservable$;
+  }
+
+  PostInsertSubscription(body: any) {
+    console.log('postInsertSub: ', body);
+    debugger;
+    return this.http.post<any>(
+      environment.serverAPI + 'Subscription/PostInsertSubscription',
+      body
+    );
   }
 }
