@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
+// Define an interface for the structure of each location object
+
 
 @Component({
   selector: 'app-domestic',
@@ -32,10 +39,24 @@ export class DomesticPage implements OnInit {
   
   showImage: boolean = false;
   showImage1: boolean = false;
+  loading = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  warnings: any[] = [];
+
+
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private spinner: NgxSpinnerService,
+    private APIService: APIService,
+    private iab: InAppBrowser,
+    
+  ) {}
 
   ngOnInit() {
+    // Fetch data on component initialization
+    this.fetchWarnings();
+
      // Check if user is logged in
      if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
@@ -43,6 +64,47 @@ export class DomesticPage implements OnInit {
     }
 
   }
+
+  fetchWarnings() {
+    // Set loading to true when starting data fetch
+    // this.loading = true;
+  
+    // Display the loading indicator
+    this.spinner.show();
+  
+    this.APIService.GetSourceTextFolderFiles('unknown').subscribe(
+      (data: any[]) => {
+        console.log('Received warnings:', data);
+        this.warnings = data;
+        // Set isWarning to true after data is loaded
+        this.isDomestic = false;
+        this.isWarning = true;
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching warnings:', error);
+        // Hide the loading indicator in case of error
+        this.spinner.hide();
+      },
+      () => {
+        // Hide the loading indicator when data is successfully loaded or in case of error
+        this.loading = false;
+        this.spinner.hide();
+      }
+    );
+  }
+  
+  
+    
+  
+  
+
+
+ 
+  
+  
+  
+
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
@@ -50,6 +112,7 @@ export class DomesticPage implements OnInit {
 
   }
   Warning() {
+    this.loading = true;
     this.isDomestic = false;
     this.isWarning = true;
   }

@@ -210,11 +210,6 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen2 = false;
     }
     
-    // if (dropdown === 'dropdown4') {
-    //   this.selectedOption4 = option;
-    //   this.isDropdownOpen2 = false;
-    // }
-   
   }
 
   sateliteDropdown(dropdown: string) {
