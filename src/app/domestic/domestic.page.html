@@ -2032,47 +2032,45 @@
       </div>
       <h1 class="heading-6">Aerodrome Warning</h1>
       <div style="overflow-y: auto; height: 32em">
-        <div class="warning-div">
-          <div class="w-layout-grid grid-warning">
-            <div
-              id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8"
-              class="div-block-15"
-            >
-              <div class="div-block-14"></div>
-            </div>
-            <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
-              <h4 class="heading-18-copy">
-                <strong>WARNING FOR FAPE - 20240409 18:00</strong>
-              </h4>
-              <div class="w-layout-grid heading-copy">
-                <div
-                  id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8"
-                  class="cct-copy-copy"
-                >
-                  <h1 class="heading-21">
-                    FAPE AD WRNG 1 VALID 091800/100300 SFC WSPD 25KT MAX 35KT
-                    FCST NC=
-                  </h1>
+        <div class="warning-div" *ngFor="let warning of warnings" class="warning">
+          <div class="warning-div">
+            <div class="w-layout-grid grid-warning">
+              <div
+                id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8"
+                class="div-block-15"
+              >
+                <div class="div-block-14"></div>
+              </div>
+              <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
+                <h4 class="heading-18-copy"><strong>WARNING FOR FAPE {{ warning.filename }}</strong></h4>
+                <div class="w-layout-grid heading-copy">
+                  <div
+                    id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8"
+                    class="cct-copy-copy"
+                  >
+                  <h1 class="heading-21">{{ warning.filetextcontent }}</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
-              <h4 class="heading-18-copy">
-                <strong>WARNING FOR FALE - 20240409 16:05</strong>
-              </h4>
-              <div class="w-layout-grid heading-copy">
-                <div
-                  id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8"
-                  class="cct-copy-copy"
-                >
-                  <h1 class="heading-21">
-                    FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=
-                  </h1>
+              <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
+                <h4 class="heading-18-copy">
+                  <strong>WARNING FOR FALE - 20240409 16:05</strong>
+                </h4>
+                <div class="w-layout-grid heading-copy">
+                  <div
+                    id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8"
+                    class="cct-copy-copy"
+                  >
+                    <h1 class="heading-21">
+                      FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=
+                    </h1>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+       
       </div>
 
       <div class="bottomdiv">

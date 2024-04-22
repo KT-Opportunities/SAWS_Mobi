@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { NgxSpinnerService } from 'ngx-spinner';
 interface ResponseItem {
   foldername: string;
   filename: string;
@@ -42,7 +44,7 @@ export class DomesticPage implements OnInit {
   showImage1: boolean = false;
   loading = false;
   selectedAirportCode: string = 'FAPE';
-
+  warnings: any[] = [];
   VermetArray: any = [];
   vermetTableData: {
     airport: string;
@@ -55,7 +57,9 @@ export class DomesticPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private APIService: APIService
+    private spinner: NgxSpinnerService,
+    private APIService: APIService,
+    private iab: InAppBrowser
   ) {
     this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
       this.VermetArray = Response;
@@ -144,6 +148,7 @@ export class DomesticPage implements OnInit {
   }
   ngOnInit() {
     // Check if user is logged in
+    this.fetchWarnings();
     if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
