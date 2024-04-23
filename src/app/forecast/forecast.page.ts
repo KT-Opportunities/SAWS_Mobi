@@ -53,7 +53,7 @@ export class ForecastPage implements OnInit {
   selectedOption3: string = '5 minutes';
   selectedAirportCode: string = 'FAPE';
   loading = false;
-
+  isLoading:boolean = true;
   AirmetArray: any = [];
   SigmetArray: any = [];
   VermetArray: any = [];
@@ -322,6 +322,10 @@ export class ForecastPage implements OnInit {
     this.isTafAccuracy = false;
     this.isTrends = false;
     this.isHarmonized = false;
+    if(this.isLoggedIn == true){
+      this.spinner.show();
+      this.router.navigate(['/sigmet-gamet']);
+    }
   }
   SigmetAirmet() {
     this.iscodeTafs = false;
