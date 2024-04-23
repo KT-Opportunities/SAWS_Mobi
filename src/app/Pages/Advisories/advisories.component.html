@@ -14,7 +14,7 @@
 
         <section class="tafs-div">
           <div class="advisoires-main-div">
-            <div class="div-blue">
+            <div class="div-blue" id="filters">
               <div class="w-layout-grid grid-31">
                 <div>
                   <div class="w-form">
@@ -93,7 +93,7 @@
             </div>
           </div>
         </section>
-
+        
         <section class="tafs-div" *ngFor="let text of AdvisoriesList">
           <h1 class="heading-6" id="{{text.Id}}">{{text.heading}}</h1>
           <h1 class="heading-6">{{text.lastmodified | date:
@@ -104,7 +104,7 @@
           <hr>
         </section>
 
-        <button (click)="ScrollToTop('colorcoded')" id="btntotop"
+        <button (click)="ScrollToTop('filters')" id="btntotop"
           title="Go to top">Top</button>
       </section>
     </div>
