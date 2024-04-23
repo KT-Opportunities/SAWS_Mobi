@@ -338,7 +338,11 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
     this.isform2Visible = false && this.isLoggedIn == false;
     debugger
-    this.router.navigate(['/sigmet_airmet']);
+    if(this.isLoggedIn == true){
+      this.spinner.show();
+      this.router.navigate(['/sigmet_airmet']);
+    }
+    
   }
   ColorcodedWarning() {
     this.iscodeTafs = false;
@@ -366,14 +370,25 @@ export class ForecastPage implements OnInit {
     this.istakeOfData = false;
     this.isTAF = false;
     this.isRecentTAF = false;
+    this.isTafAccuracy=false;
+    this.isTrends=false
+    this.isHarmonized=false;
+    debugger;
+    
+    if(this.isLoggedIn == true){
+      this.spinner.show();
+      this.router.navigate(['/advisories']);
+    }
+      
+
     this.isTafAccuracy = false;
     this.isTrends = false;
     this.isHarmonized = false;
     this.isform2Visible = false && this.isLoggedIn == false;
 
     debugger;
-    this.spinner.show();
-    this.router.navigate(['/advisories']);
+    // this.spinner.show();
+    // this.router.navigate(['/advisories']);
   }
   Warning() {
     this.iscodeTafs = false;

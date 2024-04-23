@@ -35,29 +35,30 @@
           <h1 class="heading-8">13:15:45</h1>
         </div>
       </div>
+      <div>
+        <h5 class="heading-9" id="searchHeader">Query sigmet</h5>
+        <form action="/search" class="search w-form">
+          <input
+            class="search-input w-input"
+            maxlength="256"
+            name="query"
+            placeholder="Search…"
+            type="search"
+            id="searchValue"
+            (keypress)="filterNosearchValue()"
+          /><button
+            type="submit"
+            class="search-button w-button"
+            (click)="filterbySearch($event)"
+          >Search</button>
+        </form>
+      </div>
       <div class="ObservScrol">
         <div
           id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea"
           class="div-block-14-copy"
         >
-          <div>
-            <h5 class="heading-9">Query Airmet</h5>
-            <form action="/search" class="search w-form">
-              <input
-                class="search-input w-input"
-                maxlength="256"
-                name="query"
-                placeholder="Search…"
-                type="search"
-                id="search"
-                required=""
-              /><input
-                type="submit"
-                class="search-button w-button"
-                value="Search"
-              />
-            </form>
-          </div>
+  
         </div>
         <!-- <div
           id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea"
@@ -317,7 +318,7 @@
             </div>
           </div>
         </div> -->
-
+        <button class="top" style="display: none;" disabled="true" id="scrollT"></button>
         <section class="tafs-div" *ngFor="let sigmet of SigmetList">
           <h1 class="heading-6">{{sigmet.heading}}</h1>
           <h1 class="heading-6">{{sigmet.lastmodified | date:
@@ -328,26 +329,26 @@
           <hr>
         </section>
       </div>
+      <button (click)="ScrollToTop('w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea')" id="btntotop"
+      title="Go to top">Top</button>
     </div>
-  </div>
-  <div class="bottomdiv">
-    <img
-      src="images/Path-3447.svg"
-      loading="lazy"
-      width="1216"
-      alt=""
-      class="image"
-    />
-    <div class="footerdiv">
-      <a href="landing-page.html" class="link-block-5 w-inline-block"
-        ><img
-          src="images/Group-4522.svg"
-          loading="lazy"
-          width="35"
-          alt=""
-        />
-        <h6 class="heading-10">Forecast</h6>
-      </a>
+
+    <div class="bottomdiv" style="position: relative;">
+      <img
+        src="../../assets/Path-3447.svg"
+        loading="lazy"
+        width="1216"
+        alt
+        class="image" />
+
+      <div class="footerdiv" id="footerdivid">
+        <a
+          (click)="forecastPage()"
+          class="link-block-5 w-inline-block"
+          style="position: relative; top: -11px"><img
+            src="../../assets/Group-4522.svg" loading="lazy" alt />
+          <h6 class="heading-10-copy" id="styleh6">Forecast</h6></a>
+      </div>
     </div>
   </div>
 </section>
