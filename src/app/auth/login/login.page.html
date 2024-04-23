@@ -1,5 +1,8 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">Loading...</div>
+  <!-- <div *ngIf="loading" class="loading-indicator">Loading...</div> -->
+  <div *ngIf="loading == true" class="loading-indicator">
+    <ion-spinner
+    *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...</div>
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <section class="section">
     <!-- <div class="div-block-2">

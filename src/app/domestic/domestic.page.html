@@ -1,5 +1,11 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">Loading...</div>
+  <!-- <div *ngIf="loading" class="loading-indicator">Loading...</div> -->
+
+  <div *ngIf="loading == true" class="loading-indicator">
+    <ion-spinner
+    *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...</div>
+
+
   <section class="list-page">
     <div class="" *ngIf="isDomestic">
       <div
