@@ -1309,18 +1309,38 @@
       </div>
     </section>
     <!--Take Off-->
-    <section class="tafs-div" *ngIf="istakeOfData">
+
+    <section
+      class="take-off-section"
+      style="margin-top: 0px !important"
+      *ngIf="istakeOfData"
+    >
+      <div class="div-block-2">
+        <img
+          src="images/Path-3452.svg"
+          loading="lazy"
+          width="1216"
+          alt=""
+          class="image"
+        />
+      </div>
       <h1 class="heading-6">Take - Off Parameters</h1>
-      <div class="w-layout-grid grid-6">
+      <div class="overflow-y:auto;height:32em;">
         <div
           id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408"
           class="w-layout-grid grid-take-off"
+          id="take"
         >
           <div
             id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
             class="div-off"
           >
-            <a href="#" class="button-2-copy w-button">Document</a>
+            <div
+              class="button-2-copy w-button"
+              style="position: relative; left: -12px"
+            >
+              Document
+            </div>
           </div>
           <div
             id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
@@ -1328,6 +1348,7 @@
           >
             <div class="w-form">
               <form
+                style="width: 67px !important"
                 id="email-form-2"
                 name="email-form-2"
                 data-name="Email Form 2"
@@ -1351,114 +1372,141 @@
                   <option value="FAOR">FAOR</option>
                 </select>
               </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
             </div>
           </div>
           <div
             id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
             class="div-off"
           >
-            <button class="button-2-copy w-button">Reload</button>
-          </div>
-        </div>
-        <div *ngFor="let item of VermetArray" class="div-block-15">
-          <div *ngIf="shouldDisplayItem(item)">
-          <div class="div-block-14" >
-            <div class="w-layout-grid grid-19">
-              <div class="div-block-34">
-                <h1 class="heading-23">CCCC:</h1>
-                <h1 class="heading-23-copy">
-                  {{ getAirportCode(item.filename) }}
-                </h1>
-              </div>
-              <div class="div-block-34">
-                <h1 class="heading-23">Issued at:</h1>
-                <h1 class="heading-23-copy">
-                  {{ item.lastmodified | date: 'yyyy/MM/dd HH:mm' }}
-                </h1>
-              </div>
-            </div>
-          </div>
-          <h1 class="heading-22">
-            <strong class="bold-text-4">
-              {{ extractTakeOffData(item.filetextcontent) }}
-            </strong>
-          </h1>
-
-          <div class="w-layout-grid grid-20">
             <div
-              id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
-              class="div-block-35"
-              style="width: 342px"
+              class="button-2-copy w-button"
+              style="position: relative; left: 10px"
             >
-              <div
-                id="w-node-_1290a973-af24-2a59-897b-d7d3e1d83441-a17d1408"
-                class="w-layout-grid grid-21-copy"
-              >
-                <div
-                  id="w-node-_030b0f65-b194-ad25-8a08-a35ff57158e2-a17d1408"
-                  class="div-block-36"
-                >
-                  <h4 class="heading-24">Time</h4>
-                </div>
-                <div
-                  id="w-node-ed37abd8-4ca0-87f1-cd6a-4e3c5695df38-a17d1408"
-                  class="div-block-36"
-                >
-                  <h4 class="heading-24">Temp</h4>
-                </div>
-                <div
-                  id="w-node-_0da84331-7add-d63a-dc29-b62efb53d455-a17d1408"
-                  class="div-block-36"
-                >
-                  <h4 class="heading-24">QNH</h4>
-                </div>
-                <div
-                  id="w-node-_0d050491-2a26-b337-0b99-272987035cba-a17d1408"
-                  class="div-block-36"
-                >
-                  <h4 class="heading-24">QAN</h4>
+              Reload
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tafs-div" style="overflow-y: auto; height: 32em">
+        <div class="w-layout-grid grid-6">
+          <div
+            id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
+            class="div-block-15"
+            *ngFor="let item of VermetArray"
+          >
+            <div *ngIf="shouldDisplayItem(item)">
+              <div class="div-block-14">
+                <div class="w-layout-grid" style="height: 48px">
+                  <div
+                    id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
+                    class="div-block-34"
+                  >
+                    <h1 class="heading-23">CCCC:</h1>
+                    <h1 class="heading-23-copy" id="fact">
+                      {{ getAirportCode(item.filename) }}
+                    </h1>
+                  </div>
+                  <div
+                    id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
+                    class="div-block-34"
+                  >
+                    <h1 class="heading-23">Issued at:</h1>
+                    <h1 class="heading-23-copy" id="fact">
+                      {{ item.lastmodified | date: 'yyyy/MM/dd HH:mm' }}
+                    </h1>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
-              <div
-                class="w-layout-grid grid-22-copy"
-                *ngFor="let airportData of item.vermetTableData.slice(1); let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+
+              <h1
+                class="datacape"
+                style="
+                  color: #00386c;
+                  font-size: 12px;
+                  font-weight: 387 !important;
+                "
               >
+                <p class="">{{ extractTakeOffData(item.filetextcontent) }}T</p>
+              </h1>
+              <div class="w-layout-grid grid-20" id="grid20">
                 <div
-                  id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408"
-                  class="div-block-37"
+                  id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
+                  class="div-block-35"
                 >
-                  <h4 class="heading-25">{{ airportData.time }}</h4>
+                  <div
+                    id="w-node-_1290a973-af24-2a59-897b-d7d3e1d83441-a17d1408"
+                    class="w-layout-grid grid-21-copy"
+                  >
+                    <div
+                      id="w-node-_030b0f65-b194-ad25-8a08-a35ff57158e2-a17d1408"
+                      class="div-block-36"
+                    >
+                      <h4 class="heading-24">Time</h4>
+                    </div>
+                    <div
+                      id="w-node-ed37abd8-4ca0-87f1-cd6a-4e3c5695df38-a17d1408"
+                      class="div-block-36"
+                    >
+                      <h4 class="heading-24">Temp</h4>
+                    </div>
+                    <div
+                      id="w-node-_0da84331-7add-d63a-dc29-b62efb53d455-a17d1408"
+                      class="div-block-36"
+                    >
+                      <h4 class="heading-24">QNH</h4>
+                    </div>
+                    <div
+                      id="w-node-_0d050491-2a26-b337-0b99-272987035cba-a17d1408"
+                      class="div-block-36"
+                    >
+                      <h4 class="heading-24">QAN</h4>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">{{ airportData.temp }}</h4>
-                </div>
-                <div
-                  id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">{{ airportData.qnh }}</h4>
-                </div>
-                <div
-                  id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408"
-                  class="div-block-37"
-                >
-                  <h4 class="heading-25">{{ airportData.qan }}</h4>
+                <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
+                  <div
+                    class="w-layout-grid grid-22-copy"
+                    *ngFor="let airportData of item.vermetTableData.slice(1); let i = index"
+                    [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+                  >
+                    <div
+                      id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408"
+                      class="div-block-37"
+                    >
+                      <h4 class="heading-25">{{ airportData.time }}</h4>
+                    </div>
+                    <div
+                      id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408"
+                      class="div-block-37"
+                    >
+                      <h4 class="heading-25">{{ airportData.temp }}</h4>
+                    </div>
+                    <div
+                      id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408"
+                      class="div-block-37"
+                    >
+                      <h4 class="heading-25">{{ airportData.qnh }}</h4>
+                    </div>
+                    <div
+                      id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408"
+                      class="div-block-37"
+                    >
+                      <h4 class="heading-25">{{ airportData.qan }}</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-          <!-- forecast.page.html -->
         </div>
       </div>
     </section>
-
     <!--Recent TAF-->
 
     <section class="re" *ngIf="isRecentTAF">
@@ -2441,14 +2489,14 @@
                   </div>
                 </div>
               </div>
-              <div>
+              <div *ngFor="let taf of TAFArray">
                 <div class="w-layout-grid heading-text">
                   <div
                     id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea"
                     class="cct-copy-copy"
                   >
                     <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+                      {{ extractHeadingContent(taf.filetextcontent) }}
                     </h1>
                   </div>
                   <div
@@ -2464,213 +2512,11 @@
                     class="div-block-16"
                   >
                     <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
+                      {{ extractRemainingContent(taf.filetextcontent) }}
                     </p>
                   </div>
                   <div
                     id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea"
-                    class="div-block-17"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="w-layout-grid heading-text">
-                  <div
-                    id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32135-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div
-                    id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb3213c-5aa24fea"
-                    class="div-block-16"
-                  >
-                    <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
-                    </p>
-                  </div>
-                  <div
-                    id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32148-5aa24fea"
-                    class="div-block-17"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="w-layout-grid heading-text">
-                  <div
-                    id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d2053fd-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div
-                    id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205404-5aa24fea"
-                    class="div-block-16"
-                  >
-                    <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
-                    </p>
-                  </div>
-                  <div
-                    id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205410-5aa24fea"
-                    class="div-block-17"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div
-              id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea"
-              class="div-block-15"
-            >
-              <h1 class="heading-22">Limpopo</h1>
-              <div class="div-block-32">
-                <div class="w-layout-grid ccta-grid">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <a href="#" class="button w-button" id="Normal">Normal</a>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2 w-button"
-                      >Colour / Style Index</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="w-layout-grid heading-text">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a16-5aa24fea"
-                    class="div-block-16"
-                  >
-                    <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
-                    </p>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a22-5aa24fea"
-                    class="div-block-17"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="w-layout-grid heading-text">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a25-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a2c-5aa24fea"
-                    class="div-block-16"
-                  >
-                    <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
-                    </p>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a38-5aa24fea"
-                    class="div-block-17"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div class="w-layout-grid heading-text">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3b-5aa24fea"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea"
-                    class="cct-copy"
-                  >
-                    <a href="#" class="button-2-copy w-button">View Decoded</a>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a42-5aa24fea"
-                    class="div-block-16"
-                  >
-                    <p class="paragraph-2">
-                      TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                      <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                      FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                      0300/0302 35010KT=
-                    </p>
-                  </div>
-                  <div
-                    id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a4e-5aa24fea"
                     class="div-block-17"
                   ></div>
                 </div>

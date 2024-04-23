@@ -17,6 +17,13 @@ interface ResponseItem {
   filetextcontent: string;
   // Add other properties if needed
 }
+interface FileData {
+  foldername: string;
+  filename: string;
+  lastmodified: string;
+  filetextcontent: string;
+}
+
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.page.html',
@@ -50,6 +57,9 @@ export class ForecastPage implements OnInit {
   AirmetArray: any = [];
   SigmetArray: any = [];
   VermetArray: any = [];
+  //TAFArray: any = [];
+
+  TAFArray: FileData[] = [];
   vermetTableData: {
     airport: string;
     time: string;
@@ -67,27 +77,7 @@ export class ForecastPage implements OnInit {
     private APIService: APIService
   ) {
     debugger;
-    // this.APIService.GetSourceTextFolderFiles('airmet').subscribe((Response) => {
-    //   this.AirmetArray = Response;
-    //   console.log('Response ', this.AirmetArray);
-    //   if (this.AirmetArray && this.AirmetArray.length > 0) {
-    //     const firstItem = this.AirmetArray[0]; // Assuming you want to use the date from the first item
-    //     const lastModifiedDate = firstItem.lastmodified; // Get the 'lastmodified' date
 
-    //     // Now you can use 'lastModifiedDate' in further processing
-    //     console.log('Last Modified Date:', lastModifiedDate);
-
-    //     // Example: Use this date in a function or assign to a variable
-    //     // this.someFunctionUsingDate(lastModifiedDate);
-    //     // this.lastModified = lastModifiedDate;
-    //   } else {
-    //     console.log('AirmetArray is empty or undefined');
-    //   }
-    // });
-    // this.APIService.GetSourceTextFolderFiles('sigmet').subscribe((Response) => {
-    //   this.SigmetArray = Response;
-    //   console.log('Response ', this.SigmetArray);
-    // });
     this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
       this.VermetArray = Response;
 
@@ -118,8 +108,6 @@ export class ForecastPage implements OnInit {
         return item.filetextcontent.includes('TAKE-OFF');
       });
 
-      console.log('Filtered and latest Response ', this.VermetArray);
-
       this.VermetArray.forEach((item: any) => {
         const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
 
@@ -142,7 +130,7 @@ export class ForecastPage implements OnInit {
         }, []);
 
         item.vermetTableData = formattedData; // Assign formattedData to a property
-        console.log('Filtered and latest Response Table ', formattedData);
+        // console.log('Filtered and latest Response Table ', formattedData);
         this.loading = false;
       });
     });
@@ -271,11 +259,24 @@ export class ForecastPage implements OnInit {
   }
   ColorCoded() {
     // debugger;
-    this.APIService.GetSourceTextFolderFiles('airmet').subscribe((Response) => {
-      debugger;
-      this.AirmetArray = Response;
-      console.log('Response ', this.AirmetArray);
-    });
+    this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
+      (Response: FileData[]) => {
+        this.TAFArray = Response.map((item: FileData) => {
+          const parts = item.filename.split('/');
+          if (parts.length > 1) {
+            const newFilename = parts.slice(1).join('/');
+            return {
+              ...item,
+              filename: newFilename,
+            };
+          } else {
+            return item;
+          }
+        });
+
+        console.log('Response==== ', this.TAFArray);
+      }
+    );
     this.iscodeTafs = true;
     this.isFormVisible = false;
     this.isSigmentAirmet = false;
@@ -405,6 +406,19 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
   }
   TAF() {
+    this.loading = true; // Start loading indicator
+    this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
+      (Response: FileData[]) => {
+        this.TAFArray = Response
+          
+       
+
+        console.log('Response==== ', this.TAFArray);
+        this.loading = false; // Stop loading indicator when data is loaded
+      }
+    );
+
+    // Reset other flags
     this.iscodeTafs = false;
     this.isFormVisible = false;
     this.isSigmentAirmet = false;
@@ -419,6 +433,31 @@ export class ForecastPage implements OnInit {
     this.isTrends = false;
     this.isHarmonized = false;
     this.isform2Visible = false && this.isLoggedIn == false;
+  }
+  extractHeadingContent(filetextcontent: string): string {
+    // Extract desired content for <h1> here (e.g., using regex or string manipulation)
+    // Return the extracted content
+    return filetextcontent.substring(filetextcontent.indexOf('TAF'), filetextcontent.indexOf('TEMPO'));
+  }
+
+  extractRemainingContent(filetextcontent: string): string {
+    // Extract remaining content after the content used for <h1> (e.g., using regex or string manipulation)
+    // Return the extracted content
+    return filetextcontent.substring(filetextcontent.indexOf('TEMPO') + 5);
+  }
+  extractFirstLine(filetextcontent: string): string {
+    const lines = filetextcontent.split('\n');
+    return lines[0] ? lines[0].trim() : '';
+  }
+
+  extractSecondLine(filetextcontent: string): string {
+    const lines = filetextcontent.split('\n');
+    return lines[1] ? lines[1].trim() : '';
+  }
+
+  extractThirdLine(filetextcontent: string): string {
+    const lines = filetextcontent.split('\n');
+    return lines[2] ? lines[2].trim() : '';
   }
   RecentTAF() {
     this.iscodeTafs = false;
