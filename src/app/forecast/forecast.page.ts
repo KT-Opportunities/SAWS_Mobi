@@ -259,6 +259,7 @@ export class ForecastPage implements OnInit {
   }
   ColorCoded() {
     // debugger;
+    this.loading = true;
     this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
       (Response: FileData[]) => {
         this.TAFArray = Response.map((item: FileData) => {
@@ -338,12 +339,11 @@ export class ForecastPage implements OnInit {
     this.isTrends = false;
     this.isHarmonized = false;
     this.isform2Visible = false && this.isLoggedIn == false;
-    debugger
-    if(this.isLoggedIn == true){
+    debugger;
+    if (this.isLoggedIn == true) {
       this.spinner.show();
       this.router.navigate(['/sigmet_airmet']);
     }
-    
   }
   ColorcodedWarning() {
     this.iscodeTafs = false;
@@ -371,16 +371,15 @@ export class ForecastPage implements OnInit {
     this.istakeOfData = false;
     this.isTAF = false;
     this.isRecentTAF = false;
-    this.isTafAccuracy=false;
-    this.isTrends=false
-    this.isHarmonized=false;
+    this.isTafAccuracy = false;
+    this.isTrends = false;
+    this.isHarmonized = false;
     debugger;
-    
-    if(this.isLoggedIn == true){
+
+    if (this.isLoggedIn == true) {
       this.spinner.show();
       this.router.navigate(['/advisories']);
     }
-      
 
     this.isTafAccuracy = false;
     this.isTrends = false;
@@ -426,9 +425,7 @@ export class ForecastPage implements OnInit {
     this.loading = true; // Start loading indicator
     this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
       (Response: FileData[]) => {
-        this.TAFArray = Response
-          
-       
+        this.TAFArray = Response;
 
         console.log('Response==== ', this.TAFArray);
         this.loading = false; // Stop loading indicator when data is loaded
@@ -454,7 +451,10 @@ export class ForecastPage implements OnInit {
   extractHeadingContent(filetextcontent: string): string {
     // Extract desired content for <h1> here (e.g., using regex or string manipulation)
     // Return the extracted content
-    return filetextcontent.substring(filetextcontent.indexOf('TAF'), filetextcontent.indexOf('TEMPO'));
+    return filetextcontent.substring(
+      filetextcontent.indexOf('TAF'),
+      filetextcontent.indexOf('TEMPO')
+    );
   }
 
   extractRemainingContent(filetextcontent: string): string {
