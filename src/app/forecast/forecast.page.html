@@ -1,5 +1,7 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">Loading...</div>
+  <div *ngIf="loading == true" class="loading-indicator">
+    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  </div>
   <section class="list-page">
     <!-- <div class="div-block-2">
       <ion-menu-button class="left-aligned-menu-button"></ion-menu-button>
@@ -161,8 +163,16 @@
       </div>
     </div>
 
-    
     <section class="colour-coded-tafs-page" *ngIf="iscodeTafs">
+      <div class="div-block-2">
+        <img
+          src="images/Path-3452.svg"
+          loading="lazy"
+          width="1216"
+          alt=""
+          class="image"
+        />
+      </div>
       <div class="tafs-div">
         <h1 class="heading-6" id="colorcoded">Colour Coded TAFs</h1>
 
@@ -2197,6 +2207,15 @@
     </section>
     <!--TAF-->
     <section class="colour-coded-tafs-page" *ngIf="isTAF">
+      <div class="div-block-2">
+        <img
+          src="images/Path-3452.svg"
+          loading="lazy"
+          width="1216"
+          alt=""
+          class="image"
+        />
+      </div>
       <div class="tafs-div">
         <h1 class="heading-6" id="colorcoded">
           TAF - Terminal Aerodrome Forecast
@@ -2326,7 +2345,7 @@
         </div>
       </div>
     </section>
-    <div class="bottomdiv" style="margin-top: 148%" *ngIf="isFormVisible">
+    <div class="bottomdiv" style="margin-top: 141.4%" *ngIf="isFormVisible">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -2355,7 +2374,7 @@
       </div>
     </div>
 
-    <div class="bottomdiv" style="margin-top: 148%" *ngIf="!isFormVisible">
+    <div class="bottomdiv" style="margin-top: 141.4%" *ngIf="!isFormVisible">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"

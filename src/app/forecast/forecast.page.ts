@@ -53,7 +53,7 @@ export class ForecastPage implements OnInit {
   selectedOption3: string = '5 minutes';
   selectedAirportCode: string = 'FAPE';
   loading = false;
-  isLoading:boolean = true;
+  isLoading: boolean = true;
   AirmetArray: any = [];
   SigmetArray: any = [];
   VermetArray: any = [];
@@ -75,66 +75,7 @@ export class ForecastPage implements OnInit {
     private iab: InAppBrowser,
     private spinner: NgxSpinnerService,
     private APIService: APIService
-  ) {
-    debugger;
-
-    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
-      this.VermetArray = Response;
-
-      // Step 1: Group items by airport code and keep only the latest modified item for each airport
-      const airportMap = this.VermetArray.reduce(
-        (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
-          const airportCode = this.getAirportCode(item.filename);
-
-          // If airportCode already exists in the map, compare lastmodified dates to keep the latest one
-          if (
-            !acc[airportCode] ||
-            new Date(item.lastmodified) >
-              new Date(acc[airportCode].lastmodified)
-          ) {
-            acc[airportCode] = item;
-          }
-
-          return acc;
-        },
-        {}
-      );
-
-      // Step 2: Convert the map values back to an array
-      this.VermetArray = Object.values(airportMap);
-
-      // Optional: Filter based on 'TAKE-OFF' condition
-      this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filetextcontent.includes('TAKE-OFF');
-      });
-
-      this.VermetArray.forEach((item: any) => {
-        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
-
-        const formattedData = tableData.reduce((acc: any[], row: string) => {
-          const trimmedRow = row.trim();
-
-          // Check if the row is not empty and doesn't start with '----' (separator)
-          if (trimmedRow && !trimmedRow.startsWith('----')) {
-            // Split the row by whitespace
-            const rowValues = trimmedRow.split(/\s+/);
-
-            // Extract specific values (time, temp, qnh, qan)
-            if (rowValues.length >= 4) {
-              const [time, temp, qnh, qan] = rowValues;
-              acc.push({ time, temp, qnh, qan });
-            }
-          }
-
-          return acc;
-        }, []);
-
-        item.vermetTableData = formattedData; // Assign formattedData to a property
-        // console.log('Filtered and latest Response Table ', formattedData);
-        this.loading = false;
-      });
-    });
-  }
+  ) {}
   onAirportCodeChange(event: any) {
     this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
   }
@@ -259,8 +200,10 @@ export class ForecastPage implements OnInit {
   }
   ColorCoded() {
     // debugger;
+
+    this.spinner.show();
     this.loading = true;
-    this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
+    this.APIService.GetSourceTextFolderFilesTime('taffc', 4).subscribe(
       (Response: FileData[]) => {
         this.TAFArray = Response.map((item: FileData) => {
           const parts = item.filename.split('/');
@@ -274,10 +217,18 @@ export class ForecastPage implements OnInit {
             return item;
           }
         });
-
-        console.log('Response==== ', this.TAFArray);
+        this.loading = false;
+        this.spinner.hide();
+        console.log('Response received:', Response);
+        // Handle response data
+      },
+      (error) => {
+        console.error('API Error:', error);
+        this.loading = false; // Make sure to handle loading state in case of error
+        this.spinner.hide(); // Ensure spinner is hidden on error
       }
     );
+
     this.iscodeTafs = true;
     this.isFormVisible = false;
     this.isSigmentAirmet = false;
@@ -323,7 +274,7 @@ export class ForecastPage implements OnInit {
     this.isTafAccuracy = false;
     this.isTrends = false;
     this.isHarmonized = false;
-    if(this.isLoggedIn == true){
+    if (this.isLoggedIn == true) {
       this.spinner.show();
       this.router.navigate(['/sigmet-gamet']);
     }
@@ -411,6 +362,64 @@ export class ForecastPage implements OnInit {
   }
   TakeOfData() {
     this.loading = true;
+    this.spinner.show();
+    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
+      this.VermetArray = Response;
+
+      // Step 1: Group items by airport code and keep only the latest modified item for each airport
+      const airportMap = this.VermetArray.reduce(
+        (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
+          const airportCode = this.getAirportCode(item.filename);
+
+          // If airportCode already exists in the map, compare lastmodified dates to keep the latest one
+          if (
+            !acc[airportCode] ||
+            new Date(item.lastmodified) >
+              new Date(acc[airportCode].lastmodified)
+          ) {
+            acc[airportCode] = item;
+          }
+
+          return acc;
+        },
+        {}
+      );
+
+      // Step 2: Convert the map values back to an array
+      this.VermetArray = Object.values(airportMap);
+
+      // Optional: Filter based on 'TAKE-OFF' condition
+      this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
+        return item.filetextcontent.includes('TAKE-OFF');
+      });
+
+      this.VermetArray.forEach((item: any) => {
+        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
+
+        const formattedData = tableData.reduce((acc: any[], row: string) => {
+          const trimmedRow = row.trim();
+
+          // Check if the row is not empty and doesn't start with '----' (separator)
+          if (trimmedRow && !trimmedRow.startsWith('----')) {
+            // Split the row by whitespace
+            const rowValues = trimmedRow.split(/\s+/);
+
+            // Extract specific values (time, temp, qnh, qan)
+            if (rowValues.length >= 4) {
+              const [time, temp, qnh, qan] = rowValues;
+              acc.push({ time, temp, qnh, qan });
+            }
+          }
+
+          return acc;
+        }, []);
+
+        item.vermetTableData = formattedData; // Assign formattedData to a property
+        // console.log('Filtered and latest Response Table ', formattedData);
+        this.loading = false;
+        this.spinner.hide();
+      });
+    });
     this.iscodeTafs = false;
     this.isFormVisible = false;
     this.isSigmentAirmet = false;
@@ -426,13 +435,31 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
   }
   TAF() {
-    this.loading = true; // Start loading indicator
-    this.APIService.GetSourceTextFolderFiles('taffc').subscribe(
+    this.spinner.show();
+    this.loading = true;
+    this.APIService.GetSourceTextFolderFilesTime('taffc', 4).subscribe(
       (Response: FileData[]) => {
-        this.TAFArray = Response;
-
-        console.log('Response==== ', this.TAFArray);
-        this.loading = false; // Stop loading indicator when data is loaded
+        this.TAFArray = Response.map((item: FileData) => {
+          const parts = item.filename.split('/');
+          if (parts.length > 1) {
+            const newFilename = parts.slice(1).join('/');
+            return {
+              ...item,
+              filename: newFilename,
+            };
+          } else {
+            return item;
+          }
+        });
+        this.loading = false;
+        this.spinner.hide();
+        console.log('Response received:', Response);
+        // Handle response data
+      },
+      (error) => {
+        console.error('API Error:', error);
+        this.loading = false; // Make sure to handle loading state in case of error
+        this.spinner.hide(); // Ensure spinner is hidden on error
       }
     );
 
@@ -452,13 +479,17 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
     this.isform2Visible = false && this.isLoggedIn == false;
   }
-  extractHeadingContent(filetextcontent: string): string {
-    // Extract desired content for <h1> here (e.g., using regex or string manipulation)
-    // Return the extracted content
-    return filetextcontent.substring(
-      filetextcontent.indexOf('TAF'),
-      filetextcontent.indexOf('TEMPO')
-    );
+  extractHeadingContent(fileTextContent: string): string | null {
+    // Use a regular expression to find the content starting with 'TAF'
+    const regex = /TAF[\s\S]*?(?=TEMPO|$)/;  // Matches from 'TAF' to 'TEMPO' or end of string
+  
+    const match = fileTextContent.match(regex);
+  
+    if (match) {
+      return match[0];  // Return the matched content
+    } else {
+      return null;  // Return null if no match found
+    }
   }
 
   extractRemainingContent(filetextcontent: string): string {

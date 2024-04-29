@@ -1,6 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
+
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
 @Component({
   selector: 'app-international',
   templateUrl: './international.page.html',
@@ -8,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class InternationalPage implements OnInit {
   isLogged: boolean = false;
- 
+  MaximumArray: any = [];
   ngOnInit() {}
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -37,13 +41,15 @@ export class InternationalPage implements OnInit {
   selectedOption5: string = '2023-03-20 20:00';
   nextday: boolean = true;
   prevday: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private APIService: APIService,
+    private dialog: MatDialog
   ) {}
-
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
@@ -51,6 +57,7 @@ export class InternationalPage implements OnInit {
       this.closeAllDropdowns();
     }
   }
+
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
       this.isDropdownOpen1 = !this.isDropdownOpen1;
@@ -129,8 +136,6 @@ export class InternationalPage implements OnInit {
     this.isDropdownOpen2 = false;
   }
 
- 
-
   toggleFormVisibility() {
     this.isFormVisible = false;
     this.isKwazulNatal = false;
@@ -172,6 +177,36 @@ export class InternationalPage implements OnInit {
   }
   MaximumWind() {
     // this.isKwazulNatal=true;
+    this.loading = true;
+    debugger;
+    this.APIService.GetSourceChartFolderFilesList('PW').subscribe(
+      (response) => {
+        this.MaximumArray = response;
+
+        const specifiedTimes = ['10:', '12:', '06:', '00:'];
+        const filteredArray = this.MaximumArray.filter((item: any) => {
+          // Extract time part after 'T' in lastmodified field
+          const time = item.lastmodified.split('T')[1].substring(0, 3);
+          console.log('TIME:', time);
+          return specifiedTimes.includes(time);
+        });
+
+        this.MaximumArray = filteredArray;
+        console.log('Response:', this.MaximumArray); // Log response to inspect data
+        // Iterate over each item in MaximumArray and call fetchSecondAPI
+        // this.MaximumArray.forEach((item:any) => {
+        //   this.fetchSecondAPI(item.foldername, item.filename);
+        // });
+
+        this.loading = false; // Set loading to false after processing
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false; // Set loading to false in case of error
+        // Handle error appropriately (e.g., show error message)
+      }
+    );
+
     this.isFormVisible2 = false;
     this.isFormVisible = false;
     this.isKwazulNatal = false;
@@ -180,6 +215,50 @@ export class InternationalPage implements OnInit {
     this.isCloudForecast = false;
     this.isTSProbability = false;
   }
+
+  openImageViewer(item: any) {
+    // Extract folderName and fileName from the current item
+    const folderName = item.foldername;
+    const fileName = item.filename;
+    debugger;
+    console.log('file Name:', fileName);
+
+    // Call fetchSecondAPI to get filetextcontent asynchronously
+    this.fetchSecondAPI(folderName, fileName).then((filetextcontent) => {
+      // Once filetextcontent is retrieved, open the dialog with necessary data
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '80%'; // Set custom width
+      dialogConfig.height = '80%'; // Set custom height
+      dialogConfig.data = {
+        filetextcontent: filetextcontent,
+        // Add any additional data you want to pass to the dialog here
+      };
+
+      const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+    });
+  }
+  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
+    // Return a promise that resolves with filetextcontent
+    return new Promise<string>((resolve, reject) => {
+      this.APIService.GetChartsFile(folderName, fileName).subscribe(
+        (response) => {
+          // Assuming filetextcontent is obtained from the response
+          const filetextcontent = response.filetextcontent;
+          // Log filetextcontent to verify
+          console.log('File Text Content:', filetextcontent);
+          // Resolve the promise with filetextcontent
+          resolve(filetextcontent);
+        },
+        (error) => {
+          // Reject the promise if there's an error
+          reject(error);
+        }
+      );
+    });
+  }
+
   TSProbability() {
     // this.isKwazulNatal=true;
     this.isFormVisible2 = false;

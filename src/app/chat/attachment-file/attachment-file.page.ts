@@ -48,6 +48,7 @@ export class AttachmentFilePage implements OnInit {
   ngOnInit() {
     debugger;
     console.log('DATA++++', this.data);
+    console.log('DATA++++', this.data.imageSRC);
   }
 
   closeImageDialog() {

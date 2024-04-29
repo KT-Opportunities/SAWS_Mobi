@@ -142,7 +142,30 @@ export class APIService {
         `RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
+  GetSourceTextFolderFilesTime(foldername: string, time: number) {
+    const url = `${environment.serverAPI}RawSource/GetSourceTextFolderFiles`;
 
+    // Construct the query parameters including foldername and lasthours
+    const queryParams = {
+      textfoldername: foldername,
+      lasthours: time,
+    };
+
+    // Make the HTTP GET request with query parameters
+    return this.http.get<any>(url, { params: queryParams });
+  }
+
+  GetSourceChartFolderFilesList(foldername: any) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
+    );
+  }
+
+  GetChartsFile(foldername: string, image: string): Observable<any> {
+    const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${foldername}&imagefilename=${image}`;
+    return this.http.get<any>(url);
+  }
   getFileType(fileMimetype: string): string {
     const videoMimeTypes = [
       'video/mp4',

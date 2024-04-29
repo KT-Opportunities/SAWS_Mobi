@@ -7,10 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { InternationalPageRoutingModule } from './international-routing.module';
 
 import { InternationalPage } from './international.page';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatDialogModule,
     FormsModule,
     IonicModule,
     InternationalPageRoutingModule

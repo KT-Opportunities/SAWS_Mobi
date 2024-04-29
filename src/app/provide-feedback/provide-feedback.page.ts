@@ -324,7 +324,7 @@ export class ProvideFeedbackPage implements OnInit {
         this.addFile = true;
 
         console.log('DATA CHECK::', this.feedback);
-        this.openAttachmentDialog(this.feedback, '500ms', '500ms');
+        this.openAttachmentDialog(this.feedback, '800ms', '500ms');
       };
 
       reader.onerror = (error) => {
@@ -378,7 +378,7 @@ export class ProvideFeedbackPage implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
       width: '85%',
-      height: '50%',
+      height: '80%',
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {

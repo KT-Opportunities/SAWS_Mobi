@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
@@ -60,7 +60,98 @@ export class DomesticPage implements OnInit {
     private spinner: NgxSpinnerService,
     private APIService: APIService,
     private iab: InAppBrowser
-  ) {
+  ) {}
+  onAirportCodeChange(event: any) {
+    this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
+  }
+
+  // Function to check if item should be displayed based on selectedAirportCode
+  shouldDisplayItem(item: any): boolean {
+    return this.selectedAirportCode === this.getAirportCode(item.filename);
+  }
+
+  getAirportCode(filename: string): string {
+    // Extract airport code (CCCC) from filename
+    const parts = filename.split('-');
+    const airportCode = parts[0].slice(6, 10).toUpperCase();
+    return airportCode;
+  }
+  // Inside ForecastPage class
+  extractTakeOffData(filetextcontent: string): string {
+    // Split the filetextcontent into lines
+    const lines = filetextcontent.split('\n');
+
+    // Find the line that contains "TAKE-OFF DATA"
+    const takeOffLine = lines.find((line) => line.includes('TAKE-OFF DATA'));
+
+    // Return the found line
+    return takeOffLine || ''; // Return the line if found, otherwise an empty string
+  }
+  ngOnInit() {
+    // Check if user is logged in
+    //this.fetchWarnings();
+    if (!this.authService.getIsLoggedIn()) {
+      // If not logged in, navigate to the login page
+      this.router.navigate(['/login']);
+    }
+  }
+
+  fetchWarnings() {
+    // Set loading to true when starting data fetch
+    // this.loading = true;
+
+    // Display the loading indicator
+    this.spinner.show();
+
+    this.APIService.GetSourceTextFolderFiles('unknown').subscribe(
+      (data: any[]) => {
+        console.log('Received warnings:', data);
+        this.warnings = data;
+        // Set isWarning to true after data is loaded
+        this.isDomestic = false;
+        this.isWarning = true;
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching warnings:', error);
+        // Hide the loading indicator in case of error
+        this.spinner.hide();
+      },
+      () => {
+        // Hide the loading indicator when data is successfully loaded or in case of error
+        this.loading = false;
+        this.spinner.hide();
+      }
+    );
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.getIsLoggedIn();
+  }
+  DomeDomestic() {}
+  Warning() {
+    this.loading = true;
+    this.fetchWarnings();
+    this.isDomestic = false;
+    this.isWarning = true;
+  }
+  FlightDocument() {
+    this.isDomestic = false;
+    this.isFlightDocument = true;
+  }
+
+  WindCharts() {
+    this.isDomestic = false;
+    this.isWindCharts = true;
+  }
+  location() {
+    this.isDomestic = false;
+    this.isLocation = true;
+  }
+
+  takeoff() {
+    this.loading = true;
+    this.spinner.show();
     this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
       this.VermetArray = Response;
 
@@ -117,111 +208,13 @@ export class DomesticPage implements OnInit {
         item.vermetTableData = formattedData; // Assign formattedData to a property
         console.log('Filtered and latest Response Table ', formattedData);
         this.loading = false;
+
+        this.spinner.hide();
       });
     });
-  }
-  onAirportCodeChange(event: any) {
-    this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
-  }
-
-  // Function to check if item should be displayed based on selectedAirportCode
-  shouldDisplayItem(item: any): boolean {
-    return this.selectedAirportCode === this.getAirportCode(item.filename);
-  }
-
-  getAirportCode(filename: string): string {
-    // Extract airport code (CCCC) from filename
-    const parts = filename.split('-');
-    const airportCode = parts[0].slice(6, 10).toUpperCase();
-    return airportCode;
-  }
-  // Inside ForecastPage class
-  extractTakeOffData(filetextcontent: string): string {
-    // Split the filetextcontent into lines
-    const lines = filetextcontent.split('\n');
-
-    // Find the line that contains "TAKE-OFF DATA"
-    const takeOffLine = lines.find((line) => line.includes('TAKE-OFF DATA'));
-
-    // Return the found line
-    return takeOffLine || ''; // Return the line if found, otherwise an empty string
-  }
-  ngOnInit() {
-    // Check if user is logged in
-    this.fetchWarnings();
-    if (!this.authService.getIsLoggedIn()) {
-      // If not logged in, navigate to the login page
-      this.router.navigate(['/login']);
-    }
-  }
-
-  fetchWarnings() {
-    // Set loading to true when starting data fetch
-    // this.loading = true;
-  
-    // Display the loading indicator
-    this.spinner.show();
-  
-    this.APIService.GetSourceTextFolderFiles('unknown').subscribe(
-      (data: any[]) => {
-        console.log('Received warnings:', data);
-        this.warnings = data;
-        // Set isWarning to true after data is loaded
-        this.isDomestic = false;
-        this.isWarning = true;
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching warnings:', error);
-        // Hide the loading indicator in case of error
-        this.spinner.hide();
-      },
-      () => {
-        // Hide the loading indicator when data is successfully loaded or in case of error
-        this.loading = false;
-        this.spinner.hide();
-      }
-    );
-  }
-  
-  
-    
-  
-  
-
-
- 
-  
-  
-  
-
-  get isLoggedIn(): boolean {
-    return this.authService.getIsLoggedIn();
-  }
-  DomeDomestic() {}
-  Warning() {
-    this.loading = true;
-    this.isDomestic = false;
-    this.isWarning = true;
-  }
-  FlightDocument() {
-    this.isDomestic = false;
-    this.isFlightDocument = true;
-  }
-
-  WindCharts() {
-    this.isDomestic = false;
-    this.isWindCharts = true;
-  }
-  location() {
-    this.isDomestic = false;
-    this.isLocation = true;
-  }
-
-  takeoff() {
-    this.loading = true;
     this.isDomestic = false;
     this.isTakeOff = true;
+    this.isWarning = false;
   }
   lowlevel() {
     this.isDomestic = false;

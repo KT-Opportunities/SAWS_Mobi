@@ -1,4 +1,5 @@
 <ion-content>
+  <div *ngIf="loading" class="loading-indicator">Loading...</div>
   <section class="list-page">
     <div class="" *ngIf="isFormVisible">
       <div
@@ -1879,76 +1880,26 @@
                 <div
                   id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aae-bb9b1d15"
                   class="div-block-452"
+                  *ngFor="let item of MaximumArray;let i = index"
+                  [ngClass]="i % 2 === 0 ? 'div-block-38' : 'div-block-453'"
                 >
                   <div class="w-layout-grid grid-41">
                     <div
                       id="w-node-_707270c1-b2ff-8f51-f118-3b3665aeea79-bb9b1d15"
                       class="div-block-465"
                     >
-                      <a href="#" class="button-2-copy w-button">View</a>
+                      <button
+                        class="button-2-copy w-button"
+                        (click)="openImageViewer(item)"
+                      >
+                        View
+                      </button>
                     </div>
                     <div
                       id="w-node-_5e42ce22-6a2b-b585-398b-a09e34e0d36c-bb9b1d15"
                       class="div-block-465"
                     >
                       <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02ab6-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b566-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b569-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02abe-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3f048f9e-5836-8c6a-6952-e097080e1b78-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3f048f9e-5836-8c6a-6952-e097080e1b7b-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02ac6-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_5380366f-d675-46f7-ca6a-e0b033a4f3c0-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_5380366f-d675-46f7-ca6a-e0b033a4f3c3-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
                     </div>
                   </div>
                 </div>
