@@ -203,6 +203,10 @@ const routes: Routes = [
     path: 'image-viewr',
     loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule)
   },
+  {
+    path: 'harmonized-grid',
+    loadChildren: () => import('./Pages/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
+  },
 
   
  

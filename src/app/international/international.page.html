@@ -1,5 +1,7 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">Loading...</div>
+  <div *ngIf="loading == true" class="loading-indicator">
+    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  </div>
   <section class="list-page">
     <div class="" *ngIf="isFormVisible">
       <div
@@ -81,17 +83,20 @@
       </div>
     </div>
 
-    <!-- GPM -->
+    <!-- GRID -->
     <section
       class="aerosport-ci"
       *ngIf="isFormVisible2"
       style="margin-top: -18px !important"
     >
-      <h1 class="heading-6">GPM</h1>
+      <h1 class="heading-6">GRID</h1>
 
       <div class="aerosport">
         <div class="aerosportScrol">
-          <div class="div-block-464">
+          <div
+            class="div-block-464"
+            *ngFor="let item of MaximumArray;let i = index"
+          >
             <h1 class="sub-headings">West                     </h1>
             <div class="w-form">
               <form
@@ -152,7 +157,7 @@
               </div>
             </div>
 
-            <div class="grid-div">
+            <!-- <div class="grid-div">
               <div class="w-layout-grid central-grid">
                 <div
                   id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15"
@@ -168,12 +173,13 @@
                     >
                       <h4 class="heading-24">FL050</h4>
                     </div>
-                    <div
+                    <button
                       id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
                       class="div-block-36"
+                      (click)="openImageViewer(item)"
                     >
                       <h4 class="heading-24">View Image</h4>
-                    </div>
+                    </button>
                     <div
                       id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aac-bb9b1d15"
                       class="div-block-36"
@@ -193,7 +199,7 @@
                       id="w-node-_707270c1-b2ff-8f51-f118-3b3665aeea79-bb9b1d15"
                       class="div-block-465"
                     >
-                      <a href="#" class="button-2-copy w-button">View</a>
+                      <div class="button-2-copy w-button">View</div>
                     </div>
                     <div
                       id="w-node-_5e42ce22-6a2b-b585-398b-a09e34e0d36c-bb9b1d15"
@@ -211,8 +217,9 @@
                     <div
                       id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b566-bb9b1d15"
                       class="div-block-465"
+                      (click)="openImageViewer(item)"
                     >
-                      <a href="#" class="button-2-copy w-button">View</a>
+                      <button class="button-2-copy w-button">View</button>
                     </div>
                     <div
                       id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b569-bb9b1d15"
@@ -230,8 +237,9 @@
                     <div
                       id="w-node-_3f048f9e-5836-8c6a-6952-e097080e1b78-bb9b1d15"
                       class="div-block-465"
+                      (click)="openImageViewer(item)"
                     >
-                      <a href="#" class="button-2-copy w-button">View</a>
+                      <button class="button-2-copy w-button">View</button>
                     </div>
                     <div
                       id="w-node-_3f048f9e-5836-8c6a-6952-e097080e1b7b-bb9b1d15"
@@ -249,8 +257,9 @@
                     <div
                       id="w-node-_5380366f-d675-46f7-ca6a-e0b033a4f3c0-bb9b1d15"
                       class="div-block-465"
+                      (click)="openImageViewer(item)"
                     >
-                      <a href="#" class="button-2-copy w-button">View</a>
+                      <button class="button-2-copy w-button">View</button>
                     </div>
                     <div
                       id="w-node-_5380366f-d675-46f7-ca6a-e0b033a4f3c3-bb9b1d15"
@@ -261,684 +270,66 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="div-block-464">
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL100</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </div> -->
           </div>
 
-          <!--FL180-->
-          <div class="div-block-464">
+          <div *ngFor="let item of MaximumArray" class="div-block-464">
             <div class="grid-div">
               <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL180</h4>
+                <div class="div-block-35">
+                  <div class="w-layout-grid grid-21">
+                    <div class="div-block-36">
+                      <h4 class="heading-24">{{ item.flightLevel }}</h4>
+                      <!-- Display modified flight level here -->
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
+                    <div class="div-block-36">
                       <h4 class="heading-24">View Image</h4>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
+                    <div class="div-block-36"></div>
+                    <div class="div-block-36"></div>
                   </div>
                 </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
+                <div class="div-block-452">
                   <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
+                    <div class="div-block-465">
                       <a href="#" class="button-2-copy w-button">View</a>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
+                    <div class="div-block-465">
+                      <h1 class="heading-25">{{ item.time }}</h1>
+                      <!-- Display time here -->
                     </div>
                   </div>
                 </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
+                <div class="div-block-38">
                   <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
+                    <div class="div-block-465">
                       <a href="#" class="button-2-copy w-button">View</a>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
+                    <div class="div-block-465">
+                      <h1 class="heading-25">{{ item.time }}</h1>
+                      <!-- Display time here -->
                     </div>
                   </div>
                 </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
+                <div class="div-block-453">
                   <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
+                    <div class="div-block-465">
                       <a href="#" class="button-2-copy w-button">View</a>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
+                    <div class="div-block-465">
+                      <h1 class="heading-25">{{ item.time }}</h1>
+                      <!-- Display time here -->
                     </div>
                   </div>
                 </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
+                <div class="div-block-38">
                   <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
+                    <div class="div-block-465">
                       <a href="#" class="button-2-copy w-button">View</a>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--FL240-->
-          <div class="div-block-464">
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL180</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--FL340-->
-          <div class="div-block-464">
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL180</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--FL390-->
-          <div class="div-block-464">
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL180</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--FL450-->
-          <div class="div-block-464">
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">FL180</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                  class="div-block-452"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">18:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba098-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09a-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba09d-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">12:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a0-bb9b1d15"
-                  class="div-block-453"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a5-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">06:00</h1>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0a8-bb9b1d15"
-                  class="div-block-38"
-                >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0aa-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <a href="#" class="button-2-copy w-button">View</a>
-                    </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0ad-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">00:00</h1>
+                    <div class="div-block-465">
+                      <h1 class="heading-25">{{ item.time }}</h1>
+                      <!-- Display time here -->
                     </div>
                   </div>
                 </div>
@@ -2512,7 +1903,7 @@
       style="margin-top: -18px !important"
     >
       <div class="gpm-div">
-        <h1 class="heading-6">GPM</h1>
+        <h1 class="heading-6">Grid Wind</h1>
 
         <div class="div-block-473-copy">
           <h1 class="sub-headings-wind"><strong>West</strong></h1>

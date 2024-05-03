@@ -10,6 +10,9 @@ import { AuthService } from '../services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
+import { HttpClient } from '@angular/common/http';
 interface ResponseItem {
   foldername: string;
   filename: string;
@@ -57,6 +60,7 @@ export class ForecastPage implements OnInit {
   AirmetArray: any = [];
   SigmetArray: any = [];
   VermetArray: any = [];
+
   //TAFArray: any = [];
 
   TAFArray: FileData[] = [];
@@ -74,7 +78,8 @@ export class ForecastPage implements OnInit {
     private elRef: ElementRef,
     private iab: InAppBrowser,
     private spinner: NgxSpinnerService,
-    private APIService: APIService
+    private APIService: APIService,
+    private dialog: MatDialog
   ) {}
   onAirportCodeChange(event: any) {
     this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
@@ -144,7 +149,48 @@ export class ForecastPage implements OnInit {
       this.closeAllDropdowns();
     }
   }
+  openImageViewer(item: any) {
+    // Extract folderName and fileName from the current item
+    const folderName = item.foldername;
+    const fileName = item.filename;
+    debugger;
+    console.log('file Name:', fileName);
 
+    // Call fetchSecondAPI to get filetextcontent asynchronously
+    this.fetchSecondAPI(folderName, fileName).then((filetextcontent) => {
+      // Once filetextcontent is retrieved, open the dialog with necessary data
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.disableClose = true;
+      dialogConfig.width = '80%'; // Set custom width
+      dialogConfig.height = '80%'; // Set custom height
+      dialogConfig.data = {
+        filetextcontent: filetextcontent,
+        // Add any additional data you want to pass to the dialog here
+      };
+
+      const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+    });
+  }
+  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
+    // Return a promise that resolves with filetextcontent
+    return new Promise<string>((resolve, reject) => {
+      this.APIService.GetChartsFile(folderName, fileName).subscribe(
+        (response) => {
+          // Assuming filetextcontent is obtained from the response
+          const filetextcontent = response.filetextcontent;
+          // Log filetextcontent to verify
+          console.log('File Text Content:', filetextcontent);
+          // Resolve the promise with filetextcontent
+          resolve(filetextcontent);
+        },
+        (error) => {
+          // Reject the promise if there's an error
+          reject(error);
+        }
+      );
+    });
+  }
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
       this.isDropdownOpen1 = !this.isDropdownOpen1;
@@ -481,14 +527,14 @@ export class ForecastPage implements OnInit {
   }
   extractHeadingContent(fileTextContent: string): string | null {
     // Use a regular expression to find the content starting with 'TAF'
-    const regex = /TAF[\s\S]*?(?=TEMPO|$)/;  // Matches from 'TAF' to 'TEMPO' or end of string
-  
+    const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
+
     const match = fileTextContent.match(regex);
-  
+
     if (match) {
-      return match[0];  // Return the matched content
+      return match[0]; // Return the matched content
     } else {
-      return null;  // Return null if no match found
+      return null; // Return null if no match found
     }
   }
 
@@ -557,6 +603,7 @@ export class ForecastPage implements OnInit {
     this.isTrends = true;
     this.isHarmonized = false;
   }
+
   harmonized() {
     this.iscodeTafs = false;
     this.isFormVisible = false;
@@ -570,6 +617,10 @@ export class ForecastPage implements OnInit {
     this.isRecentTAF = false;
     this.isTafAccuracy = false;
     this.isTrends = false;
-    this.isHarmonized = true;
+
+    if (this.isLoggedIn == true) {
+      this.spinner.show();
+      this.router.navigate(['/harmonized-grid']);
+    }
   }
 }

@@ -183,20 +183,28 @@ export class InternationalPage implements OnInit {
       (response) => {
         this.MaximumArray = response;
 
-        const specifiedTimes = ['10:', '12:', '06:', '00:'];
-        const filteredArray = this.MaximumArray.filter((item: any) => {
-          // Extract time part after 'T' in lastmodified field
-          const time = item.lastmodified.split('T')[1].substring(0, 3);
-          console.log('TIME:', time);
-          return specifiedTimes.includes(time);
-        });
+        this.MaximumArray = response.filter((item: any) =>
+          item.filename.includes('PWRD98')
+        );
+        console.log('Response:', this.MaximumArray);
 
-        this.MaximumArray = filteredArray;
-        console.log('Response:', this.MaximumArray); // Log response to inspect data
-        // Iterate over each item in MaximumArray and call fetchSecondAPI
-        // this.MaximumArray.forEach((item:any) => {
-        //   this.fetchSecondAPI(item.foldername, item.filename);
-        // });
+        this.MaximumArray = response;
+
+        console.log('Response:', this.MaximumArray);
+        // const allowedFilenames = [
+        //   'PWRD98FAPR290600.png',
+        //   'PWRD98FAPR281800.png',
+        //   'PWRD98FAPR280600.png',
+        //   'PWRD98FAPR290000.png',
+        // ];
+
+        // this.MaximumArray = this.MaximumArray.filter((item: any) =>
+        //   allowedFilenames.includes(item.filename)
+        // );
+
+        console.log('Response:', this.MaximumArray);
+
+        this.loading = false;
 
         this.loading = false; // Set loading to false after processing
       },
