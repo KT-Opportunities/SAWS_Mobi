@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { APIService } from 'src/app/services/apis.service';
 @Component({
   selector: 'app-aero-sport',
   templateUrl: './aero-sport.page.html',
@@ -15,6 +17,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class AeroSportPage implements OnInit {
   isLogged: boolean = false;
+  isLoading: boolean = true;
   isFormVisible: boolean = true;
   isFormVisible1: boolean = false;
   isFormVisible2: boolean = false;
@@ -39,7 +42,12 @@ export class AeroSportPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+
+    private http: HttpClient,
+
+    private APIService: APIService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -188,6 +196,22 @@ export class AeroSportPage implements OnInit {
   }
   TSProbability() {
     // this.isKwazulNatal=true;
+    this.APIService.GetSourceChartFolderFilesList('aerosport').subscribe(
+      (data) => {
+        try {
+          console.log('DATA:', data);
+
+          this.isLoading = false;
+        } catch (error) {
+          console.log('Error parsing JSON data:', error);
+          this.isLoading = false;
+        }
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
     this.isFormVisible2 = false;
     this.isFormVisible = false;
     this.isKwazulNatal = false;

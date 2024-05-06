@@ -6,7 +6,7 @@
     </div>
     <div class="wafs-main-div">
       <h1 class="heading-6">WAFS Harmonized Grid Products</h1>
-      <div>
+      <div class="scrolltaffA">
         <!--Turbulence severity-->
         <div class="w-layout-grid wafs-grid">
           <h1 class="heading-22">Turbulence severity</h1>
@@ -33,6 +33,7 @@
                   <h4
                     class="heading-25"
                     *ngIf="getTimeSubstring(item.filename) === time"
+                    (click)="openImageViewer(item)"
                   >
                     {{ displayHeading(item.filename) }}
                   </h4>
@@ -83,6 +84,7 @@
                   <h4
                     class="heading-25"
                     *ngIf="getTimeSubstring(item.filename) === time"
+                    (click)="openImageViewer(item)"
                   >
                     {{ displayHeading(item.filename) }}
                   </h4>
@@ -92,6 +94,7 @@
           </div>
         </div>
         <!--CB Coverage-->
+        
         <div class="w-layout-grid wafs-grid">
           <h1 class="heading-22">CB Coverage</h1>
           <div class="w-layout-grid grid-20" id="grid20">
@@ -132,6 +135,7 @@
                   <h4
                     class="heading-25"
                     *ngIf="getTimeSubstring(item.filename) === time"
+                    (click)="openImageViewer(item)"
                   >
                     {{ displayHeading(item.filename) }}
                   </h4>
@@ -142,7 +146,7 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="position: relative">
+    <div class="bottomdiv" style="position: fixed; margin-top: 169%">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"

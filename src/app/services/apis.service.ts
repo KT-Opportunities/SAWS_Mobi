@@ -167,6 +167,14 @@ export class APIService {
         `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&time=${time}`
     );
   }
+  GetSourceAviationFolderFilesList(foldername: any, time: any) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&time=${time}`
+    );
+  }
+
+
   GetChartsFile(foldername: string, image: string): Observable<any> {
     const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${foldername}&imagefilename=${image}`;
     return this.http.get<any>(url);

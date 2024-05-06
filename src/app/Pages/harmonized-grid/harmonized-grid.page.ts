@@ -22,7 +22,7 @@ export class HarmonizedGridPage implements OnInit {
   WAF1: any = [];
   WAF2: any = [];
   WAF3: any = [];
-  isLoading:boolean = true;
+  isLoading: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -89,6 +89,16 @@ export class HarmonizedGridPage implements OnInit {
       }
     );
   }
+  getTimeSubstring(filename: string): string {
+    // Extract the last 4 characters from the filename
+    const timeSubstring = filename.substring(
+      filename.length - 8,
+      filename.length - 4
+    );
+
+    return timeSubstring;
+  }
+
   displayHeading(filename: string): string {
     const twoDigitsAfterQIRI = filename.substring(4, 6);
 
@@ -109,15 +119,7 @@ export class HarmonizedGridPage implements OnInit {
         return ''; // Default case if none of the above matches
     }
   }
-  getTimeSubstring(filename: string): string {
-    // Extract the last 4 characters from the filename
-    const timeSubstring = filename.substring(
-      filename.length - 8,
-      filename.length - 4
-    );
 
-    return timeSubstring;
-  }
   isLastUpdated(time: string, currentItem: any): boolean {
     const itemsWithSameTime = this.WAF2.filter((item: any) => {
       // Extract the time substring from the lastmodified property
@@ -151,6 +153,7 @@ export class HarmonizedGridPage implements OnInit {
       const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
     });
   }
+
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filetextcontent
     return new Promise<string>((resolve, reject) => {
