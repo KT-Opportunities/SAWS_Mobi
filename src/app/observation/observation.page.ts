@@ -65,7 +65,8 @@ export class ObservationPage implements OnInit {
   }
   satelite() {
     this.isMetar= false;
-    this.issatelite = true
+    // this.issatelite = true
+    this.router.navigate (['/observation/satelite'])
   }
   speci () {
     this.isMetar = false;

@@ -161,24 +161,31 @@ export class APIService {
         `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
     );
   }
+
   GetSourceChartFolderFilesListtime(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&time=${time}`
+        `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
+
   GetSourceAviationFolderFilesList(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&time=${time}`
+        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=6`
     );
   }
 
-
-  GetChartsFile(foldername: string, image: string): Observable<any> {
-    const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${foldername}&imagefilename=${image}`;
+  GetAviationFile(imagefoldername: string, imagefilename: string): Observable<any> {
+    const url = `${environment.serverAPI}RawSource/GetAviationFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
     return this.http.get<any>(url);
   }
+
+  GetChartsFile(imagefoldername: string, imagefilename: string): Observable<any> {
+    const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
+    return this.http.get<any>(url);
+  }
+
   getFileType(fileMimetype: string): string {
     const videoMimeTypes = [
       'video/mp4',
