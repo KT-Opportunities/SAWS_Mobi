@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-satellite',
@@ -20,36 +21,25 @@ export class SatelliteComponent  implements OnInit {
   selectedOptionFrame: string = '';
   loading: boolean = false;
 
+  fileBaseUrl: SafeResourceUrl | undefined;
+  currentIndex: number = 0;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private APIService: APIService,
+    private sanitizer: DomSanitizer
 
    ) { }
 
   ngOnInit() {
     this.getSatelliteImage('', 12, this.selectedOptionProduct);
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-
-  // selectOption(option: string, dropdown: string) {
-  //   if (dropdown === 'dropdown1') {
-  //     this.selectedOption1 = option;
-  //     this.isDropdownOpen1 = false;
-  //   } 
-  //   if (dropdown === 'dropdown2') {
-  //     this.selectedOption2 = option;
-  //     this.isDropdownOpen2 = false;
-  //   }
-  //   if (dropdown === 'dropdown3') {
-  //     this.selectedOption3 = option;
-  //     this.isDropdownOpen2 = false;
-  //   }
-    
-  // }
 
   sateliteDropdownProductOpen(){
     this.isDropdownProductOpen = !this.isDropdownProductOpen;
@@ -65,9 +55,14 @@ export class SatelliteComponent  implements OnInit {
           item.filename.includes(productname)
         );
 
-        this.selectedOptionFrame = this.frameArray[0].lastmodified;
-
-        console.log('Response:', this.frameArray);       
+        if (this.frameArray.length > 0) {
+            this.selectedOptionFrame = this.frameArray[0].lastmodified;
+    
+            this.displayImage('', this.frameArray[0].filename).then((filetextcontent) => {
+              const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+              this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+          });
+        }    
 
         this.loading = false;
       },
@@ -79,7 +74,6 @@ export class SatelliteComponent  implements OnInit {
   }
 
   displayImage(imagefoldername: string, imagefilename: string): Promise<string> {
-    // Return a promise that resolves with filetextcontent
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(imagefoldername, imagefilename).subscribe(
         (response) => {
@@ -129,20 +123,8 @@ export class SatelliteComponent  implements OnInit {
       this.selectedOptionFrame = selectOption;
 
       this.displayImage('', imagefilename).then((filetextcontent) => {
-        // // Once filetextcontent is retrieved, open the dialog with necessary data
-        // const dialogConfig = new MatDialogConfig();
-        // dialogConfig.autoFocus = true;
-        // dialogConfig.disableClose = true;
-        // dialogConfig.width = '80%'; // Set custom width
-        // dialogConfig.height = '80%'; // Set custom height
-        // dialogConfig.data = {
-        //   filetextcontent: filetextcontent,
-        //   // Add any additional data you want to pass to the dialog here
-        // };
-  
-        // const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-
-        console.log('filetextcontent', filetextcontent)
+          const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+          this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
       });
 
   }
@@ -168,4 +150,27 @@ export class SatelliteComponent  implements OnInit {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   }
 
+  previousImage(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.frameArray.length) % this.frameArray.length;
+
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified; 
+    const fileName = this.frameArray[this.currentIndex].filename;
+    this.displayImage('', fileName).then((filetextcontent) => {
+        const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+        this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+    });
+    
+  }
+
+  nextImage(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.frameArray.length;
+
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;    
+    const fileName = this.frameArray[this.currentIndex].filename;
+
+    this.displayImage('', fileName).then((filetextcontent) => {
+        const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+        this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+    });
+  }
 }

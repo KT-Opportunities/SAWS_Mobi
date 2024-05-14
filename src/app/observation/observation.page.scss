@@ -709,6 +709,11 @@
   font-weight: 600;
 }
 
+.field-label {
+  display: flex;
+  margin-top: 10px;
+}
+
 .subscr-pdiv {
   flex-direction: column;
   justify-content: center;
