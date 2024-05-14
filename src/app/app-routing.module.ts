@@ -148,6 +148,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'observation/satelite',
+    loadChildren: () =>
+      import('./Pages/satellite/satellite.module').then(
+        (m) => m.SatelliteModule
+      ),
+  },
+  {
     path: 'domestic',
     loadChildren: () =>
       import('./domestic/domestic.module').then((m) => m.DomesticPageModule),
@@ -199,7 +206,8 @@ const routes: Routes = [
     path: 'sigmet-gamet',
     loadChildren: () =>
       import('./Pages/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
-  },  {
+  },
+  {
     path: 'image-viewr',
     loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule)
   },

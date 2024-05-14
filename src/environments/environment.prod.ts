@@ -3,5 +3,5 @@ export const environment = {
   // serverAPI: 'https://localhost:44379/api/',
 
   production: true,
-  serverAPI: 'http://qa.j-cred.co.za/aviationappapi/api/',
+  serverAPI: 'http://160.119.253.130/aviappapi/api/',
 };
