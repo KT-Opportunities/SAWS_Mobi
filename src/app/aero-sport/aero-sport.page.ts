@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { APIService } from 'src/app/services/apis.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-aero-sport',
   templateUrl: './aero-sport.page.html',
@@ -38,6 +39,13 @@ export class AeroSportPage implements OnInit {
   selectedOption5: string = '2023-03-20 20:00';
   nextday: boolean = true;
   prevday: boolean = false;
+  TsProbability: any = [];
+  xlFAItems: any[] = [];
+  noHyphenAfterXL: any[] = [];
+  has3AfterXL: any[] = [];
+  remainingItems: any[] = [];
+  fileBaseUrlNext: SafeResourceUrl;
+  fileBaseUrlPrevious: SafeResourceUrl;
 
   constructor(
     private router: Router,
@@ -47,15 +55,65 @@ export class AeroSportPage implements OnInit {
     private http: HttpClient,
 
     private APIService: APIService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer
+  ) {
+    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   ngOnInit() {
     // Check if user is logged in
+    this.isLoading = true;
     if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
     }
+    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+      (data) => {
+        try {
+          console.log('BEFORE FILTER:', data);
+          data.forEach((item: any) => {
+            if (item.filename.startsWith('xlFA')) {
+              this.xlFAItems.push(item);
+            } else if (item.filename.indexOf('-') === -1) {
+              this.noHyphenAfterXL.push(item);
+            } else {
+              const index = item.filename.indexOf('xl') + 2;
+              const afterXL = item.filename.substring(index);
+              if (afterXL === '3') {
+                this.has3AfterXL.push(item);
+              } else {
+                this.remainingItems.push(item);
+              }
+            }
+          });
+
+          console.log('xlFA Items:', this.xlFAItems);
+          console.log('No Hyphen After xl:', this.noHyphenAfterXL);
+          console.log('Has 3 After xl:', this.has3AfterXL);
+          console.log('Remaining Items:', this.remainingItems);
+
+          this.TsProbability = data.filter(
+            (item: any) =>
+              item.filename === 'tsprob_d1.gif' ||
+              item.filename === 'tsprob_d2.gif'
+          );
+
+          console.log('DATA2:', this.TsProbability);
+
+          this.isLoading = false;
+        } catch (error) {
+          console.log('Error parsing JSON data:', error);
+          this.isLoading = false;
+        }
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
   }
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
@@ -173,6 +231,27 @@ export class AeroSportPage implements OnInit {
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+
+    this.TsProbability[0];
+    console.log('ARRAY AT 0:', this.TsProbability[0]);
+    this.APIService.GetAviationFile(
+      this.TsProbability[0].foldername,
+      this.TsProbability[0].filename
+    ).subscribe(
+      (data) => {
+        console.log('IMAGE:', data);
+        const imageUrlPrevious =
+          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        this.fileBaseUrlPrevious =
+          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
+
+        console.log('back to image:', this.fileBaseUrlPrevious);
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
   }
   KwazulNatalToggle() {
     // this.isKwazulNatal=true;
@@ -196,22 +275,29 @@ export class AeroSportPage implements OnInit {
   }
   TSProbability() {
     // this.isKwazulNatal=true;
-    this.APIService.GetSourceChartFolderFilesList('aerosport').subscribe(
+    this.nextday = false;
+    this.prevday = true;
+    this.TsProbability[0];
+    console.log('ARRAY AT 0:', this.TsProbability[0]);
+    this.APIService.GetAviationFile(
+      this.TsProbability[0].foldername,
+      this.TsProbability[0].filename
+    ).subscribe(
       (data) => {
-        try {
-          console.log('DATA:', data);
+        console.log('IMAGE:', data);
+        const imageUrlPrevious =
+          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        this.fileBaseUrlPrevious =
+          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
 
-          this.isLoading = false;
-        } catch (error) {
-          console.log('Error parsing JSON data:', error);
-          this.isLoading = false;
-        }
+        console.log('back to image:', this.fileBaseUrlPrevious);
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
         this.isLoading = false;
       }
     );
+
     this.isFormVisible2 = false;
     this.isFormVisible = false;
     this.isKwazulNatal = false;
@@ -244,12 +330,68 @@ export class AeroSportPage implements OnInit {
     this.isSpotGfraph = false;
   }
 
+  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.APIService.GetAviationFile(folderName, fileName).subscribe(
+        (response) => {
+          const filetextcontent = response.filetextcontent;
+          console.log('DATA2:', this.TsProbability);
+
+          resolve(filetextcontent);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  previousDay() {
+    // Add logic for navigating to the previous day
+    this.nextday = false;
+    this.prevday = true;
+    this.TsProbability[0];
+    console.log('ARRAY AT 0:', this.TsProbability[0]);
+    this.APIService.GetAviationFile(
+      this.TsProbability[0].foldername,
+      this.TsProbability[0].filename
+    ).subscribe(
+      (data) => {
+        console.log('IMAGE:', data);
+        const imageUrlPrevious =
+          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        this.fileBaseUrlPrevious =
+          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
+
+        console.log('back to image:', this.fileBaseUrlPrevious);
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
+  }
+
   nextDay() {
     this.nextday = true;
     this.prevday = false;
-  }
-  previousDay() {
-    this.nextday = false;
-    this.prevday = true;
+    this.TsProbability[1];
+    this.APIService.GetAviationFile(
+      this.TsProbability[1].foldername,
+      this.TsProbability[1].filename
+    ).subscribe(
+      (data) => {
+        console.log('IMAGE:', data);
+        const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        this.fileBaseUrlNext =
+          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+
+        console.log('back to image:', this.fileBaseUrlNext);
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
   }
 }

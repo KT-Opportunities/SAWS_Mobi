@@ -1,0 +1,76 @@
+<ion-content [fullscreen]="true">
+  <section class="ob-metar-history">
+    <div class="cloud-cover">
+      <h1 class="heading6">TS Probability</h1>
+      <div class="w-layout-grid metar-history-grid">
+        <div class="date-container">
+          <button
+            id="last-day-btn"
+            class="button-spacing"
+            (click)="previousDay()"
+          >
+            << Previous Day
+          </button>
+          <span id="current-date"></span>
+          <button id="next-day-btn" class="button-spacing" (click)="nextDay()">
+            Next Day >>
+          </button>
+        </div>
+      </div>
+
+      <div class="div-block-15">
+        <div>
+          <div class="scroll small-m">
+            <div class="rows-wrap">
+              <div
+                data-delay="4000"
+                data-animation="slide"
+                class="slider-2 w-slider"
+                data-autoplay="false"
+                data-easing="ease"
+                data-hide-arrows="false"
+                data-disable-swipe="false"
+                data-autoplay-limit="0"
+                data-nav-spacing="3"
+                data-duration="500"
+                data-infinite="true"
+              >
+                <div class="w-slider-mask prev" *ngIf="prevday">
+                  <!-- <div class="w-slide"></div> -->
+                  <img
+                    src="fileBaseUrlPrevious"
+                    loading="lazy"
+                    width="1216"
+                    alt=""
+                    class="image"
+                  />
+                  <!-- <div class="w-slide"></div> -->
+                </div>
+                <div class="w-slider-mask next" *ngIf="nextday">
+                  <!-- <div class="w-slide"></div> -->
+                  <img
+                    src="fileBaseUrlNext"
+                    loading="lazy"
+                    width="1216"
+                    alt=""
+                    class="image"
+                  />
+                  <!-- <div class="w-slide"></div> -->
+                </div>
+                <!-- <div class="w-slider-arrow-left">
+                  <div class="w-icon-slider-left"></div>
+                </div>
+                <div class="w-slider-arrow-right">
+                  <div class="w-icon-slider-right"></div>
+                </div> -->
+                <!-- <div class="w-slider-nav w-round w-num"> -->
+
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>

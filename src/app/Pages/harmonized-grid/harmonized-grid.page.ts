@@ -22,6 +22,7 @@ export class HarmonizedGridPage implements OnInit {
   WAF1: any = [];
   WAF2: any = [];
   WAF3: any = [];
+  TsProbability: any = [];
   isLoading: boolean = true;
 
   constructor(
@@ -57,6 +58,28 @@ export class HarmonizedGridPage implements OnInit {
     //     console.log('WAF3:', this.WAF3);
     //   }
     // );
+    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+      (data) => {
+        try {
+          this.TsProbability = data.filter(
+            (item: any) =>
+              item.filename === 'tsprob_d1.gif' ||
+              item.filename === 'tsprob_d2.gif'
+          );
+
+          console.log('DATA2:', this.TsProbability);
+
+          this.isLoading = false;
+        } catch (error) {
+          console.log('Error parsing JSON data:', error);
+          this.isLoading = false;
+        }
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
     this.APIService.GetSourceChartFolderFilesList('wafs').subscribe(
       (data) => {
         try {
@@ -99,10 +122,26 @@ export class HarmonizedGridPage implements OnInit {
     return timeSubstring;
   }
 
+  displayHeadingWAF1(filename: string): string {
+    const twoDigitsAfterQIRI = filename.substring(14, 18);
+ 
+    switch (twoDigitsAfterQIRI) {
+      case '0600':
+        return 'EntireAtmosphere';
+      case '0000':
+        return 'EntireAtmosphere';
+      case '1800':
+        return 'EntireAtmosphere';
+      default:
+        return ''; // Default case if none of the above matches
+    }
+  }
   displayHeading(filename: string): string {
     const twoDigitsAfterQIRI = filename.substring(4, 6);
 
     switch (twoDigitsAfterQIRI) {
+      case '80':
+        return '800_hPa/FL100';
       case '70':
         return '700_hPa/FL100';
       case '60':

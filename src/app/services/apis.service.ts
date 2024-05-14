@@ -179,6 +179,10 @@ export class APIService {
     const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${foldername}&imagefilename=${image}`;
     return this.http.get<any>(url);
   }
+  GetAviationFile(foldername: string, image: string): Observable<any> {
+    const url = `${environment.serverAPI}RawSource/GetAviationFile?imagefoldername=${foldername}&imagefilename=${image}`;
+    return this.http.get<any>(url);
+  }
   getFileType(fileMimetype: string): string {
     const videoMimeTypes = [
       'video/mp4',

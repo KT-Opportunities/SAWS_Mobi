@@ -207,6 +207,14 @@ const routes: Routes = [
     path: 'harmonized-grid',
     loadChildren: () => import('./Pages/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
   },
+  {
+    path: 'tsprobability',
+    loadChildren: () => import('./Pages/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
+  },
+  {
+    path: 'synoptic-analysis',
+    loadChildren: () => import('./Pages/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
+  },
 
   
  
