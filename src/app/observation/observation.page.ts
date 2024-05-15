@@ -4,10 +4,15 @@ import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DatePipe } from '@angular/common'; 
 
 
-
-
+// interface SpeciReport {
+//   date: string;
+//   time: string;
+//   content: string;
+// }
 
 @Component({
   selector: 'app-observation',
@@ -16,7 +21,11 @@ import { Observable } from 'rxjs';
 })
 
 export class ObservationPage implements OnInit {
+  
   speciReportData: any[] = [];
+  loading = false;
+  
+  currentDate: string;
   speciReports: any[] = []; // Array to hold SPECI reports fetched from the API
   isLogged: boolean = false;
   isMetar:boolean = true;
@@ -55,10 +64,12 @@ export class ObservationPage implements OnInit {
      private authService: AuthService, 
      private apiService: APIService,
      private elRef: ElementRef,
+     private spinner: NgxSpinnerService,
+     private datePipe: DatePipe
     
     
  ) {
-  this.speciReports = [
+  this.speciReportData = [
     {
       date: '2024-05-14',
       time: '13:15:45',
@@ -66,7 +77,16 @@ export class ObservationPage implements OnInit {
     },
     // Add more sample SPECI reports as needed
   ];
- }
+  // Format current date using DatePipe
+  this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd') || ''; // 'yyyy-MM-dd' is the desired format
+}
+getCurrentDateTime(): string {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+  const formattedTime = currentDate.toTimeString().slice(0, 8); // Format: HH:MM:SS
+  return formattedDate + ' ' + formattedTime;
+}
+
  highlightKeywords(content: string): string {
   // Define your keywords and corresponding CSS classes
   const keywords = ['PROB30', 'TSRA', 'CB'];
@@ -81,19 +101,32 @@ export class ObservationPage implements OnInit {
   return content;
 }
   ngOnInit() {
-    this.fetchSpeciReport();
+    // this.fetchSpeciReport();
+
   }
-  fetchSpeciReport() {
-    this.apiService.getSpeciReport().subscribe(
-      (data) => {
-        console.log('Speci report data:', data);
-        this.speciReportData = data; // Assign fetched data to the component property
-      },
-      (error) => {
-        console.error('Error fetching speci report:', error);
-      }
-    );
-  }
+
+ fetchSpeciReport() {
+  // Show loading indicator before making the API call
+  this.loading = true;
+  this.spinner.show();
+
+  this.apiService.getSpeciReport().subscribe(
+    (data) => {
+      console.log('Speci report data:', data);
+      this.speciReportData = data;
+      // Hide loading indicator after fetching data
+      this.loading = false;
+      this.spinner.hide();
+    },
+    (error) => {
+      console.error('Error fetching speci report:', error);
+      // Hide loading indicator in case of error
+      this.loading = false;
+      this.spinner.hide();
+    }
+  );
+}
+
   
   
   get isLoggedIn(): boolean {
@@ -110,7 +143,8 @@ export class ObservationPage implements OnInit {
   }
   speci () {
     this.isMetar = false;
-    this.isSpeci = true
+    this.isSpeci = true;
+    this.fetchSpeciReport();
   }
   weathermap () {
     this.isMetar = false;

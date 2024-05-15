@@ -1939,6 +1939,20 @@
   border-radius: 10px;
   padding: 10px 43px 10px 5px;
 }
+.ObservScrol {
+  /* Set the width of the container as needed */
+  width: 341px;/* Example width */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.vertical-scroll-container {
+  /* Set the height of the container as needed */
+  height: 400px; /* Example height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Additional styling for child elements if needed */
+
 
 .grid-35 {
   grid-template-rows: auto;
@@ -3674,6 +3688,8 @@
   .search {
     width: 86vw;
     align-items: flex-start;
+    position: relative;
+  top: -8px;
   }
 
   .search-button {

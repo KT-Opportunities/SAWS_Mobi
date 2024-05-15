@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -13,8 +13,10 @@ import { ObservationPage } from './observation.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ObservationPageRoutingModule
+    ObservationPageRoutingModule,
+    
   ],
-  declarations: [ObservationPage]
+  declarations: [ObservationPage],
+  providers: [DatePipe]
 })
 export class ObservationPageModule {}
