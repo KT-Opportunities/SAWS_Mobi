@@ -26,7 +26,8 @@ export class ObservationPage implements OnInit {
   loading = false;
   
   currentDate: string;
-  speciReports: any[] = []; // Array to hold SPECI reports fetched from the API
+  speciReports: any[] = []; 
+  recentTafs: any[] = [];
   isLogged: boolean = false;
   isMetar:boolean = true;
   isRanderImages:boolean = false;
@@ -102,8 +103,34 @@ getCurrentDateTime(): string {
 }
   ngOnInit() {
     // this.fetchSpeciReport();
+    // this.fetchRecentTafs();
 
   }
+  fetchRecentTafs(): void {
+    this.loading = true; // Set loading to true when fetching starts
+    this.spinner.show(); // Show the spinner
+  
+    const foldername = 'taffc'; // Specify the folder name
+    this.apiService.getRecentTafs(foldername).subscribe(
+      (data) => {
+        // Assign fetched data to recentTafs array
+        this.recentTafs = data;
+        // Set loading to false when fetching is complete
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      },
+      (error) => {
+        // Log error to console
+        console.error('Error fetching recent TAFs:', error);
+        // Set loading to false when an error occurs
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      }
+    );
+  }
+  
 
  fetchSpeciReport() {
   // Show loading indicator before making the API call
@@ -186,6 +213,7 @@ getCurrentDateTime(): string {
   RecentMetar(){
     this.isMetar = false;
     this.isRecentMetar = true
+    this.fetchRecentTafs()
   }
   RecentTafs() {
     this.isMetar = false;

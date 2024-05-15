@@ -239,4 +239,14 @@ export class APIService {
   getSpeciReport(): Observable<any> {
     return this.http.get<any>('http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=speci');
   }
+  // getRecentTafs(foldername: string): Observable<any> {
+  //   return this.http.get<any>(
+  //     `${environment.serverAPI}RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
+  //   );
+  // }
+  getRecentTafs(foldername: string): Observable<any> {
+    return this.http.get<any>(
+      `http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+    );
+  }
 }
