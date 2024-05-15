@@ -7,6 +7,7 @@ import { Observable, catchError, BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class APIService {
+
   User: any;
   token: any;
   private feedbackSubject = new BehaviorSubject<any | null>(null);
@@ -233,5 +234,9 @@ export class APIService {
       environment.serverAPI + 'Subscription/PostInsertSubscription',
       body
     );
+  }
+
+  getSpeciReport(): Observable<any> {
+    return this.http.get<any>('http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=speci');
   }
 }

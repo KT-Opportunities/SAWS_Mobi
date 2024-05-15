@@ -2,7 +2,8 @@ import { Component, OnInit,ElementRef,
   HostListener, } from '@angular/core';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-
+import { APIService } from 'src/app/services/apis.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -15,7 +16,8 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class ObservationPage implements OnInit {
-
+  speciReportData: any[] = [];
+  speciReports: any[] = []; // Array to hold SPECI reports fetched from the API
   isLogged: boolean = false;
   isMetar:boolean = true;
   isRanderImages:boolean = false;
@@ -35,11 +37,12 @@ export class ObservationPage implements OnInit {
   isDropdownOpen6: boolean = false;
   isDropdownOpen7: boolean = false;
   isDropdownOpen8: boolean = false;
+  isDropdownOpen11: boolean = false;
   isDropdownOpen: boolean = false;
   selectedOption1: string = 'Animation Type';
   selectedOption2: string = '2024-03-20 13:15';
   selectedOption3: string = 'FAVV';
-  selectedOption: string = 'Select Plot meteogram';
+  selectedOption11: string = 'Select Plot meteogram';
   selectedOption5: string = 'Select saved Template';
   selectedOption6: string = 'Last Hour';
   selectedOption7: string = '5 Min';
@@ -50,11 +53,48 @@ export class ObservationPage implements OnInit {
   constructor(
     private router: Router,
      private authService: AuthService, 
+     private apiService: APIService,
      private elRef: ElementRef,
     
     
- ) {}
-  ngOnInit() {}
+ ) {
+  this.speciReports = [
+    {
+      date: '2024-05-14',
+      time: '13:15:45',
+      content: 'SPECI report content goes here with PROB30 TSRA CB keywords.',
+    },
+    // Add more sample SPECI reports as needed
+  ];
+ }
+ highlightKeywords(content: string): string {
+  // Define your keywords and corresponding CSS classes
+  const keywords = ['PROB30', 'TSRA', 'CB'];
+  const cssClass = 'highlight'; // Define your CSS class for highlighting
+
+  // Replace each keyword with a span element having the highlight CSS class
+  keywords.forEach(keyword => {
+    const regex = new RegExp(keyword, 'g');
+    content = content.replace(regex, `<span class="${cssClass}">${keyword}</span>`);
+  });
+
+  return content;
+}
+  ngOnInit() {
+    this.fetchSpeciReport();
+  }
+  fetchSpeciReport() {
+    this.apiService.getSpeciReport().subscribe(
+      (data) => {
+        console.log('Speci report data:', data);
+        this.speciReportData = data; // Assign fetched data to the component property
+      },
+      (error) => {
+        console.error('Error fetching speci report:', error);
+      }
+    );
+  }
+  
   
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -157,6 +197,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen2 = false;
       this.isDropdownOpen3 = false;
       this.isDropdownOpen4 = false;
+      this.isDropdownOpen11 = false;
     
     }
     if (dropdown === 'dropdown6') {
@@ -177,17 +218,17 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen5 = false;
       this.isDropdownOpen6 = false;
     }
-    if (dropdown === 'dropdown') {
-      this.isDropdownOpen = !this.isDropdownOpen;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
+    // if (dropdown === 'dropdown') {
+    //   this.isDropdownOpen11 = !this.isDropdownOpen11;
+    //   this.isDropdownOpen1 = false;
+    //   this.isDropdownOpen2 = false;
+    //   this.isDropdownOpen3 = false;
+    //   this.isDropdownOpen4 = false;
+    //   this.isDropdownOpen5 = false;
     
-    }
-    if (dropdown === 'dropdown8') {
-      this.isDropdownOpen = !this.isDropdownOpen;
+    // }
+    if (dropdown === 'dropdown11') {
+      this.isDropdownOpen11 = !this.isDropdownOpen11;
       this.isDropdownOpen1 = false;
       this.isDropdownOpen2 = false;
       this.isDropdownOpen3 = false;
@@ -210,8 +251,13 @@ export class ObservationPage implements OnInit {
       this.selectedOption3 = option;
       this.isDropdownOpen2 = false;
     }
+    if (dropdown === 'dropdown11') {
+      this.selectedOption11 = option;
+      this.isDropdownOpen5 = false;
+    }
     
   }
+  
 
   sateliteDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
@@ -230,6 +276,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen5 = !this.isDropdownOpen5;
       this.isDropdownOpen6 = false;
       this.isDropdownOpen7 = false;
+      this.isDropdownOpen11 = false;
     
     }
     if (dropdown === 'dropdown6') {
@@ -243,6 +290,10 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen6 = false;
       this.isDropdownOpen5 = false;
     
+    }
+    if (dropdown === 'dropdown11') {
+      this.isDropdownOpen11 = !this.isDropdownOpen11;
+      this.isDropdownOpen5 = false;
     }
 }
   closeAllDropdowns() {

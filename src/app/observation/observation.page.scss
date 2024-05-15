@@ -2493,6 +2493,10 @@
   align-items: center;
   display: flex;
 }
+.highlight {
+  color: red; /* Change color based on your requirement */
+  font-weight: bold;
+}
 
 .slider-2 {
   width: 88vw;
@@ -3368,10 +3372,11 @@
   }
 
   .table-row.head.hide {
-    width: 740px;
+    width: 794px;
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
+    margin-left: -58px;
   }
 
   .table-data-wrapper {
