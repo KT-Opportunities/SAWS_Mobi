@@ -615,6 +615,18 @@
   line-height: 22px;
 }
 
+.w-slider {
+  position: relative;
+  // height: 300px;
+  height: auto;
+  top: 20px;
+  text-align: center;
+  background: #dddddd;
+  clear: both;
+  margin-left: 21px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .news {
   flex-direction: column;
   justify-content: flex-start;
