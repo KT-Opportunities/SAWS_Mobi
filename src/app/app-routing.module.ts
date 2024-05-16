@@ -167,6 +167,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'aero-sport/cloud-cover',
+    loadChildren: () =>
+      import('./Pages/cloud-cover/cloud-cover.module').then(
+        (m) => m.CloudCoverModule
+      ),
+  },
+  {
     path: 'chat',
     loadChildren: () =>
       import('./chat/chat.module').then((m) => m.ChatPageModule),

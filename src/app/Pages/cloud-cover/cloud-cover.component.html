@@ -45,7 +45,7 @@
                 data-hover="false"
                 data-delay="0"
                 class="text-field-blue w-dropdown"
-                (click)="sateliteDropdownProductOpen()"
+                (click)="cloudCoverDropdownProductOpen()"
                 >
                   <div
                     class="w-dropdown-toggle"
@@ -55,34 +55,28 @@
                   </div>
 
                   <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
-                    <div
-                      
+                    <div 
                       class="w-dropdown-link"
-                      (click)="selectDropdownProduct('IR108_RSA', 'dropdown1')"
-                      >IR108_RSA</div
+                      (click)="selectDropdownProduct('Total cloud', 'dropdown1')"
+                      >Total cloud</div
                     >
+
                     <div
-                        
-                    class="w-dropdown-link"
-                    (click)="selectDropdownProduct('IR108_GLOBE', 'dropdown2')"
-                    >IR108_GLOBE</div
-                  >
-                  <div
-                    
-                    class="w-dropdown-link"
-                    (click)="selectDropdownProduct('FOG A', 'dropdown3')"
-                    >FOG A</div
-                  >
+                      class="w-dropdown-link"
+                      (click)="selectDropdownProduct('Low level', 'dropdown3')"
+                      >Low level</div
+                    >
+
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectDropdownProduct('Medium level', 'dropdown2')"
+                      >Medium level</div
+                    >
+
                     <div                      
                         class="w-dropdown-link"
-                        (click)="selectDropdownProduct('Day Natural Colours', 'dropdown4')"
-                        >Day Natural Colours</div
-                      >
-
-                      <div                      
-                        class="w-dropdown-link"
-                        (click)="selectDropdownProduct('ColorGlobe', 'dropdown5')"
-                        >ColorGlobe</div
+                        (click)="selectDropdownProduct('High level', 'dropdown4')"
+                          >High level</div
                       >
                     </nav>
               </div>
@@ -110,7 +104,7 @@
                   data-hover="false"
                   data-delay="0"
                   class="text-field-blue w-dropdown"
-                  (click)="sateliteDropdownFrameOpen()"
+                  (click)="cloudCoverDropdownFrameOpen()"
                 >
                   <div class="w-dropdown-toggle">
                     <div class="icon-2 w-icon-dropdown-toggle" id="icon2"  >
@@ -196,36 +190,36 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
- <div class="" 
-    >
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
-
-      <div class="footerdiv" id="footerdivid1" >
-        <div    
-        (click)=" observationPageNavigation()" 
-        class="link-block-5 w-inline-block"
-          >
-          <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-          <h6 
-            class="heading-10-copy"
-            id="styleh6"
-            style="color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 4px;">
-            Observation
-          </h6>
-          </div
-        >
-      </div>
-    </div>
-</ion-footer>
+  <div class="" 
+     >
+       <img
+         src="../../assets/Path-3447.svg"
+         loading="lazy"
+         width="1216"
+         alt=""
+         class="image"
+       />
+ 
+       <div class="footerdiv" id="footerdivid1" >
+         <div    
+         (click)=" aeroSportPageNavigation()" 
+         class="link-block-5 w-inline-block"
+           >
+           <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+           <h6 
+             class="heading-10-copy"
+             id="styleh6"
+             style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+             Aerosport
+           </h6>
+           </div
+         >
+       </div>
+     </div>
+ </ion-footer>
