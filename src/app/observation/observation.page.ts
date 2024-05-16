@@ -104,8 +104,8 @@ getCurrentDateTime(): string {
   ngOnInit() {
     // this.fetchSpeciReport();
     // this.fetchRecentTafs();
-
   }
+
   fetchRecentTafs(): void {
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner

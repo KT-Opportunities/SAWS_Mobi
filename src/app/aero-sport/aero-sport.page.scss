@@ -8931,7 +8931,8 @@ textarea.w-select {
 
 .w-slider {
   position: relative;
-  height: 300px;
+  // height: 300px;
+  height: auto;
   text-align: center;
   background: #dddddd;
   clear: both;
@@ -8939,6 +8940,8 @@ textarea.w-select {
   tap-highlight-color: rgba(0, 0, 0, 0);
   margin-left: 8px;
 }
+
+
 .w-slider-mask {
   position: relative;
   display: block;
@@ -9812,14 +9815,17 @@ textarea.w-select {
 .w--tab-active {
   display: block;
 }
+
 @media screen and (max-width: 479px) {
   .w-tab-link {
     display: block;
   }
 }
+
 .w-ix-emptyfix:after {
   content: "";
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

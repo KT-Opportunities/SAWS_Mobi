@@ -1,13 +1,13 @@
 <ion-content>
-  <div *ngIf="loading == true" class="loading-indicator">
-    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  <div *ngIf="loading === true" class="loading-indicator">
+    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
   </div>
   <section class="list-page">
     <!-- Login required services: -->
     <div *ngIf="isMetar">   <div
       class=""
       [ngClass]="{'applied-styles': !isLoggedIn}"
-      *ngIf="isLoggedIn==true"
+      *ngIf="isLoggedIn===true"
     >
       <h1
         class="heading-6"
@@ -97,7 +97,7 @@
     </div></div>
  
 
-    <div class="list-div" *ngIf="isLoggedIn==false">
+    <div class="list-div" *ngIf="isLoggedIn===false">
       <h1 class="heading-6">Observation</h1>
       <div class="w-layout-grid grid-list">
         <div 
