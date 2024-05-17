@@ -256,7 +256,7 @@
 
 .w-checkbox-input--inputType-custom.w--redirected-checked {
   background-color: #3898ec;
-  background-image: url("../../assets/Profile-p-2000.jpg");
+  background-image: url("../../../assets/Profile-p-2000.jpg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -315,7 +315,7 @@
 }
 
 .div-block-2 {
-  background-image: url("../../assets/Path-3452.svg");
+  background-image: url("../../../assets/Path-3452.svg");
   background-position: 50%;
   background-size: cover;
 }
@@ -975,14 +975,14 @@
 
 .top-nav-div {
   height: 151px;
-  background-image: url("../../assets/Path-3457.svg");
+  background-image: url("../../../assets/Path-3457.svg");
   background-position: 50%;
   background-size: cover;
 }
 
 .bottom-nav-div {
   height: 25vh;
-  background-image: url("../../assets/Path-3456.svg");
+  background-image: url("../../../assets/Path-3456.svg");
   background-position: 50%;
   background-size: cover;
   justify-content: center;
@@ -1200,7 +1200,7 @@
 
 .search-button {
   background-color: #00386c;
-  background-image: url("../../assets/Icon-awesome-search.svg");
+  background-image: url("../../../assets/Icon-awesome-search.svg");
   background-position: 0%;
   background-repeat: repeat-y;
   background-size: 0;
@@ -1319,7 +1319,7 @@
       rgba(255, 255, 255, 0.98),
       rgba(255, 255, 255, 0.98)
     ),
-    url("../../assets/Mask-Group-33x.png");
+    url("../../../assets/Mask-Group-33x.png");
   background-position: 0 0, 50% 0;
   background-size: auto, cover;
   border-bottom: 1.5px solid #000;
@@ -2603,7 +2603,7 @@
 }
 
 .div-block-2 {
-  background-image: url("../../assets/Path-3452.svg");
+  background-image: url("../../../assets/Path-3452.svg");
   background-position: 50%;
   background-size: cover;
 }
@@ -3267,14 +3267,14 @@
 
 .top-nav-div {
   height: 151px;
-  background-image: url("../../assets/Path-3457.svg");
+  background-image: url("../../../assets/Path-3457.svg");
   background-position: 50%;
   background-size: cover;
 }
 
 .bottom-nav-div {
   height: 25vh;
-  background-image: url("../../assets/Path-3456.svg");
+  background-image: url("../../../assets/Path-3456.svg");
   background-position: 50%;
   background-size: cover;
   justify-content: center;
@@ -3478,7 +3478,7 @@
 
 .search-button {
   background-color: #00386c;
-  background-image: url("../../assets/Icon-awesome-search.svg");
+  background-image: url("../../../assets/Icon-awesome-search.svg");
   background-position: 0%;
   background-repeat: repeat-y;
   background-size: 0;
@@ -3597,7 +3597,7 @@
       rgba(255, 255, 255, 0.98),
       rgba(255, 255, 255, 0.98)
     ),
-    url("../../assets/Mask-Group-33x.png");
+    url("../../../assets/Mask-Group-33x.png");
   background-position: 0 0, 50% 0;
   background-size: auto, cover;
   border-bottom: 1.5px solid #000;
@@ -4908,7 +4908,7 @@
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url("../../assets/Group-3553.png");
+    url("../../../assets/Group-3553.png");
   background-position: 0 0, 50%;
   background-size: auto, cover;
   font-family: Montserrat, sans-serif;
@@ -5486,10 +5486,10 @@
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
-   * 1. Set default font family to sans-serif.
-   * 2. Prevent iOS and IE text size adjust after device orientation change,
-   *    without disabling user zoom.
-   */
+     * 1. Set default font family to sans-serif.
+     * 2. Prevent iOS and IE text size adjust after device orientation change,
+     *    without disabling user zoom.
+     */
 html {
   font-family: sans-serif;
   /* 1 */
@@ -5499,19 +5499,19 @@ html {
   /* 2 */
 }
 /**
-     * Remove default margin.
-     */
+       * Remove default margin.
+       */
 body {
   margin: 0;
 }
 /* HTML5 display definitions
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Correct `block` display not defined for any HTML5 element in IE 8/9.
-     * Correct `block` display not defined for `details` or `summary` in IE 10/11
-     * and Firefox.
-     * Correct `block` display not defined for `main` in IE 11.
-     */
+       * Correct `block` display not defined for any HTML5 element in IE 8/9.
+       * Correct `block` display not defined for `details` or `summary` in IE 10/11
+       * and Firefox.
+       * Correct `block` display not defined for `main` in IE 11.
+       */
 article,
 aside,
 details,
@@ -5528,9 +5528,9 @@ summary {
   display: block;
 }
 /**
-     * 1. Correct `inline-block` display not defined in IE 8/9.
-     * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
-     */
+       * 1. Correct `inline-block` display not defined in IE 8/9.
+       * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+       */
 audio,
 canvas,
 progress,
@@ -5541,82 +5541,82 @@ video {
   /* 2 */
 }
 /**
-     * Prevent modern browsers from displaying `audio` without controls.
-     * Remove excess height in iOS 5 devices.
-     */
+       * Prevent modern browsers from displaying `audio` without controls.
+       * Remove excess height in iOS 5 devices.
+       */
 audio:not([controls]) {
   display: none;
   height: 0;
 }
 /**
-     * Address `[hidden]` styling not present in IE 8/9/10.
-     * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
-     */
+       * Address `[hidden]` styling not present in IE 8/9/10.
+       * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+       */
 [hidden],
 template {
   display: none;
 }
 /* Links
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Remove the gray background color from active links in IE 10.
-     */
+       * Remove the gray background color from active links in IE 10.
+       */
 a {
   background-color: transparent;
 }
 /**
-     * Improve readability of focused elements when they are also in an
-     * active/hover state.
-     */
+       * Improve readability of focused elements when they are also in an
+       * active/hover state.
+       */
 a:active,
 a:hover {
   outline: 0;
 }
 /* Text-level semantics
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
-     */
+       * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+       */
 abbr[title] {
   border-bottom: 1px dotted;
 }
 /**
-     * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
-     */
+       * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+       */
 b,
 strong {
   font-weight: bold;
 }
 /**
-     * Address styling not present in Safari and Chrome.
-     */
+       * Address styling not present in Safari and Chrome.
+       */
 dfn {
   font-style: italic;
 }
 /**
-     * Address variable `h1` font-size and margin within `section` and `article`
-     * contexts in Firefox 4+, Safari, and Chrome.
-     */
+       * Address variable `h1` font-size and margin within `section` and `article`
+       * contexts in Firefox 4+, Safari, and Chrome.
+       */
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
 /**
-     * Address styling not present in IE 8/9.
-     */
+       * Address styling not present in IE 8/9.
+       */
 mark {
   background: #ff0;
   color: #000;
 }
 /**
-     * Address inconsistent and variable font size in all browsers.
-     */
+       * Address inconsistent and variable font size in all browsers.
+       */
 small {
   font-size: 80%;
 }
 /**
-     * Prevent `sub` and `sup` affecting `line-height` in all browsers.
-     */
+       * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+       */
 sub,
 sup {
   font-size: 75%;
@@ -5631,43 +5631,43 @@ sub {
   bottom: -0.25em;
 }
 /* Embedded content
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Remove border when inside `a` element in IE 8/9/10.
-     */
+       * Remove border when inside `a` element in IE 8/9/10.
+       */
 img {
   border: 0;
 }
 /**
-     * Correct overflow not hidden in IE 9/10/11.
-     */
+       * Correct overflow not hidden in IE 9/10/11.
+       */
 svg:not(:root) {
   overflow: hidden;
 }
 /* Grouping content
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Address margin not present in IE 8/9 and Safari.
-     */
+       * Address margin not present in IE 8/9 and Safari.
+       */
 figure {
   margin: 1em 40px;
 }
 /**
-     * Address differences between Firefox and other browsers.
-     */
+       * Address differences between Firefox and other browsers.
+       */
 hr {
   box-sizing: content-box;
   height: 0;
 }
 /**
-     * Contain overflow in all browsers.
-     */
+       * Contain overflow in all browsers.
+       */
 pre {
   overflow: auto;
 }
 /**
-     * Address odd `em`-unit font size rendering in all browsers.
-     */
+       * Address odd `em`-unit font size rendering in all browsers.
+       */
 code,
 kbd,
 pre,
@@ -5676,17 +5676,17 @@ samp {
   font-size: 1em;
 }
 /* Forms
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Known limitation: by default, Chrome and Safari on OS X allow very limited
-     * styling of `select`, unless a `border` property is set.
-     */
+       * Known limitation: by default, Chrome and Safari on OS X allow very limited
+       * styling of `select`, unless a `border` property is set.
+       */
 /**
-     * 1. Correct color not being inherited.
-     *    Known issue: affects color of disabled elements.
-     * 2. Correct font properties not being inherited.
-     * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
-     */
+       * 1. Correct color not being inherited.
+       *    Known issue: affects color of disabled elements.
+       * 2. Correct font properties not being inherited.
+       * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+       */
 button,
 input,
 optgroup,
@@ -5700,30 +5700,30 @@ textarea {
   /* 3 */
 }
 /**
-     * Address `overflow` set to `hidden` in IE 8/9/10/11.
-     */
+       * Address `overflow` set to `hidden` in IE 8/9/10/11.
+       */
 button {
   overflow: visible;
 }
 /**
-     * Address inconsistent `text-transform` inheritance for `button` and `select`.
-     * All other form control elements do not inherit `text-transform` values.
-     * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
-     * Correct `select` style inheritance in Firefox.
-     */
+       * Address inconsistent `text-transform` inheritance for `button` and `select`.
+       * All other form control elements do not inherit `text-transform` values.
+       * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+       * Correct `select` style inheritance in Firefox.
+       */
 button,
 select {
   text-transform: none;
 }
 /**
-     * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
-     *    and `video` controls.
-     * 2. Correct inability to style clickable `input` types in iOS.
-     * 3. Improve usability and consistency of cursor style between image-type
-     *    `input` and others.
-     * 4. CUSTOM FOR WEBFLOW: Removed the input[type="submit"] selector to reduce
-     *    specificity and defer to the .w-button selector
-     */
+       * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+       *    and `video` controls.
+       * 2. Correct inability to style clickable `input` types in iOS.
+       * 3. Improve usability and consistency of cursor style between image-type
+       *    `input` and others.
+       * 4. CUSTOM FOR WEBFLOW: Removed the input[type="submit"] selector to reduce
+       *    specificity and defer to the .w-button selector
+       */
 button,
 html input[type="button"],
 input[type="reset"] {
@@ -5733,34 +5733,34 @@ input[type="reset"] {
   /* 3 */
 }
 /**
-     * Re-set default cursor for disabled elements.
-     */
+       * Re-set default cursor for disabled elements.
+       */
 button[disabled],
 html input[disabled] {
   cursor: default;
 }
 /**
-     * Remove inner padding and border in Firefox 4+.
-     */
+       * Remove inner padding and border in Firefox 4+.
+       */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 /**
-     * Address Firefox 4+ setting `line-height` on `input` using `!important` in
-     * the UA stylesheet.
-     */
+       * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+       * the UA stylesheet.
+       */
 input {
   line-height: normal;
 }
 /**
-     * It's recommended that you don't attempt to style these elements.
-     * Firefox's implementation doesn't respect box-sizing, padding, or width.
-     *
-     * 1. Address box sizing set to `content-box` in IE 8/9/10.
-     * 2. Remove excess padding in IE 8/9/10.
-     */
+       * It's recommended that you don't attempt to style these elements.
+       * Firefox's implementation doesn't respect box-sizing, padding, or width.
+       *
+       * 1. Address box sizing set to `content-box` in IE 8/9/10.
+       * 2. Remove excess padding in IE 8/9/10.
+       */
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -5769,44 +5769,44 @@ input[type="radio"] {
   /* 2 */
 }
 /**
-     * Fix the cursor style for Chrome's increment/decrement buttons. For certain
-     * `font-size` values of the `input`, it causes the cursor style of the
-     * decrement button to change from `default` to `text`.
-     */
+       * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+       * `font-size` values of the `input`, it causes the cursor style of the
+       * decrement button to change from `default` to `text`.
+       */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
 /**
-     * 1. CUSTOM FOR WEBFLOW: changed from `textfield` to `none` to normalize iOS rounded input
-     * 2. CUSTOM FOR WEBFLOW: box-sizing: content-box rule removed
-     *    (similar to normalize.css >=4.0.0)
-     */
+       * 1. CUSTOM FOR WEBFLOW: changed from `textfield` to `none` to normalize iOS rounded input
+       * 2. CUSTOM FOR WEBFLOW: box-sizing: content-box rule removed
+       *    (similar to normalize.css >=4.0.0)
+       */
 input[type="search"] {
   -webkit-appearance: none;
   /* 1 */
 }
 /**
-     * Remove inner padding and search cancel button in Safari and Chrome on OS X.
-     * Safari (but not Chrome) clips the cancel button when the search input has
-     * padding (and `textfield` appearance).
-     */
+       * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+       * Safari (but not Chrome) clips the cancel button when the search input has
+       * padding (and `textfield` appearance).
+       */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /**
-     * Define consistent border, margin, and padding.
-     */
+       * Define consistent border, margin, and padding.
+       */
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
 /**
-     * 1. Correct `color` not being inherited in IE 8/9/10/11.
-     * 2. Remove padding so people aren't caught out if they zero out fieldsets.
-     */
+       * 1. Correct `color` not being inherited in IE 8/9/10/11.
+       * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+       */
 legend {
   border: 0;
   /* 1 */
@@ -5814,23 +5814,23 @@ legend {
   /* 2 */
 }
 /**
-     * Remove default vertical scrollbar in IE 8/9/10/11.
-     */
+       * Remove default vertical scrollbar in IE 8/9/10/11.
+       */
 textarea {
   overflow: auto;
 }
 /**
-     * Don't inherit the `font-weight` (applied by a rule above).
-     * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
-     */
+       * Don't inherit the `font-weight` (applied by a rule above).
+       * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+       */
 optgroup {
   font-weight: bold;
 }
 /* Tables
-       ========================================================================== */
+         ========================================================================== */
 /**
-     * Remove most spacing between table cells.
-     */
+       * Remove most spacing between table cells.
+       */
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -6419,7 +6419,7 @@ th {
 
   .ob-metar-history,
   .subscription-p {
-    margin-top: 127px !important;
+    margin-top: 220px !important;
     position: static;
     top: 0%;
     bottom: 0%;
@@ -9166,19 +9166,19 @@ textarea.w-select {
   }
 }
 /**
-     * ## Note
-     * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
-     * For example percentage units do not work on descendants of elements that
-     * have any dimensions expressed in viewport units. It also doesn’t handle them at
-     * all in `calc()`.
-     */
+       * ## Note
+       * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
+       * For example percentage units do not work on descendants of elements that
+       * have any dimensions expressed in viewport units. It also doesn’t handle them at
+       * all in `calc()`.
+       */
 /**
-     * Wrapper around all lightbox elements
-     *
-     * 1. Since the lightbox can receive focus, IE also gives it an outline.
-     * 2. Fixes flickering on Chrome when a transition is in progress
-     *    underneath the lightbox.
-     */
+       * Wrapper around all lightbox elements
+       *
+       * 1. Since the lightbox can receive focus, IE also gives it an outline.
+       * 2. Fixes flickering on Chrome when a transition is in progress
+       *    underneath the lightbox.
+       */
 .w-lightbox-backdrop {
   cursor: auto;
   font-style: normal;
@@ -9216,9 +9216,9 @@ textarea.w-select {
   /* 2 */
 }
 /**
-     * Neat trick to bind the rubberband effect to our canvas instead of the whole
-     * document on iOS. It also prevents a bug that causes the document underneath to scroll.
-     */
+       * Neat trick to bind the rubberband effect to our canvas instead of the whole
+       * document on iOS. It also prevents a bug that causes the document underneath to scroll.
+       */
 .w-lightbox-backdrop,
 .w-lightbox-container {
   height: 100%;
@@ -9252,8 +9252,8 @@ textarea.w-select {
   vertical-align: middle;
 }
 /*
-     * 1. Remove default margin set by user-agent on the <figure> element.
-     */
+       * 1. Remove default margin set by user-agent on the <figure> element.
+       */
 .w-lightbox-figure {
   position: relative;
   margin: 0;
@@ -9263,17 +9263,17 @@ textarea.w-select {
   cursor: pointer;
 }
 /**
-     * IE adds image dimensions as width and height attributes on the IMG tag,
-     * but we need both width and height to be set to auto to enable scaling.
-     */
+       * IE adds image dimensions as width and height attributes on the IMG tag,
+       * but we need both width and height to be set to auto to enable scaling.
+       */
 .w-lightbox-img {
   width: auto;
   height: auto;
   max-width: none;
 }
 /**
-     * 1. Reset if style is set by user on "All Images"
-     */
+       * 1. Reset if style is set by user on "All Images"
+       */
 .w-lightbox-image {
   display: block;
   float: none;
@@ -9331,10 +9331,10 @@ textarea.w-select {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii00IDAgMjQgNDAiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0MCI+PGcgdHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJtMC0waDI4djI4aC01di0yM2gtMjN6IiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Im0xIDFoMjZ2MjZoLTN2LTIzaC0yM3oiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+");
 }
 /*
-     * Without specifying the with and height inside the SVG, all versions of IE render the icon too small.
-     * The bug does not seem to manifest itself if the elements are tall enough such as the above arrows.
-     * (http://stackoverflow.com/questions/16092114/background-size-differs-in-internet-explorer)
-     */
+       * Without specifying the with and height inside the SVG, all versions of IE render the icon too small.
+       * The bug does not seem to manifest itself if the elements are tall enough such as the above arrows.
+       * (http://stackoverflow.com/questions/16092114/background-size-differs-in-internet-explorer)
+       */
 .w-lightbox-close {
   right: 0;
   height: 2.6em;
@@ -9343,8 +9343,8 @@ textarea.w-select {
   background-size: 18px;
 }
 /**
-     * 1. All IE versions add extra space at the bottom without this.
-     */
+       * 1. All IE versions add extra space at the bottom without this.
+       */
 .w-lightbox-strip {
   position: absolute;
   bottom: 0;
@@ -9358,12 +9358,12 @@ textarea.w-select {
   overflow-y: hidden;
 }
 /*
-     * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
-     *    which doesn’t work in Safari anyway.
-     * 2. Chrome renders images pixelated when switching to GPU. Making sure
-     *    the parent is also rendered on the GPU (by setting translate3d for
-     *    example) fixes this behavior.
-     */
+       * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
+       *    which doesn’t work in Safari anyway.
+       * 2. Chrome renders images pixelated when switching to GPU. Making sure
+       *    the parent is also rendered on the GPU (by setting translate3d for
+       *    example) fixes this behavior.
+       */
 .w-lightbox-item {
   display: inline-block;
   width: 10vh;
@@ -9401,11 +9401,11 @@ textarea.w-select {
   transform: translate(-50%, 0);
 }
 /*
-     * Spinner
-     *
-     * Absolute pixel values are used to avoid rounding errors that would cause
-     * the white spinning element to be misaligned with the track.
-     */
+       * Spinner
+       *
+       * Absolute pixel values are used to avoid rounding errors that would cause
+       * the white spinning element to be misaligned with the track.
+       */
 .w-lightbox-spinner {
   position: absolute;
   top: 50%;
@@ -9432,8 +9432,8 @@ textarea.w-select {
   border-radius: 50%;
 }
 /*
-     * Utility classes
-     */
+       * Utility classes
+       */
 .w-lightbox-hide {
   display: none;
 }
@@ -9589,8 +9589,8 @@ textarea.w-select {
 .w-richtext figure.w-richtext-align-fullwidth > div {
   display: inline-block;
   /* padding-bottom is used for aspect ratios in video figures
-          we want the div to inherit that so hover/selection borders in the designer-canvas
-          fit right*/
+            we want the div to inherit that so hover/selection borders in the designer-canvas
+            fit right*/
   padding-bottom: inherit;
 }
 .w-richtext figure.w-richtext-align-fullwidth > figcaption {
@@ -12816,7 +12816,7 @@ textarea.w-select {
   }
 
   .bottomdiv {
-    margin-top: 70px;
+    margin-top: 58px;
     margin-bottom: 0;
   }
 
@@ -13756,7 +13756,6 @@ textarea.w-select {
     padding-top: 62px;
   }
   .prev {
-   
     color: #fff;
   }
   .icon-5 {

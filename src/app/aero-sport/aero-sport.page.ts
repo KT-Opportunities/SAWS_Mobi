@@ -44,6 +44,7 @@ export class AeroSportPage implements OnInit {
   noHyphenAfterXL: any[] = [];
   has3AfterXL: any[] = [];
   remainingItems: any[] = [];
+  XL2Files: any[] = [];
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
 
@@ -72,34 +73,46 @@ export class AeroSportPage implements OnInit {
     }
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
+        this.TsProbability = data.filter(
+          (item: any) =>
+            item.filename === 'tsprob_d1.gif' ||
+            item.filename === 'tsprob_d2.gif'
+        );
         try {
           console.log('BEFORE FILTER:', data);
           data.forEach((item: any) => {
             if (item.filename.startsWith('xlFA')) {
               this.xlFAItems.push(item);
-            } else if (item.filename.indexOf('-') === -1) {
+            } else if (
+              item.filename.startsWith('xl') ||
+              (item.filename.startsWith('xl-2') &&
+                item.filename.endsWith('_spot_d1.gif') &&
+                !item.filename.startsWith('xl-3')) ||
+              !item.filename.endsWith('_spot_d2.gif')
+            ) {
               this.noHyphenAfterXL.push(item);
-            } else {
-              const index = item.filename.indexOf('xl') + 2;
-              const afterXL = item.filename.substring(index);
-              if (afterXL === '3') {
-                this.has3AfterXL.push(item);
-              } else {
-                this.remainingItems.push(item);
+            }
+          });
+          const uniqueFilenames = new Set<string>();
+
+          data.forEach((item: any) => {
+            if (
+              item.filename.startsWith('xlFA') &&
+              item.filename.endsWith('_spot_d1.gif')
+            ) {
+              const baseFilename = item.filename.split('_spot_d1.gif')[0];
+              if (!uniqueFilenames.has(baseFilename)) {
+                uniqueFilenames.add(baseFilename);
+                this.XL2Files.push(item);
               }
             }
           });
 
-          console.log('xlFA Items:', this.xlFAItems);
+          console.log('xlFA Items:', this.XL2Files);
           console.log('No Hyphen After xl:', this.noHyphenAfterXL);
           console.log('Has 3 After xl:', this.has3AfterXL);
           console.log('Remaining Items:', this.remainingItems);
-
-          this.TsProbability = data.filter(
-            (item: any) =>
-              item.filename === 'tsprob_d1.gif' ||
-              item.filename === 'tsprob_d2.gif'
-          );
+          console.log('XL-2 Files:', this.XL2Files);
 
           console.log('DATA2:', this.TsProbability);
 
@@ -231,6 +244,7 @@ export class AeroSportPage implements OnInit {
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.isLoading = true;
 
     this.TsProbability[0];
     console.log('ARRAY AT 0:', this.TsProbability[0]);
@@ -244,7 +258,7 @@ export class AeroSportPage implements OnInit {
           'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
         this.fileBaseUrlPrevious =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
-
+        this.isLoading = false;
         console.log('back to image:', this.fileBaseUrlPrevious);
       },
       (error) => {
@@ -393,5 +407,15 @@ export class AeroSportPage implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+  ImageViewer(imageName: any) {
+    this.router.navigate(['/aero-image-viewer'], {
+      state: { names: imageName },
+    });
+  }
+  ImageViewer2(imageName: any) {
+    this.router.navigate(['/aero-image-viewer'], {
+      state: { names2: imageName },
+    });
   }
 }

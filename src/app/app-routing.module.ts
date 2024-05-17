@@ -215,6 +215,10 @@ const routes: Routes = [
     path: 'synoptic-analysis',
     loadChildren: () => import('./Pages/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
   },
+  {
+    path: 'aero-image-viewer',
+    loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule)
+  },
 
   
  
