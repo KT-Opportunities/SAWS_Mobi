@@ -7,7 +7,6 @@ import { Observable, catchError, BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class APIService {
-
   User: any;
   token: any;
   private feedbackSubject = new BehaviorSubject<any | null>(null);
@@ -173,16 +172,27 @@ export class APIService {
   GetSourceAviationFolderFilesList(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=6`
+        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
-
-  GetAviationFile(imagefoldername: string, imagefilename: string): Observable<any> {
+  GetSourceAviationFolderFilesListNull(time:any) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
+    );
+  }
+  GetAviationFile(
+    imagefoldername: string,
+    imagefilename: string
+  ): Observable<any> {
     const url = `${environment.serverAPI}RawSource/GetAviationFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
     return this.http.get<any>(url);
   }
 
-  GetChartsFile(imagefoldername: string, imagefilename: string): Observable<any> {
+  GetChartsFile(
+    imagefoldername: string,
+    imagefilename: string
+  ): Observable<any> {
     const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
     return this.http.get<any>(url);
   }
@@ -237,7 +247,9 @@ export class APIService {
   }
 
   getSpeciReport(): Observable<any> {
-    return this.http.get<any>('http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=speci');
+    return this.http.get<any>(
+      'http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
+    );
   }
   // getRecentTafs(foldername: string): Observable<any> {
   //   return this.http.get<any>(

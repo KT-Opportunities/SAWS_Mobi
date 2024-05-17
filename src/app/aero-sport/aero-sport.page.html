@@ -2208,7 +2208,7 @@
               <!-- <div class="w-slide"></div> -->
 
               <img
-                [src]="fileBaseUrlPrevious"
+                [src]="fileBaseUrlSynoptic"
                 loading="lazy"
                 width="1216"
                 alt=""
@@ -3413,7 +3413,9 @@
                       class="div-block-465"
                     >
                       <h1 class="heading-25">
-                        {{ item.filename.split('_spot_d1')[0] }}
+                        {{ filenameToDisplayName[item.filename] ||
+                        extractAlphabetical(item.filename.substring(2).split('_spot_d1')[0]
+                        ) }}
                       </h1>
                     </div>
                   </div>
@@ -3631,60 +3633,60 @@
           </div>
         </div>
 
-        <div class="div-block-15">
-          <div>
-            <div class="scroll small-m">
-              <div>
-                <div
-                  data-delay="4000"
-                  data-animation="slide"
-                  class="slider-2 w-slider"
-                  data-autoplay="false"
-                  data-easing="ease"
-                  data-hide-arrows="false"
-                  data-disable-swipe="false"
-                  data-autoplay-limit="0"
-                  data-nav-spacing="3"
-                  data-duration="500"
-                  data-infinite="true"
-                >
-                  <div *ngIf="prevday">
-                    <!-- <div class="w-slide"></div> -->
+        <div class="aerosport">
+          <div class="aerosportScrol">
+            <div class="div-block-464">
+              <div class="w-slider-mask prev">
+                <!-- <div class="w-slide"></div> -->
 
-                    <img
-                      [src]="fileBaseUrlPrevious"
-                      loading="lazy"
-                      width="1216"
-                      alt=""
-                      class="image"
-                      width="100%"
-                      height="100%"
-                    />
-                    <!-- <div class="w-slide"></div> -->
-                  </div>
-                  <div *ngIf="nextday">
-                    <!-- <div class="w-slide"></div> -->
-                    <img
-                      [src]="fileBaseUrlNext"
-                      loading="lazy"
-                      width="100%"
-                      height="100%"
-                      alt=""
-                      class="image"
-                    />
-                    <!-- <div class="w-slide"></div> -->
-                  </div>
-                  <!-- <div class="w-slider-arrow-left">
-                    <div class="w-icon-slider-left"></div>
-                  </div>
-                  <div class="w-slider-arrow-right">
-                    <div class="w-icon-slider-right"></div>
-                  </div> -->
-                  <!-- <div class="w-slider-nav w-round w-num"> -->
+                <div *ngIf="prevday">
+                  <!-- <div class="w-slide"></div> -->
 
-                  <!-- </div> -->
+                  <img
+                    [src]="fileBaseUrlPrevious"
+                    loading="lazy"
+                    width="1216"
+                    alt=""
+                    class="image"
+                    width="100%"
+                    height="100%"
+                  />
+                  <!-- <div class="w-slide"></div> -->
                 </div>
+                <div *ngIf="nextday">
+                  <!-- <div class="w-slide"></div> -->
+                  <img
+                    [src]="fileBaseUrlNext"
+                    loading="lazy"
+                    width="100%"
+                    height="100%"
+                    alt=""
+                    class="image"
+                  />
+                  <!-- <div class="w-slide"></div> -->
+                </div>
+                <!-- <div class="w-slide"></div> -->
               </div>
+            </div>
+          </div>
+          <div class="bottomdiv">
+            <img
+              src="images/Path-3447.svg"
+              loading="lazy"
+              width="1216"
+              alt=""
+              class="image"
+            />
+            <div class="footerdiv">
+              <a href="landing-page.html" class="link-block-5 w-inline-block"
+                ><img
+                  src="images/Group-4522.svg"
+                  loading="lazy"
+                  width="35"
+                  alt=""
+                />
+                <!-- <h6 class="heading-10">Forecast</h6> -->
+              </a>
             </div>
           </div>
         </div>
