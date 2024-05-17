@@ -24,7 +24,7 @@ export class ObservationPage implements OnInit {
   
   speciReportData: any[] = [];
   loading = false;
-  
+  metarReports: any[] = [];
   currentDate: string;
   speciReports: any[] = []; 
   recentTafs: any[] = [];
@@ -58,6 +58,7 @@ export class ObservationPage implements OnInit {
   selectedOption7: string = '5 Min';
   selectedOption8: string = '2024-03-20 13:15';
   webcamActive: boolean = false;
+  // metarReports: any;
 
   
   constructor(
@@ -105,7 +106,41 @@ getCurrentDateTime(): string {
     // this.fetchSpeciReport();
     // this.fetchRecentTafs();
   }
+  fetchMetarReports(): void {
+    this.loading = true; // Set loading to true before fetching data
+    this.spinner.show(); // Show spinner while fetching data
 
+    const foldername = 'metar';
+    this.apiService.getRecentTafs(foldername).subscribe(
+      (data) => {
+        console.log('Metar reports fetched successfully:', data);
+        this.metarReports = data;
+        this.loading = false; // Set loading to false after data is fetched
+        this.spinner.hide(); // Hide spinner after data is fetched
+      },
+      (error) => {
+        console.error('Error fetching Metar Reports:', error);
+        this.loading = false; // Set loading to false in case of error
+        this.spinner.hide(); // Hide spinner in case of error
+      }
+    );
+  }
+  // fetchMetarReports(): void {
+  //   console.log('Fetching Metar reports...');
+  //   this.spinner.show(); // Show spinner while fetching data
+  //   const foldername = 'metar';
+  //   this.apiService.getRecentTafs(foldername).subscribe(
+  //     (data) => {
+  //       console.log('Metar reports fetched successfully:', data);
+  //       this.metarReports = data; // Assign fetched data to metarReports array
+  //       this.spinner.hide(); // Hide spinner after data is fetched
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching Metar Reports:', error);
+  //       this.spinner.hide(); // Hide spinner if there's an error
+  //     }
+  //   );
+  // }
   fetchRecentTafs(): void {
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner
@@ -153,7 +188,25 @@ getCurrentDateTime(): string {
     }
   );
 }
-
+// fetchMetarReports(): void {
+//   console.log('Fetching Metar reports...');
+//   this.loading = true;
+//   this.spinner.show();
+//   const foldername = 'metar';
+//   this.apiService.getRecentTafs(foldername).subscribe(
+//     (data) => {
+//       console.log('Metar reports fetched successfully:', data);
+//       this.metarReports = data;
+//       this.loading = false;
+//       this.spinner.hide();
+//     },
+//     (error) => {
+//       console.error('Error fetching Metar Reports:', error);
+//       this.loading = false;
+//       this.spinner.hide();
+//     }
+//   );
+// }
   
   
   get isLoggedIn(): boolean {
@@ -201,6 +254,7 @@ getCurrentDateTime(): string {
   ObservMeter () {
     this.isMetar = false;
     this.isObservMeter = true
+    this.fetchMetarReports();
     this.router.navigate (['/observation'])
   }
 
