@@ -45,8 +45,21 @@ export class AeroSportPage implements OnInit {
   has3AfterXL: any[] = [];
   remainingItems: any[] = [];
   XL2Files: any[] = [];
+  Synoptic: any = [];
+  filenameToDisplayName: { [key: string]: string } = {
+    'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
+    'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
+    'xl-25.7328.18_spot_d1.gif': 'Pretoria',
+    'xl-28.40229.373_spot_d1.gif': 'Van Reenen',
+    'xl-27.99824.749_spot_d1.gif': 'Jan Kempdorp ',
+    'xl-26.3528.46_spot_d1.gif': 'Dunnottar',
+    'xl-24.3531.00_spot_d1.gif': 'Hoeadspruid',
+    'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
+    'xl-26.038827.587_spot_d1.gif': 'Orient',
+  };
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
+  fileBaseUrlSynoptic: SafeResourceUrl;
 
   constructor(
     private router: Router,
@@ -62,16 +75,22 @@ export class AeroSportPage implements OnInit {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
     this.fileBaseUrlPrevious =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlSynoptic =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
+  extractAlphabetical(filename: string): string {
+    return filename.replace(/[^a-zA-Z]/g, '');
   }
 
   ngOnInit() {
     // Check if user is logged in
     // this.isLoading = true;
+
     if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
     }
-    
+
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         this.TsProbability = data.filter(
@@ -85,13 +104,29 @@ export class AeroSportPage implements OnInit {
             if (item.filename.startsWith('xlFA')) {
               this.xlFAItems.push(item);
             } else if (
-              item.filename.startsWith('xl') ||
-              (item.filename.startsWith('xl-2') &&
-                item.filename.endsWith('_spot_d1.gif') &&
-                !item.filename.startsWith('xl-3')) ||
-              !item.filename.endsWith('_spot_d2.gif')
+              item.filename.startsWith('xl') &&
+              !item.filename.startsWith('xl-3') &&
+              !item.filename.startsWith('xlFA') &&
+              !item.filename.endsWith('_spot_d2.gif') &&
+              // Check for filenames like xlMorningside_spot_d1.gif
+              (/^[a-zA-Z]+$/.test(
+                item.filename.substring(2, item.filename.indexOf('_'))
+              ) ||
+                // Check for filenames like xl-24.2231.02_spot_d1.gif
+                (item.filename.startsWith('xl-') &&
+                  /^[\d]+\.[\d]+(\.[\d]+)*$/.test(
+                    item.filename.substring(3, item.filename.indexOf('_'))
+                  )))
             ) {
               this.noHyphenAfterXL.push(item);
+              this.noHyphenAfterXL = this.noHyphenAfterXL.filter((item) => {
+                return (
+                  this.filenameToDisplayName[item.filename] ||
+                  this.extractAlphabetical(
+                    item.filename.substring(2).split('_spot_d1')[0]
+                  )
+                );
+              });
             }
           });
           const uniqueFilenames = new Set<string>();
@@ -111,9 +146,6 @@ export class AeroSportPage implements OnInit {
 
           console.log('xlFA Items:', this.XL2Files);
           console.log('No Hyphen After xl:', this.noHyphenAfterXL);
-          console.log('Has 3 After xl:', this.has3AfterXL);
-          console.log('Remaining Items:', this.remainingItems);
-          console.log('XL-2 Files:', this.XL2Files);
 
           console.log('DATA2:', this.TsProbability);
 
@@ -122,6 +154,22 @@ export class AeroSportPage implements OnInit {
           console.log('Error parsing JSON data:', error);
           this.isLoading = false;
         }
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.isLoading = false;
+      }
+    );
+
+    this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
+      (data) => {
+        this.Synoptic = data.filter(
+          (item: any) => item.filename === 'synoptic.png'
+        );
+
+        console.log('Synoptic:', this.Synoptic);
+
+        this.isLoading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
@@ -249,20 +297,17 @@ export class AeroSportPage implements OnInit {
     this.isTSProbability = false;
     this.isLoading = true;
 
-    this.TsProbability[0];
-    console.log('ARRAY AT 0:', this.TsProbability[0]);
-    this.APIService.GetAviationFile(
-      this.TsProbability[0].foldername,
-      this.TsProbability[0].filename
-    ).subscribe(
+    this.Synoptic[0];
+    console.log('ARRAY AT 0:', this.Synoptic[0]);
+    this.APIService.GetAviationFile('', this.Synoptic[0].filename).subscribe(
       (data) => {
         console.log('IMAGE:', data);
-        const imageUrlPrevious =
+        const imageUrlSynoptic =
           'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlPrevious =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
+        this.fileBaseUrlSynoptic =
+          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
         this.isLoading = false;
-        console.log('back to image:', this.fileBaseUrlPrevious);
+        console.log('back to image:', this.fileBaseUrlSynoptic);
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
@@ -292,6 +337,7 @@ export class AeroSportPage implements OnInit {
   }
   TSProbability() {
     // this.isKwazulNatal=true;
+    debugger;
     this.nextday = false;
     this.prevday = true;
     this.TsProbability[0];
@@ -346,7 +392,7 @@ export class AeroSportPage implements OnInit {
     // this.isFormVisible3 = false;
     // this.isSpotGfraph = false;
 
-    this.router.navigate (['/aero-sport/cloud-cover'])
+    this.router.navigate(['/aero-sport/cloud-cover']);
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {

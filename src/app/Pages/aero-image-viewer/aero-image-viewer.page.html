@@ -6,7 +6,7 @@
 
   <section class="ob-metar-history">
     <div class="cloud-cover">
-      <h1 class="heading6">{{name}}</h1>
+      <h1 class="heading6">{{name|| (anotherName.startsWith('xl') ? anotherName.substring(2) : anotherName)}}</h1>
       <div class="w-layout-grid metar-history-grid">
         <div class="date-container">
           <button
@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="position: relative">
+    <div class="bottomdiv" style="position: relative; margin-top: 107px">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"

@@ -47,7 +47,7 @@ export class SatelliteComponent  implements OnInit {
   }
 
   getSatelliteImage(foldername: any, time: any, productname: any){
-    this.APIService.GetSourceAviationFolderFilesList(foldername, time).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList(foldername, 6).subscribe(
       (response) => {
         this.frameArray = response;
 

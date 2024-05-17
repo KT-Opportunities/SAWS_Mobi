@@ -24,6 +24,7 @@ export class AeroImageViewerPage implements OnInit {
   fileBaseUrlPrevious: SafeResourceUrl;
   name: string = '';
   anotherName: string = '';
+
   constructor(
     private router: Router,
     private elRef: ElementRef,
@@ -69,7 +70,7 @@ export class AeroImageViewerPage implements OnInit {
 
           console.log('Filtered TsProbability:', this.TsProbability);
           this.previousDay();
-
+          this.nextDay(); // Ensure both functions are called after data is filtered
           this.isLoading = false;
         } catch (error) {
           console.log('Error parsing JSON data:', error);
@@ -89,7 +90,6 @@ export class AeroImageViewerPage implements OnInit {
         (response) => {
           const filetextcontent = response.filetextcontent;
           console.log('Fetched file content:', filetextcontent);
-
           resolve(filetextcontent);
         },
         (error) => {
@@ -111,14 +111,13 @@ export class AeroImageViewerPage implements OnInit {
         (data) => {
           console.log('IMAGE:', data);
           const imageUrlPrevious =
-            'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+            'data:image/gif;base64,' + data.filetextcontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
-
           console.log('back to image:', this.fileBaseUrlPrevious);
         },
         (error) => {
-          console.log('Error fetching JSON data:', error);
+          console.log('Error fetching previous day image:', error);
           this.isLoading = false;
         }
       );
@@ -138,14 +137,13 @@ export class AeroImageViewerPage implements OnInit {
       ).subscribe(
         (data) => {
           console.log('IMAGE:', data);
-          const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+          const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent;
           this.fileBaseUrlNext =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-
           console.log('back to image:', this.fileBaseUrlNext);
         },
         (error) => {
-          console.log('Error fetching JSON data:', error);
+          console.log('Error fetching next day image:', error);
           this.isLoading = false;
         }
       );
@@ -156,6 +154,5 @@ export class AeroImageViewerPage implements OnInit {
 
   Aerosport() {
     window.history.back();
-    // this.router.navigate(['/forecast']);
   }
 }
