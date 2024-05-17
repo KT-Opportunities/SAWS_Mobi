@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'SAWSMOBILE',
+  appName: 'SAWS',
   webDir: 'www',
   server: {
     androidScheme: 'http',

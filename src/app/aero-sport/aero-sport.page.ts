@@ -66,11 +66,12 @@ export class AeroSportPage implements OnInit {
 
   ngOnInit() {
     // Check if user is logged in
-    this.isLoading = true;
+    // this.isLoading = true;
     if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
     }
+    
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         this.TsProbability = data.filter(
@@ -128,12 +129,14 @@ export class AeroSportPage implements OnInit {
       }
     );
   }
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
       this.closeAllDropdowns();
     }
   }
+
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
       this.isDropdownOpen1 = !this.isDropdownOpen1;
@@ -335,13 +338,15 @@ export class AeroSportPage implements OnInit {
     this.isTSProbability = false;
   }
   CloudForecast() {
-    this.isCloudForecast = true;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    this.isFormVisible2 = false;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
+    // this.isCloudForecast = true;
+    // this.isFormVisible = false;
+    // this.isKwazulNatal = false;
+    // this.isFormVisible1 = false;
+    // this.isFormVisible2 = false;
+    // this.isFormVisible3 = false;
+    // this.isSpotGfraph = false;
+
+    this.router.navigate (['/aero-sport/cloud-cover'])
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {

@@ -2,11 +2,17 @@ import { Component, OnInit,ElementRef,
   HostListener, } from '@angular/core';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
+import { Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DatePipe } from '@angular/common'; 
 
 
-
-
-
+// interface SpeciReport {
+//   date: string;
+//   time: string;
+//   content: string;
+// }
 
 @Component({
   selector: 'app-observation',
@@ -15,7 +21,13 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class ObservationPage implements OnInit {
-
+  
+  speciReportData: any[] = [];
+  loading = false;
+  
+  currentDate: string;
+  speciReports: any[] = []; 
+  recentTafs: any[] = [];
   isLogged: boolean = false;
   isMetar:boolean = true;
   isRanderImages:boolean = false;
@@ -35,11 +47,12 @@ export class ObservationPage implements OnInit {
   isDropdownOpen6: boolean = false;
   isDropdownOpen7: boolean = false;
   isDropdownOpen8: boolean = false;
+  isDropdownOpen11: boolean = false;
   isDropdownOpen: boolean = false;
   selectedOption1: string = 'Animation Type';
   selectedOption2: string = '2024-03-20 13:15';
   selectedOption3: string = 'FAVV';
-  selectedOption: string = 'Select Plot meteogram';
+  selectedOption11: string = 'Select Plot meteogram';
   selectedOption5: string = 'Select saved Template';
   selectedOption6: string = 'Last Hour';
   selectedOption7: string = '5 Min';
@@ -50,11 +63,98 @@ export class ObservationPage implements OnInit {
   constructor(
     private router: Router,
      private authService: AuthService, 
+     private apiService: APIService,
      private elRef: ElementRef,
+     private spinner: NgxSpinnerService,
+     private datePipe: DatePipe
     
     
- ) {}
-  ngOnInit() {}
+ ) {
+  this.speciReportData = [
+    {
+      date: '2024-05-14',
+      time: '13:15:45',
+      content: 'SPECI report content goes here with PROB30 TSRA CB keywords.',
+    },
+    // Add more sample SPECI reports as needed
+  ];
+  // Format current date using DatePipe
+  this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd') || ''; // 'yyyy-MM-dd' is the desired format
+}
+getCurrentDateTime(): string {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+  const formattedTime = currentDate.toTimeString().slice(0, 8); // Format: HH:MM:SS
+  return formattedDate + ' ' + formattedTime;
+}
+
+ highlightKeywords(content: string): string {
+  // Define your keywords and corresponding CSS classes
+  const keywords = ['PROB30', 'TSRA', 'CB'];
+  const cssClass = 'highlight'; // Define your CSS class for highlighting
+
+  // Replace each keyword with a span element having the highlight CSS class
+  keywords.forEach(keyword => {
+    const regex = new RegExp(keyword, 'g');
+    content = content.replace(regex, `<span class="${cssClass}">${keyword}</span>`);
+  });
+
+  return content;
+}
+  ngOnInit() {
+    // this.fetchSpeciReport();
+    // this.fetchRecentTafs();
+  }
+
+  fetchRecentTafs(): void {
+    this.loading = true; // Set loading to true when fetching starts
+    this.spinner.show(); // Show the spinner
+  
+    const foldername = 'taffc'; // Specify the folder name
+    this.apiService.getRecentTafs(foldername).subscribe(
+      (data) => {
+        // Assign fetched data to recentTafs array
+        this.recentTafs = data;
+        // Set loading to false when fetching is complete
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      },
+      (error) => {
+        // Log error to console
+        console.error('Error fetching recent TAFs:', error);
+        // Set loading to false when an error occurs
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      }
+    );
+  }
+  
+
+ fetchSpeciReport() {
+  // Show loading indicator before making the API call
+  this.loading = true;
+  this.spinner.show();
+
+  this.apiService.getSpeciReport().subscribe(
+    (data) => {
+      console.log('Speci report data:', data);
+      this.speciReportData = data;
+      // Hide loading indicator after fetching data
+      this.loading = false;
+      this.spinner.hide();
+    },
+    (error) => {
+      console.error('Error fetching speci report:', error);
+      // Hide loading indicator in case of error
+      this.loading = false;
+      this.spinner.hide();
+    }
+  );
+}
+
+  
   
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -65,11 +165,13 @@ export class ObservationPage implements OnInit {
   }
   satelite() {
     this.isMetar= false;
-    this.issatelite = true
+    // this.issatelite = true
+    this.router.navigate (['/observation/satelite'])
   }
   speci () {
     this.isMetar = false;
-    this.isSpeci = true
+    this.isSpeci = true;
+    this.fetchSpeciReport();
   }
   weathermap () {
     this.isMetar = false;
@@ -111,6 +213,7 @@ export class ObservationPage implements OnInit {
   RecentMetar(){
     this.isMetar = false;
     this.isRecentMetar = true
+    this.fetchRecentTafs()
   }
   RecentTafs() {
     this.isMetar = false;
@@ -156,6 +259,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen2 = false;
       this.isDropdownOpen3 = false;
       this.isDropdownOpen4 = false;
+      this.isDropdownOpen11 = false;
     
     }
     if (dropdown === 'dropdown6') {
@@ -176,17 +280,17 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen5 = false;
       this.isDropdownOpen6 = false;
     }
-    if (dropdown === 'dropdown') {
-      this.isDropdownOpen = !this.isDropdownOpen;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
+    // if (dropdown === 'dropdown') {
+    //   this.isDropdownOpen11 = !this.isDropdownOpen11;
+    //   this.isDropdownOpen1 = false;
+    //   this.isDropdownOpen2 = false;
+    //   this.isDropdownOpen3 = false;
+    //   this.isDropdownOpen4 = false;
+    //   this.isDropdownOpen5 = false;
     
-    }
-    if (dropdown === 'dropdown8') {
-      this.isDropdownOpen = !this.isDropdownOpen;
+    // }
+    if (dropdown === 'dropdown11') {
+      this.isDropdownOpen11 = !this.isDropdownOpen11;
       this.isDropdownOpen1 = false;
       this.isDropdownOpen2 = false;
       this.isDropdownOpen3 = false;
@@ -209,8 +313,13 @@ export class ObservationPage implements OnInit {
       this.selectedOption3 = option;
       this.isDropdownOpen2 = false;
     }
+    if (dropdown === 'dropdown11') {
+      this.selectedOption11 = option;
+      this.isDropdownOpen5 = false;
+    }
     
   }
+  
 
   sateliteDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
@@ -229,6 +338,7 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen5 = !this.isDropdownOpen5;
       this.isDropdownOpen6 = false;
       this.isDropdownOpen7 = false;
+      this.isDropdownOpen11 = false;
     
     }
     if (dropdown === 'dropdown6') {
@@ -242,6 +352,10 @@ export class ObservationPage implements OnInit {
       this.isDropdownOpen6 = false;
       this.isDropdownOpen5 = false;
     
+    }
+    if (dropdown === 'dropdown11') {
+      this.isDropdownOpen11 = !this.isDropdownOpen11;
+      this.isDropdownOpen5 = false;
     }
 }
   closeAllDropdowns() {

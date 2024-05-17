@@ -615,6 +615,18 @@
   line-height: 22px;
 }
 
+.w-slider {
+  position: relative;
+  // height: 300px;
+  height: auto;
+  top: 20px;
+  text-align: center;
+  background: #dddddd;
+  clear: both;
+  margin-left: 21px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .news {
   flex-direction: column;
   justify-content: flex-start;
@@ -707,6 +719,11 @@
   color: #00386c;
   font-family: Montserrat, sans-serif;
   font-weight: 600;
+}
+
+.field-label {
+  display: flex;
+  margin-top: 10px;
 }
 
 .subscr-pdiv {
@@ -1934,6 +1951,20 @@
   border-radius: 10px;
   padding: 10px 43px 10px 5px;
 }
+.ObservScrol {
+  /* Set the width of the container as needed */
+  width: 341px;/* Example width */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.vertical-scroll-container {
+  /* Set the height of the container as needed */
+  height: 400px; /* Example height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Additional styling for child elements if needed */
+
 
 .grid-35 {
   grid-template-rows: auto;
@@ -2487,6 +2518,10 @@
   justify-content: center;
   align-items: center;
   display: flex;
+}
+.highlight {
+  color: red; /* Change color based on your requirement */
+  font-weight: bold;
 }
 
 .slider-2 {
@@ -3363,10 +3398,11 @@
   }
 
   .table-row.head.hide {
-    width: 740px;
+    width: 794px;
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
+    margin-left: -58px;
   }
 
   .table-data-wrapper {
@@ -3664,6 +3700,8 @@
   .search {
     width: 86vw;
     align-items: flex-start;
+    position: relative;
+  top: -8px;
   }
 
   .search-button {

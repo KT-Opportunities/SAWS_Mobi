@@ -1538,8 +1538,8 @@
               </div>
             </div>
           </div>
-          <div class="div-block-15">
-            <h1 class="heading-22">Gauteng</h1>
+          <div class="div-block-15" *ngFor="let taf of recentTafs">
+            <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
             <div class="div-block-32">
               <div class="w-layout-grid ccta-grid">
                 <div
@@ -1556,110 +1556,34 @@
                 </div>
               </div>
             </div>
+            <div class="div-block-34">
+              <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1>
+            </div>
             <div class="div-block-45">
               <div class="w-layout-grid heading-text">
                 <div
                   id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649"
                   class="cct-copy-copy"
                 >
-                  <h1 class="heading-21">
-                    TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                  </h1>
+                <h1 class="heading-21" style="position: relative;
+                top: 6px;">{{ taf.filetextcontent }}</h1>
                 </div>
                 <div
                   id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649"
                   class="cct-copy"
                 >
-                  <a href="#" class="button-2-copy w-button">View Decoded</a>
+                  <div class="button-2-copy w-button">View Decoded</div>
                 </div>
               </div>
-              <div class="w-layout-grid grid-18">
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d6-9377a649"
-                  class="div-block-16"
-                >
-                  <p class="paragraph-2">
-                    TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                    <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                    FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                    0300/0302 35010KT=
-                  </p>
-                </div>
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e2-9377a649"
-                  class="div-block-17"
-                ></div>
-              </div>
+             
             </div>
             <div>
-              <div class="w-layout-grid heading-text">
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e5-9377a649"
-                  class="cct-copy-copy"
-                >
-                  <h1 class="heading-21">
-                    TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                  </h1>
-                </div>
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e8-9377a649"
-                  class="cct-copy"
-                >
-                  <a href="#" class="button-2-copy w-button">View Decoded</a>
-                </div>
-              </div>
-              <div class="w-layout-grid grid-18">
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ec-9377a649"
-                  class="div-block-16"
-                >
-                  <p class="paragraph-2">
-                    TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                    <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                    FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                    0300/0302 35010KT=
-                  </p>
-                </div>
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062f8-9377a649"
-                  class="div-block-17"
-                ></div>
-              </div>
+             
+             
             </div>
             <div>
-              <div class="w-layout-grid heading-text">
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fb-9377a649"
-                  class="cct-copy-copy"
-                >
-                  <h1 class="heading-21">
-                    TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-                  </h1>
-                </div>
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fe-9377a649"
-                  class="cct-copy"
-                >
-                  <a href="#" class="button-2-copy w-button">View Decoded</a>
-                </div>
-              </div>
-              <div class="w-layout-grid grid-18">
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f06302-9377a649"
-                  class="div-block-16"
-                >
-                  <p class="paragraph-2">
-                    TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                    <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                    FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                    0300/0302 35010KT=
-                  </p>
-                </div>
-                <div
-                  id="w-node-_2138101a-874f-ccf2-cab5-adfa22f0630e-9377a649"
-                  class="div-block-17"
-                ></div>
-              </div>
+              
+             
             </div>
           </div>
         </div>

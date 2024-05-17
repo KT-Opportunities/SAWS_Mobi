@@ -34,6 +34,9 @@ interface FileData {
 })
 export class ForecastPage implements OnInit {
   isLogged: boolean = false;
+ 
+  recentTafs: any[] = [];
+  speciReports: any[] = []; 
   isFormVisible: boolean = true;
   isform2Visible: boolean = true;
   iscodeTafs: boolean = false;
@@ -135,6 +138,30 @@ export class ForecastPage implements OnInit {
         qan,
       });
     });
+  }
+  fetchRecentTafs(): void {
+    this.loading = true; // Set loading to true when fetching starts
+    this.spinner.show(); // Show the spinner
+  
+    const foldername = 'taffc'; // Specify the folder name
+    this.APIService.getRecentTafs(foldername).subscribe(
+      (data) => {
+        // Assign fetched data to recentTafs array
+        this.recentTafs = data;
+        // Set loading to false when fetching is complete
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      },
+      (error) => {
+        // Log error to console
+        console.error('Error fetching recent TAFs:', error);
+        // Set loading to false when an error occurs
+        this.loading = false;
+        // Hide the spinner
+        this.spinner.hide();
+      }
+    );
   }
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -528,9 +555,9 @@ export class ForecastPage implements OnInit {
   extractHeadingContent(fileTextContent: string): string | null {
     // Use a regular expression to find the content starting with 'TAF'
     const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
-
+  
     const match = fileTextContent.match(regex);
-
+  
     if (match) {
       return match[0]; // Return the matched content
     } else {
@@ -571,6 +598,7 @@ export class ForecastPage implements OnInit {
     this.isTafAccuracy = false;
     this.isTrends = false;
     this.isHarmonized = false;
+    this.fetchRecentTafs()
     this.isform2Visible = false && this.isLoggedIn == false;
   }
   tafAccuracy() {
