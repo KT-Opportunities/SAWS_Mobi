@@ -14,8 +14,10 @@ export class CloudCoverComponent  implements OnInit {
   isLogged: boolean = false;
   frameArray: any = [];
 
-  selectedOptionProduct: string = 'IR108_RSA';
+  selectedOptionProduct: string = 'Total cloud';
   selectedOptionFrame: string = '';
+  folderName: string = 'aerosport';
+  lastModifiedHours: number = 12;
   loading: boolean = false;
 
   isDropdownProductOpen: boolean = false;
@@ -33,7 +35,7 @@ export class CloudCoverComponent  implements OnInit {
    ) { }
 
   ngOnInit() {
-
+    this.getCloudCoverImage(this.folderName, this.lastModifiedHours, 'tc');
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
@@ -49,16 +51,26 @@ export class CloudCoverComponent  implements OnInit {
   getCloudCoverImage(foldername: any, time: any, productname: any){
     this.APIService.GetSourceAviationFolderFilesList(foldername, time).subscribe(
       (response) => {
-        this.frameArray = response;
+        // this.frameArray = response;
 
-        this.frameArray = response.filter((item: any) =>
-          item.filename.includes(productname)
-        );
+      //   this.frameArray = response.filter((item: any) =>
+      //     item.filename.includes(productname)
+      // );
+
+
+        this.frameArray = response.filter((item: any) => 
+          item.filename.startsWith(productname) && item.filename.includes('_spot_')
+      );
+
+
+      // item.filename.startsWith('h1_spot')
+
+        console.log("this.frameArray", this.frameArray)
 
         if (this.frameArray.length > 0) {
             this.selectedOptionFrame = this.frameArray[0].lastmodified;
     
-            this.displayImage('', this.frameArray[0].filename).then((filetextcontent) => {
+            this.displayImage(this.folderName, this.frameArray[0].filename).then((filetextcontent) => {
               const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
               this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
           });
@@ -91,25 +103,25 @@ export class CloudCoverComponent  implements OnInit {
     this.isDropdownFrameOpen = !this.isDropdownFrameOpen;
   }
 
-  selectDropdownProduct(selectOption: string, dropdown: string) {
+  selectDropdownProduct(selectOption: string, dropdown: string, imagefilename: string) {
     if (dropdown === 'dropdown1') {
       this.selectedOptionProduct = selectOption;
-      this.getCloudCoverImage('', 12, selectOption);
+      this.getCloudCoverImage(this.folderName, this.lastModifiedHours, imagefilename);
     }
 
     if (dropdown === 'dropdown2') {
       this.selectedOptionProduct = selectOption;
-      this.getCloudCoverImage('', 12, selectOption);
+      this.getCloudCoverImage(this.folderName, this.lastModifiedHours, imagefilename);
     }
     
     if (dropdown === 'dropdown3') {
       this.selectedOptionProduct = selectOption;
-      this.getCloudCoverImage('', 12, selectOption);
+      this.getCloudCoverImage(this.folderName, this.lastModifiedHours, imagefilename);
     
     }
     if (dropdown === 'dropdown4') {
       this.selectedOptionProduct = selectOption;
-      this.getCloudCoverImage('', 12, selectOption);
+      this.getCloudCoverImage(this.folderName, this.lastModifiedHours, imagefilename);
     
     }
 }
@@ -118,7 +130,7 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
 
   this.selectedOptionFrame = selectOption;
 
-  this.displayImage('', imagefilename).then((filetextcontent) => {
+  this.displayImage(this.folderName, imagefilename).then((filetextcontent) => {
       const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
       this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
   });
@@ -151,7 +163,7 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
 
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified; 
     const fileName = this.frameArray[this.currentIndex].filename;
-    this.displayImage('', fileName).then((filetextcontent) => {
+    this.displayImage(this.folderName, fileName).then((filetextcontent) => {
         const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
         this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
@@ -164,7 +176,7 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;    
     const fileName = this.frameArray[this.currentIndex].filename;
 
-    this.displayImage('', fileName).then((filetextcontent) => {
+    this.displayImage(this.folderName, fileName).then((filetextcontent) => {
         const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
         this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });

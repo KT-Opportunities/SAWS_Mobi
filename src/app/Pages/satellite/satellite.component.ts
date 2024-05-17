@@ -49,7 +49,7 @@ export class SatelliteComponent  implements OnInit {
   getSatelliteImage(foldername: any, time: any, productname: any){
     this.APIService.GetSourceAviationFolderFilesList(foldername, 6).subscribe(
       (response) => {
-        this.frameArray = response;
+        // this.frameArray = response;
 
         this.frameArray = response.filter((item: any) =>
           item.filename.includes(productname)
