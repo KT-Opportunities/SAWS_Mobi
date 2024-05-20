@@ -7,7 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-cloud-cover',
   templateUrl: './cloud-cover.component.html',
-  styleUrls: ['../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['./cloud-cover.component.scss'],
+  
 })
 export class CloudCoverComponent  implements OnInit {
 
@@ -59,7 +60,7 @@ export class CloudCoverComponent  implements OnInit {
 
 
         this.frameArray = response.filter((item: any) => 
-          item.filename.startsWith(productname) && item.filename.includes('_spot_')
+          item.filename.startsWith(productname) && /^(l|m|tc|h)\d?_spot_d\d\.gif$/.test(item.filename)
       );
 
 
