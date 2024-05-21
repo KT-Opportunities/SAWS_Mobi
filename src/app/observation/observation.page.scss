@@ -1049,6 +1049,22 @@
   align-items: center;
   display: flex;
 }
+.w-layout-grid {
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 20px; /* Space between grid items */
+}
+
+.heading-text {
+  margin-bottom: 20px; /* Space between each report section */
+}
+
+.cct-copy-copy, .cct-copy {
+  /* Ensure these divs are not overlapping or causing layout issues */
+  padding: 10px;
+  // border: 1px solid #ccc;
+  // border-radius: 5px;
+}
 
 .grid-23,
 .grid-24 {
