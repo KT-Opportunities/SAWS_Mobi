@@ -13,6 +13,10 @@ import { DatePipe } from '@angular/common';
 //   time: string;
 //   content: string;
 // }
+export interface Metar {
+  raw_text: string;
+  color?: string;
+}
 
 @Component({
   selector: 'app-observation',
@@ -21,7 +25,7 @@ import { DatePipe } from '@angular/common';
 })
 
 export class ObservationPage implements OnInit {
-  
+  metarData: Metar[] = [];
   speciReportData: any[] = [];
   loading = false;
   metarReports: any[] = [];
@@ -106,6 +110,8 @@ getCurrentDateTime(): string {
     // this.fetchSpeciReport();
     // this.fetchRecentTafs();
   }
+  
+  
   fetchMetarReports(): void {
     this.loading = true; // Set loading to true before fetching data
     this.spinner.show(); // Show spinner while fetching data

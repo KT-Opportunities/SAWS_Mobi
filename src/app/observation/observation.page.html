@@ -478,9 +478,21 @@
     </ion-content> -->
     
     
-
-
-    <section class="colour-coded-tafs-page"  
+    <div *ngIf="recentTafs.length > 0">
+      <h2>Recent TAFs</h2>
+      <ul>
+        <li *ngFor="let taf of recentTafs">
+          <!-- Display relevant TAF information -->
+          <p>{{ taf.date }}</p>
+          <p>{{ taf.text }}</p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="recentTafs.length === 0">
+      <p>No recent TAFs available.</p>
+    </div>
+<!-- color coded tafs -->
+    <!-- <section class="colour-coded-tafs-page"  
     *ngIf="iscodeTafs">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
@@ -632,13 +644,9 @@
       
       </div>
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-        <!-- <div class="footerdiv">
-          <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
-            <h6 class="heading-10">Forecast</h6>
-          </a>
-        </div> -->
+      
       </div>
-    </section>
+    </section> -->
 
 
     <section class="taf-accuracy" *ngIf="issatelite">
