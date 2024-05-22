@@ -477,12 +477,12 @@
    </section> 
     </ion-content> -->
     
-    
+<!--     
     <div *ngIf="recentTafs.length > 0">
       <h2>Recent TAFs</h2>
       <ul>
         <li *ngFor="let taf of recentTafs">
-          <!-- Display relevant TAF information -->
+       
           <p>{{ taf.date }}</p>
           <p>{{ taf.text }}</p>
         </li>
@@ -490,9 +490,10 @@
     </div>
     <div *ngIf="recentTafs.length === 0">
       <p>No recent TAFs available.</p>
-    </div>
-<!-- color coded tafs -->
-    <!-- <section class="colour-coded-tafs-page"  
+    </div> -->
+
+
+    <section class="colour-coded-tafs-page"  
     *ngIf="iscodeTafs">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
@@ -646,7 +647,7 @@
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
       
       </div>
-    </section> -->
+    </section>
 
 
     <section class="taf-accuracy" *ngIf="issatelite">
@@ -930,10 +931,11 @@
           </div>
         </div>
   
-        <div class="div-block-15" id="block-15" *ngFor="let taf of recentTafs">
+        <div class="div-block-15" id="block-15" 
+        *ngFor="let taf of recentTafs">
           <!-- <h1 class="heading-22">Gauteng</h1> -->
            <!-- Display the foldername and filename -->
-        <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1>
+        <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
           <div class="div-block-32">
             <div class="w-layout-grid ccta-grid">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
@@ -948,11 +950,13 @@
         <!-- Display the lastmodified date -->
 
           <div class="div-block-34">
-            <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1>
+            <!-- <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1> -->
           </div>
 
           <div class="div-block-45">
-            <div class="w-layout-grid heading-text">
+            <div 
+            class="w-layout-grid heading-text"
+            style="margin-bottom: -37px !important;">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649" class="cct-copy-copy">
                 <h1 class="heading-21">{{ taf.filetextcontent }}</h1>
               </div>
