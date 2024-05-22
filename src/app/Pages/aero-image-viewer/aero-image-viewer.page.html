@@ -7,8 +7,9 @@
   <section class="ob-metar-history">
     <div class="cloud-cover">
       <h1 class="heading6">
-        {{name|| (anotherName.startsWith('xl') ? anotherName.substring(2) :
-        anotherName)}}
+        {{name ||kwazulNatal|| (anotherName.startsWith('xl') ?
+        anotherName.substring(2) :
+        anotherName)||filenameToDisplayName[displayName]}}
       </h1>
       <div class="w-layout-grid metar-history-grid">
         <div class="date-container">
@@ -84,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="position: relative; margin-top: 64px">
+    <div class="bottomdiv" style="position: relative; margin-top: 138px">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"

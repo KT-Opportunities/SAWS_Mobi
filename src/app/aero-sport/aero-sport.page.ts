@@ -324,6 +324,7 @@ export class AeroSportPage implements OnInit {
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.router.navigate(['/kwazul-natal']);
   }
   SpotGraphToggle() {
     // this.isKwazulNatal=true;
@@ -334,6 +335,7 @@ export class AeroSportPage implements OnInit {
     this.isSpotGfraph = true;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.router.navigate(['/landing-page']);
   }
   TSProbability() {
     // this.isKwazulNatal=true;
