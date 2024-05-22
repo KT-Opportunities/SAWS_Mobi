@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
@@ -17,6 +18,26 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./aero-sport.page.scss'],
 })
 export class AeroSportPage implements OnInit {
+  // Check if the image filename corresponds to TsProbability
+  isTsProbability(filename: string): boolean {
+    return filename.includes('tsprob_d1.gif') || filename.includes('tsprob_d2.gif');
+  }
+
+  // Check if the image filename corresponds to Synoptic
+  isSynoptic(filename: string): boolean {
+    return filename === 'synoptic.png';
+  }
+
+  // Generate the image URL based on the image object
+  getImageUrl(image: any): string {
+    return `${this.apiUrl}${image.foldername}/${image.filename}`;
+  }
+  CloudCoverImage: any;
+ConnectiveCloudImage: any;
+WindsImage: any;
+ThermalsImage: any;
+TemperatureImage: any;
+  imageUrl: string | null = null;
   isLogged: boolean = false;
   isLoading: boolean = true;
   isFormVisible: boolean = true;
@@ -46,6 +67,7 @@ export class AeroSportPage implements OnInit {
   remainingItems: any[] = [];
   XL2Files: any[] = [];
   Synoptic: any = [];
+  apiUrl: string = 'http://160.119.253.130/aviappapi/api/RawSource/GetSourceAviationFolderFilesList';
   filenameToDisplayName: { [key: string]: string } = {
     'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
     'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
@@ -65,7 +87,7 @@ export class AeroSportPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
-
+    private spinner: NgxSpinnerService,
     private http: HttpClient,
 
     private APIService: APIService,
@@ -91,6 +113,9 @@ export class AeroSportPage implements OnInit {
       this.router.navigate(['/login']);
     }
 
+    
+// Display the first TsProbability image
+
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         this.TsProbability = data.filter(
@@ -98,6 +123,23 @@ export class AeroSportPage implements OnInit {
             item.filename === 'tsprob_d1.gif' ||
             item.filename === 'tsprob_d2.gif'
         );
+
+
+         // Find Cloud Cover image
+    this.CloudCoverImage = data.find((item: any) => item.filename.includes('l14_cint_d1'));
+
+    // Find Connective Cloud image
+    this.ConnectiveCloudImage = data.find((item: any) => item.filename.includes('cb214_d1'));
+
+    // Find Winds image
+    this.WindsImage = data.find((item: any) => item.filename.includes('s8_cint_d1'));
+
+    // Find Thermals image
+    this.ThermalsImage = data.find((item: any) => item.filename.includes('lf8_cint_d1'));
+
+    // Find Temperature image
+    this.TemperatureImage = data.find((item: any) => item.filename.includes('t11_cint_d1'));
+
         try {
           console.log('BEFORE FILTER:', data);
           data.forEach((item: any) => {
@@ -270,12 +312,17 @@ export class AeroSportPage implements OnInit {
   toggleFormVisibility() {
     this.isFormVisible = false;
     this.isKwazulNatal = false;
-    this.isFormVisible1 = true;
+    // this.isFormVisible1 = true;
     this.isFormVisible2 = false;
     this.isFormVisible3 = false;
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    if (this.isLoggedIn == true) {
+      this.spinner.show();
+      this.router.navigate(['/central-interio']);
+      
+    }
   }
   toggleFormVisibility1() {
     this.isFormVisible = false;
@@ -315,6 +362,23 @@ export class AeroSportPage implements OnInit {
       }
     );
   }
+  viewImage(folderName: string, hour: string): void {
+    const fileName = `l14_cint_d1_${hour.replace(':', '')}.gif`;
+    const apiUrl = `http://160.119.253.130/aviappapi/api/RawSource/GetAviationFile?imagefoldername=${folderName}&imagefilename=${fileName}`;
+
+    // Fetch the image from the server
+    this.http.get(apiUrl, { responseType: 'blob' }).subscribe(
+      (data: Blob) => {
+        // Create an object URL for the image blob
+        this.imageUrl = URL.createObjectURL(data);
+      },
+      (error) => {
+        console.error('Error fetching image:', error);
+        // Optionally, handle the error or display a message to the user
+      }
+    );
+  }
+  
   KwazulNatalToggle() {
     // this.isKwazulNatal=true;
     this.isFormVisible2 = false;

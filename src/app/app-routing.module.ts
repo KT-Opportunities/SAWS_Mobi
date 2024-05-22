@@ -233,10 +233,19 @@ const routes: Routes = [
   {
     path: 'aero-image-viewer',
     loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule)
-  },  {
+  },
+  {
     path: 'kwazul-natal',
     loadChildren: () => import('./Pages/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
   },
+
+ 
+ 
+  {
+    path: 'central-interio',
+    loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
+  },
+
 
 
   

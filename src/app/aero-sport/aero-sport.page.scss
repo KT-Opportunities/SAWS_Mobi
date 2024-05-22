@@ -28,6 +28,17 @@
 .show-dropdown {
   display: block;
 }
+.text-field-blue {
+  position: relative;
+}
+
+.w-icon-dropdown-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust as needed */
+  transform: translateY(-50%);
+}
+
 
 .w-dropdown {
   display: inline-block;
@@ -10177,7 +10188,12 @@ textarea.w-select {
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
-  margin-right: -152px;
+  margin-right: -152px !important;
+}
+.icon-4 {
+  color: #fff;
+  margin-top: 5.4907px;
+  margin-right: -152px !important;
 }
 #dropdown-list.w--open {
   background-image: linear-gradient(#bfcdda, #bfcdda) !important;
