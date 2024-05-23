@@ -237,6 +237,10 @@ const routes: Routes = [
     path: 'kwazul-natal',
     loadChildren: () => import('./Pages/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
   },
+  {
+    path: 'south-west-cape',
+    loadChildren: () => import('./Pages/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
+  },
 
 
   
