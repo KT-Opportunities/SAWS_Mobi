@@ -17,7 +17,7 @@ export class ImageViewrPage implements OnInit {
     const imageUrl = 'data:image/jpeg/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
 
-    console.log('back to image:', this.fileBaseUrl);
+    // console.log('back to image:', this.fileBaseUrl);
   }
 
   ngOnInit() {}

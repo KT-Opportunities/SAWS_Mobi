@@ -134,6 +134,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'international/gpm',
+    loadChildren: () =>
+      import('./Pages/gpm/gpm.module').then(
+        (m) => m.GpmModule
+      ),
+  },
+  {
     path: 'flight-briefing',
     loadChildren: () =>
       import('./flight-briefing/flight-briefing.module').then(

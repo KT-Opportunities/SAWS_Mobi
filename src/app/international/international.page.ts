@@ -155,6 +155,7 @@ export class InternationalPage implements OnInit {
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.router.navigate (['/international/gpm'])
   }
   toggleFormVisibility2() {
     this.isFormVisible = false;
