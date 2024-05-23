@@ -93,10 +93,7 @@
 
       <div class="aerosport">
         <div class="aerosportScrol">
-          <div
-            class="div-block-464"
-            *ngFor="let item of MaximumArray;let i = index"
-          >
+          <div class="div-block-464">
             <h1 class="sub-headings">West                     </h1>
             <div class="w-form">
               <form
@@ -157,8 +154,11 @@
               </div>
             </div>
 
-            <!-- <div class="grid-div">
-              <div class="w-layout-grid central-grid">
+            <div class="grid-div">
+              <div
+                class="w-layout-grid central-grid"
+               
+              >
                 <div
                   id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15"
                   class="div-block-35"
@@ -176,7 +176,7 @@
                     <button
                       id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
                       class="div-block-36"
-                      (click)="openImageViewer(item)"
+                    
                     >
                       <h4 class="heading-24">View Image</h4>
                     </button>
@@ -217,9 +217,9 @@
                     <div
                       id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b566-bb9b1d15"
                       class="div-block-465"
-                      (click)="openImageViewer(item)"
+                    
                     >
-                      <button class="button-2-copy w-button">View</button>
+                      <div class="button-2-copy w-button">View</div>
                     </div>
                     <div
                       id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b569-bb9b1d15"
@@ -237,7 +237,7 @@
                     <div
                       id="w-node-_3f048f9e-5836-8c6a-6952-e097080e1b78-bb9b1d15"
                       class="div-block-465"
-                      (click)="openImageViewer(item)"
+                     
                     >
                       <button class="button-2-copy w-button">View</button>
                     </div>
@@ -257,7 +257,7 @@
                     <div
                       id="w-node-_5380366f-d675-46f7-ca6a-e0b033a4f3c0-bb9b1d15"
                       class="div-block-465"
-                      (click)="openImageViewer(item)"
+                   
                     >
                       <button class="button-2-copy w-button">View</button>
                     </div>
@@ -270,7 +270,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
 
           <div *ngFor="let item of MaximumArray" class="div-block-464">
@@ -1290,7 +1290,9 @@
                       id="w-node-_5e42ce22-6a2b-b585-398b-a09e34e0d36c-bb9b1d15"
                       class="div-block-465"
                     >
-                      <h1 class="heading-25">18:00</h1>
+                      <h1 class="heading-25">
+                        {{ extractTime(item.filename) }}
+                      </h1>
                     </div>
                   </div>
                 </div>

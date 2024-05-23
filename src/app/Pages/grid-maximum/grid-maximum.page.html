@@ -4,7 +4,7 @@
     >Loading...
   </div>
   <section class="aerosport-ci" style="margin-top: 107px !important">
-    <h1 class="heading-6">Central Interior</h1>
+    <h1 class="heading-6">Kwazulu Natal</h1>
 
     <div class="aerosport">
       <div class="aerosportScrol">
@@ -30,16 +30,7 @@
                   <div class="w-dropdown-toggle">
                     <div class="text-block">
                       {{selectedOption}}
-
-                      <div
-                        style="
-                          position: absolute;
-                          margin-top: -15px;
-                          margin-left: 100px;
-                        "
-                      >
-                        <div class="icon-2 w-icon-dropdown-toggle"></div>
-                      </div>
+                      <div class="icon-2 w-icon-dropdown-toggle"></div>
                     </div>
                   </div>
                   <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
@@ -213,57 +204,52 @@
                     (click)="toggleDropdown('dropdown2')"
                   >
                     <div class="w-dropdown-toggle">
-                      <div class="text-block">{{selectedOption2}}</div>
                       <div
-                        style="
-                          position: absolute;
-                          margin-top: -15px;
-                          margin-left: 100px;
-                        "
-                      >
-                        <div class="icon-2 w-icon-dropdown-toggle"></div>
-                      </div>
+                        class="icon-2 w-icon-dropdown-toggle"
+                        id="icon3"
+                      ></div>
+                      <div class="text-block">{{selectedOption2}}</div>
                     </div>
                     <nav class="dropdown-list1" *ngIf="isDropdownOpen2">
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('surface')"
+                        (click)="selectOption2('surface', 'dropdown2')"
                       >
                         surface
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL060')"
+                        (click)="selectOption2('FL060', 'dropdown2')"
                       >
                         FL060
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL080')"
+                        (click)="selectOption2('FL080', 'dropdown2')"
                       >
                         FL080
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL100')"
+                        (click)="selectOption2('FL100', 'dropdown2')"
                       >
                         FL100
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL120')"
+                        (click)="selectOption2('FL120', 'dropdown2')"
                       >
                         FL120
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL140')"
+                        (click)="selectOption2('FL140', 'dropdown2')"
                       >
                         FL140
                       </div>
                       <div
                         class="w-dropdown-link"
-                        (click)="selectOption2('FL160')"
+                        (click)="selectOption2('FL160', 'dropdown2')"
                       >
                         FL160
                       </div>
@@ -288,7 +274,7 @@
                     id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
                     class="div-block-36"
                   >
-                    <h4 class="heading-24">{{selectedOption2}}</h4>
+                    <h4 class="heading-24">Surface</h4>
                   </div>
                   <div
                     id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
@@ -422,16 +408,11 @@
                     (click)="toggleDropdown('dropdown3')"
                   >
                     <div class="w-dropdown-toggle">
-                      <div class="text-block">{{selectedOption3}}</div>
                       <div
-                        style="
-                          position: absolute;
-                          margin-top: -15px;
-                          margin-left: 100px;
-                        "
-                      >
-                        <div class="icon-2 w-icon-dropdown-toggle"></div>
-                      </div>
+                        class="icon-2 w-icon-dropdown-toggle"
+                        id="icon2"
+                      ></div>
+                      <div class="text-block">{{selectedOption3}}</div>
                     </div>
                     <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
                       <div
@@ -467,7 +448,7 @@
                     id="w-node-e56588f0-a404-c7f6-783b-ec1c6c397e9a-bb9b1d15"
                     class="div-block-36"
                   >
-                    <h4 class="heading-24">{{selectedOption3}}</h4>
+                    <h4 class="heading-24">Low</h4>
                   </div>
                   <div
                     id="w-node-e56588f0-a404-c7f6-783b-ec1c6c397e9d-bb9b1d15"
@@ -534,3 +515,4 @@
     </div>
   </section>
 </ion-content>
+

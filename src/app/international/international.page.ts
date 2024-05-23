@@ -150,11 +150,12 @@ export class InternationalPage implements OnInit {
     this.isFormVisible = false;
     this.isKwazulNatal = false;
     this.isFormVisible1 = false;
-    this.isFormVisible2 = true;
+    //this.isFormVisible2 = true;
     this.isFormVisible3 = false;
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.router.navigate(['/grid-winds']);
   }
   toggleFormVisibility2() {
     this.isFormVisible = false;
@@ -182,13 +183,12 @@ export class InternationalPage implements OnInit {
     this.APIService.GetSourceChartFolderFilesList('PW').subscribe(
       (response) => {
         this.MaximumArray = response;
+        console.log('Response:', this.MaximumArray);
 
         this.MaximumArray = response.filter((item: any) =>
           item.filename.includes('PWRD98')
         );
-        console.log('Response:', this.MaximumArray);
-
-        this.MaximumArray = response;
+        console.log('Response after filter:', this.MaximumArray);
 
         console.log('Response:', this.MaximumArray);
         // const allowedFilenames = [
@@ -223,7 +223,16 @@ export class InternationalPage implements OnInit {
     this.isCloudForecast = false;
     this.isTSProbability = false;
   }
-
+  extractTime(filename: string): string {
+    const timeMatch = filename.match(/(\d{4})(?=.png$)/);
+    if (timeMatch) {
+      const timeString = timeMatch[0];
+      const hours = timeString.substring(0, 2);
+      const minutes = timeString.substring(2, 4);
+      return `${hours}:${minutes}`;
+    }
+    return '';
+  }
   openImageViewer(item: any) {
     // Extract folderName and fileName from the current item
     const folderName = item.foldername;

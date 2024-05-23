@@ -248,7 +248,15 @@ const routes: Routes = [
   {
     path: 'central-interio',
     loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
+  },  {
+    path: 'grid-winds',
+    loadChildren: () => import('./Pages/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule)
   },
+  {
+    path: 'grid-maximum',
+    loadChildren: () => import('./Pages/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+  },
+
 
 
 
