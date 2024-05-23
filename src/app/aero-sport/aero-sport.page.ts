@@ -328,11 +328,12 @@ TemperatureImage: any;
     this.isFormVisible = false;
     this.isKwazulNatal = false;
     this.isFormVisible1 = false;
-    this.isFormVisible2 = true;
+    //this.isFormVisible2 = true;
     this.isFormVisible3 = false;
     this.isSpotGfraph = false;
     this.isCloudForecast = false;
     this.isTSProbability = false;
+    this.router.navigate(['/south-west-cape']);
   }
   toggleFormVisibility2() {
     this.isFormVisible = false;

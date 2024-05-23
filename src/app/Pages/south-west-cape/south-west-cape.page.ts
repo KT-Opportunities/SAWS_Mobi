@@ -1,24 +1,17 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  ElementRef,
-  HostListener,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-import { APIService } from 'src/app/services/apis.service';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
 
 @Component({
-  selector: 'app-kwazul-natal',
-  templateUrl: './kwazul-natal.page.html',
+  selector: 'app-south-west-cape',
+  templateUrl: './south-west-cape.page.html',
   styleUrls: ['../../aero-sport/aero-sport.page.scss'],
 })
-export class KwazulNatalPage implements OnInit {
+export class SouthWestCapePage implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = true;
   isFormVisible: boolean = true;
@@ -42,7 +35,7 @@ export class KwazulNatalPage implements OnInit {
   nextday: boolean = true;
   prevday: boolean = false;
   TsProbability: any = [];
-  KwazulNatal: any = [];
+  SouthWestCape: any = [];
   CloudCover: any = [];
   ConvectiveCloudBase: any = [];
   WindArray: any = [];
@@ -123,38 +116,38 @@ export class KwazulNatalPage implements OnInit {
 
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
-        this.KwazulNatal = data.filter((item: any) =>
-          item.filename.toLowerCase().includes('kzn')
+        this.SouthWestCape = data.filter((item: any) =>
+          item.filename.toLowerCase().includes('swcape')
         );
-        console.log('KWAZUL NATAL:', this.KwazulNatal);
-        this.CloudCover = this.KwazulNatal.filter(
+        console.log('South West Cape:', this.SouthWestCape);
+        this.CloudCover = this.SouthWestCape.filter(
           (item: { filename: string }) =>
-            /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
+            /^[lmhLMH](([0-9]{1,2})|tm)_swcape_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('CloudCover:', this.CloudCover);
 
-        this.ConvectiveCloudBase = this.KwazulNatal.filter(
+        this.ConvectiveCloudBase = this.SouthWestCape.filter(
           (item: { filename: string }) =>
-            /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
+            /^cb(([01]?[0-9]|2[0-3])|tm)_swcape_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
 
         console.log('ConvectiveCloudBase:', this.ConvectiveCloudBase);
-        this.WindArray = this.KwazulNatal.filter(
+        this.WindArray = this.SouthWestCape.filter(
           (item: { filename: string }) =>
-            /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
+            /^[s6810121416].*swcape_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
 
         console.log('WindArray:', this.WindArray);
-        this.ThermalArray = this.KwazulNatal.filter(
+        this.ThermalArray = this.SouthWestCape.filter(
           (item: { filename: string }) =>
-            /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
+            /^lf(([01]?[0-9]|2[0-3])|tm)_swcape_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('ThermalArray:', this.ThermalArray);
-        this.TemperatureArray = this.KwazulNatal.filter(
+        this.TemperatureArray = this.SouthWestCape.filter(
           (item: { filename: string }) =>
-            /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
+            /^[td][^c].*swcape_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('TemperatureArray:', this.TemperatureArray);

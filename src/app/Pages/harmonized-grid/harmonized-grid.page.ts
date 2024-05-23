@@ -35,7 +35,7 @@ export class HarmonizedGridPage implements OnInit {
   ) {}
   forecastPage() {
     window.history.back();
-    // this.router.navigate(['/forecast']);
+    this.router.navigate(['/forecast']);
   }
   ngOnInit() {
     // this.APIService.GetSourceChartFolderFilesList('wafs').subscribe(
@@ -124,7 +124,7 @@ export class HarmonizedGridPage implements OnInit {
 
   displayHeadingWAF1(filename: string): string {
     const twoDigitsAfterQIRI = filename.substring(14, 18);
- 
+
     switch (twoDigitsAfterQIRI) {
       case '0600':
         return 'EntireAtmosphere';
