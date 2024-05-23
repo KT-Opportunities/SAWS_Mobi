@@ -14,11 +14,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-kwazul-natal',
-  templateUrl: './kwazul-natal.page.html',
+  selector: 'app-grid-maximum',
+  templateUrl: './grid-maximum.page.html',
   styleUrls: ['../../aero-sport/aero-sport.page.scss'],
 })
-export class KwazulNatalPage implements OnInit {
+export class GridMaximumPage implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = true;
   isFormVisible: boolean = true;
@@ -121,43 +121,43 @@ export class KwazulNatalPage implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceChartFolderFilesList('PW').subscribe(
       (data) => {
         this.KwazulNatal = data.filter((item: any) =>
-          item.filename.toLowerCase().includes('kzn')
+          item.filename.toLowerCase().includes('gw_')
         );
-        console.log('KWAZUL NATAL:', this.KwazulNatal);
-        this.CloudCover = this.KwazulNatal.filter(
-          (item: { filename: string }) =>
-            /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
-        ).map((item: { filename: string }) => item.filename);
+        console.log('PW:', this.KwazulNatal);
+        // this.CloudCover = this.KwazulNatal.filter(
+        //   (item: { filename: string }) =>
+        //     /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
+        // ).map((item: { filename: string }) => item.filename);
 
-        console.log('CloudCover:', this.CloudCover);
+        // console.log('CloudCover:', this.CloudCover);
 
-        this.ConvectiveCloudBase = this.KwazulNatal.filter(
-          (item: { filename: string }) =>
-            /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
-        ).map((item: { filename: string }) => item.filename);
+        // this.ConvectiveCloudBase = this.KwazulNatal.filter(
+        //   (item: { filename: string }) =>
+        //     /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
+        // ).map((item: { filename: string }) => item.filename);
 
-        console.log('ConvectiveCloudBase:', this.ConvectiveCloudBase);
-        this.WindArray = this.KwazulNatal.filter(
-          (item: { filename: string }) =>
-            /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
-        ).map((item: { filename: string }) => item.filename);
+        // console.log('ConvectiveCloudBase:', this.ConvectiveCloudBase);
+        // this.WindArray = this.KwazulNatal.filter(
+        //   (item: { filename: string }) =>
+        //     /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
+        // ).map((item: { filename: string }) => item.filename);
 
-        console.log('WindArray:', this.WindArray);
-        this.ThermalArray = this.KwazulNatal.filter(
-          (item: { filename: string }) =>
-            /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
-        ).map((item: { filename: string }) => item.filename);
+        // console.log('WindArray:', this.WindArray);
+        // this.ThermalArray = this.KwazulNatal.filter(
+        //   (item: { filename: string }) =>
+        //     /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
+        // ).map((item: { filename: string }) => item.filename);
 
-        console.log('ThermalArray:', this.ThermalArray);
-        this.TemperatureArray = this.KwazulNatal.filter(
-          (item: { filename: string }) =>
-            /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
-        ).map((item: { filename: string }) => item.filename);
+        // console.log('ThermalArray:', this.ThermalArray);
+        // this.TemperatureArray = this.KwazulNatal.filter(
+        //   (item: { filename: string }) =>
+        //     /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
+        // ).map((item: { filename: string }) => item.filename);
 
-        console.log('TemperatureArray:', this.TemperatureArray);
+        // console.log('TemperatureArray:', this.TemperatureArray);
 
         //CloudCover:any=[];
         //ConvectiveCloudBase:any=[];
@@ -253,7 +253,6 @@ export class KwazulNatalPage implements OnInit {
       this.isDropdownOpen2 = false;
     }
   }
-
 
   forecastDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
@@ -362,7 +361,6 @@ export class KwazulNatalPage implements OnInit {
     });
   }
   ImageViewer2(imageName: any) {
-      
     this.router.navigate(['/aero-image-viewer'], {
       state: { kwazulNatal: imageName },
     });

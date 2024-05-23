@@ -134,6 +134,192 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'flight-briefing',
+    loadChildren: () =>
+      import('./flight-briefing/flight-briefing.module').then(
+        (m) => m.FlightBriefingPageModule
+      ),
+  },
+  {
+    path: 'observation',
+    loadChildren: () =>
+      import('./observation/observation.module').then(
+        (m) => m.ObservationPageModule
+      ),
+  },
+  {
+    path: 'observation/satelite',
+    loadChildren: () =>
+      import('./Pages/satellite/satellite.module').then(
+        (m) => m.SatelliteModule
+      ),
+  },
+  {
+    path: 'domestic',
+    loadChildren: () =>
+      import('./domestic/domestic.module').then((m) => m.DomesticPageModule),
+  },
+  {
+    path: 'aero-sport',
+    loadChildren: () =>
+      import('./aero-sport/aero-sport.module').then(
+        (m) => m.AeroSportPageModule
+      ),
+  },
+  {
+    path: 'aero-sport/cloud-cover',
+    loadChildren: () =>
+      import('./Pages/cloud-cover/cloud-cover.module').then(
+        (m) => m.CloudCoverModule
+      ),
+  },
+  {
+    path: 'chat',
+    loadChildren: () =>
+      import('./chat/chat.module').then((m) => m.ChatPageModule),
+  },
+  {
+    path: 'message-list',
+    loadChildren: () =>
+      import('../app/provide-feedback/message-list/message-list.module').then(
+        (m) => m.MessageListPageModule
+      ),
+  },
+  {
+    path: 'observation-metar-history',
+    loadChildren: () =>
+      import(
+        './observation-metar-history/observation-metar-history.module'
+      ).then((m) => m.ObservationMetarHistoryPageModule),
+  },
+  {
+    path: 'web-cam',
+    loadChildren: () =>
+      import('./web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+  },
+  {
+    path: 'advisories',
+    loadChildren: () =>
+      import('./Pages/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
+  },
+
+  {
+    path: 'sigmet_airmet',
+    loadChildren: () =>
+      import('./Pages/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
+  },
+
+  {
+    path: 'sigmet-gamet',
+    loadChildren: () =>
+      import('./Pages/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
+  },
+  {
+    path: 'image-viewr',
+    loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule)
+  },
+  {
+    path: 'harmonized-grid',
+    loadChildren: () => import('./Pages/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
+  },
+  {
+    path: 'tsprobability',
+    loadChildren: () => import('./Pages/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
+  },
+  {
+    path: 'synoptic-analysis',
+    loadChildren: () => import('./Pages/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
+  },
+  {
+    path: 'aero-image-viewer',
+    loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule)
+  },
+  {
+    path: 'kwazul-natal',
+    loadChildren: () => import('./Pages/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
+  },
+  {
+    path: 'south-west-cape',
+    loadChildren: () => import('./Pages/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
+  },
+
+ 
+ 
+  {
+    path: 'central-interio',
+    loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
+  },
+  {
+    path: 'grid-winds',
+    loadChildren: () => import('./Pages/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule)
+  },
+  {
+    path: 'grid-maximum',
+    loadChildren: () => import('./Pages/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+  },
+
+  {
+    path: 'aviation-home',
+    loadChildren: () =>
+      import('./aviation-home/aviation-home.module').then(
+        (m) => m.AviationHomePageModule
+      ),
+  },
+  {
+    path: 'color-coded',
+    loadChildren: () =>
+      import('./color-coded/color-coded.module').then(
+        (m) => m.ColorCodedPageModule
+      ),
+  },
+  {
+    path: 'aviation-code',
+    loadChildren: () =>
+      import('./aviation-code/aviation-code.module').then(
+        (m) => m.AviationCodePageModule
+      ),
+  },
+  {
+    path: 'contact-us',
+    loadChildren: () =>
+      import('./contact-us/contact-us.module').then(
+        (m) => m.ContactUsPageModule
+      ),
+  },
+  {
+    path: 'news',
+    loadChildren: () =>
+      import('./news/news.module').then((m) => m.NewsPageModule),
+  },
+  {
+    path: 'subscription-package',
+    loadChildren: () =>
+      import('./subscription-package/subscription-package.module').then(
+        (m) => m.SubscriptionPackagePageModule
+      ),
+  },
+   {
+    path: 'subscription-Successful',
+    loadChildren: () =>
+      import('./subscription-package/subscription-package.module').then(
+        (m) => m.SubscriptionPackagePageModule
+      ),
+  },
+  {
+    path: 'provide-feedback',
+    loadChildren: () =>
+      import('./provide-feedback/provide-feedback.module').then(
+        (m) => m.ProvideFeedbackPageModule
+      ),
+  },
+  {
+    path: 'international',
+    loadChildren: () =>
+      import('./international/international.module').then(
+        (m) => m.InternationalPageModule
+      ),
+  },
+  {
     path: 'international/gpm',
     loadChildren: () =>
       import('./Pages/gpm/gpm.module').then(
