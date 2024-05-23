@@ -261,4 +261,11 @@ export class APIService {
       `http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
+
+  getRecentMetarReports(foldername: any, time: any) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+    );
+  }
 }

@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common'; 
 
 
+
 // interface SpeciReport {
 //   date: string;
 //   time: string;
@@ -25,6 +26,7 @@ export interface Metar {
 })
 
 export class ObservationPage implements OnInit {
+  
   metarData: Metar[] = [];
   speciReportData: any[] = [];
   loading = false;
@@ -106,11 +108,15 @@ getCurrentDateTime(): string {
 
   return content;
 }
-  ngOnInit() {
-    // this.fetchSpeciReport();
-    // this.fetchRecentTafs();
-  }
+ngOnInit(): void {
+  // Example foldername and time, adjust these values as needed
   
+}
+  
+
+
+
+
   
   fetchMetarReports(): void {
     this.loading = true; // Set loading to true before fetching data
@@ -131,6 +137,7 @@ getCurrentDateTime(): string {
       }
     );
   }
+  
   // fetchMetarReports(): void {
   //   console.log('Fetching Metar reports...');
   //   this.spinner.show(); // Show spinner while fetching data
@@ -256,6 +263,7 @@ getCurrentDateTime(): string {
   colorcoded () {
   this.isMetar = false;
   this.iscodeTafs = true
+  this.fetchMetarReports();
   }
   ObservMeter () {
     this.isMetar = false;

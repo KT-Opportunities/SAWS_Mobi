@@ -1938,6 +1938,31 @@
   right: 0%;
 }
 
+.metar-report {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.metar-report.red {
+  background-color: #ff0000;
+}
+
+.metar-report.yellow {
+  background-color: #ffff00;
+  color: #000;
+}
+
+.metar-report.green {
+  background-color: #00ff00;
+}
+
+.metar-report h1, .metar-report p {
+  margin: 5px 0;
+}
+
+
 .chats-div {
   flex-direction: column;
   justify-content: center;
