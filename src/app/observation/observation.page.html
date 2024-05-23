@@ -498,7 +498,7 @@
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
       <div class="tafs-div">
-        <h1 class="heading-6" id="colorcoded">Colour Coded TAFs</h1>
+        <h1 class="heading-6" id="colorcoded">Colour Coded METAR</h1>
        
           <div class="w-layout-grid grid-6" id="layout">
             <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
@@ -514,7 +514,7 @@
             <div  class="ObservScrol">
             <div id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea" class="div-block-14-copy">
               <div>
-                <h5 class="heading-9">Query TAFs</h5>
+                <h5 class="heading-9">Query Metar</h5>
                 <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit" class="search-button w-button" value="Search"></form>
               </div>
             </div>
@@ -531,55 +531,26 @@
                 </div>
               </div>
               <div>
-                <div class="w-layout-grid heading-text">
+                <div class="w-layout-grid heading-text" *ngFor="let report of metarReports">
                   <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea" class="cct-copy-copy">
-                    <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
+                    <h1 class="heading-21">{{ report.filetextcontent }}</h1>
                   </div>
                   <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
                     <div class="button-2-copy w-button">View Decoded</div>
                   </div>
                 </div>
-                <div class="w-layout-grid grid-18">
-                  <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c6d-5aa24fea" class="div-block-16">
-                    <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
-                  </div>
-                  <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea" class="div-block-17"></div>
-                </div>
+                
               </div>
               <div>
-                <div class="w-layout-grid heading-text">
-                  <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32135-5aa24fea" class="cct-copy-copy">
-                    <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
-                  </div>
-                  <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea" class="cct-copy">
-                    <div class="button-2-copy w-button">View Decoded</div>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb3213c-5aa24fea" class="div-block-16">
-                    <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
-                  </div>
-                  <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32148-5aa24fea" class="div-block-17"></div>
-                </div>
+               
+               
               </div>
               <div>
-                <div class="w-layout-grid heading-text">
-                  <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d2053fd-5aa24fea" class="cct-copy-copy">
-                    <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
-                  </div>
-                  <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea" class="cct-copy">
-                    <div class="button-2-copy w-button">View Decoded</div>
-                  </div>
-                </div>
-                <div class="w-layout-grid grid-18">
-                  <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205404-5aa24fea" class="div-block-16">
-                    <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
-                  </div>
-                  <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205410-5aa24fea" class="div-block-17"></div>
-                </div>
+              
+               
               </div>
             </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
+            <!-- <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
               <h1 class="heading-22">Limpopo</h1>
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
@@ -639,7 +610,7 @@
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a4e-5aa24fea" class="div-block-17"></div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       
