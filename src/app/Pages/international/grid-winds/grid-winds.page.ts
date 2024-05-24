@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
-import { ImageViewrPage } from '../image-viewr/image-viewr.page';
+import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 
 @Component({
   selector: 'app-grid-winds',

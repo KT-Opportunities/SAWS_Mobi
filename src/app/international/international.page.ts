@@ -136,7 +136,7 @@ export class InternationalPage implements OnInit {
     this.isDropdownOpen2 = false;
   }
 
-  toggleFormVisibility() {
+  ImageBrowser() {
     this.isFormVisible = false;
     this.isKwazulNatal = false;
     this.isFormVisible1 = true;
@@ -146,27 +146,30 @@ export class InternationalPage implements OnInit {
     this.isCloudForecast = false;
     this.isTSProbability = false;
   }
-  toggleFormVisibility1() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    //this.isFormVisible2 = true;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+
+  GPM() {
+    // this.isFormVisible = false;
+    // this.isKwazulNatal = false;
+    // this.isFormVisible1 = false;
+    // //this.isFormVisible2 = true;
+    // this.isFormVisible3 = false;
+    // this.isSpotGfraph = false;
+    // this.isCloudForecast = false;
+    // this.isTSProbability = false;
     this.router.navigate (['/international/gpm'])
-    this.router.navigate(['/grid-winds']);
   }
-  toggleFormVisibility2() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    this.isFormVisible3 = true;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+
+  GridWinds() {
+    // this.isFormVisible = false;
+    // this.isKwazulNatal = false;
+    // this.isFormVisible1 = false;
+    // this.isFormVisible3 = true;
+    // this.isSpotGfraph = false;
+    // this.isCloudForecast = false;
+    // this.isTSProbability = false;
+    this.router.navigate(['/international/grid-winds']);
   }
+
   KwazulNatalToggle() {
     // this.isKwazulNatal=true;
     this.isFormVisible2 = false;
@@ -178,6 +181,7 @@ export class InternationalPage implements OnInit {
     this.isTSProbability = false;
   }
   MaximumWind() {
+    // this.router.navigate (['/international/grid-maximum'])
     // this.isKwazulNatal=true;
     this.loading = true;
     debugger;
@@ -216,13 +220,13 @@ export class InternationalPage implements OnInit {
       }
     );
 
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible = false;
-    this.isSpotGfraph = true;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+    // this.isFormVisible2 = false;
+    // this.isFormVisible = false;
+    // this.isKwazulNatal = false;
+    // this.isFormVisible = false;
+    // this.isSpotGfraph = true;
+    // this.isCloudForecast = false;
+    // this.isTSProbability = false;
   }
   extractTime(filename: string): string {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);

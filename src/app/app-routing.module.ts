@@ -150,7 +150,7 @@ const routes: Routes = [
   {
     path: 'observation/satelite',
     loadChildren: () =>
-      import('./Pages/satellite/satellite.module').then(
+      import('./Pages/observation/satellite/satellite.module').then(
         (m) => m.SatelliteModule
       ),
   },
@@ -169,7 +169,7 @@ const routes: Routes = [
   {
     path: 'aero-sport/cloud-cover',
     loadChildren: () =>
-      import('./Pages/cloud-cover/cloud-cover.module').then(
+      import('./Pages/aerosport/cloud-cover/cloud-cover.module').then(
         (m) => m.CloudCoverModule
       ),
   },
@@ -200,19 +200,19 @@ const routes: Routes = [
   {
     path: 'advisories',
     loadChildren: () =>
-      import('./Pages/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
+      import('./Pages/forecast/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
   },
 
   {
     path: 'sigmet_airmet',
     loadChildren: () =>
-      import('./Pages/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
+      import('./Pages/forecast/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
   },
 
   {
     path: 'sigmet-gamet',
     loadChildren: () =>
-      import('./Pages/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
+      import('./Pages/forecast/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
   },
   {
     path: 'image-viewr',
@@ -220,15 +220,15 @@ const routes: Routes = [
   },
   {
     path: 'harmonized-grid',
-    loadChildren: () => import('./Pages/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
+    loadChildren: () => import('./Pages/forecast/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
   },
   {
     path: 'tsprobability',
-    loadChildren: () => import('./Pages/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
+    loadChildren: () => import('./Pages/aerosport/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
   },
   {
     path: 'synoptic-analysis',
-    loadChildren: () => import('./Pages/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
+    loadChildren: () => import('./Pages/aerosport/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
   },
   {
     path: 'aero-image-viewer',
@@ -236,28 +236,19 @@ const routes: Routes = [
   },
   {
     path: 'kwazul-natal',
-    loadChildren: () => import('./Pages/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
+    loadChildren: () => import('./Pages/aerosport/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
   },
   {
     path: 'south-west-cape',
-    loadChildren: () => import('./Pages/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
+    loadChildren: () => import('./Pages/aerosport/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
   },
 
  
  
   {
     path: 'central-interio',
-    loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
+    loadChildren: () => import('./Pages/aerosport/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
   },
-  {
-    path: 'grid-winds',
-    loadChildren: () => import('./Pages/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule)
-  },
-  {
-    path: 'grid-maximum',
-    loadChildren: () => import('./Pages/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
-  },
-
   {
     path: 'aviation-home',
     loadChildren: () =>
@@ -322,9 +313,17 @@ const routes: Routes = [
   {
     path: 'international/gpm',
     loadChildren: () =>
-      import('./Pages/gpm/gpm.module').then(
+      import('./Pages/international/gpm/gpm.module').then(
         (m) => m.GpmModule
       ),
+  },
+  {
+    path: 'international/grid-winds',
+    loadChildren: () => import('./Pages/international/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule)
+  },
+  {
+    path: 'international/grid-maximum',
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
   },
   {
     path: 'flight-briefing',
@@ -343,7 +342,7 @@ const routes: Routes = [
   {
     path: 'observation/satelite',
     loadChildren: () =>
-      import('./Pages/satellite/satellite.module').then(
+      import('./Pages/observation/satellite/satellite.module').then(
         (m) => m.SatelliteModule
       ),
   },
@@ -362,7 +361,7 @@ const routes: Routes = [
   {
     path: 'aero-sport/cloud-cover',
     loadChildren: () =>
-      import('./Pages/cloud-cover/cloud-cover.module').then(
+      import('./Pages/aerosport/cloud-cover/cloud-cover.module').then(
         (m) => m.CloudCoverModule
       ),
   },
@@ -393,19 +392,19 @@ const routes: Routes = [
   {
     path: 'advisories',
     loadChildren: () =>
-      import('./Pages/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
+      import('./Pages/forecast/Advisories/advisories.module').then((m) => m.advisoriesPageModule),
   },
 
   {
     path: 'sigmet_airmet',
     loadChildren: () =>
-      import('./Pages/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
+      import('./Pages/forecast/sigmet_airmet/sigmet-airmet.module').then((m) => m.sigmetAirmetPageModule),
   },
 
   {
     path: 'sigmet-gamet',
     loadChildren: () =>
-      import('./Pages/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
+      import('./Pages/forecast/sigmet-gamet/sigmet-gamet.module').then((m) => m.sigmetGametPageModule),
   },
   {
     path: 'image-viewr',
@@ -413,15 +412,15 @@ const routes: Routes = [
   },
   {
     path: 'harmonized-grid',
-    loadChildren: () => import('./Pages/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
+    loadChildren: () => import('./Pages/forecast/harmonized-grid/harmonized-grid.module').then( m => m.HarmonizedGridPageModule)
   },
   {
     path: 'tsprobability',
-    loadChildren: () => import('./Pages/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
+    loadChildren: () => import('./Pages/aerosport/tsprobability/tsprobability.module').then( m => m.TSProbabilityPageModule)
   },
   {
     path: 'synoptic-analysis',
-    loadChildren: () => import('./Pages/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
+    loadChildren: () => import('./Pages/aerosport/synoptic-analysis/synoptic-analysis.module').then( m => m.SynopticAnalysisPageModule)
   },
   {
     path: 'aero-image-viewer',
@@ -429,22 +428,16 @@ const routes: Routes = [
   },
   {
     path: 'kwazul-natal',
-    loadChildren: () => import('./Pages/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
+    loadChildren: () => import('./Pages/aerosport/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
   },
   {
     path: 'south-west-cape',
-    loadChildren: () => import('./Pages/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
-  },
-
- 
- 
-  {
-    path: 'central-interio',
-    loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
-  },
-
-
-
+    loadChildren: () => import('./Pages/aerosport/south-west-cape/south-west-cape.module').then( m => m.SouthWestCapePageModule)
+  }, 
+  // {
+  //   path: 'central-interio',
+  //   loadChildren: () => import('./Pages/central-interio/central-interio.module').then( m => m.CentralInterioPageModule)
+  // },
   
  
 ];

@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { ImageViewrPage } from '../image-viewr/image-viewr.page';
+import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 
 @Component({
   selector: 'app-gpm',

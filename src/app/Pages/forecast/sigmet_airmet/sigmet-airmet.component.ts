@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {APIService} from './../../services/apis.service'
+import {APIService} from '../../../services/apis.service'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { textFile } from '../Advisories/advisories.component';
 @Component({

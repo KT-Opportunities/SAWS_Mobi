@@ -6,15 +6,16 @@ import {
   HostListener,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {APIService} from './../../services/apis.service'
+// import {APIService} from './../../services/apis.service'
 import { AuthService } from 'src/app/services/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { APIService } from 'src/app/services/apis.service';
 @Component({
   selector: 'app-central-interio',
   templateUrl: './central-interio.page.html',
-  styleUrls: ['../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
 })
 export class CentralInterioPage implements OnInit {
 
@@ -58,9 +59,7 @@ export class CentralInterioPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
-
     private http: HttpClient,
-
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
-import { ImageViewrPage } from '../image-viewr/image-viewr.page';
+import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 interface WAFItem {
   foldername: string;
   filename: string;

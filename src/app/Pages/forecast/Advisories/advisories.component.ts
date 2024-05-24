@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { APIService } from './../../services/apis.service';
+import { APIService } from '../../../services/apis.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';

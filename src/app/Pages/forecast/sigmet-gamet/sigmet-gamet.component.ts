@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {APIService} from './../../services/apis.service'
+import {APIService} from '../../../services/apis.service'
 @Component({
   selector: 'app-sigmet-gamet',
   templateUrl: './sigmet-gamet.component.html',
