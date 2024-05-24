@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-grid-maximum',
   templateUrl: './grid-maximum.page.html',
-  styleUrls: ['../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
 })
 export class GridMaximumPage implements OnInit {
   isLogged: boolean = false;

@@ -9,7 +9,7 @@ import { APIService } from 'src/app/services/apis.service';
 @Component({
   selector: 'app-south-west-cape',
   templateUrl: './south-west-cape.page.html',
-  styleUrls: ['../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
 })
 export class SouthWestCapePage implements OnInit {
   isLogged: boolean = false;

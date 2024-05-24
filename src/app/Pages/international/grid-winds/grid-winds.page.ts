@@ -17,7 +17,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 @Component({
   selector: 'app-grid-winds',
   templateUrl: './grid-winds.page.html',
-  styleUrls: ['../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
 })
 export class GridWindsPage implements OnInit {
   isLogged: boolean = false;

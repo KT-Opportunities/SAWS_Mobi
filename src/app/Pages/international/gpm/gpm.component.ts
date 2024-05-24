@@ -9,7 +9,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 @Component({
   selector: 'app-gpm',
   templateUrl: './gpm.component.html',
-  styleUrls: ['../../international/international.page.scss'],
+  styleUrls: ['../../../international/international.page.scss'],
 })
 export class GpmComponent  implements OnInit {
 
