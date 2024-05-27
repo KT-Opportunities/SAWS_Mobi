@@ -26,16 +26,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'folder/:id',
-    loadChildren: () =>
-      import('./folder/folder.module').then((m) => m.FolderPageModule),
-  },
-  {
-    path: 'folder',
-    loadChildren: () =>
-      import('./folder/folder.module').then((m) => m.FolderPageModule),
-  },
-  {
     path: 'register',
     loadChildren: () =>
       import('./auth/register/register.module').then(
@@ -69,7 +59,7 @@ const routes: Routes = [
   {
     path: 'forecast',
     loadChildren: () =>
-      import('./forecast/forecast.module').then((m) => m.ForecastPageModule),
+      import('./Pages/forecast/forecast.module').then((m) => m.ForecastPageModule),
   },
 
   {
@@ -82,7 +72,7 @@ const routes: Routes = [
   {
     path: 'color-coded',
     loadChildren: () =>
-      import('./color-coded/color-coded.module').then(
+      import('./Pages/forecast/color-coded/color-coded.module').then(
         (m) => m.ColorCodedPageModule
       ),
   },
@@ -106,23 +96,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'international',
-    loadChildren: () =>
-      import('./international/international.module').then(
-        (m) => m.InternationalPageModule
-      ),
-  },
-  {
-    path: 'flight-briefing',
-    loadChildren: () =>
-      import('./flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
-      ),
-  },
-  {
     path: 'observation',
     loadChildren: () =>
-      import('./observation/observation.module').then(
+      import('./Pages/observation/observation.module').then(
         (m) => m.ObservationPageModule
       ),
   },
@@ -134,15 +110,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'domestic',
+    path: 'observation/observation-metar-history',
     loadChildren: () =>
-      import('./domestic/domestic.module').then((m) => m.DomesticPageModule),
-  },
-  {
-    path: 'aero-sport',
-    loadChildren: () =>
-      import('./aero-sport/aero-sport.module').then(
-        (m) => m.AeroSportPageModule
+      import('./Pages/observation/observation-metar-history/observation-metar-history.module').then(
+        (m) => m.ObservationMetarHistoryPageModule
       ),
   },
   {
@@ -163,13 +134,13 @@ const routes: Routes = [
     path: 'observation-metar-history',
     loadChildren: () =>
       import(
-        './observation-metar-history/observation-metar-history.module'
+        './Pages/observation/observation-metar-history/observation-metar-history.module'
       ).then((m) => m.ObservationMetarHistoryPageModule),
   },
   {
     path: 'web-cam',
     loadChildren: () =>
-      import('./web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
   },
   {
     path: 'advisories',
@@ -233,7 +204,7 @@ const routes: Routes = [
   {
     path: 'color-coded',
     loadChildren: () =>
-      import('./color-coded/color-coded.module').then(
+      import('./Pages/forecast/color-coded/color-coded.module').then(
         (m) => m.ColorCodedPageModule
       ),
   },
@@ -273,7 +244,7 @@ const routes: Routes = [
   {
     path: 'international',
     loadChildren: () =>
-      import('./international/international.module').then(
+      import('./Pages/international/international.module').then(
         (m) => m.InternationalPageModule
       ),
   },
@@ -295,15 +266,8 @@ const routes: Routes = [
   {
     path: 'flight-briefing',
     loadChildren: () =>
-      import('./flight-briefing/flight-briefing.module').then(
+      import('./Pages/flight-briefing/flight-briefing.module').then(
         (m) => m.FlightBriefingPageModule
-      ),
-  },
-  {
-    path: 'observation',
-    loadChildren: () =>
-      import('./observation/observation.module').then(
-        (m) => m.ObservationPageModule
       ),
   },
   {
@@ -316,12 +280,12 @@ const routes: Routes = [
   {
     path: 'domestic',
     loadChildren: () =>
-      import('./domestic/domestic.module').then((m) => m.DomesticPageModule),
+      import('./Pages/domestic/domestic.module').then((m) => m.DomesticPageModule),
   },
   {
     path: 'aero-sport',
     loadChildren: () =>
-      import('./aero-sport/aero-sport.module').then(
+      import('./Pages/aerosport/aero-sport.module').then(
         (m) => m.AeroSportPageModule
       ),
   },
@@ -341,13 +305,13 @@ const routes: Routes = [
     path: 'observation-metar-history',
     loadChildren: () =>
       import(
-        './observation-metar-history/observation-metar-history.module'
+        './Pages/observation/observation-metar-history/observation-metar-history.module'
       ).then((m) => m.ObservationMetarHistoryPageModule),
   },
   {
     path: 'web-cam',
     loadChildren: () =>
-      import('./web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
   },
   {
     path: 'advisories',

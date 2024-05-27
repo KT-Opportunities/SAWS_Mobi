@@ -1,11 +1,11 @@
 import { Component, OnInit,ElementRef,
   HostListener, } from '@angular/core';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common'; 
+import { AuthService } from 'src/app/services/auth.service';
 
 
 

@@ -1,10 +1,9 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
+import { AuthService } from 'src/app/services/auth.service';
+import { ImageViewrPage } from '../image-viewr/image-viewr.page';
 @Component({
   selector: 'app-international',
   templateUrl: './international.page.html',

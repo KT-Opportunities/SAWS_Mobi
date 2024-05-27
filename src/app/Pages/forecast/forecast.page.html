@@ -1,6 +1,6 @@
 <ion-content>
-  <div *ngIf="loading == true" class="loading-indicator">
-    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  <div *ngIf="loading === true" class="loading-indicator">
+    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
   </div>
   <section class="list-page">
     <!-- <div class="div-block-2">
@@ -18,7 +18,7 @@
       <div
         class=""
         [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn==true"
+        *ngIf="isLoggedIn === true"
       >
         <h1
           class="heading-6"

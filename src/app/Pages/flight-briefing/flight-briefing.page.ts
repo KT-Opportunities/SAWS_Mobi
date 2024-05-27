@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-flight-briefing',

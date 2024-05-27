@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/services/auth.service';
 interface ResponseItem {
   foldername: string;
   filename: string;

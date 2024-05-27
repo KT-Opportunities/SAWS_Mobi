@@ -6,13 +6,15 @@ import {
   HostListener,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+// import { AuthService } from '../services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
+// import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
+import { ImageViewrPage } from '../image-viewr/image-viewr.page';
 interface ResponseItem {
   foldername: string;
   filename: string;

@@ -6,12 +6,13 @@ import {
   HostListener,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+// import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-aero-sport',
   templateUrl: './aero-sport.page.html',
