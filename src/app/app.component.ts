@@ -48,27 +48,34 @@ export class AppComponent {
     this.initializeApp();
     this.fetchUserData();
   }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Override system dark mode
       document.body.classList.toggle('light-theme', true);
     });
   }
+
   fetchUserData() {
     this.userDetails = this.authService.getUserData();
   }
+
   aviationcode() {
     this.router.navigate(['/aviation-code']);
   }
+
   contactUs() {
     this.router.navigate(['/contact-us']);
   }
+
   relatedLink() {
     window.location.href = 'http://aviation.weathersa.co.za/#links';
   }
+
   news() {
     this.router.navigate(['/news']);
   }
+
   messagelist() {
     if (this.authService.getIsLoggedIn()) {
       this.router.navigate(['/message-list']);
@@ -78,6 +85,7 @@ export class AppComponent {
       this.router.navigate(['/login']);
     }
   }
+
   // provideFeedback() {
   //   if (this.authService.getIsLoggedIn()) {
   //     this.router.navigate(['/message-list']);
@@ -87,6 +95,7 @@ export class AppComponent {
 
   //   }
   // }
+
   gotoProvideFeedback() {
     if (this.authService.getIsLoggedIn()) {
       this.router.navigate(['/message-list']);
@@ -95,13 +104,16 @@ export class AppComponent {
       this.router.navigate(['/login']);
     }
   }
+
   subscriptionPackage() {
     this.router.navigate(['/subscription-package']);
   }
+
   termsAndCondition() {
     window.location.href =
       'http://aviation.weathersa.co.za/#termsAndConditions';
   }
+  
   POPIA() {
     window.location.href = 'http://www.weathersa.co.za/home/popia';
   }

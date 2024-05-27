@@ -10,18 +10,18 @@ const routes: Routes = [
   {
     path: 'landing-page',
     loadChildren: () =>
-      import('./landing-page/landing-page.module').then(
+      import('./Pages/home/landing-page/landing-page.module').then(
         (m) => m.LandingPageModule
       ),
   },
   {
     path: 'attachment-file',
-    loadChildren: () => import('./chat/attachment-file/attachment-file.module').then( m => m.AttachmentFilePageModule)
+    loadChildren: () => import('./Pages/side-bar-menu/chat/attachment-file/attachment-file.module').then( m => m.AttachmentFilePageModule)
   },
   {
     path: 'subscription-package/:id', // Define the route with the ID parameter
     loadChildren: () =>
-      import('./subscription-package/subscription-package.module').then(
+      import('./Pages/side-bar-menu/subscription-package/subscription-package.module').then(
         (m) => m.SubscriptionPackagePageModule
       ),
   },
@@ -89,40 +89,19 @@ const routes: Routes = [
   {
     path: 'aviation-code',
     loadChildren: () =>
-      import('./aviation-code/aviation-code.module').then(
+      import('./Pages/side-bar-menu/aviation-code/aviation-code.module').then(
         (m) => m.AviationCodePageModule
-      ),
-  },
-  {
-    path: 'contact-us',
-    loadChildren: () =>
-      import('./contact-us/contact-us.module').then(
-        (m) => m.ContactUsPageModule
       ),
   },
   {
     path: 'news',
     loadChildren: () =>
-      import('./news/news.module').then((m) => m.NewsPageModule),
-  },
-  {
-    path: 'subscription-package',
-    loadChildren: () =>
-      import('./subscription-package/subscription-package.module').then(
-        (m) => m.SubscriptionPackagePageModule
-      ),
-  },
-   {
-    path: 'subscription-Successful',
-    loadChildren: () =>
-      import('./subscription-package/subscription-package.module').then(
-        (m) => m.SubscriptionPackagePageModule
-      ),
+      import('./Pages/side-bar-menu/news/news.module').then((m) => m.NewsPageModule),
   },
   {
     path: 'provide-feedback',
     loadChildren: () =>
-      import('./provide-feedback/provide-feedback.module').then(
+      import('./Pages/side-bar-menu/provide-feedback/provide-feedback.module').then(
         (m) => m.ProvideFeedbackPageModule
       ),
   },
@@ -174,14 +153,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'chat',
-    loadChildren: () =>
-      import('./chat/chat.module').then((m) => m.ChatPageModule),
-  },
-  {
     path: 'message-list',
     loadChildren: () =>
-      import('../app/provide-feedback/message-list/message-list.module').then(
+      import('./Pages/side-bar-menu/provide-feedback/message-list/message-list.module').then(
         (m) => m.MessageListPageModule
       ),
   },
@@ -266,41 +240,34 @@ const routes: Routes = [
   {
     path: 'aviation-code',
     loadChildren: () =>
-      import('./aviation-code/aviation-code.module').then(
+      import('./Pages/side-bar-menu/aviation-code/aviation-code.module').then(
         (m) => m.AviationCodePageModule
       ),
   },
   {
     path: 'contact-us',
     loadChildren: () =>
-      import('./contact-us/contact-us.module').then(
+      import('./Pages/side-bar-menu/contact-us/contact-us.module').then(
         (m) => m.ContactUsPageModule
       ),
   },
   {
     path: 'news',
     loadChildren: () =>
-      import('./news/news.module').then((m) => m.NewsPageModule),
+      import('./Pages/side-bar-menu/news/news.module').then((m) => m.NewsPageModule),
   },
   {
     path: 'subscription-package',
     loadChildren: () =>
-      import('./subscription-package/subscription-package.module').then(
+      import('./Pages/side-bar-menu/subscription-package/subscription-package.module').then(
         (m) => m.SubscriptionPackagePageModule
       ),
   },
    {
     path: 'subscription-Successful',
     loadChildren: () =>
-      import('./subscription-package/subscription-package.module').then(
+      import('./Pages/side-bar-menu/subscription-package/subscription-package.module').then(
         (m) => m.SubscriptionPackagePageModule
-      ),
-  },
-  {
-    path: 'provide-feedback',
-    loadChildren: () =>
-      import('./provide-feedback/provide-feedback.module').then(
-        (m) => m.ProvideFeedbackPageModule
       ),
   },
   {
@@ -368,14 +335,7 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () =>
-      import('./chat/chat.module').then((m) => m.ChatPageModule),
-  },
-  {
-    path: 'message-list',
-    loadChildren: () =>
-      import('../app/provide-feedback/message-list/message-list.module').then(
-        (m) => m.MessageListPageModule
-      ),
+      import('./Pages/side-bar-menu/chat/chat.module').then((m) => m.ChatPageModule),
   },
   {
     path: 'observation-metar-history',

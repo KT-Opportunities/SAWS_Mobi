@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
-import { Feedback } from '../Models/message.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
 import { fileDataFeedback } from 'src/app/Models/File';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AttachmentFilePage } from './attachment-file/attachment-file.page';
+import { AuthService } from 'src/app/services/auth.service';
+import { Feedback } from 'src/app/Models/message.model';
 interface Message {
   feedback?: string;
   response?: string;

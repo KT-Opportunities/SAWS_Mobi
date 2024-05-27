@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { APIService } from '../services/apis.service';
 import {} from '@ionic/angular';
 import { SwiperModule } from 'swiper/types';
 import { Swiper } from 'swiper';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-
 import 'swiper/css';
+import { AuthService } from 'src/app/services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
 
 export interface Advertisement {
   imageUrl: string;
