@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-kwazul-natal',
   templateUrl: './kwazul-natal.page.html',
-  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['./../aero-sport.page.scss'],
 })
 export class KwazulNatalPage implements OnInit {
   isLogged: boolean = false;
