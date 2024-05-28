@@ -15,7 +15,7 @@ import { APIService } from 'src/app/services/apis.service';
 @Component({
   selector: 'app-central-interio',
   templateUrl: './central-interio.page.html',
-  styleUrls: ['../../../aero-sport/aero-sport.page.scss'],
+  styleUrls: ['./../aero-sport.page.scss'],
 })
 export class CentralInterioPage implements OnInit {
 

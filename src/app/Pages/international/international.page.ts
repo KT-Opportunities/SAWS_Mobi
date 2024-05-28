@@ -136,51 +136,23 @@ export class InternationalPage implements OnInit {
   }
 
   ImageBrowser() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = true;
-    this.isFormVisible2 = false;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+    this.router.navigate (['/international/image-browser'])
   }
 
   GPM() {
-    // this.isFormVisible = false;
-    // this.isKwazulNatal = false;
-    // this.isFormVisible1 = false;
-    // //this.isFormVisible2 = true;
-    // this.isFormVisible3 = false;
-    // this.isSpotGfraph = false;
-    // this.isCloudForecast = false;
-    // this.isTSProbability = false;
     this.router.navigate (['/international/gpm'])
   }
 
   GridWinds() {
-    // this.isFormVisible = false;
-    // this.isKwazulNatal = false;
-    // this.isFormVisible1 = false;
-    // this.isFormVisible3 = true;
-    // this.isSpotGfraph = false;
-    // this.isCloudForecast = false;
-    // this.isTSProbability = false;
     this.router.navigate(['/international/grid-winds']);
   }
 
-  KwazulNatalToggle() {
-    // this.isKwazulNatal=true;
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = true;
-    this.isFormVisible = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+  SIGWXCharts() {
+    this.router.navigate(['/international/sigwx-charts']);
   }
+
   MaximumWind() {
-    // this.router.navigate (['/international/grid-maximum'])
+    this.router.navigate (['/international/grid-maximum'])
     // this.isKwazulNatal=true;
     this.loading = true;
     debugger;
@@ -227,6 +199,16 @@ export class InternationalPage implements OnInit {
     // this.isCloudForecast = false;
     // this.isTSProbability = false;
   }
+
+  GraphicalSigmetAirmet() {
+    this.router.navigate(['/international/graphic-sigmet-airmet']);
+ }
+
+ Humidity() {
+  this.router.navigate(['/international/humidity']);
+ }
+
+
   extractTime(filename: string): string {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);
     if (timeMatch) {
@@ -237,6 +219,8 @@ export class InternationalPage implements OnInit {
     }
     return '';
   }
+
+
   openImageViewer(item: any) {
     // Extract folderName and fileName from the current item
     const folderName = item.foldername;
@@ -280,39 +264,7 @@ export class InternationalPage implements OnInit {
     });
   }
 
-  TSProbability() {
-    // this.isKwazulNatal=true;
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = true;
-  }
-  SigmetArmet() {
-    // this.isKwazulNatal=true;
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = true;
-  }
-  aerosportPage() {
-    this.router.navigate(['/landing-page']);
-  }
 
-  Humidity() {
-    this.isCloudForecast = true;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    this.isFormVisible2 = false;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
-  }
 
   nextDay() {
     this.nextday = true;
@@ -321,5 +273,9 @@ export class InternationalPage implements OnInit {
   previousDay() {
     this.nextday = false;
     this.prevday = true;
+  }
+
+  backHome() {
+    this.router.navigate(['/']);
   }
 }

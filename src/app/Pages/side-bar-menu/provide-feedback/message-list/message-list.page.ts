@@ -7,7 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.page.html',
-  styleUrls: ['../../subscription-package/subscription-package.page.scss'],
+  // styleUrls: ['../../subscription-package/subscription-package.page.scss'],
+  styleUrls: ['./..//provide-feedback.page.scss'],
 })
 export class MessageListPage implements OnInit {
   isLogged: boolean = false;

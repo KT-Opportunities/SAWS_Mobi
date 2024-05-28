@@ -3,7 +3,6 @@
     <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
   </div>
   <section class="list-page">
-
     <div class="" *ngIf="isFormVisible">
       <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn ===true">
         <h1 class="heading-6" style="text-align: center">International</h1>
@@ -16,7 +15,7 @@
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Humidity</h1>
           </a>
-          <div (click)="KwazulNatalToggle()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
+          <div (click)="SIGWXCharts()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">SIGWX Charts</h1>
           </div>
@@ -33,7 +32,7 @@
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Image Browser</h1>
           </div>
-          <div (click)="TSProbability()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          <div (click)="GraphicalSigmetAirmet()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Graphical SIGMET/AIRMET</h1>
           </div>
@@ -44,7 +43,7 @@
       <h1 class="heading-6">International</h1>
       <div class="w-layout-grid grid-list">
         <div id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" class="link-block-3 w-inline-block"
-          (click)="TSProbability()">
+          (click)="GraphicalSigmetAirmet()">
           <h1 class="heading-5">Graphics SIGMENT/AIRMET</h1>
         </div>
       </div>
@@ -239,7 +238,7 @@
       <div class="aerosport">
         <div class="aerosportScrol">
           <div class="div-block-464">
-            <h1 class="sub-headings">West                     </h1>
+            <h1 class="sub-headings">West</h1>
             <div class="w-form">
               <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-3"
                 data-wf-page-id="65ef0e606bbd1609bb9b1d15" data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252">
@@ -1463,7 +1462,7 @@
     <div class="bottomdiv" style="margin-top: 148%" *ngIf="isFormVisible">
       <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
       <div class="footerdiv">
-        <a (click)="aerosportPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+        <a (click)="backHome()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
             src="../../assets/Group-3489.svg" loading="lazy" alt="" />
           <h6 class="heading-10-copy" style="
               color: #fff;

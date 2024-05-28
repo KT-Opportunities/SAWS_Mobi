@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-payment-type',
   templateUrl: './payment-type.page.html',
-  styleUrls: ['../../subscription-package/subscription-package.page.scss'],
+  styleUrls: ['./../subscription-package.page.scss'],
 })
 export class PaymentTypePage implements OnInit {
  // Boolean variables to track the visibility of sections

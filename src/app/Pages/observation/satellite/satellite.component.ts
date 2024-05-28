@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-satellite',
   templateUrl: './satellite.component.html',
-  styleUrls: ['../../../observation/observation.page.scss'],
+  styleUrls: ['./../observation.page.scss'],
 })
 export class SatelliteComponent  implements OnInit {
 
