@@ -332,6 +332,10 @@ const routes: Routes = [
     path: 'international/graphic-sigmet-airmet',
     loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
   },
+  {
+    path: 'international/sigwx-charts',
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+  },
 
   // --- Flight-briefing url paths
   {
