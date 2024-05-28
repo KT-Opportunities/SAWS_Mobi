@@ -1,3 +1,31 @@
-<p>
-  color-coded-warnings works!
-</p>
+<ion-content>
+
+  <div>
+
+  </div>
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
+  </div>
+
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" observationPageNavigation()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+          Forecast
+        </h6>
+      </div>
+    </div>
+  </div>
+</ion-footer>
