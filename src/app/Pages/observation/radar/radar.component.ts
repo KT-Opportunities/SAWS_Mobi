@@ -11,6 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RadarComponent  implements OnInit {
 
+  isLogged: boolean = false;
+  loading: boolean = false;
+
   constructor(
     private router: Router,
     private authService: AuthService,

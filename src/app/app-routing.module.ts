@@ -214,12 +214,12 @@ const routes: Routes = [
   {
     path: 'observation/metar',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/metar/metar.module').then((m) => m.MetarModule),
   },
   {
     path: 'observation/metar-color-coded',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/metar-color-coded/metar-color-coded.module').then((m) => m.MetarColorCodedModule),
   },
   {
     path: 'observation/metar-recent',
@@ -229,27 +229,27 @@ const routes: Routes = [
   {
     path: 'observation/metar-history',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/metar-history/metar-history.module').then((m) => m.MetarHistoryModule),
   },
   {
     path: 'observation/speci',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/speci/speci.module').then((m) => m.SpeciModule),
   },
   {
     path: 'observation/metar-taf-recent',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/metar-taf-recent/metar-taf-recent.module').then((m) => m.MetarTafRecentModule),
   },
   {
     path: 'observation/radar',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/radar/radar.module').then((m) => m.RadarModule),
   },
   {
     path: 'observation/weather-map',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
+      import('./Pages/observation/weather-map/weather-map.module').then((m) => m.WeatherMapModule),
   },
 
 
@@ -266,12 +266,12 @@ const routes: Routes = [
 
   {
     path: 'image-viewr',
-    loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule)
+    loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule),
   },
 
   {
     path: 'aero-image-viewer',
-    loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule)
+    loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule),
   }, 
 
   {
@@ -314,27 +314,27 @@ const routes: Routes = [
   },
   {
     path: 'international/grid-winds',
-    loadChildren: () => import('./Pages/international/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule)
+    loadChildren: () => import('./Pages/international/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule),
   },
   {
     path: 'international/grid-maximum',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
   },
   {
     path: 'international/humidity',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
   },
   {
     path: 'international/image-browser',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
   },
   {
     path: 'international/graphic-sigmet-airmet',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
   },
   {
     path: 'international/sigwx-charts',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule)
+    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
   },
 
   // --- Flight-briefing url paths
