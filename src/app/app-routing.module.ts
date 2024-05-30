@@ -193,6 +193,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'observation/metar',
+    loadChildren: () =>
+      import('./Pages/observation/metar/metar.module').then(
+        (m) => m.MetarModule
+      ),
+  },
+  {
     path: 'observation/satelite',
     loadChildren: () =>
       import('./Pages/observation/satellite/satellite.module').then(
@@ -200,21 +207,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'observation/observation-metar-history',
-    loadChildren: () =>
-      import('./Pages/observation/observation-metar-history/observation-metar-history.module').then(
-        (m) => m.ObservationMetarHistoryPageModule
-      ),
-  },
-  {
     path: 'observation/web-cam',
     loadChildren: () =>
       import('./Pages/observation/web-cam/web-cam.module').then((m) => m.WebCamPageModule),
-  },
-  {
-    path: 'observation/metar',
-    loadChildren: () =>
-      import('./Pages/observation/metar/metar.module').then((m) => m.MetarModule),
   },
   {
     path: 'observation/metar-color-coded',
@@ -505,13 +500,6 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () =>
       import('./Pages/side-bar-menu/chat/chat.module').then((m) => m.ChatPageModule),
-  },
-  {
-    path: 'observation-metar-history',
-    loadChildren: () =>
-      import(
-        './Pages/observation/observation-metar-history/observation-metar-history.module'
-      ).then((m) => m.ObservationMetarHistoryPageModule),
   },
   {
     path: 'image-viewr',

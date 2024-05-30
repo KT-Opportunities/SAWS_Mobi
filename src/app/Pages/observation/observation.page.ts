@@ -7,13 +7,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common'; 
 import { AuthService } from 'src/app/services/auth.service';
 
-
-
-// interface SpeciReport {
-//   date: string;
-//   time: string;
-//   content: string;
-// }
 export interface Metar {
   raw_text: string;
   color?: string;
@@ -25,7 +18,7 @@ export interface Metar {
   styleUrls: ['./observation.page.scss'],
 })
 
-export class ObservationPage implements OnInit {
+export class ObservationPage {
   
   metarData: Metar[] = [];
   speciReportData: any[] = [];
@@ -74,8 +67,6 @@ export class ObservationPage implements OnInit {
      private elRef: ElementRef,
      private spinner: NgxSpinnerService,
      private datePipe: DatePipe
-    
-    
  ) {
   this.speciReportData = [
     {
@@ -88,6 +79,7 @@ export class ObservationPage implements OnInit {
   // Format current date using DatePipe
   this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd') || ''; // 'yyyy-MM-dd' is the desired format
 }
+
 getCurrentDateTime(): string {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
@@ -108,15 +100,8 @@ getCurrentDateTime(): string {
 
   return content;
 }
-ngOnInit(): void {
-  // Example foldername and time, adjust these values as needed
-  
-}
-  
-
-
-
-
+  // ngOnInit(): void {
+  // }  
   
   fetchMetarReports(): void {
     this.loading = true; // Set loading to true before fetching data
@@ -225,23 +210,28 @@ ngOnInit(): void {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-  metar () {
-    this.isMetar = false;
-    this.isRanderImages = true
+
+  NavigateToRadar() {
+    // this.isMetar = false;
+    // this.isRanderImages = true
+    this.router.navigate (['/observation/radar'])
   }
-  satelite() {
-    this.isMetar= false;
-    // this.issatelite = true
+
+  NavigateToSatelite() {
     this.router.navigate (['/observation/satelite'])
   }
-  speci () {
-    this.isMetar = false;
-    this.isSpeci = true;
-    this.fetchSpeciReport();
+
+  NavigateToSpeci () {
+    // this.isMetar = false;
+    // this.isSpeci = true;
+    // this.fetchSpeciReport();
+    this.router.navigate (['/observation/speci'])
   }
-  weathermap () {
-    this.isMetar = false;
-    this.isWeatherMap = true
+
+  NavigateToWeatherMap () {
+    // this.isMetar = false;
+    // this.isWeatherMap = true
+    this.router.navigate (['/observation/weather-map'])
   }
   recentmeter(){
     
@@ -260,32 +250,39 @@ ngOnInit(): void {
     this.isWeatherMap = false;
   }
 
-  colorcoded () {
-  this.isMetar = false;
-  this.iscodeTafs = true
-  this.fetchMetarReports();
-  }
-  ObservMeter () {
-    this.isMetar = false;
-    this.isObservMeter = true
-    this.fetchMetarReports();
-    this.router.navigate (['/observation'])
+  NavigateToColorCoded () {
+  // this.isMetar = false;
+  // this.iscodeTafs = true
+  // this.fetchMetarReports();
+  this.router.navigate (['/observation/metar-color-coded'])
   }
 
-  MetarHistory() {
-  this.isMetar = false;
-  this.isMetarHistory = true;
-
+  NavigateToMetar () {
+    // this.isMetar = false;
+    // this.isObservMeter = true
+    // this.fetchMetarReports();
+    this.router.navigate (['/observation/metar'])
   }
 
-  RecentMetar(){
-    this.isMetar = false;
-    this.isRecentMetar = true
-    this.fetchRecentTafs()
+  // MetarHistory() {
+  // this.isMetar = false;
+  // this.isMetarHistory = true;
+
+  // }
+
+  NavigateToMetarRecent(){
+    // this.isMetar = false;
+    // this.isRecentMetar = true
+    // this.fetchRecentTafs();
+    this.router.navigate (['/observation/metar-history'])
   }
-  RecentTafs() {
-    this.isMetar = false;
-    this.isRecentTafs = true;
+
+  NavigateToMetarHistory(){
+    this.router.navigate (['/observation/metar-history'])
+  }
+
+  NavigateToMetarTafRecent() {
+    this.router.navigate (['/observation/metar-taf-recent'])
   }
 
   toggleDropdown(dropdown: string) {
@@ -437,9 +434,9 @@ ngOnInit(): void {
   observPage() {
     this.router.navigate(['/landing-page']);
   }
-  observMetarPage() {
-    // this.router.navigate(['/news']);
-    this.router.navigate(['/web-cam']);
+  
+  NavigateToWebCam() {
+    this.router.navigate(['observation/web-cam']);
   }
  
 }
