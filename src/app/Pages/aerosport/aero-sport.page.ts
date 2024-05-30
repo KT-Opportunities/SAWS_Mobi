@@ -383,14 +383,14 @@ TemperatureImage: any;
   
   KwazulNatalToggle() {
     // this.isKwazulNatal=true;
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = true;
-    this.isFormVisible = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
-    this.router.navigate(['/kwazul-natal']);
+    // this.isFormVisible2 = false;
+    // this.isFormVisible = false;
+    // this.isKwazulNatal = true;
+    // this.isFormVisible = false;
+    // this.isSpotGfraph = false;
+    // this.isCloudForecast = false;
+    // this.isTSProbability = false;
+    this.router.navigate(['aero-sport/kwazul-natal']);
   }
   SpotGraphToggle() {
     // this.isKwazulNatal=true;

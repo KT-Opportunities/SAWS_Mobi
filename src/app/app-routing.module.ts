@@ -468,14 +468,21 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'aero-sport/cloud-forecast',
+    path: 'aero-sport/cloud-cover',
     loadChildren: () =>
       import('./Pages/aerosport/cloud-cover/cloud-cover.module').then(
         (m) => m.CloudCoverModule
       ),
   },
   {
-    path: 'aero-sport/kwazul-natal',
+    path: 'aero-sport/cloud-forecast',
+    loadChildren: () =>
+      import('./Pages/aerosport/cloud-forecast/cloud-forecast.module').then(
+        (m) => m.CloudForecastModule
+      ),
+  },
+  {
+    path: 'aero-sport/kwazulu-natal',
     loadChildren: () => import('./Pages/aerosport/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
   },
   {
