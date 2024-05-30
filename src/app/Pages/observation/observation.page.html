@@ -1,10 +1,10 @@
 <ion-content>
-  <div *ngIf="loading === true" class="loading-indicator">
+  <!-- <div *ngIf="loading === true" class="loading-indicator">
     <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
-  </div>
+  </div> -->
 
   <section class="list-page">
-    <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn === true">
+    <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
       <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
         Observation
       </h1>
@@ -56,9 +56,7 @@
       </div>
     </div>
 
-
-
-    <div class="list-div" *ngIf="isLoggedIn === false">
+    <div class="list-div" *ngIf="!isLoggedIn">
       <h1 class="heading-6">Observation</h1>
       <div class="w-layout-grid grid-list">
         <div (click)="NavigateToMetar()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
@@ -72,9 +70,7 @@
       </div>
     </div>
 
-
-
-    <section class="ob-randar" *ngIf="isRanderImages">
+    <!-- <section class="ob-randar" *ngIf="isRanderImages">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
       <div class="metar-history-main-div" id="maindiv">
         <h1 class="heading-6" id="RaderImages">Radar Images</h1>
@@ -166,9 +162,9 @@
         </div>
       </div>
 
-    </section>
+    </section> -->
 
-    <section class="colour-coded-tafs-page" *ngIf="isObservMeter">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isObservMeter">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
       <div class="tafs-div">
@@ -197,7 +193,6 @@
 
 
             <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
-              <!-- <h1 class="heading-22">Other Regions</h1> -->
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
@@ -209,9 +204,6 @@
                 </div>
               </div>
               <div>
-                <!-- <div>
-                  <p>Last Modified: {{ report.lastmodified }}</p>
-                </div> -->
                 <div class="w-layout-grid heading-text" *ngFor="let report of metarReports">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea" class="cct-copy-copy">
                     <h1 class="heading-21">{{ report.filetextcontent }}</h1>
@@ -222,7 +214,6 @@
                 </div>
                 <div class="w-layout-grid grid-18">
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a16-5aa24fea" class="div-block-16">
-                    <!-- <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p> -->
                   </div>
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a22-5aa24fea" class="div-block-17"></div>
                 </div>
@@ -245,7 +236,7 @@
       <div class="bottomdiv" style="margin-top: 147% !important;">
         <img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
       </div>
-    </section>
+    </section> -->
 
     <!-- <section class="colour-coded-tafs-page" *ngIf="isSpeci">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
@@ -279,8 +270,7 @@
       </div>
     </section> -->
 
-
-    <section class="colour-coded-tafs-page" *ngIf="isSpeci">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isSpeci">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
       <div class="tafs-div">
@@ -315,7 +305,6 @@
 
               <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15"
                 *ngFor="let speciReport of speciReportData">
-                <!-- <h1 class="heading-22">{{ speciReport.filename}}</h1> -->
                 <div class="div-block-32">
                   <div class="w-layout-grid ccta-grid">
                     <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
@@ -337,7 +326,6 @@
                   </div>
                   <div class="w-layout-grid grid-18">
                     <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c6d-5aa24fea" class="div-block-16">
-                      <!-- <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p> -->
                     </div>
                     <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea" class="div-block-17"></div>
                   </div>
@@ -405,53 +393,9 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
-
-    <!-- <ion-content class="ion-padding">
-      <section class="colour-coded-tafs-page">
-        <div class="speci-reports">
-        
-          <div *ngIf="speciReportData.length > 0">
-            <div *ngFor="let speciReport of speciReportData" class="speci-report">
-              <h1 class="heading-21">SPECI Report</h1>
-              <div class="date-time">
-                <h1 class="heading-7">Date:</h1>
-                <h1 class="heading-8">{{ speciReport.lastmodified | date }}</h1>
-              </div>
-              <div class="report-content">
-                <p class="paragraph-2">{{ speciReport.filetextcontent }}</p>
-              </div>
-            </div>
-          </div>
-         
-          <div *ngIf="speciReportData.length === 0">
-            <p>No SPECI reports available</p>
-          </div>
-                  <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
-                    <div class="button-2-copy w-button">View Decoded</div>
-        </div>
-   </div>
-   </section> 
-    </ion-content> -->
-
-    <!--     
-    <div *ngIf="recentTafs.length > 0">
-      <h2>Recent TAFs</h2>
-      <ul>
-        <li *ngFor="let taf of recentTafs">
-       
-          <p>{{ taf.date }}</p>
-          <p>{{ taf.text }}</p>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="recentTafs.length === 0">
-      <p>No recent TAFs available.</p>
-    </div> -->
-
-
-    <section class="colour-coded-tafs-page" *ngIf="iscodeTafs">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="iscodeTafs">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
       <div class="tafs-div">
@@ -509,7 +453,7 @@
 
               </div>
             </div>
-            <!-- <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
+            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
               <h1 class="heading-22">Limpopo</h1>
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
@@ -569,7 +513,7 @@
                   <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a4e-5aa24fea" class="div-block-17"></div>
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
 
@@ -577,10 +521,9 @@
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
 
       </div>
-    </section>
+    </section> -->
 
-
-    <section class="taf-accuracy" *ngIf="issatelite">
+    <!-- <section class="taf-accuracy" *ngIf="issatelite">
 
       <div class="cloud-cover">
         <h1 class="heading-12">SAWS Satelite</h1>
@@ -671,12 +614,11 @@
 
 
 
-    </section>
+    </section> -->
 
     <!-- RecentMetar- -->
-
-    <section class="re" *ngIf="isRecentMetar">
-      <!-- <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div> -->
+    
+    <!--  <section class="re" *ngIf="isRecentMetar">
       <div class="recent-tafs">
         <h1 class="heading-6" id="heading7">Recent TAFs</h1>
         <div>
@@ -726,14 +668,11 @@
                     class="submit-button-3-copy w-button" value="Save"><input type="submit" data-wait="Please wait..."
                     class="submit-button-3 w-button" value="Cancel"></div>
                 <div class="div-block-40">
-                  <!-- <h4 class="heading-45">Successfully added a template</h4> -->
                 </div>
               </form>
               <div class="">
-                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="">
-                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
               </div>
             </div>
             <div id="w-node-_38257011-dae8-5f44-9e44-5a2e6988a1a7-9377a649">
@@ -781,18 +720,13 @@
                   </div>
                 </form>
                 <div class="w-form-done">
-                  <!-- <div>Thank you! Your submission has been received!</div> -->
                 </div>
                 <div class="w-form-fail">
-                  <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
                 </div>
               </div>
             </div>
 
             <div class="div-block-15" id="block-15" *ngFor="let taf of recentTafs">
-              <!-- <h1 class="heading-22">Gauteng</h1> -->
-              <!-- Display the foldername and filename -->
-              <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
               <div class="div-block-32">
                 <div class="w-layout-grid ccta-grid">
                   <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
@@ -804,10 +738,7 @@
                 </div>
               </div>
 
-              <!-- Display the lastmodified date -->
-
               <div class="div-block-34">
-                <!-- <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1> -->
               </div>
 
               <div class="div-block-45">
@@ -821,42 +752,41 @@
                 </div>
                 <div class="w-layout-grid grid-18">
                   <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d6-9377a649" class="div-block-16">
-                    <!-- <p class="paragraph-2">{{ taf.filetextcontent }}</p> -->
                   </div>
                   <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e2-9377a649" class="div-block-17"></div>
                 </div>
               </div>
               <div>
-                <!-- <div class="w-layout-grid heading-text">
+                <div class="w-layout-grid heading-text">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e5-9377a649" class="cct-copy-copy">
                 <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
               </div>
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062e8-9377a649" class="cct-copy">
                 <div class="button-2-copy w-button">View Decoded</div>
               </div>
-            </div> -->
-                <!-- <div class="w-layout-grid grid-18">
+            </div>
+              <div class="w-layout-grid grid-18">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ec-9377a649" class="div-block-16">
                 <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
               </div>
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062f8-9377a649" class="div-block-17"></div>
-            </div> -->
+            </div>
               </div>
               <div>
-                <!-- <div class="w-layout-grid heading-text">
+                <div class="w-layout-grid heading-text">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fb-9377a649" class="cct-copy-copy">
                 <h1 class="heading-21">TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040</h1>
               </div>
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062fe-9377a649" class="cct-copy">
                 <div class="button-2-copy w-button">View Decoded</div>
               </div>
-            </div> -->
-                <!-- <div class="w-layout-grid grid-18">
+            </div>
+                <div class="w-layout-grid grid-18">
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f06302-9377a649" class="div-block-16">
                 <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p>
               </div>
               <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f0630e-9377a649" class="div-block-17"></div>
-            </div> -->
+            </div>
               </div>
             </div>
           </div>
@@ -876,14 +806,14 @@
         <div class="footerdiv">
           <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg"
               loading="lazy" width="35" alt="">
-            <!-- <h6 class="heading-10">Forecast</h6> -->
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- MetarHistory -->
-    <section class="ob-metar-history" *ngIf="isMetarHistory" style="position: relative;
+
+    <!-- <section class="ob-metar-history" *ngIf="isMetarHistory" style="position: relative;
   top: -20px;">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image">
         <div class="metar-history-main-div">
@@ -934,10 +864,9 @@
                 </div>
               </form>
               <div class="w-form-done">
-                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="w-form-fail">
-                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+
               </div>
 
             </div>
@@ -1166,17 +1095,12 @@
       </div>
 
       <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-        <!-- <div class="footerdiv">
-        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
-          <h6 class="heading-10">Forecast</h6>
-        </a>
-      </div> -->
       </div>
-    </section>
+    </section> -->
 
     <!-- RecentTafs -->
-    <section class="re" *ngIf="isRecentTafs">
-      <!-- <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div> -->
+
+    <!-- <section class="re" *ngIf="isRecentTafs">
       <div class="recent-tafs">
         <h1 class="heading-6" id="heading7">Recent METAR/TAFs</h1>
         <div class="w-layout-grid1 grid-6-copy">
@@ -1223,14 +1147,11 @@
                   class="submit-button-3-copy w-button" value="Save"><input type="submit" data-wait="Please wait..."
                   class="submit-button-3 w-button" value="Cancel"></div>
               <div class="div-block-40">
-                <!-- <h4 class="heading-45">Successfully added a template</h4> -->
               </div>
             </form>
             <div class="">
-              <!-- <div>Thank you! Your submission has been received!</div> -->
             </div>
             <div class="">
-              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
             </div>
           </div>
           <div id="w-node-_38257011-dae8-5f44-9e44-5a2e6988a1a7-9377a649">
@@ -1278,10 +1199,8 @@
                 </div>
               </form>
               <div class="w-form-done">
-                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="w-form-fail">
-                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
               </div>
             </div>
           </div>
@@ -1363,10 +1282,11 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Weather Map -->
-    <section class="ob-metar-history" *ngIf="isWeatherMap">
+
+    <!-- <section class="ob-metar-history" *ngIf="isWeatherMap">
       <div class="cloud-cover">
         <h1 class="heading-6">
           Current METAR/SYNOP temperatures and weather
@@ -1440,32 +1360,8 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <!-- <div class="bottomdiv" style="margin-top: 147% !important;">
-      <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-      <div class="footerdiv">
-        <a class="w-inline-block" (click)="observPage()"><img src="../../assets/Group-3489.svg" loading="lazy"
-            alt="" /></a>
-      </div>
-    </div> -->
-
-    <!-- <div class="bottomdiv" style="margin-top: 147%" *ngIf="!isMetar">
-      <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
-      <div class="footerdiv" id="footerdivid1">
-        <div (click)=" observatPage()" class="link-block-5 w-inline-block"><img src="../../assets/Group-4522.svg"
-            loading="lazy" alt="" />
-          <h6 class="heading-10-copy" id="styleh6" style="    color: #fff;
-          margin-top: 10px;
-          margin-bottom: 0;
-          font-family: Montserrat, sans-serif;
-          text-decoration: none;
-          font-size: 12px;
-          margin-top: 4px;">Observation</h6>
-        </div>
-      </div>
-    </div> -->
   </section>
 </ion-content>
 
@@ -1473,7 +1369,7 @@
   <div class="">
     <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
     <div class="footerdiv">
-      <a class="w-inline-block" (click)="observPage()"><img src="../../assets/Group-3489.svg" loading="lazy"
+      <a class="w-inline-block" (click)="NavigateToLandingPage()"><img src="../../assets/Group-3489.svg" loading="lazy"
           alt="" /></a>
     </div>
   </div>

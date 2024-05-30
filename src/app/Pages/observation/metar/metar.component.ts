@@ -5,6 +5,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 
+export interface Metar {
+  raw_text: string;
+  color?: string;
+}
+
 @Component({
   selector: 'app-metar',
   templateUrl: './metar.component.html',
@@ -16,6 +21,7 @@ export class MetarComponent  implements OnInit {
   loading: boolean = false;
 
   metarReports: any[] = [];
+  metarData: Metar[] = [];
 
   constructor(
     private router: Router,
