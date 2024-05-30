@@ -356,7 +356,9 @@ export class KwazulNatalPage implements OnInit {
     );
   }
   ImageViewer(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
+
+    console.log("imageName", imageName)
+    this.router.navigate(['aero-image-viewer'], {
       state: { kwazulNatal: imageName },
     });
   }
