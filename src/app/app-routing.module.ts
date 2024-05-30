@@ -438,8 +438,8 @@ const routes: Routes = [
   {
     path: 'domestic/metar-maps',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/metar-maps/metar-maps.module').then(
+        (m) => m.MetarMapsModule
       ),
   },
   {
