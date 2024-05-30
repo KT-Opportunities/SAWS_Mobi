@@ -397,9 +397,8 @@ export class GridWindsPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  aerosportPage() {
-    this.router.navigate(['/aero-sport']);
-    window.history.back();
+  International() {
+    this.router.navigate(['/international']);
   }
 
   ImageViewer(item: any) {

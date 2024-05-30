@@ -13,7 +13,7 @@
       </h1>
 
       <div class="w-layout-grid metar-history-grid">
-        <div class="date-container">
+        <div class="date-container" *ngIf="TsProbability.length > 1">
           <button
             *ngIf="nextday"
             id="last-day-btn"
