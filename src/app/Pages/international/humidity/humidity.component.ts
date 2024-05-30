@@ -311,8 +311,8 @@ export class HumidityComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.autoFocus = true;
       dialogConfig.disableClose = true;
-      dialogConfig.width = '100%'; // Set custom width
-      dialogConfig.height = '100%'; // Set custom height
+      dialogConfig.width = '90%'; // Set custom width
+      dialogConfig.height = '90%'; // Set custom height
       dialogConfig.data = {
         filetextcontent: filetextcontent,
         // Add any additional data you want to pass to the dialog here
