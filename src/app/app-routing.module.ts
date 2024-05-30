@@ -338,7 +338,7 @@ const routes: Routes = [
   },
   {
     path: 'international/humidity',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
+    loadChildren: () => import('./Pages/international/humidity/humidity.module').then( m => m.HumidityModule),
   },
   {
     path: 'international/image-browser',
@@ -350,7 +350,7 @@ const routes: Routes = [
   },
   {
     path: 'international/sigwx-charts',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
+    loadChildren: () => import('./Pages/international/sigwx-charts/sigwx-charts.module').then( m => m.SigwxChartsModule),
   },
 
   // --- Flight-briefing url paths

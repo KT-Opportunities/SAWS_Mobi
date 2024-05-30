@@ -21,7 +21,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AeroSportPage implements OnInit {
   // Check if the image filename corresponds to TsProbability
   isTsProbability(filename: string): boolean {
-    return filename.includes('tsprob_d1.gif') || filename.includes('tsprob_d2.gif');
+    return (
+      filename.includes('tsprob_d1.gif') || filename.includes('tsprob_d2.gif')
+    );
   }
 
   // Check if the image filename corresponds to Synoptic
@@ -34,10 +36,10 @@ export class AeroSportPage implements OnInit {
     return `${this.apiUrl}${image.foldername}/${image.filename}`;
   }
   CloudCoverImage: any;
-ConnectiveCloudImage: any;
-WindsImage: any;
-ThermalsImage: any;
-TemperatureImage: any;
+  ConnectiveCloudImage: any;
+  WindsImage: any;
+  ThermalsImage: any;
+  TemperatureImage: any;
   imageUrl: string | null = null;
   isLogged: boolean = false;
   isLoading: boolean = true;
@@ -68,7 +70,8 @@ TemperatureImage: any;
   remainingItems: any[] = [];
   XL2Files: any[] = [];
   Synoptic: any = [];
-  apiUrl: string = 'http://160.119.253.130/aviappapi/api/RawSource/GetSourceAviationFolderFilesList';
+  apiUrl: string =
+    'http://160.119.253.130/aviappapi/api/RawSource/GetSourceAviationFolderFilesList';
   filenameToDisplayName: { [key: string]: string } = {
     'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
     'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
@@ -114,8 +117,7 @@ TemperatureImage: any;
       this.router.navigate(['/login']);
     }
 
-    
-// Display the first TsProbability image
+    // Display the first TsProbability image
 
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
@@ -125,21 +127,30 @@ TemperatureImage: any;
             item.filename === 'tsprob_d2.gif'
         );
 
+        // Find Cloud Cover image
+        this.CloudCoverImage = data.find((item: any) =>
+          item.filename.includes('l14_cint_d1')
+        );
 
-         // Find Cloud Cover image
-    this.CloudCoverImage = data.find((item: any) => item.filename.includes('l14_cint_d1'));
+        // Find Connective Cloud image
+        this.ConnectiveCloudImage = data.find((item: any) =>
+          item.filename.includes('cb214_d1')
+        );
 
-    // Find Connective Cloud image
-    this.ConnectiveCloudImage = data.find((item: any) => item.filename.includes('cb214_d1'));
+        // Find Winds image
+        this.WindsImage = data.find((item: any) =>
+          item.filename.includes('s8_cint_d1')
+        );
 
-    // Find Winds image
-    this.WindsImage = data.find((item: any) => item.filename.includes('s8_cint_d1'));
+        // Find Thermals image
+        this.ThermalsImage = data.find((item: any) =>
+          item.filename.includes('lf8_cint_d1')
+        );
 
-    // Find Thermals image
-    this.ThermalsImage = data.find((item: any) => item.filename.includes('lf8_cint_d1'));
-
-    // Find Temperature image
-    this.TemperatureImage = data.find((item: any) => item.filename.includes('t11_cint_d1'));
+        // Find Temperature image
+        this.TemperatureImage = data.find((item: any) =>
+          item.filename.includes('t11_cint_d1')
+        );
 
         try {
           console.log('BEFORE FILTER:', data);
@@ -310,59 +321,19 @@ TemperatureImage: any;
     return this.authService.getIsLoggedIn();
   }
 
-  toggleFormVisibility() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    // this.isFormVisible1 = true;
-    this.isFormVisible2 = false;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
+  CentralInterior() {
+  
     if (this.isLoggedIn == true) {
       this.spinner.show();
-      this.router.navigate(['/central-interio']);
-      
+      this.router.navigate(['aero-sport/central-interior']);
     }
   }
-  toggleFormVisibility1() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    //this.isFormVisible2 = true;
-    this.isFormVisible3 = false;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
-    this.router.navigate(['/south-west-cape']);
+  SouthWesternCape() {
+    this.router.navigate(['aero-sport/south-west-cape']);
   }
-  toggleFormVisibility2() {
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible1 = false;
-    this.isFormVisible3 = true;
-    this.isSpotGfraph = false;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
-    this.isLoading = true;
+  SynopticAnalysis() {
+    this.router.navigate(['aero-sport/synoptic-analysis']);
 
-    this.Synoptic[0];
-    console.log('ARRAY AT 0:', this.Synoptic[0]);
-    this.APIService.GetAviationFile('', this.Synoptic[0].filename).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlSynoptic =
-          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlSynoptic =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
-        this.isLoading = false;
-        console.log('back to image:', this.fileBaseUrlSynoptic);
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
-      }
-    );
   }
   viewImage(folderName: string, hour: string): void {
     const fileName = `l14_cint_d1_${hour.replace(':', '')}.gif`;
@@ -380,28 +351,12 @@ TemperatureImage: any;
       }
     );
   }
-  
+
   KwazulNatalToggle() {
-    // this.isKwazulNatal=true;
-    // this.isFormVisible2 = false;
-    // this.isFormVisible = false;
-    // this.isKwazulNatal = true;
-    // this.isFormVisible = false;
-    // this.isSpotGfraph = false;
-    // this.isCloudForecast = false;
-    // this.isTSProbability = false;
     this.router.navigate(['aero-sport/kwazulu-natal']);
   }
   SpotGraphToggle() {
-    // this.isKwazulNatal=true;
-    this.isFormVisible2 = false;
-    this.isFormVisible = false;
-    this.isKwazulNatal = false;
-    this.isFormVisible = false;
-    this.isSpotGfraph = true;
-    this.isCloudForecast = false;
-    this.isTSProbability = false;
-    this.router.navigate(['/landing-page']);
+    this.router.navigate(['aero-sport/spot-graph-map']);
   }
   TSProbability() {
     // this.isKwazulNatal=true;

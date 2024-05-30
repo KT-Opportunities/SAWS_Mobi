@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CentralInterioPageRoutingModule } from './central-interio-routing.module';
+import { SportGraphMapRoutingModule } from './sport-graph-map-routing.module';
+import { SportGraphMapComponent } from './sport-graph-map.component';
 
-import { CentralInterioPage } from './central-interio.page';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CentralInterioPageRoutingModule
+    SportGraphMapRoutingModule
   ],
-  declarations: [CentralInterioPage]
+  declarations: [SportGraphMapComponent]
 })
-export class CentralInterioPageModule {}
+export class SportGraphMapModule {}
