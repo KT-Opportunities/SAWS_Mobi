@@ -4,6 +4,11 @@ import { APIService } from 'src/app/services/apis.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http'; // Import HttpClient
+
+interface ImageData {
+  url: string;
+}
 interface ResponseItem {
   foldername: string;
   filename: string;
@@ -18,6 +23,11 @@ interface ResponseItem {
   styleUrls: ['./domestic.page.scss'],
 })
 export class DomesticPage implements OnInit {
+   // Array to store wind chart images fetched from the API
+   windChartImages: { url: string }[] = [];
+// Property to store the URL of the selected image
+selectedImageUrl: string | null = null;
+
   isDomestic: boolean = true;
   isLogged: boolean = false;
   isHourlyCharts: boolean = false;
@@ -59,7 +69,9 @@ export class DomesticPage implements OnInit {
     private authService: AuthService,
     private spinner: NgxSpinnerService,
     private APIService: APIService,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private http: HttpClient // Inject HttpClient
+
   ) {}
   onAirportCodeChange(event: any) {
     this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
@@ -87,14 +99,71 @@ export class DomesticPage implements OnInit {
     // Return the found line
     return takeOffLine || ''; // Return the line if found, otherwise an empty string
   }
+
+  
   ngOnInit() {
+    this.fetchWindChartImages();
     // Check if user is logged in
-    //this.fetchWarnings();
     if (!this.authService.getIsLoggedIn()) {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
-    }
+    } 
   }
+ 
+  isImageFile(filename: string): boolean {
+    const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    const fileExtension = filename.split('.').pop()?.toLowerCase();
+    return fileExtension ? validExtensions.includes(fileExtension) : false;
+  }
+
+  fetchWindChartImages(): void {
+    this.loading = true;
+    this.APIService.GetSourceAviationFolderFilesList('', 6).subscribe(
+      (data: any[]) => {
+        this.windChartImages = data.map((item) => {
+          return {
+            url: `http://160.119.253.130/aviappapi/api/RawSource/GetAviationFile?imagefoldername=${item.foldername}&imagefilename=${item.filename}`,
+          };
+        });
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching wind chart images:', error);
+        this.loading = false;
+      }
+    );
+  }
+  
+  
+
+  checkImageExistence(imageUrl: string): void {
+    // Send an HTTP HEAD request to check if the image exists
+    this.http.head(imageUrl).subscribe(
+      () => {
+        // Image exists, you can handle this as needed
+        console.log(`Image exists: ${imageUrl}`);
+      },
+      (error) => {
+        // Image does not exist, handle the error gracefully
+        console.error(`Image does not exist: ${imageUrl}`, error);
+      }
+    );
+  }
+  
+  
+  
+  viewImage(imageUrl: string): void {
+    this.selectedImageUrl = imageUrl;
+  }
+
+  closeImage(): void {
+    this.selectedImageUrl = null;
+  }
+  
+  
+
+  
+
 
   fetchWarnings() {
     // Set loading to true when starting data fetch

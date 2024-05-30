@@ -7,10 +7,12 @@ import { Observable, catchError, BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class APIService {
+  
   User: any;
   token: any;
   private feedbackSubject = new BehaviorSubject<any | null>(null);
   public feedbackObservable$ = this.feedbackSubject.asObservable();
+  apiUrl: any;
 
   constructor(private http: HttpClient) {
     var stringUser = sessionStorage.getItem('User');
@@ -268,4 +270,18 @@ export class APIService {
         `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
+ 
+  getWindChartImage(folderName: string, fileName: string): Observable<any> {
+    // Construct the image URL using apiUrl from environment
+    const imageUrl = `${this.apiUrl}RawSource/GetChartsFile?imagefoldername=${folderName}&imagefilename=${fileName}`;
+    return this.http.get<any>(imageUrl);
+  }
+  // Inside APIService class
+
+  getAviationImage(filename: string): Observable<Blob> {
+    const url = `${environment.serverAPI}RawSource/GetAviationFile?imagefilename=${filename}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  
+ 
 }
