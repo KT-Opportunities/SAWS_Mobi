@@ -7,6 +7,114 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
+  <section class="colour-coded-tafs-page">
+    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+
+    <div class="tafs-div">
+      <h1 class="heading-6" id="colorcoded">Special Meteorological Aerodrome Report</h1>
+
+      <div class="w-layout-grid grid-6" id="layout">
+        <div>
+          <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
+            <div id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea" class="cct">
+              <h1 class="heading-7">Date :</h1>
+              <h1 class="heading-8">{{ currentDate }}</h1>
+            </div>
+            <div id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea" class="cct">
+              <h1 class="heading-7">Time : </h1>
+              <h1 class="heading-8">13:15:45</h1>
+            </div>
+          </div>
+        </div>
+        <div>
+
+        </div>
+        <div class="ObservScrol">
+          <div class="horizontal-scroll-container">
+            <div id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea" class="div-block-14-copy">
+              <div>
+                <h5 class="heading-9">Query METARs</h5>
+                <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256"
+                    name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit"
+                    class="search-button w-button" value="Search"></form>
+              </div>
+            </div>
+
+            <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15"
+              *ngFor="let speciReport of speciReportData">
+              <!-- <h1 class="heading-22">{{ speciReport.filename}}</h1> -->
+              <div class="div-block-32">
+                <div class="w-layout-grid ccta-grid">
+                  <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
+                    <div class="button w-button" id="Normal">Normal</div>
+                  </div>
+                  <div id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea" class="cct-copy">
+                    <div class="button-2 w-button" id="style">Colour / Style Index</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="w-layout-grid heading-text">
+                  <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea" class="cct-copy-copy">
+                    <p class="heading-21">{{ speciReport.filetextcontent }}</p>
+                  </div>
+                  <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
+                    <div class="button-2-copy w-button">View Decoded</div>
+                  </div>
+                </div>
+                <div class="w-layout-grid grid-18">
+                  <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c6d-5aa24fea" class="div-block-16">
+                    <!-- <p class="paragraph-2">TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong> FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG 0300/0302 35010KT=</p> -->
+                  </div>
+                  <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea" class="div-block-17"></div>
+                </div>
+              </div>
+              <div>
+                <div class="w-layout-grid heading-text">
+
+                </div>
+
+              </div>
+              <div>
+
+
+              </div>
+            </div>
+            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
+
+              <div>
+
+
+              </div>
+              <div>
+
+
+              </div>
+              <div>
+
+
+              </div>
+            </div>
+            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+      <div class="footerdiv">
+        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy"
+            width="35" alt="">
+          <h6 class="heading-10">Forecast</h6>
+        </a>
+      </div>
+    </div>
+  </section>
+
 
 </ion-content>
 <ion-footer class="ion-no-border">

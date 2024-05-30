@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { APIService } from 'src/app/services/apis.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-web-cam',
@@ -10,16 +12,24 @@ import { AuthService } from '../../../services/auth.service';
 export class WebCamPage implements OnInit {
   isLogged: boolean = false;
   webcamActive: boolean = false;
-  constructor(private router: Router, private authService: AuthService) {}
+  loading: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private apiService: APIService,
+    private sanitizer: DomSanitizer
+  ) {}
+
   ngOnInit() {}
+
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
 
-  observPage() {
-    this.router.navigate(['/landing-page']);
-  }
-  ObservationPage() {
+  observationPageNavigation() {
     this.router.navigate(['/observation']);
   }
+
+
 }
