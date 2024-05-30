@@ -390,7 +390,7 @@ TemperatureImage: any;
     // this.isSpotGfraph = false;
     // this.isCloudForecast = false;
     // this.isTSProbability = false;
-    this.router.navigate(['aero-sport/kwazul-natal']);
+    this.router.navigate(['aero-sport/kwazulu-natal']);
   }
   SpotGraphToggle() {
     // this.isKwazulNatal=true;
