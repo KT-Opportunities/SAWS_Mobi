@@ -102,7 +102,7 @@ const routes: Routes = [
   {
     path: 'forecast/advisories',
     loadChildren: () =>
-      import('./Pages/forecast/Advisories/advisories.module').then(
+      import('./Pages/forecast/advisories/advisories.module').then(
         (m) => m.advisoriesPageModule
       ),
   },

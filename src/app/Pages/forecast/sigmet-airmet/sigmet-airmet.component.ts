@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {APIService} from '../../../services/apis.service'
 import { NgxSpinnerService } from 'ngx-spinner';
-import { textFile } from '../Advisories/advisories.component';
+import { textFile } from '../advisories/advisories.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';

@@ -3,30 +3,12 @@
     <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
   </div>
   <section class="list-page">
-    <!-- <div class="div-block-2">
-      <ion-menu-button class="left-aligned-menu-button"></ion-menu-button>
-      <img
-        src="../../assets/Path-3452.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
-    </div> -->
-
-    <div *ngIf="isFormVisible">
-      <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn === true">
+    <div>
+      <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
         <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
           Forecast
         </h1>
         <div class="w-layout-grid grid-list" style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none">
-          <!-- <div (click)="toggleFormVisibility()" 
-          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          href="#"
-          class="link-block-3 w-inline-block"
-        >
-          <h1 class="heading-5">Central Interior</h1>
-        </div> -->
           <div (click)="NavigateToColorCodedTaf()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Color coded TAF</h1>
@@ -57,7 +39,7 @@
           <div (click)="NavigateToRecentTAF()" class="link-block-3 w-inline-block">
             <h1 class="heading-5">Recent TAFs</h1>
           </div>
-          <div (click)=" tafAccuracy()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          <div (click)="NavigateToTafAccuracy()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">TAF Accuracy</h1>
           </div>
@@ -73,7 +55,7 @@
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Advisories</h1>
           </div>
-          <div (click)="Warning()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" href="#"
+          <div (click)="NavigateToWarnings()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" href="#"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Warnings</h1>
           </div>
@@ -81,7 +63,7 @@
       </div>
     </div>
 
-    <div class="list-div" *ngIf="isLoggedIn === false && isform2Visible === true">
+    <div class="list-div" *ngIf="!isLoggedIn">
       <h1 class="heading-6">Forecast</h1>
       <div class="w-layout-grid grid-list">
         <div (click)="NavigateToSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
@@ -103,7 +85,7 @@
       </div>
     </div>
 
-    <section class="colour-coded-tafs-page" *ngIf="iscodeTafs">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="iscodeTafs">
       <div class="div-block-2">
         <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
       </div>
@@ -176,10 +158,10 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Code TAFS-->
-    <section class="colour-coded-tafs-page" *ngIf="isSigmentAirmet">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isSigmentAirmet">
       <div class="tafs-div">
         <h1 class="heading-6" id="colorcoded">Color coded :SIGMENT/AIRMET</h1>
 
@@ -380,10 +362,10 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Sigmet Airmet-->
-    <section class="colour-coded-tafs-page" *ngIf="isColorSigmentAirmet">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isColorSigmentAirmet">
       <div class="div-block-2">
         <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
       </div>
@@ -588,10 +570,10 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Color coded Warning-->
-    <section class="colour-coded-tafs-page" *ngIf="iscolorCodedWarning">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="iscolorCodedWarning">
       <div class="tafs-div">
         <h1 class="heading-6" id="colorcoded">Colour Coded Warnings</h1>
         <div class="w-layout-grid grid-6" id="layout">
@@ -604,10 +586,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Advesories-->
-    <section class="tafs-div" *ngIf="isAdvesories">
+    <!-- <section class="tafs-div" *ngIf="isAdvesories">
       <h1 class="heading-6" id="colorcoded">Advisories</h1>
       <div class="advisoires-main-div">
         <div class="div-blue">
@@ -663,10 +645,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Warning-->
-    <section class="colour-coded-tafs-page" *ngIf="isWarning">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isWarning">
       <div class="tafs-div">
         <h1 class="heading-6" id="colorcoded">Aerodrome Warning</h1>
 
@@ -678,10 +660,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Take Off-->
-    <section class="take-off-section" style="margin-top: 0px !important" *ngIf="istakeOfData">
+    <!-- <section class="take-off-section" style="margin-top: 0px !important" *ngIf="istakeOfData">
       <div class="div-block-2">
         <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
       </div>
@@ -709,10 +691,8 @@
                 </select>
               </form>
               <div class="w-form-done">
-                <!-- <div>Thank you! Your submission has been received!</div> -->
               </div>
               <div class="w-form-fail">
-                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
               </div>
             </div>
           </div>
@@ -792,10 +772,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Recent TAF-->
-    <section class="re" *ngIf="isRecentTAF">
+    <!-- <section class="re" *ngIf="isRecentTAF">
       <div class="recent-tafs">
         <h1 class="heading-6">Recent TAFs</h1>
         <div class="scrolltaffA">
@@ -902,7 +882,6 @@
             </div>
           </div>
           <div class="div-block-15" *ngFor="let taf of recentTafs">
-            <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
             <div class="div-block-32">
               <div class="w-layout-grid ccta-grid">
                 <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
@@ -939,10 +918,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--TAF Accuracy-->
-    <section class="tafs-div" *ngIf="isTafAccuracy">
+    <!-- <section class="tafs-div" *ngIf="isTafAccuracy">
       <div class="taf-accuracy-main-div">
         <h1 class="heading-6">TAF Accuracy</h1>
         <h1 class="heading-23">
@@ -1023,10 +1002,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!--Trends-->
-    <section class="trends-section" *ngIf="isTrends">
+    <!-- <section class="trends-section" *ngIf="isTrends">
       <div class="trends-main-div">
         <h1 class="heading-6">METAR trend analysis for FAPP</h1>
         <div class="w-layout-grid trand-grid">
@@ -1170,12 +1149,10 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!--Harmonized Grid Productsa-->
+    </section> -->
 
     <!--TAF-->
-    <section class="colour-coded-tafs-page" *ngIf="isTAF">
+    <!-- <section class="colour-coded-tafs-page" *ngIf="isTAF">
       <div class="div-block-2">
         <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
       </div>
@@ -1250,9 +1227,9 @@
           </a>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <div class="bottomdiv" style="margin-top: 141.4%" *ngIf="isFormVisible">
+    <div class="bottomdiv" style="margin-top: 141.4%">
       <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
       <div class="footerdiv">
         <a (click)="LandingPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
@@ -1270,7 +1247,7 @@
       </div>
     </div>
 
-    <div class="bottomdiv" style="margin-top: 141.4%" *ngIf="!isFormVisible">
+    <div class="bottomdiv" style="margin-top: 141.4%">
       <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
 
       <div class="footerdiv" id="footerdivid">
