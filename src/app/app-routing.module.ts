@@ -438,8 +438,8 @@ const routes: Routes = [
   {
     path: 'domestic/metar-maps',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/metar-maps/metar-maps.module').then(
+        (m) => m.MetarMapsModule
       ),
   },
   {
@@ -529,7 +529,7 @@ const routes: Routes = [
     path: 'aero-sport/tsprobability',
     loadChildren: () =>
       import('./Pages/aerosport/tsprobability/tsprobability.module').then(
-        (m) => m.TSProbabilityPageModule
+        (m) => m.TSProbabilityModule
       ),
   },
   {

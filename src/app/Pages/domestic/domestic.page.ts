@@ -224,7 +224,9 @@ export class DomesticPage implements OnInit {
     this.isDomestic = false;
     this.isSIGWX = true;
   }
-
+  MetarMaps() {
+    this.router.navigate(['domestic/metar-maps']);
+  }
   hourlyChart() {
     this.isDomestic = false;
     this.isHourlyCharts = true;

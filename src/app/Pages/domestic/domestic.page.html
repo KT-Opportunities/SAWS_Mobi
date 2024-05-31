@@ -2,9 +2,8 @@
   <!-- <div *ngIf="loading" class="loading-indicator">Loading...</div> -->
 
   <div *ngIf="loading == true" class="loading-indicator">
-    <ion-spinner
-    *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...</div>
-
+    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  </div>
 
   <section class="list-page">
     <div class="" *ngIf="isDomestic">
@@ -45,7 +44,7 @@
             <h1 class="heading-5">ICAO Locations</h1>
           </div>
           <div
-            (click)="toggleImageVisibility1()"
+            (click)="MetarMaps()"
             id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
             class="link-block-3 w-inline-block"
           >
@@ -2038,7 +2037,11 @@
       </div>
       <h1 class="heading-6">Aerodrome Warning</h1>
       <div style="overflow-y: auto; height: 32em">
-        <div class="warning-div" *ngFor="let warning of warnings" class="warning">
+        <div
+          class="warning-div"
+          *ngFor="let warning of warnings"
+          class="warning"
+        >
           <div class="warning-div">
             <div class="w-layout-grid grid-warning">
               <div
@@ -2048,13 +2051,15 @@
                 <div class="div-block-14"></div>
               </div>
               <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
-                <h4 class="heading-18-copy"><strong>WARNING FOR FAPE {{ warning.filename }}</strong></h4>
+                <h4 class="heading-18-copy">
+                  <strong>WARNING FOR FAPE {{ warning.filename }}</strong>
+                </h4>
                 <div class="w-layout-grid heading-copy">
                   <div
                     id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8"
                     class="cct-copy-copy"
                   >
-                  <h1 class="heading-21">{{ warning.filetextcontent }}</h1>
+                    <h1 class="heading-21">{{ warning.filetextcontent }}</h1>
                   </div>
                 </div>
               </div>
@@ -2076,7 +2081,6 @@
             </div>
           </div>
         </div>
-       
       </div>
 
       <div class="bottomdiv">

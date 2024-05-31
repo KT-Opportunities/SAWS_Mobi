@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TSProbabilityRoutingModule } from './tsprobability-routing.module';
-import { TSProbabilityComponent } from './tsprobability.component';
+import { MetarMapsRoutingModule } from './metar-maps-routing.module';
+import { MetarMapsComponent } from './metar-maps.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TSProbabilityRoutingModule,
+    MetarMapsRoutingModule
   ],
-  declarations: [TSProbabilityComponent],
+  declarations: [MetarMapsComponent]
 })
-export class TSProbabilityModule {}
+export class MetarMapsModule {}

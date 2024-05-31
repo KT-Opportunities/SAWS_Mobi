@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TSProbabilityPage } from './tsprobability.page';
+import { TSProbabilityPage } from './tsprobability.component';
 
 describe('TSProbabilityPage', () => {
   let component: TSProbabilityPage;
