@@ -22,39 +22,9 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 export class GridMaximumPage implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = true;
-
-  isFormVisible: boolean = true;
-  isFormVisible1: boolean = false;
-  isFormVisible2: boolean = false;
-  isFormVisible3: boolean = false;
-  isKwazulNatal: boolean = false;
-  isSpotGfraph: boolean = false;
-  isTSProbability: boolean = false;
-  isCloudForecast: boolean = false;
-  isDropdownOpen1: boolean = false;
-  isDropdownOpen2: boolean = false;
-  isDropdownOpen3: boolean = false;
-  isDropdownOpen4: boolean = false;
-  isDropdownOpen5: boolean = false;
-  //selectedOption1: string = 'Low';
-  selectedOption2: string = 'FL060';
-  selectedOption3: string = 'Normal';
-  selectedOption4: string = 'Total cloud';
-  selectedOption5: string = '2023-03-20 20:00';
-  nextday: boolean = true;
-  prevday: boolean = false;
-  TsProbability: any = [];
-  KwazulNatal: any = [];
-  CloudCover: any = [];
-  ConvectiveCloudBase: any = [];
-  WindArray: any = [];
-  ThermalArray: any = [];
-  TemperatureArray: any = [];
-  selectedOption = 'Low';
+  
   MaximumArray: any = [];
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  fileBaseUrlSynoptic: SafeResourceUrl;
+
 
   constructor(
     private router: Router,
@@ -67,11 +37,7 @@ export class GridMaximumPage implements OnInit {
     private dialog: MatDialog,
     private sanitizer: DomSanitizer
   ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlSynoptic =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  
   }
   extractTime(filename: string): string {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);
@@ -103,18 +69,6 @@ export class GridMaximumPage implements OnInit {
           item.filename.includes('PWRD98')
         );
         console.log('Response after filter:', this.MaximumArray);
-
-        console.log('Response:', this.MaximumArray);
-        // const allowedFilenames = [
-        //   'PWRD98FAPR290600.png',
-        //   'PWRD98FAPR281800.png',
-        //   'PWRD98FAPR280600.png',
-        //   'PWRD98FAPR290000.png',
-        // ];
-
-        // this.MaximumArray = this.MaximumArray.filter((item: any) =>
-        //   allowedFilenames.includes(item.filename)
-        // );
 
         console.log('Response:', this.MaximumArray);
 
@@ -171,17 +125,6 @@ export class GridMaximumPage implements OnInit {
     });
   }
 
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    if (!this.elRef.nativeElement.contains(event.target)) {
-      this.closeAllDropdowns();
-    }
-  }
-
-  closeAllDropdowns() {
-    this.isDropdownOpen1 = false;
-    this.isDropdownOpen2 = false;
-  }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
