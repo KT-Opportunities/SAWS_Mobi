@@ -450,10 +450,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'domestic/siggwx-charts',
+    path: 'domestic/sigwx-charts',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/sigwx-charts/sigwx-charts.module').then(
+        (m) => m.SigwxChartsModule
       ),
   },
   {

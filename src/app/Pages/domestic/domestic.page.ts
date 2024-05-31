@@ -221,8 +221,7 @@ export class DomesticPage implements OnInit {
     this.isLowLevel = true;
   }
   SIGWX() {
-    this.isDomestic = false;
-    this.isSIGWX = true;
+    this.router.navigate(['domestic/sigwx-charts']);
   }
   MetarMaps() {
     this.router.navigate(['domestic/metar-maps']);
