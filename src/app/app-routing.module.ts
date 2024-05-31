@@ -72,9 +72,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forecast/sigmet_airmet',
+    path: 'forecast/sigmet-airmet',
     loadChildren: () =>
-      import('./Pages/forecast/sigmet_airmet/sigmet-airmet.module').then(
+      import('./Pages/forecast/sigmet-airmet/sigmet-airmet.module').then(
         (m) => m.sigmetAirmetPageModule
       ),
   },
@@ -109,22 +109,22 @@ const routes: Routes = [
   {
     path: 'forecast/color-coded-taf',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/color-coded-taf/color-coded-taf.module').then(
+        (m) => m.ColorCodedTafModule
       ),
   },
   {
     path: 'forecast/color-coded-warnings',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/color-coded-warnings/color-coded-warnings.module').then(
+        (m) => m.ColorCodedWarningsModule
       ),
   },
   {
     path: 'forecast/color-coded-sigment-airmet',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/color-coded-sigment-airmet/color-coded-sigment-airmet.module').then(
+        (m) => m.ColorCodedSigmentAirmetModule
       ),
   },
   {
@@ -144,8 +144,8 @@ const routes: Routes = [
   {
     path: 'forecast/recent-tafs',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/recent-tafs/recent-tafs.module').then(
+        (m) => m.RecentTafsModule
       ),
   },
   {
@@ -165,8 +165,8 @@ const routes: Routes = [
   {
     path: 'forecast/waf-harminized-grid-products',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/harmonized-grid/harmonized-grid.module').then(
+        (m) => m.HarmonizedGridPageModule
       ),
   },
   {

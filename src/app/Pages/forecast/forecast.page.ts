@@ -141,6 +141,7 @@ export class ForecastPage implements OnInit {
       });
     });
   }
+
   fetchRecentTafs(): void {
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner
@@ -165,9 +166,11 @@ export class ForecastPage implements OnInit {
       }
     );
   }
+
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
+
   toggleFormVisibility() {
     this.isFormVisible = !this.isFormVisible;
   }
@@ -273,50 +276,9 @@ export class ForecastPage implements OnInit {
       this.isDropdownOpen2 = false;
     }
   }
-  ColorCoded() {
-    // debugger;
 
-    this.spinner.show();
-    this.loading = true;
-    this.APIService.GetSourceTextFolderFilesTime('taffc', 4).subscribe(
-      (Response: FileData[]) => {
-        this.TAFArray = Response.map((item: FileData) => {
-          const parts = item.filename.split('/');
-          if (parts.length > 1) {
-            const newFilename = parts.slice(1).join('/');
-            return {
-              ...item,
-              filename: newFilename,
-            };
-          } else {
-            return item;
-          }
-        });
-        this.loading = false;
-        this.spinner.hide();
-        console.log('Response received:', Response);
-        // Handle response data
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.loading = false; // Make sure to handle loading state in case of error
-        this.spinner.hide(); // Ensure spinner is hidden on error
-      }
-    );
-
-    this.iscodeTafs = true;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isColorSigmentAirmet = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
+  NavigateToColorCodedTaf() {
+    this.router.navigate(['/forecast/color-coded-taf']);
   }
 
   forecastPage() {
@@ -335,25 +297,11 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
     this.isform2Visible = true && this.isLoggedIn == false;
   }
-  ColorcodedSigmetAirmet() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = true;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    if (this.isLoggedIn == true) {
-      this.spinner.show();
-      this.router.navigate(['/sigmet-gamet']);
-    }
+
+  NavigateToColorcodedSigmetAirmet() {
+    this.router.navigate(['/forecast/color-coded-sigment-airmet']);
   }
+
   SigmetAirmet() {
     this.iscodeTafs = false;
     this.isFormVisible = false;
@@ -372,54 +320,18 @@ export class ForecastPage implements OnInit {
     debugger;
     if (this.isLoggedIn == true) {
       this.spinner.show();
-      this.router.navigate(['/sigmet_airmet']);
+      this.router.navigate(['/sigmet-airmet']);
     }
   }
-  ColorcodedWarning() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = true;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
+
+  NavigateToColorCodedWarnings() {
+    this.router.navigate(['/forecast/color-coded-warnings']);
   }
-  Advesories() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = true;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    debugger;
 
-    if (this.isLoggedIn == true) {
-      this.spinner.show();
-      this.router.navigate(['/advisories']);
-    }
-
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    this.isform2Visible = false && this.isLoggedIn == false;
-
-    debugger;
-    // this.spinner.show();
-    // this.router.navigate(['/advisories']);
+  NaviagateToAdvisories() {
+    this.router.navigate(['/forecast/advisories']);
   }
+
   Warning() {
     this.iscodeTafs = false;
     this.isFormVisible = false;
@@ -435,6 +347,7 @@ export class ForecastPage implements OnInit {
     this.isTrends = false;
     this.isHarmonized = false;
   }
+
   TakeOfData() {
     this.loading = true;
     this.spinner.show();
@@ -586,23 +499,11 @@ export class ForecastPage implements OnInit {
     const lines = filetextcontent.split('\n');
     return lines[2] ? lines[2].trim() : '';
   }
-  RecentTAF() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = true;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    this.fetchRecentTafs()
-    this.isform2Visible = false && this.isLoggedIn == false;
+  
+  NavigateToRecentTAF() {
+    this.router.navigate(['/forecast/recent-tafs']);
   }
+
   tafAccuracy() {
     this.iscodeTafs = false;
     this.isFormVisible = false;
@@ -634,23 +535,7 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
   }
 
-  harmonized() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-
-    if (this.isLoggedIn == true) {
-      this.spinner.show();
-      this.router.navigate(['/harmonized-grid']);
-    }
+  NavigateToHarmonizedGridProducts() {
+    this.router.navigate(['/forecast/waf-harminized-grid-products']);
   }
 }
