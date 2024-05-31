@@ -75,7 +75,7 @@ const routes: Routes = [
     path: 'forecast/sigmet-airmet',
     loadChildren: () =>
       import('./Pages/forecast/sigmet-airmet/sigmet-airmet.module').then(
-        (m) => m.sigmetAirmetPageModule
+        (m) => m.SigmetAirmetModule
       ),
   },
   {
@@ -130,15 +130,15 @@ const routes: Routes = [
   {
     path: 'forecast/take-off-data',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/take-off-data/take-off-data.module').then(
+        (m) => m.TakeOffDatModule
       ),
   },
   {
     path: 'forecast/taf',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/taf/taf.module').then(
+        (m) => m.TafModule
       ),
   },
   {
@@ -158,8 +158,8 @@ const routes: Routes = [
   {
     path: 'forecast/trends',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/trends/trends.module').then(
+        (m) => m.TrendsModule
       ),
   },
   {
@@ -172,8 +172,8 @@ const routes: Routes = [
   {
     path: 'forecast/warnings',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/warnings/warnings.module').then(
+        (m) => m.WarningsModule
       ),
   },
 

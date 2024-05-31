@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { sigmetGametRoutingModule } from './sigmet-gamet-routing.module';
+import { WarningsRoutingModule } from './warnings-routing.module';
 
-import { SigmetGametComponent } from './sigmet-gamet.component';
+import { WarningsComponent } from './warnings.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetGametRoutingModule
+    WarningsRoutingModule
   ],
-  declarations: [SigmetGametComponent]
+  declarations: [WarningsComponent]
 })
-export class sigmetGametPageModule {}
+export class WarningsModule {}

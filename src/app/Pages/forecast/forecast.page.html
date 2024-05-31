@@ -40,16 +40,16 @@
             <h1 class="heading-5">Color coded: Warnings</h1>
           </div>
 
-          <div (click)="SigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
+          <div (click)="NavigateToSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">SIGMET/AIRMET</h1>
           </div>
 
-          <div (click)="TakeOfData()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603" href="#"
+          <div (click)="NavigateToTakeOffData()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603" href="#"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Take-off data</h1>
           </div>
-          <div (click)="TAF()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          <div (click)="NavigateToTafs()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">TAF</h1>
           </div>
@@ -61,7 +61,7 @@
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">TAF Accuracy</h1>
           </div>
-          <div (click)="Trends() " id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          <div (click)="NavigateToTrends()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block">
             <h1 class="heading-5">Trends</h1>
           </div>
@@ -84,11 +84,11 @@
     <div class="list-div" *ngIf="isLoggedIn === false && isform2Visible === true">
       <h1 class="heading-6">Forecast</h1>
       <div class="w-layout-grid grid-list">
-        <div (click)="SigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
+        <div (click)="NavigateToSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
           class="link-block-3 w-inline-block">
           <h1 class="heading-5">SIGMET/AIRMET</h1>
         </div>
-        <div (click)="TAF()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+        <div (click)="NavigateToTafs()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           class="link-block-3 w-inline-block">
           <h1 class="heading-5">TAFS</h1>
         </div>

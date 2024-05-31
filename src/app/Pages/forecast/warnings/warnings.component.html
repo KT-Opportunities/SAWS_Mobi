@@ -1,11 +1,23 @@
 <ion-content>
-
-  <div>
-
-  </div>
   <div *ngIf="loading" class="loading-indicator">
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
+
+  <section class="list-page"></section>
+
+  <section class="colour-coded-tafs-page">
+    <div class="tafs-div">
+      <h1 class="heading-6" id="colorcoded">Aerodrome Warning</h1>
+
+      <div class="w-layout-grid grid-6" id="layout">
+        <div class="ObservScrol">
+          <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
+            <h1 class="heading-7">No valid warnings were found.</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 </ion-content>
@@ -14,7 +26,7 @@
     <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
 
     <div class="footerdiv" id="footerdivid1">
-      <div (click)=" observationPageNavigation()" class="link-block-5 w-inline-block">
+      <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
         <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
              margin-top: 10px;

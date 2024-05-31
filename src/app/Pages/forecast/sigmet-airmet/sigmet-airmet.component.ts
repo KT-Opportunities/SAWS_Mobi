@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import {APIService} from '../../../services/apis.service'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { textFile } from '../Advisories/advisories.component';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-sigmet-airmet',
   templateUrl: './sigmet-airmet.component.html',
@@ -14,7 +18,15 @@ export class SigmetAirmetComponent  implements OnInit {
   AirmetList:any = [];
   GametList:any = [];
   unfilteredList:any = [];
-  constructor(private api:APIService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private elRef: ElementRef,
+    private iab: InAppBrowser,
+    private spinner: NgxSpinnerService,
+    private apiService: APIService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     // this.api.GetSourceTextFolderFiles("sigmet")
@@ -45,12 +57,11 @@ export class SigmetAirmetComponent  implements OnInit {
     //   this.isLoading = false;
       
     // })
-    debugger;
     this.getSigmetTextFiles();
   }
 
  async getSigmetTextFiles(){
-  await this.api.GetSourceTextFolderFiles("sigmet")
+  await this.apiService.GetSourceTextFolderFiles("sigmet")
     .subscribe((Response) => {
       
       Response.forEach((element:any) => {
@@ -71,7 +82,7 @@ export class SigmetAirmetComponent  implements OnInit {
   }
  async getAirmetTextFiles(){
   debugger
-    await this.api.GetSourceTextFolderFiles("airmet")
+    await this.apiService.GetSourceTextFolderFiles("airmet")
     .subscribe((Response) => {
       
       Response.forEach((element:any) => {
@@ -93,7 +104,7 @@ export class SigmetAirmetComponent  implements OnInit {
   }
   async getGametTextFiles(){
     debugger
-   await this.api.GetSourceTextFolderFiles("gamet")
+   await this.apiService.GetSourceTextFolderFiles("gamet")
     .subscribe((Response) => {
       
       Response.forEach((element:any) => {
@@ -150,6 +161,10 @@ export class SigmetAirmetComponent  implements OnInit {
   forecastPage() {
     window.history.back();
     // this.router.navigate(['/forecast']);
+  }
+
+  forecastPageNavigation() {
+    this.router.navigate(['/forecast']);
   }
 
 }

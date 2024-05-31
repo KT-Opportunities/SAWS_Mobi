@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { sigmetAirmetRoutingModule } from './sigmet-airmet-routing.module';
-
+import { SigmetAirmetRoutingModule } from './sigmet-airmet-routing.module';
 import { SigmetAirmetComponent } from './sigmet-airmet.component';
 
 @NgModule({
@@ -13,8 +11,8 @@ import { SigmetAirmetComponent } from './sigmet-airmet.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetAirmetRoutingModule
+    SigmetAirmetRoutingModule
   ],
   declarations: [SigmetAirmetComponent]
 })
-export class sigmetAirmetPageModule {}
+export class SigmetAirmetModule {}

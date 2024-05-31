@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SigmetGametComponent } from './sigmet-gamet.component';
+import { TafComponent } from './taf.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SigmetGametComponent
+    component: TafComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class sigmetGametRoutingModule {}
+export class TafRoutingModule {}

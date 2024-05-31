@@ -4,17 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { sigmetGametRoutingModule } from './sigmet-gamet-routing.module';
-
-import { SigmetGametComponent } from './sigmet-gamet.component';
+import { TakeOffDatRoutingModule } from './take-off-data-routing.module';
+import { TakeOffDataComponent } from './take-off-data.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetGametRoutingModule
+    TakeOffDatRoutingModule
   ],
-  declarations: [SigmetGametComponent]
+  declarations: [TakeOffDataComponent]
 })
-export class sigmetGametPageModule {}
+export class TakeOffDatModule {}

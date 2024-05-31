@@ -302,26 +302,8 @@ export class ForecastPage implements OnInit {
     this.router.navigate(['/forecast/color-coded-sigment-airmet']);
   }
 
-  SigmetAirmet() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = true;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    this.isform2Visible = false && this.isLoggedIn == false;
-    debugger;
-    if (this.isLoggedIn == true) {
-      this.spinner.show();
-      this.router.navigate(['/sigmet-airmet']);
-    }
+  NavigateToSigmetAirmet() {
+    this.router.navigate(['/forecast/sigmet-airmet']);
   }
 
   NavigateToColorCodedWarnings() {
@@ -348,125 +330,14 @@ export class ForecastPage implements OnInit {
     this.isHarmonized = false;
   }
 
-  TakeOfData() {
-    this.loading = true;
-    this.spinner.show();
-    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
-      this.VermetArray = Response;
-
-      // Step 1: Group items by airport code and keep only the latest modified item for each airport
-      const airportMap = this.VermetArray.reduce(
-        (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
-          const airportCode = this.getAirportCode(item.filename);
-
-          // If airportCode already exists in the map, compare lastmodified dates to keep the latest one
-          if (
-            !acc[airportCode] ||
-            new Date(item.lastmodified) >
-              new Date(acc[airportCode].lastmodified)
-          ) {
-            acc[airportCode] = item;
-          }
-
-          return acc;
-        },
-        {}
-      );
-
-      // Step 2: Convert the map values back to an array
-      this.VermetArray = Object.values(airportMap);
-
-      // Optional: Filter based on 'TAKE-OFF' condition
-      this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filetextcontent.includes('TAKE-OFF');
-      });
-
-      this.VermetArray.forEach((item: any) => {
-        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
-
-        const formattedData = tableData.reduce((acc: any[], row: string) => {
-          const trimmedRow = row.trim();
-
-          // Check if the row is not empty and doesn't start with '----' (separator)
-          if (trimmedRow && !trimmedRow.startsWith('----')) {
-            // Split the row by whitespace
-            const rowValues = trimmedRow.split(/\s+/);
-
-            // Extract specific values (time, temp, qnh, qan)
-            if (rowValues.length >= 4) {
-              const [time, temp, qnh, qan] = rowValues;
-              acc.push({ time, temp, qnh, qan });
-            }
-          }
-
-          return acc;
-        }, []);
-
-        item.vermetTableData = formattedData; // Assign formattedData to a property
-        // console.log('Filtered and latest Response Table ', formattedData);
-        this.loading = false;
-        this.spinner.hide();
-      });
-    });
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = true;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
+  NavigateToTakeOffData() {
+    this.router.navigate(['/forecast/take-off-data']);
   }
-  TAF() {
-    this.spinner.show();
-    this.loading = true;
-    this.APIService.GetSourceTextFolderFilesTime('taffc', 4).subscribe(
-      (Response: FileData[]) => {
-        this.TAFArray = Response.map((item: FileData) => {
-          const parts = item.filename.split('/');
-          if (parts.length > 1) {
-            const newFilename = parts.slice(1).join('/');
-            return {
-              ...item,
-              filename: newFilename,
-            };
-          } else {
-            return item;
-          }
-        });
-        this.loading = false;
-        this.spinner.hide();
-        console.log('Response received:', Response);
-        // Handle response data
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.loading = false; // Make sure to handle loading state in case of error
-        this.spinner.hide(); // Ensure spinner is hidden on error
-      }
-    );
 
-    // Reset other flags
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = true;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = false;
-    this.isHarmonized = false;
-    this.isform2Visible = false && this.isLoggedIn == false;
+  NavigateToTafs() { 
+    this.router.navigate(['/forecast/taf']);
   }
+
   extractHeadingContent(fileTextContent: string): string | null {
     // Use a regular expression to find the content starting with 'TAF'
     const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
@@ -519,20 +390,9 @@ export class ForecastPage implements OnInit {
     this.isTrends = false;
     this.isHarmonized = false;
   }
-  Trends() {
-    this.iscodeTafs = false;
-    this.isFormVisible = false;
-    this.isSigmentAirmet = false;
-    this.isColorSigmentAirmet = false;
-    this.iscolorCodedWarning = false;
-    this.isAdvesories = false;
-    this.isWarning = false;
-    this.istakeOfData = false;
-    this.isTAF = false;
-    this.isRecentTAF = false;
-    this.isTafAccuracy = false;
-    this.isTrends = true;
-    this.isHarmonized = false;
+
+  NavigateToTrends() {
+    this.router.navigate(['/forecast/trends']);
   }
 
   NavigateToHarmonizedGridProducts() {

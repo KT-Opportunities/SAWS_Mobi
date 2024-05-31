@@ -4,17 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { sigmetGametRoutingModule } from './sigmet-gamet-routing.module';
-
-import { SigmetGametComponent } from './sigmet-gamet.component';
+import { TafRoutingModule } from './taf-routing.module';
+import { TafComponent } from './taf.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetGametRoutingModule
+    TafRoutingModule
   ],
-  declarations: [SigmetGametComponent]
+  declarations: [TafComponent]
 })
-export class sigmetGametPageModule {}
+export class TafModule {}

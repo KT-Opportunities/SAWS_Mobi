@@ -4,17 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { sigmetGametRoutingModule } from './sigmet-gamet-routing.module';
-
-import { SigmetGametComponent } from './sigmet-gamet.component';
+import { TrendsRoutingModule } from './trends-routing.module';
+import { TrendsComponent } from './trends.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetGametRoutingModule
+    TrendsRoutingModule
   ],
-  declarations: [SigmetGametComponent]
+  declarations: [TrendsComponent]
 })
-export class sigmetGametPageModule {}
+export class TrendsModule {}
