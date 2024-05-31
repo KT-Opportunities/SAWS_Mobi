@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <section class="ob-metar-history">
+  <section class="ob-metar-history" style="margin-top: 238px !important">
     <div class="cloud-cover">
       <h1 class="heading6">TS Probability</h1>
       <div class="w-layout-grid metar-history-grid">
@@ -8,11 +8,17 @@
             id="last-day-btn"
             class="button-spacing"
             (click)="previousDay()"
+            *ngIf="prevday"
           >
             << Previous Day
           </button>
           <span id="current-date"></span>
-          <button id="next-day-btn" class="button-spacing" (click)="nextDay()">
+          <button
+            id="next-day-btn"
+            class="button-spacing"
+            (click)="nextDay()"
+            *ngIf="nextday"
+          >
             Next Day >>
           </button>
         </div>
@@ -36,40 +42,43 @@
                 data-infinite="true"
               >
                 <div class="w-slider-mask prev" *ngIf="prevday">
-                  <!-- <div class="w-slide"></div> -->
                   <img
-                    src="fileBaseUrlPrevious"
+                    [src]="fileBaseUrlPrevious"
                     loading="lazy"
                     width="1216"
                     alt=""
                     class="image"
                   />
-                  <!-- <div class="w-slide"></div> -->
                 </div>
                 <div class="w-slider-mask next" *ngIf="nextday">
-                  <!-- <div class="w-slide"></div> -->
                   <img
-                    src="fileBaseUrlNext"
+                    [src]="fileBaseUrlNext"
                     loading="lazy"
                     width="1216"
                     alt=""
                     class="image"
                   />
-                  <!-- <div class="w-slide"></div> -->
                 </div>
-                <!-- <div class="w-slider-arrow-left">
-                  <div class="w-icon-slider-left"></div>
-                </div>
-                <div class="w-slider-arrow-right">
-                  <div class="w-icon-slider-right"></div>
-                </div> -->
-                <!-- <div class="w-slider-nav w-round w-num"> -->
-
-                <!-- </div> -->
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="bottomdiv" style="margin-top: 110%">
+      <img
+        src="../../assets/Path-3447.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image"
+      />
+
+      <div class="footerdiv" id="footerdivid">
+        <a (click)="aerosportPage()" class="link-block-5 w-inline-block"
+          ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+          <h6 class="heading-10-copy" id="styleh6">Aerosport</h6></a
+        >
       </div>
     </div>
   </section>

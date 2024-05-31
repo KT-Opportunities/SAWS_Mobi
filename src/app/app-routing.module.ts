@@ -529,7 +529,7 @@ const routes: Routes = [
     path: 'aero-sport/tsprobability',
     loadChildren: () =>
       import('./Pages/aerosport/tsprobability/tsprobability.module').then(
-        (m) => m.TSProbabilityPageModule
+        (m) => m.TSProbabilityModule
       ),
   },
   {

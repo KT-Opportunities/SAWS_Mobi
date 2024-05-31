@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TSProbabilityPage } from './tsprobability.page';
+import { TSProbabilityComponent } from './tsprobability.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TSProbabilityPage
-  }
+    component: TSProbabilityComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TSProbabilityPageRoutingModule {}
+export class TSProbabilityRoutingModule {}

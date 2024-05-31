@@ -4,17 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TSProbabilityPageRoutingModule } from './tsprobability-routing.module';
-
-import { TSProbabilityPage } from './tsprobability.page';
+import { TSProbabilityRoutingModule } from './tsprobability-routing.module';
+import { TSProbabilityComponent } from './tsprobability.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TSProbabilityPageRoutingModule
+    TSProbabilityRoutingModule,
   ],
-  declarations: [TSProbabilityPage]
+  declarations: [TSProbabilityComponent],
 })
-export class TSProbabilityPageModule {}
+export class TSProbabilityModule {}
