@@ -7,16 +7,64 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
+  <div *ngIf="imageNotFound" class="loading-indicator">
+    <ion-spinner *ngIf="imageNotFound" name="bubbles"></ion-spinner>Image not available
+  </div>
+
   <section class="ob-randar">
     <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
     <div class="metar-history-main-div" id="maindiv">
       <h1 class="heading-6" id="RaderImages">Radar Images</h1>
+
+      <div class="div-block-464">
+        <h4 class="sub-headings">
+          Select option
+        </h4>
+
+        <div class="w-form">
+          <div id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get" class="form-3"
+            data-wf-page-id="65ef0e606bbd1609bb9b1d15" data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252">
+            <div>
+              <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown" (click)="radarDropdownOpen()">
+                <div class="w-dropdown-toggle">
+                  <div class="icon-2 w-icon-dropdown-toggle"></div>
+                  <div class="text-block">{{selectedOption}}
+                  </div>
+                </div>
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen">
+
+                  <div class="w-dropdown-link" (click)="selectOption('.gif', 'dropdown1', 'Individual image')">
+                    Individual image
+                  </div>
+
+                  <div class="w-dropdown-link" (click)="selectOption('50.gif', 'dropdown2', 'Individual 50km Images')">
+                    Individual 50km Images
+                  </div>
+
+                  <div class="w-dropdown-link" (click)="selectOption('75.gif', 'dropdown3', 'Individual 75km Images')">
+                    Individual 75km Images
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="w-form-done">
+            <div></div>
+          </div>
+          <div class="w-form-fail">
+            <div></div>
+          </div>
+        </div>
+
+      </div>
+
       <div>
+
         <div class="w-layout-grid grid-20">
           <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4552-df47fded" class="div-block-35">
             <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4553-df47fded" class="w-layout-grid grid-21" id="grid21">
               <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4554-df47fded" class="div-block-36">
-                <h4 class="heading-24" id="heading-24">Individual Image</h4>
+                <h4 class="heading-24" id="heading-24">{{ selectedOption }}</h4>
               </div>
               <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4557-df47fded" class="div-block-36">
                 <h4 class="heading-24" id="heading-24">View Image</h4>
@@ -31,7 +79,7 @@
                 <h4 class="heading-25">FABL</h4>
               </div>
               <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4565-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('BLS')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
@@ -41,7 +89,7 @@
                 <h4 class="heading-25">FABM</h4>
               </div>
               <div id="w-node-_5586f8de-500c-3d0d-41e6-8fc6e92cb068-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('BM')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
@@ -50,8 +98,9 @@
               <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef457e-df47fded" class="div-block-37">
                 <h4 class="heading-25">FACT</h4>
               </div>
-              <div id="w-node-e7c9e1d2-4d07-0cf8-ea26-9a926eb740ec-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+              <div id="w-node-e7c9e1d2-4d07-0cf8-ea26-9a926eb740ec-df47fded" class="div-block-37"
+              >
+                  <div (click)="viewImage('CT')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
@@ -61,7 +110,7 @@
                 <h4 class="heading-25">FADN</h4>
               </div>
               <div id="w-node-_782976cf-bafb-5f5e-9603-d16b861e96af-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('DNS')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
@@ -71,27 +120,107 @@
                 <h4 class="heading-25">FADY</h4>
               </div>
               <div id="w-node-_35a877aa-3c3a-5cd6-9810-4b38617c6d8b-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('FY')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
           <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da856-df47fded" class="div-block-38">
             <div class="w-layout-grid grid-22" id="grid22">
               <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da858-df47fded" class="div-block-37">
-                <h4 class="heading-25">FADN</h4>
+                <h4 class="heading-25">FAEO</h4>
               </div>
               <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da85b-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('EO')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
           <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
             <div class="w-layout-grid grid-22" id="grid22">
               <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
-                <h4 class="heading-25">FADY</h4>
+                <h4 class="heading-25">FAEL</h4>
               </div>
               <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
-                <div class="button-2 w-button">View Image</div>
+                <div (click)="viewImage('EL')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FAGG</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('GGS')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FAIR</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('IRS')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FAPP</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('PP')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FAPE</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('PE')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FAUT</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('UT')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FASZ</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('SZ')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">OTD</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('OTS')" class="button-2 w-button">View Image</div>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
+            <div class="w-layout-grid grid-22" id="grid22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">VNM</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <div (click)="viewImage('VN')" class="button-2 w-button">View Image</div>
               </div>
             </div>
           </div>
