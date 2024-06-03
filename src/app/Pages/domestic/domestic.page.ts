@@ -226,6 +226,10 @@ export class DomesticPage implements OnInit {
   MetarMaps() {
     this.router.navigate(['domestic/metar-maps']);
   }
+  Qnhchart() {
+    this.router.navigate(['domestic/qnh-chart']);
+  }
+
   hourlyChart() {
     this.isDomestic = false;
     this.isHourlyCharts = true;

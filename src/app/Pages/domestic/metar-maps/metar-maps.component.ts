@@ -44,7 +44,7 @@ export class MetarMapsComponent implements OnInit {
   }
 
   loadSynopticData() {
-    debugger;
+  
     this.isLoading = true;
     this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
       (data) => {

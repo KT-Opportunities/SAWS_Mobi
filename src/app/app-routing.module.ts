@@ -232,7 +232,9 @@ const routes: Routes = [
   {
     path: 'observation/metar-color-coded',
     loadChildren: () =>
-      import('./Pages/observation/metar-color-coded/metar-color-coded.module').then((m) => m.MetarColorCodedModule),
+      import(
+        './Pages/observation/metar-color-coded/metar-color-coded.module'
+      ).then((m) => m.MetarColorCodedModule),
   },
   {
     path: 'observation/metar-recent',
@@ -244,27 +246,37 @@ const routes: Routes = [
   {
     path: 'observation/metar-history',
     loadChildren: () =>
-      import('./Pages/observation/metar-history/metar-history.module').then((m) => m.MetarHistoryModule),
+      import('./Pages/observation/metar-history/metar-history.module').then(
+        (m) => m.MetarHistoryModule
+      ),
   },
   {
     path: 'observation/speci',
     loadChildren: () =>
-      import('./Pages/observation/speci/speci.module').then((m) => m.SpeciModule),
+      import('./Pages/observation/speci/speci.module').then(
+        (m) => m.SpeciModule
+      ),
   },
   {
     path: 'observation/metar-taf-recent',
     loadChildren: () =>
-      import('./Pages/observation/metar-taf-recent/metar-taf-recent.module').then((m) => m.MetarTafRecentModule),
+      import(
+        './Pages/observation/metar-taf-recent/metar-taf-recent.module'
+      ).then((m) => m.MetarTafRecentModule),
   },
   {
     path: 'observation/radar',
     loadChildren: () =>
-      import('./Pages/observation/radar/radar.module').then((m) => m.RadarModule),
+      import('./Pages/observation/radar/radar.module').then(
+        (m) => m.RadarModule
+      ),
   },
   {
     path: 'observation/weather-map',
     loadChildren: () =>
-      import('./Pages/observation/weather-map/weather-map.module').then((m) => m.WeatherMapModule),
+      import('./Pages/observation/weather-map/weather-map.module').then(
+        (m) => m.WeatherMapModule
+      ),
   },
 
   {
@@ -279,13 +291,19 @@ const routes: Routes = [
 
   {
     path: 'image-viewr',
-    loadChildren: () => import('./Pages/image-viewr/image-viewr.module').then( m => m.ImageViewrPageModule),
+    loadChildren: () =>
+      import('./Pages/image-viewr/image-viewr.module').then(
+        (m) => m.ImageViewrPageModule
+      ),
   },
 
   {
     path: 'aero-image-viewer',
-    loadChildren: () => import('./Pages/aero-image-viewer/aero-image-viewer.module').then( m => m.AeroImageViewerPageModule),
-  }, 
+    loadChildren: () =>
+      import('./Pages/aero-image-viewer/aero-image-viewer.module').then(
+        (m) => m.AeroImageViewerPageModule
+      ),
+  },
 
   {
     path: 'aviation-code',
@@ -325,15 +343,24 @@ const routes: Routes = [
   },
   {
     path: 'international/grid-winds',
-    loadChildren: () => import('./Pages/international/grid-winds/grid-winds.module').then( m => m.GridWindsPageModule),
+    loadChildren: () =>
+      import('./Pages/international/grid-winds/grid-winds.module').then(
+        (m) => m.GridWindsPageModule
+      ),
   },
   {
     path: 'international/grid-maximum',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
+    loadChildren: () =>
+      import('./Pages/international/grid-maximum/grid-maximum.module').then(
+        (m) => m.GridMaximumPageModule
+      ),
   },
   {
     path: 'international/humidity',
-    loadChildren: () => import('./Pages/international/humidity/humidity.module').then( m => m.HumidityModule),
+    loadChildren: () =>
+      import('./Pages/international/humidity/humidity.module').then(
+        (m) => m.HumidityModule
+      ),
   },
   {
     path: 'international/image-browser',
@@ -345,7 +372,10 @@ const routes: Routes = [
   },
   {
     path: 'international/sigwx-charts',
-    loadChildren: () => import('./Pages/international/sigwx-charts/sigwx-charts.module').then( m => m.SigwxChartsModule),
+    loadChildren: () =>
+      import('./Pages/international/sigwx-charts/sigwx-charts.module').then(
+        (m) => m.SigwxChartsModule
+      ),
   },
 
   // --- Flight-briefing url paths
@@ -445,8 +475,8 @@ const routes: Routes = [
   {
     path: 'domestic/qnh-chart',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/qnh-chart/qnh-chart.module').then(
+        (m) => m.QnhChartModule
       ),
   },
   {
@@ -516,7 +546,10 @@ const routes: Routes = [
   },
   {
     path: 'aero-sport/kwazulu-natal',
-    loadChildren: () => import('./Pages/aerosport/kwazul-natal/kwazul-natal.module').then( m => m.KwazulNatalPageModule)
+    loadChildren: () =>
+      import('./Pages/aerosport/kwazul-natal/kwazul-natal.module').then(
+        (m) => m.KwazulNatalPageModule
+      ),
   },
   {
     path: 'aero-sport/south-west-cape',
@@ -542,9 +575,9 @@ const routes: Routes = [
   {
     path: 'aero-sport/synoptic-analysis',
     loadChildren: () =>
-      import('./Pages/aerosport/synoptic-analysis/synoptic-analysis.module').then(
-        (m) => m.SynopticAnalysisPageModule
-      ),
+      import(
+        './Pages/aerosport/synoptic-analysis/synoptic-analysis.module'
+      ).then((m) => m.SynopticAnalysisPageModule),
   },
   {
     path: 'chat',
