@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="isLoading == true" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading == true" name="bubbles"></ion-spinner
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner
     >Loading...
   </div>
   <section class="aerosport-ci" style="margin-top: 107px !important">
@@ -598,7 +598,7 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="margin-top: 148%">
+    <!-- <div class="bottomdiv" style="margin-top: 148%">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -613,7 +613,21 @@
           <h6 class="heading-10-copy" id="styleh6">International</h6></a
         >
       </div>
-    </div>
+    </div> -->
   </section>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid">
+      <a (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6">
+          International</h6>
+      </a>
+    </div>
+  </div>
+</ion-footer>
 

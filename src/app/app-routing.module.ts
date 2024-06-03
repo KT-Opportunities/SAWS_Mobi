@@ -337,11 +337,11 @@ const routes: Routes = [
   },
   {
     path: 'international/image-browser',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
+    loadChildren: () => import('./Pages/international/image-browser/image-browser.module').then( m => m.ImageBrowserModule),
   },
   {
     path: 'international/graphic-sigmet-airmet',
-    loadChildren: () => import('./Pages/international/grid-maximum/grid-maximum.module').then( m => m.GridMaximumPageModule),
+    loadChildren: () => import('./Pages/international/graphical-sigmet-airmet/graphical-sigmet-airmet.module').then( m => m.GraphicalSigmetAirmetModule),
   },
   {
     path: 'international/sigwx-charts',

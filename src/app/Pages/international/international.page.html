@@ -1,10 +1,10 @@
 <ion-content>
   <section class="list-page">
-    <div class="" *ngIf="isFormVisible">
+    <div class="">
       <div
         class=""
         [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn ===true"
+        *ngIf="isLoggedIn"
       >
         <h1 class="heading-6" style="text-align: center">International</h1>
         <div
@@ -12,7 +12,7 @@
           style="overflow-y: auto; max-height: 460px; -ms-overflow-style: none"
         >
           <div
-            (click)="GPM()"
+            (click)="NavigateToGPM()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             href="#"
             class="link-block-3 w-inline-block"
@@ -20,14 +20,14 @@
             <h1 class="heading-5">GPM</h1>
           </div>
           <a
-            (click)="Humidity()"
+            (click)="NavigateToHumidity()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">Humidity</h1>
           </a>
           <div
-            (click)="SIGWXCharts()"
+            (click)="NavigateToSIGWXCharts()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             class="link-block-3 w-inline-block"
           >
@@ -35,28 +35,28 @@
           </div>
 
           <div
-            (click)="GridWinds()"
+            (click)="NavigateToGridWinds()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">Wind:Grid</h1>
           </div>
           <div
-            (click)="MaximumWind()"
+            (click)="NavigateToMaximumWind()"
             id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">Wind:Maximum</h1>
           </div>
           <div
-            (click)="ImageBrowser()"
+            (click)="NavigateToImageBrowser()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">Image Browser</h1>
           </div>
           <div
-            (click)="GraphicalSigmetAirmet()"
+            (click)="NavigateToGraphicalSigmetAirmet()"
             id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block"
           >
@@ -65,13 +65,14 @@
         </div>
       </div>
     </div>
-    <div class="list-div" *ngIf="isLoggedIn === false">
+
+    <div class="list-div" *ngIf="!isLoggedIn">
       <h1 class="heading-6">International</h1>
       <div class="w-layout-grid grid-list">
         <div
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           class="link-block-3 w-inline-block"
-          (click)="GraphicalSigmetAirmet()"
+          (click)="NavigateToGraphicalSigmetAirmet()"
         >
           <h1 class="heading-5">Graphics SIGMENT/AIRMET</h1>
         </div>
@@ -81,7 +82,7 @@
     <!--Maximum Wind-->
 
     <!--Image Browser -->
-    <section
+    <!-- <section
       class="aerosport-ci"
       *ngIf="isFormVisible3"
       style="margin-top: -18px !important"
@@ -98,10 +99,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Significant Weather Charts -->
-    <section
+    <!-- <section
       class="aerosport-ci"
       *ngIf="isKwazulNatal"
       style="margin-top: -18px !important"
@@ -622,11 +623,10 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Graphical SIGMET/AIRMET-->
-
-    <section class="ob-metar-history" *ngIf="isTSProbability">
+    <!-- <section class="ob-metar-history" *ngIf="isTSProbability">
       <div class="cloud-cover">
         <h1 class="heading6">Graphical SIGMET/AIRMET</h1>
 
@@ -648,7 +648,6 @@
                   data-infinite="true"
                 >
                   <div class="w-slider-mask prev">
-                    <!-- <div class="w-slide"></div> -->
                     <img
                       src="../../assets/graphicSigmentAirmet.png"
                       loading="lazy"
@@ -656,27 +655,16 @@
                       alt=""
                       class="image"
                     />
-                    <!-- <div class="w-slide"></div> -->
                   </div>
-
-                  <!-- <div class="w-slider-arrow-left">
-                    <div class="w-icon-slider-left"></div>
-                  </div>
-                  <div class="w-slider-arrow-right">
-                    <div class="w-icon-slider-right"></div>
-                  </div> -->
-                  <!-- <div class="w-slider-nav w-round w-num"> -->
-
-                  <!-- </div> -->
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section
+    <!-- <section
       class="gpm-section"
       *ngIf="isFormVisible1"
       style="margin-top: -18px !important"
@@ -1444,9 +1432,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <div class="bottomdiv" style="margin-top: 148%" *ngIf="isFormVisible">
+    <!-- <div class="bottomdiv" style="margin-top: 148%" *ngIf="isFormVisible">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -1473,9 +1461,9 @@
           ></h6>
         </a>
       </div>
-    </div>
+    </div> -->
 
-    <div class="bottomdiv" style="margin-top: 148%" *ngIf="!isFormVisible">
+    <!-- <div class="bottomdiv" style="margin-top: 148%" *ngIf="!isFormVisible">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -1490,6 +1478,27 @@
           <h6 class="heading-10-copy" id="styleh6">International</h6>
         </a>
       </div>
-    </div>
+    </div> -->
+  
   </section>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <div class="footerdiv">
+      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" style="
+            color: #fff;
+            margin-top: 9px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "></h6>
+      </a>
+    </div>
+  </div>
+</ion-footer>

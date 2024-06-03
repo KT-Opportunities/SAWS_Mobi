@@ -41,7 +41,7 @@ export class GpmComponent  implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  internationalPageNavigation() {
+  NavigateToInternational() {
     this.router.navigate(['/international']);
   }
 

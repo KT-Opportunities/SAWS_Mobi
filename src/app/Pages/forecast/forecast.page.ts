@@ -52,10 +52,10 @@ export class ForecastPage implements OnInit {
   }
 
   forecastPage() {
-
+    this.router.navigate(['/landing-page']);
   }
 
-  LandingPage() {
+  NavigateToLandingPage() {
     this.router.navigate(['/landing-page']);
   }
 

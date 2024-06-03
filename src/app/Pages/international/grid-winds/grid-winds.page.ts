@@ -21,7 +21,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 })
 export class GridWindsPage implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
@@ -296,6 +296,7 @@ export class GridWindsPage implements OnInit {
       return this.EastGridWindArray;
     }
   }
+
   getFilteredItemSouth() {
     if (this.selectedOption === 'FL100') {
       return this.SouthGridWindArray.filter((item: any) => {
@@ -397,7 +398,7 @@ export class GridWindsPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  International() {
+  NavigateToInternational() {
     this.router.navigate(['/international']);
   }
 
@@ -405,7 +406,6 @@ export class GridWindsPage implements OnInit {
     console.log('file Name:', item);
     const folderName = item.substring(0, 2);
     const fileName = item;
-    debugger;
     console.log('Folder Name:', folderName);
 
     // Call fetchSecondAPI to get filetextcontent asynchronously

@@ -21,7 +21,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 })
 export class HumidityComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
@@ -49,9 +49,7 @@ export class HumidityComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
-
     private http: HttpClient,
-
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer
@@ -250,6 +248,7 @@ export class HumidityComponent implements OnInit {
       return this.SouthGridWindArray;
     }
   }
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
@@ -285,6 +284,7 @@ export class HumidityComponent implements OnInit {
       this.isDropdownOpen2 = false;
     }
   }
+
   closeAllDropdowns() {
     this.isDropdownOpen1 = false;
     this.isDropdownOpen2 = false;
@@ -294,7 +294,7 @@ export class HumidityComponent implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  International() {
+  NavigateToInternational() {
     this.router.navigate(['/international']);
   }
 

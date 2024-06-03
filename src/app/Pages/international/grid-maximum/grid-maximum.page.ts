@@ -21,7 +21,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 })
 export class GridMaximumPage implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   isFormVisible: boolean = true;
   isFormVisible1: boolean = false;
@@ -93,7 +93,6 @@ export class GridMaximumPage implements OnInit {
       this.router.navigate(['/login']);
     }
     this.isLoading = true;
-    debugger;
     this.APIService.GetSourceChartFolderFilesList('PW').subscribe(
       (response) => {
         this.MaximumArray = response;
@@ -131,7 +130,6 @@ export class GridMaximumPage implements OnInit {
     // Extract folderName and fileName from the current item
     const folderName = item.foldername;
     const fileName = item.filename;
-    debugger;
     console.log('file Name:', fileName);
 
     // Call fetchSecondAPI to get filetextcontent asynchronously
@@ -187,7 +185,7 @@ export class GridMaximumPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  International() {
+  NavigateToInternational() {
     this.router.navigate(['/international']);
   }
 }

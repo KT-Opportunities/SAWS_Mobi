@@ -1,8 +1,4 @@
 <ion-content>
-  <!-- <div *ngIf="loading === true" class="loading-indicator">
-    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
-  </div> -->
-
   <section class="list-page">
     <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
       <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
@@ -1366,11 +1362,29 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <div class="">
+  <!-- <div class="">
     <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
     <div class="footerdiv">
       <a class="w-inline-block" (click)="NavigateToLandingPage()"><img src="../../assets/Group-3489.svg" loading="lazy"
           alt="" /></a>
+    </div>
+  </div> -->
+
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <div class="footerdiv">
+      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" style="
+            color: #fff;
+            margin-top: 9px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "></h6>
+      </a>
     </div>
   </div>
 </ion-footer>

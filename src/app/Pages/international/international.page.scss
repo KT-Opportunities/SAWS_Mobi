@@ -8085,7 +8085,7 @@ html.w-mod-touch * {
 }
 
 .w-button {
-  display: inline-block;
+  // display: inline-block;
   padding: 9px 32px;
   background-color: #00386c;
   color: white;
@@ -8094,6 +8094,9 @@ html.w-mod-touch * {
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .w-button1 {
   display: inline-block;

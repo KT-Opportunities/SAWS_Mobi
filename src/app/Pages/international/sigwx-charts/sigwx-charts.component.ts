@@ -22,7 +22,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 export class SigwxChartsComponent  implements OnInit {
 
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
@@ -64,6 +64,7 @@ export class SigwxChartsComponent  implements OnInit {
     this.fileBaseUrlSynoptic =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
+
   getTimeFromFilename(imageName: any) {
     // Extract the portion before '.gif'
     const baseName = imageName.split('.gif')[0];
@@ -83,6 +84,7 @@ export class SigwxChartsComponent  implements OnInit {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
     }
+
     this.APIService.GetSourceAviationFolderFilesList('gw', 72).subscribe(
       (data) => {
         console.log('Data received:', data);
@@ -191,6 +193,7 @@ export class SigwxChartsComponent  implements OnInit {
       return this.CentralGridWindArray;
     }
   }
+
   getFilteredItemWest() {
     if (this.selectedOption3 === 'FL100') {
       return this.WestGridWindArray.filter((item: any) => {
@@ -244,6 +247,7 @@ export class SigwxChartsComponent  implements OnInit {
       return this.WestGridWindArray;
     }
   }
+
   getFilteredItemEast() {
     if (this.selectedOption4 === 'FL100') {
       return this.EastGridWindArray.filter((item: any) => {
@@ -297,6 +301,7 @@ export class SigwxChartsComponent  implements OnInit {
       return this.EastGridWindArray;
     }
   }
+
   getFilteredItemSouth() {
     if (this.selectedOption === 'FL100') {
       return this.SouthGridWindArray.filter((item: any) => {
@@ -350,6 +355,7 @@ export class SigwxChartsComponent  implements OnInit {
       return this.SouthGridWindArray;
     }
   }
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
@@ -389,6 +395,7 @@ export class SigwxChartsComponent  implements OnInit {
       this.isDropdownOpen5 = false;
     }
   }
+
   closeAllDropdowns() {
     this.isDropdownOpen1 = false;
     this.isDropdownOpen2 = false;
@@ -398,7 +405,7 @@ export class SigwxChartsComponent  implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  International() {
+  NavigateToInternational() {
     this.router.navigate(['/international']);
   }
 

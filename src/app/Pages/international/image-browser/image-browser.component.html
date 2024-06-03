@@ -1,3 +1,36 @@
-<p>
-  image-browser works!
-</p>
+<ion-content [fullscreen]="true">
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+
+  <section class="aerosport-ci" style="margin-top: 107px !important">
+    <h1 class="heading-6">Image Browser</h1>
+
+    <div class="aerosport">
+      <div class="aerosportScrol">
+        <div class="div-block-464">
+          <h1 class="sub-headings"></h1>
+        </div>
+        <div class="div-block-464">
+          <h1 class="sub-headings">Browsing miscellaneous images ()</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid">
+      <a (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6">
+          International</h6>
+      </a>
+    </div>
+  </div>
+</ion-footer>
