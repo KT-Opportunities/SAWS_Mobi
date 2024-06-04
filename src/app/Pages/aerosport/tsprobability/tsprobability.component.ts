@@ -35,7 +35,7 @@ export class TSProbabilityComponent implements OnInit {
     this.fileBaseUrlPrevious = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
-  aerosportPage() {
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
 

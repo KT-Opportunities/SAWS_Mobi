@@ -1,7 +1,6 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="isLoading == true" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading == true" name="bubbles"></ion-spinner
-    >Loading...
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>Loading...
   </div>
   <section class="aerosport-ci" style="margin-top: 107px !important">
     <h1 class="heading-6">Spot Graph Map</h1>
@@ -13,60 +12,30 @@
             <h1 class="sub-headings">Aerodromes</h1>
             <div class="grid-div">
               <div class="w-layout-grid central-grid">
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15"
-                  class="div-block-35"
-                >
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15"
-                      class="div-block-36"
-                    >
+                <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba086-bb9b1d15" class="div-block-35">
+                  <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba087-bb9b1d15" class="w-layout-grid grid-21">
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba088-bb9b1d15" class="div-block-36">
                       <h4 class="heading-24">CB</h4>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15"
-                      class="div-block-36"
-                    >
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08b-bb9b1d15" class="div-block-36">
                       <h4 class="heading-24">View Image</h4>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08e-bb9b1d15" class="div-block-36"></div>
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba08f-bb9b1d15" class="div-block-36"></div>
                   </div>
                 </div>
 
                 <!---->
-                <div
-                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b0-bb9b1d15"
-                  class="div-block-454"
+                <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b0-bb9b1d15" class="div-block-454"
                   *ngFor="let item of xlFAItems; let i = index"
-                  [ngClass]="i % 2 === 0 ? 'div-block-454' : 'div-block-38'"
-                >
+                  [ngClass]="i % 2 === 0 ? 'div-block-454' : 'div-block-38'">
                   <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b2-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <button
-                        class="button-2-copy w-button"
-                        (click)="ImageViewer(item.filename.substring(2, 6))"
-                      >
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b2-bb9b1d15" class="div-block-465">
+                      <button class="button-2-copy w-button" (click)="ImageViewer(item.filename.substring(2, 6))">
                         View
                       </button>
                     </div>
-                    <div
-                      id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b5-bb9b1d15"
-                      class="div-block-465"
-                    >
+                    <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b5-bb9b1d15" class="div-block-465">
                       <h1 class="heading-25">
                         {{ item.filename.substring(2, 6) }}
                       </h1>
@@ -79,65 +48,35 @@
           <h1 class="sub-headings">Locations</h1>
           <div class="grid-div">
             <div class="w-layout-grid central-grid">
-              <div
-                id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15"
-                class="div-block-35"
-              >
-                <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa5-bb9b1d15"
-                  class="w-layout-grid grid-21"
-                >
-                  <div
-                    id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa6-bb9b1d15"
-                    class="div-block-36"
-                  >
+              <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15" class="div-block-35">
+                <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa5-bb9b1d15" class="w-layout-grid grid-21">
+                  <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa6-bb9b1d15" class="div-block-36">
                     <h4 class="heading-24">Regions</h4>
                   </div>
-                  <div
-                    id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
-                    class="div-block-36"
-                  >
+                  <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15" class="div-block-36">
                     <h4 class="heading-24">View Image</h4>
                   </div>
-                  <div
-                    id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aac-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aad-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
+                  <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aac-bb9b1d15" class="div-block-36"></div>
+                  <div id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aad-bb9b1d15" class="div-block-36"></div>
                 </div>
               </div>
 
-              <div
-                id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b0-bb9b1d15"
-                class="div-block-454"
+              <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b0-bb9b1d15" class="div-block-454"
                 *ngFor="let item of noHyphenAfterXL; let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-454' : 'div-block-38'"
-              >
+                [ngClass]="i % 2 === 0 ? 'div-block-454' : 'div-block-38'">
                 <div class="w-layout-grid grid-41">
-                  <div
-                    id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b566-bb9b1d15"
-                    class="div-block-465"
-                  >
-                    <button
-                      class="button-2-copy w-button"
-                      (click)="ImageViewer2(item.filename)"
-                    >
+                  <div id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b566-bb9b1d15" class="div-block-465">
+                    <button class="button-2-copy w-button" (click)="ImageViewer2(item.filename)">
                       View
                     </button>
                   </div>
-                  <div
-                    id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b569-bb9b1d15"
-                    class="div-block-465"
-                  >
+                  <div id="w-node-db37a491-8dad-40b9-a88e-cc55c6b1b569-bb9b1d15" class="div-block-465">
                     <h1 class="heading-25">
                       {{
-                        filenameToDisplayName[item.filename] ||
-                          extractAlphabetical(
-                            item.filename.substring(2).split("_spot_d1")[0]
-                          )
+                      filenameToDisplayName[item.filename] ||
+                      extractAlphabetical(
+                      item.filename.substring(2).split("_spot_d1")[0]
+                      )
                       }}
                     </h1>
                   </div>
@@ -148,21 +87,19 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="margin-top: 148%">
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
+  </section>
+</ion-content>
 
-      <div class="footerdiv" id="footerdivid">
-        <a (click)="aerosportPage()" class="link-block-5 w-inline-block"
-          ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-          <h6 class="heading-10-copy" id="styleh6">Aerosport</h6></a
-        >
-      </div>
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid">
+      <a (click)="NavigateToAerosport()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6">
+          Aerosport</h6>
+      </a>
     </div>
-  </section></ion-content
->
+  </div>
+</ion-footer>

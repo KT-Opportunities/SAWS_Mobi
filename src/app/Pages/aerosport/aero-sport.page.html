@@ -1,92 +1,53 @@
 <ion-content>
 
   <section class="list-page">
-    <div class="" >
-      <div
-        class=""
-        [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn===true"
-      >
+    <div class="">
+      <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
         <h1 class="heading-6" style="text-align: center">AeroSport</h1>
-        <div
-          class="w-layout-grid grid-list"
-          style="overflow-y: auto; max-height: 460px; -ms-overflow-style: none"
-        >
-          <div
-            (click)="CentralInterior()"
-            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            href="#"
-            class="link-block-3 w-inline-block"
-          >
+        <div class="w-layout-grid grid-list" style="overflow-y: auto; max-height: 460px; -ms-overflow-style: none">
+          <div (click)="NavigateToCentralInterior()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
+            class="link-block-3 w-inline-block">
             <h1 class="heading-5">Central Interior</h1>
           </div>
-          <a
-            (click)="CloudForecast()"
-            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            class="link-block-3 w-inline-block"
-          >
+          <a (click)="NavigateToCloudForecast()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            class="link-block-3 w-inline-block">
             <h1 class="heading-5">Cloud Forecast</h1>
           </a>
-          <div
-            (click)="KwazulNatalToggle()"
-            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            href="#"
-            class="link-block-3 w-inline-block"
-          >
+          <div (click)="NavigateToKwazulNatal()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
+            class="link-block-3 w-inline-block">
             <h1 class="heading-5">Kwazulu Natal</h1>
           </div>
 
-          <div
-            (click)="SouthWesternCape()"
-            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            href="#"
-            class="link-block-3 w-inline-block"
-          >
+          <div (click)="NavigateToSouthWesternCape()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            href="#" class="link-block-3 w-inline-block">
             <h1 class="heading-5">Southwestern Cape</h1>
           </div>
-          <div
-            (click)="SpotGraphToggle()"
-            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            href="#"
-            class="link-block-3 w-inline-block"
-          >
+          <div (click)="NavigateToSpotGraphMap()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" href="#"
+            class="link-block-3 w-inline-block">
             <h1 class="heading-5">Spot Graph Map</h1>
           </div>
-          <div
-            (click)="SynopticAnalysis()"
-            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-        
-            class="link-block-3 w-inline-block"
-          >
+          <div (click)="NavigateToSynopticAnalysis()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            class="link-block-3 w-inline-block">
             <h1 class="heading-5">Synoptic Analysis</h1>
           </div>
-          <div
-            (click)="TSProbability()"
-            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            href="https://aviation.weathersa.co.za/#showTSProbability"
-            class="link-block-3 w-inline-block"
-          >
+          <div (click)="NavigateToTSProbability()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            href="https://aviation.weathersa.co.za/#showTSProbability" class="link-block-3 w-inline-block">
             <h1 class="heading-5">TS Probability</h1>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="margin-top: 148%" >
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-      />
-      <div class="footerdiv">
-        <a
-          (click)="aerosportPage()"
-          class="link-block-5 w-inline-block"
-          style="position: relative; top: -11px"
-          ><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
-          <h6
-            class="heading-10-copy"
-            style="
+
+  </section>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <div class="footerdiv">
+      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" style="
               color: #fff;
               margin-top: 9px;
               margin-bottom: 0;
@@ -94,11 +55,8 @@
               text-decoration: none;
               font-size: 12px;
               margin-top: 4px;
-            "
-          ></h6
-        ></a>
-      </div>
+            "></h6>
+      </a>
     </div>
-
-  </section></ion-content
->
+  </div>
+</ion-footer>

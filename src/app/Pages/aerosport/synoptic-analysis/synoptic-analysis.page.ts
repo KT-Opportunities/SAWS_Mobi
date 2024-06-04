@@ -85,7 +85,7 @@ export class SynopticAnalysisPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  aerosportPage() {
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
 }

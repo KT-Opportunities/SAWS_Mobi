@@ -20,7 +20,7 @@ import { APIService } from 'src/app/services/apis.service';
 })
 export class CentralInteriorComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   isTSProbability: boolean = false;
   isCloudForecast: boolean = false;
@@ -359,7 +359,7 @@ export class CentralInteriorComponent implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  aerosportPage() {
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
 

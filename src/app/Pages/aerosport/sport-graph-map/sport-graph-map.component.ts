@@ -18,9 +18,11 @@ export class SportGraphMapComponent implements OnInit {
       filename.includes('tsprob_d1.gif') || filename.includes('tsprob_d2.gif')
     );
   }
-  aerosportPage() {
+
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
+
   // Check if the image filename corresponds to Synoptic
   isSynoptic(filename: string): boolean {
     return filename === 'synoptic.png';

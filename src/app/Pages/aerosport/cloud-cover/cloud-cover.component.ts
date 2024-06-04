@@ -138,7 +138,7 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
 
 }
 
-  aeroSportPageNavigation() {
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
 

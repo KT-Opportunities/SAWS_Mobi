@@ -302,7 +302,7 @@ export class KwazulNatalPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  aerosportPage() {
+  NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
     window.history.back();
   }
