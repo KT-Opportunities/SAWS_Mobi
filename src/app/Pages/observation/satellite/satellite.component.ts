@@ -129,7 +129,7 @@ export class SatelliteComponent  implements OnInit {
 
   }
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

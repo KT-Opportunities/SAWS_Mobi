@@ -13,7 +13,9 @@ export interface Metar {
 @Component({
   selector: 'app-metar',
   templateUrl: './metar.component.html',
-  styleUrls: ['./metar.component.scss'],
+  // styleUrls: ['./metar.component.scss'],
+  styleUrls: ['./../observation.page.scss'],
+
 })
 export class MetarComponent  implements OnInit {
 
@@ -36,7 +38,7 @@ export class MetarComponent  implements OnInit {
     this.fetchMetarReports();
   }
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

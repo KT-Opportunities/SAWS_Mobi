@@ -47,7 +47,7 @@ export class MetarTafRecentComponent  implements OnInit {
 
   ngOnInit() {}
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

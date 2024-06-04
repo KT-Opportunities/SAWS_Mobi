@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-weather-map',
   templateUrl: './weather-map.component.html',
-  styleUrls: ['./weather-map.component.scss'],
+  styleUrls: ['./../observation.page.scss'],
 })
 export class WeatherMapComponent  implements OnInit {
 
@@ -43,7 +43,7 @@ export class WeatherMapComponent  implements OnInit {
 
   ngOnInit() {}
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

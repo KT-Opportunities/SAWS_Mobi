@@ -29,7 +29,7 @@ export class MetarColorCodedComponent  implements OnInit {
     this.fetchMetarReports();
   }
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

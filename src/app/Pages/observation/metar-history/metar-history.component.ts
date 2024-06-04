@@ -45,7 +45,7 @@ export class MetarHistoryComponent  implements OnInit {
 
   ngOnInit() {}
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

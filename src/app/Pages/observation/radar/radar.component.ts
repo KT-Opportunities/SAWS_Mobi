@@ -39,7 +39,7 @@ export class RadarComponent  implements OnInit {
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

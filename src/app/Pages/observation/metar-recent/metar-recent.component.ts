@@ -46,7 +46,7 @@ export class MetarRecentComponent  implements OnInit {
 
   ngOnInit() {}
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

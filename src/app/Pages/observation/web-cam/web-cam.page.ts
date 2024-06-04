@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-web-cam',
   templateUrl: './web-cam.page.html',
-  styleUrls: ['./web-cam.page.scss'],
+  styleUrls: ['./../observation.page.scss'],
 })
 export class WebCamPage implements OnInit {
   isLogged: boolean = false;
@@ -27,7 +27,7 @@ export class WebCamPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  observationPageNavigation() {
+  NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
 
