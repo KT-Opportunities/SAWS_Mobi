@@ -1,5 +1,5 @@
-<ion-content
-  ><section class="list-page">
+<ion-content>
+  <section class="list-page">
     <!-- <div class="div-block-2">
       <ion-menu-button class="left-aligned-menu-button"></ion-menu-button>
       <img
@@ -10,11 +10,12 @@
         class="image"
       />
     </div> -->
+
     <div *ngIf="isFlight">
       <div 
       class=""
       [ngClass]="{'applied-styles': !isLoggedIn}"
-      *ngIf="isLoggedIn==true"
+      *ngIf="isLoggedIn"
     >
       <h1
         class="heading-6"
@@ -26,35 +27,35 @@
         class="w-layout-grid grid-list"
         style="overflow-y: auto; max-height: 460px; -ms-overflow-style: none"
       >
-        <div (click)="EditFlight()"
+        <div (click)="NavigateToFlightEdit()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
     
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Flight:Edit</h1>
+          <h1 class="heading-5">Flight: Edit</h1>
         </div>
-        <div (click)="importExport()"
+        <div (click)="NavigateToImportExport()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
           
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Flight:Import/Export</h1>
+          <h1 class="heading-5">Flight: Import/Export</h1>
         </div>
-        <div (click)="SavedFlight()"
+        <div (click)="NavigateToFlightSave()"
           id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
        
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Flight:Save</h1>
+          <h1 class="heading-5">Flight: Save</h1>
         </div>
-        <div (click)="shareflieght()"
+        <div (click)="NavigateToFlightShare()"
           id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
           
           class="link-block-3 w-inline-block"
         >
-          <h1 class="heading-5">Flight:Share</h1>
+          <h1 class="heading-5">Flight: Share</h1>
         </div>
-        <div (click)="departure()"
+        <div (click)="NavigateToImportDepartureList()"
           id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
           
           class="link-block-3 w-inline-block"
@@ -62,7 +63,7 @@
           <h1 class="heading-5">Import Departure List</h1>
         </div>
 
-        <div (click)="SheduleFlight()"
+        <div (click)="NavigateToSheduleFlightReport()"
         id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
         
         class="link-block-3 w-inline-block"
@@ -320,7 +321,7 @@
                           <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
                         </div>
                       </div>
-                      <h4 class="heading-21">   Minutes before departure</h4>
+                      <h4 class="heading-21"> Minutes before departure</h4>
                     </div>
                   </div>
                 </div>
@@ -364,7 +365,7 @@
       </div>
     </section>
 
-    <!-- Share Flieght -->
+    <!-- Share Flight -->
     <section class="shared-flight" *ngIf="isSharedflight">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
       <div class="import-and-export-main-div">
@@ -401,7 +402,7 @@
       </div>
     </section>
 
-    <!-- edit flieght -->
+    <!-- edit flight -->
     <section class="edit-flight-section"
     *ngIf="isEditFlight">
       <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
@@ -1143,7 +1144,7 @@
       </section>
 
 
-      <!-- Schedule FLight -->
+      <!-- Schedule Flight -->
       <section class="edit-flight-section"
       *ngIf="isSheduleFlight">
         <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
@@ -1210,7 +1211,7 @@
         </section>
 
 
-    <div class="bottomdiv" style="margin-top: 147% !important;">
+    <!-- <div class="bottomdiv" style="margin-top: 147% !important;">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -1223,9 +1224,9 @@
           ><img src="../../assets/Group-3489.svg" loading="lazy" alt=""
         /></a>
       </div>
-    </div>
+    </div> -->
 
-    <div class="bottomdiv" style="margin-top: 147%" *ngIf="!isFlight">
+    <!-- <div class="bottomdiv" style="margin-top: 147%" *ngIf="!isFlight">
       <img
         src="../../assets/Path-3447.svg"
         loading="lazy"
@@ -1247,13 +1248,28 @@
           margin-top: 4px;"  >Flight Briefing</h6></a
         >
       </div>
+    </div> -->
+
+    </section>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <div class="footerdiv">
+      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" style="
+            color: #fff;
+            margin-top: 9px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "></h6>
+      </a>
     </div>
+  </div>
+</ion-footer>
 
-   
-
-
-   
-    
-    
-    </section
-></ion-content>

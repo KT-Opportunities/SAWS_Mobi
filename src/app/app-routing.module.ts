@@ -387,52 +387,45 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'flight-briefing/edit',
+    path: 'flight-briefing/flight-edit',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/edit/edit.module').then(
+        (m) => m.EditModule
       ),
   },
   {
     path: 'flight-briefing/import-export',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/import-export/import-export.module').then(
+        (m) => m.ImportExportModule
       ),
   },
   {
-    path: 'flight-briefing/save',
+    path: 'flight-briefing/flight-save',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/save/save.module').then(
+        (m) => m.SaveModule
       ),
   },
   {
-    path: 'flight-briefing/share',
+    path: 'flight-briefing/flight-share',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/share/share.module').then(
+        (m) => m.ShareModule
       ),
   },
   {
-    path: 'flight-briefing/departure-list',
+    path: 'flight-briefing/import-departure-list',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
-      ),
-  },
-  {
-    path: 'flight-briefing/import-department-list',
-    loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/import-departure-list/import-departure-list.module').then(
+        (m) => m.ImportDepartureListModule
       ),
   },
   {
     path: 'flight-briefing/schedule-flight-report',
     loadChildren: () =>
-      import('./Pages/flight-briefing/flight-briefing.module').then(
-        (m) => m.FlightBriefingPageModule
+      import('./Pages/flight-briefing/schedule-flight-report/schedule-flight-report.module').then(
+        (m) => m.ScheduleFlightReportModule
       ),
   },
 

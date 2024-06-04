@@ -1,3 +1,265 @@
-<p>
-  import-departure-list works!
-</p>
+<ion-content>
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
+  </div>
+
+  <section class="departure-list-section" style="margin-top: 10px">
+    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+    <div class="depature-main-div">
+      <h1 class="heading-6" id="heading-6">Load a Departure List</h1>
+      <div class="" style="overflow-y: auto; height: 33em;">
+        <div class="w-layout-grid trand-grid">
+          <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3654-e48b3f09" class="div-block-15">
+            <div class="div-block-14"></div>
+          </div>
+          <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3656-e48b3f09" class="form-block w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
+              data-wf-page-id="6601657e0bf00039e48b3f09" data-wf-element-id="c35269cd-d023-de89-ae8e-d14bac8b3657">
+              <div class="div-block-44">
+                <div class="div-block-43"><label for="field-2" class="field-label-2">Select another station:</label>
+                  <div class="upload-div-copy">
+                    <div class="upload-div">
+                      <div class="w-embed">
+                        <form action="/action_page.php">
+                          <input type="file" id="myFile" name="filename">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+          <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b368b-e48b3f09" class="div-block-467">
+            <div class="w-layout-grid grid-26-copy-copy">
+              <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3690-e48b3f09" class="div-white-and-borders">
+                <div class="w-layout-grid grid-27">
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3692-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Overwrite existing flights:</h4>
+                  </div>
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3695-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="ea098362-0d62-9919-2553-c6f3b8af8dac"><label
+                          class="w-checkbox checkbox-field-2"><input type="checkbox" id="checkbox" name="checkbox"
+                            data-name="Checkbox" class="w-checkbox-input checkbox"><span
+                            class="checkbox-label-2 w-form-label" for="checkbox"></span></label></form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b3698-e48b3f09" class="div-blue-copy">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b369a-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Flight levels:</h4>
+                  </div>
+                  <div id="w-node-_4f9637ef-7ccf-7d9d-3957-19502ee5a5b4-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="4f9637ef-7ccf-7d9d-3957-19502ee5a5b6">
+                        <div class="div-block-470"><input class="text-field-blue-borders w-input" maxlength="256"
+                            name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2"
+                            required=""></div>
+                      </form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36a0-e48b3f09" class="div-white-and-borders">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36a2-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Create schedules:</h4>
+                  </div>
+                  <div id="w-node-e52e3de8-8c92-0275-f16b-03a1accc33c2-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="e52e3de8-8c92-0275-f16b-03a1accc33c4"><label
+                          class="w-checkbox checkbox-field-3"><input type="checkbox" id="checkbox-3" name="checkbox-3"
+                            data-name="Checkbox 3" class="w-checkbox-input checkbox"><span
+                            class="checkbox-label-2 w-form-label" for="checkbox-3"></span></label></form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36a8-e48b3f09" class="div-blue-copy">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36aa-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Auto-select METARs and TAFs:</h4>
+                  </div>
+                  <div id="w-node-_046ed4b9-f189-a8e8-c3fb-5b5398f087f8-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="046ed4b9-f189-a8e8-c3fb-5b5398f087fa"><label
+                          class="w-checkbox checkbox-field-4"><input type="checkbox" id="checkbox-4" name="checkbox-4"
+                            data-name="Checkbox 4" class="w-checkbox-input checkbox"><span
+                            class="checkbox-label-2 w-form-label" for="checkbox-4"></span></label></form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36b0-e48b3f09" class="div-white-and-borders">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-c35269cd-d023-de89-ae8e-d14bac8b36b2-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Use ROUTE charts:</h4>
+                  </div>
+                  <div id="w-node-b211b450-c974-4cb2-b077-202bb4058d93-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="b211b450-c974-4cb2-b077-202bb4058d95"><label
+                          class="w-checkbox checkbox-field-5"><input type="checkbox" id="checkbox-2" name="checkbox-2"
+                            data-name="Checkbox 2" class="w-checkbox-input checkbox"><span
+                            class="checkbox-label-2 w-form-label" for="checkbox-2"></span></label></form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_46a7a425-1c01-62d4-6322-02b4f3ef11c4-e48b3f09" class="div-blue-copy">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-_46a7a425-1c01-62d4-6322-02b4f3ef11c6-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Use calculated static charts:</h4>
+                  </div>
+                  <div id="w-node-_4a8c75a2-19c6-2197-77a4-5c8989ff22c2-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="4a8c75a2-19c6-2197-77a4-5c8989ff22c4"><label
+                          class="w-checkbox checkbox-field-6"><input type="checkbox" id="checkbox-2" name="checkbox-2"
+                            data-name="Checkbox 2" class="w-checkbox-input checkbox"><span
+                            class="checkbox-label-2 w-form-label" for="checkbox-2"></span></label></form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_46b28d40-ba7e-6f15-20b2-f7c709bf7cd3-e48b3f09" class="div-white-and-borders">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-_46b28d40-ba7e-6f15-20b2-f7c709bf7cd5-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">When to generate:</h4>
+                  </div>
+                  <div id="w-node-_0e3e31c1-1929-e97a-b9c2-7868ad54de8c-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="0e3e31c1-1929-e97a-b9c2-7868ad54de8e">
+                        <div class="div-block-470"><input class="text-field-blue-borders-copy w-input" maxlength="256"
+                            name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2"
+                            required=""></div>
+                      </form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                    <h4 class="heading-21"> Minutes before departure</h4>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_5135990f-0624-4943-2905-eeec0b4c0b69-e48b3f09" class="div-blue-copy">
+                <div class="w-layout-grid grid-27" id="grid27">
+                  <div id="w-node-_5135990f-0624-4943-2905-eeec0b4c0b6b-e48b3f09" class="div-block-48">
+                    <h4 class="heading-21">Default departure:</h4>
+                  </div>
+                  <div id="w-node-_69cebf11-8f77-c92b-31ad-a95856ae66bf-e48b3f09" class="div-block-48">
+                    <div class="w-form">
+                      <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+                        data-wf-page-id="6601657e0bf00039e48b3f09"
+                        data-wf-element-id="69cebf11-8f77-c92b-31ad-a95856ae66c1">
+                        <div class="div-block-470"><input class="text-field-blue-borders-copy w-input" maxlength="256"
+                            name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2"
+                            required=""></div>
+                      </form>
+                      <div class="w-form-done">
+                        <!-- <div>Thank you! Your submission has been received!</div> -->
+                      </div>
+                      <div class="w-form-fail">
+                        <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="div-block-469">
+          <div style="margin-top: 3px !important;" class="button-2-copy w-button">Submit</div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+      <div class="footerdiv">
+        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy"
+            width="35" alt="">
+          <h6 class="heading-10">Forecast</h6>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid">
+      <a (click)="NavigateToFlightBriefing()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6">
+          Flight Briefing</h6>
+      </a>
+    </div>
+  </div>
+</ion-footer>

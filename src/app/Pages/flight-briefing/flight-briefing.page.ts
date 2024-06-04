@@ -33,34 +33,33 @@ export class FlightBriefingPage implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {}
+
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
 
-  importExport() {
-    this.isFlight = false;
-    this.isexportImport = true;
-  }
-  departure() {
-    this.isFlight = false;
-    this.isdeparture = true;
-  }
-  shareflieght() {
-    this.isFlight = false;
-    this.isSharedflight = true;
-  }
-  EditFlight() {
-    this.isFlight = false;
-    this.isEditFlight = true;
+  NavigateToImportExport() {
+    this.router.navigate(['/flight-briefing/import-export']);
   }
 
-  SavedFlight() {
-    this.isFlight = false;
-    this.isSavedFlight = true;
+  NavigateToImportDepartureList() {
+    this.router.navigate(['/flight-briefing/import-departure-list']);
   }
-  SheduleFlight () {
-    this.isFlight = false;
-    this.isSheduleFlight = true;
+
+  NavigateToFlightShare() {
+    this.router.navigate(['/flight-briefing/flight-share']);
+  }
+
+  NavigateToFlightEdit() {
+    this.router.navigate(['/flight-briefing/flight-edit']);
+  }
+
+  NavigateToFlightSave() {
+    this.router.navigate(['/flight-briefing/flight-save']);
+  }
+
+  NavigateToSheduleFlightReport () {
+    this.router.navigate(['/flight-briefing/schedule-flight-report']);
   }
 
   
@@ -107,6 +106,11 @@ export class FlightBriefingPage implements OnInit {
     this.isDropdownOpen1 = false;
     this.isDropdownOpen2 = false;
  
+  }
+
+  NavigateToLandingPage()
+  {
+    this.router.navigate(['/landing-page']);
   }
 
 }
