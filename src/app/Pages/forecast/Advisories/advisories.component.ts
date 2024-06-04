@@ -13,7 +13,8 @@ export interface textFile {
 @Component({
   selector: 'app-advisories',
   templateUrl: './advisories.component.html',
-  styleUrls: ['./advisories.component.scss'],
+  // styleUrls: ['./advisories.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class AdvisoriesComponent implements OnInit {
   isLoading: boolean = true;
@@ -30,7 +31,6 @@ export class AdvisoriesComponent implements OnInit {
   ) {}
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event: any): void {
-    debugger;
     this.scrollBuytton();
   }
 
@@ -56,7 +56,6 @@ export class AdvisoriesComponent implements OnInit {
           element.Id = element.filetextcontent.split('\n')[0];
         }
         if (element.Id.split(' ')[0] == 'TC') {
-          debugger;
           var vwValue = element.filetextcontent.split('\n')[5];
           element.heading = vwValue;
           vwValue = vwValue.split('TC:')[1].trim();
@@ -70,13 +69,11 @@ export class AdvisoriesComponent implements OnInit {
       });
       this.AdvisoriesList = Response;
       console.log('Response ', this.AdvisoriesList);
-      debugger;
       this.isLoading = false;
       this.spinner.hide();
     });
 
     document.addEventListener('scroll', () => {
-      debugger;
       var Topbutton = document.getElementById('btntotop');
       if (
         document.body.scrollTop > 20 ||
@@ -90,19 +87,16 @@ export class AdvisoriesComponent implements OnInit {
   }
 
   ScrollToFilter(event: any) {
-    debugger;
     var element = document.getElementById(event.target.value);
     element?.scrollIntoView({ behavior: 'smooth' });
   }
 
   ScrollToTop(value: any) {
-    debugger;
     var element = document.getElementById(value);
     element?.scrollIntoView({ behavior: 'smooth' });
   }
 
   scrollBuytton() {
-    debugger;
     let buttoTop = document.getElementById('btntotop');
     if (
       document.body.scrollTop > 20 ||
@@ -114,8 +108,8 @@ export class AdvisoriesComponent implements OnInit {
     }
   }
 
-  forecastPage() {
+  forecastPageNavigation() {
     window.history.back();
-    // this.router.navigate(['/forecast']);
+    this.router.navigate(['/forecast']);
   }
 }

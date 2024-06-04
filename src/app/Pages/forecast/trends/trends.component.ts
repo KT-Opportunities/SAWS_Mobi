@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-trends',
   templateUrl: './trends.component.html',
-  styleUrls: ['./trends.component.scss'],
+  // styleUrls: ['./trends.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class TrendsComponent  implements OnInit {
 

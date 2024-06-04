@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-warnings',
   templateUrl: './warnings.component.html',
-  styleUrls: ['./warnings.component.scss'],
+  // styleUrls: ['./warnings.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class WarningsComponent  implements OnInit {
 

@@ -9,7 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-sigmet-airmet',
   templateUrl: './sigmet-airmet.component.html',
-  styleUrls: ['./sigmet-airmet.component.scss'],
+  // styleUrls: ['./sigmet-airmet.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class SigmetAirmetComponent  implements OnInit {
 
@@ -75,13 +76,13 @@ export class SigmetAirmetComponent  implements OnInit {
       this.unfilteredList = Response;
       this.getAirmetTextFiles();
       console.log("Response ", this.SigmetList);
-      debugger
+  
       // this.isLoading = false;
       
     })
   }
  async getAirmetTextFiles(){
-  debugger
+
     await this.apiService.GetSourceTextFolderFiles("airmet")
     .subscribe((Response) => {
       
@@ -97,13 +98,13 @@ export class SigmetAirmetComponent  implements OnInit {
       this.SigmetList.push(Response);
       this.unfilteredList.push(Response);
       console.log("Response ", this.SigmetList);
-      debugger
+  
       this.getGametTextFiles();
       
     })
   }
   async getGametTextFiles(){
-    debugger
+
    await this.apiService.GetSourceTextFolderFiles("gamet")
     .subscribe((Response) => {
       
@@ -118,14 +119,14 @@ export class SigmetAirmetComponent  implements OnInit {
       this.SigmetList.push(Response);
       this.unfilteredList.push(Response);
       console.log("Response ", this.SigmetList);
-      debugger
+  
       this.isLoading = false;
       
     })
   }
   
   filterbySearch(event: Event){
-    debugger
+  
 
     let element = document.getElementById('searchValue');
     console.log("value ",element);
@@ -141,8 +142,7 @@ export class SigmetAirmetComponent  implements OnInit {
   }
 
   filterNosearchValue(){
-    debugger
-
+   
     let element = document.getElementById('searchValue');
     console.log("value ",element);
     let filterValue = (element as HTMLInputElement).value;
@@ -153,7 +153,6 @@ export class SigmetAirmetComponent  implements OnInit {
   }
 
   ScrollToTop(value: any) {
-    debugger;
     var element = document.getElementById(value);
     element?.scrollIntoView({ behavior: 'smooth' });
   }

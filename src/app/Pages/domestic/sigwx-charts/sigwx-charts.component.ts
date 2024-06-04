@@ -162,7 +162,6 @@ export class SigwxChartsComponent implements OnInit {
     // Extract folderName and fileName from the current item
     const folderName = '';
     const fileName = item.filename;
-    debugger;
     console.log('file Name:', fileName);
 
     // Call fetchSecondAPI to get filetextcontent asynchronously

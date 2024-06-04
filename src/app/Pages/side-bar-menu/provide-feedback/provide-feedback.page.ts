@@ -230,7 +230,6 @@ export class ProvideFeedbackPage implements OnInit {
   updateFeedbackFormWithAttachment(body: any) {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
-        debugger;
         this.feedbackForm.reset();
 
         this.uploadFile(

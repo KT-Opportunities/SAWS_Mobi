@@ -16,7 +16,8 @@ interface FileData {
 @Component({
   selector: 'app-taf',
   templateUrl: './taf.component.html',
-  styleUrls: ['./taf.component.scss'],
+  // styleUrls: ['./taf.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class TafComponent  implements OnInit {
 

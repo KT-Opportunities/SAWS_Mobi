@@ -16,7 +16,7 @@ interface FileData {
 @Component({
   selector: 'app-color-coded-taf',
   templateUrl: './color-coded-taf.component.html',
-  styleUrls: ['./color-coded-taf.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class ColorCodedTafComponent  implements OnInit {
   loading = false;

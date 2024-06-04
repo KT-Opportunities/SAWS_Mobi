@@ -95,7 +95,6 @@ export class LoginPage implements OnInit, OnDestroy {
               this.userData = response;
               this.authAPI.setUserData(this.userData);
               this.authAPI.saveCurrentUser(response);
-              console.log('TEST::', this.userData);
               const redirectUrl = this.authAPI.getRedirectUrl();
               if (redirectUrl) {
                 // If yes, navigate them to that URL

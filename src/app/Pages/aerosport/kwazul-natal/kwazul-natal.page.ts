@@ -363,7 +363,6 @@ export class KwazulNatalPage implements OnInit {
     });
   }
   ImageViewer2(imageName: any) {
-    debugger;
     this.router.navigate(['/aero-image-viewer'], {
       state: { kwazulNatal: imageName },
     });

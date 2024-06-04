@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-recent-tafs',
   templateUrl: './recent-tafs.component.html',
-  styleUrls: ['./recent-tafs.component.scss'],
+  // styleUrls: ['./recent-tafs.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class RecentTafsComponent  implements OnInit {
 

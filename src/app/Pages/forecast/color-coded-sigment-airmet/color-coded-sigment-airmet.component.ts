@@ -8,7 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-color-coded-sigment-airmet',
   templateUrl: './color-coded-sigment-airmet.component.html',
-  styleUrls: ['./color-coded-sigment-airmet.component.scss'],
+  // styleUrls: ['./color-coded-sigment-airmet.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class ColorCodedSigmentAirmetComponent  implements OnInit {
 

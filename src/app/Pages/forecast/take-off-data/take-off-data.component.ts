@@ -17,7 +17,8 @@ interface ResponseItem {
 @Component({
   selector: 'app-take-off-data',
   templateUrl: './take-off-data.component.html',
-  styleUrls: ['./take-off-data.component.scss'],
+  // styleUrls: ['./take-off-data.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class TakeOffDataComponent  implements OnInit {
 

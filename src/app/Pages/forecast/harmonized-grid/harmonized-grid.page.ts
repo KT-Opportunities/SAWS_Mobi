@@ -15,7 +15,8 @@ interface WAFItem {
 @Component({
   selector: 'app-harmonized-grid',
   templateUrl: './harmonized-grid.page.html',
-  styleUrls: ['./harmonized-grid.page.scss'],
+  // styleUrls: ['./harmonized-grid.page.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class HarmonizedGridPage implements OnInit {
   WAF: any = [];
@@ -173,7 +174,6 @@ export class HarmonizedGridPage implements OnInit {
     // Extract folderName and fileName from the current item
     const folderName = item.foldername;
     const fileName = item.filename;
-    debugger;
     console.log('file Name:', fileName);
 
     // Call fetchSecondAPI to get filetextcontent asynchronously

@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-color-coded-warnings',
   templateUrl: './color-coded-warnings.component.html',
-  styleUrls: ['./color-coded-warnings.component.scss'],
+  // styleUrls: ['./color-coded-warnings.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class ColorCodedWarningsComponent  implements OnInit {
 

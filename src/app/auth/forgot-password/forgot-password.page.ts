@@ -76,22 +76,17 @@ export class ForgotPasswordPage implements OnInit {
       Email: this.userForm.controls['Email'].value,
     };
 
-    console.log('BODY:', body);
     if (this.userForm.invalid) {
       return;
     } else {
       this.api.RequestPasswordReset(body).subscribe(
         (data: any) => {
-          debugger;
-          console.log('SAVED:', data);
-
           this.router.navigate([this.router.url]);
           this.Successfully();
           this.statusMessage = true;
         },
         (error) => {
           console.error('Error:', error);
-          debugger;
           if (
             error &&
             error.error &&

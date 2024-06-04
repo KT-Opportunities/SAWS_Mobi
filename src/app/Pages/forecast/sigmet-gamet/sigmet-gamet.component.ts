@@ -3,7 +3,8 @@ import {APIService} from '../../../services/apis.service'
 @Component({
   selector: 'app-sigmet-gamet',
   templateUrl: './sigmet-gamet.component.html',
-  styleUrls: ['./sigmet-gamet.component.scss'],
+  // styleUrls: ['./sigmet-gamet.component.scss'],
+  styleUrls: ['./../forecast.page.scss'],
 })
 export class SigmetGametComponent  implements OnInit {
 

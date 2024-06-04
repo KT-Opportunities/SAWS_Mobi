@@ -413,7 +413,6 @@ export class SigwxChartsComponent  implements OnInit {
     console.log('file Name:', item);
     const folderName = item.substring(0, 2);
     const fileName = item;
-    debugger;
     console.log('Folder Name:', folderName);
 
     // Call fetchSecondAPI to get filetextcontent asynchronously
