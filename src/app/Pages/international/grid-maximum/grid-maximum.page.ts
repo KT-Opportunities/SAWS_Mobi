@@ -25,7 +25,6 @@ export class GridMaximumPage implements OnInit {
 
   MaximumArray: any = [];
 
-
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -36,9 +35,7 @@ export class GridMaximumPage implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer
-  ) {
-  
-  }
+  ) {}
   extractTime(filename: string): string {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);
     if (timeMatch) {
@@ -81,26 +78,31 @@ export class GridMaximumPage implements OnInit {
     );
   }
   openImageViewer(item: any) {
-    // Extract folderName and fileName from the current item
     const folderName = item.foldername;
     const fileName = item.filename;
-    console.log('file Name:', fileName);
+    this.isLoading = true;
 
-    // Call fetchSecondAPI to get filetextcontent asynchronously
-    this.fetchSecondAPI(folderName, fileName).then((filetextcontent) => {
-      // Once filetextcontent is retrieved, open the dialog with necessary data
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.disableClose = true;
-      dialogConfig.width = '80%'; // Set custom width
-      dialogConfig.height = '80%'; // Set custom height
-      dialogConfig.data = {
-        filetextcontent: filetextcontent,
-        // Add any additional data you want to pass to the dialog here
-      };
+    this.fetchSecondAPI(folderName, fileName)
+      .then((filetextcontent) => {
+        this.isLoading = false;
 
-      const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-    });
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '80%';
+        dialogConfig.height = '80%';
+        dialogConfig.data = { filetextcontent };
+
+        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.isLoading = false;
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching file content:', error);
+        this.isLoading = false;
+      });
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
@@ -122,7 +124,6 @@ export class GridMaximumPage implements OnInit {
       );
     });
   }
-
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();

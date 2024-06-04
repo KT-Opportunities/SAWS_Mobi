@@ -401,28 +401,33 @@ export class GridWindsPage implements OnInit {
   NavigateToInternational() {
     this.router.navigate(['/international']);
   }
-
   ImageViewer(item: any) {
     console.log('file Name:', item);
     const folderName = item.substring(0, 2);
     const fileName = item;
     console.log('Folder Name:', folderName);
 
-    // Call fetchSecondAPI to get filetextcontent asynchronously
-    this.fetchSecondAPI(folderName, fileName).then((filetextcontent) => {
-      // Once filetextcontent is retrieved, open the dialog with necessary data
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.disableClose = true;
-      dialogConfig.width = '80%'; // Set custom width
-      dialogConfig.height = '80%'; // Set custom height
-      dialogConfig.data = {
-        filetextcontent: filetextcontent,
-        // Add any additional data you want to pass to the dialog here
-      };
+    this.fetchSecondAPI(folderName, fileName)
+      .then((filetextcontent) => {
+        this.isLoading = false;
 
-      const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-    });
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '80%';
+        dialogConfig.height = '80%';
+        dialogConfig.data = { filetextcontent };
+
+        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.isLoading = false;
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching file content:', error);
+        this.isLoading = false;
+      });
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
