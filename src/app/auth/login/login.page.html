@@ -1,9 +1,12 @@
 <ion-content>
-  <!-- <div *ngIf="loading" class="loading-indicator">Loading...</div> -->
-  <div *ngIf="loading == true" class="loading-indicator">
+  <div *ngIf="loading" class="loading-indicator">
     <ion-spinner
-    *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...</div>
+    *ngIf="loading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+
   <meta content="width=device-width, initial-scale=1" name="viewport" />
+  
   <section class="section">
     <!-- <div class="div-block-2">
       <img
@@ -125,7 +128,7 @@
         </h5>
       </a>
     </div>
-    <div class="bottomdivlogin">
+    <!-- <div class="bottomdivlogin">
       <img
         src="/assets/Path-3447.svg"
         loading="lazy"
@@ -138,10 +141,27 @@
           ><img src="/assets/Group-3489.svg" loading="lazy" alt=""
         /></a>
       </div>
-    </div>
+    </div> -->
   </section>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
   />
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img
+      src="/assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
+    <div class="div-block-5" (click)="home()">
+      <a class="w-inline-block"
+        ><img src="/assets/Group-3489.svg" loading="lazy" alt=""
+      /></a>
+    </div>
+  </div>
+</ion-footer>
