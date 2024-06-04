@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,10 +7,16 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './flight-briefing.page.html',
   styleUrls: ['./flight-briefing.page.scss'],
 })
-export class FlightBriefingPage {
+export class FlightBriefingPage implements OnInit {
   isLogged: boolean = false;
  
   constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    if (!this.authService.getIsLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();

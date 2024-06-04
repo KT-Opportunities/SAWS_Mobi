@@ -28,7 +28,11 @@ export class ScheduleFlightReportComponent  implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.authService.getIsLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
