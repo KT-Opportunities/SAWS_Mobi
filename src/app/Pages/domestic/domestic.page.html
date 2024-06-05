@@ -1,8 +1,8 @@
 <ion-content>
   <!-- <div *ngIf="loading" class="loading-indicator">Loading...</div> -->
 
-  <div *ngIf="loading == true" class="loading-indicator">
-    <ion-spinner *ngIf="loading == true" name="bubbles"></ion-spinner>Loading...
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
   <section class="list-page">
@@ -10,7 +10,7 @@
       <div
         class=""
         [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn==true"
+        *ngIf="isLoggedIn"
       >
         <h1
           class="heading-6"
@@ -44,21 +44,21 @@
             <h1 class="heading-5">ICAO Locations</h1>
           </div>
           <div
-            (click)="MetarMaps()"
+            (click)="NavigateToMetarMaps()"
             id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">METAR Maps</h1>
           </div>
           <div
-            (click)="Qnhchart()"
+            (click)="NavigateToQnhChart()"
             id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block"
           >
             <h1 class="heading-5">QNH CHart</h1>
           </div>
           <div
-            (click)="SIGWX()"
+            (click)="NavigateToSIGWXCharts()"
             id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block"
           >
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <div class="list-div" *ngIf="isLoggedIn==false"></div>
+      <div class="list-div" *ngIf="!isLoggedIn"></div>
     </div>
 
     <!-- Hourly Charts -->
@@ -1135,7 +1135,6 @@
     </section>
 
     <!-- Wind Chart -->
-
     <section class="wind-charts" *ngIf="isWindCharts">
       <div class="div-block-2">
         <img
@@ -2813,7 +2812,6 @@
     </section>
 
     <!-- FlightDocument -->
-
     <section class="domestic-documents-flight-section" *ngIf="isFlightDocument">
       <div class="div-block-2">
         <img
@@ -4317,6 +4315,7 @@
         style="height: 39em"
       />
     </section>
+
     <!--Map  -->
     <section>
       <img
@@ -4326,7 +4325,7 @@
       />
     </section>
 
-    <div
+    <!-- <div
       class="bottomdiv"
       style="margin-top: 147% !important"
       *ngIf="isDomestic"
@@ -4343,9 +4342,9 @@
           <img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div
+    <!-- <div
       class="bottomdiv"
       style="margin-top: 147% !important"
       *ngIf="!isDomestic"
@@ -4378,6 +4377,26 @@
           </h6>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <div class="footerdiv">
+      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" style="
+            color: #fff;
+            margin-top: 9px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "></h6>
+      </a>
+    </div>
+  </div>
+</ion-footer>

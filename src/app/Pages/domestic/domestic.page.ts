@@ -61,6 +61,15 @@ export class DomesticPage implements OnInit {
     private APIService: APIService,
     private iab: InAppBrowser
   ) {}
+
+  ngOnInit() {
+    // Check if user is logged in
+    if (!this.authService.getIsLoggedIn()) {
+      // If not logged in, navigate to the login page
+      this.router.navigate(['/login']);
+    }
+  }
+
   onAirportCodeChange(event: any) {
     this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
   }
@@ -76,6 +85,7 @@ export class DomesticPage implements OnInit {
     const airportCode = parts[0].slice(6, 10).toUpperCase();
     return airportCode;
   }
+
   // Inside ForecastPage class
   extractTakeOffData(filetextcontent: string): string {
     // Split the filetextcontent into lines
@@ -86,14 +96,6 @@ export class DomesticPage implements OnInit {
 
     // Return the found line
     return takeOffLine || ''; // Return the line if found, otherwise an empty string
-  }
-  ngOnInit() {
-    // Check if user is logged in
-    //this.fetchWarnings();
-    if (!this.authService.getIsLoggedIn()) {
-      // If not logged in, navigate to the login page
-      this.router.navigate(['/login']);
-    }
   }
 
   fetchWarnings() {
@@ -128,13 +130,16 @@ export class DomesticPage implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
+
   DomeDomestic() {}
+
   Warning() {
     this.loading = true;
     this.fetchWarnings();
     this.isDomestic = false;
     this.isWarning = true;
   }
+
   FlightDocument() {
     this.isDomestic = false;
     this.isFlightDocument = true;
@@ -144,6 +149,7 @@ export class DomesticPage implements OnInit {
     this.isDomestic = false;
     this.isWindCharts = true;
   }
+
   location() {
     this.isDomestic = false;
     this.isLocation = true;
@@ -216,17 +222,21 @@ export class DomesticPage implements OnInit {
     this.isTakeOff = true;
     this.isWarning = false;
   }
+
   lowlevel() {
     this.isDomestic = false;
     this.isLowLevel = true;
   }
-  SIGWX() {
+
+  NavigateToSIGWXCharts() {
     this.router.navigate(['domestic/sigwx-charts']);
   }
-  MetarMaps() {
+  
+  NavigateToMetarMaps() {
     this.router.navigate(['domestic/metar-maps']);
   }
-  Qnhchart() {
+
+  NavigateToQnhChart() {
     this.router.navigate(['domestic/qnh-chart']);
   }
 
@@ -234,6 +244,7 @@ export class DomesticPage implements OnInit {
     this.isDomestic = false;
     this.isHourlyCharts = true;
   }
+
   DomesticBack() {
     this.isDomestic = true;
     this.isHourlyCharts = false;
@@ -251,6 +262,7 @@ export class DomesticPage implements OnInit {
   domesticPage() {
     this.router.navigate(['/landing-page']);
   }
+
   toggleImageVisibility() {
     this.isDomestic = false;
     this.showImage = !this.showImage;
@@ -260,6 +272,7 @@ export class DomesticPage implements OnInit {
     this.isDomestic = false;
     this.showImage1 = !this.showImage1;
   }
+
   toggleDropdown(dropdown: string) {
     if (dropdown === 'dropdown5') {
       this.isDropdownOpen5 = !this.isDropdownOpen5;
@@ -301,5 +314,9 @@ export class DomesticPage implements OnInit {
   selectOption(option: string) {
     this.selectedOption5 = option;
     this.isDropdownOpen5 = false;
+  }
+
+  NavigateToLandingPage() {
+    this.router.navigate(['/landing-page']);
   }
 }

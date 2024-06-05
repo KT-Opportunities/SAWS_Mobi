@@ -86,7 +86,9 @@ export class QnhChartComponent implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-  Domestic() {
+
+  NavigateToDomestic() {
     this.router.navigate(['/domestic']);
   }
+
 }

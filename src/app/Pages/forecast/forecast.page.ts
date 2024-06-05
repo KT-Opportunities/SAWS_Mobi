@@ -51,10 +51,6 @@ export class ForecastPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  forecastPage() {
-    this.router.navigate(['/landing-page']);
-  }
-
   NavigateToLandingPage() {
     this.router.navigate(['/landing-page']);
   }

@@ -1,8 +1,9 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="isLoading === true" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading === true" name="bubbles"></ion-spinner
-    >Loading...
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>Loading...
   </div>
+
   <section class="sigwx-charts" style="margin-top: 106px">
     <h1 class="heading-6">Significant Weather Charts</h1>
     <div style="overflow-y: auto; height: 32em">
@@ -12,120 +13,56 @@
           <div class="div-blue-copy"></div>
         </div>
         <div class="w-layout-grid sigwx-grid" id="chats">
-          <div
-            id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5f8-4a376e8a"
-            class="div-block-35"
-          >
+          <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5f8-4a376e8a" class="div-block-35">
             <div class="w-layout-grid grid-21" id="grid121">
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5fa-4a376e8a"
-                class="div-block-36"
-                id="node1"
-              >
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5fa-4a376e8a" class="div-block-36" id="node1">
                 <h4 class="heading-24" id="block">
                   Low level (surface to FL180)
                 </h4>
               </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5fd-4a376e8a"
-                class="div-block-36"
-              >
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd5fd-4a376e8a" class="div-block-36">
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd600-4a376e8a"
-                class="div-block-36"
-              ></div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd601-4a376e8a"
-                class="div-block-36"
-              ></div>
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd600-4a376e8a" class="div-block-36"></div>
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd601-4a376e8a" class="div-block-36"></div>
             </div>
           </div>
-          <div
-            id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a"
-            class="div-block-452"
-            *ngFor="let item of Sigwxm; let i = index"
-            [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-          >
+          <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a" class="div-block-452"
+            *ngFor="let item of Sigwxm; let i = index" [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'">
             <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a"
-                class="div-block-37"
-              >
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a" class="div-block-37">
                 <h4 class="heading-25">{{ getTimeFromFilenamexm(item) }}</h4>
               </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a"
-                class="div-block-37"
-              >
-                <div
-                  class="button-2-copy w-button"
-                  id="view"
-                  (click)="openImageViewer(item)"
-                  >View
+              <div id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a" class="div-block-37">
+                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(item)">View
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="w-layout-grid sigwx-grid" id="chats">
-          <div
-            id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa58-4a376e8a"
-            class="div-block-35"
-          >
-            <div
-              id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa59-4a376e8a"
-              class="w-layout-grid grid-21"
-              id="grid121"
-            >
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa5a-4a376e8a"
-                class="div-block-36"
-                id="node1"
-              >
+          <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa58-4a376e8a" class="div-block-35">
+            <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa59-4a376e8a" class="w-layout-grid grid-21" id="grid121">
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa5a-4a376e8a" class="div-block-36" id="node1">
                 <h4 class="heading-24" id="block">
                   High level (above to FL180)
                 </h4>
               </div>
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa5d-4a376e8a"
-                class="div-block-36"
-              >
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa5d-4a376e8a" class="div-block-36">
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa60-4a376e8a"
-                class="div-block-36"
-              ></div>
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa61-4a376e8a"
-                class="div-block-36"
-              ></div>
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa60-4a376e8a" class="div-block-36"></div>
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa61-4a376e8a" class="div-block-36"></div>
             </div>
           </div>
-          <div
-            id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa62-4a376e8a"
-            class="div-block-452"
-            *ngFor="let item of Sigwxh; let i = index"
-            [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-          >
+          <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa62-4a376e8a" class="div-block-452"
+            *ngFor="let item of Sigwxh; let i = index" [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'">
             <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa64-4a376e8a"
-                class="div-block-37"
-              >
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa64-4a376e8a" class="div-block-37">
                 <h4 class="heading-25">{{ getTimeFromFilenamexh(item) }}</h4>
               </div>
-              <div
-                id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa67-4a376e8a"
-                class="div-block-37"
-              >
-                <div
-                  class="button-2-copy w-button"
-                  id="view"
-                  (click)="openImageViewer(item)"
-                >
+              <div id="w-node-fa7cf422-81d9-8501-ac32-fa08ee40aa67-4a376e8a" class="div-block-37">
+                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(item)">
                   View
                 </div>
               </div>
@@ -133,62 +70,28 @@
           </div>
         </div>
         <div class="w-layout-grid sigwx-grid" id="chats">
-          <div
-            id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d1-4a376e8a"
-            class="div-block-35"
-          >
-            <div
-              id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d2-4a376e8a"
-              class="w-layout-grid grid-21"
-              id="grid121"
-            >
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d3-4a376e8a"
-                class="div-block-36"
-                id="node1"
-              >
+          <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d1-4a376e8a" class="div-block-35">
+            <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d2-4a376e8a" class="w-layout-grid grid-21" id="grid121">
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d3-4a376e8a" class="div-block-36" id="node1">
                 <h4 class="heading-24" id="block">
                   Additional Low (surface to <br />FL100)
                 </h4>
               </div>
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d6-4a376e8a"
-                class="div-block-36"
-              >
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d6-4a376e8a" class="div-block-36">
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d9-4a376e8a"
-                class="div-block-36"
-              ></div>
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192da-4a376e8a"
-                class="div-block-36"
-              ></div>
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192d9-4a376e8a" class="div-block-36"></div>
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192da-4a376e8a" class="div-block-36"></div>
             </div>
           </div>
-          <div
-            id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192db-4a376e8a"
-            class="div-block-452"
-            *ngFor="let item of Sigwxl; let i = index"
-            [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-          >
+          <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192db-4a376e8a" class="div-block-452"
+            *ngFor="let item of Sigwxl; let i = index" [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'">
             <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192dd-4a376e8a"
-                class="div-block-37"
-              >
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192dd-4a376e8a" class="div-block-37">
                 <h4 class="heading-25">{{ getTimeFromFilenamexl(item) }}</h4>
               </div>
-              <div
-                id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192e0-4a376e8a"
-                class="div-block-37"
-              >
-                <div
-                  class="button-2-copy w-button"
-                  id="view"
-                  (click)="openImageViewer(item)"
-                >
+              <div id="w-node-_0b15b4bc-0f58-c34b-1ebe-e3cdd8c192e0-4a376e8a" class="div-block-37">
+                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(item)">
                   View
                 </div>
               </div>
@@ -197,35 +100,27 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv" style="margin-top: 10% !important">
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
 
-      <div class="footerdiv" id="footerdivid1">
-        <div (click)="Domestic()" class="link-block-5 w-inline-block">
-          <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-          <h6
-            class="heading-10-copy"
-            id="styleh6"
-            style="
-              color: #fff;
-              margin-top: 10px;
-              margin-bottom: 0;
-              font-family: Montserrat, sans-serif;
-              text-decoration: none;
-              font-size: 12px;
-              margin-top: 4px;
-            "
-          >
-            Domestic
-          </h6>
-        </div>
+  </section>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+               margin-top: 10px;
+               margin-bottom: 0;
+               font-family: Montserrat, sans-serif;
+               text-decoration: none;
+               font-size: 12px;
+               margin-top: 4px;">
+          Domestic
+        </h6>
       </div>
     </div>
-  </section></ion-content
->
+  </div>
+</ion-footer>

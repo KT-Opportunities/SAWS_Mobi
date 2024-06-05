@@ -47,6 +47,7 @@ export class SigwxChartsComponent implements OnInit {
       this.loadSynopticData();
     }
   }
+
   getTimeFromFilenamexh(item: any) {
     // Extract filename without extension
     const filename = item.filename;
@@ -98,6 +99,7 @@ export class SigwxChartsComponent implements OnInit {
     }
     return null;
   }
+
   getTimeFromFilenamexl(item: any) {
     const filename = item.filename;
 
@@ -122,6 +124,7 @@ export class SigwxChartsComponent implements OnInit {
     }
     return null;
   }
+
   loadSynopticData() {
     this.isLoading = true;
     this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
@@ -200,10 +203,13 @@ export class SigwxChartsComponent implements OnInit {
       );
     });
   }
+
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-  Domestic() {
+
+  NavigateToDomestic() {
     this.router.navigate(['/domestic']);
   }
+  
 }
