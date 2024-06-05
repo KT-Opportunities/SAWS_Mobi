@@ -22,7 +22,7 @@ interface ResponseItem {
 })
 export class TakeOffDataComponent  implements OnInit {
 
-  loading = false;
+  isLoading = false;
   isLogged: boolean = false;
   selectedAirportCode: string = 'FAPE';
 
@@ -74,7 +74,7 @@ export class TakeOffDataComponent  implements OnInit {
       });
     });
 
-    this.loading = true;
+    this.isLoading = true;
     this.spinner.show();
 
     this.apiService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
@@ -130,7 +130,7 @@ export class TakeOffDataComponent  implements OnInit {
 
         item.vermetTableData = formattedData; // Assign formattedData to a property
         // console.log('Filtered and latest Response Table ', formattedData);
-        this.loading = false;
+        this.isLoading = false;
         this.spinner.hide();
       });
     });
