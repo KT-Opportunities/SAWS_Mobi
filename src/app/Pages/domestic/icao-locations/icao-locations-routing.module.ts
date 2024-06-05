@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TakeOffDataComponent } from './take-off-data.component';
+import { IcaoLocationsComponent } from './icao-locations.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TakeOffDataComponent
+    component: IcaoLocationsComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TakeOffDataRoutingModule {}
+export class IcaoLocationsRoutingModule {}

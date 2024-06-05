@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TakeOffDataRoutingModule } from './take-off-data-routing.module';
-import { TakeOffDataComponent } from './take-off-data.component';
+import { HourlyChartsRoutingModule } from './hourly-charts-routing.module';
+import { HourlyChartsComponent } from './hourly-charts.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TakeOffDataRoutingModule
+    HourlyChartsRoutingModule
   ],
-  declarations: [TakeOffDataComponent]
+  declarations: [HourlyChartsComponent]
 })
-export class TakeOffDataModule {}
+export class HourlyChartsModule {}

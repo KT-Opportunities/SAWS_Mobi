@@ -1,3 +1,69 @@
-<p>
-  warnings works!
-</p>
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+
+  <section class="domestic-warnings-section" style="margin-top: 107px !important">
+    <div class="div-block-2">
+      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
+    </div>
+    <h1 class="heading-6">Aerodrome Warning</h1>
+    <div style="overflow-y: auto; height: 32em">
+      <div class="warning-div" *ngFor="let warning of warnings" class="warning">
+        <div class="warning-div">
+          <div class="w-layout-grid grid-warning">
+            <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8" class="div-block-15">
+              <div class="div-block-14"></div>
+            </div>
+            <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
+              <h4 class="heading-18-copy">
+                <strong>WARNING FOR FAPE {{ warning.filename }}</strong>
+              </h4>
+              <div class="w-layout-grid heading-copy">
+                <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8" class="cct-copy-copy">
+                  <h1 class="heading-21">{{ warning.filetextcontent }}</h1>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
+              <h4 class="heading-18-copy">
+                <strong>WARNING FOR FALE - 20240409 16:05</strong>
+              </h4>
+              <div class="w-layout-grid heading-copy">
+                <div id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8" class="cct-copy-copy">
+                  <h1 class="heading-21">
+                    FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+          Domestic
+        </h6>
+      </div>
+    </div>
+  </div>
+</ion-footer>

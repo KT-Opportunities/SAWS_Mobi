@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TakeOffDataRoutingModule } from './take-off-data-routing.module';
-import { TakeOffDataComponent } from './take-off-data.component';
+import { IcaoLocationsRoutingModule } from './icao-locations-routing.module';
+import { IcaoLocationsComponent } from './icao-locations.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TakeOffDataRoutingModule
+    IcaoLocationsRoutingModule
   ],
-  declarations: [TakeOffDataComponent]
+  declarations: [IcaoLocationsComponent]
 })
-export class TakeOffDataModule {}
+export class IcaoLocationsModule {}

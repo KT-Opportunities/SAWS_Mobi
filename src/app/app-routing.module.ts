@@ -440,22 +440,22 @@ const routes: Routes = [
   {
     path: 'domestic/flight-document',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/flight-document/flight-document.module').then(
+        (m) => m.FlightDocumentModule
       ),
   },
   {
     path: 'domestic/hourly-charts',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/hourly-charts/hourly-charts.module').then(
+        (m) => m.HourlyChartsModule
       ),
   },
   {
     path: 'domestic/icao-locations',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/icao-locations/icao-locations.module').then(
+        (m) => m.IcaoLocationsModule
       ),
   },
   {
@@ -489,22 +489,22 @@ const routes: Routes = [
   {
     path: 'domestic/warnings',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/warnings/warnings.module').then(
+        (m) => m.WarningsModule
       ),
   },
   {
-    path: 'domestic/wind-charts',
+    path: 'domestic/winds-charts',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/winds-charts/winds-charts.module').then(
+        (m) => m.WindsChartsModule
       ),
   },
   {
     path: 'domestic/low-level-wind-profile',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/low-level-wind-profile/low-level-wind-profile.module').then(
+        (m) => m.LowLevelWindProfileModule
       ),
   },
 

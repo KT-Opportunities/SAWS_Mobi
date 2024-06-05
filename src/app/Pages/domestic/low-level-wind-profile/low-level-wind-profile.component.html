@@ -1,3 +1,164 @@
-<p>
-  low-level-wind-profile works!
-</p>
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+
+  <section class="low_level-wind-section" style="margin-top: 107px !important">
+    <div class="div-block-2">
+      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
+    </div>
+    <h1 class="heading-6">
+      Low-level Wind Profile for Upper <br />Air stations
+    </h1>
+    <div style="overflow-y: auto; height: 32em; padding: 15px; width: 25em">
+      <div class="low-level-main-div">
+        <div class="div-block-466">
+          <div class="w-layout-grid lowlevel-grid">
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83a-b2ace610" class="div-block-35">
+              <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83b-b2ace610" class="w-layout-grid low-grid">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83c-b2ace610" class="div-block-36">
+                  <h4 class="heading-24" id="heading224">Wind Profile</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83f-b2ace610" class="div-block-36">
+                  <h4 class="heading-24" id="heading224">View Image</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a842-b2ace610" class="div-block-36"></div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a843-b2ace610" class="div-block-36"></div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a844-b2ace610" class="div-block-452">
+              <div class="w-layout-grid wind-grid">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a846-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FAIR</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a849-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a84c-b2ace610" class="div-block-38">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a84e-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FACT</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a851-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a854-b2ace610" class="div-block-453">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a856-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FADN</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a859-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a85c-b2ace610" class="div-block-38">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a85e-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FAPE</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a861-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a864-b2ace610" class="div-block-454">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a866-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FABL</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a869-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a86c-b2ace610" class="div-block-38">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a86e-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FABM</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a871-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a874-b2ace610" class="div-block-455">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a876-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FADY</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a879-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a87c-b2ace610" class="div-block-38">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a87e-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FASB</h4>
+                </div>
+                <div id="w-node-_14588279-bdc8-ee9d-e926-6a691607a881-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e4-b2ace610" class="div-block-455">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e6-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FAPP</h4>
+                </div>
+                <div id="w-node-_2892e19d-be5c-4851-962a-929a464e30e9-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba3-b2ace610" class="div-block-38">
+              <div class="w-layout-grid grid-22">
+                <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba5-b2ace610" class="div-block-37">
+                  <h4 class="heading-25">FAUP</h4>
+                </div>
+                <div id="w-node-_9cd3d74e-7bfa-a255-c60d-17c346599ba8-b2ace610" class="div-block-37">
+                  <div class="button-2-copy w-button" id="view">View</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="div-block-479">
+            <p class="paragraph-13">
+              <strong>Note:</strong> Not all stations do ascents every day (or
+              twice daily). <br />Availability of a profile depends on the
+              time of day <br />and season.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+          Domestic
+        </h6>
+      </div>
+    </div>
+  </div>
+</ion-footer>

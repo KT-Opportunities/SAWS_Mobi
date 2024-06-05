@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TakeOffDataRoutingModule } from './take-off-data-routing.module';
-import { TakeOffDataComponent } from './take-off-data.component';
+import { WarningsComponent } from './warnings.component';
+import { WarningsRoutingModule } from './warnings-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TakeOffDataRoutingModule
+    WarningsRoutingModule
   ],
-  declarations: [TakeOffDataComponent]
+  declarations: [WarningsComponent]
 })
-export class TakeOffDataModule {}
+export class WarningsModule {}

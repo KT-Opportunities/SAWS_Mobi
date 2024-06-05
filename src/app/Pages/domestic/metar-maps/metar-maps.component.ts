@@ -19,7 +19,7 @@ import { APIService } from 'src/app/services/apis.service';
 export class MetarMapsComponent implements OnInit {
   imageUrl: string | null = null;
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   MetarMaps: any = [];
   fileBaseUrlSynoptic: SafeResourceUrl = '';
 

@@ -1,3 +1,559 @@
-<p>
-  hourly-charts works!
-</p>
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+  
+  <section class="hourly-charts-section" style="margin-top: 107px !important">
+  <div class="div-block-2">
+    <img
+      src="images/Path-3452.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
+  </div>
+  <h1 class="heading-6"><strong>Hourly Charts</strong></h1>
+  <div style="overflow-y: auto; height: 32em">
+    <div class="hourly-charts-div">
+      <div class="div-block-473">
+        <div class="charts-div-sub">
+          <h4 class="heading-6-copy"><strong>QNH Colour</strong></h4>
+          <div
+            class="button-2-copy w-button"
+            style="position: relative; left: 13px"
+          >
+            Most Recent
+          </div>
+        </div>
+        <div class="" id="grid">
+          <div
+            id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec66-3e57d814"
+            class="div-block-48-copy"
+          >
+            <div class="w-form">
+              <form
+                id="email-form-3"
+                name="email-form-3"
+                data-name="Email Form 3"
+                method="get"
+                data-wf-page-id="660d3cc3aa83ef783e57d814"
+                data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec68"
+              >
+                <div class="div-blue-copy"></div>
+              </form>
+              <div class="w-form-done">
+                <!-- <div>Thank you! Your submission has been received!</div> -->
+              </div>
+              <div class="w-form-fail">
+                <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+              </div>
+            </div>
+            <div
+              id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec70-3e57d814"
+              class="div-block-48-copy"
+            >
+              <div class="w-form">
+                <form
+                  id="email-form-3"
+                  name="email-form-3"
+                  data-name="Email Form 3"
+                  method="get"
+                  data-wf-page-id="660d3cc3aa83ef783e57d814"
+                  data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec72"
+                >
+                  <div class="div-block-470">
+                    <h4 class="qnh-heading">00Z</h4>
+                    <h4 class="qnh-heading">O1Z</h4>
+                    <h4 class="qnh-heading">02Z</h4>
+                    <h4 class="qnh-heading">03Z</h4>
+                    <h4 class="qnh-heading">04Z</h4>
+                    <h4 class="qnh-heading">05Z</h4>
+                  </div>
+                  <div class="div-block-470">
+                    <h4 class="qnh-heading">06Z</h4>
+                    <h4 class="qnh-heading">07Z</h4>
+                    <h4 class="qnh-heading">08Z</h4>
+                    <h4 class="qnh-heading">09Z</h4>
+                    <h4 class="qnh-heading">10Z</h4>
+                    <h4 class="qnh-heading">11Z</h4>
+                  </div>
+                  <div class="div-block-470">
+                    <h4 class="qnh-heading">12Z</h4>
+                    <h4 class="qnh-heading">13Z</h4>
+                    <h4 class="qnh-heading">14Z</h4>
+                    <h4 class="qnh-heading">15Z</h4>
+                    <h4 class="qnh-heading">16Z</h4>
+                    <h4 class="qnh-heading">17Z</h4>
+                  </div>
+                  <div class="div-block-470">
+                    <h4 class="qnh-heading">18Z</h4>
+                    <h4 class="qnh-heading">19Z</h4>
+                    <h4 class="qnh-heading">20Z</h4>
+                    <h4 class="qnh-heading">21Z</h4>
+                    <h4 class="qnh-heading">22Z</h4>
+                    <h4 class="qnh-heading">23Z</h4>
+                  </div>
+                </form>
+                <div class="w-form-done">
+                  <!-- <div>Thank you! Your submission has been received!</div> -->
+                </div>
+                <div class="w-form-fail">
+                  <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-div-sub">
+      <h4 class="heading-6-copy"><strong>QNH Greyscale</strong></h4>
+      <div class="button-2-copy w-button">Most Recent</div>
+    </div>
+    <div class="" id="grid">
+      <div
+        id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec66-3e57d814"
+        class="div-block-48-copy"
+      >
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            data-wf-page-id="660d3cc3aa83ef783e57d814"
+            data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec68"
+          >
+            <div class="div-blue-copy"></div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div
+          id="w-node-efba7511-8cb8-71a7-cb98-25a17c62ec70-3e57d814"
+          class="div-block-48-copy"
+        >
+          <div class="w-form">
+            <form
+              id="email-form-3"
+              name="email-form-3"
+              data-name="Email Form 3"
+              method="get"
+              data-wf-page-id="660d3cc3aa83ef783e57d814"
+              data-wf-element-id="efba7511-8cb8-71a7-cb98-25a17c62ec72"
+            >
+              <div class="div-block-470">
+                <h4 class="qnh-heading">00Z</h4>
+                <h4 class="qnh-heading">O1Z</h4>
+                <h4 class="qnh-heading">02Z</h4>
+                <h4 class="qnh-heading">03Z</h4>
+                <h4 class="qnh-heading">04Z</h4>
+                <h4 class="qnh-heading">05Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">06Z</h4>
+                <h4 class="qnh-heading">07Z</h4>
+                <h4 class="qnh-heading">08Z</h4>
+                <h4 class="qnh-heading">09Z</h4>
+                <h4 class="qnh-heading">10Z</h4>
+                <h4 class="qnh-heading">11Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">12Z</h4>
+                <h4 class="qnh-heading">13Z</h4>
+                <h4 class="qnh-heading">14Z</h4>
+                <h4 class="qnh-heading">15Z</h4>
+                <h4 class="qnh-heading">16Z</h4>
+                <h4 class="qnh-heading">17Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">18Z</h4>
+                <h4 class="qnh-heading">19Z</h4>
+                <h4 class="qnh-heading">20Z</h4>
+                <h4 class="qnh-heading">21Z</h4>
+                <h4 class="qnh-heading">22Z</h4>
+                <h4 class="qnh-heading">23Z</h4>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="charts-div-sub">
+      <h4 class="heading-6-copy">
+        <strong>Air Temperature <br />Colour</strong>
+      </h4>
+      <div class="button-2-copy w-button">Most Recent</div>
+    </div>
+    <div class="" id="grid">
+      <div
+        id="w-node-_9a769e24-31d1-3e5b-9f75-fa18a61370c7-3e57d814"
+        class="div-block-48-copy"
+      >
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            data-wf-page-id="660d3cc3aa83ef783e57d814"
+            data-wf-element-id="9a769e24-31d1-3e5b-9f75-fa18a61370c9"
+          >
+            <div class="div-blue-copy"></div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div
+          id="w-node-_9a769e24-31d1-3e5b-9f75-fa18a61370d1-3e57d814"
+          class="div-block-48-copy"
+        >
+          <div class="w-form">
+            <form
+              id="email-form-3"
+              name="email-form-3"
+              data-name="Email Form 3"
+              method="get"
+              data-wf-page-id="660d3cc3aa83ef783e57d814"
+              data-wf-element-id="9a769e24-31d1-3e5b-9f75-fa18a61370d3"
+            >
+              <div class="div-block-470">
+                <h4 class="qnh-heading">00Z</h4>
+                <h4 class="qnh-heading">O1Z</h4>
+                <h4 class="qnh-heading">02Z</h4>
+                <h4 class="qnh-heading">03Z</h4>
+                <h4 class="qnh-heading">04Z</h4>
+                <h4 class="qnh-heading">05Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">06Z</h4>
+                <h4 class="qnh-heading">07Z</h4>
+                <h4 class="qnh-heading">08Z</h4>
+                <h4 class="qnh-heading">09Z</h4>
+                <h4 class="qnh-heading">10Z</h4>
+                <h4 class="qnh-heading">11Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">12Z</h4>
+                <h4 class="qnh-heading">13Z</h4>
+                <h4 class="qnh-heading">14Z</h4>
+                <h4 class="qnh-heading">15Z</h4>
+                <h4 class="qnh-heading">16Z</h4>
+                <h4 class="qnh-heading">17Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">18Z</h4>
+                <h4 class="qnh-heading">19Z</h4>
+                <h4 class="qnh-heading">20Z</h4>
+                <h4 class="qnh-heading">21Z</h4>
+                <h4 class="qnh-heading">22Z</h4>
+                <h4 class="qnh-heading">23Z</h4>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="charts-div-sub">
+      <h4 class="heading-6-copy">
+        <strong>Air Temperature <br />Greyscale</strong>
+      </h4>
+      <div class="button-2-copy w-button">Most Recent</div>
+    </div>
+    <div class="" id="grid">
+      <div
+        id="w-node-_5e201edc-b7f5-a40c-bda1-ccf0e4954a7c-3e57d814"
+        class="div-block-48-copy"
+      >
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            data-wf-page-id="660d3cc3aa83ef783e57d814"
+            data-wf-element-id="5e201edc-b7f5-a40c-bda1-ccf0e4954a7e"
+          >
+            <div class="div-blue-copy"></div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div
+          id="w-node-_5e201edc-b7f5-a40c-bda1-ccf0e4954a86-3e57d814"
+          class="div-block-48-copy"
+        >
+          <div class="w-form">
+            <form
+              id="email-form-3"
+              name="email-form-3"
+              data-name="Email Form 3"
+              method="get"
+              data-wf-page-id="660d3cc3aa83ef783e57d814"
+              data-wf-element-id="5e201edc-b7f5-a40c-bda1-ccf0e4954a88"
+            >
+              <div class="div-block-470">
+                <h4 class="qnh-heading">00Z</h4>
+                <h4 class="qnh-heading">O1Z</h4>
+                <h4 class="qnh-heading">02Z</h4>
+                <h4 class="qnh-heading">03Z</h4>
+                <h4 class="qnh-heading">04Z</h4>
+                <h4 class="qnh-heading">05Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">06Z</h4>
+                <h4 class="qnh-heading">07Z</h4>
+                <h4 class="qnh-heading">08Z</h4>
+                <h4 class="qnh-heading">09Z</h4>
+                <h4 class="qnh-heading">10Z</h4>
+                <h4 class="qnh-heading">11Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">12Z</h4>
+                <h4 class="qnh-heading">13Z</h4>
+                <h4 class="qnh-heading">14Z</h4>
+                <h4 class="qnh-heading">15Z</h4>
+                <h4 class="qnh-heading">16Z</h4>
+                <h4 class="qnh-heading">17Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">18Z</h4>
+                <h4 class="qnh-heading">19Z</h4>
+                <h4 class="qnh-heading">20Z</h4>
+                <h4 class="qnh-heading">21Z</h4>
+                <h4 class="qnh-heading">22Z</h4>
+                <h4 class="qnh-heading">23Z</h4>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="charts-div-sub">
+      <h4 class="heading-6-copy">
+        <strong>Dewpoint Temperature <br />Colour</strong>
+      </h4>
+      <div class="button-2-copy w-button">Most Recent</div>
+    </div>
+    <div class="" id="grid">
+      <div
+        id="w-node-cf6b9d3b-1133-771e-609f-23b2c7d23728-3e57d814"
+        class="div-block-48-copy"
+      >
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            data-wf-page-id="660d3cc3aa83ef783e57d814"
+            data-wf-element-id="cf6b9d3b-1133-771e-609f-23b2c7d2372a"
+          >
+            <div class="div-blue-copy"></div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div
+          id="w-node-cf6b9d3b-1133-771e-609f-23b2c7d23732-3e57d814"
+          class="div-block-48-copy"
+        >
+          <div class="w-form">
+            <form
+              id="email-form-3"
+              name="email-form-3"
+              data-name="Email Form 3"
+              method="get"
+              data-wf-page-id="660d3cc3aa83ef783e57d814"
+              data-wf-element-id="cf6b9d3b-1133-771e-609f-23b2c7d23734"
+            >
+              <div class="div-block-470">
+                <h4 class="qnh-heading">00Z</h4>
+                <h4 class="qnh-heading">O1Z</h4>
+                <h4 class="qnh-heading">02Z</h4>
+                <h4 class="qnh-heading">03Z</h4>
+                <h4 class="qnh-heading">04Z</h4>
+                <h4 class="qnh-heading">05Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">06Z</h4>
+                <h4 class="qnh-heading">07Z</h4>
+                <h4 class="qnh-heading">08Z</h4>
+                <h4 class="qnh-heading">09Z</h4>
+                <h4 class="qnh-heading">10Z</h4>
+                <h4 class="qnh-heading">11Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">12Z</h4>
+                <h4 class="qnh-heading">13Z</h4>
+                <h4 class="qnh-heading">14Z</h4>
+                <h4 class="qnh-heading">15Z</h4>
+                <h4 class="qnh-heading">16Z</h4>
+                <h4 class="qnh-heading">17Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">18Z</h4>
+                <h4 class="qnh-heading">19Z</h4>
+                <h4 class="qnh-heading">20Z</h4>
+                <h4 class="qnh-heading">21Z</h4>
+                <h4 class="qnh-heading">22Z</h4>
+                <h4 class="qnh-heading">23Z</h4>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="charts-div-sub">
+      <h4 class="heading-6-copy">
+        <strong>Dewpoint Temperature <br />Greyscale</strong>
+      </h4>
+      <div class="button-2-copy w-button">Most Recent</div>
+    </div>
+    <div class="" id="grid">
+      <div
+        id="w-node-c416995a-81cf-a44d-7153-def48cabaf2b-3e57d814"
+        class="div-block-48-copy"
+      >
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            data-wf-page-id="660d3cc3aa83ef783e57d814"
+            data-wf-element-id="c416995a-81cf-a44d-7153-def48cabaf2d"
+          >
+            <div class="div-blue-copy"></div>
+          </form>
+          <div class="w-form-done">
+            <!-- <div>Thank you! Your submission has been received!</div> -->
+          </div>
+          <div class="w-form-fail">
+            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+          </div>
+        </div>
+        <div
+          id="w-node-c416995a-81cf-a44d-7153-def48cabaf35-3e57d814"
+          class="div-block-48-copy"
+        >
+          <div class="w-form">
+            <form
+              id="email-form-3"
+              name="email-form-3"
+              data-name="Email Form 3"
+              method="get"
+              data-wf-page-id="660d3cc3aa83ef783e57d814"
+              data-wf-element-id="c416995a-81cf-a44d-7153-def48cabaf37"
+            >
+              <div class="div-block-470">
+                <h4 class="qnh-heading">00Z</h4>
+                <h4 class="qnh-heading">O1Z</h4>
+                <h4 class="qnh-heading">02Z</h4>
+                <h4 class="qnh-heading">03Z</h4>
+                <h4 class="qnh-heading">04Z</h4>
+                <h4 class="qnh-heading">05Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">06Z</h4>
+                <h4 class="qnh-heading">07Z</h4>
+                <h4 class="qnh-heading">08Z</h4>
+                <h4 class="qnh-heading">09Z</h4>
+                <h4 class="qnh-heading">10Z</h4>
+                <h4 class="qnh-heading">11Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">12Z</h4>
+                <h4 class="qnh-heading">13Z</h4>
+                <h4 class="qnh-heading">14Z</h4>
+                <h4 class="qnh-heading">15Z</h4>
+                <h4 class="qnh-heading">16Z</h4>
+                <h4 class="qnh-heading">17Z</h4>
+              </div>
+              <div class="div-block-470">
+                <h4 class="qnh-heading">18Z</h4>
+                <h4 class="qnh-heading">19Z</h4>
+                <h4 class="qnh-heading">20Z</h4>
+                <h4 class="qnh-heading">21Z</h4>
+                <h4 class="qnh-heading">22Z</h4>
+                <h4 class="qnh-heading">23Z</h4>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+          Domestic
+        </h6>
+      </div>
+    </div>
+  </div>
+</ion-footer>
