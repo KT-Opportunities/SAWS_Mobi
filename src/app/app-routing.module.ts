@@ -482,8 +482,8 @@ const routes: Routes = [
   {
     path: 'domestic/take-off-data',
     loadChildren: () =>
-      import('./Pages/domestic/domestic.module').then(
-        (m) => m.DomesticPageModule
+      import('./Pages/domestic/take-off-data/take-off-data.module').then(
+        (m) => m.TakeOffDataModule
       ),
   },
   {
