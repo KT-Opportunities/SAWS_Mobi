@@ -4,6 +4,7 @@ import { APIService } from 'src/app/services/apis.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth.service';
+
 interface ResponseItem {
   foldername: string;
   filename: string;
@@ -131,101 +132,28 @@ export class DomesticPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  DomeDomestic() {}
-
-  Warning() {
-    this.loading = true;
-    this.fetchWarnings();
-    this.isDomestic = false;
-    this.isWarning = true;
+  NavigateToWarnings() {
+    this.router.navigate(['domestic/warnings']);
   }
 
-  FlightDocument() {
-    this.isDomestic = false;
-    this.isFlightDocument = true;
+  NavigateToFlightDocument() {
+    this.router.navigate(['domestic/flight-document']);
   }
 
-  WindCharts() {
-    this.isDomestic = false;
-    this.isWindCharts = true;
+  NavigateToWindsCharts() {
+    this.router.navigate(['domestic/winds-charts']);
   }
 
-  location() {
-    this.isDomestic = false;
-    this.isLocation = true;
+  NavigateToIcaoLocations() {
+    this.router.navigate(['domestic/icao-locations']);
   }
 
-  takeoff() {
-    this.loading = true;
-    this.spinner.show();
-    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
-      this.VermetArray = Response;
-
-      // Step 1: Group items by airport code and keep only the latest modified item for each airport
-      const airportMap = this.VermetArray.reduce(
-        (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
-          const airportCode = this.getAirportCode(item.filename);
-
-          // If airportCode already exists in the map, compare lastmodified dates to keep the latest one
-          if (
-            !acc[airportCode] ||
-            new Date(item.lastmodified) >
-              new Date(acc[airportCode].lastmodified)
-          ) {
-            acc[airportCode] = item;
-          }
-
-          return acc;
-        },
-        {}
-      );
-
-      // Step 2: Convert the map values back to an array
-      this.VermetArray = Object.values(airportMap);
-
-      // Optional: Filter based on 'TAKE-OFF' condition
-      this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filetextcontent.includes('TAKE-OFF');
-      });
-
-      console.log('Filtered and latest Response ', this.VermetArray);
-
-      this.VermetArray.forEach((item: any) => {
-        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
-
-        const formattedData = tableData.reduce((acc: any[], row: string) => {
-          const trimmedRow = row.trim();
-
-          // Check if the row is not empty and doesn't start with '----' (separator)
-          if (trimmedRow && !trimmedRow.startsWith('----')) {
-            // Split the row by whitespace
-            const rowValues = trimmedRow.split(/\s+/);
-
-            // Extract specific values (time, temp, qnh, qan)
-            if (rowValues.length >= 4) {
-              const [time, temp, qnh, qan] = rowValues;
-              acc.push({ time, temp, qnh, qan });
-            }
-          }
-
-          return acc;
-        }, []);
-
-        item.vermetTableData = formattedData; // Assign formattedData to a property
-        console.log('Filtered and latest Response Table ', formattedData);
-        this.loading = false;
-
-        this.spinner.hide();
-      });
-    });
-    this.isDomestic = false;
-    this.isTakeOff = true;
-    this.isWarning = false;
+  NavigateToTakeOffData() {
+    this.router.navigate(['domestic/take-off-data']);
   }
 
-  lowlevel() {
-    this.isDomestic = false;
-    this.isLowLevel = true;
+  NavigateToLowLevelWindProfile() {
+    this.router.navigate(['domestic/low-level-wind-profile']);
   }
 
   NavigateToSIGWXCharts() {
@@ -240,9 +168,8 @@ export class DomesticPage implements OnInit {
     this.router.navigate(['domestic/qnh-chart']);
   }
 
-  hourlyChart() {
-    this.isDomestic = false;
-    this.isHourlyCharts = true;
+  NavigateToHourlyCharts() {
+    this.router.navigate(['domestic/hourly-charts']);
   }
 
   DomesticBack() {
