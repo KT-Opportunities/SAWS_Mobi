@@ -6,30 +6,37 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 
+// Define an interface to strongly type the MetarReport
+interface MetarReport {
+  filetextcontent: string;
+  // Add other properties of the MetarReport object here
+}
+
 @Component({
   selector: 'app-metar-color-coded',
   templateUrl: './metar-color-coded.component.html',
   styleUrls: ['./metar-color-coded.component.scss'],
 })
-export class MetarColorCodedComponent  implements OnInit {
-
+export class MetarColorCodedComponent implements OnInit {
   isLogged: boolean = false;
   loading: boolean = false;
-  metarReports: any[] = [];
+  metarReports: MetarReport[] = [];
+  filteredReports: MetarReport[] = [];
+  searchQuery: string = '';
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
-    private spinner: NgxSpinnerService,
-   ) { }
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.fetchMetarReports();
   }
 
-  NavigateToObservation() {
+  navigateToObservation(): void {
     this.router.navigate(['/observation']);
   }
 
@@ -39,9 +46,10 @@ export class MetarColorCodedComponent  implements OnInit {
 
     const foldername = 'metar';
     this.apiService.getRecentTafs(foldername).subscribe(
-      (data) => {
+      (data: MetarReport[]) => {
         console.log('Metar reports fetched successfully:', data);
         this.metarReports = data;
+        this.filteredReports = data; // Initialize filteredReports with all reports
         this.loading = false; // Set loading to false after data is fetched
         this.spinner.hide(); // Hide spinner after data is fetched
       },
@@ -53,4 +61,14 @@ export class MetarColorCodedComponent  implements OnInit {
     );
   }
 
+  // Function to filter the reports based on the search query
+  onSearch(): void {
+    if (this.searchQuery.trim() === '') {
+      this.filteredReports = this.metarReports; // If search query is empty, show all reports
+    } else {
+      this.filteredReports = this.metarReports.filter((report) =>
+        report.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  }
 }

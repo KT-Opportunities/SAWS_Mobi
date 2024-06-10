@@ -6,7 +6,9 @@
   <section class="list-page"></section>
 
   <section class="colour-coded-tafs-page">
-    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+    <div class="div-block-2">
+      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image">
+    </div>
 
     <div class="tafs-div">
       <h1 class="heading-6" id="colorcoded">Colour Coded METAR</h1>
@@ -26,9 +28,13 @@
           <div id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea" class="div-block-14-copy">
             <div>
               <h5 class="heading-9">Query Metar</h5>
-              <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256"
-                  name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit"
-                  class="search-button w-button" value="Search"></form>
+              <!-- Form to handle search functionality -->
+              <form (submit)="onSearch()" class="search w-form">
+                <!-- Bind the search input to the searchQuery property -->
+                <input [(ngModel)]="searchQuery" class="search-input w-input" maxlength="256"
+                       name="query" placeholder="Search…" type="search" id="search" required>
+                <input type="submit" class="search-button w-button" value="Search">
+              </form>
             </div>
           </div>
           <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
@@ -44,7 +50,8 @@
               </div>
             </div>
             <div>
-              <div class="w-layout-grid heading-text" *ngFor="let report of metarReports">
+              <!-- Iterate over filteredReports to show the filtered results -->
+              <div class="w-layout-grid heading-text" *ngFor="let report of filteredReports">
                 <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea" class="cct-copy-copy">
                   <h1 class="heading-21">{{ report.filetextcontent }}</h1>
                 </div>
@@ -58,20 +65,17 @@
       </div>
 
     </div>
-    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-
+    <div class="bottomdiv">
+      <img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
     </div>
   </section>
-
-
 </ion-content>
 <ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
+  <div>
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
     <div class="footerdiv" id="footerdivid1">
-      <div (click)=" NavigateToObservation()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+      <div (click)="navigateToObservation()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="">
         <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
              margin-top: 10px;
              margin-bottom: 0;
