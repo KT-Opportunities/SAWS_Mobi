@@ -29,10 +29,10 @@
             <div>
               <h5 class="heading-9">Query Metar</h5>
               <!-- Form to handle search functionality -->
-              <form (submit)="onSearch()" class="search w-form">
-                <!-- Bind the search input to the searchQuery property -->
-                <input [(ngModel)]="searchQuery" class="search-input w-input" maxlength="256"
-                       name="query" placeholder="Search…" type="search" id="search" required>
+              <form (ngSubmit)="onSearch()" class="search w-form">
+                <!-- Bind the search input to the searchQuery property and call onSearch() on form submission -->
+                <input [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" class="search-input w-input" maxlength="256"
+                       name="query" placeholder="Search…" type="search" id="search">
                 <input type="submit" class="search-button w-button" value="Search">
               </form>
             </div>
