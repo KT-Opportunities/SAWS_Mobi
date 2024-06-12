@@ -22,15 +22,11 @@
           </div> -->
 
           <div id="w-node-d5113b85-dffb-5330-a3a9-3c1251f6e32c-871273fb" class="div-block-521">
-            <div 
-              (click)="selectPaymentType('monthly')" 
-              class="button-4 w-button" 
+            <div (click)="selectPaymentType('monthly')" class="button-4 w-button"
               [class.active]="selectedPaymentType === 'monthly'">
               Monthly
             </div>
-            <div 
-              (click)="selectPaymentType('annually')" 
-              class="button-4 w-button" 
+            <div (click)="selectPaymentType('annually')" class="button-4 w-button"
               [class.active]="selectedPaymentType === 'annually'">
               Annually
             </div>
@@ -48,7 +44,7 @@
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57">
                   <h1 class="heading-21-copy">R{{freeSubscriptionAmount.toFixed(2)}}</h1>
-                  <div class="div-block-62">
+                  <!-- <div class="div-block-62">
                     <h4 class="field-label">Available Services</h4>
                     <div data-hover="false" data-delay="0" class="w-dropdown">
                       <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('freeSubscription')">
@@ -67,11 +63,58 @@
                     <ul>
                       <li>Sigwx Charts</li>
                     </ul>
+                    <ul>
+                      <li>Sigwx Charts 2</li>
+                    </ul>
+                  </div> -->
+
+                  <div class="div-block-62">
+                    <h4 class="field-label">Available Services</h4>
+                    <div data-hover="false" data-delay="0" class="w-dropdown">
+                      <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('freeSubscription')">
+                        <div class="w-icon-dropdown-toggle"></div>
+                        <div>{{ selectedFreeService ? selectedFreeService : 'Select' }} Services</div>
+                      </div>
+                      <nav class="dropdown-list-6 w-dropdown-list"
+                        [class.show-dropdown]="dropdownVisible['freeSubscription']">
+                        <a (click)="selectFreeService('International')" class="w-dropdown-link">International</a>
+                        <a (click)="selectFreeService('Observation')" class="w-dropdown-link">Observation</a>
+                        <a (click)="selectFreeService('Forecast')" class="w-dropdown-link">Forecast</a>
+                        <a (click)="selectFreeService('Other')" class="w-dropdown-link">Other</a>
+                      </nav>
+                    </div>
                   </div>
+                  <div class="html-embed-11 w-embed">
+                    <ul *ngIf="selectedFreeService === 'International'">
+                      <li>Sigwx Charts</li>
+                    </ul>
+                    <ul *ngIf="selectedFreeService === 'Observation'">
+                      <li>METAR</li>
+                      <li>SPECI</li>
+                      <li>Web Cams </li>
+                    </ul>
+                    <ul *ngIf="selectedFreeService === 'Forecast'">
+                      <li>Colour Coded TAF</li>
+                      <li>Colour Coded SIGMET/AIRMET</li>
+                      <li>Colour Coded Warnings</li>
+                      <li>SIGMET/AIRMET</li>
+                      <li>Recent TAFs</li>
+                      <li>Warnings</li>
+                      <li>Advisories</li>
+                    </ul>
+                    <ul *ngIf="selectedFreeService === 'Other'">
+                      <li>Edit personal Details</li>
+                      <li>Manage Subscription</li>
+                      <li>Messages</li>
+                      <li>SIGMET Advisories</li>
+                      <li>User/personal History</li>
+                    </ul>
+                  </div>
+
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e46-871273fb" class="div-block-56">
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e47-871273fb" class="div-block-55"></div>
-                  <a (click)="provideFeedback(0)" *ngIf="!isLoggedIn" class="button-2-copy w-button">Subscribe Now</a>
+                  <a (click)="provideFeedback(freeSubscriptionAmount)" *ngIf="!isLoggedIn" class="button-2-copy w-button">Subscribe Now</a>
                   <a *ngIf="isLoggedIn" class="button-2-copy w-button" style="background-color: grey"
                     [attr.readonly]="true">
                     Subscribed
@@ -92,23 +135,22 @@
                     <div data-hover="false" data-delay="0" class="w-dropdown">
                       <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('premiumSubscription')">
                         <div class="w-icon-dropdown-toggle"></div>
-                        <div>Select Services</div>
+                        <div>{{ selectedPremiumService ? selectedPremiumService : 'Select' }} Services</div>
                       </div>
                       <nav class="dropdown-list-6 w-dropdown-list"
                         [class.show-dropdown]="dropdownVisible['premiumSubscription']">
-                        <a (click)="GoToInternational()" class="dropdown-link-4 w-dropdown-link">International</a>
-                        <a (click)="GoTODomestic()" class="dropdown-link-5 w-dropdown-link">Domestic</a>
-                        <!-- <a (click)="GoTOFlieghtBrief()" class="dropdown-link-6 w-dropdown-link"
-                        >Flight Briefing</a
-                      > -->
-                        <a (click)="GoToObservation()" class="dropdown-link-6 w-dropdown-link">Observation</a>
-                        <a (click)="GoToForecast()" class="dropdown-link-6 w-dropdown-link">Forecast</a>
-                        <a href="#" class="dropdown-link-6 w-dropdown-link">Other</a>
+                        <a (click)="selectPremiumService('International')" class="w-dropdown-link">International</a>
+                        <a (click)="selectPremiumService('Domestic')" class="w-dropdown-link">Domestic</a>
+                        <a (click)="selectPremiumService('FlightBriefing')" class="w-dropdown-link">Flight Briefing</a>
+                        <a (click)="selectPremiumService('Observation')" class="w-dropdown-link">Observation</a>
+                        <a (click)="selectPremiumService('Forecast')" class="w-dropdown-link">Forecast</a>
+                        <a (click)="selectPremiumService('Aerospot')" class="w-dropdown-link">Aerospot</a>
+                        <a (click)="selectPremiumService('Other')" class="w-dropdown-link">Other</a>
                       </nav>
                     </div>
                   </div>
                   <div class="html-embed-11 w-embed">
-                    <ul>
+                    <ul *ngIf="selectedPremiumService === 'International'">
                       <li>Grid winds</li>
                       <li>Maximum Winds</li>
                       <li>Sigwx Charts</li>
@@ -118,11 +160,70 @@
                       <li>Graphical SIGMET/AIRMET</li>
                       <li>Image Browser</li>
                     </ul>
+                    <ul *ngIf="selectedPremiumService === 'Domestic'">
+                      <li>Flight Document</li>
+                      <li>Hourly Charts</li>
+                      <li>ICAO Locations</li>
+                      <li>Low Level Wind Profiles</li>
+                      <li>METAR Maps </li>
+                      <li>QNH Chart</li>
+                      <li>SIGWX Charts</li>
+                      <li>Take-Off-Data</li>
+                      <li>Warnings</li>
+                      <li>Wind Charts</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'FlightBriefing'">
+                      <li>Edit Flight</li>
+                      <li>Import Departure List</li>
+                      <li>Import/Export Flights</li>
+                      <li>Saved Flights</li>
+                      <li>Scheduled Flight Report</li>
+                      <li>Shared Flights</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Observation'">
+                      <li>Colour Coded METAR</li>
+                      <li>METAR</li>
+                      <li>Recent METARs</li>
+                      <li>Recent METAR/TAFs</li>
+                      <li>METAR History</li>
+                      <li>Radar products</li>
+                      <li>Satellite</li>
+                      <li>SPECI</li>
+                      <li>Weather Map </li>
+                      <li>Web Cams </li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Forecast'">
+                      <li>Colour Coded TAF</li>
+                      <li>Colour Coded SIGMET/AIRMET</li>
+                      <li>Colour Coded Warnings</li>
+                      <li>SIGMET/AIRMET</li>
+                      <li>Take-Off-Data</li>
+                      <li>TAF Accuracy</li>
+                      <li>Recent TAFs</li>
+                      <li>TAF Accuracy</li>
+                      <li>Harmonized Products</li>
+                      <li>Trends</li>
+                      <li>Warnings</li>
+                      <li>Advisories</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Aerospot'">
+                      <li>Spot Graph Map</li>
+                      <li>Synoptic Analysis</li>
+                      <li>TS Probabilities</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Other'">
+                      <li>Historical weather data</li>
+                      <li>Edit personal Details</li>
+                      <li>Manage Subscription</li>
+                      <li>Messages</li>
+                      <li>SIGMET Advisories</li>
+                      <li>User/personal History</li>
+                    </ul>
                   </div>
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e46-871273fb" class="div-block-56">
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e47-871273fb" class="div-block-55"></div>
-                  <div (click)="provideFeedback(1,180)" class="button-2-copy w-button">Subscribe Now</div>
+                  <div (click)="provideFeedback(1,premiumSubscriptionAmount)" class="button-2-copy w-button">Subscribe Now</div>
                 </div>
               </div>
             </div>
@@ -139,60 +240,102 @@
                     <div class="w-dropdown">
                       <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('regulatedSubscription')">
                         <div class="w-icon-dropdown-toggle"></div>
-                        <div>Select Services</div>
+                        <div>{{ selectedRegulatedService ? selectedRegulatedService : 'Select' }} Services</div>
                       </div>
                       <nav class="dropdown-list-6 w-dropdown-list"
                         [class.show-dropdown]="dropdownVisible['regulatedSubscription']">
-                        <a (click)="GoToInternational()" class="dropdown-link-4 w-dropdown-link">International</a>
-                        <a (click)="GoTODomestic()" class="dropdown-link-5 w-dropdown-link">Domestic</a>
-                        <a (click)="GoTOFlieghtBrief()" class="dropdown-link-6 w-dropdown-link">Flight Briefing</a>
-                        <a (click)="GoToObservation()" class="dropdown-link-6 w-dropdown-link">Observation</a>
-                        <a (click)="GoToForecast()" class="dropdown-link-6 w-dropdown-link">Forecast</a>
-                        <a href="#" class="dropdown-link-6 w-dropdown-link">Other</a>
+                        <a (click)="selectRegulatedService('International')" class="w-dropdown-link">International</a>
+                        <a (click)="selectRegulatedService('Domestic')" class="w-dropdown-link">Domestic</a>
+                        <a (click)="selectRegulatedService('FlightBriefing')" class="w-dropdown-link">Flight Briefing</a>
+                        <a (click)="selectRegulatedService('Observation')" class="w-dropdown-link">Observation</a>
+                        <a (click)="selectRegulatedService('Forecast')" class="w-dropdown-link">Forecast</a>
+                        <a (click)="selectRegulatedService('Aerospot')" class="w-dropdown-link">Aerospot</a>
+                        <a (click)="selectRegulatedService('Other')" class="w-dropdown-link">Other</a>
                       </nav>
                     </div>
                   </div>
                   <div class="html-embed-11 w-embed">
                     <ul>
-                      <li>Grid winds</li>
-                      <li>Maximum Winds</li>
-                      <li>Sigwx Charts</li>
-                      <li>World Map</li>
-                      <li>GPM</li>
-                      <li>Humidity</li>
-                      <li>Graphical SIGMET/AIRMET</li>
-                      <li>Image Browser</li>
+                      <ul *ngIf="selectedRegulatedService === 'International'">
+                        <li>Grid winds</li>
+                        <li>Maximum Winds</li>
+                        <li>Sigwx Charts</li>
+                        <li>World Map</li>
+                        <li>GPM</li>
+                        <li>Humidity</li>
+                        <li>Graphical SIGMET/AIRMET</li>
+                        <li>Image Browser</li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'Domestic'">
+                        <li>Flight Document</li>
+                        <li>Hourly Charts</li>
+                        <li>ICAO Locations</li>
+                        <li>Low Level Wind Profiles</li>
+                        <li>METAR Maps </li>
+                        <li>QNH Chart</li>
+                        <li>SIGWX Charts</li>
+                        <li>Take-Off-Data</li>
+                        <li>Warnings</li>
+                        <li>Wind Charts</li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'FlightBriefing'">
+                        <li>Edit Flight</li>
+                        <li>Import Departure List</li>
+                        <li>Import/Export Flights</li>
+                        <li>Saved Flights</li>
+                        <li>Scheduled Flight Report</li>
+                        <li>Shared Flights</li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'Observation'">
+                        <li>Colour Coded METAR</li>
+                        <li>METAR</li>
+                        <li>Recent METARs</li>
+                        <li>Recent METAR/TAFs</li>
+                        <li>METAR History</li>
+                        <li>Radar products</li>
+                        <li>Satellite</li>
+                        <li>SPECI</li>
+                        <li>Weather Map </li>
+                        <li>Web Cams </li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'Forecast'">
+                        <li>Colour Coded TAF</li>
+                        <li>Colour Coded SIGMET/AIRMET</li>
+                        <li>Colour Coded Warnings</li>
+                        <li>SIGMET/AIRMET</li>
+                        <li>Take-Off-Data</li>
+                        <li>TAF Accuracy</li>
+                        <li>Recent TAFs</li>
+                        <li>TAF Accuracy</li>
+                        <li>Harmonized Products</li>
+                        <li>Trends</li>
+                        <li>Warnings</li>
+                        <li>Advisories</li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'Aerospot'">
+                        <li>Spot Graph Map</li>
+                        <li>Synoptic Analysis</li>
+                        <li>TS Probabilities</li>
+                      </ul>
+                      <ul *ngIf="selectedRegulatedService === 'Other'">
+                        <li>Historical weather data</li>
+                        <li>Edit personal Details</li>
+                        <li>Manage Subscription</li>
+                        <li>Messages</li>
+                        <li>SIGMET Advisories</li>
+                        <li>User/personal History</li>
+                      </ul>
                     </ul>
                   </div>
                 </div>
                 <div class="div-block-56">
                   <div class="div-block-55"></div>
-                  <a (click)="provideFeedback(2, 380)" class="button-2-copy w-button">Subscribe Now</a>
+                  <a (click)="provideFeedback(2, regulatedSubscriptionAmount)" class="button-2-copy w-button">Subscribe Now</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="bottomdiv">
-      <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-      <div class="footerdiv">
-        <a (click)="forecastPage()" class="link-block-5 w-inline-block"><img src="../../assets/Group-4522.svg"
-            loading="lazy" alt="" />
-          <h6 class="heading-10-copy" style="
-            color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 16px;
-            margin-top: 4px;
-          ">
-            Back
-          </h6>
-        </a>
       </div>
     </div>
   </section>

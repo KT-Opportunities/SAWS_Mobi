@@ -30,6 +30,11 @@ export class SubscriptionPackagePage implements OnInit {
   premiumSubscriptionAmount: number = 180;
   regulatedSubscriptionAmount: number = 380;
 
+  // selectedService: string | null = null;
+  selectedFreeService: string | null = null;
+  selectedPremiumService: string | null = null;
+  selectedRegulatedService: string | null = null;
+
   subsObj: any = {
     returnUrl: '',
     cancelUrl: '',
@@ -76,8 +81,6 @@ export class SubscriptionPackagePage implements OnInit {
       // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    debugger;
-    // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
     //   // If the user is logged in
     if (this.subscriptionId) {
       // Check if a subscription package ID is set
@@ -88,35 +91,23 @@ export class SubscriptionPackagePage implements OnInit {
       } else if (this.subscriptionId == 2) {
         this.subscribe(380, this.subscriptionId, 'Regulated');
       }
-
-      // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
-      // }
     }
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.subscriptionId = params['id'];
-      // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    // debugger;
-    // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
-    //   // If the user is logged in
     if (this.subscriptionId) {
       // Check if a subscription package ID is set
-      // if (this.selectedSubscriptionPackageId !== undefined) {
       // Call the subscribe method if a subscription package ID is set
       if (this.subscriptionId == 1) {
         this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
       } else if (this.subscriptionId == 2) {
         this.subscribe(this.regulatedSubscriptionAmount, this.subscriptionId, 'Regulated');
       }
-
-      // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
-      // }
     }
-    // });
 
     const currentUrl = window.location.href;
     console.log(currentUrl);
@@ -278,7 +269,6 @@ export class SubscriptionPackagePage implements OnInit {
     );
   }
 
-
   selectPaymentType(type: string) {
     this.selectedPaymentType = type;
 
@@ -309,12 +299,30 @@ export class SubscriptionPackagePage implements OnInit {
     this.dropdownVisible[dropdownName] = !this.dropdownVisible[dropdownName];
   }
 
-  forecastPage() {
-    this.router.navigate(['/landing-page']);
+  selectFreeService(service: string) {
+    this.selectedFreeService = service;
+
+    for (let key in this.dropdownVisible) {
+        this.dropdownVisible[key] = false;
+    }
   }
-  forecastPage2() {
-    this.router.navigate(['/alnding-page']);
+
+  selectPremiumService(service: string) {
+    this.selectedPremiumService = service;
+
+    for (let key in this.dropdownVisible) {
+        this.dropdownVisible[key] = false;
+    }
   }
+
+  selectRegulatedService(service: string) {
+    this.selectedRegulatedService = service;
+
+    for (let key in this.dropdownVisible) {
+        this.dropdownVisible[key] = false;
+    }
+  }
+
 
   // monthlypage() {
   //   this.selectedPaymentType = 'monthly'; // Update selected payment type
@@ -336,28 +344,6 @@ export class SubscriptionPackagePage implements OnInit {
 
   //   this.router.navigate(['/subscription-package/payment-type', { paymentType: this.selectedPaymentType }]);
   // }
-
-  toggleMonthlySection() {
-    console.log('toggleMonthlySection() called');
-    // this.showMonthlySection = true;
-    // this.showAnnuallySection = false;
-  }
-
-  GoToInternational() {
-    this.router.navigate(['/international']);
-  }
-  GoToForecast() {
-    this.router.navigate(['/forecast']);
-  }
-  GoTODomestic() {
-    this.router.navigate(['/domestic']);
-  }
-  GoTOFlieghtBrief() {
-    this.router.navigate(['/flight-briefing']);
-  }
-  GoToObservation() {
-    this.router.navigate(['/observation']);
-  }
 
   daysBtnDates(date1: any, date2: any) {
     let Difference_In_Time =
