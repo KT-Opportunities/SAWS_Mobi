@@ -159,6 +159,8 @@ export class SubscriptionPackagePage implements OnInit {
       subscriptionType = 'Regulated';
     }
 
+    debugger;
+
     this.subsObj.amount = Number(amount.toFixed(2));
     this.subsObj.recurring_amount = Number(amount.toFixed(2));
     this.subsObj.name_first = userLoginDetails?.aspUserName;
@@ -167,7 +169,10 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.confirmation_email = userLoginDetails?.aspUserEmail;
     this.subsObj.m_payment_id = subscriptionId.toString();
     this.subsObj.item_name = subscriptionType;
-    this.subsObj.item_description = subscriptionType;
+    this.subsObj.item_description = subscriptionType; 
+
+    // added this line
+    // this.subsObj.userprofileid = userLoginDetails?.userprofileid;
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -186,6 +191,7 @@ export class SubscriptionPackagePage implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
+
   provideFeedback(subscriptionPackageId: number, amount?: number) {
     if (!this.authService.getIsLoggedIn()) {
       const redirectUrl = `/subscription-package?id=${subscriptionPackageId}`;
@@ -236,7 +242,6 @@ export class SubscriptionPackagePage implements OnInit {
   saveSub() {
     var oneYearFromNow = new Date();
 
-    debugger;
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
     this.updateSub.package_price = this.subsObj.recurring_amount;
@@ -251,8 +256,10 @@ export class SubscriptionPackagePage implements OnInit {
     this.updateSub.subscription_duration = Number(
       this.daysBtnDates(this.updateSub.start_date, this.updateSub.end_date)
     );
-    this.updateSub.userprofileid = userLoginDetails?.aspUserID;
+    this.updateSub.userprofileid = userLoginDetails?.userprofileid;
    //this.updateSub.userprofileid = 119;
+
+   debugger;
 
     console.log('updateSub', this.updateSub);
     debugger;
