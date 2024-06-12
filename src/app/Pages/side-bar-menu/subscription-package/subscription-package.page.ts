@@ -23,7 +23,12 @@ export class SubscriptionPackagePage implements OnInit {
     premiumSubscription: false,
     regulatedSubscription: false,
   };
-  selectedPaymentType: string | undefined;
+
+  // selectedPaymentType: string | undefined ;
+  selectedPaymentType: string = 'monthly';
+  freeSubscriptionAmount: number = 0;
+  premiumSubscriptionAmount: number = 180;
+  regulatedSubscriptionAmount: number = 380;
 
   subsObj: any = {
     returnUrl: '',
@@ -95,7 +100,7 @@ export class SubscriptionPackagePage implements OnInit {
       // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    debugger;
+    // debugger;
     // this.authService.loginEvent.subscribe((loggedIn: boolean) => {
     //   // If the user is logged in
     if (this.subscriptionId) {
@@ -103,16 +108,15 @@ export class SubscriptionPackagePage implements OnInit {
       // if (this.selectedSubscriptionPackageId !== undefined) {
       // Call the subscribe method if a subscription package ID is set
       if (this.subscriptionId == 1) {
-        this.subscribe(180, this.subscriptionId);
+        this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
       } else if (this.subscriptionId == 2) {
-        this.subscribe(380, this.subscriptionId, 'Regulated');
+        this.subscribe(this.regulatedSubscriptionAmount, this.subscriptionId, 'Regulated');
       }
 
       // this.subscribe(this.amount!, this.selectedSubscriptionPackageId);
       // }
     }
     // });
-    this.selectedPaymentType = 'monthly';
 
     const currentUrl = window.location.href;
     console.log(currentUrl);
@@ -274,6 +278,21 @@ export class SubscriptionPackagePage implements OnInit {
     );
   }
 
+
+  selectPaymentType(type: string) {
+    this.selectedPaymentType = type;
+
+    if( type === 'monthly') {
+      this.freeSubscriptionAmount = 0;
+      this.premiumSubscriptionAmount = 180;
+      this.regulatedSubscriptionAmount = 380;
+    } else {
+      this.freeSubscriptionAmount = 0;
+      this.premiumSubscriptionAmount = 2160;
+      this.regulatedSubscriptionAmount = 4560;
+    }
+  }
+
   displayIcon(): boolean {
     return this.isSubscriber; // Return true if the user is a subscriber, false otherwise
   }
@@ -296,21 +315,22 @@ export class SubscriptionPackagePage implements OnInit {
   forecastPage2() {
     this.router.navigate(['/alnding-page']);
   }
-  monthlypage() {
-    this.selectedPaymentType = 'monthly'; // Update selected payment type
-    this.router.navigate([
-      '/subscription-package/payment-type',
-      { paymentType: 'monthly' },
-    ]);
-  }
 
-  annualypage() {
-    this.selectedPaymentType = ''; // Update selected payment type
-    this.router.navigate([
-      '/subscription-package/payment-type',
-      { paymentType: 'annually' },
-    ]);
-  }
+  // monthlypage() {
+  //   this.selectedPaymentType = 'monthly'; // Update selected payment type
+  //   this.router.navigate([
+  //     '/subscription-package/payment-type',
+  //     { paymentType: 'monthly' },
+  //   ]);
+  // }
+
+  // annualypage() {
+  //   this.selectedPaymentType = ''; // Update selected payment type
+  //   this.router.navigate([
+  //     '/subscription-package/payment-type',
+  //     { paymentType: 'annually' },
+  //   ]);
+  // }
 
   // private navigateToPaymentTypePage() {
 
@@ -350,5 +370,9 @@ export class SubscriptionPackagePage implements OnInit {
     );
 
     return Difference_In_Days;
+  }
+
+  NavigateToLandingPage() {
+    this.router.navigate(['/landing-page']);
   }
 }
