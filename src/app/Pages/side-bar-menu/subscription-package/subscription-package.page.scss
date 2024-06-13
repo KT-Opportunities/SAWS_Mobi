@@ -2556,6 +2556,16 @@
   color: #fff;
 }
 
+.button-4.w-button {
+  background-color: white;
+  color: #8295C2;
+}
+
+.button-4.w-button.active {
+  background-color: #002950;
+  color: white;
+}
+
 .footerdiv {
   justify-content: center;
   align-items: center;
@@ -7819,7 +7829,7 @@ html.w-mod-touch * {
 
 .w-button {
   display: inline-block;
-  padding: 9px 15px;
+  // padding: 9px 15px;
   background-color: #00386c;
   color: white;
   border: 0;

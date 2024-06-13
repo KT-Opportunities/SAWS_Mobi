@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+
 interface WAFItem {
   foldername: string;
   filename: string;
@@ -19,10 +20,10 @@ interface WAFItem {
   styleUrls: ['./../forecast.page.scss'],
 })
 export class HarmonizedGridPage implements OnInit {
-  WAF: any = [];
-  WAF1: any = [];
-  WAF2: any = [];
-  WAF3: any = [];
+  WAF: WAFItem[] = [];
+  WAF1: WAFItem[] = [];
+  WAF2: WAFItem[] = [];
+  WAF3: WAFItem[] = [];
   TsProbability: any = [];
   isLoading: boolean = true;
 
@@ -34,31 +35,13 @@ export class HarmonizedGridPage implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog
   ) {}
+
   forecastPage() {
     window.history.back();
     this.router.navigate(['/forecast']);
   }
+
   ngOnInit() {
-    // this.APIService.GetSourceChartFolderFilesList('wafs').subscribe(
-    //   (Response) => {
-    //     this.WAF = Response;
-    //     console.log('WAF:', this.WAF);
-    //     this.WAF.forEach((item: any) => {
-    //       // Explicitly type 'item' as 'any' or the appropriate type
-    //       // Check the filename to determine which array to push into
-    //       if (item.filename.includes('QBRE')) {
-    //         this.WAF1.push(item);
-    //       } else if (item.filename.includes('QIRE')) {
-    //         this.WAF2.push(item);
-    //       } else if (item.filename.includes('QLRE')) {
-    //         this.WAF3.push(item);
-    //       }
-    //     });
-    //     console.log('WAF1:', this.WAF1);
-    //     console.log('WAF2:', this.WAF2);
-    //     console.log('WAF3:', this.WAF3);
-    //   }
-    // );
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         try {
@@ -81,15 +64,14 @@ export class HarmonizedGridPage implements OnInit {
         this.isLoading = false;
       }
     );
+
     this.APIService.GetSourceChartFolderFilesList('wafs').subscribe(
       (data) => {
         try {
-          this.WAF = data;
-          console.log('JSON Data:', this.WAF);
+          this.WAF = this.filterLatestEntries(data);
+          console.log('Filtered JSON Data:', this.WAF);
 
-          this.WAF.forEach((item: any) => {
-            // Explicitly type 'item' as 'any' or the appropriate type
-            // Check the filename to determine which array to push into
+          this.WAF.forEach((item: WAFItem) => {
             if (item.filename.includes('QBRE')) {
               this.WAF1.push(item);
             } else if (item.filename.includes('QIRE')) {
@@ -98,6 +80,7 @@ export class HarmonizedGridPage implements OnInit {
               this.WAF3.push(item);
             }
           });
+
           console.log('WAF1:', this.WAF1);
           console.log('WAF2:', this.WAF2);
           console.log('WAF3:', this.WAF3);
@@ -113,14 +96,22 @@ export class HarmonizedGridPage implements OnInit {
       }
     );
   }
-  getTimeSubstring(filename: string): string {
-    // Extract the last 4 characters from the filename
-    const timeSubstring = filename.substring(
-      filename.length - 8,
-      filename.length - 4
-    );
 
-    return timeSubstring;
+  filterLatestEntries(data: WAFItem[]): WAFItem[] {
+    const latestEntries = new Map<string, WAFItem>();
+
+    data.forEach((item) => {
+      const filename = item.filename;
+      if (!latestEntries.has(filename) || new Date(item.lastmodified) > new Date(latestEntries.get(filename)!.lastmodified)) {
+        latestEntries.set(filename, item);
+      }
+    });
+
+    return Array.from(latestEntries.values());
+  }
+
+  getTimeSubstring(filename: string): string {
+    return filename.substring(filename.length - 8, filename.length - 4);
   }
 
   displayHeadingWAF1(filename: string): string {
@@ -128,15 +119,14 @@ export class HarmonizedGridPage implements OnInit {
 
     switch (twoDigitsAfterQIRI) {
       case '0600':
-        return 'EntireAtmosphere';
       case '0000':
-        return 'EntireAtmosphere';
       case '1800':
         return 'EntireAtmosphere';
       default:
-        return ''; // Default case if none of the above matches
+        return '';
     }
   }
+
   displayHeading(filename: string): string {
     const twoDigitsAfterQIRI = filename.substring(4, 6);
 
@@ -156,26 +146,24 @@ export class HarmonizedGridPage implements OnInit {
       case '25':
         return '250_hPa/FL340';
       default:
-        return ''; // Default case if none of the above matches
+        return '';
     }
   }
 
   isLastUpdated(time: string, currentItem: any): boolean {
     const itemsWithSameTime = this.WAF2.filter((item: any) => {
-      // Extract the time substring from the lastmodified property
-      const itemTime = item.lastmodified.substring(11, 16); // Extracts HH:MM from the timestamp
+      const itemTime = item.lastmodified.substring(11, 16);
       return itemTime === time;
     });
-    return (
-      itemsWithSameTime.indexOf(currentItem) === itemsWithSameTime.length - 1
-    );
+    return itemsWithSameTime.indexOf(currentItem) === itemsWithSameTime.length - 1;
   }
 
   openImageViewer(item: any) {
     console.log('file Name:', item);
-    const folderName = item.substring(0, 2);
-    const fileName = item;
+    const folderName = item.foldername;
+    const fileName = item.filename;
     console.log('Folder Name:', folderName);
+    this.isLoading = true;
 
     this.fetchSecondAPI(folderName, fileName)
       .then((filetextcontent) => {
@@ -199,20 +187,16 @@ export class HarmonizedGridPage implements OnInit {
         this.isLoading = false;
       });
   }
+
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filetextcontent
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetChartsFile(folderName, fileName).subscribe(
         (response) => {
-          // Assuming filetextcontent is obtained from the response
           const filetextcontent = response.filetextcontent;
-          // Log filetextcontent to verify
           console.log('File Text Content:', filetextcontent);
-          // Resolve the promise with filetextcontent
           resolve(filetextcontent);
         },
         (error) => {
-          // Reject the promise if there's an error
           reject(error);
         }
       );
