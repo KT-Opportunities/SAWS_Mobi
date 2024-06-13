@@ -297,12 +297,10 @@ export class HumidityComponent implements OnInit {
   NavigateToInternational() {
     this.router.navigate(['/international']);
   }
-
   ImageViewer(item: any) {
-    console.log('file Name:', item);
     const folderName = item.substring(0, 2);
     const fileName = item;
-    console.log('Folder Name:', folderName);
+    this.isLoading = true;
 
     this.fetchSecondAPI(folderName, fileName)
       .then((filetextcontent) => {
@@ -326,6 +324,7 @@ export class HumidityComponent implements OnInit {
         this.isLoading = false;
       });
   }
+
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filetextcontent
     return new Promise<string>((resolve, reject) => {
