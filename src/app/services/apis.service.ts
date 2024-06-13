@@ -268,4 +268,25 @@ export class APIService {
         `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
+
+    // Method to fetch wind chart images
+    // fetchWindChartImages(): Observable<any[]> {
+    //   const apiUrl = 'http://160.119.253.130/aviappapi/api/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=12';
+    //   return this.http.get<any[]>(apiUrl);
+    // }
+    fetchWindChartImages(foldername:any , lasthours: number = 12): Observable<any[]> {
+      const apiUrl = `${environment.serverAPI}RawSource/GetSourceAviationFolderFilesList`;
+      
+      // Construct the query parameters including foldername and lasthours
+      const queryParams = {
+        imagefoldername: foldername,
+        lasthours: lasthours.toString(),
+      };
+    
+      // Make the HTTP GET request with query parameters
+      return this.http.get<any[]>(apiUrl, { params: queryParams });
+    }
+    
+
+    
 }
