@@ -26,9 +26,14 @@ export class SubscriptionPackagePage implements OnInit {
 
   // selectedPaymentType: string | undefined ;
   selectedPaymentType: string = 'monthly';
+  subscriptionType: string = '';
   freeSubscriptionAmount: number = 0;
   premiumSubscriptionAmount: number = 180;
   regulatedSubscriptionAmount: number = 380;
+
+  freeSubscriptionId: number = 1;
+  premiumSubscriptionId: number = 2;
+  regulatedSubscriptionId: number = 3;
 
   // selectedService: string | null = null;
   selectedFreeService: string | null = null;
@@ -86,28 +91,26 @@ export class SubscriptionPackagePage implements OnInit {
       // Check if a subscription package ID is set
       // if (this.selectedSubscriptionPackageId !== undefined) {
       // Call the subscribe method if a subscription package ID is set
-      if (this.subscriptionId == 1) {
-        this.subscribe(180, this.subscriptionId);
-      } else if (this.subscriptionId == 2) {
-        this.subscribe(380, this.subscriptionId, 'Regulated');
-      }
+      // if (this.subscriptionId == 1) {
+      //   this.subscribe(180, this.subscriptionId);
+      // } else if (this.subscriptionId == 2) {
+      //   this.subscribe(380, this.subscriptionId, 'Regulated');
+      // }
+
+      // this.subscribe(380, this.subscriptionId);
+      this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
+
     }
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.subscriptionId = params['id'];
-    });
+    // this.route.queryParams.subscribe((params) => {
+    //   this.subscriptionId = params['id'];
+    // });
 
-    if (this.subscriptionId) {
-      // Check if a subscription package ID is set
-      // Call the subscribe method if a subscription package ID is set
-      if (this.subscriptionId == 1) {
-        this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
-      } else if (this.subscriptionId == 2) {
-        this.subscribe(this.regulatedSubscriptionAmount, this.subscriptionId, 'Regulated');
-      }
-    }
+    // if (this.subscriptionId) {
+    //   this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
+    // }
 
     const currentUrl = window.location.href;
     console.log(currentUrl);
@@ -144,14 +147,17 @@ export class SubscriptionPackagePage implements OnInit {
     }
   }
 
-  subscribe(amount: number, subscriptionId: number, subscriptionType?: string) {
+  subscribe(amount: number, subscriptionId: number) {
+      
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
 
-    if ((subscriptionId = 1)) {
-      subscriptionType = 'Premium';
-    } else if ((subscriptionId = 2)) {
-      subscriptionType = 'Regulated';
+    if ((subscriptionId == 2 || subscriptionId == 5)) {
+      this.subscriptionType = 'Premium';
+    } else if ((subscriptionId == 3 || subscriptionId == 6)) {
+      this.subscriptionType = 'Regulated';
+    } else {
+      this.subscriptionType = 'Free';
     }
 
     debugger;
@@ -163,11 +169,8 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.email_address = userLoginDetails?.aspUserEmail;
     this.subsObj.confirmation_email = userLoginDetails?.aspUserEmail;
     this.subsObj.m_payment_id = subscriptionId.toString();
-    this.subsObj.item_name = subscriptionType;
-    this.subsObj.item_description = subscriptionType; 
-
-    // added this line
-    // this.subsObj.userprofileid = userLoginDetails?.userprofileid;
+    this.subsObj.item_name = this.subscriptionType;
+    this.subsObj.item_description = this.subscriptionType; 
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -235,7 +238,8 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   saveSub() {
-    var oneYearFromNow = new Date();
+    var oneYearOrMonthFromNow = new Date();
+    // var oneMonthFromNow = new Date();
 
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
@@ -245,16 +249,30 @@ export class SubscriptionPackagePage implements OnInit {
       this.selectedPaymentType + ' ' + this.subsObj.item_name;
     this.updateSub.subscriptionId = 0;
     this.updateSub.start_date = new Date(Date.now());
-    this.updateSub.end_date = new Date(oneYearFromNow.setFullYear(
-      oneYearFromNow.getFullYear() + 1
-    ));
-    this.updateSub.subscription_duration = Number(
-      this.daysBtnDates(this.updateSub.start_date, this.updateSub.end_date)
-    );
-    this.updateSub.userprofileid = userLoginDetails?.userprofileid;
-   //this.updateSub.userprofileid = 119;
 
-   debugger;
+    if( this.selectedPaymentType === 'monthly'){
+
+      this.updateSub.end_date = new Date(oneYearOrMonthFromNow.setMonth(
+        oneYearOrMonthFromNow.getMonth() + 1
+      ));
+      this.updateSub.subscription_duration = Number(
+        this.daysBtnDates(this.updateSub.start_date, this.updateSub.end_date)
+      );
+
+    } else {
+
+      this.updateSub.end_date = new Date(oneYearOrMonthFromNow.setFullYear(
+        oneYearOrMonthFromNow.getFullYear() + 1
+      ));
+      this.updateSub.subscription_duration = Number(
+        this.daysBtnDates(this.updateSub.start_date, this.updateSub.end_date)
+      );
+
+    }
+
+    this.updateSub.userprofileid = userLoginDetails?.userprofileid;
+
+    debugger;
 
     console.log('updateSub', this.updateSub);
     debugger;
@@ -276,10 +294,16 @@ export class SubscriptionPackagePage implements OnInit {
       this.freeSubscriptionAmount = 0;
       this.premiumSubscriptionAmount = 180;
       this.regulatedSubscriptionAmount = 380;
+      this.freeSubscriptionId = 1;
+      this.premiumSubscriptionId = 2;
+      this.regulatedSubscriptionId = 3;
     } else {
       this.freeSubscriptionAmount = 0;
       this.premiumSubscriptionAmount = 2160;
       this.regulatedSubscriptionAmount = 4560;
+      this.freeSubscriptionId = 4;
+      this.premiumSubscriptionId = 5;
+      this.regulatedSubscriptionId = 6;
     }
   }
 
@@ -322,28 +346,6 @@ export class SubscriptionPackagePage implements OnInit {
         this.dropdownVisible[key] = false;
     }
   }
-
-
-  // monthlypage() {
-  //   this.selectedPaymentType = 'monthly'; // Update selected payment type
-  //   this.router.navigate([
-  //     '/subscription-package/payment-type',
-  //     { paymentType: 'monthly' },
-  //   ]);
-  // }
-
-  // annualypage() {
-  //   this.selectedPaymentType = ''; // Update selected payment type
-  //   this.router.navigate([
-  //     '/subscription-package/payment-type',
-  //     { paymentType: 'annually' },
-  //   ]);
-  // }
-
-  // private navigateToPaymentTypePage() {
-
-  //   this.router.navigate(['/subscription-package/payment-type', { paymentType: this.selectedPaymentType }]);
-  // }
 
   daysBtnDates(date1: any, date2: any) {
     let Difference_In_Time =
