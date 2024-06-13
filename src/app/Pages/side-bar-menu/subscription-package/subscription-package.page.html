@@ -64,20 +64,16 @@
                   </div>
                   <div class="html-embed-11 w-embed">
                     <ul *ngIf="selectedFreeService === 'International'">
-                      <li>Sigwx Charts</li>
+                      <li>Graphics SIGMET/AIRMET</li>
                     </ul>
                     <ul *ngIf="selectedFreeService === 'Observation'">
                       <li>METAR</li>
-                      <li>SPECI</li>
-                      <li>Web Cams </li>
+                      <li>Webcams </li>
                     </ul>
                     <ul *ngIf="selectedFreeService === 'Forecast'">
-                      <li>Colour Coded TAF</li>
-                      <li>Colour Coded SIGMET/AIRMET</li>
-                      <li>Colour Coded Warnings</li>
+                      <li>TAFS</li>
                       <li>SIGMET/AIRMET</li>
                       <li>Recent TAFs</li>
-                      <li>Warnings</li>
                       <li>Advisories</li>
                     </ul>
                     <ul *ngIf="selectedFreeService === 'Other'">
@@ -134,46 +130,46 @@
                   </div>
                   <div class="html-embed-11 w-embed">
                     <ul *ngIf="selectedPremiumService === 'International'">
-                      <li>Grid winds</li>
-                      <li>Maximum Winds</li>
-                      <li>Sigwx Charts</li>
-                      <li>World Map</li>
                       <li>GPM</li>
                       <li>Humidity</li>
-                      <li>Graphical SIGMET/AIRMET</li>
+                      <li>Sigwx Charts</li>
+                      <li>Wind: Grid</li>
+                      <li>Wind: Maximum</li>
                       <li>Image Browser</li>
+                      <li>Graphical SIGMET/AIRMET</li>
+
                     </ul>
                     <ul *ngIf="selectedPremiumService === 'Domestic'">
                       <li>Flight Document</li>
                       <li>Hourly Charts</li>
                       <li>ICAO Locations</li>
-                      <li>Low Level Wind Profiles</li>
                       <li>METAR Maps </li>
                       <li>QNH Chart</li>
                       <li>SIGWX Charts</li>
                       <li>Take-Off-Data</li>
                       <li>Warnings</li>
                       <li>Wind Charts</li>
+                      <li>Low Level Wind Profiles</li>
                     </ul>
                     <ul *ngIf="selectedPremiumService === 'FlightBriefing'">
-                      <li>Edit Flight</li>
+                      <li>Flight: Edit</li>
+                      <li>Flight: Import/Export</li>
+                      <li>Flight: Saved</li>
                       <li>Import Departure List</li>
-                      <li>Import/Export Flights</li>
-                      <li>Saved Flights</li>
                       <li>Scheduled Flight Report</li>
                       <li>Shared Flights</li>
                     </ul>
                     <ul *ngIf="selectedPremiumService === 'Observation'">
-                      <li>Colour Coded METAR</li>
                       <li>METAR</li>
-                      <li>Recent METARs</li>
-                      <li>Recent METAR/TAFs</li>
+                      <li>Web Cams </li>
+                      <li>Colour Coded METAR</li>
                       <li>METAR History</li>
+                      <li>Recent METARs</li>
+                      <li>SPECI</li>
+                      <li>Recent METAR/TAFs</li>
                       <li>Radar products</li>
                       <li>Satellite</li>
-                      <li>SPECI</li>
                       <li>Weather Map </li>
-                      <li>Web Cams </li>
                     </ul>
                     <ul *ngIf="selectedPremiumService === 'Forecast'">
                       <li>Colour Coded TAF</li>
@@ -183,13 +179,18 @@
                       <li>Take-Off-Data</li>
                       <li>TAF Accuracy</li>
                       <li>Recent TAFs</li>
+                      <li>TAF</li>
                       <li>TAF Accuracy</li>
-                      <li>Harmonized Products</li>
                       <li>Trends</li>
-                      <li>Warnings</li>
+                      <li>WAF Harmonized GRID Products</li>
                       <li>Advisories</li>
+                      <li>Warnings</li>
                     </ul>
                     <ul *ngIf="selectedPremiumService === 'Aerospot'">
+                      <li>Central Interior</li>
+                      <li>Cloud Forest</li>
+                      <li>Kwazulu Natal</li>
+                      <li>Southwestern Cape</li>
                       <li>Spot Graph Map</li>
                       <li>Synoptic Analysis</li>
                       <li>TS Probabilities</li>
@@ -239,76 +240,79 @@
                     </div>
                   </div>
                   <div class="html-embed-11 w-embed">
-                    <ul>
-                      <ul *ngIf="selectedRegulatedService === 'International'">
-                        <li>Grid winds</li>
-                        <li>Maximum Winds</li>
-                        <li>Sigwx Charts</li>
-                        <li>World Map</li>
-                        <li>GPM</li>
-                        <li>Humidity</li>
-                        <li>Graphical SIGMET/AIRMET</li>
-                        <li>Image Browser</li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'Domestic'">
-                        <li>Flight Document</li>
-                        <li>Hourly Charts</li>
-                        <li>ICAO Locations</li>
-                        <li>Low Level Wind Profiles</li>
-                        <li>METAR Maps </li>
-                        <li>QNH Chart</li>
-                        <li>SIGWX Charts</li>
-                        <li>Take-Off-Data</li>
-                        <li>Warnings</li>
-                        <li>Wind Charts</li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'FlightBriefing'">
-                        <li>Edit Flight</li>
-                        <li>Import Departure List</li>
-                        <li>Import/Export Flights</li>
-                        <li>Saved Flights</li>
-                        <li>Scheduled Flight Report</li>
-                        <li>Shared Flights</li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'Observation'">
-                        <li>Colour Coded METAR</li>
-                        <li>METAR</li>
-                        <li>Recent METARs</li>
-                        <li>Recent METAR/TAFs</li>
-                        <li>METAR History</li>
-                        <li>Radar products</li>
-                        <li>Satellite</li>
-                        <li>SPECI</li>
-                        <li>Weather Map </li>
-                        <li>Web Cams </li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'Forecast'">
-                        <li>Colour Coded TAF</li>
-                        <li>Colour Coded SIGMET/AIRMET</li>
-                        <li>Colour Coded Warnings</li>
-                        <li>SIGMET/AIRMET</li>
-                        <li>Take-Off-Data</li>
-                        <li>TAF Accuracy</li>
-                        <li>Recent TAFs</li>
-                        <li>TAF Accuracy</li>
-                        <li>Harmonized Products</li>
-                        <li>Trends</li>
-                        <li>Warnings</li>
-                        <li>Advisories</li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'Aerospot'">
-                        <li>Spot Graph Map</li>
-                        <li>Synoptic Analysis</li>
-                        <li>TS Probabilities</li>
-                      </ul>
-                      <ul *ngIf="selectedRegulatedService === 'Other'">
-                        <li>Historical weather data</li>
-                        <li>Edit personal Details</li>
-                        <li>Manage Subscription</li>
-                        <li>Messages</li>
-                        <li>SIGMET Advisories</li>
-                        <li>User/personal History</li>
-                      </ul>
+                    <ul *ngIf="selectedPremiumService === 'International'">
+                      <li>GPM</li>
+                      <li>Humidity</li>
+                      <li>Sigwx Charts</li>
+                      <li>Wind: Grid</li>
+                      <li>Wind: Maximum</li>
+                      <li>Image Browser</li>
+                      <li>Graphical SIGMET/AIRMET</li>
+
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Domestic'">
+                      <li>Flight Document</li>
+                      <li>Hourly Charts</li>
+                      <li>ICAO Locations</li>
+                      <li>METAR Maps </li>
+                      <li>QNH Chart</li>
+                      <li>SIGWX Charts</li>
+                      <li>Take-Off-Data</li>
+                      <li>Warnings</li>
+                      <li>Wind Charts</li>
+                      <li>Low Level Wind Profiles</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'FlightBriefing'">
+                      <li>Flight: Edit</li>
+                      <li>Flight: Import/Export</li>
+                      <li>Flight: Saved</li>
+                      <li>Import Departure List</li>
+                      <li>Scheduled Flight Report</li>
+                      <li>Shared Flights</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Observation'">
+                      <li>METAR</li>
+                      <li>Web Cams </li>
+                      <li>Colour Coded METAR</li>
+                      <li>METAR History</li>
+                      <li>Recent METARs</li>
+                      <li>SPECI</li>
+                      <li>Recent METAR/TAFs</li>
+                      <li>Radar products</li>
+                      <li>Satellite</li>
+                      <li>Weather Map </li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Forecast'">
+                      <li>Colour Coded TAF</li>
+                      <li>Colour Coded SIGMET/AIRMET</li>
+                      <li>Colour Coded Warnings</li>
+                      <li>SIGMET/AIRMET</li>
+                      <li>Take-Off-Data</li>
+                      <li>TAF Accuracy</li>
+                      <li>Recent TAFs</li>
+                      <li>TAF</li>
+                      <li>TAF Accuracy</li>
+                      <li>Trends</li>
+                      <li>WAF Harmonized GRID Products</li>
+                      <li>Advisories</li>
+                      <li>Warnings</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Aerospot'">
+                      <li>Central Interior</li>
+                      <li>Cloud Forest</li>
+                      <li>Kwazulu Natal</li>
+                      <li>Southwestern Cape</li>
+                      <li>Spot Graph Map</li>
+                      <li>Synoptic Analysis</li>
+                      <li>TS Probabilities</li>
+                    </ul>
+                    <ul *ngIf="selectedPremiumService === 'Other'">
+                      <li>Historical weather data</li>
+                      <li>Edit personal Details</li>
+                      <li>Manage Subscription</li>
+                      <li>Messages</li>
+                      <li>SIGMET Advisories</li>
+                      <li>User/personal History</li>
                     </ul>
                   </div>
                 </div>

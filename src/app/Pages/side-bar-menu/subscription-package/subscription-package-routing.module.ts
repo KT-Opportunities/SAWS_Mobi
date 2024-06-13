@@ -7,12 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: SubscriptionPackagePage
-  },
- 
-  {
-    path: 'payment-type',
-    loadChildren: () => import('./payment-type/payment-type.module').then( m => m.PaymentTypePageModule)
-  },
+  }
 ];
 
 @NgModule({
