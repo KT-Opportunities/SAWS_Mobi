@@ -319,7 +319,6 @@ const routes: Routes = [
         (m) => m.ContactUsPageModule
       ),
   },
-
   {
     path: 'subscription-Successful',
     loadChildren: () =>
@@ -327,6 +326,14 @@ const routes: Routes = [
         './Pages/side-bar-menu/subscription-package/subscription-package.module'
       ).then((m) => m.SubscriptionPackagePageModule),
   },
+  {
+    path: 'subscription-package',
+    loadChildren: () =>
+      import(
+        './Pages/side-bar-menu/subscription-package/subscription-package.module'
+      ).then((m) => m.SubscriptionPackagePageModule),
+  },
+
 
   // --- International url paths
   {
