@@ -82,9 +82,12 @@ export class WindsChartsComponent  implements OnInit {
     );
   }
 
-  removefile(filename: string):string {
-    return filename.replace('.gif', '');
+  removefile(filename: string): string {
+    // Extract numeric part using a regular expression
+    const match = filename.match(/\d+/);
+    return match ? match[0] : '';
   }
+  
 
 openImageViewer(item: any) {
   console.log('Opening', item); 
