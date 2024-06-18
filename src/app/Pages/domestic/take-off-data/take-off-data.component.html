@@ -1,224 +1,233 @@
 <ion-content [fullscreen]="true">
-
   <div *ngIf="isLoading" class="loading-indicator">
     <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
     Loading...
   </div>
 
-<section
-class="take-off-section"
-style="margin-top: 107px !important"
->
-<div class="div-block-2">
-  <img
-    src="images/Path-3452.svg"
-    loading="lazy"
-    width="1216"
-    alt=""
-    class="image"
-  />
-</div>
-<h1 class="heading-6">Take - Off Parameters</h1>
-<div class="overflow-y:auto;height:32em;">
-  <div
-    id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408"
-    class="w-layout-grid grid-take-off"
-    id="take"
-  >
-    <div
-      id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
-      class="div-off"
-    >
+  <section class="take-off-section" style="margin-top: 107px !important">
+    <div class="div-block-2">
+      <img
+        src="images/Path-3452.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image"
+      />
+    </div>
+    <h1 class="heading-6">Take - Off Parameters</h1>
+    <div class="overflow-y:auto;height:32em;">
       <div
-        class="button-2-copy w-button"
-        style="position: relative; left: -12px"
+        id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408"
+        class="w-layout-grid grid-take-off"
+        id="take"
       >
-        Document
-      </div>
-    </div>
-    <div
-      id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
-      class="div-off"
-    >
-      <div class="w-form">
-        <form
-          style="width: 67px !important"
-          id="email-form-2"
-          name="email-form-2"
-          data-name="Email Form 2"
-          method="get"
-          data-wf-page-id="65c08511e6e9943ba17d1408"
-          data-wf-element-id="0890f4e6-efeb-3cd1-742e-9e36574c2616"
+        <div
+          id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
+          class="div-off"
         >
-          <select
-            id="field-2"
-            name="field-2"
-            data-name="Field 2"
-            class="selection w-select"
-            (change)="onAirportCodeChange($event)"
-            [(ngModel)]="selectedAirportCode"
-          >
-            <option value="FAPE">FAPE</option>
-            <option value="FABL">FABL</option>
-            <option value="FACT">FACT</option>
-            <option value="FALE">FALE</option>
-            <option value="FALA">FALA</option>
-            <option value="FAOR">FAOR</option>
-          </select>
-        </form>
-        <div class="w-form-done">
-          <!-- <div>Thank you! Your submission has been received!</div> -->
-        </div>
-        <div class="w-form-fail">
-          <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
-        </div>
-      </div>
-    </div>
-    <div
-      id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
-      class="div-off"
-    >
-      <div
-        class="button-2-copy w-button"
-        style="position: relative; left: 10px"
-      >
-        Reload
-      </div>
-    </div>
-  </div>
-</div>
-<div class="tafs-div" style="overflow-y: auto; height: 32em">
-  <div class="w-layout-grid grid-6">
-    <div
-      id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
-      class="div-block-15"
-      *ngFor="let item of VermetArray"
-    >
-      <div *ngIf="shouldDisplayItem(item)">
-        <div class="div-block-14">
-          <div class="w-layout-grid" style="height: 48px">
-            <div
-              id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
-              class="div-block-34"
-            >
-              <h1 class="heading-23">CCCC:</h1>
-              <h1 class="heading-23-copy" id="fact">
-                {{ getAirportCode(item.filename) }}
-              </h1>
-            </div>
-            <div
-              id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
-              class="div-block-34"
-            >
-              <h1 class="heading-23">Issued at:</h1>
-              <h1 class="heading-23-copy" id="fact">
-                {{ item.lastmodified | date: 'yyyy/MM/dd HH:mm' }}
-              </h1>
-            </div>
-          </div>
-        </div>
-
-        <h1
-          class="datacape"
-          style="
-            color: #00386c;
-            font-size: 12px;
-            font-weight: 387 !important;
-          "
-        >
-          <p class="">{{ extractTakeOffData(item.filetextcontent) }}T</p>
-        </h1>
-        <div class="w-layout-grid grid-20" id="grid20">
           <div
-            id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
-            class="div-block-35"
+            class="button-2-copy w-button"
+            style="position: relative; left: -12px"
           >
-            <div
-              id="w-node-_1290a973-af24-2a59-897b-d7d3e1d83441-a17d1408"
-              class="w-layout-grid grid-21-copy"
+            Document
+          </div>
+        </div>
+        <div
+          id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
+          class="div-off"
+        >
+          <div class="w-form">
+            <form
+              style="width: 67px !important"
+              id="email-form-2"
+              name="email-form-2"
+              data-name="Email Form 2"
+              method="get"
+              data-wf-page-id="65c08511e6e9943ba17d1408"
+              data-wf-element-id="0890f4e6-efeb-3cd1-742e-9e36574c2616"
             >
-              <div
-                id="w-node-_030b0f65-b194-ad25-8a08-a35ff57158e2-a17d1408"
-                class="div-block-36"
+              <select
+                id="field-2"
+                name="field-2"
+                data-name="Field 2"
+                class="selection w-select"
+                (change)="onAirportCodeChange($event)"
+                [(ngModel)]="selectedAirportCode"
               >
-                <h4 class="heading-24">Time</h4>
-              </div>
-              <div
-                id="w-node-ed37abd8-4ca0-87f1-cd6a-4e3c5695df38-a17d1408"
-                class="div-block-36"
-              >
-                <h4 class="heading-24">Temp</h4>
-              </div>
-              <div
-                id="w-node-_0da84331-7add-d63a-dc29-b62efb53d455-a17d1408"
-                class="div-block-36"
-              >
-                <h4 class="heading-24">QNH</h4>
-              </div>
-              <div
-                id="w-node-_0d050491-2a26-b337-0b99-272987035cba-a17d1408"
-                class="div-block-36"
-              >
-                <h4 class="heading-24">QAN</h4>
-              </div>
+                <option value="FAPE">FAPE</option>
+                <option value="FABL">FABL</option>
+                <option value="FACT">FACT</option>
+                <option value="FALE">FALE</option>
+                <option value="FALA">FALA</option>
+                <option value="FAOR">FAOR</option>
+              </select>
+            </form>
+            <div class="w-form-done">
+              <!-- <div>Thank you! Your submission has been received!</div> -->
+            </div>
+            <div class="w-form-fail">
+              <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
             </div>
           </div>
-          <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
-            <div
-              class="w-layout-grid grid-43"
-              *ngFor="let airportData of item.vermetTableData.slice(1); let i = index"
-              [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+        </div>
+        <div
+          id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
+          class="div-off"
+        >
+          <div
+            class="button-2-copy w-button"
+            style="position: relative; left: 10px"
+          >
+            Reload
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tafs-div" style="overflow-y: auto; height: 32em">
+      <div class="w-layout-grid grid-6">
+        <div
+          id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
+          class="div-block-15"
+          *ngFor="let item of VermetArray"
+        >
+          <div *ngIf="shouldDisplayItem(item)">
+            <div class="div-block-14">
+              <div class="w-layout-grid" style="height: 48px">
+                <div
+                  id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
+                  class="div-block-34"
+                >
+                  <h1 class="heading-23">CCC:</h1>
+                  <h1 class="heading-23-copy" id="fact">
+                    {{ getAirportCode(item.filename) }}
+                  </h1>
+                </div>
+                <div
+                  id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
+                  class="div-block-34"
+                >
+                  <h1 class="heading-23">Issued at:</h1>
+                  <h1 class="heading-23-copy" id="fact">
+                    {{ item.lastmodified | date : "yyyy/MM/dd HH:mm" }}
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            <h1
+              class="datacape"
+              style="
+                color: #00386c;
+                font-size: 12px;
+                font-weight: 387 !important;
+              "
             >
+              <p class="">{{ extractTakeOffData(item.filetextcontent) }}T</p>
+            </h1>
+            <div class="w-layout-grid grid-20" id="grid20">
               <div
-                id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408"
-                class="div-block-37"
+                id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
+                class="div-block-35"
               >
-                <h4 class="heading-25">{{ airportData.time }}</h4>
+                <div
+                  id="w-node-_1290a973-af24-2a59-897b-d7d3e1d83441-a17d1408"
+                  class="w-layout-grid grid-21-copy"
+                >
+                  <div
+                    id="w-node-_030b0f65-b194-ad25-8a08-a35ff57158e2-a17d1408"
+                    class="div-block-36"
+                  >
+                    <h4 class="heading-24">Time</h4>
+                  </div>
+                  <div
+                    id="w-node-ed37abd8-4ca0-87f1-cd6a-4e3c5695df38-a17d1408"
+                    class="div-block-36"
+                  >
+                    <h4 class="heading-24">Temp</h4>
+                  </div>
+                  <div
+                    id="w-node-_0da84331-7add-d63a-dc29-b62efb53d455-a17d1408"
+                    class="div-block-36"
+                  >
+                    <h4 class="heading-24">QNH</h4>
+                  </div>
+                  <div
+                    id="w-node-_0d050491-2a26-b337-0b99-272987035cba-a17d1408"
+                    class="div-block-36"
+                  >
+                    <h4 class="heading-24">QAN</h4>
+                  </div>
+                </div>
               </div>
-              <div
-                id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">{{ airportData.temp }}</h4>
-              </div>
-              <div
-                id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">{{ airportData.qnh }}</h4>
-              </div>
-              <div
-                id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">{{ airportData.qan }}</h4>
+              <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
+                <div
+                  class="w-layout-grid grid-43"
+                  *ngFor="
+                    let airportData of item.vermetTableData.slice(1);
+                    let i = index
+                  "
+                  [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+                >
+                  <div
+                    id="w-node-_7244b421-9a1b-dd26-9007-e91b12d8c0e8-a17d1408"
+                    class="div-block-37"
+                  >
+                    <h4 class="heading-25">{{ airportData.time }}</h4>
+                  </div>
+                  <div
+                    id="w-node-_653f2a82-1eb7-213a-c528-2e142679a8c9-a17d1408"
+                    class="div-block-37"
+                  >
+                    <h4 class="heading-25">{{ airportData.temp }}</h4>
+                  </div>
+                  <div
+                    id="w-node-_910e359d-1b28-a70b-fc58-f64fb7dc8d7d-a17d1408"
+                    class="div-block-37"
+                  >
+                    <h4 class="heading-25">{{ airportData.qnh }}</h4>
+                  </div>
+                  <div
+                    id="w-node-ef1dc405-f06f-85e1-a475-12de4b23ae41-a17d1408"
+                    class="div-block-37"
+                  >
+                    <h4 class="heading-25">{{ airportData.qan }}</h4>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-</section>
-
+  </section>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid1">
-      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+      <div (click)="NavigateToDomestic()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
+        <h6
+          class="heading-10-copy"
+          id="styleh6"
+          style="
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "
+        >
           Domestic
         </h6>
       </div>

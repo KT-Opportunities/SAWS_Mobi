@@ -102,7 +102,11 @@ export class HarmonizedGridPage implements OnInit {
 
     data.forEach((item) => {
       const filename = item.filename;
-      if (!latestEntries.has(filename) || new Date(item.lastmodified) > new Date(latestEntries.get(filename)!.lastmodified)) {
+      if (
+        !latestEntries.has(filename) ||
+        new Date(item.lastmodified) >
+          new Date(latestEntries.get(filename)!.lastmodified)
+      ) {
         latestEntries.set(filename, item);
       }
     });
@@ -121,7 +125,7 @@ export class HarmonizedGridPage implements OnInit {
       case '0600':
       case '0000':
       case '1800':
-        return 'EntireAtmosphere';
+        return 'Entire Atmosphere';
       default:
         return '';
     }
@@ -155,7 +159,9 @@ export class HarmonizedGridPage implements OnInit {
       const itemTime = item.lastmodified.substring(11, 16);
       return itemTime === time;
     });
-    return itemsWithSameTime.indexOf(currentItem) === itemsWithSameTime.length - 1;
+    return (
+      itemsWithSameTime.indexOf(currentItem) === itemsWithSameTime.length - 1
+    );
   }
 
   openImageViewer(item: any) {
