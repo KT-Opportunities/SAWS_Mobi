@@ -1,22 +1,12 @@
 <ion-content>
   <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner
-    *ngIf="loading" name="bubbles"></ion-spinner>
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
     Loading...
   </div>
 
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  
+
   <section class="section">
-    <!-- <div class="div-block-2">
-      <img
-        src="/assets/Path-3452.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
-    </div> -->
     <div class="div-block">
       <img
         src="/assets/Mask-Group-33x.png"
@@ -33,10 +23,6 @@
           (ngSubmit)="onSubmit()"
           id="email-form"
           name="email-form"
-          data-name="Email Form"
-          method="get"
-          data-wf-page-id="659521adf58cf3b2b367414f"
-          data-wf-element-id="20ed0310-03da-2f9b-d789-72d5c0b79626"
         >
           <h1 class="login">LOGIN</h1>
           <label for="name" class="field-label">Username</label>
@@ -44,7 +30,6 @@
             class="text-field w-input"
             maxlength="256"
             name="name"
-            data-name="Name"
             placeholder="Type your username"
             type="text"
             id="name"
@@ -52,7 +37,7 @@
             formControlName="username"
           />
           <div
-            *ngIf="loginForm.get('username')?.invalid && loginForm.get('username') && submitted==true"
+            *ngIf="loginForm.get('username')?.invalid && submitted"
             class="error-message"
           >
             Username is required.
@@ -63,9 +48,8 @@
               class="text-field w-input"
               maxlength="256"
               name="field"
-              data-name=""
               placeholder="Type your Password"
-              type="{{ showPassword ? 'text' : 'password' }}"
+              [type]="showPassword ? 'text' : 'password'"
               id="field"
               required=""
               formControlName="password"
@@ -79,31 +63,16 @@
               ></i>
             </span>
             <div
-              *ngIf="loginForm.get('password')?.invalid && loginForm.get('password') && submitted==true"
+              *ngIf="loginForm.get('password')?.invalid && submitted"
               class="error-message"
             >
               Password is required.
             </div>
-            <div *ngIf="errorMessage" class="error-message">
-              {{ errorMessage }}
-            </div>
           </div>
-
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
           <div class="w-layout-grid grid">
-            <!-- <div id="w-node-_6e6af7e3-63da-7985-a081-2b45a0e94176-b367414f">
-              <label class="w-checkbox checkbox-field">
-                <input
-                  type="checkbox"
-                  id="checkbox"
-                  name="checkbox"
-                  data-name="Checkbox"
-                  class="w-checkbox-input"
-                />
-                <span class="checkbox-label w-form-label" for="checkbox"
-                  >Remember Me</span
-                >
-              </label>
-            </div> -->
             <div
               id="w-node-_5a2d7d19-0969-1d91-ec5c-ff2a96283cf6-b367414f"
               class="div-block-4"
@@ -128,20 +97,6 @@
         </h5>
       </a>
     </div>
-    <!-- <div class="bottomdivlogin">
-      <img
-        src="/assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
-      <div class="div-block-5" (click)="home()">
-        <a class="w-inline-block"
-          ><img src="/assets/Group-3489.svg" loading="lazy" alt=""
-        /></a>
-      </div>
-    </div> -->
   </section>
   <link
     rel="stylesheet"
@@ -149,8 +104,8 @@
   />
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <div class="">
+<ion-footer class="ion-no-border" style="margin-top: 5px">
+  <div>
     <img
       src="/assets/Path-3447.svg"
       loading="lazy"

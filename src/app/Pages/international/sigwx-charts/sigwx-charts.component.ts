@@ -19,8 +19,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
   templateUrl: './sigwx-charts.component.html',
   styleUrls: ['./../international.page.scss'],
 })
-export class SigwxChartsComponent  implements OnInit {
-
+export class SigwxChartsComponent implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = false;
 
@@ -31,17 +30,13 @@ export class SigwxChartsComponent  implements OnInit {
   isDropdownOpen4: boolean = false;
   isDropdownOpen5: boolean = false;
   //selectedOption1: string = 'Low';
-  selectedOption = 'FL100';
-  selectedOption2: string = 'FL100';
-  selectedOption3: string = 'FL100';
-  selectedOption4: string = 'FL100';
-  selectedOption5: string = 'FL100';
+  selectedOption = 'Africa';
+  selectedOption2: string = 'Africa';
+  selectedOption3: string = 'Africa';
+  selectedOption4: string = 'Africa';
 
-  GridWind: any = [];
-  CentralGridWindArray: any = [];
-  WestGridWindArray: any = [];
-  EastGridWindArray: any = [];
-  SouthGridWindArray: any = [];
+  WAFS: any = [];
+  SIGW: any = [];
 
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
@@ -67,7 +62,8 @@ export class SigwxChartsComponent  implements OnInit {
 
   getTimeFromFilename(imageName: any) {
     // Extract the portion before '.gif'
-    const baseName = imageName.split('.gif')[0];
+
+    const baseName = imageName.split('.png')[0];
 
     // Extract the last two characters
     const time = baseName.slice(-2);
@@ -85,30 +81,27 @@ export class SigwxChartsComponent  implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    this.APIService.GetSourceAviationFolderFilesList('gw', 72).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('sigw', 72).subscribe(
       (data) => {
         console.log('Data received:', data);
-        this.GridWind = data;
-        console.log('PW:', this.GridWind);
-        this.CentralGridWindArray = this.GridWind.filter(
-          (item: { filename: string }) => item.filename.includes('gw_cent')
-        ).map((item: { filename: string }) => item.filename);
-        console.log('CentralGridWindArray:', this.CentralGridWindArray);
 
-        this.WestGridWindArray = this.GridWind.filter(
-          (item: { filename: string }) => item.filename.includes('gw_west')
-        ).map((item: { filename: string }) => item.filename);
-        console.log('WestGridWindArray:', this.WestGridWindArray);
+        // Filter items that contain '_egrr'
+        this.WAFS = data
+          .filter((item: { filename: string }) =>
+            item.filename.includes('_egrr')
+          )
+          .map((item: { filename: string }) => item.filename);
 
-        this.EastGridWindArray = this.GridWind.filter(
-          (item: { filename: string }) => item.filename.includes('gw_east')
-        ).map((item: { filename: string }) => item.filename);
-        console.log('EastGridWindArray:', this.EastGridWindArray);
+        // Filter items that contain 'xx' but not '_egrr'
 
-        this.SouthGridWindArray = this.GridWind.filter(
-          (item: { filename: string }) => item.filename.includes('gw_south')
-        ).map((item: { filename: string }) => item.filename);
-        console.log('SouthGridWindArray:', this.SouthGridWindArray);
+        this.SIGW = data
+          .filter(
+            (item: { filename: string }) =>
+              item.filename.includes('xx') && !item.filename.includes('_egrr')
+          )
+          .map((item: { filename: string }) => item.filename);
+        console.log('SIGW:', this.SIGW);
+        console.log('WAFS:', this.WAFS);
 
         this.isLoading = false;
       },
@@ -140,222 +133,73 @@ export class SigwxChartsComponent  implements OnInit {
     }
   }
 
-  getFilteredItemCentral() {
-    if (this.selectedOption2 === 'FL100') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent10\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL180') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent18\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL240') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent24\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL300') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent30\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL340') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent34\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL390') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent39\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL450') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent45\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL530') {
-      return this.CentralGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_cent53\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else {
-      return this.CentralGridWindArray;
-    }
-  }
-
-  getFilteredItemWest() {
-    if (this.selectedOption3 === 'FL100') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west10\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL180') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west18\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL240') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west24\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL300') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west30\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL340') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west34\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL390') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west39\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption3 === 'FL450') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west45\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption2 === 'FL530') {
-      return this.WestGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_west53\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else {
-      return this.WestGridWindArray;
-    }
-  }
-
-  getFilteredItemEast() {
-    if (this.selectedOption4 === 'FL100') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east10\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL180') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east18\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL240') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east24\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL300') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east30\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL340') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east34\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL390') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east39\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL450') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east45\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption4 === 'FL530') {
-      return this.EastGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_east53\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else {
-      return this.EastGridWindArray;
-    }
-  }
-
   getFilteredItemSouth() {
-    if (this.selectedOption === 'FL100') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south10\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL180') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south18\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL240') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south24\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL300') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south30\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL340') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south34\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL390') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south39\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL450') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south45\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else if (this.selectedOption === 'FL530') {
-      return this.SouthGridWindArray.filter((item: any) => {
-        // Use a regular expression to match the pattern "gw_cent10\d+\.gif"
-        const pattern = /gw_south53\d+\.gif/;
-        return pattern.test(item);
-      });
-    } else {
-      return this.SouthGridWindArray;
-    }
-  }
+    let prefix = '';
 
+    switch (this.selectedOption2) {
+      case 'Africa':
+        prefix = 'sigw_afxx';
+        break;
+      case 'Africa/Asia':
+        prefix = 'sigw_aaxx';
+        break;
+      case 'Asia':
+        prefix = 'sigw_fexx';
+        break;
+      case 'Australia':
+        prefix = 'sigw_ssxx';
+        break;
+      case 'Europe':
+        prefix = 'sigw_euxx';
+        break;
+      case 'Middle East':
+        prefix = 'sigw_mexx';
+        break;
+      case 'North America':
+        prefix = 'sigw_naxx';
+        break;
+      case 'South America':
+        prefix = 'sigw_saxx';
+        break;
+      default:
+        return this.SIGW; // Return the original array if no filter is applied
+    }
+
+    const pattern = new RegExp(`^${prefix}\\d+\\.png$`);
+    return this.SIGW.filter((item: string) => pattern.test(item));
+  }
+  getFilteredItemChart() {
+    let prefix = '';
+
+    switch (this.selectedOption3) {
+      case 'Africa':
+        prefix = 'sigw_egrr_afxx';
+        break;
+      case 'Africa/Asia':
+        prefix = 'sigw_egrr_aaxx';
+        break;
+      case 'Asia':
+        prefix = 'sigw_egrr_fexx';
+        break;
+      case 'Australia':
+        prefix = 'sigw_egrr_ssxx';
+        break;
+      case 'Europe':
+        prefix = 'sigw_egrr_euxx';
+        break;
+      case 'Middle East':
+        prefix = 'sigw_egrr_mexx';
+        break;
+      case 'North America':
+        prefix = 'sigw_egrr_naxx';
+        break;
+      default:
+        return this.WAFS; // Return the original array if no filter is applied
+    }
+
+    const pattern = new RegExp(`^${prefix}\\d+\\.png$`);
+    return this.WAFS.filter((item: string) => pattern.test(item));
+  }
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
@@ -411,7 +255,7 @@ export class SigwxChartsComponent  implements OnInit {
 
   ImageViewer(item: any) {
     console.log('file Name:', item);
-    const folderName = item.substring(0, 2);
+    const folderName = 'sigw';
     const fileName = item;
     console.log('Folder Name:', folderName);
 

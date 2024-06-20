@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +28,7 @@ export class LoginPage implements OnInit, OnDestroy {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,12 +43,11 @@ export class LoginPage implements OnInit, OnDestroy {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.isMobile = this.mobileQuery.matches;
   }
+
   ngOnInit() {
-    // Retrieve subscriptionPackageId from query parameters
     this.route.queryParams.subscribe((params) => {
       const subscriptionPackageId = params['id'];
       if (subscriptionPackageId) {
-        // Set subscriptionPackageId in the login form or handle as needed
         this.loginForm.patchValue({
           subscriptionPackageId: subscriptionPackageId,
         });
@@ -59,8 +58,9 @@ export class LoginPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
+
   togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword; // Toggle the visibility
+    this.showPassword = !this.showPassword;
     const passwordField = document.getElementById('field') as HTMLInputElement;
     passwordField.type = this.showPassword ? 'text' : 'password';
   }
@@ -68,24 +68,23 @@ export class LoginPage implements OnInit, OnDestroy {
   private mobileQueryListener: () => void;
 
   isLoginPage() {
-    // Check if the current route is the login page
     return this.router.url === '/login';
   }
+
   register() {
     this.router.navigate(['/register']);
   }
+
   home() {
-    // Check if the current route is the login page
     this.router.navigate(['/landing-page']);
   }
 
   onSubmit() {
     this.submitted = true;
+    this.errorMessage = null; // Clear previous error messages
     if (this.loginForm.valid) {
-      // Set loading to true to show loading indicator
       this.loading = true;
       this.spinner.show();
-      // Call the login method from AuthService
       this.authAPI
         .login(this.loginForm.value)
         .subscribe(
@@ -97,12 +96,9 @@ export class LoginPage implements OnInit, OnDestroy {
               this.authAPI.saveCurrentUser(response);
               const redirectUrl = this.authAPI.getRedirectUrl();
               if (redirectUrl) {
-                // If yes, navigate them to that URL
                 this.router.navigateByUrl(redirectUrl);
               } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
-                // If not, navigate them to the landing page
                 this.router.navigateByUrl(redirectUrl);
-                // this.router.navigate(['/landing-page']);
               } else {
                 this.router.navigate(['/landing-page']);
               }
@@ -112,23 +108,18 @@ export class LoginPage implements OnInit, OnDestroy {
             }
           },
           (error) => {
-            console.log(error);
-            console.log('ERROR MESSAGE:', error.error.Message);
-            if (
-              error.error.Message == 'Please check your password and username'
-            ) {
+            console.log(error.error.statusText);
+            if (error.statusText == 'Unauthorized') {
               this.errorMessage = 'Invalid username or password';
-              this.router.navigate(['login']);
+            } else {
+              this.errorMessage = 'An error occurred. Please try again.';
             }
             this.notLogged = true;
-
             this.loading = false;
           }
         )
         .add(() => {
           this.loading = false;
-
-          // Hide the spinner
           this.spinner.hide();
         });
     }
