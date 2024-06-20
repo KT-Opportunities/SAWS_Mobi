@@ -320,7 +320,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'subscription-Successful',
+    path: 'subscription-successful',
     loadChildren: () =>
       import(
         './Pages/side-bar-menu/subscription-package/subscription-package.module'

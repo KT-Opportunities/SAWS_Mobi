@@ -40,6 +40,8 @@ export class SubscriptionPackagePage implements OnInit {
   selectedPremiumService: string | null = null;
   selectedRegulatedService: string | null = null;
 
+  token: string = '';
+
   subsObj: any = {
     returnUrl: '',
     cancelUrl: '',
@@ -68,6 +70,8 @@ export class SubscriptionPackagePage implements OnInit {
     start_date: Date.now(),
     end_date: Date.now(),
     subscription_duration: 0,
+    subscription_token: '',
+    subscription_status: 'Active',
   };
 
   constructor(
@@ -116,7 +120,8 @@ export class SubscriptionPackagePage implements OnInit {
     console.log(currentUrl);
     var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
     console.log(landingPage + 'subscription-Successful');
-    this.subsObj.returnUrl = landingPage + 'subscription-Successful';
+    this.subsObj.returnUrl = landingPage + 'subscription-successful';
+    // this.subsObj.returnUrl = landingPage + 'subscription-package';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
   }
 
@@ -129,17 +134,38 @@ export class SubscriptionPackagePage implements OnInit {
       //hideurlbar: 'yes',
     });
 
+    console.log('this.browser', this.browser)
+
     //this.browser.addEventListener('loadstart', this.loadStartCallBack);
 
+    let isFirstCall = true;
+
     this.browser.on('loadstart').subscribe((event: any) => {
+
+
+      console.log('loadstart - event', event)
+      // this.token = event.url;
+
+      // console.log('this.token', this.token)
+
+      if (isFirstCall) {
+        this.token = event.url.split('/').pop() || '';
+        console.log('this.token', this.token);
+        isFirstCall = false;
+      }
+
       this.loadStartCallBack(event);
     });
   }
 
   loadStartCallBack(event: any) {
     /* Close InAppBrowser if loading the predefined close URL */
+
+    console.log('event', event)
+
     if (event.url == this.subsObj.returnUrl) {
       debugger;
+      
       this.browser.close();
       this.saveSub();
     } else if (event.url == this.subsObj.cancelUrl) {
@@ -162,15 +188,24 @@ export class SubscriptionPackagePage implements OnInit {
 
     debugger;
 
+    // Transaction details
+    this.subsObj.m_payment_id = subscriptionId.toString();
     this.subsObj.amount = Number(amount.toFixed(2));
-    this.subsObj.recurring_amount = Number(amount.toFixed(2));
+    this.subsObj.item_name = this.subscriptionType;
+    this.subsObj.item_description = this.subscriptionType; 
+    // Customer details
     this.subsObj.name_first = userLoginDetails?.aspUserName;
     this.subsObj.name_last = userLoginDetails?.aspUserName;
     this.subsObj.email_address = userLoginDetails?.aspUserEmail;
+    // Transaction options
     this.subsObj.confirmation_email = userLoginDetails?.aspUserEmail;
-    this.subsObj.m_payment_id = subscriptionId.toString();
-    this.subsObj.item_name = this.subscriptionType;
-    this.subsObj.item_description = this.subscriptionType; 
+
+    // Subscriptions
+    // subscription_type
+    // billing_date
+    // frequency
+    // cycles
+    this.subsObj.recurring_amount = Number(amount.toFixed(2));
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -178,6 +213,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.APIService.paySubscription(this.subsObj).subscribe(
       (payRes: any) => {
         console.log('url: ', payRes.url);
+        console.log('response-paypal: ', payRes);
         this.openInAppBrowser(payRes.url);
       },
       (err) => {
@@ -238,6 +274,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   saveSub() {
+
     var oneYearOrMonthFromNow = new Date();
     // var oneMonthFromNow = new Date();
 
@@ -245,9 +282,10 @@ export class SubscriptionPackagePage implements OnInit {
     const userLoginDetails = JSON.parse(user);
     this.updateSub.package_price = this.subsObj.recurring_amount;
     this.updateSub.package_id = Number(this.subsObj.m_payment_id);
-    this.updateSub.package_name =
-      this.selectedPaymentType + ' ' + this.subsObj.item_name;
+    this.updateSub.package_name = this.selectedPaymentType + ' ' + this.subsObj.item_name;
     this.updateSub.subscriptionId = 0;
+    this.updateSub.subscription_status = 'Active';
+    this.updateSub.subscription_token = this.token;
     this.updateSub.start_date = new Date(Date.now());
 
     if( this.selectedPaymentType === 'monthly'){
@@ -270,11 +308,14 @@ export class SubscriptionPackagePage implements OnInit {
 
     }
 
+
+
     this.updateSub.userprofileid = userLoginDetails?.userprofileid;
 
     debugger;
 
     console.log('updateSub', this.updateSub);
+    
     debugger;
     this.APIService.PostInsertSubscription(this.updateSub).subscribe(
       (data: any) => {
