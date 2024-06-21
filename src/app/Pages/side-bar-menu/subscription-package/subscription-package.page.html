@@ -33,11 +33,11 @@
           </div>
         </div>
       </div>
-      
+
       <div class="div-block-15">
         <div class="div-block-60">
           <div class="w-layout-grid grid-34">
-            
+
             <!-- Free Subscription -->
             <div id="w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb" class="div-block-54">
               <div class="w-layout-grid grid-33">
@@ -89,14 +89,19 @@
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e46-871273fb" class="div-block-56">
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e47-871273fb" class="div-block-55"></div>
                   <!-- <a (click)="provideFeedback(freeSubscriptionId, freeSubscriptionAmount)" *ngIf="!isLoggedIn" class="button-2-copy w-button">Subscribe Now</a> -->
-                  <!-- <a *ngIf="isLoggedIn" class="button-2-copy w-button" style="background-color: grey; display: flex; justify-content: center; align-items: center;"
-                    [attr.readonly]="true">
+                  <a class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;"
+                    (click)="CancelSubscription(regulateMonthlydSubscribedId)">
+                    Subscribed
+                  </a>
+
+                  <!-- <a class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;"
+                    [attr.readonly]="true" 
+                    >
                     Subscribed
                   </a> -->
-                  <a class="button-2-copy w-button" style="background-color: grey; display: flex; justify-content: center; align-items: center;"
-                  [attr.readonly]="true">
-                  Subscribed
-                </a>
+
                 </div>
               </div>
             </div>
@@ -105,7 +110,7 @@
             <div id="w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb" class="div-block-54">
               <div class="w-layout-grid grid-33">
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2a-871273fb" class="div-block-53">
-                  <h1 class="heading-47">Premium</h1>
+                  <h1 class="heading-47">Premium Subscription</h1>
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57">
                   <h1 class="heading-21-copy">R{{premiumSubscriptionAmount.toFixed(2)}}</h1>
@@ -207,16 +212,37 @@
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e46-871273fb" class="div-block-56">
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e47-871273fb" class="div-block-55"></div>
-                  <div (click)="provideFeedback(premiumSubscriptionId, premiumSubscriptionAmount)" class="button-2-copy w-button">Subscribe Now</div>
+
+                  <div *ngIf="!isSubscribedPremiumMonthly && selectedPaymentType === 'monthly'"
+                    (click)="provideFeedback(premiumSubscriptionId, premiumSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
+                  </div>
+
+                  <div *ngIf="selectedPaymentType === 'annually' && !isSubscribedPremiumAnnually"
+                    (click)="provideFeedback(premiumSubscriptionId, premiumSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
+                  </div>
+
+                  <a *ngIf="isSubscribedPremiumMonthly && selectedPaymentType === 'monthly'"
+                    (click)="CancelSubscription(premiumMontlySubscribedId)" class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
+                    UnSubscribe
+                  </a>
+
+                  <a *ngIf="isSubscribedPremiumAnnually && selectedPaymentType === 'annually'"
+                    (click)="CancelSubscription(premiumAnnuallySubscribedId)" class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
+                    UnSubscribe
+                  </a>
                 </div>
               </div>
             </div>
 
             <!-- Regulated -->
-            <div class="div-block-54">
+            <!-- <div class="div-block-54">
               <div class="w-layout-grid grid-33">
                 <div class="div-block-53">
-                  <h1 class="heading-47">Regulated</h1>
+                  <h1 class="heading-47">Regulated Subscription</h1>
                 </div>
                 <div class="div-block-57">
                   <h1 class="heading-21-copy">R{{regulatedSubscriptionAmount.toFixed(2)}}</h1>
@@ -231,7 +257,8 @@
                         [class.show-dropdown]="dropdownVisible['regulatedSubscription']">
                         <a (click)="selectRegulatedService('International')" class="w-dropdown-link">International</a>
                         <a (click)="selectRegulatedService('Domestic')" class="w-dropdown-link">Domestic</a>
-                        <a (click)="selectRegulatedService('FlightBriefing')" class="w-dropdown-link">Flight Briefing</a>
+                        <a (click)="selectRegulatedService('FlightBriefing')" class="w-dropdown-link">Flight
+                          Briefing</a>
                         <a (click)="selectRegulatedService('Observation')" class="w-dropdown-link">Observation</a>
                         <a (click)="selectRegulatedService('Forecast')" class="w-dropdown-link">Forecast</a>
                         <a (click)="selectRegulatedService('Aerospot')" class="w-dropdown-link">Aerospot</a>
@@ -240,7 +267,7 @@
                     </div>
                   </div>
                   <div class="html-embed-11 w-embed">
-                    <ul *ngIf="selectedPremiumService === 'International'">
+                    <ul *ngIf="selectedRegulatedService === 'International'">
                       <li>GPM</li>
                       <li>Humidity</li>
                       <li>Sigwx Charts</li>
@@ -250,7 +277,7 @@
                       <li>Graphical SIGMET/AIRMET</li>
 
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'Domestic'">
+                    <ul *ngIf="selectedRegulatedService === 'Domestic'">
                       <li>Flight Document</li>
                       <li>Hourly Charts</li>
                       <li>ICAO Locations</li>
@@ -262,7 +289,7 @@
                       <li>Wind Charts</li>
                       <li>Low Level Wind Profiles</li>
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'FlightBriefing'">
+                    <ul *ngIf="selectedRegulatedService === 'FlightBriefing'">
                       <li>Flight: Edit</li>
                       <li>Flight: Import/Export</li>
                       <li>Flight: Saved</li>
@@ -270,7 +297,7 @@
                       <li>Scheduled Flight Report</li>
                       <li>Shared Flights</li>
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'Observation'">
+                    <ul *ngIf="selectedRegulatedService === 'Observation'">
                       <li>METAR</li>
                       <li>Web Cams </li>
                       <li>Colour Coded METAR</li>
@@ -282,7 +309,7 @@
                       <li>Satellite</li>
                       <li>Weather Map </li>
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'Forecast'">
+                    <ul *ngIf="selectedRegulatedService === 'Forecast'">
                       <li>Colour Coded TAF</li>
                       <li>Colour Coded SIGMET/AIRMET</li>
                       <li>Colour Coded Warnings</li>
@@ -297,7 +324,7 @@
                       <li>Advisories</li>
                       <li>Warnings</li>
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'Aerospot'">
+                    <ul *ngIf="selectedRegulatedService === 'Aerospot'">
                       <li>Central Interior</li>
                       <li>Cloud Forest</li>
                       <li>Kwazulu Natal</li>
@@ -306,7 +333,7 @@
                       <li>Synoptic Analysis</li>
                       <li>TS Probabilities</li>
                     </ul>
-                    <ul *ngIf="selectedPremiumService === 'Other'">
+                    <ul *ngIf="selectedRegulatedService === 'Other'">
                       <li>Historical weather data</li>
                       <li>Edit personal Details</li>
                       <li>Manage Subscription</li>
@@ -318,10 +345,32 @@
                 </div>
                 <div class="div-block-56">
                   <div class="div-block-55"></div>
-                  <a (click)="provideFeedback(regulatedSubscriptionId, regulatedSubscriptionAmount)" class="button-2-copy w-button">Subscribe Now</a>
+
+                  <a *ngIf="isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
+                    (click)="CancelSubscription(regulateAnnuallydSubscribedId)" class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
+                    UnSubscribe
+                  </a>
+                  
+                  <a id="open-action-sheet" *ngIf="isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
+                    (click)="CancelSubscription(regulateMonthlydSubscribedId)" class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
+                    UnSubscribe
+                  </a>
+
+                  <a *ngIf="!isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
+                    (click)="provideFeedback(regulatedSubscriptionId, regulatedSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
+                  </a>
+
+                  <a *ngIf="!isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
+                    (click)="provideFeedback(regulatedSubscriptionId, regulatedSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
+                  </a>
+
                 </div>
               </div>
-            </div>
+            </div> -->
 
           </div>
         </div>

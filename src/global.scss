@@ -33,6 +33,61 @@
   --black: black;
 }
 
+.delete-button {
+  color: white;
+  background-color: red;
+  --ion-color-primary: red;
+  --ion-background-color: red;
+  --background: red;
+}
+
+.cancel-button {
+  color: black;
+  background-color: lightgray;
+  --ion-color-primary: lightgray;
+  --ion-background-color: lightgray;
+  --background: lightgray;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-group {
+  // background: #f58840;
+  background: #00264a;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-title {
+  // color: #fff;
+  color: #fff;
+  font-size: large;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-cancel::after {
+  // background: #e97223;
+  background: #00264a;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-cancel,
+ion-action-sheet.my-custom-class .action-sheet-cancel.ion-focused {
+  color: #8295c2;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-destructive,
+ion-action-sheet.my-custom-class .action-sheet-destructive.ion-focused {
+  color: #808080;
+}
+
+@media (any-hover: hover) {
+  ion-action-sheet.my-custom-class .action-sheet-cancel:hover {
+    color: #557bd4;
+  }
+  ion-action-sheet.my-custom-class .action-sheet-destructive:hover {
+    color: #524b4b;
+  }
+}
+
+ion-action-sheet.my-custom-class ion-backdrop {
+  opacity: 0.6;
+}
+
 #RaderImages {
   text-align: center;
   margin-top: 10px;

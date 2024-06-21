@@ -175,12 +175,14 @@ export class APIService {
         `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
+
   GetSourceAviationFolderFilesListNull(time:any) {
     return this.http.get<any>(
       environment.serverAPI +
         `RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
     );
   }
+
   GetAviationFile(
     imagefoldername: string,
     imagefilename: string
@@ -233,6 +235,7 @@ export class APIService {
       return 'Unknown';
     }
   }
+
   getFeedbackData(): Observable<any> {
     return this.feedbackObservable$;
   }
@@ -245,6 +248,15 @@ export class APIService {
       body
     );
   }
+
+  GetSubscriptionByUserProfileId(Id: number) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `Subscription/GetSubscriptionByUserProfileId?Id=${Id}`
+    );
+  }
+
+
 
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(

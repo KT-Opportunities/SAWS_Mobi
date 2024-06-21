@@ -5,6 +5,8 @@ import { APIService } from 'src/app/services/apis.service';
 import { take, filter } from 'rxjs/operators';
 import { Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ActionSheetController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-subscription-package',
@@ -13,9 +15,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SubscriptionPackagePage implements OnInit {
   selectedSubscriptionPackageId: number | undefined;
+  selectedSubscriptionPackageAmount: number | undefined;
   showAnnuallySection: boolean = false;
   showMonthlySection: boolean = true;
   isSubscriber: boolean = true;
+
+  isSubscribedPremiumMonthly: boolean = false;
+  isSubscribedPremiumAnnually: boolean = false;
+  isSubscriberRegulatedMonthly: boolean = false;
+  isSubscriberRegulatedAnnually: boolean = false;
+
   subscriptionId: number | undefined;
   dropdownVisible: { [key: string]: boolean } = {
     paymentType: false,
@@ -27,6 +36,7 @@ export class SubscriptionPackagePage implements OnInit {
   // selectedPaymentType: string | undefined ;
   selectedPaymentType: string = 'monthly';
   subscriptionType: string = '';
+  
   freeSubscriptionAmount: number = 0;
   premiumSubscriptionAmount: number = 180;
   regulatedSubscriptionAmount: number = 380;
@@ -35,12 +45,20 @@ export class SubscriptionPackagePage implements OnInit {
   premiumSubscriptionId: number = 2;
   regulatedSubscriptionId: number = 3;
 
+  premiumMontlySubscribedId: number = 0;
+  premiumAnnuallySubscribedId: number = 0;
+  regulateMonthlydSubscribedId: number = 0;
+  regulateAnnuallydSubscribedId: number = 0;
+
   // selectedService: string | null = null;
   selectedFreeService: string | null = null;
   selectedPremiumService: string | null = null;
   selectedRegulatedService: string | null = null;
 
   token: string = '';
+  subsArray: any = [];
+  filteredSubscriptions: any = [];
+  actionSheetSubHeader: string = '';
 
   subsObj: any = {
     returnUrl: '',
@@ -58,6 +76,55 @@ export class SubscriptionPackagePage implements OnInit {
     recurring_amount: 500.0,
     frequency: 'annual',
   };
+
+  public actionSheetButtonsCancel = [
+    {
+      text: 'UnSubscribe',
+      role: 'destructive',
+      icon: 'trash-outline',
+      data: {
+        action: 'delete',
+      },
+      handler: () => {
+        this.handleAction('delete');
+      }
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      icon: 'close',
+      data: {
+        action: 'cancel',
+      },
+      handler: () => {
+        this.handleAction('cancel');
+      }
+    },
+  ];
+
+  public actionSheetButtonsSwitch = [
+    {
+      text: 'Subscribe',
+      icon: 'add-circle',
+      data: {
+        action: 'subscribe',
+      },
+      handler: () => {
+        this.handleAction('subscribe');
+      }
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      icon: 'close',
+      data: {
+        action: 'cancel',
+      },
+      handler: () => {
+        this.handleAction('cancel');
+      }
+    },
+  ];
 
   browser: any;
 
@@ -81,7 +148,9 @@ export class SubscriptionPackagePage implements OnInit {
     private APIService: APIService,
     private route: ActivatedRoute,
     private api: APIService,
-    public plat: Platform
+    public plat: Platform,
+    private actionSheetController: ActionSheetController,
+    private toastController: ToastController
   ) {}
 
   ionViewWillEnter() {
@@ -92,17 +161,9 @@ export class SubscriptionPackagePage implements OnInit {
 
     //   // If the user is logged in
     if (this.subscriptionId) {
-      // Check if a subscription package ID is set
-      // if (this.selectedSubscriptionPackageId !== undefined) {
-      // Call the subscribe method if a subscription package ID is set
-      // if (this.subscriptionId == 1) {
-      //   this.subscribe(180, this.subscriptionId);
-      // } else if (this.subscriptionId == 2) {
-      //   this.subscribe(380, this.subscriptionId, 'Regulated');
-      // }
 
-      // this.subscribe(380, this.subscriptionId);
-      this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
+     // this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
+      this.CheckSubscriptionStatus(this.subscriptionId, this.selectedSubscriptionPackageAmount);
 
     }
   }
@@ -116,6 +177,10 @@ export class SubscriptionPackagePage implements OnInit {
     //   this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
     // }
 
+    if (this.authService.getIsLoggedIn()) {
+      this.GetSubscriptions();
+    }
+
     const currentUrl = window.location.href;
     console.log(currentUrl);
     var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
@@ -123,6 +188,84 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.returnUrl = landingPage + 'subscription-successful';
     // this.subsObj.returnUrl = landingPage + 'subscription-package';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
+  }
+
+  GetSubscriptions(){
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+
+    this.APIService.GetSubscriptionByUserProfileId(userLoginDetails?.userprofileid).subscribe(
+      (response: any) => {      
+        
+        this.subsArray = response;
+        
+        response.forEach((element: any) => {
+
+          if (element.package_id == 2) {
+            this.isSubscribedPremiumMonthly = true;
+            this.premiumMontlySubscribedId = element.subscriptionId;
+          } else if (element.package_id == 3) {
+            this.isSubscriberRegulatedMonthly = true;
+            this.regulateMonthlydSubscribedId = element.subscriptionId;
+          } else if (element.package_id == 5) {
+            this.isSubscribedPremiumAnnually = true;
+            this.premiumAnnuallySubscribedId = element.subscriptionId;
+          } else {
+            this.isSubscriberRegulatedAnnually = true;
+            this.regulateAnnuallydSubscribedId = element.subscriptionId;
+          }
+
+        });
+      
+      },
+      (err) => {
+        console.log('error: ', err);
+      }
+    );
+  }
+
+  CheckSubscriptionStatus(subscriptionPackageId: number, amount?: number){
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+
+    this.APIService.GetSubscriptionByUserProfileId(userLoginDetails?.userprofileid).subscribe(
+      (response: any) => {    
+   
+        // Initialize a flag to check if the subscriptionPackageId exists
+        let packageExists = false;
+        
+        response.forEach((element: any) => {
+          if (element.package_id == subscriptionPackageId) {
+            packageExists = true;
+          }
+        });
+    
+        // If the package does not exist, subscribe to it
+        // if (!packageExists) {
+        //   this.subscribe(amount!, subscriptionPackageId);
+        // } else {
+        //   this.presentToast('top','You have already subscribed to this package!', 'danger', 'close');
+        //   this.router.navigate(['/subscription-package']);
+        //   this.GetSubscriptions();
+        // }
+
+        if(packageExists){
+          this.presentToast('top','You have already subscribed to this package!', 'danger', 'close');
+          this.router.navigate(['/subscription-package']);
+          this.GetSubscriptions();
+        } else if (response.length >= 1 && !packageExists) {
+          // this.presentToast('top','You have already subscribed to this package!', 'danger', 'close');
+          this.router.navigate(['/subscription-package']);
+          this.presentActionSheetSwitch();
+          this.GetSubscriptions();
+        } else {
+          this.subscribe(amount!, subscriptionPackageId);
+        }
+      },
+      (err) => {
+        console.log('error: ', err);
+      }
+    );
   }
 
   openInAppBrowser(url: string) {
@@ -259,8 +402,7 @@ export class SubscriptionPackagePage implements OnInit {
       // Once the user logs in, proceed with subscription
       loginPromise
         .then(() => {
-          this.selectedSubscriptionPackageId = subscriptionPackageId;
-          this.subscribe(amount!, subscriptionPackageId);
+          
         })
         .catch((error) => {
           // Handle error appropriately
@@ -268,8 +410,12 @@ export class SubscriptionPackagePage implements OnInit {
     } else {
       // If already logged in, directly set the selectedSubscriptionPackageId
       this.selectedSubscriptionPackageId = subscriptionPackageId;
+
       // Proceed with subscription
-      this.subscribe(amount!, subscriptionPackageId);
+      // this.subscribe(amount!, subscriptionPackageId);
+
+      // Implement a checkt for existing one
+      this.CheckSubscriptionStatus(subscriptionPackageId, amount!);
     }
   }
 
@@ -308,8 +454,6 @@ export class SubscriptionPackagePage implements OnInit {
 
     }
 
-
-
     this.updateSub.userprofileid = userLoginDetails?.userprofileid;
 
     debugger;
@@ -321,11 +465,113 @@ export class SubscriptionPackagePage implements OnInit {
       (data: any) => {
         console.log('postSub: ', data);
         this.router.navigate(['/landing-page']);
+
+        this.presentToast('top','Subscription Added!', 'success', 'checkmark');
+        this.GetSubscriptions();
       },
       (err) => {
         console.log('postSub err: ', err);
       }
     );
+  }
+
+
+  CancelSubscription(subscriptionId: number){
+    
+    this.filteredSubscriptions = this.filterSubscriptionsById(subscriptionId);
+    this.presentActionSheetCancel();    
+    this.filteredSubscriptions[0].subscription_status = 'Cancelled';
+
+  }
+  
+  cancelSub() {
+
+    this.APIService.PostInsertSubscription(this.filteredSubscriptions[0]).subscribe(
+      (data: any) => {
+        console.log('updateSub: ', data);
+        this.router.navigate(['/landing-page']);
+
+        this.presentToast('top','Subscription Cancelled!', 'success', 'checkmark')
+        this.GetSubscriptions();
+      },
+      (err) => {
+        console.log('updateSub err: ', err);
+      }
+    );
+    
+  }
+
+  switchSub() {
+
+    this.presentToast('top','Subscription Updated!', 'success', 'checkmark');
+
+    // this.APIService.PostInsertSubscription(this.filteredSubscriptions[0]).subscribe(
+    //   (data: any) => {
+    //     console.log('updateSub: ', data);
+    //     this.router.navigate(['/landing-page']);
+
+    //     this.presentToast('top','Subscription Updated!', 'success', 'checkmark')
+    //     this.GetSubscriptions();
+    //   },
+    //   (err) => {
+    //     console.log('updateSub err: ', err);
+    //   }
+    // );
+    
+  }
+
+  filterSubscriptionsById(subscriptionId: number) {
+    return this.subsArray.filter((subscription: any) => subscription.subscriptionId === subscriptionId);
+  }
+
+  async presentActionSheetCancel() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Cancel Subscription!',
+      subHeader: `Are you sure your want to UnSubscribe from the selected subscription?`,
+      buttons: this.actionSheetButtonsCancel,
+      cssClass: 'my-custom-class'
+    });
+    await actionSheet.present();
+  }
+
+  async presentActionSheetSwitch() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Another Subscription Exists!',
+      subHeader: `Are you sure your want to change the Subscription?`,
+      buttons: this.actionSheetButtonsSwitch,
+      cssClass: 'my-custom-class'
+    });
+    await actionSheet.present();
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 4000,
+      position: position,
+      color: color,
+      icon: icon
+    });
+
+    await toast.present();
+  }
+
+  handleAction(action: string) {
+    switch(action) {
+      case 'delete':
+        this.cancelSub();
+        console.log('Delete action triggered');
+        break;
+      case 'cancel':
+        console.log('Cancel action triggered');
+        break;
+      case 'subscribe':
+          this.switchSub();
+          console.log('Subscribe action triggered');
+          break;
+      default:
+        console.log('Unknown action');
+    }
   }
 
   selectPaymentType(type: string) {
