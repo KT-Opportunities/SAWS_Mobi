@@ -36,6 +36,7 @@ export class LowLevelWindProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     if (!this.authService.getIsLoggedIn()) {
       this.router.navigate(['/login']);
     } else {
