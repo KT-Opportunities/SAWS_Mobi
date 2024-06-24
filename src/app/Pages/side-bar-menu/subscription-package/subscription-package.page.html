@@ -42,7 +42,7 @@
             <div id="w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb" class="div-block-54">
               <div class="w-layout-grid grid-33">
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2a-871273fb" class="div-block-53">
-                  <h1 class="heading-47">Free Subscription</h1>
+                  <h1 class="heading-47">Free {{selectedPaymentType}} Subscription</h1>
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57">
                   <h1 class="heading-21-copy">R{{freeSubscriptionAmount.toFixed(2)}}</h1>
@@ -91,8 +91,8 @@
                   <!-- <a (click)="provideFeedback(freeSubscriptionId, freeSubscriptionAmount)" *ngIf="!isLoggedIn" class="button-2-copy w-button">Subscribe Now</a> -->
                   <a class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;"
-                    (click)="CancelSubscription(regulateMonthlydSubscribedId)">
-                    Subscribed
+                    (click)="CancelFreeSubscription()">
+                    UnSubscribed
                   </a>
 
                   <!-- <a class="button-2-copy w-button"
@@ -110,7 +110,7 @@
             <div id="w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb" class="div-block-54">
               <div class="w-layout-grid grid-33">
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2a-871273fb" class="div-block-53">
-                  <h1 class="heading-47">Premium Subscription</h1>
+                  <h1 class="heading-47">Premium {{selectedPaymentType}} Subscription</h1>
                 </div>
                 <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57">
                   <h1 class="heading-21-copy">R{{premiumSubscriptionAmount.toFixed(2)}}</h1>
@@ -239,10 +239,10 @@
             </div>
 
             <!-- Regulated -->
-            <!-- <div class="div-block-54">
+            <div class="div-block-54">
               <div class="w-layout-grid grid-33">
                 <div class="div-block-53">
-                  <h1 class="heading-47">Regulated Subscription</h1>
+                  <h1 class="heading-47">Regulated {{selectedPaymentType}} Subscription</h1>
                 </div>
                 <div class="div-block-57">
                   <h1 class="heading-21-copy">R{{regulatedSubscriptionAmount.toFixed(2)}}</h1>
@@ -370,7 +370,7 @@
 
                 </div>
               </div>
-            </div> -->
+            </div>
 
           </div>
         </div>

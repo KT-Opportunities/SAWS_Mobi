@@ -25,8 +25,8 @@ export class AppComponent {
   isSubscribed: boolean = false;
   logout() {
     this.authService.setLoggedInStatus(false);
-    window.location.reload();
     this.router.navigate(['/login']);
+    // window.location.reload();
   }
   login() {
     this.router.navigate(['/login']);
