@@ -300,5 +300,10 @@ export class APIService {
     }
     
 
+    fetchHourlyChartData(foldername: any , lasthours: number = 24): Observable<any[]> {
+      const apiUrl = `${environment.serverAPI}RawSource/GetSourceAviationFolderFilesList`;
+      const queryParams = { imagefoldername: foldername, lasthours: lasthours.toString() };
+      return this.http.get<any[]>(apiUrl, { params: queryParams });
+    }
     
 }
