@@ -32,7 +32,7 @@ export class AuthService {
     };
 
     return this.http.post<any>(
-      `${environment.serverAPI}Authenticate/Login`,
+      `${environment.serverAPI}v1/Authenticate/Login`,
       body,
       httpOptions
     );

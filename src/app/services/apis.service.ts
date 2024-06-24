@@ -28,7 +28,7 @@ export class APIService {
 
   createNewUser(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'Authenticate/RegisterSubscriber',
+      environment.serverAPI + 'v1/Authenticate/RegisterSubscriber',
       body
     );
   }
@@ -39,7 +39,7 @@ export class APIService {
     return this.http
       .post<any>(
         environment.serverAPI +
-          `Authenticate/RequestPasswordReset?email=${form.Email}`,
+          `v1/Authenticate/RequestPasswordReset?email=${form.Email}`,
         form
       )
       .pipe(
@@ -52,14 +52,14 @@ export class APIService {
 
   PostInsertNewFeedback(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'Feedback/PostInsertNewFeedback',
+      environment.serverAPI + 'v1/Feedback/PostInsertNewFeedback',
       body
     );
   }
   getPagedAllSubscribers(pageNumber: any, pageSize: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `Feedback/GetPagedAllFeedbacks?pageNumber=${pageNumber}&pageSize=${pageSize}`
+        `v1/Feedback/GetPagedAllFeedbacks?pageNumber=${pageNumber}&pageSize=${pageSize}`
       // {
       //   headers: new HttpHeaders().append(
       //     'Authorization',
@@ -70,52 +70,52 @@ export class APIService {
   }
   getFeedbackById(id: number) {
     return this.http.get<any>(
-      environment.serverAPI + `Feedback/GetFeedbackById?Id=${id}`
+      environment.serverAPI + `v1/Feedback/GetFeedbackById?Id=${id}`
     );
   }
   getFeedbackMessagesBySenderId(senderId: string) {
     return this.http.get<any>(
       environment.serverAPI +
-        `Feedback/GetFeedbackMessagesBySenderId?Id=${senderId}`
+        `v1/Feedback/GetFeedbackMessagesBySenderId?Id=${senderId}`
     );
   }
   PostDocsForFeedback(formData: any) {
     return this.http.post<any>(
-      environment.serverAPI + 'FileManager/PostDocsForFeedback',
+      environment.serverAPI + 'v1/FileManager/PostDocsForFeedback',
       formData
     );
   }
   // Method to fetch advertisement by ID
   getAdvertByAdvertId(id: number) {
     return this.http.get<any>(
-      environment.serverAPI + `Advert/GetAdvertByAdvertId?id=${id}`
+      environment.serverAPI + `v1/Advert/GetAdvertByAdvertId?id=${id}`
     );
   }
 
   // Method to fetch all advertisements
   getAllAdverts() {
-    return this.http.get<any>(environment.serverAPI + `Advert/GetAllAdverts`);
+    return this.http.get<any>(environment.serverAPI + `v1/Advert/GetAllAdverts`);
   }
 
   // getDocAdvertFileById(id: number) {
   //   return this.http.get<any>(
-  //     environment.serverAPI +`FileManager/GetDocAdvertFileById?Id=${id}`
+  //     environment.serverAPI +`v1/FileManager/GetDocAdvertFileById?Id=${id}`
 
   //   );
   // }
   // GetAdvertByAdvertId(id: any): Observable<any> {
-  //   return this.http.get<any>(`${environment.serverAPI}Advert/GetAdvertByAdvertId?Id=${id}`);
+  //   return this.http.get<any>(`${environment.serverAPI}v1/Advert/GetAdvertByAdvertId?Id=${id}`);
   // }
 
   getDocAdvertFileById(id: any) {
     return this.http.get(
-      environment.serverAPI + `FileManager/GetDocAdvertFileById?Id=${id}`,
+      environment.serverAPI + `v1/FileManager/GetDocAdvertFileById?Id=${id}`,
       { responseType: 'blob' }
     );
   }
   postInsertNewFeedback(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'Feedback/PostInsertNewFeedback',
+      environment.serverAPI + 'v1/Feedback/PostInsertNewFeedback',
       body
       // this.httpOptions
       // {
@@ -131,7 +131,7 @@ export class APIService {
     console.log('Subscribe: ', body);
     // debugger;
     return this.http.post<any>(
-      environment.serverAPI + 'Subscriber/MakeRecurringPayment',
+      environment.serverAPI + 'v1/Subscriber/MakeRecurringPayment',
       body
     );
   }
@@ -139,11 +139,11 @@ export class APIService {
   GetSourceTextFolderFiles(foldername: string) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
   GetSourceTextFolderFilesTime(foldername: string, time: number) {
-    const url = `${environment.serverAPI}RawSource/GetSourceTextFolderFiles`;
+    const url = `${environment.serverAPI}v1/RawSource/GetSourceTextFolderFiles`;
 
     // Construct the query parameters including foldername and lasthours
     const queryParams = {
@@ -158,28 +158,28 @@ export class APIService {
   GetSourceChartFolderFilesList(foldername: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
+        `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
     );
   }
 
   GetSourceChartFolderFilesListtime(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
 
   GetSourceAviationFolderFilesList(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
 
   GetSourceAviationFolderFilesListNull(time:any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
     );
   }
 
@@ -187,7 +187,7 @@ export class APIService {
     imagefoldername: string,
     imagefilename: string
   ): Observable<any> {
-    const url = `${environment.serverAPI}RawSource/GetAviationFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
+    const url = `${environment.serverAPI}v1/RawSource/GetAviationFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
     return this.http.get<any>(url);
   }
 
@@ -195,7 +195,7 @@ export class APIService {
     imagefoldername: string,
     imagefilename: string
   ): Observable<any> {
-    const url = `${environment.serverAPI}RawSource/GetChartsFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
+    const url = `${environment.serverAPI}v1/RawSource/GetChartsFile?imagefoldername=${imagefoldername}&imagefilename=${imagefilename}`;
     return this.http.get<any>(url);
   }
 
@@ -244,7 +244,7 @@ export class APIService {
     console.log('postInsertSub: ', body);
     debugger;
     return this.http.post<any>(
-      environment.serverAPI + 'Subscription/PostInsertSubscription',
+      environment.serverAPI + 'v1/Subscription/PostInsertSubscription',
       body
     );
   }
@@ -252,7 +252,7 @@ export class APIService {
   GetSubscriptionByUserProfileId(Id: number) {
     return this.http.get<any>(
       environment.serverAPI +
-        `Subscription/GetSubscriptionByUserProfileId?Id=${Id}`
+        `v1/Subscription/GetSubscriptionByUserProfileId?Id=${Id}`
     );
   }
 
@@ -260,7 +260,8 @@ export class APIService {
 
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(
-      'http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
+      environment.serverAPI +
+      'v1/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
     );
   }
   // getRecentTafs(foldername: string): Observable<any> {
@@ -270,14 +271,15 @@ export class APIService {
   // }
   getRecentTafs(foldername: string): Observable<any> {
     return this.http.get<any>(
-      `http://160.119.253.130/aviappapi/api/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+      environment.serverAPI +
+      `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
 
   getRecentMetarReports(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
     );
   }
 
@@ -287,7 +289,7 @@ export class APIService {
     //   return this.http.get<any[]>(apiUrl);
     // }
     fetchWindChartImages(foldername:any , lasthours: number = 12): Observable<any[]> {
-      const apiUrl = `${environment.serverAPI}RawSource/GetSourceAviationFolderFilesList`;
+      const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
       
       // Construct the query parameters including foldername and lasthours
       const queryParams = {
@@ -301,7 +303,7 @@ export class APIService {
     
 
     fetchHourlyChartData(foldername: any , lasthours: number = 24): Observable<any[]> {
-      const apiUrl = `${environment.serverAPI}RawSource/GetSourceAviationFolderFilesList`;
+      const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
       const queryParams = { imagefoldername: foldername, lasthours: lasthours.toString() };
       return this.http.get<any[]>(apiUrl, { params: queryParams });
     }
