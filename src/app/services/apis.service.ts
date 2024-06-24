@@ -285,7 +285,7 @@ export class APIService {
 
     // Method to fetch wind chart images
     // fetchWindChartImages(): Observable<any[]> {
-    //   const apiUrl = 'http://160.119.253.130/aviappapi/api/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=12';
+    //   const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=12`;
     //   return this.http.get<any[]>(apiUrl);
     // }
     fetchWindChartImages(foldername:any , lasthours: number = 12): Observable<any[]> {
