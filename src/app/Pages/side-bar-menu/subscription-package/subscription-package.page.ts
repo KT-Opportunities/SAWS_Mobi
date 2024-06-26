@@ -550,7 +550,7 @@ export class SubscriptionPackagePage implements OnInit {
 
     const actionSheet = await this.actionSheetController.create({
       header: 'Cancel Subscription!',
-      subHeader: `Are you sure your want to UnSubscribe from the selected subscription?`,
+      subHeader: `Are you sure you want to UnSubscribe from the selected subscription?`,
       buttons: this.actionSheetButtonsCancel,
       cssClass: 'my-custom-class'
     });
@@ -574,7 +574,7 @@ export class SubscriptionPackagePage implements OnInit {
 
     const actionSheet = await this.actionSheetController.create({
       header: 'Another Subscription Exists!',
-      subHeader: `Are you sure your want to change the Subscription?`,
+      subHeader: `Are you sure you want to change the Subscription?`,
       buttons: this.actionSheetButtonsSwitch,
       cssClass: 'my-custom-class'
     });

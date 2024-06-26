@@ -67,20 +67,24 @@ ion-action-sheet.my-custom-class .action-sheet-cancel::after {
 
 ion-action-sheet.my-custom-class .action-sheet-cancel,
 ion-action-sheet.my-custom-class .action-sheet-cancel.ion-focused {
-  color: #8295c2;
+  // color: #8295c2;
+  color: #fff;
 }
 
 ion-action-sheet.my-custom-class .action-sheet-destructive,
 ion-action-sheet.my-custom-class .action-sheet-destructive.ion-focused {
-  color: #808080;
+  // color: #808080;
+  color: #fff;
 }
 
 @media (any-hover: hover) {
   ion-action-sheet.my-custom-class .action-sheet-cancel:hover {
-    color: #557bd4;
+    // color: #557bd4;
+    color: #e6c3c3;
   }
   ion-action-sheet.my-custom-class .action-sheet-destructive:hover {
-    color: #524b4b;
+    // color: #524b4b;
+    color: #e6c3c3;
   }
 }
 
