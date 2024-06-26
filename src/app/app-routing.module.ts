@@ -617,7 +617,11 @@ const routes: Routes = [
       import('./Pages/aero-image-viewer/aero-image-viewer.module').then(
         (m) => m.AeroImageViewerPageModule
       ),
+  },  {
+    path: 'view-decoded',
+    loadChildren: () => import('./Pages/view-decoded/view-decoded.module').then( m => m.ViewDecodedPageModule)
   },
+
 ];
 
 @NgModule({
