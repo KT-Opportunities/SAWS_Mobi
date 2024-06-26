@@ -1,22 +1,21 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 @Component({
   selector: 'app-recent-tafs',
   templateUrl: './recent-tafs.component.html',
-  // styleUrls: ['./recent-tafs.component.scss'],
   styleUrls: ['./../forecast.page.scss'],
 })
-export class RecentTafsComponent  implements OnInit {
-
+export class RecentTafsComponent implements OnInit {
   loading = false;
   isLogged: boolean = false;
-
+  isLoading: boolean = true;
   recentTafs: any[] = [];
 
   isDropdownOpen1: boolean = false;
@@ -33,11 +32,12 @@ export class RecentTafsComponent  implements OnInit {
     private iab: InAppBrowser,
     private spinner: NgxSpinnerService,
     private apiService: APIService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.fetchRecentTafs()
+    this.fetchRecentTafs();
   }
 
   forecastPageNavigation() {
@@ -47,7 +47,7 @@ export class RecentTafsComponent  implements OnInit {
   fetchRecentTafs(): void {
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner
-  
+
     const foldername = 'taffc'; // Specify the folder name
     this.apiService.getRecentTafs(foldername).subscribe(
       (data) => {
@@ -74,32 +74,65 @@ export class RecentTafsComponent  implements OnInit {
   }
 
   forecastDropdown(dropdown: string) {
-    if (dropdown === 'dropdown1') {
-      this.isDropdownOpen1 = !this.isDropdownOpen1;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
+    switch (dropdown) {
+      case 'dropdown1':
+        this.isDropdownOpen1 = !this.isDropdownOpen1;
+        this.isDropdownOpen2 = false;
+        this.isDropdownOpen3 = false;
+        break;
+      case 'dropdown2':
+        this.isDropdownOpen2 = !this.isDropdownOpen2;
+        this.isDropdownOpen1 = false;
+        this.isDropdownOpen3 = false;
+        break;
+      case 'dropdown3':
+        this.isDropdownOpen3 = !this.isDropdownOpen3;
+        this.isDropdownOpen1 = false;
+        this.isDropdownOpen2 = false;
+        break;
     }
-
-    if (dropdown === 'dropdown2') {
-      this.isDropdownOpen2 = !this.isDropdownOpen2;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen3 = false;
-    }
-    if (dropdown === 'dropdown3') {
-      this.isDropdownOpen3 = !this.isDropdownOpen3;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-    }
+    this.cdRef.detectChanges(); // Ensure change detection
   }
 
-  selectOption(option: string, dropdown: string) {
-    if (dropdown === 'dropdown1') {
-      this.selectedOption1 = option;
-      this.isDropdownOpen1 = false;
-    } else if (dropdown === 'dropdown2') {
-      this.selectedOption2 = option;
-      this.isDropdownOpen2 = false;
+  selectOption(option: string, dropdown: string, event: MouseEvent) {
+    event.stopPropagation(); // Prevent event bubbling
+    switch (dropdown) {
+      case 'dropdown1':
+        this.selectedOption1 = option;
+        this.isDropdownOpen1 = false;
+        break;
+      case 'dropdown2':
+        this.selectedOption2 = option;
+        this.isDropdownOpen2 = false;
+        break;
+      case 'dropdown3':
+        this.selectedOption3 = option;
+        this.isDropdownOpen3 = false;
+        break;
     }
+    this.cdRef.detectChanges(); // Ensure change detection
   }
 
+  ImageViewer(item: any) {
+    console.log('file Name:', item);
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    this.isLoading = true;
+
+    this.isLoading = false;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
+
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
+  }
 }

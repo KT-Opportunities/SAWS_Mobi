@@ -84,22 +84,22 @@
                     >
                       <a
                         class="w-dropdown-link"
-                        (click)="selectOption('Total Cloud', 'dropdown1')"
+                        (click)="selectOption('Total Cloud', 'dropdown1',$event)"
                         >Total Cloud</a
                       >
                       <a
                         class="w-dropdown-link"
-                        (click)="selectOption('Medium level', 'dropdown1')"
+                        (click)="selectOption('Medium level', 'dropdown1',$event)"
                         >Medium level</a
                       >
                       <a
                         class="w-dropdown-link"
-                        (click)="selectOption('Low level', 'dropdown1')"
+                        (click)="selectOption('Low level', 'dropdown1',$event)"
                         >Low level</a
                       >
                       <a
                         class="w-dropdown-link"
-                        (click)="selectOption('High Level', 'dropdown1')"
+                        (click)="selectOption('High Level', 'dropdown1',$event)"
                         >High Level</a
                       >
                     </nav>
@@ -181,22 +181,22 @@
                       >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Total Cloud', 'dropdown2')"
+                          (click)="selectOption('Total Cloud', 'dropdown2',$event)"  
                           >Total Cloud</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Medium level', 'dropdown2')"
+                          (click)="selectOption('Medium level', 'dropdown2',$event)"
                           >Medium level</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Low level', 'dropdown2')"
+                          (click)="selectOption('Low level', 'dropdown2',$event)"
                           >Low level</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('High Level', 'dropdown2')"
+                          (click)="selectOption('High Level', 'dropdown2',$event)"
                           >High Level</a
                         >
                       </nav>
@@ -225,23 +225,28 @@
                       <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Total Cloud', 'dropdown3')"
+                          (click)="selectOption('1 min', 'dropdown3',$event)"
                           >1 min</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Medium level', 'dropdown3')"
+                          (click)="selectOption('2 min', 'dropdown3',$event)"
                           >2 Min</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('Low level', 'dropdown3')"
+                          (click)="selectOption('3 min', 'dropdown3',$event)"
                           >3 min</a
                         >
                         <a
                           class="w-dropdown-link"
-                          (click)="selectOption('High Level', 'dropdown3')"
+                          (click)="selectOption('4 min', 'dropdown3',$event)"
                           >4 min</a
+                        >
+                        <a
+                          class="w-dropdown-link"
+                          (click)="selectOption('5 min', 'dropdown3',$event)"
+                          >5 min</a
                         >
                       </nav>
                     </div>
@@ -260,13 +265,13 @@
                 id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649"
                 class="cct-copy-copy"
               >
-                <a href="#" class="button w-button">Normal</a>
+                <div class="button w-button">Normal</div>
               </div>
               <div
                 id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649"
                 class="cct-copy"
               >
-                <a href="#" class="button-2 w-button">Colour / Style Index</a>
+                <div class="button-2 w-button">Colour / Style Index</div>
               </div>
             </div>
           </div>
@@ -287,7 +292,9 @@
                 id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649"
                 class="cct-copy"
               >
-                <div class="button-2-copy w-button">View Decoded</div>
+                <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
+                  View Decoded
+                </div>
               </div>
             </div>
           </div>
