@@ -139,7 +139,15 @@ export class LoginPage implements OnInit, OnDestroy {
       color: color,
       icon: icon,
       cssClass:"custom-toast",
-      swipeGesture: "vertical"
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
     });
 
     await toast.present();

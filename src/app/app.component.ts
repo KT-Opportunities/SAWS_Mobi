@@ -80,7 +80,6 @@ export class AppComponent {
     // toast.onDidDismiss().then(() => {
     //   this.router.navigate(['/landing-page']);
     // });
-
   }
 
 
