@@ -137,10 +137,11 @@ export class LoginPage implements OnInit, OnDestroy {
       duration: 3000,
       position: position,
       color: color,
-      icon: icon
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical"
     });
 
     await toast.present();
-
   }
 }

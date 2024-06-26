@@ -589,7 +589,9 @@ export class SubscriptionPackagePage implements OnInit {
       duration: 5000,
       position: position,
       color: color,
-      icon: icon
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical"
     });
 
     await toast.present();
