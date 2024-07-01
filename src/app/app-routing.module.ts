@@ -621,6 +621,10 @@ const routes: Routes = [
     path: 'view-decoded',
     loadChildren: () => import('./Pages/view-decoded/view-decoded.module').then( m => m.ViewDecodedPageModule)
   },
+  {
+    path: 'view-symbol',
+    loadChildren: () => import('./Pages/view-symbol/view-symbol.module').then( m => m.ViewSymbolPageModule)
+  },
 
 ];
 
