@@ -18,6 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .w-button {
@@ -106,7 +108,8 @@ iframe[seamless] {
   display: block;
 }
 .fileImage {
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
+  justify-content: center;
   // object-fit: contain; /* Ensures the image maintains aspect ratio while filling the container */
 }
