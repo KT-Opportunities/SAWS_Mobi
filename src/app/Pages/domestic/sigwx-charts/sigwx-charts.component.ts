@@ -208,12 +208,13 @@ export class SigwxChartsComponent implements OnInit {
     dialogConfig.height = '80%';
     dialogConfig.data = { item };
 
-    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+    const dialogRef = this.dialog.open(ViewSymbolPage, dialogConfig);
 
     dialogRef.afterClosed().subscribe(() => {
       this.isLoading = false;
     });
   }
+
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filetextcontent
     return new Promise<string>((resolve, reject) => {

@@ -14,7 +14,7 @@ export class ViewSymbolPage implements OnInit {
     private dialogRef: MatDialogRef<ViewSymbolPage>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.imageUrl = '../../assets/Group-4522.svg';
+    this.imageUrl = '../../assets/sxwg.gif';
     console.log('back to image:', this.imageUrl);
   }
 
