@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 interface FileData {
   foldername: string;
@@ -22,7 +23,7 @@ export class ColorCodedTafComponent  implements OnInit {
   loading = false;
   isLogged: boolean = false;
   TAFArray: FileData[] = [];
-
+  isLoading: boolean = true;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -86,6 +87,28 @@ export class ColorCodedTafComponent  implements OnInit {
     // Extract remaining content after the content used for <h1> (e.g., using regex or string manipulation)
     // Return the extracted content
     return filetextcontent.substring(filetextcontent.indexOf('TEMPO') + 5);
+  }
+  ImageViewer(item: any) {
+    console.log('file Name:', item);
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    this.isLoading = true;
+
+    this.isLoading = false;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
+
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
   }
 
 }

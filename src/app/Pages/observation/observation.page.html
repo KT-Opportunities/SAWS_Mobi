@@ -1,52 +1,92 @@
 <ion-content>
   <section class="list-page">
-    <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
-      <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
+    <div
+      class=""
+      [ngClass]="{'applied-styles': !isLoggedIn}"
+      *ngIf="isLoggedIn"
+    >
+      <h1
+        class="heading-6"
+        [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}"
+      >
         Observation
       </h1>
-      <div class="w-layout-grid grid-list" style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none">
-        <div (click)="NavigateToMetar()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+      <div
+        class="w-layout-grid grid-list"
+        style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none"
+      >
+        <div
+          (click)="NavigateToMetar()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR</h1>
         </div>
 
-        <div (click)="NavigateToWebCam()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToWebCam()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Webcams</h1>
         </div>
 
-        <div (click)="NavigateToColorCoded()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToColorCoded()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR: Color Coded</h1>
         </div>
 
-        <div (click)="NavigateToMetarRecent()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToMetarRecent()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR: Recent</h1>
         </div>
-        <div (click)="NavigateToMetarHistory()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToMetarHistory()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR: History</h1>
         </div>
 
-        <div (click)="NavigateToSpeci()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToSpeci()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">SPECI</h1>
         </div>
-        <div (click)="NavigateToMetarTafRecent()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToMetarTafRecent()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR/TAF: Recent</h1>
         </div>
-        <div (click)="NavigateToRadar()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToRadar()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Radar</h1>
         </div>
-        <div (click)="NavigateToSatelite()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToSatelite()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Satellite</h1>
         </div>
-        <div (click)="NavigateToWeatherMap()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToWeatherMap()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Weather Map</h1>
         </div>
       </div>
@@ -55,12 +95,18 @@
     <div class="list-div" *ngIf="!isLoggedIn">
       <h1 class="heading-6">Observation</h1>
       <div class="w-layout-grid grid-list">
-        <div (click)="NavigateToMetar()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToMetar()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">METAR</h1>
         </div>
-        <div (click)="NavigateToWebCam()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToWebCam()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Webcams</h1>
         </div>
       </div>
@@ -613,7 +659,7 @@
     </section> -->
 
     <!-- RecentMetar- -->
-    
+
     <!--  <section class="re" *ngIf="isRecentMetar">
       <div class="recent-tafs">
         <h1 class="heading-6" id="heading7">Recent TAFs</h1>
@@ -1357,7 +1403,6 @@
         </div>
       </div>
     </section> -->
-
   </section>
 </ion-content>
 
@@ -1371,11 +1416,22 @@
   </div> -->
 
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <img
+      style="margin-top: -69px"
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+    />
     <div class="footerdiv">
-      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
-        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" style="
+      <a
+        (click)="NavigateToLandingPage()"
+        class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"
+        ><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6
+          class="heading-10-copy"
+          style="
             color: #fff;
             margin-top: 9px;
             margin-bottom: 0;
@@ -1383,7 +1439,8 @@
             text-decoration: none;
             font-size: 12px;
             margin-top: 4px;
-          "></h6>
+          "
+        ></h6>
       </a>
     </div>
   </div>
