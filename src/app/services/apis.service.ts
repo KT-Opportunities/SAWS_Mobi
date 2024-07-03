@@ -35,6 +35,7 @@ export class APIService {
   setFeedbackData(data: any): void {
     this.feedbackSubject.next(data);
   }
+  
   RequestPasswordReset(form: any) {
     return this.http
       .post<any>(
@@ -124,6 +125,13 @@ export class APIService {
       //     `Bearer ${this.token}`
       //   ),
       // }
+    );
+  }
+
+  PostInsertAdvertClick(body: {}) {
+    return this.http.post<any>(
+      environment.serverAPI + 'v1/Advert/PostInsertAdvertClick',
+      body
     );
   }
 

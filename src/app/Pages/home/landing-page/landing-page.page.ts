@@ -11,6 +11,7 @@ import { APIService } from 'src/app/services/apis.service';
 export interface Advertisement {
   imageUrl: string;
   link: string;
+  advertId: number;
   description: string;
   isActive?: boolean;
 }
@@ -61,7 +62,17 @@ export class LandingPage implements OnInit {
       this.rotateAdvertisements();
     }, 6000);
   }
-  
+
+  addAdvertClick(body: any) {
+    this.apiService.PostInsertAdvertClick(body).subscribe(
+      (data: any) => {
+        console.log('Success:', data);
+      },
+      (err) => {
+        console.log('Error:', err);
+      }
+    );
+  }
   
   rotateAdvertisements() {
        // It checks if there are advertisements available 
@@ -134,76 +145,75 @@ export class LandingPage implements OnInit {
     
   }
 
-// This method fetches all advertisements 
-loadAllAdvertisements() {
-  // Make an HTTP request to fetch advertisements.
-  this.apiService.getAllAdverts().subscribe(
-    (data: any[]) => {
-      console.log('getAllAdverts', data);
-      this.advertisements = data.map(ad => {
-        // Prevent security vulnerabilities, create a safe URL for the image.
-        const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
-        // Ensure the URL is valid and does not start with "http://localhost"
-        const advertUrl = this.ensureValidURL(ad.advert_url);
-        return { imageUrl, link: advertUrl } as Advertisement;
-      });
-      //console.log('advertisements', this.advertisements);
+  // This method fetches all advertisements 
+  loadAllAdvertisements() {
+    // Make an HTTP request to fetch advertisements.
+    this.apiService.getAllAdverts().subscribe(
+      (data: any[]) => {
+        console.log('getAllAdverts', data);
+        this.advertisements = data.map(ad => {
+          // Prevent security vulnerabilities, create a safe URL for the image.
+          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
+          // Ensure the URL is valid and does not start with "http://localhost"
+          const advertUrl = this.ensureValidURL(ad.advert_url);
 
-      // Set the currentAdvertisement to the first advertisement in the array
-      if (this.advertisements.length > 0) {
-        this.currentAdvertisement = this.advertisements[0];
+          const advertId = ad.advertId;
+
+          return { imageUrl, link: advertUrl, advertId } as Advertisement;
+        });
+        console.log('advertisements', this.advertisements);
+
+        // Set the currentAdvertisement to the first advertisement in the array
+        if (this.advertisements.length > 0) {
+          this.currentAdvertisement = this.advertisements[0];
+        }
+
+        // Initialize Swiper after loading advertisements
+        this.initializeSwiper();
+      },
+      (error: any) => {
+        console.error('Error fetching all advertisements:', error);
       }
-
-      // Initialize Swiper after loading advertisements
-      this.initializeSwiper();
-    },
-    (error: any) => {
-      console.error('Error fetching all advertisements:', error);
-    }
-  );
-}
- // Ensure URL is valid
- ensureValidURL(url: string): string {
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    url = 'https://' + url;
+    );
   }
-  return url;
-}
+
+  // Ensure URL is valid
+  ensureValidURL(url: string): string {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+    return url;
+  }
 
   // Launch advertisement link
-  launchAdvertLink(advertUrl: string) {
+  launchAdvertLink(advertUrl: string, advertId: number) {
     window.open(advertUrl, "_blank");
+    console.log("advertId", advertId)
+
+    const body = {
+      advertClickId: 0,
+      advertId: advertId
+    }
+
+    this.addAdvertClick(body)
+
   }
 
-
-
-initializeSwiper() {
-  console.log('Initializing Swiper');
-  if (this.advertisements.length > 0 && this.swiperElement) {
-    //console.log('Creating Swiper instance');
-    this.swiper = new Swiper(this.swiperElement.nativeElement, {
-      direction: 'vertical',
-      loop: true, // Enable looping to seamlessly rotate banners
-      autoplay: {
-        delay: 10000, // Set autoplay delay to 10 seconds
-        disableOnInteraction: false,
-      },
-      navigation: false,
-      allowTouchMove: true, // Allow users to swipe if needed
-    });
-  } 
-}
-
-
-
-
-
+  initializeSwiper() {
+    console.log('Initializing Swiper');
+    if (this.advertisements.length > 0 && this.swiperElement) {
+      //console.log('Creating Swiper instance');
+      this.swiper = new Swiper(this.swiperElement.nativeElement, {
+        direction: 'vertical',
+        loop: true, // Enable looping to seamlessly rotate banners
+        autoplay: {
+          delay: 10000, // Set autoplay delay to 10 seconds
+          disableOnInteraction: false,
+        },
+        navigation: false,
+        allowTouchMove: true, // Allow users to swipe if needed
+      });
+    } 
+  }
 
 }
-
-
- 
-  
- 
-  
-

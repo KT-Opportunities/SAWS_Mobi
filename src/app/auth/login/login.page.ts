@@ -77,6 +77,10 @@ export class LoginPage implements OnInit, OnDestroy {
     this.router.navigate(['/register']);
   }
 
+  forgortPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
   home() {
     this.router.navigate(['/landing-page']);
   }

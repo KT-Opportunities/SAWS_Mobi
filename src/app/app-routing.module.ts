@@ -330,6 +330,13 @@ const routes: Routes = [
       ).then((m) => m.SubscriptionPackagePageModule),
   },
   {
+    path: 'subscription-successful/:token',
+    loadChildren: () =>
+      import(
+        './Pages/side-bar-menu/subscription-package/subscription-package.module'
+      ).then((m) => m.SubscriptionPackagePageModule),
+  },
+  {
     path: 'subscription-package',
     loadChildren: () =>
       import(
@@ -617,7 +624,8 @@ const routes: Routes = [
       import('./Pages/aero-image-viewer/aero-image-viewer.module').then(
         (m) => m.AeroImageViewerPageModule
       ),
-  },  {
+  },
+  {
     path: 'view-decoded',
     loadChildren: () => import('./Pages/view-decoded/view-decoded.module').then( m => m.ViewDecodedPageModule)
   },

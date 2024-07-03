@@ -7,6 +7,7 @@ import { Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActionSheetController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-subscription-package',
@@ -68,6 +69,7 @@ export class SubscriptionPackagePage implements OnInit {
     notifyUrl: '',
     name_first: 'test_User',
     name_last: 'test',
+    userId: 0,
     email_address: 'raymond.mortu@gmail.com',
     m_payment_id: 'SAW_test_1',
     item_name: 'SAW Recurring subscription',
@@ -193,7 +195,9 @@ export class SubscriptionPackagePage implements OnInit {
     var landingPage = currentUrl.substr(0, currentUrl.lastIndexOf('/') + 1);
     console.log(landingPage + 'subscription-Successful');
     this.subsObj.returnUrl = landingPage + 'subscription-successful';
-    // this.subsObj.returnUrl = landingPage + 'subscription-package';
+    // this.subsObj.notifyUrl = landingPage + 'subscription-successful/:token';
+    // this.subsObj.notifyUrl = 'http://160.119.253.130/saws/#/subscription/success';
+    this.subsObj.notifyUrl =  environment.serverAPI + 'v1/Subscriber/Notify';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
   }
 
@@ -300,21 +304,58 @@ export class SubscriptionPackagePage implements OnInit {
 
       this.loadStartCallBack(event);
     });
+
+    this.browser.on('loadstop').subscribe((event: any) => {
+      this.loadStopCallBack(event);
+      
+      // Extract the token from the URL
+      const urlParams = new URLSearchParams(event.url);
+      const token = urlParams.get('token'); // Adjust the key based on the actual parameter name
+  
+      if (token) {
+        // this.token = token;
+        console.log('Token on success:', token);
+  
+        // Handle the token
+        // this.handleToken(this.token);
+  
+        // Close the browser after extracting the token
+        this.browser.close();
+      }
+    });
+
+    this.browser.on('exit').subscribe((event: any) => {
+      
+      console.log('loadexit - event', event)
+      
+      console.log('exit browswer activated')
+      this.browser.close();
+    });
   }
 
   loadStartCallBack(event: any) {
     /* Close InAppBrowser if loading the predefined close URL */
 
-    console.log('event', event)
-
+    console.log('loadstart- event', event)
+        
     if (event.url == this.subsObj.returnUrl) {
       debugger;
       
       this.browser.close();
       this.saveSub();
-    } else if (event.url == this.subsObj.cancelUrl) {
+
+    } else if (event.url == this.subsObj.notifyUrl) {
+      console.log('notified user', event)
+    }
+    else if (event.url == this.subsObj.cancelUrl) {
       this.browser.close();
     }
+  }
+
+  loadStopCallBack(event: any) {
+    console.log('loadstop - event', event);
+    // Implement any logic needed when the browser has stopped loading
+    // For example, check if a certain condition is met or perform additional actions
   }
 
   subscribe(amount: number, subscriptionId: number) {
@@ -336,6 +377,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.m_payment_id = subscriptionId.toString();
     this.subsObj.amount = Number(amount.toFixed(2));
     this.subsObj.item_name = this.subscriptionType;
+    this.subsObj.userId = userLoginDetails?.userprofileid;
     this.subsObj.item_description = this.subscriptionType; 
     // Customer details
     this.subsObj.name_first = userLoginDetails?.aspUserName;
