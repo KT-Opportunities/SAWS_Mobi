@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatMenuModule } from '@angular/material/menu';
 // import { MatButtonModule } from '@angular/material/button';
@@ -25,8 +25,12 @@ export class AppComponent {
   isSubscribed: boolean = false;
   logout() {
     this.authService.setLoggedInStatus(false);
-    window.location.reload();
     this.router.navigate(['/login']);
+    // window.location.reload();
+
+    this.presentToast('top','Loggout Successful!', 'medium', 'checkmark');
+
+
   }
   login() {
     this.router.navigate(['/login']);
@@ -38,7 +42,8 @@ export class AppComponent {
     private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
     private authAPI: AuthService,
-    private platform: Platform
+    private platform: Platform,
+    private toastController: ToastController
   ) {}
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -48,6 +53,35 @@ export class AppComponent {
     this.initializeApp();
     this.fetchUserData();
   }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          side: 'end',
+          text: 'Go to Home',
+          handler: () => {
+            this.router.navigate(['/landing-page']);
+          }
+        }
+      ]
+    });
+
+    await toast.present();
+
+    // toast.onDidDismiss().then(() => {
+    //   this.router.navigate(['/landing-page']);
+    // });
+  }
+
 
   initializeApp() {
     this.platform.ready().then(() => {

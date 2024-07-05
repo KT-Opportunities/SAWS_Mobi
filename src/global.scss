@@ -33,6 +33,86 @@
   --black: black;
 }
 
+.delete-button {
+  color: white;
+  background-color: red;
+  --ion-color-primary: red;
+  --ion-background-color: red;
+  --background: red;
+}
+
+.cancel-button {
+  color: black;
+  background-color: lightgray;
+  --ion-color-primary: lightgray;
+  --ion-background-color: lightgray;
+  --background: lightgray;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-group {
+  // background: #f58840;
+  background: #00264a;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-title {
+  // color: #fff;
+  color: #fff;
+  font-size: large;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-cancel::after {
+  // background: #e97223;
+  background: #00264a;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-cancel,
+ion-action-sheet.my-custom-class .action-sheet-cancel.ion-focused {
+  // color: #8295c2;
+  color: #fff;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-destructive,
+ion-action-sheet.my-custom-class .action-sheet-destructive.ion-focused {
+  // color: #808080;
+  color: #fff;
+}
+
+@media (any-hover: hover) {
+  ion-action-sheet.my-custom-class .action-sheet-cancel:hover {
+    // color: #557bd4;
+    color: #e6c3c3;
+  }
+  ion-action-sheet.my-custom-class .action-sheet-destructive:hover {
+    // color: #524b4b;
+    color: #e6c3c3;
+  }
+}
+
+ion-action-sheet.my-custom-class ion-backdrop {
+  opacity: 0.6;
+}
+
+ion-toast.custom-toast {
+  --background: #f4f4fa;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #4b4a50;
+}
+
+ion-toast.custom-toast::part(message) {
+  font-style: italic;
+  color: #f4f4fa;
+}
+
+ion-toast.custom-toast::part(icon) {
+  color: #f4f4fa;
+}
+
+ion-toast.custom-toast::part(button) {
+  border-left: 1px solid #d2d2d2;
+  color: #030207;
+  font-size: 12px;
+}
+
 #RaderImages {
   text-align: center;
   margin-top: 10px;

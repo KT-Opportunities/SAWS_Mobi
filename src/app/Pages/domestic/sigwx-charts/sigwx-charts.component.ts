@@ -12,6 +12,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ViewSymbolPage } from '../../view-symbol/view-symbol.page';
+import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 @Component({
   selector: 'app-sigwx-charts',
@@ -189,6 +191,29 @@ export class SigwxChartsComponent implements OnInit {
       });
   }
 
+  item: any;
+  openImageViewerSymbol(item: any) {
+    console.log('file Name:', item);
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    this.isLoading = true;
+
+    this.isLoading = false;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
+
+    const dialogRef = this.dialog.open(ViewSymbolPage, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
+  }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filetextcontent
@@ -217,5 +242,4 @@ export class SigwxChartsComponent implements OnInit {
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
   }
-  
 }

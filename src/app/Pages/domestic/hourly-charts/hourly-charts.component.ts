@@ -18,8 +18,7 @@ export class HourlyChartsComponent implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = false;
   images: { name: string, url: string }[] = [];
-  hourlyChartData: any= [];
-  // chartData: any;
+  hourlyChartData: any= []
   // Define the chartData array with the correct structure
 chartData: { heading: string; information: string; imageUrl?: string }[] = [
   { heading: 'QNH Colour', information: 'Information about QNH Colour' },
@@ -62,28 +61,6 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
   }
 
   
-
-  // fetchHourlyChartData() {
-  //   this.isLoading = true;
-  //   const foldername = ''; 
-  //   const lasthours = 12; 
-  
-  //   this.APIService.fetchHourlyChartData(foldername, lasthours).subscribe(
-  //     (data) => {
-      
-  //       this.chartData = data;
-  //       this.isLoading = false; 
-  //       console.log(this.chartData);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching wind charts data:', error);
-  //       this.isLoading = false; 
-  //     }
-  //   );
-  // }
-
-
-
    // Method to fetch hourly chart data
    fetchHourlyChartData() {
     this.isLoading = true;
@@ -92,12 +69,7 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
         console.log('API Response:', data); // Log the API response
         // Check if data is valid and not empty
         if (data && data.length > 0) {
-          // this.chartData = data.map(item => ({
-          //   heading: item.chartData,
-          //   information: `Last modified: ${item.lastmodified}`,
-          //   filename: item.filename,
-          //   imageUrl: `/home/aviapp/AviationData/aviation/${item.filename}`
-          // }));
+          
           console.log('Chart Data:', this.chartData); // Log the chartData array
         } else {
           console.warn('No valid data found in API response.');
@@ -111,8 +83,6 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
     );
   }
   
-  
-
   get filteredChartData(): any[] {
     // Define the list of desired headings
     const desiredHeadings = ['QNH Colour', 'QNH Greyscale', 'Air Temperature Colour', 'Air Temperature Greyscale', 'Dewpoint Temperature Colour', 'Dewpoint Temperature Greyscale'];
@@ -146,14 +116,6 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
     this.router.navigate(['/view-image'], { queryParams: { filePath: fileName } });
 }
 
-  
-  
-  
-
-  
-  
-  
-  
 
   getSafeUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
@@ -168,7 +130,6 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
     }
     return [];
   }
-  
   
   openImageViewer(chart: any, time: string) {
     this.isLoading = true;
@@ -263,11 +224,6 @@ chartData: { heading: string; information: string; imageUrl?: string }[] = [
     return hour < 10 ? '0' + hour : hour.toString(); // Pad single digit hours with '0'
   }
   
-  
- 
-  
-
-
 fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
   // Return a promise that resolves with filetextcontent
   return new Promise<string>((resolve, reject) => {

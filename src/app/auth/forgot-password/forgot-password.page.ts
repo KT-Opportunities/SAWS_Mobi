@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   HostListener,
   ViewChild,
   ElementRef,
@@ -20,7 +19,7 @@ import Swal from 'sweetalert2';
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss'],
 })
-export class ForgotPasswordPage implements OnInit {
+export class ForgotPasswordPage  {
   userForm: FormGroup;
   submitted = false;
   errorMgs: string | null = null;
@@ -93,7 +92,7 @@ export class ForgotPasswordPage implements OnInit {
             error.error.response === 'Invalid email'
           ) {
             debugger;
-            this.router.navigate(['/forgot-password']);
+            // this.router.navigate(['/forgot-password']);
             // Handle the case when the email doesn't exist
             this.errorMgs = 'The provided email does not exist.';
           } else {
@@ -110,7 +109,10 @@ export class ForgotPasswordPage implements OnInit {
     this.submitted = false;
     this.userForm.reset();
   }
-  ngOnInit() {}
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 
   submitForm() {
  

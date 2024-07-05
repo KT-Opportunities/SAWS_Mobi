@@ -11,17 +11,31 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 @Component({
   selector: 'app-winds-charts',
   templateUrl: './winds-charts.component.html',
-  // styleUrls: ['./winds-charts.component.scss'],
-  styleUrls: ['./../domestic.page.scss'],
+  styleUrls: ['./../domestic.page.scss'], // Adjust the path if needed
 })
-export class WindsChartsComponent  implements OnInit {
+export class WindsChartsComponent implements OnInit {
 
   isLogged: boolean = false;
   isLoading: boolean = false;
-  images: { name: string, url: string }[] = [];
-  chartsArray: any = [];
+  chartsArray: any[] = []; // Ensure this is an array
+  sevenDigitNumbers: number[] = []; // Explicitly declare the type of this array
  
-    constructor(
+  chart = [
+    // Sample data
+    { title: 'Low level (surface to FL180)', filename: 'chart1.png' },
+    { title: 'High level (above FL180)', filename: 'chart2.png' },
+    // Add more chart data as needed
+  ];
+
+  blockFormats = [
+    { format: 'FL010 to FL240', numbers: [12, 18, 24, 30, 36, 42, 48] },
+    { format: 'FL210 to FL450', numbers: [12, 18, 24, 30, 36, 42, 48] },
+    { format: 'FL010 to FL150', numbers: [12, 18, 24, 30, 36, 42, 48] },
+    { format: 'FL150 to FL450', numbers: [12, 18, 24, 30, 36, 42, 48] },
+    { format: 'All level scroll', numbers: [12, 18, 24, 30, 36, 42, 48] }
+  ];
+
+  constructor(
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
@@ -34,122 +48,136 @@ export class WindsChartsComponent  implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true; // Set isLoading to true initially
+    this.isLoading = true;
+    this.generateSevenDigitNumbers(7);
     this.fetchWindChartImages();
     if (!this.authService.getIsLoggedIn()) {
       this.router.navigate(['/login']);
-    } else {
-   
     }
   }
 
+  generateSevenDigitNumbers(count: number) {
+    this.sevenDigitNumbers = [];
+    for (let i = 0; i < count; i++) {
+      const number = Math.floor(1000000 + Math.random() * 9000000);
+      this.sevenDigitNumbers.push(number);
+    }
+    this.sevenDigitNumbers.sort((a, b) => a - b);
+    console.log('Generated and Sorted Seven Digit Numbers:', this.sevenDigitNumbers);
+  }
+  
   fetchWindChartImages() {
-    // Make HTTP request to fetch wind chart images
-    this.APIService.fetchWindChartImages('',12).subscribe(
+    this.APIService.fetchWindChartImages('', 12).subscribe(
       (data: any[]) => {
-        console.log('API Response:', data); // Log the entire API response for debugging
-        
-        if (data && data.length > 0) {
-          // Filter and map API response to construct charts array
-         
-          this.chartsArray = data;
-          this. chartsArray = data
-          .filter(item => item.filename && (item.filename.includes('glwl') || item.filename.includes('vglwh')))
-          // .map(item => ({
-          //   title: item.filename,
-          //   imageUrl: this.constructImageUrl(item)
-          // }));
-          // console.log('chart', this.chartsArray)
+        console.log('API Response:', data);
 
-    
-          console.log('Charts:', this. chartsArray); // Log the constructed charts array for debugging
+        // Debug: Ensure 'data' is an array and contains objects with 'filename'
+        if (!Array.isArray(data)) {
+          console.error('API response is not an array:', data);
+          this.isLoading = false;
+          return;
+        }
+
+        console.log('Seven Digit Numbers:', this.sevenDigitNumbers);
+
+        if (data && data.length > 0) {
+          // Check if 'filename' exists and contains expected substrings
+          const filteredData = data.filter(item => item.filename && (item.filename.includes('glwl') || item.filename.includes('vglwh')));
+          console.log('Filtered Data:', filteredData);
+
+          const limitedData = filteredData.slice(0, 7);
+          console.log('Limited Data:', limitedData);
+
+          // Ensure that each item in filteredData gets a sevenDigitNumber
+          this.chartsArray = limitedData.map((item, index) => {
+            const format = this.getChartFormat(item.filename);
+            // Use modulus operator to handle cases where index >= sevenDigitNumbers.length
+            const sevenDigitNumber = this.sevenDigitNumbers[index % this.sevenDigitNumbers.length] || 'N/A';
+            console.log('Mapping item:', item, 'Format:', format, 'Seven Digit Number:', sevenDigitNumber);
+            return {
+              format: format,
+              filename: item.filename,
+              sevenDigitNumber: sevenDigitNumber
+            };
+          });
+
+          console.log('Charts Array:', this.chartsArray);
         } else {
           console.warn('No valid data found in API response.');
         }
 
-       
-        
-        // Set isLoading to false after processing data
         this.isLoading = false;
       },
       (error) => {
-        // Log error if fetching data fails
         console.error('Error fetching wind chart images:', error);
-        
-        // Set isLoading to false in case of error
         this.isLoading = false;
       }
     );
+  }
+  
+  getChartFormat(filename: string): string {
+    if (filename.includes('30')) return '30';
+    if (filename.includes('36')) return '36';
+    if (filename.includes('42')) return '42';
+    if (filename.includes('48')) return '48';
+    return 'Unknown Format';
   }
 
   removefile(filename: string): string {
-    // Extract numeric part using a regular expression
     const match = filename.match(/\d+/);
     return match ? match[0] : '';
   }
-  
 
-openImageViewer(item: any) {
-  console.log('Opening', item); 
-  console.log('openImageViewer', item);
-  const folderName = '';
-  const fileName = item.filename;
-  console.log ('file', fileName);
+  openImageViewer(item: any) {
+    console.log('Opening', item);
+    const folderName = '';
+    const fileName = item.filename;
 
-  // Check if folderName and fileName are defined
-  if (folderName == '' && fileName) {
-    this.isLoading = true;
+    if (folderName === '' && fileName) {
+      this.isLoading = true;
 
-    // Call fetchSecondAPI with folderName and fileName
-    this.fetchSecondAPI(folderName, fileName)
-      .then((filetextcontent) => {
-        this.isLoading = false;
+      this.fetchSecondAPI(folderName, fileName)
+        .then((filetextcontent) => {
+          this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filetextcontent };
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.autoFocus = true;
+          dialogConfig.disableClose = true;
+          dialogConfig.width = '80%';
+          dialogConfig.height = '80%';
+          dialogConfig.data = { filetextcontent };
 
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+          const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(() => {
+          dialogRef.afterClosed().subscribe(() => {
+            this.isLoading = false;
+          });
+        })
+        .catch((error) => {
+          console.error('Error fetching file content:', error);
           this.isLoading = false;
         });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.isLoading = false;
-      });
-  } else {
-    console.error('Folder name or file name is undefined.');
+    } else {
+      console.error('Folder name or file name is undefined.');
+    }
   }
-}
 
-
-fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-  // Return a promise that resolves with filetextcontent
-  return new Promise<string>((resolve, reject) => {
-    this.APIService.GetAviationFile(folderName, fileName).subscribe(
-      (response) => {
-        // Assuming filetextcontent is obtained from the response
-        const filetextcontent = response.filetextcontent;
-        // Log filetextcontent to verify
-        console.log('File Text Content:', filetextcontent);
-        // Resolve the promise with filetextcontent
-        resolve(filetextcontent);
-      },
-      (error) => {
-        // Reject the promise if there's an error
-        reject(error);
-      }
-    );
-  });
-}
+  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.APIService.GetAviationFile(folderName, fileName).subscribe(
+        (response) => {
+          const filetextcontent = response.filetextcontent;
+          console.log('File Text Content:', filetextcontent);
+          resolve(filetextcontent);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
   }
-
 }

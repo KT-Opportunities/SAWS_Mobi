@@ -323,7 +323,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'subscription-Successful',
+    path: 'subscription-successful',
+    loadChildren: () =>
+      import(
+        './Pages/side-bar-menu/subscription-package/subscription-package.module'
+      ).then((m) => m.SubscriptionPackagePageModule),
+  },
+  {
+    path: 'subscription-successful/:token',
     loadChildren: () =>
       import(
         './Pages/side-bar-menu/subscription-package/subscription-package.module'
@@ -618,6 +625,15 @@ const routes: Routes = [
         (m) => m.AeroImageViewerPageModule
       ),
   },
+  {
+    path: 'view-decoded',
+    loadChildren: () => import('./Pages/view-decoded/view-decoded.module').then( m => m.ViewDecodedPageModule)
+  },
+  {
+    path: 'view-symbol',
+    loadChildren: () => import('./Pages/view-symbol/view-symbol.module').then( m => m.ViewSymbolPageModule)
+  },
+
 ];
 
 @NgModule({

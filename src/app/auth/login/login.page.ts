@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private authAPI: AuthService,
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private toastController: ToastController
   ) {
     this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
@@ -75,6 +77,10 @@ export class LoginPage implements OnInit, OnDestroy {
     this.router.navigate(['/register']);
   }
 
+  forgortPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
   home() {
     this.router.navigate(['/landing-page']);
   }
@@ -101,6 +107,7 @@ export class LoginPage implements OnInit, OnDestroy {
                 this.router.navigateByUrl(redirectUrl);
               } else {
                 this.router.navigate(['/landing-page']);
+                this.presentToast('top','Login Successful!', 'success', 'checkmark');
               }
             } else {
               this.errorMessage = 'Only subscribers can login';
@@ -108,11 +115,13 @@ export class LoginPage implements OnInit, OnDestroy {
             }
           },
           (error) => {
-            console.log(error.error.statusText);
+            // console.log(error.error.statusText);
             if (error.statusText == 'Unauthorized') {
-              this.errorMessage = 'Invalid username or password';
+              // this.errorMessage = 'Invalid username or password';
+              this.presentToast('top','Invalid username or password!', 'danger', 'close');
             } else {
-              this.errorMessage = 'An error occurred. Please try again.';
+              // this.errorMessage = 'An error occurred. Please try again.';
+              this.presentToast('top','An error occurred. Please try again!', 'danger', 'close');
             }
             this.notLogged = true;
             this.loading = false;
@@ -123,5 +132,28 @@ export class LoginPage implements OnInit, OnDestroy {
           this.spinner.hide();
         });
     }
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
+    });
+
+    await toast.present();
   }
 }

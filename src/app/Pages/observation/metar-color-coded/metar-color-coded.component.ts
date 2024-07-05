@@ -1,10 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 // Define an interface to strongly type the MetarReport
 interface MetarReport {
@@ -29,7 +31,8 @@ export class MetarColorCodedComponent implements OnInit {
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -70,5 +73,31 @@ export class MetarColorCodedComponent implements OnInit {
         report.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
+  }
+  isLoading: boolean = true;
+  item: any;
+  ImageViewer(item: any) {
+    console.log('file Name:', item);
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    this.isLoading = true;
+
+  
+        this.isLoading = false;
+
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
+        dialogConfig.width = '80%';
+        dialogConfig.height = '80%';
+        dialogConfig.data = { item };
+
+        const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.isLoading = false;
+        });
+    
   }
 }

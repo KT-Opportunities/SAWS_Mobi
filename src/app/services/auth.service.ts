@@ -20,6 +20,8 @@ export class AuthService {
   logout() {
     // Logic for logging out
     this.isLoggedIn = false;
+    this.setIsFromSubscription(false);
+    // window.location.reload();
   }
   login(form: any) {
     const body = { UserName: form.username, Password: form.password };
@@ -30,7 +32,7 @@ export class AuthService {
     };
 
     return this.http.post<any>(
-      `${environment.serverAPI}Authenticate/Login`,
+      `${environment.serverAPI}v1/Authenticate/Login`,
       body,
       httpOptions
     );

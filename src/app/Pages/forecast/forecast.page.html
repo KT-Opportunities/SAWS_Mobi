@@ -1,62 +1,112 @@
 <ion-content>
   <div *ngIf="loading === true" class="loading-indicator">
-    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner>Loading...
+    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner
+    >Loading...
   </div>
   <section class="list-page">
     <div>
-      <div class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
-        <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
+      <div
+        class=""
+        [ngClass]="{'applied-styles': !isLoggedIn}"
+        *ngIf="isLoggedIn"
+      >
+        <h1
+          class="heading-6"
+          [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}"
+        >
           Forecast
         </h1>
-        <div class="w-layout-grid grid-list" style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none">
-          <div (click)="NavigateToColorCodedTaf()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            class="link-block-3 w-inline-block">
+        <div
+          class="w-layout-grid grid-list"
+          style="overflow-y: auto; max-height: 33em; -ms-overflow-style: none"
+        >
+          <div
+            (click)="NavigateToColorCodedTaf()"
+            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Color coded TAF</h1>
           </div>
-          <div (click)="NavigateToColorcodedSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToColorcodedSigmetAirmet()"
+            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Color coded: SIGMENT/AIRMET</h1>
           </div>
-          <div (click)="NavigateToColorCodedWarnings()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToColorCodedWarnings()"
+            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Color coded: Warnings</h1>
           </div>
 
-          <div (click)="NavigateToSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToSigmetAirmet()"
+            id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+            href="#"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">SIGMET/AIRMET</h1>
           </div>
 
-          <div (click)="NavigateToTakeOffData()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603" href="#"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToTakeOffData()"
+            id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+            href="#"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Take-off data</h1>
           </div>
-          <div (click)="NavigateToTafs()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToTafs()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">TAF</h1>
           </div>
 
-          <div (click)="NavigateToRecentTAF()" class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToRecentTAF()"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Recent TAFs</h1>
           </div>
-          <div (click)="NavigateToTafAccuracy()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToTafAccuracy()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">TAF Accuracy</h1>
           </div>
-          <div (click)="NavigateToTrends()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToTrends()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Trends</h1>
           </div>
-          <div (click)="NavigateToHarmonizedGridProducts()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToHarmonizedGridProducts()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">WAF Harmonized GRID Products</h1>
           </div>
-          <div (click)="NaviagateToAdvisories()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NaviagateToAdvisories()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Advisories</h1>
           </div>
-          <div (click)="NavigateToWarnings()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" href="#"
-            class="link-block-3 w-inline-block">
+          <div
+            (click)="NavigateToWarnings()"
+            id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+            href="#"
+            class="link-block-3 w-inline-block"
+          >
             <h1 class="heading-5">Warnings</h1>
           </div>
         </div>
@@ -66,20 +116,34 @@
     <div class="list-div" *ngIf="!isLoggedIn">
       <h1 class="heading-6">Forecast</h1>
       <div class="w-layout-grid grid-list">
-        <div (click)="NavigateToSigmetAirmet()" id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603" href="#"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToSigmetAirmet()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          href="#"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">SIGMET/AIRMET</h1>
         </div>
-        <div (click)="NavigateToTafs()" id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToTafs()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">TAFS</h1>
         </div>
-        <div (click)="NavigateToRecentTAF()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603" href="#"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NavigateToRecentTAF()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          href="#"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Recent TAFs</h1>
         </div>
-        <div (click)="NaviagateToAdvisories()" id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
-          class="link-block-3 w-inline-block">
+        <div
+          (click)="NaviagateToAdvisories()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          class="link-block-3 w-inline-block"
+        >
           <h1 class="heading-5">Advisories</h1>
         </div>
       </div>
@@ -1228,17 +1292,27 @@
         </div>
       </div>
     </section> -->
-
   </section>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <img
+      style="margin-top: -69px"
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+    />
     <div class="footerdiv">
-      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
-        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" style="
+      <a
+        (click)="NavigateToLandingPage()"
+        class="link-block-5 w-inline-block"
+        style="position: relative; top: -11px"
+        ><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+        <h6
+          class="heading-10-copy"
+          style="
             color: #fff;
             margin-top: 9px;
             margin-bottom: 0;
@@ -1246,7 +1320,8 @@
             text-decoration: none;
             font-size: 12px;
             margin-top: 4px;
-          "></h6>
+          "
+        ></h6>
       </a>
     </div>
   </div>
