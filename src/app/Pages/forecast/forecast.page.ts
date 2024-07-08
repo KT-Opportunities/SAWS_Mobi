@@ -45,7 +45,10 @@ export class ForecastPage implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    console.log('isLoggedIn', this.isLoggedIn)
+  }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
