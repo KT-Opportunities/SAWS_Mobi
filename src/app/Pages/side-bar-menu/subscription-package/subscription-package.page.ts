@@ -69,6 +69,7 @@ export class SubscriptionPackagePage implements OnInit {
     notifyUrl: '',
     name_first: 'test_User',
     name_last: 'test',
+    userId: 0,
     email_address: 'raymond.mortu@gmail.com',
     m_payment_id: 'SAW_test_1',
     item_name: 'SAW Recurring subscription',
@@ -78,13 +79,6 @@ export class SubscriptionPackagePage implements OnInit {
     amount: 500.0,
     recurring_amount: 500.0,
     frequency: 'annual',
-
-    userId: 0,
-    package_name: "annually Premium",
-    package_id: 0,
-    subscription_type: "monthly",
-    subscription_amount: 30,
-
   };
 
   public actionSheetButtonsCancel = [
@@ -344,17 +338,16 @@ export class SubscriptionPackagePage implements OnInit {
 
     console.log('loadstart- event', event)
         
-    // if (event.url == this.subsObj.returnUrl) {
-    //   debugger;
+    if (event.url == this.subsObj.returnUrl) {
+      debugger;
       
-    //   this.browser.close();
-    //   // this.saveSub();
+      this.browser.close();
+      this.saveSub();
 
-    // } else if (event.url == this.subsObj.notifyUrl) {
-    //   console.log('notified user', event)
-    // }
-    
-    if (event.url == this.subsObj.cancelUrl) {
+    } else if (event.url == this.subsObj.notifyUrl) {
+      console.log('notified user', event)
+    }
+    else if (event.url == this.subsObj.cancelUrl) {
       this.browser.close();
     }
   }
@@ -366,8 +359,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   subscribe(amount: number, subscriptionId: number) {
-    
-    var oneYearOrMonthFromNow = new Date();  
+      
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
 
@@ -385,6 +377,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.m_payment_id = subscriptionId.toString();
     this.subsObj.amount = Number(amount.toFixed(2));
     this.subsObj.item_name = this.subscriptionType;
+    this.subsObj.userId = userLoginDetails?.userprofileid;
     this.subsObj.item_description = this.subscriptionType; 
     // Customer details
     this.subsObj.name_first = userLoginDetails?.aspUserName;
@@ -392,22 +385,16 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.email_address = userLoginDetails?.aspUserEmail;
     // Transaction options
     this.subsObj.confirmation_email = userLoginDetails?.aspUserEmail;
-    
+
     // Subscriptions
     // subscription_type
     // billing_date
     // frequency
     // cycles
     this.subsObj.recurring_amount = Number(amount.toFixed(2));
-    
+
+    console.log('subO: ', this.subsObj);
     debugger;
-    
-    // Subcription Details
-    this.subsObj.userId = userLoginDetails?.userprofileid;
-    this.subsObj.package_name = this.selectedPaymentType + ' ' + this.subscriptionType;
-    this.subsObj.subscription_type = this.selectedPaymentType;
-    this.subsObj.subscription_amount = Number(amount.toFixed(2));
-        
 
     this.APIService.paySubscription(this.subsObj).subscribe(
       (payRes: any) => {

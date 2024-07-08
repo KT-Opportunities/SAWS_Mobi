@@ -37,10 +37,7 @@ export class AuthService {
       httpOptions
     );
   }
-  
   private isLoggedIn = false;
-  private isFreeSubscription = false;
-  private isPremiumSubscription = false;
   private isFromSubscription = false;
   private subscriptionPackageIdSubject = new BehaviorSubject<
     number | undefined
@@ -54,7 +51,6 @@ export class AuthService {
   getIsLoggedIn(): boolean {
     return this.isLoggedIn;
   }
-
   getIsFromSubscription(): boolean {
     return this.isFromSubscription;
   }
@@ -62,12 +58,10 @@ export class AuthService {
   setIsFromSubscription(status: boolean): void {
     this.isFromSubscription = status;
   }
-
   setLoggedInStatus(status: boolean): void {
     this.isLoggedIn = status;
     this.loginEventSubject.next(status);
   }
-
   setUserData(userData: any) {
     this.userData = userData;
     console.log('TEST::', this.userData);
@@ -76,7 +70,6 @@ export class AuthService {
   getUserData() {
     return this.userData;
   }
-
   setRedirectUrl(url: string) {
     this.redirectUrl = url;
   }
@@ -94,5 +87,4 @@ export class AuthService {
   getCurrentUser() {
     return sessionStorage.getItem('CurrentUser');
   }
-
 }
