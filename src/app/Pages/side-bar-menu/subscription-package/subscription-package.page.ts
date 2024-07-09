@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class SubscriptionPackagePage implements OnInit {
   selectedSubscriptionPackageId: number | undefined;
   selectedSubscriptionPackageAmount: number | undefined;
+  cancelSubscriptionId: number | undefined;
   showAnnuallySection: boolean = false;
   showMonthlySection: boolean = true;
   isSubscriber: boolean = true;
@@ -79,6 +80,10 @@ export class SubscriptionPackagePage implements OnInit {
     amount: 500.0,
     recurring_amount: 500.0,
     frequency: 'annual',
+    package_id: 0,
+    subscription_amount: 500.00,
+    package_name: 'monthly Premium',
+    subscription_type: 'monthly'
   };
 
   public actionSheetButtonsCancel = [
@@ -339,17 +344,17 @@ export class SubscriptionPackagePage implements OnInit {
     console.log('loadstart- event', event)
         
     if (event.url == this.subsObj.returnUrl) {
-      debugger;
-      
+      debugger;  
       this.browser.close();
-      this.saveSub();
+      // this.saveSub();
+    }
 
-    } else if (event.url == this.subsObj.notifyUrl) {
-      console.log('notified user', event)
-    }
-    else if (event.url == this.subsObj.cancelUrl) {
-      this.browser.close();
-    }
+    // } else if (event.url == this.subsObj.notifyUrl) {
+    //   console.log('notified user', event)
+    // }
+    // else if (event.url == this.subsObj.cancelUrl) {
+    //   this.browser.close();
+    // }
   }
 
   loadStopCallBack(event: any) {
@@ -392,6 +397,10 @@ export class SubscriptionPackagePage implements OnInit {
     // frequency
     // cycles
     this.subsObj.recurring_amount = Number(amount.toFixed(2));
+    this.subsObj.subscription_amount = Number(amount.toFixed(2));
+    this.subsObj.package_id = subscriptionId;
+    this.subsObj.package_name = this.selectedPaymentType + ' ' + this.subscriptionType ;
+    this.subsObj.subscription_type = this.subscriptionType;
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -524,10 +533,31 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   CancelSubscription(subscriptionId: number){
+
+    // this.APIService.CancelSubscriptionByUserProfileId(subscriptionId).subscribe(
+    //   (data: any) => {
+    //     console.log('cancelData: ', data);
+    //     // this.router.navigate(['/landing-page']);
+
+    //     // if (this.isSubscriptionSwitch){
+    //     //   this.updateSwitchedSub();
+    //     // } else {
+    //     //   this.presentToast('top','Subscription Added!', 'success', 'checkmark');
+    //     //   this.GetSubscriptions();
+    //     // }
+
+    //   },
+    //   (err) => {
+    //     console.log('postSub err: ', err);
+    //   }
+    // );
     
-    this.filteredSubscriptions = this.filterSubscriptionsById(subscriptionId);
-    this.presentActionSheetCancel();  
-    this.filteredSubscriptions[0].subscription_status = 'Cancelled';
+    // this.filteredSubscriptions = this.filterSubscriptionsById(subscriptionId);
+    // this.filteredSubscriptions[0].subscription_status = 'Cancelled';
+    
+    this.cancelSubscriptionId = subscriptionId;
+  
+    this.presentActionSheetCancel();
 
   }
 
@@ -539,16 +569,19 @@ export class SubscriptionPackagePage implements OnInit {
   
   cancelSub() {
 
-    this.APIService.PostInsertSubscription(this.filteredSubscriptions[0]).subscribe(
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+
+    this.APIService.CancelSubscription(this.cancelSubscriptionId!, userLoginDetails?.userprofileid).subscribe(
       (data: any) => {
-        console.log('updateSub: ', data);
-        this.router.navigate(['/landing-page']);
+        console.log('cancelSub: ', data);
+        // this.router.navigate(['/landing-page']);
 
         this.presentToast('top','Subscription Cancelled!', 'success', 'checkmark')
         this.GetSubscriptions();
       },
       (err) => {
-        console.log('updateSub err: ', err);
+        console.log('cancelSub err: ', err);
       }
     );
     
