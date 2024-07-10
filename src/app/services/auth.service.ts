@@ -21,6 +21,7 @@ export class AuthService {
     // Logic for logging out
     this.isLoggedIn = false;
     this.setIsFromSubscription(false);
+    this.setSubscriptionStatus('');
     // window.location.reload();
   }
   login(form: any) {
@@ -38,6 +39,7 @@ export class AuthService {
     );
   }
   private isLoggedIn = false;
+  private isFreeSubscription = true;
   private isFromSubscription = false;
   private subscriptionPackageIdSubject = new BehaviorSubject<
     number | undefined
@@ -51,6 +53,7 @@ export class AuthService {
   getIsLoggedIn(): boolean {
     return this.isLoggedIn;
   }
+
   getIsFromSubscription(): boolean {
     return this.isFromSubscription;
   }
@@ -58,10 +61,30 @@ export class AuthService {
   setIsFromSubscription(status: boolean): void {
     this.isFromSubscription = status;
   }
+
   setLoggedInStatus(status: boolean): void {
     this.isLoggedIn = status;
     this.loginEventSubject.next(status);
   }
+
+  setSubscriptionStatus(status: string): void {
+
+    console.log('did set sub:', status)
+
+    if(status == '' || status == 'monthly Free' || status == 'annually Free') {
+      this.isFreeSubscription = true;
+    } else {
+      this.isFreeSubscription = false;
+    }
+
+    console.log('this.isFreeSubscription', this.isFreeSubscription)
+
+  }
+
+  getIsFreeSubscription(): boolean {
+    return this.isFreeSubscription;
+  }
+
   setUserData(userData: any) {
     this.userData = userData;
     console.log('TEST::', this.userData);
@@ -70,6 +93,7 @@ export class AuthService {
   getUserData() {
     return this.userData;
   }
+
   setRedirectUrl(url: string) {
     this.redirectUrl = url;
   }

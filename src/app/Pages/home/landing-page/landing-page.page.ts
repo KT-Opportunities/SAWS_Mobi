@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import {} from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { SwiperModule } from 'swiper/types';
 import { Swiper } from 'swiper';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -47,10 +47,15 @@ export class LandingPage implements OnInit {
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
-
+    private toastController: ToastController
   ) {}
 
+  ionViewWillEnter() {
+    this.UpdateSubscriptionStatus();
+  }
+
   ngOnInit() {
+
     // Load all advertisements
     this.loadAllAdvertisements();
   
@@ -61,9 +66,11 @@ export class LandingPage implements OnInit {
     setInterval(() => {
       this.rotateAdvertisements();
     }, 6000);
+
   }
 
   addAdvertClick(body: any) {
+    console.log('Success:', body);
     this.apiService.PostInsertAdvertClick(body).subscribe(
       (data: any) => {
         console.log('Success:', data);
@@ -84,13 +91,65 @@ export class LandingPage implements OnInit {
       this.currentAdvertisement = this.advertisements[this.currentAdvertisementIndex];
     }
     if (this.currentAdvertisement) {
-      // console.log('Current advertisement URL', this.currentAdvertisement.link);
     }
 
   }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
+  }
+
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
+  }
+
+  UpdateSubscriptionStatus(){
+
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+
+    if(this.isLoggedIn){
+
+        this.apiService.GetActiveSubscriptionByUserProfileId(userLoginDetails?.userprofileid).subscribe(
+        (data: any) => {
+          
+          if(data.length > 0) {
+            this.authService.setSubscriptionStatus(data[0].package_name);
+          } else {
+            this.authService.setSubscriptionStatus('');
+          }
+
+        },
+        (err) => {
+          console.log('postSub err: ', err);
+        }
+      );
+
+    } 
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          side: 'end',
+          text: 'Go to Subscription',
+          handler: () => {
+            this.router.navigate(['/subscription-package']);
+          }
+        }
+      ]
+    });
+
+    await toast.present();
   }
 
   forecastPage() {
@@ -102,12 +161,42 @@ export class LandingPage implements OnInit {
   }
 
   aerosportPage() {
-    if (this.authService.getIsLoggedIn()) {
+    if (this.isLoggedIn && !this.isFreeSubscription ) {
       this.router.navigate(['/aero-sport']);
-    } else {
+    } else if (this.isLoggedIn && this.isFreeSubscription) {
+      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
+    } else {      
       this.authService.setRedirectUrl('/aero-sport');
       this.router.navigate(['/login']);
     }
+  }
+
+  observPage() {
+    this.router.navigate(['/observation']);
+  }
+
+  FlightBriefing() {
+
+    if (this.isLoggedIn && !this.isFreeSubscription) {
+      this.router.navigate(['/flight-briefing']);
+    } else if (this.isLoggedIn && this.isFreeSubscription) {
+      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
+    } else {
+      this.authService.setRedirectUrl('/flight-briefing');
+      this.router.navigate(['/login']);
+    }
+  }
+
+  domesticPage() {
+    if (this.isLoggedIn && !this.isFreeSubscription) {
+      this.router.navigate(['/domestic']);
+    } else if (this.isLoggedIn && this.isFreeSubscription) {
+      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
+    } else {
+      this.authService.setRedirectUrl('/domestic');
+      this.router.navigate(['/login']);
+    }
+    
   }
 
   goBack() {
@@ -122,35 +211,11 @@ export class LandingPage implements OnInit {
     }
   }
 
-  observPage() {
-    this.router.navigate(['/observation']);
-  }
-
-  FlightBriefing() {
-    if (this.authService.getIsLoggedIn()) {
-      this.router.navigate(['/flight-briefing']);
-    } else {
-      this.authService.setRedirectUrl('/flight-briefing');
-      this.router.navigate(['/login']);
-    }
-  }
-
-  domesticPage() {
-    if (this.authService.getIsLoggedIn()) {
-      this.router.navigate(['/domestic']);
-    } else {
-      this.authService.setRedirectUrl('/domestic');
-      this.router.navigate(['/login']);
-    }
-    
-  }
-
   // This method fetches all advertisements 
   loadAllAdvertisements() {
     // Make an HTTP request to fetch advertisements.
     this.apiService.getAllAdverts().subscribe(
       (data: any[]) => {
-        console.log('getAllAdverts', data);
         this.advertisements = data.map(ad => {
           // Prevent security vulnerabilities, create a safe URL for the image.
           const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
@@ -161,7 +226,6 @@ export class LandingPage implements OnInit {
 
           return { imageUrl, link: advertUrl, advertId } as Advertisement;
         });
-        console.log('advertisements', this.advertisements);
 
         // Set the currentAdvertisement to the first advertisement in the array
         if (this.advertisements.length > 0) {
@@ -188,7 +252,6 @@ export class LandingPage implements OnInit {
   // Launch advertisement link
   launchAdvertLink(advertUrl: string, advertId: number) {
     window.open(advertUrl, "_blank");
-    console.log("advertId", advertId)
 
     const body = {
       advertClickId: 0,
@@ -200,9 +263,7 @@ export class LandingPage implements OnInit {
   }
 
   initializeSwiper() {
-    console.log('Initializing Swiper');
     if (this.advertisements.length > 0 && this.swiperElement) {
-      //console.log('Creating Swiper instance');
       this.swiper = new Swiper(this.swiperElement.nativeElement, {
         direction: 'vertical',
         loop: true, // Enable looping to seamlessly rotate banners

@@ -4,7 +4,7 @@
       <div
         class=""
         [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn"
+        *ngIf="isLoggedIn && !isFreeSubscription"
       >
         <h1 class="heading-6" style="text-align: center">International</h1>
         <div
@@ -62,6 +62,19 @@
           >
             <h1 class="heading-5">Graphical SIGMET/AIRMET</h1>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-div" *ngIf="isLoggedIn && isFreeSubscription">
+      <h1 class="heading-6">International</h1>
+      <div class="w-layout-grid grid-list">
+        <div
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          class="link-block-3 w-inline-block"
+          (click)="NavigateToGraphicalSigmetAirmet()"
+        >
+          <h1 class="heading-5">Graphics SIGMENT/AIRMET</h1>
         </div>
       </div>
     </div>

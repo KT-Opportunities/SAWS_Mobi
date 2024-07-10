@@ -285,6 +285,13 @@ export class APIService {
     );
   }
 
+  GetActiveSubscriptionByUserProfileId(Id: number) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `v1/Subscription/GetActiveSubscriptionByUserProfileId?Id=${Id}`
+    );
+  }
+
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +

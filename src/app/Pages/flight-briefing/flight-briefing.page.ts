@@ -13,13 +13,17 @@ export class FlightBriefingPage implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    if (!this.authService.getIsLoggedIn()) {
+    if (!this.isLoggedIn) {
       this.router.navigate(['/login']);
     }
   }
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
+  }
+
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
   }
 
   NavigateToImportExport() {

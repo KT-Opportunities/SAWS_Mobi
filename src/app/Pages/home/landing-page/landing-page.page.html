@@ -2,9 +2,9 @@
 
   <div class="div-block">
 
-    <h1 class="alllinks">ALL LINKS</h1>
+    <h1 *ngIf="isFreeSubscription" class="alllinks">ALL LINKS</h1>
     <div>
-      <div style="height: 50px;">
+      <div *ngIf="isFreeSubscription" style="height: 50px;">
         <swiper-container #swiper *ngIf="advertisements.length > 0">
           <div class="swiper-wrapper">
             <a *ngIf="currentAdvertisement" (click)="launchAdvertLink(currentAdvertisement.link, currentAdvertisement.advertId)">
