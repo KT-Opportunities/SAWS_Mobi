@@ -68,17 +68,11 @@ export class AuthService {
   }
 
   setSubscriptionStatus(status: string): void {
-
-    console.log('did set sub:', status)
-
     if(status == '' || status == 'monthly Free' || status == 'annually Free') {
       this.isFreeSubscription = true;
     } else {
       this.isFreeSubscription = false;
     }
-
-    console.log('this.isFreeSubscription', this.isFreeSubscription)
-
   }
 
   getIsFreeSubscription(): boolean {

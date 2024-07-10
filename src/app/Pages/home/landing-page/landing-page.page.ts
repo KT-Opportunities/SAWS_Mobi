@@ -7,6 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import 'swiper/css';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 export interface Advertisement {
   imageUrl: string;
@@ -41,13 +42,15 @@ export class LandingPage implements OnInit {
   currentAdvertisement: Advertisement | null = null;
 
   swiperConfig: any;
+  browser: any;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private iab: InAppBrowser
   ) {}
 
   ionViewWillEnter() {
@@ -126,6 +129,19 @@ export class LandingPage implements OnInit {
       );
 
     } 
+  }
+
+  openInAppBrowser(url: string) {
+    this.browser = this.iab.create(url, '_blank', {
+      location: 'no',
+      hidden: 'no',
+      hardwareback: 'yes',
+      zoom: 'no',
+      //hideurlbar: 'yes',
+    });
+
+    console.log('this.browser', this.browser)
+
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
@@ -251,7 +267,8 @@ export class LandingPage implements OnInit {
 
   // Launch advertisement link
   launchAdvertLink(advertUrl: string, advertId: number) {
-    window.open(advertUrl, "_blank");
+    // window.open(advertUrl, "_blank");
+    this.openInAppBrowser(advertUrl);
 
     const body = {
       advertClickId: 0,
