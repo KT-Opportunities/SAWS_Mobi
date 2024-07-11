@@ -7,6 +7,8 @@ import { AuthService } from '../../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastController } from '@ionic/angular';
 import { APIService } from 'src/app/services/apis.service';
+import { Keyboard } from '@capacitor/keyboard';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +33,8 @@ export class LoginPage implements OnInit, OnDestroy {
     password: ['', Validators.required],
   });
 
+  isKeyboardVisible = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -40,12 +44,21 @@ export class LoginPage implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private renderer: Renderer2,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private platform: Platform
   ) {
     this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
   }
 
   ionViewDidLeave() {
@@ -76,10 +89,24 @@ export class LoginPage implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.platform.ready().then(() => {
+      // Listen for keyboard will show event
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      });
+
+      // Listen for keyboard will hide event
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      });
+    });
   }
 
   ngOnDestroy() {
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
   }
 
   togglePasswordVisibility(): void {
