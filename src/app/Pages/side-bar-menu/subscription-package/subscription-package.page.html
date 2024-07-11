@@ -1,4 +1,9 @@
 <ion-content>
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
+    Loading...
+  </div>
+  
   <section class="subscription-p" style="overflow-y: auto; position: relative;">
     <div class="main-div-sub">
       <h1 class="heading-6">Subscription</h1>

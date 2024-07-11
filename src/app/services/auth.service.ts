@@ -41,6 +41,7 @@ export class AuthService {
   private isLoggedIn = false;
   private isFreeSubscription = true;
   private isFromSubscription = false;
+  private isToReturnToSub = false;
   private subscriptionPackageIdSubject = new BehaviorSubject<
     number | undefined
   >(undefined);
@@ -60,6 +61,14 @@ export class AuthService {
 
   setIsFromSubscription(status: boolean): void {
     this.isFromSubscription = status;
+  }
+
+  getIsToReturnToSub(): boolean {
+    return this.isToReturnToSub;
+  }
+
+  setIsToReturnToSub(status: boolean): void {
+    this.isToReturnToSub = status;
   }
 
   setLoggedInStatus(status: boolean): void {
