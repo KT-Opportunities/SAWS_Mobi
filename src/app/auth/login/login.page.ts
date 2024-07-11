@@ -52,12 +52,15 @@ export class LoginPage implements OnInit, OnDestroy {
 
     const redirectUrl: string | null =this.authAPI.getRedirectUrl();
     
-    if(this.userData != null) {
+    if (this.userData != null) {
       this.UpdateSubscription(this.userData!.userprofileid);
 
       if (!this.authAPI.getIsFreeSubscription() && redirectUrl) {
           this.router.navigateByUrl(redirectUrl);
-      } else if (this.authAPI.getIsFreeSubscription() && redirectUrl){
+      } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
+        this.router.navigateByUrl(redirectUrl);
+      }      
+      else if (this.authAPI.getIsFreeSubscription() && redirectUrl){
         this.presentToastSub('top','Subscription is required to access Service!', 'danger', 'close');
       }
 
@@ -101,6 +104,8 @@ export class LoginPage implements OnInit, OnDestroy {
 
   home() {
     this.router.navigate(['/landing-page']);
+    this.authAPI.setIsFromSubscription(false);
+    this.authAPI.setSubscriptionStatus('');
   }
 
   onSubmit() {
@@ -122,6 +127,8 @@ export class LoginPage implements OnInit, OnDestroy {
 
               const redirectUrl = this.authAPI.getRedirectUrl();
 
+              console.log("redirectUrl:", redirectUrl)
+
               if (redirectUrl) {
                 this.router.navigateByUrl('/landing-page');
               } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
@@ -131,9 +138,12 @@ export class LoginPage implements OnInit, OnDestroy {
                 this.presentToast('top','Login Successful!', 'success', 'checkmark');
               }
 
+              this.loginForm.reset();
+
             } else {
-              this.errorMessage = 'Only subscribers can login';
-              this.router.navigate(['login']);
+              // this.errorMessage = 'Only subscribers can login';
+              this.presentToast('top','Only subscribers can login!', 'danger', 'close');
+              // this.router.navigate(['login']);
             }
           },
           (error) => {

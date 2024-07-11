@@ -781,8 +781,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   NavigateToLandingPage() {
-
     this.router.navigate(['/landing-page']);
-    
+    this.authService.setIsFromSubscription(false);
   }
 }

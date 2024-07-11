@@ -268,7 +268,7 @@
                 formControlName="Fullname"
               />
               <div
-                *ngIf="userForm.get('Fullname')?.invalid && userForm.get('Fullname') && submitted==true"
+                *ngIf="userForm.get('Fullname')?.invalid && userForm.get('Fullname') && submitted"
                 class="error-message"
               >
                 Full Name is required.
@@ -308,7 +308,7 @@
                 formControlName="Email"
               />
               <div
-                *ngIf="userForm.get('Email')?.invalid && userForm.get('Email') && submitted==true"
+                *ngIf="userForm.get('Email')?.invalid && userForm.get('Email') && submitted"
                 class="error-message"
               >
                 Email is required.
@@ -421,9 +421,9 @@
           </div> -->
         </form>
       </div>
-      <a href="" class="link-block w-inline-block">
+      <a (click)="NavigateToLogin()" class="link-block w-inline-block">
         <h5 class="createlinktext">
-          Already have an account? <a href="/login" class="linkspace">Login </a>
+          Already have an account? <a (click)="NavigateToLogin()" class="linkspace">Login </a>
         </h5>
       </a>
     </div>
