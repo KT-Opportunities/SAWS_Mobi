@@ -1,6 +1,6 @@
 <ion-content>
   <div *ngIf="loading === true" class="loading-indicator">
-    <ion-spinner *ngIf="loading === true" name="bubbles"></ion-spinner
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner
     >Loading...
   </div>
   <section class="list-page">
@@ -8,7 +8,7 @@
       <div
         class=""
         [ngClass]="{'applied-styles': !isLoggedIn}"
-        *ngIf="isLoggedIn"
+        *ngIf="isLoggedIn && !isFreeSubscription"
       >
         <h1
           class="heading-6"
@@ -109,6 +109,42 @@
           >
             <h1 class="heading-5">Warnings</h1>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-div" *ngIf="isLoggedIn && isFreeSubscription">
+      <h1 class="heading-6">Forecast</h1>
+      <div class="w-layout-grid grid-list">
+        <div
+          (click)="NavigateToSigmetAirmet()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          href="#"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">SIGMET/AIRMET</h1>
+        </div>
+        <div
+          (click)="NavigateToTafs()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">TAFS</h1>
+        </div>
+        <div
+          (click)="NavigateToRecentTAF()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          href="#"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">Recent TAFs</h1>
+        </div>
+        <div
+          (click)="NaviagateToAdvisories()"
+          id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">Advisories</h1>
         </div>
       </div>
     </div>

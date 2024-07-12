@@ -3,7 +3,7 @@
     <div
       class=""
       [ngClass]="{'applied-styles': !isLoggedIn}"
-      *ngIf="isLoggedIn"
+      *ngIf="isLoggedIn && !isFreeSubscription"
     >
       <h1
         class="heading-6"
@@ -88,6 +88,26 @@
           class="link-block-3 w-inline-block"
         >
           <h1 class="heading-5">Weather Map</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-div" *ngIf="isLoggedIn && isFreeSubscription">
+      <h1 class="heading-6">Observation</h1>
+      <div class="w-layout-grid grid-list">
+        <div
+          (click)="NavigateToMetar()"
+          id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">METAR</h1>
+        </div>
+        <div
+          (click)="NavigateToWebCam()"
+          id="w-node-eeb1886e-2c92-e02c-6736-b9ae31e75cb6-56144603"
+          class="link-block-3 w-inline-block"
+        >
+          <h1 class="heading-5">Webcams</h1>
         </div>
       </div>
     </div>

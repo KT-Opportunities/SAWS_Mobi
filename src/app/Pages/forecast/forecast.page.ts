@@ -51,6 +51,10 @@ export class ForecastPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
+  }
+
   NavigateToLandingPage() {
     this.router.navigate(['/landing-page']);
   }

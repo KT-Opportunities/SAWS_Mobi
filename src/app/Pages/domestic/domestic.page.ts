@@ -44,9 +44,10 @@ export class DomesticPage {
   NavigateToLowLevelWindProfile() {
     this.router.navigate(['domestic/low-level-wind-profile']);
   }
-NavigateToTakeOff(){
-  this.router.navigate(['domestic/take-off-data']);
-}
+  
+  NavigateToTakeOff(){
+    this.router.navigate(['domestic/take-off-data']);
+  }
   NavigateToSIGWXCharts() {
     this.router.navigate(['domestic/sigwx-charts']);
   }

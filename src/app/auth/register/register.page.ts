@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   @ViewChild('userFormRef') userFormRef!: ElementRef;
   showPassword: boolean = false;
   currentStep: number = 1;
@@ -36,6 +36,7 @@ export class RegisterPage implements OnInit {
   scrollContent(): void {
     this.content.nativeElement.scrollIntoView();
   }
+
   scrollToForm() {
     if (this.userFormRef) {
       this.userFormRef.nativeElement.scrollIntoView({
@@ -52,6 +53,7 @@ export class RegisterPage implements OnInit {
     private renderer: Renderer2,
     private alertController: AlertController,
     private authAPI: AuthService,
+    private toastController: ToastController
   ) {
     this.userForm = this.formBuilder.group({
       Fullname: ['', Validators.required],
@@ -69,6 +71,7 @@ export class RegisterPage implements OnInit {
       this.clearPasswordError();
     });
   }
+
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword; // Toggle the visibility
 
@@ -83,6 +86,7 @@ export class RegisterPage implements OnInit {
     passwordField.type = this.showPassword ? 'text' : 'password';
     confirmPasswordField.type = this.showPassword ? 'text' : 'password';
   }
+
   async presentPopup() {
     const alert = await this.alertController.create({
       message: 'User Already Exists.',
@@ -91,6 +95,7 @@ export class RegisterPage implements OnInit {
 
     await alert.present();
   }
+
   async Successfully() {
     const alert = await this.alertController.create({
       header: 'Success',
@@ -101,6 +106,7 @@ export class RegisterPage implements OnInit {
 
     await alert.present();
   }
+
   emailValidator(control: any) {
     if (control.value) {
       const matches = control.value.match(
@@ -111,6 +117,7 @@ export class RegisterPage implements OnInit {
       return null;
     }
   }
+
   passwordValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
@@ -138,7 +145,7 @@ export class RegisterPage implements OnInit {
 
     if (password !== confirmPassword) {
       this.errorMessage = 'Password and confirm password do not match.';
-      this.loading = false; // Set loading to false when validation fails
+      this.loading = false;
       return;
     }
 
@@ -151,39 +158,79 @@ export class RegisterPage implements OnInit {
     };
 
     if (this.userForm.invalid) {
-      this.loading = false; // Set loading to false when validation fails
+      this.loading = false;
       return;
     } else {
       this.api.createNewUser(body).subscribe(
         (data: any) => {
-          console.log('SAVED:', data);
           if (data.Status === 'Success') {
-            this.router.navigate(['register']);
+    
             this.statusMessage = true;
             this.errorMessage = null;
-            this.loading = false; // Set loading to false when validation fails
-            const redirectUrl = this.authAPI.getRedirectUrl();
-            if(this.authAPI.getIsFromSubscription()){
-              this.router.navigate(['login']);
-            }else{
-              this.Successfully();
-              this.onReset();
-            }
- 
+            this.loading = false;
+            
+            this.presentToast('top','Account Created Successfully!', 'success', 'close');
+
+            this.router.navigate(['login']);
+            this.onReset();
           }
         },
         (error: any) => {
-          console.log(error);
-          console.log('ERROR MESSAGE:', error.error.Message);
           if (error.error.Message === 'User Exists') {
-            this.presentPopup();
-            this.errorMessageExist = 'User Alredy  Exists';
-            this.router.navigate(['register']);
+            // this.presentPopup();
+            this.presentToastReg('top','User Alredy Exists!', 'danger', 'close'); 
           }
-          this.loading = false; // Set loading to false when API call fails
+          this.loading = false;
         }
       );
     }
+  }
+
+  async presentToastReg(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          side: 'end',
+          text: 'Go to Login',
+          handler: () => {
+            this.router.navigate(['/login']);
+          }
+        }
+      ]
+    });
+
+    await toast.present();
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
+    });
+
+    await toast.present();
   }
 
   onReset() {
@@ -191,12 +238,17 @@ export class RegisterPage implements OnInit {
     this.userForm.reset();
     this.statusMessage = false;
   }
+
   clearPasswordError() {
     if (this.errorMessage === 'Password and confirm password do not match.') {
       this.errorMessage = null;
     }
   }
-  ngOnInit() {}
+
+  NavigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
   nextStep() {
     this.currentStep++;
   }

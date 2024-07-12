@@ -27,6 +27,10 @@ export class ObservationPage {
     return this.authService.getIsLoggedIn();
   }
 
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
+  }
+
   NavigateToRadar() {
     this.router.navigate (['/observation/radar'])
   }

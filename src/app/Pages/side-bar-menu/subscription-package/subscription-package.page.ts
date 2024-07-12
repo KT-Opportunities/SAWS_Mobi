@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class SubscriptionPackagePage implements OnInit {
   selectedSubscriptionPackageId: number | undefined;
   selectedSubscriptionPackageAmount: number | undefined;
+  cancelSubscriptionId: number | undefined;
   showAnnuallySection: boolean = false;
   showMonthlySection: boolean = true;
   isSubscriber: boolean = true;
@@ -62,6 +63,7 @@ export class SubscriptionPackagePage implements OnInit {
   subsArray: any = [];
   filteredSubscriptions: any = [];
   actionSheetSubHeader: string = '';
+  loading = false;
 
   subsObj: any = {
     returnUrl: '',
@@ -79,6 +81,10 @@ export class SubscriptionPackagePage implements OnInit {
     amount: 500.0,
     recurring_amount: 500.0,
     frequency: 'annual',
+    package_id: 0,
+    subscription_amount: 500.00,
+    package_name: 'monthly Premium',
+    subscription_type: 'monthly'
   };
 
   public actionSheetButtonsCancel = [
@@ -177,12 +183,21 @@ export class SubscriptionPackagePage implements OnInit {
       // Optionally, you can perform any actions based on the subscription package ID here
     });
 
-    //   // If the user is logged in
+    // If the user is logged in
     if (this.subscriptionId) {
      // this.subscribe(this.premiumSubscriptionAmount, this.subscriptionId);
       this.CheckSubscriptionStatus(this.subscriptionId, this.selectedSubscriptionPackageAmount);
     }
   }
+
+  ionViewDidLeave() {
+    if (this.authService.getIsToReturnToSub()){
+      this.router.navigate(['/subscription-package']);
+      this.authService.setIsToReturnToSub(false);
+    }
+  }
+
+
 
   ngOnInit() {
 
@@ -288,46 +303,17 @@ export class SubscriptionPackagePage implements OnInit {
 
     console.log('this.browser', this.browser)
 
-    //this.browser.addEventListener('loadstart', this.loadStartCallBack);
-
-    let isFirstCall = true;
-
     this.browser.on('loadstart').subscribe((event: any) => {
 
       console.log('loadstart - event', event)
-
-      if (isFirstCall) {
-        this.token = event.url.split('/').pop() || '';
-        console.log('this.token', this.token);
-        isFirstCall = false;
-      }
-
       this.loadStartCallBack(event);
     });
 
     this.browser.on('loadstop').subscribe((event: any) => {
-      this.loadStopCallBack(event);
-      
-      // Extract the token from the URL
-      const urlParams = new URLSearchParams(event.url);
-      const token = urlParams.get('token'); // Adjust the key based on the actual parameter name
-  
-      if (token) {
-        // this.token = token;
-        console.log('Token on success:', token);
-  
-        // Handle the token
-        // this.handleToken(this.token);
-  
-        // Close the browser after extracting the token
-        this.browser.close();
-      }
+      this.loadStopCallBack(event);      
     });
 
-    this.browser.on('exit').subscribe((event: any) => {
-      
-      console.log('loadexit - event', event)
-      
+    this.browser.on('exit').subscribe((event: any) => {  
       console.log('exit browswer activated')
       this.browser.close();
     });
@@ -339,17 +325,22 @@ export class SubscriptionPackagePage implements OnInit {
     console.log('loadstart- event', event)
         
     if (event.url == this.subsObj.returnUrl) {
-      debugger;
-      
+      debugger;  
+      this.authService.setIsToReturnToSub(true);
       this.browser.close();
-      this.saveSub();
+      // this.saveSub();
+      this.loading = false;
+      this.presentToastSub('top','Subscription Created!', 'success', 'checkmark');
+      this.router.navigate(['/landing-page']);
 
-    } else if (event.url == this.subsObj.notifyUrl) {
-      console.log('notified user', event)
-    }
-    else if (event.url == this.subsObj.cancelUrl) {
+
+    } else if (event.url == this.subsObj.cancelUrl) {
+
       this.browser.close();
-    }
+      this.loading = false;
+      this.presentToast('top','Cancelled Adding of Subscription!', 'danger', 'checkmark');
+
+   }
   }
 
   loadStopCallBack(event: any) {
@@ -359,6 +350,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   subscribe(amount: number, subscriptionId: number) {
+    this.loading = true;
       
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
@@ -370,8 +362,6 @@ export class SubscriptionPackagePage implements OnInit {
     } else {
       this.subscriptionType = 'Free';
     }
-
-    debugger;
 
     // Transaction details
     this.subsObj.m_payment_id = subscriptionId.toString();
@@ -392,6 +382,10 @@ export class SubscriptionPackagePage implements OnInit {
     // frequency
     // cycles
     this.subsObj.recurring_amount = Number(amount.toFixed(2));
+    this.subsObj.subscription_amount = Number(amount.toFixed(2));
+    this.subsObj.package_id = subscriptionId;
+    this.subsObj.package_name = this.selectedPaymentType + ' ' + this.subscriptionType ;
+    this.subsObj.subscription_type = this.subscriptionType;
 
     console.log('subO: ', this.subsObj);
     debugger;
@@ -404,6 +398,7 @@ export class SubscriptionPackagePage implements OnInit {
       },
       (err) => {
         console.log('error: ', err);
+        this.loading = false;
       }
     );
   }
@@ -512,7 +507,7 @@ export class SubscriptionPackagePage implements OnInit {
         if (this.isSubscriptionSwitch){
           this.updateSwitchedSub();
         } else {
-          this.presentToast('top','Subscription Added!', 'success', 'checkmark');
+          this.presentToastSub('top','Subscription Added!', 'success', 'checkmark');
           this.GetSubscriptions();
         }
 
@@ -524,10 +519,9 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   CancelSubscription(subscriptionId: number){
-    
-    this.filteredSubscriptions = this.filterSubscriptionsById(subscriptionId);
-    this.presentActionSheetCancel();  
-    this.filteredSubscriptions[0].subscription_status = 'Cancelled';
+   
+    this.cancelSubscriptionId = subscriptionId;
+    this.presentActionSheetCancel();
 
   }
 
@@ -538,17 +532,25 @@ export class SubscriptionPackagePage implements OnInit {
   }
   
   cancelSub() {
+    this.loading = true;
 
-    this.APIService.PostInsertSubscription(this.filteredSubscriptions[0]).subscribe(
+    var user: any = this.authService.getCurrentUser();
+    const userLoginDetails = JSON.parse(user);
+
+    this.APIService.CancelSubscription(this.cancelSubscriptionId!, userLoginDetails?.userprofileid).subscribe(
       (data: any) => {
-        console.log('updateSub: ', data);
+        console.log('cancelSub: ', data);
         this.router.navigate(['/landing-page']);
+        this.authService.setIsToReturnToSub(true);
 
         this.presentToast('top','Subscription Cancelled!', 'success', 'checkmark')
         this.GetSubscriptions();
+
+        this.loading = false;
       },
       (err) => {
-        console.log('updateSub err: ', err);
+        console.log('cancelSub err: ', err);
+        this.loading = false;
       }
     );
     
@@ -572,7 +574,7 @@ export class SubscriptionPackagePage implements OnInit {
         console.log('updateSub: ', data);
         this.router.navigate(['/landing-page']);
 
-        this.presentToast('top','Subscription Changed!', 'success', 'sync')
+        this.presentToastSub('top','Subscription Changed!', 'success', 'sync')
         this.GetSubscriptions();
       },
       (err) => {
@@ -638,6 +640,30 @@ export class SubscriptionPackagePage implements OnInit {
 
     await toast.present();
 
+  }
+
+  async presentToastSub(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          side: 'end',
+          text: 'Go to Subscription',
+          handler: () => {
+            this.router.navigate(['/subscription-package']);
+          }
+        }
+      ]
+    });
+
+    await toast.present();
   }
 
   handleAction(action: string) {
@@ -748,8 +774,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   NavigateToLandingPage() {
-
     this.router.navigate(['/landing-page']);
-    
+    this.authService.setIsFromSubscription(false);
   }
 }
