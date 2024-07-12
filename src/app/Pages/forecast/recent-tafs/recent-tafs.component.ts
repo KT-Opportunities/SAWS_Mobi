@@ -17,6 +17,8 @@ export class RecentTafsComponent implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = true;
   recentTafs: any[] = [];
+  filteredTafs: any[] = []; // New variable to store filtered TAFs
+  searchQuery: string = '';
 
   isDropdownOpen1: boolean = false;
   isDropdownOpen2: boolean = false;
@@ -53,6 +55,7 @@ export class RecentTafsComponent implements OnInit {
       (data) => {
         // Assign fetched data to recentTafs array
         this.recentTafs = data;
+        this.filteredTafs = data;
         // Set loading to false when fetching is complete
         this.loading = false;
         // Hide the spinner
@@ -73,6 +76,21 @@ export class RecentTafsComponent implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
+  filterTafs() {
+    // Filter the TAFs based on the search query
+    if (this.searchQuery.trim()) {
+      this.filteredTafs = this.recentTafs.filter(taf =>
+        taf.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredTafs = this.recentTafs;
+    }
+  }
+
+  onSearch(event: Event) {
+    event.preventDefault(); // Prevent the form from submitting
+    this.filterTafs(); // Call the filter function
+  }
   forecastDropdown(dropdown: string) {
     switch (dropdown) {
       case 'dropdown1':

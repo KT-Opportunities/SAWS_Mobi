@@ -5,9 +5,9 @@
 
   <section class="list-page"></section>
 
-  <section class="re">
+  <section class="re" style="margin-top: -1px !important;">
     <div class="recent-tafs">
-      <h1 class="heading-6">Recent TAFs</h1>
+      <h1 class="heading-6">Metar Recent TAFs</h1>
       <div class="scrolltaffA">
         <div class="w-layout-grid grid-6-copy">
           <div
@@ -130,15 +130,17 @@
               class="div-block-14"
             >
               <h5 class="heading-9">Query TAFs</h5>
-              <form action="/search" class="search w-form">
+              <form action="/search" class="search w-form" (submit)="onSearch($event)" >
                 <input
-                  class="search-input w-input"
-                  maxlength="256"
-                  name="query"
-                  placeholder="Search…"
-                  type="search"
-                  id="search"
-                  required=""
+                class="search-input w-input"
+                maxlength="256"
+                name="query"
+                placeholder="Search…"
+                type="search"
+                id="search"
+                [(ngModel)]="searchQuery"
+                (ngModelChange)="filterTafs()"
+                required=""
                 />
                 <input
                   type="submit"
@@ -257,7 +259,7 @@
           </div>
         </div>
 
-        <div class="div-block-15" *ngFor="let taf of recentTafs">
+        <div class="div-block-15" *ngFor="let taf of filteredTafs">
           <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
           <div class="div-block-32">
             <div class="w-layout-grid ccta-grid">
@@ -276,7 +278,7 @@
             </div>
           </div>
           <div class="div-block-34">
-            <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1>
+            <!-- <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1> -->
           </div>
           <div class="div-block-45">
             <div class="w-layout-grid heading-text">
