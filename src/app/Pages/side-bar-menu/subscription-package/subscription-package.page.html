@@ -97,7 +97,7 @@
                   <a class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;"
                     (click)="CancelFreeSubscription()">
-                    UnSubscribed
+                    Unsubscribe
                   </a>
 
                   <!-- <a class="button-2-copy w-button"
@@ -231,13 +231,13 @@
                   <a *ngIf="isSubscribedPremiumMonthly && selectedPaymentType === 'monthly'"
                     (click)="CancelSubscription(premiumMontlySubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
-                    UnSubscribe
+                    Unsubscribe
                   </a>
 
                   <a *ngIf="isSubscribedPremiumAnnually && selectedPaymentType === 'annually'"
                     (click)="CancelSubscription(premiumAnnuallySubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
-                    UnSubscribe
+                    Unsubscribe
                   </a>
                 </div>
               </div>
@@ -354,13 +354,13 @@
                   <a *ngIf="isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
                     (click)="CancelSubscription(regulateAnnuallydSubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
-                    UnSubscribe
+                    Unsubscribe
                   </a>
                   
                   <a id="open-action-sheet" *ngIf="isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
                     (click)="CancelSubscription(regulateMonthlydSubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
-                    UnSubscribe
+                    Unsubscribe
                   </a>
 
                   <a *ngIf="!isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
