@@ -72,8 +72,9 @@ export class LoginPage implements OnInit, OnDestroy {
           this.router.navigateByUrl(redirectUrl);
       } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
         this.router.navigateByUrl(redirectUrl);
-      }      
-      else if (this.authAPI.getIsFreeSubscription() && redirectUrl){
+      } else if (redirectUrl == '/landing-page') {
+        this.router.navigateByUrl(redirectUrl);
+      }  else if (this.authAPI.getIsFreeSubscription() && redirectUrl){
         this.presentToastSub('top','Subscription is required to access Service!', 'danger', 'close');
       }
 

@@ -3,7 +3,7 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
     Loading...
   </div>
-  
+
   <section class="subscription-p" style="overflow-y: auto; position: relative;">
     <div class="main-div-sub">
       <h1 class="heading-6">Subscription</h1>
@@ -223,16 +223,17 @@
                     class="button-2-copy w-button">Subscribe Now
                   </div>
 
-                  <div *ngIf="selectedPaymentType === 'annually' && !isSubscribedPremiumAnnually"
-                    (click)="provideFeedback(premiumSubscriptionId, premiumSubscriptionAmount)"
-                    class="button-2-copy w-button">Subscribe Now
-                  </div>
 
                   <a *ngIf="isSubscribedPremiumMonthly && selectedPaymentType === 'monthly'"
                     (click)="CancelSubscription(premiumMontlySubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
                     Unsubscribe
                   </a>
+
+                  <div *ngIf=" !isSubscribedPremiumAnnually && selectedPaymentType === 'annually'"
+                    (click)="provideFeedback(premiumSubscriptionId, premiumSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
+                  </div>
 
                   <a *ngIf="isSubscribedPremiumAnnually && selectedPaymentType === 'annually'"
                     (click)="CancelSubscription(premiumAnnuallySubscribedId)" class="button-2-copy w-button"
@@ -351,12 +352,11 @@
                 <div class="div-block-56">
                   <div class="div-block-55"></div>
 
-                  <a *ngIf="isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
-                    (click)="CancelSubscription(regulateAnnuallydSubscribedId)" class="button-2-copy w-button"
-                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
-                    Unsubscribe
+                  <a *ngIf="!isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
+                    (click)="provideFeedback(regulatedSubscriptionId, regulatedSubscriptionAmount)"
+                    class="button-2-copy w-button">Subscribe Now
                   </a>
-                  
+
                   <a id="open-action-sheet" *ngIf="isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
                     (click)="CancelSubscription(regulateMonthlydSubscribedId)" class="button-2-copy w-button"
                     style="background-color: grey; display: flex; justify-content: center; align-items: center;">
@@ -368,10 +368,12 @@
                     class="button-2-copy w-button">Subscribe Now
                   </a>
 
-                  <a *ngIf="!isSubscriberRegulatedMonthly && selectedPaymentType === 'monthly'"
-                    (click)="provideFeedback(regulatedSubscriptionId, regulatedSubscriptionAmount)"
-                    class="button-2-copy w-button">Subscribe Now
+                  <a *ngIf="isSubscriberRegulatedAnnually && selectedPaymentType === 'annually'"
+                    (click)="CancelSubscription(regulateAnnuallydSubscribedId)" class="button-2-copy w-button"
+                    style="background-color: grey; display: flex; justify-content: center; align-items: center;">
+                    Unsubscribe
                   </a>
+
 
                 </div>
               </div>
