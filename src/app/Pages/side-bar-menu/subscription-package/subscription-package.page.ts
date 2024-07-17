@@ -238,7 +238,7 @@ export class SubscriptionPackagePage implements OnInit {
           } else if (element.package_id == 5) {
             this.isSubscribedPremiumAnnually = true;
             this.premiumAnnuallySubscribedId = element.subscriptionId;
-          } else {
+          } else if (element.package_id == 6)  {
             this.isSubscriberRegulatedAnnually = true;
             this.regulateAnnuallydSubscribedId = element.subscriptionId;
           }
