@@ -2511,6 +2511,16 @@ ion-toast.custom-toast::part(button) {
 }
 
 @media screen and (max-width: 991px) {
+  .round-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    margin-top: -107px;
+    margin-left: -246px;
+    margin-bottom: 90px;
+  }
   .logout {
     padding-left: 3px;
     width: 25px;
@@ -2534,6 +2544,18 @@ ion-toast.custom-toast::part(button) {
     left: 0%;
     right: 0%;
   }
+  .section {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    margin-top: 194px;
+  }
   .aerosport-ci {
     margin-top: -118px;
     position: static;
@@ -2545,7 +2567,7 @@ ion-toast.custom-toast::part(button) {
 
   .image {
     height: auto;
-    margin-top: 0;
+    margin-top: -99px;
     padding-top: 0;
   }
 
@@ -2608,7 +2630,7 @@ ion-toast.custom-toast::part(button) {
   }
 
   .landing-page-section {
-    margin-top: -116px;
+    margin-top: 67px;
     position: static;
     top: 0%;
     bottom: 0%;
@@ -2668,7 +2690,7 @@ ion-toast.custom-toast::part(button) {
     bottom: 0%;
     left: 0%;
     right: 0%;
-    margin-top: 119px !important;
+    margin-top: 177px !important;
   }
 
   .colour-coded-tafs-page {
@@ -2898,7 +2920,7 @@ ion-toast.custom-toast::part(button) {
   }
 
   .continueb {
-    width: 46vw;
+    width: 78vw;
   }
 
   .grid-2 {
