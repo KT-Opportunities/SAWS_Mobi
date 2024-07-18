@@ -26,6 +26,7 @@ export class TafComponent implements OnInit {
 
   TAFArray: FileData[] = [];
   isLoading: boolean = true;
+  searchQuery: string = ''; // Variable to hold the search query
 
   constructor(
     private router: Router,
@@ -55,6 +56,7 @@ export class TafComponent implements OnInit {
             return item;
           }
         });
+        // this.searchQuery = this.searchQuery;
         this.loading = false;
         this.spinner.hide();
         console.log('Response received:', Response);
@@ -70,6 +72,21 @@ export class TafComponent implements OnInit {
 
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
+  }
+   // Method to handle search form submission
+   onSearch(event: Event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    this.searchQuery = this.searchQuery.trim().toLowerCase();
+  }
+
+  // Method to filter TAFArray based on search query
+  get filteredTAFArray(): FileData[] {
+    if (!this.searchQuery) {
+      return this.TAFArray;
+    }
+    return this.TAFArray.filter(item =>
+      item.filetextcontent.toLowerCase().includes(this.searchQuery)
+    );
   }
 
   extractHeadingContent(fileTextContent: string): string | null {
