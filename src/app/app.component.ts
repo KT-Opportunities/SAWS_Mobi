@@ -35,6 +35,7 @@ export class AppComponent {
   }
   login() {
     this.router.navigate(['/login']);
+    this.authService.setRedirectUrl('/landing-page');
   }
   isLogged: boolean = false;
   constructor(
