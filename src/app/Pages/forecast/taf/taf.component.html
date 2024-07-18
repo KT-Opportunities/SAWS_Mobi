@@ -47,8 +47,10 @@
           >
             <div>
               <h5 class="heading-9">Query Airmet</h5>
-              <form action="/search" class="search w-form">
+              <form action="/search" class="search w-form" 
+              (ngSubmit)="onSearch($event)">
                 <input
+                [(ngModel)]="searchQuery" 
                   class="search-input w-input"
                   maxlength="256"
                   name="query"
@@ -85,7 +87,8 @@
                 </div>
               </div>
             </div>
-            <div *ngFor="let taf of TAFArray">
+            <div *ngFor="let taf of filteredTAFArray">
+              
               <div class="w-layout-grid heading-text">
                 <div
                   id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea"
