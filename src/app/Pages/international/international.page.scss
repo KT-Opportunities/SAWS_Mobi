@@ -1,3 +1,8 @@
+.custom-dialog-container .mat-dialog-container {
+  margin-top: px; /* Adjust as needed */
+  margin-left: 15px; /* Adjust as needed */
+}
+
 .heading-5 {
   font-size: 14px;
   color: #002f5a;
@@ -11,16 +16,6 @@
   margin-top: 155%;
 }
 
-.w-icon-dropdown-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  right: -50px;
-  margin: auto;
-  margin-right: 20px;
-  width: 1em;
-  height: 1em;
-}
 .w-icon-arrow-down:before,
 .w-icon-dropdown-toggle:before {
   content: "\e603";
@@ -51,6 +46,8 @@
 }
 #icon3 {
   padding-right: 30px;
+  margin-top: -10px;
+  position: absolute;
 }
 .w-dropdown1 {
   display: inline-block;
@@ -67,7 +64,7 @@
   vertical-align: top;
   text-decoration: none;
   color: white;
-  padding: 7px;
+  //padding: 7px;
   text-align: left;
   margin-left: auto;
   margin-right: auto;
@@ -80,21 +77,12 @@
   user-select: none;
   display: inline-block;
   cursor: pointer;
-  padding-right: 40px;
+  // padding-right: 40px;
 }
 .w-dropdown-toggle:focus {
   outline: 0;
 }
-.w-icon-dropdown-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  right: -50px;
-  margin: auto;
-  margin-right: 20px;
-  width: 1em;
-  height: 1em;
-}
+
 .w-dropdown-list {
   background-color: white;
   width: 100%;
@@ -153,21 +141,10 @@
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
-  margin-right: -182px;
+  margin-right: -152px;
+  margin-left: 307px;
 }
 
-.w-icon-dropdown-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  right: -50px;
-  margin: auto;
-  margin-top: auto;
-  margin-right: auto;
-  margin-right: 20px;
-  width: 1em;
-  height: 1em;
-}
 [class^="w-icon-"],
 [class*=" w-icon-"] {
   font-family: "webflow-icons" !important;
@@ -9136,7 +9113,7 @@ textarea.w-select {
   vertical-align: top;
   text-decoration: none;
   color: white;
-  padding: 7px;
+  //padding: 7px;
   text-align: left;
   margin-left: auto;
   margin-right: auto;
@@ -9149,21 +9126,12 @@ textarea.w-select {
   user-select: none;
   display: inline-block;
   cursor: pointer;
-  padding-right: 40px;
+  // padding-right: 40px;
 }
 .w-dropdown-toggle:focus {
   outline: 0;
 }
-.w-icon-dropdown-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  right: -50px;
-  margin: auto;
-  margin-right: 20px;
-  width: 1em;
-  height: 1em;
-}
+
 .w-dropdown-list {
   background-color: white;
   width: 100%;
@@ -10189,7 +10157,7 @@ textarea.w-select {
 
 .text-block {
   color: #fff;
-  margin-top: -5px !important;
+  margin-top: 0px !important;
   font-family: Montserrat, sans-serif;
 }
 
