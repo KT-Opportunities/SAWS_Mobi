@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {APIService} from '../../../services/apis.service'
 import { NgxSpinnerService } from 'ngx-spinner';
-import { textFile } from '../advisories/advisories.component';
+// import { textFile } from '../advisories/advisories.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
@@ -18,7 +18,8 @@ export class SigmetAirmetComponent  implements OnInit {
   SigmetList:any = [];
   AirmetList:any = [];
   GametList:any = [];
-  unfilteredList:any = [];
+  filteredList:any = []= [];
+  searchQuery: string = '';
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -30,34 +31,7 @@ export class SigmetAirmetComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.api.GetSourceTextFolderFiles("sigmet")
-    // .subscribe((Response) => {
-    //   Response.forEach((element:any) => {
-    //     element.Id = element.filetextcontent.split('\n')[2];
-       
-    //       var vwValue = element.filetextcontent.split('\n')[2];
-    //       element.heading = vwValue;
-         
-    //       // var obj = { value: element.filetextcontent.split('\n')[0], viewValue:vwValue}
-    //       // element.Id = element.filetextcontent.split('\n')[0];
-        
-    //     // if(element.Id.split(' ')[0] == 'TC'){
-    //     //   debugger
-    //     //   var vwValue = element.filetextcontent.split('\n')[5]
-    //     //   element.heading = vwValue;
-    //     //   vwValue = vwValue.split('TC:')[1].trim();
-    //     //   var obj = { value: element.filetextcontent.split('\n')[0], viewValue:vwValue}
-    //     //   this.CycloneList.push(obj);
-    //     //   element.Id = element.filetextcontent.split('\n')[0];
-    //     // }
-    //   });
-    //   this.SigmetList = Response;
-    //   this.unfilteredList = Response;
-    //   console.log("Response ", this.SigmetList);
-    //   debugger
-    //   this.isLoading = false;
-      
-    // })
+ 
     this.getSigmetTextFiles();
   }
 
@@ -73,7 +47,7 @@ export class SigmetAirmetComponent  implements OnInit {
          
       });
       this.SigmetList = Response;
-      this.unfilteredList = Response;
+      this.filteredList = Response;
       this.getAirmetTextFiles();
       console.log("Response ", this.SigmetList);
   
@@ -96,7 +70,7 @@ export class SigmetAirmetComponent  implements OnInit {
 
       //Push airmet into the sigmet List
       this.SigmetList.push(Response);
-      this.unfilteredList.push(Response);
+      this.filteredList.push(Response);
       console.log("Response ", this.SigmetList);
   
       this.getGametTextFiles();
@@ -117,7 +91,7 @@ export class SigmetAirmetComponent  implements OnInit {
       });
       //push gamet into the sigmet List
       this.SigmetList.push(Response);
-      this.unfilteredList.push(Response);
+      this.filteredList.push(Response);
       console.log("Response ", this.SigmetList);
   
       this.isLoading = false;
@@ -132,7 +106,7 @@ export class SigmetAirmetComponent  implements OnInit {
     console.log("value ",element);
     let filterValue = (element as HTMLInputElement).value;
     if (!filterValue) {
-      this.SigmetList = this.unfilteredList;
+      this.SigmetList = this.filteredList;
       return;
     }
   
@@ -141,13 +115,15 @@ export class SigmetAirmetComponent  implements OnInit {
     );
   }
 
+  
+
   filterNosearchValue(){
    
     let element = document.getElementById('searchValue');
     console.log("value ",element);
     let filterValue = (element as HTMLInputElement).value;
     if (!filterValue) {
-      this.SigmetList = this.unfilteredList;
+      this.SigmetList = this.filteredList;
       return;
     }
   }

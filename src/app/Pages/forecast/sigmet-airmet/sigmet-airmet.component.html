@@ -5,7 +5,7 @@
     Loading...
   </div>
 
-  <section class="colour-coded-tafs-page">
+  <section class="colour-coded-tafs-page"  style="   margin-top: 57px !important;">
     <div class="div-block-2">
       <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
     </div>
@@ -26,9 +26,12 @@
         </div>
         <div>
           <h5 class="heading-9" id="searchHeader">Query sigmet</h5>
-          <form action="/search" class="search w-form">
-            <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
-              id="searchValue" (keypress)="filterNosearchValue()" /><button type="submit" class="search-button w-button"
+          <form action="/search" class="search w-form" >
+            <input class="search-input w-input" maxlength="256"
+             name="query" placeholder="Search…" type="search"
+             [(ngModel)]="searchQuery"
+                (ngModelChange)="filterbySearch($event)"
+              id="searchValue"  /><button type="submit" class="search-button w-button"
               (click)="filterbySearch($event)">Search</button>
           </form>
         </div>
@@ -297,8 +300,8 @@
           <button class="top" style="display: none;" disabled="true" id="scrollT"></button>
           <section class="tafs-div" *ngFor="let sigmet of SigmetList">
             <h1 class="heading-6">{{sigmet.heading}}</h1>
-            <h1 class="heading-6">{{sigmet.lastmodified | date:
-              "yyyy/MM/dd HH:mm"}}</h1>
+            <!-- <h1 class="heading-6">{{sigmet.lastmodified | date:
+              "yyyy/MM/dd HH:mm"}}</h1> -->
             <span style="white-space: pre-line;">
               {{sigmet.filetextcontent}}
             </span>

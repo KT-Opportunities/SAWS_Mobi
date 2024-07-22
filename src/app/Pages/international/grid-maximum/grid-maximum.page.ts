@@ -89,8 +89,14 @@ export class GridMaximumPage implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
+        dialogConfig.width = '100vw';
+        dialogConfig.height = '100%';
+        dialogConfig.maxWidth = '97vw';
+        dialogConfig.maxHeight = '99%';
+        dialogConfig.panelClass = 'custom-dialog-container';
+   
+
+
         dialogConfig.data = { filetextcontent };
 
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
