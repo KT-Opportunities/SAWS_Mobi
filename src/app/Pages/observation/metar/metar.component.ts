@@ -23,9 +23,9 @@ export class MetarComponent  implements OnInit {
 
   isLogged: boolean = false;
   loading: boolean = false;
-
   metarReports: any[] = [];
   metarData: Metar[] = [];
+  searchQuery: string = '';
 
   constructor(
     private router: Router,
@@ -64,6 +64,24 @@ export class MetarComponent  implements OnInit {
       }
     );
   }
+
+  // Method to handle search form submission
+  onSearch(event: Event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    this.searchQuery = this.searchQuery.trim().toLowerCase();
+  }
+
+  // Method to filter TAFArray based on search query
+  get filteredmetarReports():any  {
+    if (!this.searchQuery) {
+      return this.metarReports;
+    }
+    return this.metarReports.filter(item =>
+      item.filetextcontent.toLowerCase().includes(this.searchQuery)
+    );
+  }
+
+
   isLoading: boolean = true;
   item: any;
   ImageViewer(item: any) {

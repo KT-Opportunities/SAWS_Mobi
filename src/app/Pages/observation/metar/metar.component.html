@@ -26,9 +26,21 @@
           <div id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea" class="div-block-14-copy">
             <div>
               <h5 class="heading-9">Query TAFs</h5>
-              <form action="/search" class="search w-form"><input class="search-input w-input" maxlength="256"
-                  name="query" placeholder="Search…" type="search" id="search" required=""><input type="submit"
-                  class="search-button w-button" value="Search"></form>
+              <form action="/search"
+              (ngSubmit)="onSearch($event)"
+               class="search w-form">
+               <input class="search-input w-input"
+                 [(ngModel)]="searchQuery"  
+                  maxlength="256"
+                  name="query" 
+                  placeholder="Search…" 
+                  type="search" id="search" 
+                  required="">
+                  <input type="submit"
+                  (click)="onSearch($event)"
+                  class="search-button w-button"
+                   value="Search">
+                  </form>
             </div>
           </div>
 
@@ -45,7 +57,7 @@
               </div>
             </div>
             <div>
-              <div class="w-layout-grid heading-text" *ngFor="let report of metarReports">
+              <div class="w-layout-grid heading-text" *ngFor="let report of filteredmetarReports">
                 <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea" class="cct-copy-copy">
                   <h1 class="heading-21">{{ report.filetextcontent }}</h1>
                 </div>
