@@ -1,13 +1,18 @@
 <ion-content [fullscreen]="true">
-
   <div *ngIf="isLoading" class="loading-indicator">
     <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
     Loading...
   </div>
 
-  <section class="wind-charts" style="margin-top: 107px !important">
+  <section class="wind-charts" style="">
     <div class="div-block-2">
-      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
+      <img
+        src="images/Path-3452.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image"
+      />
     </div>
     <h1 class="heading-6">Forecast Winds</h1>
     <div style="overflow-y: auto; height: 32em">
@@ -21,232 +26,376 @@
           <div class="div-blue-copy"></div>
         </div>
 
-
-
-
-        
-       
-      <div class="w-layout-grid wind-grid-charts" id="chats">
-          <div    id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0" class="div-block-35">
-            <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0" class="w-layout-grid grid-21" id="grid121">
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0" class="div-block-36" id="node1">
+        <div class="w-layout-grid wind-grid-charts" id="chats">
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0"
+            class="div-block-35"
+          >
+            <div
+              id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0"
+              class="w-layout-grid grid-21"
+              id="grid121"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0"
+                class="div-block-36"
+                id="node1"
+              >
                 <h4 class="heading-24" id="block">
                   Block Format FL010 to FL240
                 </h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0" class="div-block-36">
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0" class="div-block-36"></div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0" class="div-block-36"></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0" class="div-block-455">
-            <div class="w-layout-grid grid-22" *ngFor="let chart of  chartsArray
-            let i = index"  [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
-     >
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0" class="div-block-37">
-                <h4 class="heading-25">{{ removefile(chart.filename)}}</h4>
+
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0"
+            class="div-block-455"
+          >
+            <div
+              class="w-layout-grid grid-22"
+              *ngFor="let chart of chartsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0"
+                class="div-block-37"
+              >
+                <h4 class="heading-25">{{ removefile(chart.filename) }}</h4>
               </div>
-             
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0" class="div-block-37">
-                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(chart)">View</div>
+
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0"
+                class="div-block-37"
+              >
+                <div
+                  class="button-2-copy w-button"
+                  id="view"
+                  (click)="openImageViewer(chart)"
+                >
+                  View
+                </div>
               </div>
             </div>
           </div>
-        
-      
-
-
-
-
-
         </div>
 
         <div class="w-layout-grid wind-grid-charts" id="chats">
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0" class="div-block-35">
-            <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0" class="w-layout-grid grid-21" id="grid121">
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0" class="div-block-36" id="node1">
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0"
+            class="div-block-35"
+          >
+            <div
+              id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0"
+              class="w-layout-grid grid-21"
+              id="grid121"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0"
+                class="div-block-36"
+                id="node1"
+              >
                 <h4 class="heading-24" id="block">
                   Block Format FL210 to FL450
                 </h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0" class="div-block-36">
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0" class="div-block-36"></div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0" class="div-block-36"></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0" class="div-block-455">
-            <div class="w-layout-grid grid-22" *ngFor="let chart of  chartsArray
-            let i = index"  [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
-     >
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0" class="div-block-37">
-                <h4 class="heading-25">{{ removefile(chart.filename)}}</h4>
+
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0"
+            class="div-block-455"
+          >
+            <div
+              class="w-layout-grid grid-22"
+              *ngFor="let chart of chartsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0"
+                class="div-block-37"
+              >
+                <h4 class="heading-25">{{ removefile(chart.filename) }}</h4>
               </div>
-             
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0" class="div-block-37">
-                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(chart)">View</div>
+
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0"
+                class="div-block-37"
+              >
+                <div
+                  class="button-2-copy w-button"
+                  id="view"
+                  (click)="openImageViewer(chart)"
+                >
+                  View
+                </div>
               </div>
             </div>
           </div>
-        
-      
-
-
-
-
-
         </div>
 
         <div class="w-layout-grid wind-grid-charts" id="chats">
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0" class="div-block-35">
-            <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0" class="w-layout-grid grid-21" id="grid121">
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0" class="div-block-36" id="node1">
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0"
+            class="div-block-35"
+          >
+            <div
+              id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0"
+              class="w-layout-grid grid-21"
+              id="grid121"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0"
+                class="div-block-36"
+                id="node1"
+              >
                 <h4 class="heading-24" id="block">
                   Barb Format FL010 to FL150
                 </h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0" class="div-block-36">
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0" class="div-block-36"></div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0" class="div-block-36"></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0" class="div-block-455">
-            <div class="w-layout-grid grid-22" *ngFor="let chart of  chartsArray
-            let i = index"  [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
-     >
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0" class="div-block-37">
-                <h4 class="heading-25">{{ removefile(chart.filename)}}</h4>
+
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0"
+            class="div-block-455"
+          >
+            <div
+              class="w-layout-grid grid-22"
+              *ngFor="let chart of chartsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0"
+                class="div-block-37"
+              >
+                <h4 class="heading-25">{{ removefile(chart.filename) }}</h4>
               </div>
-             
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0" class="div-block-37">
-                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(chart)">View</div>
+
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0"
+                class="div-block-37"
+              >
+                <div
+                  class="button-2-copy w-button"
+                  id="view"
+                  (click)="openImageViewer(chart)"
+                >
+                  View
+                </div>
               </div>
             </div>
           </div>
-        
-      
-
-
-
-
-
         </div>
 
-        
         <div class="w-layout-grid wind-grid-charts" id="chats">
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0" class="div-block-35">
-            <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0" class="w-layout-grid grid-21" id="grid121">
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0" class="div-block-36" id="node1">
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0"
+            class="div-block-35"
+          >
+            <div
+              id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0"
+              class="w-layout-grid grid-21"
+              id="grid121"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0"
+                class="div-block-36"
+                id="node1"
+              >
                 <h4 class="heading-24" id="block">
                   Barb Format FL150 to FL450
                 </h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0" class="div-block-36">
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0" class="div-block-36"></div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0" class="div-block-36"></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0" class="div-block-455">
-            <div class="w-layout-grid grid-22" *ngFor="let chart of  chartsArray
-            let i = index"  [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
-     >
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0" class="div-block-37">
-                <h4 class="heading-25">{{ removefile(chart.filename)}}</h4>
+
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0"
+            class="div-block-455"
+          >
+            <div
+              class="w-layout-grid grid-22"
+              *ngFor="let chart of chartsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0"
+                class="div-block-37"
+              >
+                <h4 class="heading-25">{{ removefile(chart.filename) }}</h4>
               </div>
-             
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0" class="div-block-37">
-                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(chart)">View</div>
+
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0"
+                class="div-block-37"
+              >
+                <div
+                  class="button-2-copy w-button"
+                  id="view"
+                  (click)="openImageViewer(chart)"
+                >
+                  View
+                </div>
               </div>
             </div>
           </div>
-        
-      
-
-
-
-
-
         </div>
 
         <div class="w-layout-grid wind-grid-charts" id="chats">
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0" class="div-block-35">
-            <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0" class="w-layout-grid grid-21" id="grid121">
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0" class="div-block-36" id="node1">
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c35-0a6d0ed0"
+            class="div-block-35"
+          >
+            <div
+              id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c36-0a6d0ed0"
+              class="w-layout-grid grid-21"
+              id="grid121"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c37-0a6d0ed0"
+                class="div-block-36"
+                id="node1"
+              >
                 <h4 class="heading-24" id="block">
                   Barb Format All level scroll  
                 </h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0" class="div-block-36">
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3a-0a6d0ed0"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="heading224">View Image</h4>
               </div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0" class="div-block-36"></div>
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0" class="div-block-36"></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3d-0a6d0ed0"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c3e-0a6d0ed0"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          
-          <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0" class="div-block-455">
-            <div class="w-layout-grid grid-22" *ngFor="let chart of  chartsArray
-            let i = index"  [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
-     >
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0" class="div-block-37">
-                <h4 class="heading-25">{{ removefile(chart.filename)}}</h4>
+
+          <div
+            id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c6f-0a6d0ed0"
+            class="div-block-455"
+          >
+            <div
+              class="w-layout-grid grid-22"
+              *ngFor="let chart of chartsArray; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
+            >
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c71-0a6d0ed0"
+                class="div-block-37"
+              >
+                <h4 class="heading-25">{{ removefile(chart.filename) }}</h4>
               </div>
-             
-              <div id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0" class="div-block-37">
-                <div class="button-2-copy w-button" id="view" (click)="openImageViewer(chart)">View</div>
+
+              <div
+                id="w-node-c90e3967-8beb-285d-326e-61e0c14b7c74-0a6d0ed0"
+                class="div-block-37"
+              >
+                <div
+                  class="button-2-copy w-button"
+                  id="view"
+                  (click)="openImageViewer(chart)"
+                >
+                  View
+                </div>
               </div>
             </div>
           </div>
-        
-      
-
-
-
-
-
         </div>
-
-
-
-        
-
-
-
-        
-       
-       
       </div>
     </div>
-
   </section>
-
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid1">
-      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+      <div (click)="NavigateToDomestic()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
+        <h6
+          class="heading-10-copy"
+          id="styleh6"
+          style="
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "
+        >
           Domestic
         </h6>
       </div>
