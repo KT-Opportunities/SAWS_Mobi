@@ -285,7 +285,9 @@ p {
 .sub-headings-wind {
   color: #002b53;
   font-family: Montserrat, sans-serif;
+  text-align: center;
 }
+
 #grid121 {
   grid-row-gap: 16px;
   grid-column-gap: 16px;
@@ -314,6 +316,9 @@ p {
 #view {
   position: relative;
   top: -9px;
+  width: 32%;
+  align-items: center;
+  align-content: center;
 }
 
 #FAAD {
@@ -719,7 +724,19 @@ p {
 }
 
 @media screen and (max-width: 479px) {
-  
+  .aerosport-ci {
+    margin-top: 107px;
+  }
+  .wind-charts {
+    margin-top: 107px;
+  }
+  .sigwx-charts {
+    margin-top: 107px;
+  }
+  .low_level-wind-section {
+    margin-top: -106px;
+  }
+
   .checkbox-label-2-copy {
     margin-top: 6px;
     padding-left: 10px;
@@ -830,11 +847,12 @@ p {
     text-align: center;
     background-color: #00386c;
     margin-top: 20px;
-    margin-left: 0;
+    margin-left: 6px !important;
     margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
+    padding-top: 6px;
   }
   .heading-6-copy {
     text-align: center;
@@ -880,6 +898,40 @@ p {
 }
 
 @media screen and (max-width: 991px) {
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 159px;
+  }
+  .sigwx-charts {
+    margin-top: 158px;
+  }
+  .wind-charts {
+    margin-top: 158px;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  .sigwx-charts {
+    margin-top: 168px;
+  }
+  .low_level-wind-section {
+    margin-top: 160px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
   .heading-copy {
     grid-column-gap: 16px;
     grid-row-gap: 16px;
@@ -898,9 +950,49 @@ p {
     left: 0%;
     right: 0%;
   }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    // margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 159px;
+  }
+  .wind-charts {
+    margin-top: 158px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+
+  .low_level-wind-section {
+    margin-top: 160px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
   .heading-18-copy,
   .heading-18-copy-copy {
     font-family: Montserrat, sans-serif;
@@ -911,5 +1003,16 @@ p {
   }
   .heading-21 {
     font-weight: 500;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
   }
 }
