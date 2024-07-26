@@ -724,6 +724,15 @@ p {
 }
 
 @media screen and (max-width: 479px) {
+  .icao-location-section {
+    margin-top: 107px;
+  }
+  .domestic-warnings-section {
+    margin-top: 107px;
+  }
+  .take-off-section {
+    margin-top: 107px;
+  }
   .aerosport-ci {
     margin-top: 107px;
   }
@@ -895,9 +904,40 @@ p {
     align-items: center;
     display: flex;
   }
+  .scrollclass {
+    overflow-y: auto;
+    height: 32em;
+    padding: 15px;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 991px) {
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .domestic-warnings-section {
+    margin-top: 191px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 50em;
+    padding: 15px;
+    width: 100%;
+  }
+
   .prev {
     width: 100%;
     padding-left: 53px;
@@ -964,6 +1004,30 @@ p {
 }
 
 @media screen and (max-width: 767px) {
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .domestic-warnings-section {
+    margin-top: 191px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 50em;
+    padding: 15px;
+    width: 100%;
+  }
   .prev {
     width: 100%;
     padding-left: 53px;
@@ -1009,6 +1073,96 @@ p {
     background-color: #00386c;
     margin-top: 20px;
     margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .domestic-warnings-section {
+    margin-top: 191px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 50em;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 159px;
+  }
+  .sigwx-charts {
+    margin-top: 158px;
+  }
+  .wind-charts {
+    margin-top: 158px;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  .sigwx-charts {
+    margin-top: 168px;
+  }
+  .low_level-wind-section {
+    margin-top: 160px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
+  .heading-copy {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-direction: row;
+  }
+  .trends-section-copy,
+  .departure-list-section,
+  .import-and-export-list,
+  .shared-flight,
+  .edit-flight-section,
+  .hourly-charts-section {
+    // margin-top: -113px;
+    position: static;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    // margin-left: 6px !important;
     margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
