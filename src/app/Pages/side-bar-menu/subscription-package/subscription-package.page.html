@@ -62,11 +62,11 @@
 
                     <!-- <div class="div-block-62"></div> -->
 
-                    <div class="slider-container" (swipeleft)="nextSlide()" (swiperight)="prevSlide()">
+                    <div class="slider-container" (swipeleft)="nextSlide('free')" (swiperight)="prevSlide('free')">
                       <div class="slides-wrapper">
-                        <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentSlide">
+                        <div class="slide" *ngFor="let slide of freeSlides; let i = index" [class.active]="i === currentFreeSlide">
                           <h1 class="service-types">{{ slide }}</h1>
-                          <div class="w-embed list" *ngIf="i === currentSlide">
+                          <div class="w-embed list" *ngIf="i === currentFreeSlide">
                             <ul *ngIf="slide === 'International'">
                               <li>Graphics SIGMET/AIRMET</li>
                             </ul>
@@ -91,10 +91,10 @@
                         </div>
                       </div>
                       <div class="slider-nav">
-                        <span *ngFor="let slide of slides; let i = index" 
+                        <span *ngFor="let slide of freeSlides; let i = index" 
                               class="dot" 
-                              [class.active]="i === currentSlide" 
-                              (click)="goToSlide(i)">
+                              [class.active]="i === currentFreeSlide" 
+                              (click)="goToSlide(i, 'free')">
                         </span>
                       </div>
                     </div>
@@ -150,9 +150,10 @@
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2a-871273fb" class="div-block-53">
                     <h1 class="heading-47">Premium {{selectedPaymentType}} Subscription</h1>
                   </div>
-                  <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57">
+                  <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e2d-871273fb" class="div-block-57 html-embed-11">
                     <h1 class="heading-21-copy">R{{premiumSubscriptionAmount.toFixed(2)}}</h1>
-                    <div class="div-block-62">
+
+                    <!-- <div class="div-block-62">
                       <h4 class="field-label">Available Services</h4>
                       <div data-hover="false" data-delay="0" class="w-dropdown">
                         <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('premiumSubscription')">
@@ -171,8 +172,100 @@
                           <a (click)="selectPremiumService('Other')" class="w-dropdown-link">Other</a>
                         </nav>
                       </div>
+                    </div> -->
+
+                    <div class="slider-container" (swipeleft)="nextSlide('premium')" (swiperight)="prevSlide('premium')">
+                      <div class="slides-wrapper">
+                        <div class="slide" *ngFor="let slide of premiumSlides; let i = index" [class.active]="i === currentPremiumSlide">
+                          <h1 class="service-types">{{ slide }}</h1>
+                          <div class="w-embed list" *ngIf="i === currentPremiumSlide">
+                            <ul *ngIf="slide === 'International'">
+                              <li>GPM</li>
+                              <li>Humidity</li>
+                              <li>Sigwx Charts</li>
+                              <li>Wind: Grid</li>
+                              <li>Wind: Maximum</li>
+                              <li>Image Browser</li>
+                              <li>Graphical SIGMET/AIRMET</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Domestic'">
+                              <li>Flight Document</li>
+                              <li>Hourly Charts</li>
+                              <li>ICAO Locations</li>
+                              <li>METAR Maps </li>
+                              <li>QNH Chart</li>
+                              <li>SIGWX Charts</li>
+                              <li>Take-Off-Data</li>
+                              <li>Warnings</li>
+                              <li>Wind Charts</li>
+                              <li>Low Level Wind Profiles</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Flight Briefing'">
+                              <li>Flight: Edit</li>
+                              <li>Flight: Import/Export</li>
+                              <li>Flight: Saved</li>
+                              <li>Import Departure List</li>
+                              <li>Scheduled Flight Report</li>
+                              <li>Shared Flights</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Observation'">
+                              <li>METAR</li>
+                              <li>Web Cams </li>
+                              <li>Colour Coded METAR</li>
+                              <li>METAR History</li>
+                              <li>Recent METARs</li>
+                              <li>SPECI</li>
+                              <li>Recent METAR/TAFs</li>
+                              <li>Radar products</li>
+                              <li>Satellite</li>
+                              <li>Weather Map </li>
+                            </ul>
+                            <ul *ngIf="slide === 'Forecast'">
+                              <li>Colour Coded TAF</li>
+                              <li>Colour Coded SIGMET/AIRMET</li>
+                              <li>Colour Coded Warnings</li>
+                              <li>SIGMET/AIRMET</li>
+                              <li>Take-Off-Data</li>
+                              <li>TAF Accuracy</li>
+                              <li>Recent TAFs</li>
+                              <li>TAF</li>
+                              <li>TAF Accuracy</li>
+                              <li>Trends</li>
+                              <li>WAF Harmonized GRID Products</li>
+                              <li>Advisories</li>
+                              <li>Warnings</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Aerospot'">
+                              <li>Central Interior</li>
+                              <li>Cloud Forest</li>
+                              <li>Kwazulu Natal</li>
+                              <li>Southwestern Cape</li>
+                              <li>Spot Graph Map</li>
+                              <li>Synoptic Analysis</li>
+                              <li>TS Probabilities</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Other'">
+                              <li>Historical weather data</li>
+                              <li>Edit personal Details</li>
+                              <li>Manage Subscription</li>
+                              <li>Messages</li>
+                              <li>SIGMET Advisories</li>
+                              <li>User/personal History</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider-nav">
+                        <span *ngFor="let slide of premiumSlides; let i = index" 
+                              class="dot" 
+                              [class.active]="i === currentPremiumSlide" 
+                              (click)="goToSlide(i, 'premium')">
+                        </span>
+                      </div>
                     </div>
-                    <div class="html-embed-11 w-embed">
+
+
+                    <!-- <div class="html-embed-11 w-embed">
                       <ul *ngIf="selectedPremiumService === 'International'">
                         <li>GPM</li>
                         <li>Humidity</li>
@@ -247,7 +340,7 @@
                         <li>SIGMET Advisories</li>
                         <li>User/personal History</li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e46-871273fb" class="div-block-56">
                     <div id="w-node-_6c1890b3-3c19-96b9-c4da-81bac2d03e47-871273fb" class="div-block-55"></div>
@@ -284,9 +377,101 @@
                   <div class="div-block-53">
                     <h1 class="heading-47">Regulated {{selectedPaymentType}} Subscription</h1>
                   </div>
-                  <div class="div-block-57">
+                  <div class="div-block-57 html-embed-11">
                     <h1 class="heading-21-copy">R{{regulatedSubscriptionAmount.toFixed(2)}}</h1>
-                    <div class="div-block-62">
+
+                    <div class="slider-container" (swipeleft)="nextSlide('regulated')" (swiperight)="prevSlide('regulated')">
+                      <div class="slides-wrapper">
+                        <div class="slide" *ngFor="let slide of regulatedSlides; let i = index" [class.active]="i === currentRegulatedSlide">
+                          <h1 class="service-types">{{ slide }}</h1>
+                          <div class="w-embed list" *ngIf="i === currentRegulatedSlide">
+                            <ul *ngIf="slide === 'International'">
+                              <li>GPM</li>
+                              <li>Humidity</li>
+                              <li>Sigwx Charts</li>
+                              <li>Wind: Grid</li>
+                              <li>Wind: Maximum</li>
+                              <li>Image Browser</li>
+                              <li>Graphical SIGMET/AIRMET</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Domestic'">
+                              <li>Flight Document</li>
+                              <li>Hourly Charts</li>
+                              <li>ICAO Locations</li>
+                              <li>METAR Maps </li>
+                              <li>QNH Chart</li>
+                              <li>SIGWX Charts</li>
+                              <li>Take-Off-Data</li>
+                              <li>Warnings</li>
+                              <li>Wind Charts</li>
+                              <li>Low Level Wind Profiles</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Flight Briefing'">
+                              <li>Flight: Edit</li>
+                              <li>Flight: Import/Export</li>
+                              <li>Flight: Saved</li>
+                              <li>Import Departure List</li>
+                              <li>Scheduled Flight Report</li>
+                              <li>Shared Flights</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Observation'">
+                              <li>METAR</li>
+                              <li>Web Cams </li>
+                              <li>Colour Coded METAR</li>
+                              <li>METAR History</li>
+                              <li>Recent METARs</li>
+                              <li>SPECI</li>
+                              <li>Recent METAR/TAFs</li>
+                              <li>Radar products</li>
+                              <li>Satellite</li>
+                              <li>Weather Map </li>
+                            </ul>
+                            <ul *ngIf="slide === 'Forecast'">
+                              <li>Colour Coded TAF</li>
+                              <li>Colour Coded SIGMET/AIRMET</li>
+                              <li>Colour Coded Warnings</li>
+                              <li>SIGMET/AIRMET</li>
+                              <li>Take-Off-Data</li>
+                              <li>TAF Accuracy</li>
+                              <li>Recent TAFs</li>
+                              <li>TAF</li>
+                              <li>TAF Accuracy</li>
+                              <li>Trends</li>
+                              <li>WAF Harmonized GRID Products</li>
+                              <li>Advisories</li>
+                              <li>Warnings</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Aerospot'">
+                              <li>Central Interior</li>
+                              <li>Cloud Forest</li>
+                              <li>Kwazulu Natal</li>
+                              <li>Southwestern Cape</li>
+                              <li>Spot Graph Map</li>
+                              <li>Synoptic Analysis</li>
+                              <li>TS Probabilities</li>
+                            </ul>
+                            <ul *ngIf="slide === 'Other'">
+                              <li>Historical weather data</li>
+                              <li>Edit personal Details</li>
+                              <li>Manage Subscription</li>
+                              <li>Messages</li>
+                              <li>SIGMET Advisories</li>
+                              <li>User/personal History</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider-nav">
+                        <span *ngFor="let slide of regulatedSlides; let i = index" 
+                              class="dot" 
+                              [class.active]="i === currentRegulatedSlide" 
+                              (click)="goToSlide(i, 'regulated')">
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <!-- <div class="div-block-62">
                       <h4 class="field-label">Available Services</h4>
                       <div class="w-dropdown">
                         <div class="sub-dropd w-dropdown-toggle" (click)="toggleDropdown('regulatedSubscription')">
@@ -305,8 +490,8 @@
                           <a (click)="selectRegulatedService('Other')" class="w-dropdown-link">Other</a>
                         </nav>
                       </div>
-                    </div>
-                    <div class="html-embed-11 w-embed">
+                    </div> -->
+                    <!-- <div class="html-embed-11 w-embed">
                       <ul *ngIf="selectedRegulatedService === 'International'">
                         <li>GPM</li>
                         <li>Humidity</li>
@@ -381,7 +566,7 @@
                         <li>SIGMET Advisories</li>
                         <li>User/personal History</li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="div-block-56">
                     <div class="div-block-55"></div>

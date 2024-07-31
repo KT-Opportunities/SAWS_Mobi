@@ -165,9 +165,12 @@ export class SubscriptionPackagePage implements OnInit {
     subscription_status: 'Active',
   };
 
-  slides = ['International', 'Observation', 'Forecast', 'Other'];
-  currentSlide = 0;
-  slideInterval: any;
+  freeSlides = ['International', 'Observation', 'Forecast', 'Other'];
+  premiumSlides = ['International', 'Domestic', 'Flight Briefing', 'Observation', 'Forecast', 'Aerospot', 'Other'];
+  regulatedSlides = ['International', 'Domestic', 'Flight Briefing', 'Observation', 'Forecast', 'Aerospot', 'Other'];
+  currentFreeSlide = 0;
+  currentPremiumSlide = 0;
+  currentRegulatedSlide = 0;
 
   constructor(
     private router: Router,
@@ -217,34 +220,39 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.notifyUrl =  environment.serverAPI + 'v1/Subscriber/Notify';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
 
-
-    // this.startSlideShow();
   }
 
-  // ngOnDestroy() {
-    // this.stopSlideShow();
-  // }
-
-  // startSlideShow() {
-  //   this.slideInterval = setInterval(() => {
-  //     this.nextSlide();
-  //   }, 4000);
-  // }
-
-  // stopSlideShow() {
-  //   clearInterval(this.slideInterval);
-  // }
-
-  nextSlide() {
-    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  nextSlide(type: string) {
+    if(type == "free"){
+      this.currentFreeSlide = (this.currentFreeSlide + 1) % this.freeSlides.length;
+    } else if (type == "premium") {
+      this.currentPremiumSlide = (this.currentPremiumSlide + 1) % this.premiumSlides.length;
+    } else {
+      this.currentRegulatedSlide = (this.currentRegulatedSlide + 1) % this.regulatedSlides.length;
+    }
   }
 
-  prevSlide() {
-    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  prevSlide(type: string) {
+    if(type == "free"){
+      this.currentFreeSlide = (this.currentFreeSlide - 1 + this.freeSlides.length) % this.freeSlides.length;
+
+    } else if (type == "premium") {
+      this.currentFreeSlide = (this.currentFreeSlide - 1 + this.premiumSlides.length) % this.premiumSlides.length;
+
+    } else {
+      this.currentPremiumSlide = (this.currentPremiumSlide - 1 + this.regulatedSlides.length) % this.regulatedSlides.length;
+    }
   }
 
-  goToSlide(index: number) {
-    this.currentSlide = index;
+  goToSlide(index: number, type: string) {
+
+    if(type =="free"){
+      this.currentFreeSlide = index;
+    } else if(type == "premium"){
+      this.currentPremiumSlide = index;
+    } else {
+      this.currentRegulatedSlide = index;  
+    }
   }
 
   GetSubscriptions(){
