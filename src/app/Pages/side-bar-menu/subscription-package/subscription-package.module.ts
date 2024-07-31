@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SubscriptionPackagePageRoutingModule } from './subscription-package-routing.module';
 
 import { SubscriptionPackagePage } from './subscription-package.page';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SubscriptionPackagePage } from './subscription-package.page';
     IonicModule,
     SubscriptionPackagePageRoutingModule
   ],
-  declarations: [SubscriptionPackagePage]
+  declarations: [SubscriptionPackagePage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SubscriptionPackagePageModule {}

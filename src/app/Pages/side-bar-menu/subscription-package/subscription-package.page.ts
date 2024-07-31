@@ -165,6 +165,10 @@ export class SubscriptionPackagePage implements OnInit {
     subscription_status: 'Active',
   };
 
+  slides = ['International', 'Observation', 'Forecast', 'Other'];
+  currentSlide = 0;
+  slideInterval: any;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -197,8 +201,6 @@ export class SubscriptionPackagePage implements OnInit {
     }
   }
 
-
-
   ngOnInit() {
 
     if (this.authService.getIsLoggedIn()) {
@@ -214,6 +216,35 @@ export class SubscriptionPackagePage implements OnInit {
     // this.subsObj.notifyUrl = 'http://160.119.253.130/saws/#/subscription/success';
     this.subsObj.notifyUrl =  environment.serverAPI + 'v1/Subscriber/Notify';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
+
+
+    // this.startSlideShow();
+  }
+
+  // ngOnDestroy() {
+    // this.stopSlideShow();
+  // }
+
+  // startSlideShow() {
+  //   this.slideInterval = setInterval(() => {
+  //     this.nextSlide();
+  //   }, 4000);
+  // }
+
+  // stopSlideShow() {
+  //   clearInterval(this.slideInterval);
+  // }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
   }
 
   GetSubscriptions(){

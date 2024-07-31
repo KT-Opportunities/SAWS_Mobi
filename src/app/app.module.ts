@@ -1,6 +1,6 @@
 // Import necessary Angular modules
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { Injectable, NgModule } from '@angular/core';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -16,8 +16,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { HammerModule } from '@angular/platform-browser';
+import { HammerGestureConfig } from '@angular/platform-browser';
 
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  override overrides = {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   // Declarations: Components, Directives, and Pipes declared in this module
@@ -38,13 +47,18 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
     MatListModule,
     MatTableModule, // Add MatTableModule
     MatPaginatorModule, // Add MatPaginatorModule
-    MatSortModule // Add MatSortModule
+    MatSortModule, // Add MatSortModule
+    HammerModule
 
     // SwiperModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     InAppBrowser,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })
