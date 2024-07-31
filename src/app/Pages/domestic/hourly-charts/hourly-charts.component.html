@@ -3,8 +3,8 @@
     <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
     Loading...
   </div>
-  
-  <section class="hourly-charts-section" style="margin-top: 107px !important">
+
+  <section class="hourly-charts-section" >
     <div class="div-block-2">
       <img
         src="images/Path-3452.svg"
@@ -15,12 +15,17 @@
       />
     </div>
     <h1 class="heading-6"><strong>Hourly Charts</strong></h1>
-    <div style="overflow-y: auto; height: 32em;">
-      <div *ngFor="let chart of chartData" class="div-block-473"
-      >
+    <div style="overflow-y: auto; height: 32em">
+      <div *ngFor="let chart of chartData" class="div-block-473">
         <div class="charts-div-sub">
-          <h4 class="heading-6-copy" style="width: 186px !important;"><strong>{{ chart.heading }}</strong></h4>
-          <div class="button-2-copy w-button" style="position: relative; left: -8px" (click)="openImageViewer(chart, 'Most Recent')">
+          <h4 class="heading-6-copy" style="width: 186px !important">
+            <strong>{{ chart.heading }}</strong>
+          </h4>
+          <div
+            class="button-2-copy w-button"
+            style="position: relative; left: -8px"
+            (click)="openImageViewer(chart, 'Most Recent')"
+          >
             Most Recent
           </div>
         </div>
@@ -28,39 +33,58 @@
         <div class="" id="grid">
           <div class="hourly-charts-div">
             <div *ngFor="let timeSet of timeSets" class="div-block-470">
-              
-              <h4 *ngFor="let time of timeSet" class="qnh-heading" (click)="openImageViewer(chart, time)">{{ time }}</h4>
+              <h4
+                *ngFor="let time of timeSet"
+                class="qnh-heading"
+                (click)="openImageViewer(chart, time)"
+              >
+                {{ time }}
+              </h4>
             </div>
           </div>
           <div class="div-block-470">
             <!-- <p>{{ chart.information }}</p> -->
-            <img *ngIf="chart.imageUrl" [src]="chart.imageUrl" alt="{{ chart.heading }}">
+            <img
+              *ngIf="chart.imageUrl"
+              [src]="chart.imageUrl"
+              alt="{{ chart.heading }}"
+            />
             <ng-container *ngIf="!chart.imageUrl">
               <!-- <p>No image available</p> -->
             </ng-container>
           </div>
         </div>
-       
       </div>
     </div>
-   
   </section>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div>
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid1">
       <div (click)="NavigateToDomestic()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
+        <h6
+          class="heading-10-copy"
+          id="styleh6"
+          style="
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "
+        >
           Domestic
         </h6>
       </div>
