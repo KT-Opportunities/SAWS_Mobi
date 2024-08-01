@@ -634,14 +634,6 @@ p {
   top: 3px;
 }
 
-#ICAO {
-  padding-left: 54px;
-  padding-right: 0;
-  font-size: 13px;
-  position: relative;
-  top: 3px;
-}
-
 #searchform {
   position: relative;
   top: -17px;
@@ -723,7 +715,566 @@ p {
   top: 6px;
 }
 
+@media screen and (max-width: 1024px) {
+  #ICAO {
+    padding-right: 0;
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+  }
+  .div-block-37 {
+    justify-content: start;
+    align-items: center;
+    display: flex;
+  }
+  .checkbox-label-2-copy {
+    margin-top: 6px;
+    padding-left: 10px;
+    display: flex;
+  }
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 250px;
+  }
+  .list-page {
+    margin-top: 250px;
+    overflow-y: hidden;
+  }
+  .take-off-section {
+    margin-top: 127px;
+  }
+  .hourly-charts-section {
+    margin-top: 250px;
+  }
+  .domestic-warnings-section {
+    margin-top: 250px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 44em;
+    padding: 15px;
+    width: 100%;
+  }
+  .hourly-charts-div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .image {
+    margin-top: -115px;
+  }
+  .search {
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+  }
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 250px;
+  }
+  .sigwx-charts {
+    margin-top: 250px;
+  }
+  .wind-charts {
+    margin-top: 250px;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  .sigwx-charts {
+    margin-top: 250px;
+  }
+  .low_level-wind-section {
+    margin-top: 250px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
+  .heading-copy {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-direction: row;
+  }
+  .trends-section-copy,
+  .departure-list-section,
+  .import-and-export-list,
+  .shared-flight,
+  .edit-flight-section,
+  .hourly-charts-section {
+    // margin-top: -113px;
+    position: static;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    // margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #ICAO {
+    padding-right: 0;
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+  }
+  .div-block-37 {
+    justify-content: start;
+    align-items: center;
+    display: flex;
+  }
+  .checkbox-label-2-copy {
+    margin-top: 6px;
+    padding-left: 10px;
+    display: flex;
+  }
+  .div-block-470 {
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  .heading-25 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    // padding-right: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    width: 100%;
+  }
+  #Serch1 {
+    margin-top: -4px;
+    margin-bottom: 14px;
+    margin-left: -29px;
+  }
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 250px;
+  }
+  .list-page {
+    margin-top: 250px;
+    overflow-y: hidden;
+  }
+  .hourly-charts-section {
+    margin-top: 250px;
+  }
+  .take-off-section {
+    margin-top: 127px;
+  }
+  .domestic-warnings-section {
+    margin-top: 250px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 44em;
+    padding: 15px;
+    width: 100%;
+  }
+  .hourly-charts-div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .image {
+    margin-top: -115px;
+  }
+  .search {
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+  }
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 250px;
+  }
+  .sigwx-charts {
+    margin-top: 250px;
+  }
+  .wind-charts {
+    margin-top: 250px;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  .sigwx-charts {
+    margin-top: 250px;
+  }
+  .low_level-wind-section {
+    margin-top: 250px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
+  .heading-copy {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-direction: row;
+  }
+  .trends-section-copy,
+  .departure-list-section,
+  .import-and-export-list,
+  .shared-flight,
+  .edit-flight-section,
+  .hourly-charts-section {
+    // margin-top: -113px;
+    position: static;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    // margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
+}
+@media screen and (max-width: 991px) {
+  #ICAO {
+    padding-right: 0;
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+  }
+  .div-block-37 {
+    justify-content: start;
+    align-items: center;
+    display: flex;
+  }
+  .checkbox-label-2-copy {
+    margin-top: 6px;
+    padding-left: 10px;
+    display: flex;
+  }
+  .div-block-470 {
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  .heading-25 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    // padding-right: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    width: 100%;
+  }
+  #Serch1 {
+    margin-top: -4px;
+    margin-bottom: 14px;
+    margin-left: -29px;
+  }
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .list-page {
+    margin-top: 191px;
+    overflow-y: hidden;
+  }
+  .hourly-charts-section {
+    margin-top: 191px;
+  }
+  .domestic-warnings-section {
+    margin-top: 191px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 50em;
+    padding: 15px;
+    width: 100%;
+  }
+  .search {
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+  }
+  .image {
+    margin-top: -115px;
+  }
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 159px;
+  }
+  .sigwx-charts {
+    margin-top: 158px;
+  }
+  .wind-charts {
+    margin-top: 158px;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  .sigwx-charts {
+    margin-top: 168px;
+  }
+  .low_level-wind-section {
+    margin-top: 160px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
+  .heading-copy {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-direction: row;
+  }
+  .trends-section-copy,
+  .departure-list-section,
+  .import-and-export-list,
+  .shared-flight,
+  .edit-flight-section,
+  .hourly-charts-section {
+    // margin-top: -113px;
+    position: static;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    // margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
+}
+@media screen and (max-width: 767px) {
+  #ICAO {
+    padding-right: 0;
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+  }
+  .div-block-37 {
+    justify-content: start;
+    align-items: center;
+    display: flex;
+  }
+
+  .checkbox-label-2-copy {
+    margin-top: 6px;
+    padding-left: 10px;
+    display: flex;
+  }
+  .div-block-470 {
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  .heading-25 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    // padding-right: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    width: 100%;
+  }
+  #Serch1 {
+    margin-top: -4px;
+    margin-bottom: 14px;
+    margin-left: -29px;
+  }
+  .hourly-charts-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .charts-div-sub {
+    align-items: flex-start;
+  }
+  .icao-location-section {
+    margin-top: 191px;
+  }
+  .list-page {
+    margin-top: 191px;
+    overflow-y: hidden;
+  }
+  .hourly-charts-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .domestic-warnings-section {
+    margin-top: 191px;
+  }
+  .take-off-section {
+    margin-top: 191px;
+  }
+  .scrollclass {
+    overflow-y: auto;
+    height: 50em;
+    padding: 15px;
+    width: 100%;
+  }
+  .image {
+    margin-top: -115px;
+  }
+  .prev {
+    width: 100%;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+  .aerosport-ci {
+    margin-top: 159px;
+  }
+  .wind-charts {
+    margin-top: 158px;
+  }
+  #heading224 {
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 106px;
+    font-family: Montserrat, sans-serif;
+  }
+  #chats {
+    width: 90%;
+    margin-left: 28px;
+  }
+
+  .low_level-wind-section {
+    margin-top: 160px;
+  }
+  .heading-6 {
+    text-align: center;
+  }
+  .heading-18-copy,
+  .heading-18-copy-copy {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+  }
+  .hourly-charts-div {
+    margin-bottom: 20px;
+  }
+  .heading-21 {
+    font-weight: 500;
+  }
+  .button-2-copy {
+    text-align: center;
+    background-color: #00386c;
+    margin-top: 20px;
+    margin-left: 6px !important;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    padding-top: 6px;
+  }
+}
 @media screen and (max-width: 479px) {
+  #ICAO {
+    padding-left: 54px;
+    padding-right: 0;
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+  }
+
   .icao-location-section {
     margin-top: 107px;
   }
@@ -739,6 +1290,7 @@ p {
   .hourly-charts-section {
     margin-top: 107px;
   }
+
   .aerosport-ci {
     margin-top: 107px;
   }
@@ -751,7 +1303,10 @@ p {
   .low_level-wind-section {
     margin-top: -106px;
   }
-
+  .list-page {
+    margin-top: 107px;
+    overflow-y: hidden;
+  }
   .checkbox-label-2-copy {
     margin-top: 6px;
     padding-left: 10px;
@@ -802,6 +1357,7 @@ p {
     padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
+    width: 100%;
   }
   .heading-copy {
     display: flex;
@@ -912,497 +1468,8 @@ p {
   }
   .scrollclass {
     overflow-y: auto;
-    height: 32em;
+    height: 33em;
     padding: 15px;
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 991px) {
-  .checkbox-label-2-copy {
-    margin-top: 6px;
-    padding-left: 10px;
-    display: flex;
-  }
-  .div-block-470 {
-    flex-flow: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-  }
-  .heading-25 {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
-    font-size: 12px;
-    line-height: 20px;
-  }
-  #Serch1 {
-    margin-top: -4px;
-    margin-bottom: 14px;
-    margin-left: -29px;
-  }
-  .hourly-charts-div {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .charts-div-sub {
-    align-items: flex-start;
-  }
-  .icao-location-section {
-    margin-top: 191px;
-  }
-  .take-off-section {
-    margin-top: 191px;
-  }
-  .take-off-section {
-    margin-top: 191px;
-  }
-  .hourly-charts-section {
-    margin-top: 191px;
-  }
-  .domestic-warnings-section {
-    margin-top: 191px;
-  }
-  .scrollclass {
-    overflow-y: auto;
-    height: 50em;
-    padding: 15px;
-    width: 100%;
-  }
-  .search {
-    width: 100%;
-    align-items: center;
-    margin: 0;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-  }
-  .image {
-    margin-top: -115px;
-  }
-  .prev {
-    width: 100%;
-    padding-left: 53px;
-    padding-right: 53px;
-  }
-  .aerosport-ci {
-    margin-top: 159px;
-  }
-  .sigwx-charts {
-    margin-top: 158px;
-  }
-  .wind-charts {
-    margin-top: 158px;
-  }
-  #chats {
-    width: 90%;
-    margin-left: 28px;
-  }
-  #heading224 {
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 106px;
-    font-family: Montserrat, sans-serif;
-  }
-  .sigwx-charts {
-    margin-top: 168px;
-  }
-  .low_level-wind-section {
-    margin-top: 160px;
-  }
-  .heading-6 {
-    text-align: center;
-  }
-  .heading-copy {
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
-    flex-direction: row;
-  }
-  .trends-section-copy,
-  .departure-list-section,
-  .import-and-export-list,
-  .shared-flight,
-  .edit-flight-section,
-  .hourly-charts-section {
-    // margin-top: -113px;
-    position: static;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-  }
-  .button-2-copy {
-    text-align: center;
-    background-color: #00386c;
-    margin-top: 20px;
-    // margin-left: 6px !important;
-    margin-right: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 10px;
-    padding-top: 6px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .checkbox-label-2-copy {
-    margin-top: 6px;
-    padding-left: 10px;
-    display: flex;
-  }
-  .div-block-470 {
-    flex-flow: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-  }
-  .heading-25 {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
-    font-size: 12px;
-    line-height: 20px;
-  }
-  #Serch1 {
-    margin-top: -4px;
-    margin-bottom: 14px;
-    margin-left: -29px;
-  }
-  .hourly-charts-div {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .charts-div-sub {
-    align-items: flex-start;
-  }
-  .icao-location-section {
-    margin-top: 191px;
-  }
-  .hourly-charts-section {
-    margin-top: 191px;
-  }
-  .take-off-section {
-    margin-top: 191px;
-  }
-  .domestic-warnings-section {
-    margin-top: 191px;
-  }
-  .take-off-section {
-    margin-top: 191px;
-  }
-  .scrollclass {
-    overflow-y: auto;
-    height: 50em;
-    padding: 15px;
-    width: 100%;
-  }
-  .image {
-    margin-top: -115px;
-  }
-  .prev {
-    width: 100%;
-    padding-left: 53px;
-    padding-right: 53px;
-  }
-  .aerosport-ci {
-    margin-top: 159px;
-  }
-  .wind-charts {
-    margin-top: 158px;
-  }
-  #heading224 {
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 106px;
-    font-family: Montserrat, sans-serif;
-  }
-  #chats {
-    width: 90%;
-    margin-left: 28px;
-  }
-
-  .low_level-wind-section {
-    margin-top: 160px;
-  }
-  .heading-6 {
-    text-align: center;
-  }
-  .heading-18-copy,
-  .heading-18-copy-copy {
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-  }
-  .hourly-charts-div {
-    margin-bottom: 20px;
-  }
-  .heading-21 {
-    font-weight: 500;
-  }
-  .button-2-copy {
-    text-align: center;
-    background-color: #00386c;
-    margin-top: 20px;
-    margin-left: 6px !important;
-    margin-right: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 10px;
-    padding-top: 6px;
-  }
-}
-@media screen and (max-width: 1200px) {
-  .checkbox-label-2-copy {
-    margin-top: 6px;
-    padding-left: 10px;
-    display: flex;
-  }
-  .div-block-470 {
-    flex-flow: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-  }
-  .heading-25 {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
-    font-size: 12px;
-    line-height: 20px;
-  }
-  #Serch1 {
-    margin-top: -4px;
-    margin-bottom: 14px;
-    margin-left: -29px;
-  }
-  .hourly-charts-div {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .charts-div-sub {
-    align-items: flex-start;
-  }
-  .icao-location-section {
-    margin-top: 250px;
-  }
-  .hourly-charts-section {
-    margin-top: 250px;
-  }
-  .take-off-section {
-    margin-top: 127px;
-  }
-  .domestic-warnings-section {
-    margin-top: 250px;
-  }
-  .scrollclass {
-    overflow-y: auto;
-    height: 44em;
-    padding: 15px;
-    width: 100%;
-  }
-  .hourly-charts-div {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .image {
-    margin-top: -115px;
-  }
-  .search {
-    width: 100%;
-    align-items: center;
-    margin: 0;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-  }
-  .prev {
-    width: 100%;
-    padding-left: 53px;
-    padding-right: 53px;
-  }
-  .aerosport-ci {
-    margin-top: 250px;
-  }
-  .sigwx-charts {
-    margin-top: 250px;
-  }
-  .wind-charts {
-    margin-top: 250px;
-  }
-  #chats {
-    width: 90%;
-    margin-left: 28px;
-  }
-  #heading224 {
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 106px;
-    font-family: Montserrat, sans-serif;
-  }
-  .sigwx-charts {
-    margin-top: 250px;
-  }
-  .low_level-wind-section {
-    margin-top: 250px;
-  }
-  .heading-6 {
-    text-align: center;
-  }
-  .heading-copy {
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
-    flex-direction: row;
-  }
-  .trends-section-copy,
-  .departure-list-section,
-  .import-and-export-list,
-  .shared-flight,
-  .edit-flight-section,
-  .hourly-charts-section {
-    // margin-top: -113px;
-    position: static;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-  }
-  .button-2-copy {
-    text-align: center;
-    background-color: #00386c;
-    margin-top: 20px;
-    // margin-left: 6px !important;
-    margin-right: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 10px;
-    padding-top: 6px;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .checkbox-label-2-copy {
-    margin-top: 6px;
-    padding-left: 10px;
-    display: flex;
-  }
-  .hourly-charts-div {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .charts-div-sub {
-    align-items: flex-start;
-  }
-  .icao-location-section {
-    margin-top: 250px;
-  }
-  .take-off-section {
-    margin-top: 127px;
-  }
-  .hourly-charts-section {
-    margin-top: 250px;
-  }
-  .domestic-warnings-section {
-    margin-top: 250px;
-  }
-  .scrollclass {
-    overflow-y: auto;
-    height: 44em;
-    padding: 15px;
-    width: 100%;
-  }
-  .hourly-charts-div {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .image {
-    margin-top: -115px;
-  }
-  .search {
-    width: 100%;
-    align-items: center;
-    margin: 0;
-    padding-left: 0;
-    padding-right: 0;
-    display: flex;
-  }
-  .prev {
-    width: 100%;
-    padding-left: 53px;
-    padding-right: 53px;
-  }
-  .aerosport-ci {
-    margin-top: 250px;
-  }
-  .sigwx-charts {
-    margin-top: 250px;
-  }
-  .wind-charts {
-    margin-top: 250px;
-  }
-  #chats {
-    width: 90%;
-    margin-left: 28px;
-  }
-  #heading224 {
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 106px;
-    font-family: Montserrat, sans-serif;
-  }
-  .sigwx-charts {
-    margin-top: 250px;
-  }
-  .low_level-wind-section {
-    margin-top: 250px;
-  }
-  .heading-6 {
-    text-align: center;
-  }
-  .heading-copy {
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
-    flex-direction: row;
-  }
-  .trends-section-copy,
-  .departure-list-section,
-  .import-and-export-list,
-  .shared-flight,
-  .edit-flight-section,
-  .hourly-charts-section {
-    // margin-top: -113px;
-    position: static;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-  }
-  .button-2-copy {
-    text-align: center;
-    background-color: #00386c;
-    margin-top: 20px;
-    // margin-left: 6px !important;
-    margin-right: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 10px;
-    padding-top: 6px;
   }
 }
