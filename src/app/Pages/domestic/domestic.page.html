@@ -5,7 +5,7 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
-  <section class="list-page">
+  <section class="hourly-charts-section">
     <div class="">
       <div
         class=""
@@ -18,10 +18,7 @@
         >
           Domestic
         </h1>
-        <div
-          class="w-layout-grid grid-list"
-          style="overflow-y: auto; max-height: 498px; -ms-overflow-style: none"
-        >
+        <div class="w-layout-grid grid-list scrollclass">
           <div
             (click)="NavigateToFlightDocument()"
             id="w-node-_0de2fb19-c504-712a-b299-1a10b36205eb-56144603"
@@ -55,7 +52,7 @@
             id="w-node-_15267599-4e64-b2e4-4f2f-f2a4545a7361-56144603"
             class="link-block-3 w-inline-block"
           >
-            <h1 class="heading-5">QNH CHart</h1>
+            <h1 class="heading-5">QNH Chart</h1>
           </div>
           <div
             (click)="NavigateToSIGWXCharts()"
@@ -98,15 +95,20 @@
         </div>
       </div>
 
-      <div class="list-div" *ngIf="!isLoggedIn">
-      </div>
+      <div class="list-div" *ngIf="!isLoggedIn"></div>
     </div>
   </section>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img  style="margin-top: -69px" src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
+    <img
+      style="margin-top: -141px"
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+    />
     <div class="footerdiv">
       <a
         (click)="NavigateToLandingPage()"

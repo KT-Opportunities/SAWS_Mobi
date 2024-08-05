@@ -1,17 +1,22 @@
 <ion-content [fullscreen]="true">
-
   <div *ngIf="isLoading" class="loading-indicator">
     <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
     Loading...
   </div>
 
-  <section class="icao-location-section" style="margin-top: 107px !important">
+  <section class="icao-location-section">
     <div class="icao-main-div">
-      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
+      <img
+        src="images/Path-3452.svg"
+        loading="lazy"
+        width="1216"
+        alt=""
+        class="image"
+      />
     </div>
 
     <h1 class="heading-6">Grid wind charts</h1>
-    <div style="overflow-y: auto; height: 32em">
+    <div class="scrollclass">
       <div class="icao-grid">
         <div class="div-block-473-copy">
           <h1 class="sub-headings-wind">
@@ -21,64 +26,127 @@
         <div class="div-block-481" id="wind">
           <h5 class="heading-9">Search:</h5>
           <form action="/search" class="search w-form" id="searchform">
-            <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
-              id="search" required="" />
-            <input type="submit" class="search-button w-button" value="Search" id="Serch1" />
+            <input
+              class="search-input w-input"
+              maxlength="256"
+              name="query"
+              placeholder="Search…"
+              type="search"
+              id="search"
+              required=""
+            />
+            <input
+              type="submit"
+              class="search-button w-button"
+              value="Search"
+              id="Serch1"
+            />
           </form>
         </div>
         <div class="w-layout-grid icao-location-grid" id="locatio">
-          <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b22-a3b81dfb" class="div-block-35">
+          <div
+            id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b22-a3b81dfb"
+            class="div-block-35"
+          >
             <div id="grid121" class="w-layout-grid grid-21">
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b24-a3b81dfb" class="div-block-36">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b24-a3b81dfb"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="air">
                   <strong>Airport Name</strong>
                 </h4>
               </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b28-a3b81dfb" class="div-block-36">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b28-a3b81dfb"
+                class="div-block-36"
+              >
                 <h4 class="heading-24" id="ICAO"><strong>ICAO ID</strong></h4>
               </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2b-a3b81dfb" class="div-block-36"></div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2c-a3b81dfb" class="div-block-36"></div>
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2b-a3b81dfb"
+                class="div-block-36"
+              ></div>
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2c-a3b81dfb"
+                class="div-block-36"
+              ></div>
             </div>
           </div>
-          <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2d-a3b81dfb" class="div-block-452">
+          <div
+            id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2d-a3b81dfb"
+            class="div-block-452"
+          >
             <div class="w-layout-grid grid-22">
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2f-a3b81dfb" class="div-block-37-copy">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2f-a3b81dfb"
+                class="div-block-37-copy"
+              >
                 <h4 class="heading-25">Alexander Bay Airpor/Alexander Bay</h4>
               </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b32-a3b81dfb" class="div-block-37">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b32-a3b81dfb"
+                class="div-block-37"
+              >
                 <div class="button-2-copy w-button" id="FAAD">FAAB</div>
               </div>
             </div>
           </div>
-          <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b35-a3b81dfb" class="div-block-38">
+
+          <div
+            id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b45-a3b81dfb"
+            class="div-block-38"
+          >
             <div class="w-layout-grid grid-22">
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b37-a3b81dfb" class="div-block-37-copy">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b47-a3b81dfb"
+                class="div-block-37-copy"
+              >
+                <h4 class="heading-25">Andrews Field Airpor / Andrews Field</h4>
+              </div>
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b4a-a3b81dfb"
+                class="div-block-37"
+              >
+                <div class="button-2-copy w-button" id="FAAD">FAAF</div>
+              </div>
+            </div>
+          </div>
+          <div
+            id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2d-a3b81dfb"
+            class="div-block-452"
+          >
+            <div class="w-layout-grid grid-22">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b2f-a3b81dfb"
+                class="div-block-37-copy"
+              >
                 <h4 class="heading-25">Adelaide Airport/Adelaide</h4>
               </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b3a-a3b81dfb" class="div-block-37">
-                <div class="button-2-copy w-button" id="FAAD">FAAD</div>
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b32-a3b81dfb"
+                class="div-block-37"
+              >
+                <div class="button-2-copy w-button" id="FAAD">FAAB</div>
               </div>
             </div>
           </div>
-          <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b3d-a3b81dfb" class="div-block-453">
+
+          <div
+            id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b45-a3b81dfb"
+            class="div-block-38"
+          >
             <div class="w-layout-grid grid-22">
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b3f-a3b81dfb" class="div-block-37-copy">
-                <h4 class="heading-25">Aberdeen Airport/Aberdeen</h4>
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b47-a3b81dfb"
+                class="div-block-37-copy"
+              >
+                <h4 class="heading-25">Andrews Field Airpor / Andrews Field</h4>
               </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b42-a3b81dfb" class="div-block-37">
-                <div class="button-2-copy w-button" id="FAAD">FAAE</div>
-              </div>
-            </div>
-          </div>
-          <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b45-a3b81dfb" class="div-block-38">
-            <div class="w-layout-grid grid-22">
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b47-a3b81dfb" class="div-block-37-copy">
-                <h4 class="heading-25">
-                  Andrews Field Airpor / Andrews Field
-                </h4>
-              </div>
-              <div id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b4a-a3b81dfb" class="div-block-37">
+              <div
+                id="w-node-_875e7379-18d1-394d-7cd1-9719ac405b4a-a3b81dfb"
+                class="div-block-37"
+              >
                 <div class="button-2-copy w-button" id="FAAD">FAAF</div>
               </div>
             </div>
@@ -87,23 +155,34 @@
       </div>
     </div>
   </section>
-
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid1">
-      <div (click)=" NavigateToDomestic()" class="link-block-5 w-inline-block">
+      <div (click)="NavigateToDomestic()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
+        <h6
+          class="heading-10-copy"
+          id="styleh6"
+          style="
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 4px;
+          "
+        >
           Domestic
         </h6>
       </div>

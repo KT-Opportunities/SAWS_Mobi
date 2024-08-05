@@ -165,6 +165,13 @@ export class SubscriptionPackagePage implements OnInit {
     subscription_status: 'Active',
   };
 
+  freeSlides = ['International', 'Observation', 'Forecast', 'Other'];
+  premiumSlides = ['International', 'Domestic', 'Flight Briefing', 'Observation', 'Forecast', 'Aerospot', 'Other'];
+  regulatedSlides = ['International', 'Domestic', 'Flight Briefing', 'Observation', 'Forecast', 'Aerospot', 'Other'];
+  currentFreeSlide = 0;
+  currentPremiumSlide = 0;
+  currentRegulatedSlide = 0;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -197,8 +204,6 @@ export class SubscriptionPackagePage implements OnInit {
     }
   }
 
-
-
   ngOnInit() {
 
     if (this.authService.getIsLoggedIn()) {
@@ -214,6 +219,41 @@ export class SubscriptionPackagePage implements OnInit {
     // this.subsObj.notifyUrl = 'http://160.119.253.130/saws/#/subscription/success';
     this.subsObj.notifyUrl =  environment.serverAPI + 'v1/Subscriber/Notify';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
+
+  }
+
+  nextSlide(type: string) {
+
+    if(type == "free"){
+      this.currentFreeSlide = (this.currentFreeSlide + 1) % this.freeSlides.length;
+    } else if (type == "premium") {
+      this.currentPremiumSlide = (this.currentPremiumSlide + 1) % this.premiumSlides.length;
+    } else {
+      this.currentRegulatedSlide = (this.currentRegulatedSlide + 1) % this.regulatedSlides.length;
+    }
+  }
+
+  prevSlide(type: string) {
+    if(type == "free"){
+      this.currentFreeSlide = (this.currentFreeSlide - 1 + this.freeSlides.length) % this.freeSlides.length;
+
+    } else if (type == "premium") {
+      this.currentPremiumSlide = (this.currentPremiumSlide - 1 + this.premiumSlides.length) % this.premiumSlides.length;
+
+    } else {
+      this.currentRegulatedSlide = (this.currentRegulatedSlide - 1 + this.regulatedSlides.length) % this.regulatedSlides.length;
+    }
+  }
+
+  goToSlide(index: number, type: string) {
+
+    if(type =="free"){
+      this.currentFreeSlide = index;
+    } else if(type == "premium"){
+      this.currentPremiumSlide = index;
+    } else {
+      this.currentRegulatedSlide = index;  
+    }
   }
 
   GetSubscriptions(){
