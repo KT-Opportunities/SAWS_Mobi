@@ -246,8 +246,8 @@ li::before {
 }
 
 .content {
-  margin-top: 50px;
-  height: calc(100vh - 50px);
+  margin-top: 350px;
+  height: calc(100vh - 350px);
   overflow-y: auto;
 }
 
@@ -6963,6 +6963,11 @@ th {
 }
 
 @media screen and (max-width: 479px) {
+
+  .heading-47 {
+    font-size: 18px;
+  }
+
   #footerdivid {
     margin-top: 221%;
   }

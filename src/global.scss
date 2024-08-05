@@ -56,7 +56,7 @@ ion-action-sheet.my-custom-class .action-sheet-group {
 
 ion-action-sheet.my-custom-class .action-sheet-title {
   // color: #fff;
-  color: #fff;
+  color: #fff !important;
   font-size: large;
 }
 
@@ -68,13 +68,24 @@ ion-action-sheet.my-custom-class .action-sheet-cancel::after {
 ion-action-sheet.my-custom-class .action-sheet-cancel,
 ion-action-sheet.my-custom-class .action-sheet-cancel.ion-focused {
   // color: #8295c2;
-  color: #fff;
+  color: #fff !important;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-button,
+ion-action-sheet.my-custom-class .action-sheet-button.ion-focused {
+  // color: #8295c2;
+  color: #fff !important;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-icon {
+  // color: #8295c2;
+  color: #fff !important;
 }
 
 ion-action-sheet.my-custom-class .action-sheet-destructive,
 ion-action-sheet.my-custom-class .action-sheet-destructive.ion-focused {
   // color: #808080;
-  color: #fff;
+  color: #fff !important;
 }
 
 @media (any-hover: hover) {
