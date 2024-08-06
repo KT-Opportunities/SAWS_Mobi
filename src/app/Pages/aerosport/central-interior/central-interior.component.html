@@ -1,9 +1,8 @@
 <ion-content [fullscreen]="true">
   <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner
-    >Loading...
+    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>Loading...
   </div>
-  <section class="aerosport-ci" style="margin-top: 107px !important">
+  <section class="aerosport-ci" style="margin-top: 35%">
     <h1 class="heading-6">Central Interior</h1>
 
     <div class="aerosport">
@@ -29,7 +28,7 @@
                 >
                   <div class="w-dropdown-toggle">
                     <div class="text-block">
-                      {{selectedOption}}
+                      {{ selectedOption }}
 
                       <div
                         style="
@@ -81,7 +80,7 @@
                     id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa6-bb9b1d15"
                     class="div-block-36"
                   >
-                    <h4 class="heading-24">{{selectedOption}}</h4>
+                    <h4 class="heading-24">{{ selectedOption }}</h4>
                   </div>
                   <div
                     id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
@@ -102,7 +101,7 @@
               <div
                 id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aae-bb9b1d15"
                 class="div-block-452"
-                *ngFor="let item of getFilteredItems() let i = index"
+                *ngFor="let item of getFilteredItems(); let i = index"
                 [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
               >
                 <div class="w-layout-grid grid-41">
@@ -165,7 +164,7 @@
               <div
                 id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
                 class="div-block-452"
-                *ngFor="let item of ConvectiveCloudBase let i = index"
+                *ngFor="let item of ConvectiveCloudBase; let i = index"
                 [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
               >
                 <div class="w-layout-grid grid-41">
@@ -213,7 +212,7 @@
                     (click)="toggleDropdown('dropdown2')"
                   >
                     <div class="w-dropdown-toggle">
-                      <div class="text-block">{{selectedOption2}}</div>
+                      <div class="text-block">{{ selectedOption2 }}</div>
                       <div
                         style="
                           position: absolute;
@@ -288,7 +287,7 @@
                     id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
                     class="div-block-36"
                   >
-                    <h4 class="heading-24">{{selectedOption2}}</h4>
+                    <h4 class="heading-24">{{ selectedOption2 }}</h4>
                   </div>
                   <div
                     id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
@@ -373,7 +372,7 @@
               <div
                 id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
                 class="div-block-452"
-                *ngFor="let item of ThermalArray let i = index"
+                *ngFor="let item of ThermalArray; let i = index"
                 [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
               >
                 <div class="w-layout-grid grid-41">
@@ -422,7 +421,7 @@
                     (click)="toggleDropdown('dropdown3')"
                   >
                     <div class="w-dropdown-toggle">
-                      <div class="text-block">{{selectedOption3}}</div>
+                      <div class="text-block">{{ selectedOption3 }}</div>
                       <div
                         style="
                           position: absolute;
@@ -467,7 +466,7 @@
                     id="w-node-e56588f0-a404-c7f6-783b-ec1c6c397e9a-bb9b1d15"
                     class="div-block-36"
                   >
-                    <h4 class="heading-24">{{selectedOption3}}</h4>
+                    <h4 class="heading-24">{{ selectedOption3 }}</h4>
                   </div>
                   <div
                     id="w-node-e56588f0-a404-c7f6-783b-ec1c6c397e9d-bb9b1d15"
@@ -488,7 +487,7 @@
               <div
                 id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
                 class="div-block-452"
-                *ngFor="let item of getFilteredItemsThermal() let i = index"
+                *ngFor="let item of getFilteredItemsThermal(); let i = index"
                 [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
               >
                 <div class="w-layout-grid grid-41">
@@ -521,16 +520,19 @@
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid">
       <a (click)="NavigateToAerosport()" class="link-block-5 w-inline-block">
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          Aerosport</h6>
+        <h6 class="heading-10-copy" id="styleh6">Aerosport</h6>
       </a>
     </div>
   </div>
 </ion-footer>
-
-

@@ -177,6 +177,17 @@
 }
 
 @media screen and (max-width: 991px) {
+  .heading6 {
+    color: #002b53;
+    font-family: Montserrat, sans-serif;
+    font-size: 40px;
+    margin-top: -114px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
   .w-layout-blockcontainer {
     max-width: 728px;
   }
@@ -6419,7 +6430,7 @@ th {
 
   .ob-metar-history,
   .subscription-p {
-    margin-top: 220px !important;
+    margin-top: 678px;
     position: static;
     top: 0%;
     bottom: 0%;
