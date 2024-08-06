@@ -1864,6 +1864,15 @@
 }
 
 @media screen and (max-width: 991px) {
+
+  .heading-6 {
+    font-size: 30px;
+  }
+
+  .list-div {
+    // margin-top: 350px;
+  }
+
   .section {
     position: static;
     top: 0%;
@@ -1981,7 +1990,7 @@
   }
 
   .list-page {
-    margin-top: -123px;
+    // margin-top: -123px;
     position: static;
     top: 0%;
     bottom: 0%;
@@ -2339,6 +2348,11 @@
 }
 
 @media screen and (max-width: 767px) {
+
+  .list-div {
+    // margin-top: 280px;
+  }
+
   .image {
     margin-top: 0;
   }
@@ -2551,6 +2565,7 @@
 
   .tafs-div {
     margin-bottom: 20px;
+    margin-top: -100px;
   }
 
   .grid-6 {
@@ -2974,6 +2989,11 @@
 }
 
 @media screen and (max-width: 479px) {
+
+  .list-div {
+    // margin-top: 0;
+  }
+
   .section {
     padding-top: 0;
   }

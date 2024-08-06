@@ -223,6 +223,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   nextSlide(type: string) {
+
     if(type == "free"){
       this.currentFreeSlide = (this.currentFreeSlide + 1) % this.freeSlides.length;
     } else if (type == "premium") {
@@ -237,10 +238,10 @@ export class SubscriptionPackagePage implements OnInit {
       this.currentFreeSlide = (this.currentFreeSlide - 1 + this.freeSlides.length) % this.freeSlides.length;
 
     } else if (type == "premium") {
-      this.currentFreeSlide = (this.currentFreeSlide - 1 + this.premiumSlides.length) % this.premiumSlides.length;
+      this.currentPremiumSlide = (this.currentPremiumSlide - 1 + this.premiumSlides.length) % this.premiumSlides.length;
 
     } else {
-      this.currentPremiumSlide = (this.currentPremiumSlide - 1 + this.regulatedSlides.length) % this.regulatedSlides.length;
+      this.currentRegulatedSlide = (this.currentRegulatedSlide - 1 + this.regulatedSlides.length) % this.regulatedSlides.length;
     }
   }
 

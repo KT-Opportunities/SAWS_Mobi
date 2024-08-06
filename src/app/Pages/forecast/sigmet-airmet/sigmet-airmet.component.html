@@ -5,10 +5,7 @@
     Loading...
   </div>
 
-  <section class="colour-coded-tafs-page"  style="   margin-top: 57px !important;">
-    <div class="div-block-2">
-      <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
-    </div>
+  <section class="list-page">
 
     <div class="tafs-div">
       <h1 class="heading-6" id="colorcoded">SIGMET/AIRMET/GAMET</h1>
@@ -26,13 +23,10 @@
         </div>
         <div>
           <h5 class="heading-9" id="searchHeader">Query sigmet</h5>
-          <form action="/search" class="search w-form" >
-            <input class="search-input w-input" maxlength="256"
-             name="query" placeholder="Search…" type="search"
-             [(ngModel)]="searchQuery"
-                (ngModelChange)="filterbySearch($event)"
-              id="searchValue"  /><button type="submit" class="search-button w-button"
-              (click)="filterbySearch($event)">Search</button>
+          <form action="/search" class="search w-form">
+            <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
+              [(ngModel)]="searchQuery" (ngModelChange)="filterbySearch($event)" id="searchValue" /><button
+              type="submit" class="search-button w-button" (click)="filterbySearch($event)">Search</button>
           </form>
         </div>
         <div class="ObservScrol">
