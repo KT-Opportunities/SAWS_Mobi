@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-sigmet-airmet',
   templateUrl: './sigmet-airmet.component.html',
-  // styleUrls: ['./sigmet-airmet.component.scss'],
   styleUrls: ['./../forecast.page.scss'],
 })
 export class SigmetAirmetComponent  implements OnInit {
@@ -46,6 +45,7 @@ export class SigmetAirmetComponent  implements OnInit {
           element.heading = vwValue;
          
       });
+
       this.SigmetList = Response;
       this.filteredList = Response;
       this.getAirmetTextFiles();
@@ -71,11 +71,15 @@ export class SigmetAirmetComponent  implements OnInit {
       //Push airmet into the sigmet List
       this.SigmetList.push(Response);
       this.filteredList.push(Response);
-      console.log("Response ", this.SigmetList);
+      console.log("Response - airmet  ", this.SigmetList);
   
       this.getGametTextFiles();
       
-    })
+    }),
+    (error: any) => {
+      console.error("Error occurred while fetching airmet data: ", error);
+      this.isLoading = false;
+    }
   }
   async getGametTextFiles(){
 
@@ -92,11 +96,15 @@ export class SigmetAirmetComponent  implements OnInit {
       //push gamet into the sigmet List
       this.SigmetList.push(Response);
       this.filteredList.push(Response);
-      console.log("Response ", this.SigmetList);
+      console.log("Response - gamet ", this.SigmetList);
   
       this.isLoading = false;
       
-    })
+    }),
+    (error: any) => {
+      console.error("Error occurred while fetching gamet data: ", error);
+      this.isLoading = false;
+    }
   }
   
   filterbySearch(event: Event){

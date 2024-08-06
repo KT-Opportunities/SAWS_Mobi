@@ -59,4 +59,9 @@ export class ColorCodedSigmentAirmetComponent  implements OnInit {
       this.isLoading = false;
     });
   }
+
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
 }

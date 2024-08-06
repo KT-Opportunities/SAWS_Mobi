@@ -3,6 +3,8 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
+  <div id="top"></div>
+
   <section class="list-page">
 
     <div class="tafs-div">
@@ -72,6 +74,10 @@
   </section>
 </ion-content>
 <ion-footer class="ion-no-border">
+  <button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+    Top
+  </button>
+  
   <div class="">
     <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" style="margin-top: -64px" />
 

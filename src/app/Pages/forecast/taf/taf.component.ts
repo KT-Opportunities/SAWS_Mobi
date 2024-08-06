@@ -131,4 +131,9 @@ export class TafComponent implements OnInit {
         });
     
   }
+
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
 }

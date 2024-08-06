@@ -4,6 +4,8 @@
     Loading...
   </div>
 
+  <div id="top"></div>
+
   <section class="list-page">
     <div class="tafs-div">
       <h1 class="heading-6" id="colorcoded">
@@ -61,17 +63,15 @@
         </div>
       </div>
 
-      <div style="margin-top: 50px;" *ngFor="let text of AdvisoriesList">
+      <div style="margin-top: 0px; padding: 15px;" *ngFor="let text of AdvisoriesList">
         <h1 class="heading-6" id="{{text.Id}}">{{text.heading}}</h1>
         <h1 class="heading-6">{{text.lastmodified | date:
           "yyyy/MM/dd HH:mm"}}</h1>
-        <span style="white-space: pre-line;">
+        <span style="white-space: pre-line;color: #000;">
           {{text.filetextcontent}}
         </span>
         <hr>
       </div>
-
-      <button (click)="ScrollToTop('filters')" id="btntotop" title="Go to top">Top</button>
     </div>
   </section>
 
@@ -79,6 +79,9 @@
 
 <ion-footer class="ion-no-border">
   <div class="">
+    <button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+      Top
+    </button>
     <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
 
     <div class="footerdiv" id="footerdivid1">

@@ -153,7 +153,7 @@ export class APIService {
   GetSourceTextFolderFiles(foldername: string) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}&lasthours=6`
     );
   }
 

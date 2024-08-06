@@ -3,6 +3,10 @@
   margin-top: 155%;
 }
 
+.paragraph-2 {
+  color: #000;
+}
+
 @media screen and (max-width: 991px) {
   .w-layout-blockcontainer {
     max-width: 728px;
@@ -132,6 +136,7 @@
   margin: 0 0 0 10px;
   font-family: Montserrat, sans-serif;
   font-weight: 600;
+  width: 75px;
 }
 
 .paragraph-11 {
@@ -1009,6 +1014,7 @@
   font-family: Montserrat, sans-serif;
   font-size: 24px;
   font-weight: 600;
+  margin: 0;
 }
 
 .heading-10-copy {
@@ -1865,12 +1871,28 @@
 
 @media screen and (max-width: 991px) {
 
-  .heading-6 {
-    font-size: 30px;
+  .heading-9 {
+    margin-left: 50px;
   }
 
-  .list-div {
-    // margin-top: 350px;
+  .search-button {
+    margin-top: -1px !important;
+    margin-left: -72px;
+    height: 50px;
+  }
+
+  .search {
+    width: 80vw;
+  }
+
+  .w-input {
+    margin-bottom: 0;
+    height: 50px;
+    margin-left: 50px;
+  }
+
+  .heading-6 {
+    font-size: 30px;
   }
 
   .section {
@@ -2015,6 +2037,7 @@
   .div-block-15 {
     margin-left: 47px;
     margin-right: 47px;
+    margin-top: 20px;
   }
 
   .paragraph-2 {
@@ -2110,7 +2133,7 @@
 
   .heading-21 {
     font-size: 12px;
-    line-height: 20px;
+    // line-height: 20px;
   }
 
   .heading-22 {
@@ -2349,9 +2372,7 @@
 
 @media screen and (max-width: 767px) {
 
-  .list-div {
-    // margin-top: 280px;
-  }
+ 
 
   .image {
     margin-top: 0;
@@ -2990,6 +3011,16 @@
 
 @media screen and (max-width: 479px) {
 
+  .search-button {
+    height: 38px;
+    margin-top: 5px !important;
+    margin-left: -71px;
+  }
+
+  .w-input {
+    height: 38px;
+  }
+
   .list-div {
     // margin-top: 0;
   }
@@ -3260,6 +3291,7 @@
   .paragraph-2 {
     font-family: Montserrat, sans-serif;
     font-size: 10px;
+    color: #000;
   }
 
   .link-block-5 {
