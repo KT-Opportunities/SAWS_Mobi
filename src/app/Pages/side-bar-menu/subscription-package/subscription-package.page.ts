@@ -89,7 +89,7 @@ export class SubscriptionPackagePage implements OnInit {
 
   public actionSheetButtonsCancel = [
     {
-      text: 'UnSubscribe',
+      text: 'Unsubscribe',
       role: 'destructive',
       icon: 'trash-outline',
       data: {
@@ -634,7 +634,7 @@ export class SubscriptionPackagePage implements OnInit {
 
     const actionSheet = await this.actionSheetController.create({
       header: 'Cancel Subscription!',
-      subHeader: `Are you sure you want to UnSubscribe from the selected subscription?`,
+      subHeader: `Are you sure you want to Unsubscribe from the selected subscription?`,
       buttons: this.actionSheetButtonsCancel,
       cssClass: 'my-custom-class'
     });
