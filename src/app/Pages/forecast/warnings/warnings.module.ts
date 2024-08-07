@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { WarningsRoutingModule } from './warnings-routing.module';
 
 import { WarningsComponent } from './warnings.component';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WarningsRoutingModule
-  ],
+    WarningsRoutingModule,
+    SharedModule
+],
   declarations: [WarningsComponent]
 })
 export class WarningsModule {}

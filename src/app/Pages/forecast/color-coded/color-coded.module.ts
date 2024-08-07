@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ColorCodedPageRoutingModule } from './color-coded-routing.module';
 
 import { ColorCodedPage } from './color-coded.page';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ColorCodedPageRoutingModule
-  ],
+    ColorCodedPageRoutingModule,
+    SharedModule
+],
   declarations: [ColorCodedPage]
 })
 export class ColorCodedPageModule {}

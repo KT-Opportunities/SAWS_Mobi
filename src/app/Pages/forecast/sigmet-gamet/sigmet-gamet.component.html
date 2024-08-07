@@ -32,7 +32,7 @@
           </div>
 
           <button class="top" style="display: none;" disabled="true" id="scrollT"></button>
-          <section class="tafs-div" *ngFor="let sigmet of SigmetList">
+          <div class="tafs-div" *ngFor="let sigmet of SigmetList">
             <div>
               <h1 class="heading-21" id="head12">{{sigmet.heading}}</h1>
 
@@ -48,13 +48,13 @@
             </div>
 
             <hr>
-          </section>
+          </div>
         </div>
-        <button (click)="ScrollToTop('w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea')" id="btntotop"
-          title="Go to top">Top</button>
+        <!-- <button (click)="ScrollToTop('w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea')" id="btntotop"
+          title="Go to top">Top</button> -->
       </div>
 
-      <div class="bottomdiv" style="position: relative;">
+      <!-- <div class="bottomdiv" style="position: relative;">
         <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt class="image" />
 
         <div class="footerdiv" id="footerdivid" style="position: relative !important;
@@ -64,7 +64,28 @@
             <h6 class="heading-10-copy" id="styleh6">Forecast</h6>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </ion-content>
+
+<app-footer></app-footer>
+
+<div class="footerdiv" id="footerdivid1">
+  <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+         margin-top: 10px;
+         margin-bottom: 0;
+         font-family: Montserrat, sans-serif;
+         text-decoration: none;
+         font-size: 12px;
+         margin-top: 4px;">
+      Forecast
+    </h6>
+  </div>
+</div>
+
+<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+  Top
+</button>

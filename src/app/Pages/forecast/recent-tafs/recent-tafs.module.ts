@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { RecentTafsRoutingModule } from './recent-tafs-routing.module';
 
 import { RecentTafsComponent } from './recent-tafs.component';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RecentTafsRoutingModule
-  ],
+    RecentTafsRoutingModule,
+    SharedModule
+],
   declarations: [RecentTafsComponent]
 })
 export class RecentTafsModule {}

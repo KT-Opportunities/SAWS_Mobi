@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { sigmetGametRoutingModule } from './sigmet-gamet-routing.module';
 
 import { SigmetGametComponent } from './sigmet-gamet.component';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    sigmetGametRoutingModule
-  ],
+    sigmetGametRoutingModule,
+    SharedModule
+],
   declarations: [SigmetGametComponent]
 })
 export class sigmetGametPageModule {}

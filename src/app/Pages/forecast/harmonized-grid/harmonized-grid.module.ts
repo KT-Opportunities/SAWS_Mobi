@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { HarmonizedGridPageRoutingModule } from './harmonized-grid-routing.module';
 
 import { HarmonizedGridPage } from './harmonized-grid.page';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HarmonizedGridPageRoutingModule
-  ],
+    HarmonizedGridPageRoutingModule,
+    SharedModule
+],
   declarations: [HarmonizedGridPage]
 })
 export class HarmonizedGridPageModule {}

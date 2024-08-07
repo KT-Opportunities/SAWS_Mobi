@@ -208,4 +208,8 @@ export class HarmonizedGridPage implements OnInit {
       );
     });
   }
+
+  forecastPageNavigation() {
+    this.router.navigate(['/forecast']);
+  }
 }

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ColorCodedWarningsRoutingModule } from './color-coded-warnings-routing.module';
 
 import { ColorCodedWarningsComponent } from './color-coded-warnings.component';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ColorCodedWarningsRoutingModule
-  ],
+    ColorCodedWarningsRoutingModule,
+    SharedModule
+],
   declarations: [ColorCodedWarningsComponent]
 })
 export class ColorCodedWarningsModule {}

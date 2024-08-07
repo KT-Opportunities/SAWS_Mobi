@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ForecastPageRoutingModule } from './forecast-routing.module';
 
 import { ForecastPage } from './forecast.page';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ForecastPageRoutingModule
-  ],
+    ForecastPageRoutingModule,
+    SharedModule
+],
   declarations: [ForecastPage]
 })
 export class ForecastPageModule {}

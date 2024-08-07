@@ -117,6 +117,7 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
 .button-native {
   margin-left: 253px;
 }
@@ -221,6 +222,11 @@ ion-menu-button {
 }
 
 .image {
+  height: auto;
+  max-height: none;
+}
+
+.image-footer {
   height: auto;
   max-height: none;
 }
@@ -895,6 +901,11 @@ ion-menu-button {
     padding-top: 0;
   }
 
+  .image-footer {
+    // margin-top: 13px;
+    padding-top: 0;
+  }
+
   .div-block-2 {
     margin-top: -110px;
   }
@@ -1196,6 +1207,11 @@ ion-menu-button {
     margin-top: -126px;
   }
 
+  .image-footer {
+    height: auto;
+    // margin-top: -126px;
+  }
+
   .div-block-2 {
     height: 44%;
     background-image: none;
@@ -1405,6 +1421,11 @@ ion-menu-button {
 }
 
 .image {
+  height: auto;
+  max-height: none;
+}
+
+.image-footer {
   height: auto;
   max-height: none;
 }
@@ -2086,6 +2107,15 @@ ion-menu-button {
 }
 
 @media screen and (max-width: 991px) {
+
+  .left-aligned-menu-button {
+    width: 50%; /* Each image takes 50% of the container */
+    color: #fff;
+    margin-left: 460px;
+    margin-top: -40px;
+    font-size: 60px;
+    line-height: 30px;
+  }
   .section {
     position: static;
     top: 0%;
@@ -2098,6 +2128,11 @@ ion-menu-button {
   .image {
     height: auto;
     margin-top: -126px;
+  }
+
+  .image-footer {
+    height: auto;
+    // margin-top: -126px;
   }
 
   .div-block-2 {
@@ -2380,6 +2415,7 @@ ion-menu-button {
     color: #fff;
     margin-left: 243px;
     margin-top: -74px;
+    font-size: 40px;
   }
   .round-image {
     width: 70px;
@@ -2406,7 +2442,14 @@ ion-menu-button {
     height: 77%;
   }
   .image {
-    margin-top: 13px;
+    // margin-top: 13px;
+    margin-top: 10px;
+    padding-top: 0;
+  }
+
+  .image-footer {
+    // margin-top: 13px;
+    // margin-top: 10px;
     padding-top: 0;
   }
 
@@ -2577,6 +2620,13 @@ ion-menu-button {
 .top-content {
   position: fixed;
   top: 97px;
+  left: 0;
+  z-index: 999; /* Adjust z-index value as needed to ensure it displays on top */
+}
+
+.footer-content {
+  position: fixed;
+  bottom: 0;
   left: 0;
   z-index: 999; /* Adjust z-index value as needed to ensure it displays on top */
 }

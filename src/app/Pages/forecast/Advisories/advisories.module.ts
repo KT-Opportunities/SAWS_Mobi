@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { advisoriesRoutingModule } from './advisories-routing.module';
 
 import { AdvisoriesComponent } from './advisories.component';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    advisoriesRoutingModule
-  ],
+    advisoriesRoutingModule,
+    SharedModule
+],
   declarations: [AdvisoriesComponent]
 })
 export class advisoriesPageModule {}

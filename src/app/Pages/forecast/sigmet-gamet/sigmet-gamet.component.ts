@@ -119,7 +119,7 @@ export class SigmetGametComponent  implements OnInit {
         element?.scrollIntoView({ behavior: 'smooth' });
       }
     
-      forecastPage() {
+      forecastPageNavigation() {
         window.history.back();
         // this.router.navigate(['/forecast']);
       }
