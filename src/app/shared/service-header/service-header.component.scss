@@ -1,0 +1,32 @@
+.service-heading {
+   position: sticky;
+  }
+
+.heading {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+
+@media screen and (max-width: 767px) {
+
+
+}
+
+@media screen and (max-width: 479px) {
+
+}
+
+// @media screen and (max-width: 991px) {
+
+// .heading-6 {
+//     text-align: center;
+//     margin-top: 90px;
+//     margin-bottom: 10px;
+//     font-size: 20px;
+//     line-height: 30px;
+//   }
+// }

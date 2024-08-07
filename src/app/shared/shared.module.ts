@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { IonicModule } from '@ionic/angular';
+import { ServiceHeaderComponent } from './service-header/service-header.component';
 
 @NgModule({
   imports: [
@@ -15,9 +16,11 @@ import { IonicModule } from '@ionic/angular';
   ],
   declarations: [
     FooterComponent,
+    ServiceHeaderComponent
   ],
   exports: [
-    FooterComponent
+    FooterComponent,
+    ServiceHeaderComponent
   ]
 })
 export class SharedModule { }
