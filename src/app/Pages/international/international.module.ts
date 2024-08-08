@@ -8,6 +8,7 @@ import { InternationalPageRoutingModule } from './international-routing.module';
 
 import { InternationalPage } from './international.page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     FormsModule,
     IonicModule,
-    InternationalPageRoutingModule
+    InternationalPageRoutingModule,
+    SharedModule
   ],
   declarations: [InternationalPage]
 })

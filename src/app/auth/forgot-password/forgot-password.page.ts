@@ -3,6 +3,7 @@ import {
   HostListener,
   ViewChild,
   ElementRef,
+  OnInit,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -11,15 +12,16 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { APIService } from 'src/app/services/apis.service';
-import Swal from 'sweetalert2';
+import { Keyboard } from '@capacitor/keyboard';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss'],
 })
-export class ForgotPasswordPage  {
+export class ForgotPasswordPage implements OnInit {
   userForm: FormGroup;
   submitted = false;
   errorMgs: string | null = null;
@@ -27,6 +29,9 @@ export class ForgotPasswordPage  {
   loading = false;
   statusMessage = false;
   errorMessage = false;
+
+  isKeyboardVisible = false;
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     // Adjust your layout here based on the window size
@@ -51,12 +56,35 @@ export class ForgotPasswordPage  {
     private formBuilder: FormBuilder,
     private api: APIService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private platform: Platform
   ) {
     this.userForm = this.formBuilder.group({
       Email: ['', [Validators.required, this.emailValidator]],
     });
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
   }
+
+   ngOnInit(): void {
+    this.platform.ready().then(() => {
+      // Listen for keyboard will show event
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      });
+
+      // Listen for keyboard will hide event
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      });
+    });
+   }
 
   async Successfully() {
     const alert = await this.alertController.create({
@@ -68,6 +96,7 @@ export class ForgotPasswordPage  {
 
     await alert.present();
   }
+
   onSubmit() {
     this.submitted = true;
 
@@ -103,6 +132,9 @@ export class ForgotPasswordPage  {
         }
       );
     }
+  }
+  home() {
+    this.router.navigate(['/landing-page']);
   }
 
   onReset() {

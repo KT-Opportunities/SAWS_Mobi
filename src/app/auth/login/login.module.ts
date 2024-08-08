@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoginPage } from './login.page';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -20,8 +21,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-  
-  ],
+    SharedModule
+],
   declarations: [LoginPage]
 })
 export class LoginPageModule {}

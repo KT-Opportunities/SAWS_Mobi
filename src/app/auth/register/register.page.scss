@@ -81,3 +81,8 @@
   background-color: #007bff; /* Change to your desired header background color */
   color: #ffffff; /* Change to your desired header text color */
 }
+
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}

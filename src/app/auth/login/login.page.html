@@ -108,7 +108,7 @@
   />
 </ion-content>
 
-<ion-footer
+<!-- <ion-footer
   *ngIf="!isKeyboardVisible"
   class="ion-no-border"
   style="margin-top: 5px"
@@ -128,4 +128,21 @@
       </div>
     </div>
   </div>
-</ion-footer>
+</ion-footer> -->
+
+<app-footer *ngIf="!isKeyboardVisible"></app-footer>
+
+<div class="footerdiv" *ngIf="!isKeyboardVisible">
+  <a (click)="home()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+      src="./../../../assets/Group-3489.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" style="
+        color: #fff;
+        margin-top: 9px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "></h6>
+  </a>
+</div>

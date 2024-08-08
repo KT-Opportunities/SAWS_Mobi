@@ -12,10 +12,12 @@ import { ServiceListItemsComponent } from './service-list-items/service-list-ite
 import { ServiceListItemsGridComponent } from './service-list-items-grid/service-list-items-grid.component';
 import { ServiceListItemComponent } from './service-list-item/service-list-item.component';
 import { LoadingComponent } from './loading/loading.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatDialogModule,
     RouterModule,
     FormsModule,
     IonicModule,
