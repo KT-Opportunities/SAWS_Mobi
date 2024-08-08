@@ -1,11 +1,10 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
   <!-- <section class="list-page"></section> -->
 
-  <section class="list-page">
+  <!-- <section class="list-page"> -->
+    <app-package-content>
     <div class="tafs-div">
       <h1 class="heading-6" id="colorcoded">Colour Coded Warnings</h1>
       <div class="w-layout-grid grid-6" id="layout">
@@ -18,7 +17,9 @@
         </div>
       </div>
     </div>
-  </section>
+ 
+    
+  </app-package-content>
 
 
 </ion-content>

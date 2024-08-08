@@ -1,10 +1,8 @@
 <ion-content>
-  <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner
-    >Loading...
-  </div>
+  <app-loading *ngIf="isLoading"></app-loading>
 
-  <section class="list-page">
+  <!-- <section class="list-page"> -->
+    <app-package-content>
     <div class="wafs-main-div">
       <h1 class="heading-6">WAFS Harmonized Grid Products</h1>
       <div class="scrolltaffA">
@@ -189,7 +187,8 @@
         >
       </div>
     </div>
-  </section>
+
+  </app-package-content>
 </ion-content>
 
 <app-footer></app-footer>

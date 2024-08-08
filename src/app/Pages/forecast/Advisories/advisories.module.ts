@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { advisoriesRoutingModule } from './advisories-routing.module';
-
 import { AdvisoriesComponent } from './advisories.component';
 import { SharedModule } from "../../../shared/shared.module";
+import { advisoriesRoutingModule } from './advisories-routing.module';
 
 @NgModule({
   imports: [

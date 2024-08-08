@@ -1,51 +1,17 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  ElementRef,
-  HostListener,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-// import { AuthService } from '../services/auth.service';
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { APIService } from 'src/app/services/apis.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-// import { ImageViewrPage } from '../Pages/image-viewr/image-viewr.page';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/services/auth.service';
-import { ImageViewrPage } from '../image-viewr/image-viewr.page';
-interface ResponseItem {
-  foldername: string;
-  filename: string;
-  lastmodified: string;
-  filetextcontent: string;
-  // Add other properties if needed
-}
-interface FileData {
-  foldername: string;
-  filename: string;
-  lastmodified: string;
-  filetextcontent: string;
-}
 
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.page.html',
   styleUrls: ['./forecast.page.scss'],
 })
-export class ForecastPage implements OnInit {
-  isLogged: boolean = false; 
-  
-  loading = false;
-  isLoading: boolean = true;
+export class ForecastPage {
+  isLogged: boolean = false;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
-
-  ngOnInit() {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
@@ -87,10 +53,10 @@ export class ForecastPage implements OnInit {
     this.router.navigate(['/forecast/take-off-data']);
   }
 
-  NavigateToTafs() { 
+  NavigateToTafs() {
     this.router.navigate(['/forecast/taf']);
   }
- 
+
   NavigateToRecentTAF() {
     this.router.navigate(['/forecast/recent-tafs']);
   }

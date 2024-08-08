@@ -1,11 +1,10 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
   <div id="top"></div>
 
-  <section class="list-page">
+  <!-- <section class="list-page"> -->
+    <app-package-content>
     <div class="div-block-2">
       <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image" />
     </div>
@@ -78,8 +77,9 @@
         </a>
       </div>
     </div> -->
-  </section>
-
+ 
+    
+  </app-package-content>
 
 </ion-content>
 

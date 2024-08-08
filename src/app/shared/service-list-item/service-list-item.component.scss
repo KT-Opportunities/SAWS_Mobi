@@ -1,0 +1,40 @@
+.item {
+    width: 92vw;
+    background-color: rgba(0, 44, 86, 0.18);
+    border-radius: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    margin-left: 2px;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.heading {
+    color: #002f5a;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    letter-spacing: normal;
+}
+
+@media screen and (max-width: 991px) {
+    .heading {
+        margin: 10px !important
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .heading {
+        font-size: 14px;
+        color: #002f5a;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
+    }
+
+}

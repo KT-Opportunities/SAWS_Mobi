@@ -1,9 +1,8 @@
 <ion-content>
-  <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="isLoading"></app-loading>
 
-  <section class="list-page">
+  <!-- <section class="list-page"> -->
+    <app-package-content>
     <h1 class="heading-6">Take - Off Parameters</h1>
     <div class="overflow-y:auto;height:32em;">
       <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408" class="w-layout-grid grid-take-off" id="take"
@@ -209,7 +208,8 @@
         </div>
       </div>
     </div>
-  </section>
+
+  </app-package-content>
 </ion-content>
 
 <!-- <ion-footer class="ion-no-border">

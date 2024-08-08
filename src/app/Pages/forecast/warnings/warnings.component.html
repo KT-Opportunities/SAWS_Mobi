@@ -1,9 +1,9 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
-  <section class="list-page">
+  <!-- <section class="list-page"> -->
+
+    <app-package-content>
     <div class="tafs-div">
       <h1 class="heading-6" id="colorcoded">Aerodrome Warning</h1>
 
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-package-content>
 
 </ion-content>
 <!-- <ion-footer class="ion-no-border">
