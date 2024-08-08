@@ -1,4 +1,4 @@
-.layout-grid {
+.list-layout-grid {
     grid-row-gap: 16px;
     grid-column-gap: 16px;
     grid-template-rows: auto auto;
@@ -7,7 +7,7 @@
     display: grid;
 }
 
-.grid-list {
+.list-grid-list {
     grid-template-rows: auto auto auto auto auto auto auto;
     grid-template-columns: 1fr;
 }

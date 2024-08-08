@@ -13,6 +13,8 @@ import { ServiceListItemsGridComponent } from './service-list-items-grid/service
 import { ServiceListItemComponent } from './service-list-item/service-list-item.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PackageSubHeaderComponent } from './package-sub-header/package-sub-header.component';
+import { PackageListItemsComponent } from './package-list-items/package-list-items.component';
 
 @NgModule({
   imports: [
@@ -31,7 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ServiceListItemComponent,
     ServiceListItemsGridComponent,
     PackageHeaderComponent,
+    PackageSubHeaderComponent,
     PackageContentComponent,
+    PackageListItemsComponent,
     LoadingComponent
   ],
   exports: [
@@ -42,7 +46,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ServiceListItemComponent,
     ServiceListItemsGridComponent,
     PackageHeaderComponent,
+    PackageSubHeaderComponent,
     PackageContentComponent,
+    PackageListItemsComponent,
     LoadingComponent
   ]
 })

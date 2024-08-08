@@ -1,19 +1,36 @@
 .package-heading {
-    position: sticky;
-}
-
-.heading {
+    left: 0;
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    top: 0;
+    right: 0;
+    padding-top: 140px;
+  }
+  
+  .heading {
     text-align: center;
-    margin-top: 10px;
+    // margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 30px;
     font-weight: 500;
-}
-
-
-@media screen and (max-width: 991px) {}
-
-@media screen and (max-width: 767px) {}
-
-@media screen and (max-width: 479px) {}
+  }
+  
+  @media screen and (max-width: 991px) {
+    .package-heading {
+      padding-top: 220px;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .package-heading {
+      padding-top: 180px;
+    }
+  }
+  
+  @media screen and (max-width: 479px) {
+    .package-heading {
+      padding-top: 130px;
+    }
+  }

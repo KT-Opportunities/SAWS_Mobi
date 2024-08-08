@@ -8,7 +8,7 @@
       SIGMET/AIRMET/GAMET
     </app-package-header>
 
-    <div class="w-layout-grid grid-6" id="layout">
+    <app-package-sub-header>
       <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
         <div id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea" class="cct">
           <h1 class="heading-7">Date :</h1>
@@ -28,7 +28,9 @@
             class="search-button w-button" (click)="filterbySearch($event)">Search</button>
         </form>
       </div>
+    </app-package-sub-header>
 
+    <app-package-list-items>
       <div id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb43-61ad4633" class="div-block-15">
         <div *ngFor="let sigmet of SigmetList">
           <div class="w-layout-grid heading-text">
@@ -44,8 +46,7 @@
           </div>
         </div>
       </div>
-
-    </div>
+    </app-package-list-items>
   </app-package-content>
 
 </ion-content>
