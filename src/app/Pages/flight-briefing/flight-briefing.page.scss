@@ -3667,6 +3667,22 @@ flex-flow: wrap;
 }
 
 @media screen and (max-width: 991px) {
+  .list-page {
+    margin-top: 84px !important ;
+    position: static !important;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+  .heading-6{
+    text-align: center;
+  position: relative;
+  top: 171px;
+  }
+}
+
+@media screen and (max-width: 991px) {
   .section {
     position: static;
     top: 0%;
