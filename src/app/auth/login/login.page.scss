@@ -171,7 +171,7 @@
   // }
   .fas {
     position: absolute;
-    right: 233px;
+    right: 249px;
     margin-top: -23px;
     transform: translateY(-50%);
     cursor: pointer;
@@ -303,5 +303,17 @@
   .checkbox-label {
     font-size: 14px;
     color: #00386c;
+  }
+  .section {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    margin-top: 131px;
   }
 }

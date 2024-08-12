@@ -4269,7 +4269,7 @@
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
-  margin-right: -182px !important;
+  margin-right: -182px;
 }
 
 .dropdown-list {
@@ -8107,7 +8107,7 @@ textarea.w-select {
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
-  margin-right: -152px !important;
+  margin-right: -152px;
 }
 .icon-4 {
   color: #fff;
@@ -10467,7 +10467,7 @@ textarea.w-select {
     // margin-left: 20%;
   }
   .ob-metar-history {
-    margin-top: 300px;
+    margin-top: -117px;
   }
   .grid-21 {
     grid-template-rows: auto;
@@ -11415,6 +11415,24 @@ textarea.w-select {
   }
 }
 @media screen and (max-width: 991px) {
+  .icon-2 {
+    color: #fff;
+    margin-top: 5.4907px;
+    margin-right: -288px;
+  }
+  .text-field-blue {
+    width: 58vw;
+    height: 32px;
+    color: #fff;
+    background-image: linear-gradient(#00386c, #00386c);
+    border-radius: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4px 10px;
+    font-family: Open Sans, sans-serif;
+    display: block;
+    box-shadow: 0 2px 5px #00386c;
+  }
   .w-container {
     max-width: 728px;
   }
@@ -11464,6 +11482,10 @@ textarea.w-select {
     width: 100%;
     left: auto;
     right: auto;
+  }
+  .aerosportScrol {
+    overflow-y: auto;
+    height: 34em;
   }
 }
 @media screen and (max-width: 767px) {
@@ -12696,6 +12718,19 @@ textarea.w-select {
   }
 }
 @media screen and (max-width: 767px) {
+  .text-field-blue {
+    width: 58vw;
+    height: 32px;
+    color: #fff;
+    background-image: linear-gradient(#00386c, #00386c);
+    border-radius: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4px 10px;
+    font-family: Open Sans, sans-serif;
+    display: block;
+    box-shadow: 0 2px 5px #00386c;
+  }
   .w-hidden-main {
     display: inherit !important;
   }
@@ -13394,7 +13429,7 @@ textarea.w-select {
 
   .text-field-copy,
   .text-field-blue {
-    width: 92vw;
+    width: 98vw;
   }
 
   .div-block-42 {
@@ -14581,7 +14616,11 @@ textarea.w-select {
   .icon-2-copy {
     margin-right: -29px;
   }
-
+  .icon-2 {
+    color: #fff;
+    margin-top: 5.4907px;
+    margin-right: -182px;
+  }
   .text-field-copy {
     width: 56vw;
   }
@@ -14625,7 +14664,7 @@ textarea.w-select {
 
   .text-field-copy,
   .text-field-blue {
-    width: 92vw;
+    width: 97vw;
   }
 
   .div-block-42 {
@@ -14840,6 +14879,11 @@ textarea.w-select {
   }
 }
 @media screen and (max-width: 479px) {
+  .heading-12 {
+    font-size: 16px;
+    line-height: 31px;
+    margin-bottom: -173px;
+  }
   .w-container {
     max-width: none;
   }
@@ -14893,6 +14937,10 @@ textarea.w-select {
   }
   .w-col-tiny-12 {
     width: 100%;
+  }
+  .aerosportScrol {
+    overflow-y: auto;
+    height: 34em;
   }
 }
 @media screen and (max-width: 479px) {

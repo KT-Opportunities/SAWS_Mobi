@@ -6437,7 +6437,35 @@ th {
     left: 0%;
     right: 0%;
   }
-
+  #next-day-btn {
+    background-color: #008c1d;
+    color: #fff;
+    border-radius: 10px;
+    font-family: Open Sans, sans-serif;
+    font-size: 12px;
+  }
+  #last-day-btn {
+    color: #fff;
+    background-color: #00386c;
+    border-radius: 10px;
+    font-family: Open Sans, sans-serif;
+    font-size: 12px;
+  }
+  .metar-history-grid{
+    justify-items: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .button-spacing {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
   .subscription-p-main-div {
     flex-direction: column;
   }
@@ -7855,7 +7883,7 @@ th {
   }
 
   .ob-metar-history {
-    margin-top: -91px;
+    margin-top: 244px;
     padding-left: 0;
     padding-right: 0;
   }
@@ -12018,7 +12046,7 @@ textarea.w-select {
 
   .ob-metar-history,
   .subscription-p {
-    margin-top: -118px;
+    margin-top: 306px;
     position: static;
     top: 0%;
     bottom: 0%;
@@ -13580,7 +13608,7 @@ textarea.w-select {
   }
 
   .ob-metar-history {
-    margin-top: -91px;
+    margin-top: 244px;
     padding-left: 0;
     padding-right: 0;
   }
