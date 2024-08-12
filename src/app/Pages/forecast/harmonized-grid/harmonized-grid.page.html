@@ -1,198 +1,112 @@
 <ion-content>
   <app-loading *ngIf="isLoading"></app-loading>
 
-  <!-- <section class="list-page"> -->
-    <app-package-content>
+  <div id="top"></div>
+  <app-package-content>
 
-      <app-package-header>
-        WAFS Harmonized Grid Products
-      </app-package-header>
+    <app-package-header>
+      WAFS Harmonized Grid Products
+    </app-package-header>
 
-    <div class="wafs-main-div">
-      <!-- <h1 class="heading-6">WAFS Harmonized Grid Products</h1> -->
-      <div class="scrolltaffA">
-        <!--Turbulence severity-->
-        <div
-          class="w-layout-grid wafs-grid"
-          style="
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: minmax(50px, auto);
-          "
-        >
-          <h1 class="heading-22" style="grid-column: span 3">
-            Turbulence severity
-          </h1>
-          <div
-            class="w-layout-grid grid-20"
-            id="grid20"
-            style="grid-column: span 3"
-          >
-            <div class="div-block-35" style="grid-column: span 3">
-              <div
-                class="w-layout-grid grid-21-copy"
-                style="grid-template-columns: repeat(3, 1fr)"
-              >
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0600</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0000</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">1800</h4>
-                </div>
+    <app-package-list-items>
+      <!--Turbulence severity-->
+      <div class="w-layout-grid wafs-grid" style="
+              grid-template-columns: repeat(3, 1fr);
+              grid-auto-rows: minmax(50px, auto);
+            ">
+        <h1 class="heading-22" style="grid-column: span 3">
+          Turbulence severity
+        </h1>
+        <div class="w-layout-grid grid-20" id="grid20" style="grid-column: span 3">
+          <div class="div-block-35" style="grid-column: span 3">
+            <div class="w-layout-grid grid-21-copy" style="grid-template-columns: repeat(3, 1fr)">
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0600</h4>
               </div>
-            </div>
-            <div
-              class="w-layout-grid grid-22-copy"
-              style="grid-template-columns: repeat(3, 1fr)"
-            >
-              <div
-                class="div-block-37"
-                *ngFor="let time of ['0600', '0000', '1800']"
-                style="width: 100px"
-              >
-                <div *ngFor="let item of WAF2">
-                  <h4
-                    class="heading-25"
-                    *ngIf="getTimeSubstring(item.filename) === time"
-                    (click)="openImageViewer(item)"
-                  >
-                    {{ displayHeading(item.filename) }}
-                  </h4>
-                </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0000</h4>
+              </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">1800</h4>
               </div>
             </div>
           </div>
-        </div>
-
-        <!--Icing severity-->
-        <div
-          class="w-layout-grid wafs-grid"
-          style="
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: minmax(50px, auto);
-          "
-        >
-          <h1 class="heading-22" style="grid-column: span 3">Icing severity</h1>
-          <div
-            class="w-layout-grid grid-20"
-            id="grid20"
-            style="grid-column: span 3"
-          >
-            <div class="div-block-35" style="grid-column: span 3">
-              <div
-                class="w-layout-grid grid-21-copy"
-                style="grid-template-columns: repeat(3, 1fr)"
-              >
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0600</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0000</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">1800</h4>
-                </div>
-              </div>
-            </div>
-            <div
-              class="w-layout-grid grid-22-copy"
-              style="grid-template-columns: repeat(3, 1fr)"
-            >
-              <div
-                class="div-block-37"
-                *ngFor="let time of ['0600', '0000', '1800']"
-                style="width: 100px"
-              >
-                <div *ngFor="let item of WAF3">
-                  <h4
-                    class="heading-25"
-                    *ngIf="getTimeSubstring(item.filename) === time"
-                    (click)="openImageViewer(item)"
-                  >
-                    {{ displayHeading(item.filename) }}
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--CB Coverage-->
-        <div
-          class="w-layout-grid wafs-grid"
-          style="
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: minmax(50px, auto);
-          "
-        >
-          <h1 class="heading-22" style="grid-column: span 3">CB Coverage</h1>
-          <div
-            class="w-layout-grid grid-20"
-            id="grid20"
-            style="grid-column: span 3"
-          >
-            <div class="div-block-35" style="grid-column: span 3">
-              <div
-                class="w-layout-grid grid-21-copy"
-                style="grid-template-columns: repeat(3, 1fr)"
-              >
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0600</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">0000</h4>
-                </div>
-                <div class="div-block-36" style="width: 100px">
-                  <h4 class="heading-24">1800</h4>
-                </div>
-              </div>
-            </div>
-            <div
-              class="w-layout-grid grid-22-copy"
-              style="grid-template-columns: repeat(3, 1fr)"
-            >
-              <div
-                class="div-block-37"
-                *ngFor="let time of ['0600', '0000', '1800']"
-                style="width: 100px"
-              >
-                <div *ngFor="let item of WAF1">
-                  <h4
-                    class="heading-25"
-                    *ngIf="getTimeSubstring(item.filename) === time"
-                    (click)="openImageViewer(item)"
-                  >
-                    {{ displayHeadingWAF1(item.filename) }}
-                  </h4>
-                </div>
+          <div class="w-layout-grid grid-22-copy" style="grid-template-columns: repeat(3, 1fr)">
+            <div class="div-block-37" *ngFor="let time of ['0600', '0000', '1800']" style="width: 100px">
+              <div *ngFor="let item of WAF2">
+                <h4 class="heading-25" *ngIf="getTimeSubstring(item.filename) === time" (click)="openImageViewer(item)">
+                  {{ displayHeading(item.filename) }}
+                </h4>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="bottomdiv" style="position: fixed; margin-top: 167%">
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt
-        class="image"
-      />
 
-      <div class="footerdiv" id="footerdivid">
-        <a
-          (click)="forecastPage()"
-          class="link-block-5 w-inline-block"
-          style="position: relative; top: -11px"
-          ><img src="../../assets/Group-4522.svg" loading="lazy" alt />
-          <h6 class="heading-10-copy" id="styleh6">Forecast</h6></a
-        >
+      <!--Icing severity-->
+      <div class="w-layout-grid wafs-grid" style="
+              grid-template-columns: repeat(3, 1fr);
+              grid-auto-rows: minmax(50px, auto);
+            ">
+        <h1 class="heading-22" style="grid-column: span 3">Icing severity</h1>
+        <div class="w-layout-grid grid-20" id="grid20" style="grid-column: span 3">
+          <div class="div-block-35" style="grid-column: span 3">
+            <div class="w-layout-grid grid-21-copy" style="grid-template-columns: repeat(3, 1fr)">
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0600</h4>
+              </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0000</h4>
+              </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">1800</h4>
+              </div>
+            </div>
+          </div>
+          <div class="w-layout-grid grid-22-copy" style="grid-template-columns: repeat(3, 1fr)">
+            <div class="div-block-37" *ngFor="let time of ['0600', '0000', '1800']" style="width: 100px">
+              <div *ngFor="let item of WAF3">
+                <h4 class="heading-25" *ngIf="getTimeSubstring(item.filename) === time" (click)="openImageViewer(item)">
+                  {{ displayHeading(item.filename) }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <!--CB Coverage-->
+      <div class="w-layout-grid wafs-grid" style="
+              grid-template-columns: repeat(3, 1fr);
+              grid-auto-rows: minmax(50px, auto);
+            ">
+        <h1 class="heading-22" style="grid-column: span 3">CB Coverage</h1>
+        <div class="w-layout-grid grid-20" id="grid20" style="grid-column: span 3">
+          <div class="div-block-35" style="grid-column: span 3">
+            <div class="w-layout-grid grid-21-copy" style="grid-template-columns: repeat(3, 1fr)">
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0600</h4>
+              </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">0000</h4>
+              </div>
+              <div class="div-block-36" style="width: 100px">
+                <h4 class="heading-24">1800</h4>
+              </div>
+            </div>
+          </div>
+          <div class="w-layout-grid grid-22-copy" style="grid-template-columns: repeat(3, 1fr)">
+            <div class="div-block-37" *ngFor="let time of ['0600', '0000', '1800']" style="width: 100px">
+              <div *ngFor="let item of WAF1">
+                <h4 class="heading-25" *ngIf="getTimeSubstring(item.filename) === time" (click)="openImageViewer(item)">
+                  {{ displayHeadingWAF1(item.filename) }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-package-list-items>
   </app-package-content>
 </ion-content>
 
@@ -213,6 +127,6 @@
   </div>
 </div>
 
-<!-- <button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
   Top
-</button> -->
+</button>

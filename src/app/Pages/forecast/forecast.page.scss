@@ -15,12 +15,14 @@
 @media screen and (max-width: 991px) {
   .w-layout-blockcontainer {
     max-width: 728px;
+    margin-bottom: 150px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .w-layout-blockcontainer {
     max-width: none;
+    // margin-bottom: 150px;
   }
 }
 
@@ -432,6 +434,7 @@
 
 .form-block {
   border: 1px #000;
+  margin-top: 60px;
 }
 
 .grid-6-copy {
@@ -796,6 +799,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-top: 50px;
 }
 
 .advisories-grid {
@@ -1887,7 +1891,7 @@
   }
 
   .heading-9 {
-    margin-left: 50px;
+    // margin-left: 50px;
   }
 
   .search-button {
@@ -2871,7 +2875,7 @@
   }
 
   .advisoires-main-div {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .advisories-grid {

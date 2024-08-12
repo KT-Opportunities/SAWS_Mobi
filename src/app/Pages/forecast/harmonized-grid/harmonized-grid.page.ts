@@ -212,4 +212,9 @@ export class HarmonizedGridPage implements OnInit {
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }
+
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
 }

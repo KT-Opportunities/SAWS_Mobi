@@ -1,13 +1,14 @@
 <ion-content>
   <app-loading *ngIf="isLoading"></app-loading>
 
-  <!-- <section class="list-page"> -->
-    <app-package-content>
-      <app-package-header>
-        Take - Off Parameters
-      </app-package-header>
-    <!-- <h1 class="heading-6">Take - Off Parameters</h1> -->
-    <div class="overflow-y:auto;height:32em;">
+  <div id="top"></div>
+
+  <app-package-content>
+    <app-package-header>
+      Take - Off Parameters
+    </app-package-header>
+
+    <app-package-sub-header>
       <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408" class="w-layout-grid grid-take-off" id="take"
         style="
           display: flex;
@@ -15,6 +16,7 @@
           align-items: center;
           height: 100%;
           gap: 10px;
+          margin-top: 50px;
         ">
         <div id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408" class="div-off" style="
             flex: 1;
@@ -85,158 +87,133 @@
           </div>
         </div>
       </div>
-    </div>
+    </app-package-sub-header>
 
-    <div class="tafs-div" style="overflow-y: auto; height: 32em">
-      <div class="w-layout-grid1 grid-6">
-        <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408" class="div-block-15"
-          *ngFor="let item of VermetArray">
-          <div *ngIf="shouldDisplayItem(item)">
-            <div class="div-block-14" style="display: flex; justify-content: space-between">
-              <div class="w-layout-grid1" style="display: flex; flex: 1; gap: 10px; width: 100%">
-                <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408" class="div-block-34"
-                  style="flex: 1; text-align: center">
-                  <h1 class="heading-23" style="margin: 0">CCCC:</h1>
-                  <h1 class="heading-23-copy" id="fact" style="margin: 0">
-                    {{ getAirportCode(item.filename) }}
-                  </h1>
-                </div>
-                <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408" class="div-block-34"
-                  style="flex: 1; text-align: center">
-                  <h1 class="heading-23" style="margin: 0">Issued at:</h1>
-                  <h1 class="heading-23-copy" id="fact" style="margin: 0">
-                    {{ item.lastmodified | date : "yyyy/MM/dd HH:mm" }}
-                  </h1>
-                </div>
+    <app-package-list-items>
+      <div id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408" class="div-block-15"
+        *ngFor="let item of VermetArray">
+        <div *ngIf="shouldDisplayItem(item)">
+          <div class="div-block-14" style="display: flex; justify-content: space-between">
+            <div class="w-layout-grid1" style="display: flex; flex: 1; gap: 10px; width: 100%">
+              <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408" class="div-block-34"
+                style="flex: 1; text-align: center">
+                <h1 class="heading-23" style="margin: 0">CCCC:</h1>
+                <h1 class="heading-23-copy" id="fact" style="margin: 0">
+                  {{ getAirportCode(item.filename) }}
+                </h1>
+              </div>
+              <div id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408" class="div-block-34"
+                style="flex: 1; text-align: center">
+                <h1 class="heading-23" style="margin: 0">Issued at:</h1>
+                <h1 class="heading-23-copy" id="fact" style="margin: 0">
+                  {{ item.lastmodified | date : "yyyy/MM/dd HH:mm" }}
+                </h1>
               </div>
             </div>
+          </div>
 
-            <h1 class="datacape" style="
+          <h1 class="datacape" style="
                 color: #00386c;
                 font-size: 12px;
                 font-weight: 387 !important;
               ">
-              <p class="">{{ extractTakeOffData(item.filetextcontent) }}T</p>
-            </h1>
-            <div class="w-layout-grid1 grid-20" id="grid20">
-              <!-- Headings -->
-              <div id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408" class="div-block-35">
-                <div class="w-layout-grid1 grid-21-copy" style="
+            <p class="">{{ extractTakeOffData(item.filetextcontent) }}T</p>
+          </h1>
+          <div class="w-layout-grid1 grid-20" id="grid20">
+            <!-- Headings -->
+            <div id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408" class="div-block-35">
+              <div class="w-layout-grid1 grid-21-copy" style="
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     text-align: center;
                   ">
-                  <div class="div-block-36" style="
+                <div class="div-block-36" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-24" style="margin: 0">Time</h4>
-                  </div>
-                  <div class="div-block-36" style="
+                  <h4 class="heading-24" style="margin: 0">Time</h4>
+                </div>
+                <div class="div-block-36" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-24" style="margin: 0">Temp</h4>
-                  </div>
-                  <div class="div-block-36" style="
+                  <h4 class="heading-24" style="margin: 0">Temp</h4>
+                </div>
+                <div class="div-block-36" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-24" style="margin: 0">QNH</h4>
-                  </div>
-                  <div class="div-block-36" style="
+                  <h4 class="heading-24" style="margin: 0">QNH</h4>
+                </div>
+                <div class="div-block-36" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-24" style="margin: 0">QAN</h4>
-                  </div>
+                  <h4 class="heading-24" style="margin: 0">QAN</h4>
                 </div>
               </div>
+            </div>
 
-              <!-- Content -->
-              <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
-                <div *ngFor="
+            <!-- Content -->
+            <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
+              <div *ngFor="
                     let airportData of item.vermetTableData.slice(1);
                     let i = index
                   " class="w-layout-grid1 grid-22-copy" [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
-                  style="
+                style="
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
                     text-align: center;
                   ">
-                  <div class="div-block-37" style="
+                <div class="div-block-37" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-25" style="margin: 0">
-                      {{ airportData.time }}
-                    </h4>
-                  </div>
-                  <div class="div-block-37" style="
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.time }}
+                  </h4>
+                </div>
+                <div class="div-block-37" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-25" style="margin: 0">
-                      {{ airportData.temp }}
-                    </h4>
-                  </div>
-                  <div class="div-block-37" style="
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.temp }}
+                  </h4>
+                </div>
+                <div class="div-block-37" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-25" style="margin: 0">
-                      {{ airportData.qnh }}
-                    </h4>
-                  </div>
-                  <div class="div-block-37" style="
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.qnh }}
+                  </h4>
+                </div>
+                <div class="div-block-37" style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                     ">
-                    <h4 class="heading-25" style="margin: 0">
-                      {{ airportData.qan }}
-                    </h4>
-                  </div>
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.qan }}
+                  </h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </app-package-list-items>
 
   </app-package-content>
 </ion-content>
-
-<!-- <ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
-    <div class="footerdiv" id="footerdivid1">
-      <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="
-            color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 4px;
-          ">
-          Forecast
-        </h6>
-      </div>
-    </div>
-  </div> 
-</ion-footer> -->
 
 <app-footer></app-footer>
 
@@ -255,6 +232,6 @@
   </div>
 </div>
 
-<!-- <button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
   Top
-</button> -->
+</button>

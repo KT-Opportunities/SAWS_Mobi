@@ -1,49 +1,27 @@
 <ion-content>
   <app-loading *ngIf="loading"></app-loading>
 
-  <!-- <section class="list-page"> -->
+  <app-package-content>
 
-    <app-package-content>
+    <app-package-header>
+      Warnings
+    </app-package-header>
 
-      <app-package-header>
-        Aerodrome Warning
-      </app-package-header>
-  
-    <!-- <div class="tafs-div"> -->
+    <app-package-sub-header>
       <h1 class="heading-6" id="colorcoded">Aerodrome Warning</h1>
+    </app-package-sub-header>
 
-      <div class="w-layout-grid grid-6" id="layout">
-        <div class="ObservScrol">
+    <app-package-list-items>
+        <div>
           <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
             <h1 class="heading-7">No valid warnings were found.</h1>
           </div>
         </div>
-      </div>
-    <!-- </div> -->
+    </app-package-list-items>
+
   </app-package-content>
 
 </ion-content>
-<!-- <ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
-    <div class="footerdiv" id="footerdivid1">
-      <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
-          Forecast
-        </h6>
-      </div>
-    </div>
-  </div>
-</ion-footer> -->
-
 <app-footer></app-footer>
 
 <div class="footerdiv" id="footerdivid1">
