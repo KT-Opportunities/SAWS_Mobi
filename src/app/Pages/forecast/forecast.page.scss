@@ -13,14 +13,20 @@
 }
 
 @media screen and (max-width: 991px) {
+  .w-input {
+    margin-left: 80px;
+  }
+
   .w-layout-blockcontainer {
     max-width: 728px;
+    margin-bottom: 150px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .w-layout-blockcontainer {
     max-width: none;
+    // margin-bottom: 150px;
   }
 }
 
@@ -142,7 +148,13 @@
   margin: 0 0 0 10px;
   font-family: Montserrat, sans-serif;
   font-weight: 600;
-  width: 75px;
+  // width: 75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: auto;
+
 }
 
 .paragraph-11 {
@@ -242,6 +254,7 @@
   font-size: 13px;
   font-weight: 400;
   margin-left: -2px;
+  margin-top: 40px;
 }
 
 .heading-23-copy {
@@ -377,6 +390,7 @@
   margin-top: 5.4907px;
   margin-right: -152px;
 }
+
 #dropdown-list.w--open {
   background-image: linear-gradient(#bfcdda, #bfcdda) !important;
   border-radius: 10px;
@@ -395,6 +409,10 @@
   border-radius: 10px;
   margin-top: -9px;
   margin-left: -9px;
+}
+
+.w-form {
+  margin-top: 20px;
 }
 
 .div-block-39 {
@@ -432,6 +450,7 @@
 
 .form-block {
   border: 1px #000;
+  margin-top: 60px;
 }
 
 .grid-6-copy {
@@ -796,6 +815,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-top: 50px;
 }
 
 .advisories-grid {
@@ -1887,7 +1907,7 @@
   }
 
   .heading-9 {
-    margin-left: 50px;
+    // margin-left: 50px;
   }
 
   .search-button {
@@ -1903,7 +1923,7 @@
   .w-input {
     margin-bottom: 0;
     height: 50px;
-    margin-left: 50px;
+    // margin-left: 50px;
   }
 
   .heading-6 {
@@ -2388,7 +2408,7 @@
 
 @media screen and (max-width: 767px) {
 
- 
+
 
   .image {
     margin-top: 0;
@@ -2871,7 +2891,7 @@
   }
 
   .advisoires-main-div {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .advisories-grid {
@@ -3026,6 +3046,10 @@
 }
 
 @media screen and (max-width: 479px) {
+
+  .w-input {
+    margin-left: 0;
+  }
 
   .search-button {
     height: 38px;
@@ -3644,11 +3668,13 @@
     margin-left: 0;
     margin-right: 0;
   }
+
   .scrolltaffA {
     overflow-y: auto;
     height: 59vh;
     overflow-x: hidden;
   }
+
   .grid-25 {
     flex-direction: column;
     display: flex;
@@ -4987,6 +5013,7 @@
 }
 
 @media screen and (max-width: 991px) {
+
   #w-node-f1c778ee-c811-ecc1-ff28-ed39c451c414-871273fb,
   #w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb,
   #w-node-f2fdc661-12f8-3e0c-2870-5daeb4d3de5e-871273fb,
@@ -4998,6 +5025,7 @@
 }
 
 @media screen and (max-width: 767px) {
+
   #w-node-_20b18408-8c74-80d2-287d-98258cd86ab1-eca2c248,
   #w-node-c547babf-737c-635b-62ed-283a9a2ce662-eca2c248,
   #w-node-_282bf718-407a-47de-bb05-370afd11ee83-eca2c248 {
@@ -5006,6 +5034,7 @@
 }
 
 @media screen and (max-width: 479px) {
+
   #w-node-_98a40e1d-dd8c-3085-b8fc-2c6e0851cc2f-847dc521,
   #w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea,
   #w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408,
@@ -5019,10 +5048,12 @@
   #w-node-b2360b30-aa39-6664-66a0-7a26e6b1f321-114c6fed {
     justify-self: center;
   }
+
   .trand-grid {
     overflow-y: auto;
     height: 53vh;
   }
+
   #w-node-_3138f03a-958e-bfd0-7aae-6103597a6919-114c6fed {
     align-self: center;
     justify-self: center;

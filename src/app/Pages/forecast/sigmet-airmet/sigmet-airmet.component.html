@@ -5,23 +5,23 @@
 
   <app-package-content>
     <app-package-header>
-      SIGMET/AIRMET/GAMET
+      Sigmet / Airmet
     </app-package-header>
 
     <app-package-sub-header>
       <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
         <div id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea" class="cct">
-          <h1 class="heading-7">Date :</h1>
-          <h1 class="heading-8">2024 - 01 - 22</h1>
+          <h1 class="heading-7">Date: </h1>
+          <h1 class="heading-8">{{ currentDate }}</h1>
         </div>
         <div id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea" class="cct">
-          <h1 class="heading-7">Time :</h1>
-          <h1 class="heading-8">13:15:45</h1>
+          <h1 class="heading-7">Time:</h1>
+          <h1 class="heading-8">{{ currentTime }}</h1>
         </div>
       </div>
 
       <div>
-        <h5 class="heading-9" id="searchHeader">Query sigmet</h5>
+        <!-- <h5 class="heading-9" id="searchHeader">Query sigmet</h5> -->
         <form action="/search" class="search w-form">
           <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
             [(ngModel)]="searchQuery" (ngModelChange)="filterbySearch($event)" id="searchValue" /><button type="submit"

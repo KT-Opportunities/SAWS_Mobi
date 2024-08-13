@@ -14,14 +14,31 @@
 .grid-items {
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr;
-    margin-bottom: 10px;
     margin-left: 0;
     margin-right: 0;
+    margin-top: 60px;
+    margin-bottom: 120px;
+    // margin-bottom: 10px;
 
 }
 
-@media screen and (max-width: 991px) {}
+@media screen and (max-width: 991px) {
+    .grid-items {
+        margin-right: 40px;
+        margin-left: 40px;
+    }
+}
 
-@media screen and (max-width: 767px) {}
+@media screen and (max-width: 767px) {
+    .grid-items {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+}
 
-@media screen and (max-width: 479px) {}
+@media screen and (max-width: 479px) {
+    .grid-items {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}

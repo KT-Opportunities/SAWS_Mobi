@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
+import { DatePipe } from '@angular/common';
 
 interface FileData {
   foldername: string;
@@ -15,15 +16,20 @@ interface FileData {
 }
 
 @Component({
-  selector: 'app-color-coded-taf',
+  selector: 'app-taf-accuracy-taf',
   templateUrl: './color-coded-taf.component.html',
   styleUrls: ['./../forecast.page.scss'],
 })
-export class ColorCodedTafComponent  implements OnInit {
+export class ColorCodedTafComponent  implements OnInit, OnDestroy {
   loading = false;
   isLogged: boolean = false;
   TAFArray: FileData[] = [];
   isLoading: boolean = true;
+
+  currentDate: string | undefined;
+  currentTime: string | undefined;
+  intervalId: any;
+  
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -31,10 +37,16 @@ export class ColorCodedTafComponent  implements OnInit {
     private iab: InAppBrowser,
     private spinner: NgxSpinnerService,
     private apiService: APIService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
+
+    this.updateTime();
+    this.intervalId = setInterval(() => {
+      this.updateTime();
+    }, 1000);
 
     this.spinner.show();
     this.loading = true;
@@ -63,6 +75,19 @@ export class ColorCodedTafComponent  implements OnInit {
         this.spinner.hide(); // Ensure spinner is hidden on error
       }
     );
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  updateTime() {
+    const now = new Date();
+    this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
+    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
 
   }
 

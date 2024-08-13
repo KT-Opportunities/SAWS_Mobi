@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ColorCodedPageRoutingModule } from './color-coded-routing.module';
+import { TafAccuracyPageRoutingModule } from './taf-accuracy-routing.module';
 
-import { ColorCodedPage } from './color-coded.page';
+import { TafAccuracyPage } from './taf-accuracy.page';
 import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from "../../../shared/shared.module";
     CommonModule,
     FormsModule,
     IonicModule,
-    ColorCodedPageRoutingModule,
+    TafAccuracyPageRoutingModule,
     SharedModule
 ],
-  declarations: [ColorCodedPage]
+  declarations: [TafAccuracyPage]
 })
-export class ColorCodedPageModule {}
+export class TafAccuracyPageModule {}

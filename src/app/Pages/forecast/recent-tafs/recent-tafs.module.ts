@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -17,6 +17,7 @@ import { SharedModule } from "../../../shared/shared.module";
     RecentTafsRoutingModule,
     SharedModule
 ],
-  declarations: [RecentTafsComponent]
+  declarations: [RecentTafsComponent],
+  providers: [DatePipe]
 })
 export class RecentTafsModule {}

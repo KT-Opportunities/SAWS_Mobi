@@ -8,17 +8,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 @Component({
-  selector: 'app-color-coded',
-  templateUrl: './color-coded.page.html',
-  // styleUrls: ['./color-coded.page.scss'],
+  selector: 'app-taf-accuracy',
+  templateUrl: './taf-accuracy.page.html',
   styleUrls: ['./../forecast.page.scss'],
 })
-export class ColorCodedPage implements OnInit {
+export class TafAccuracyPage implements OnInit {
 
   loading = false;
   isLogged: boolean = false;
-  isLoading: boolean = true;
-  item: any;
 
   constructor(
     private router: Router,
@@ -36,26 +33,10 @@ export class ColorCodedPage implements OnInit {
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }
-  ImageViewer(item: any) {
-    console.log('file Name:', item);
-    const folderName = 'sigw';
-    const fileName = item;
-    console.log('Folder Name:', folderName);
-    this.isLoading = true;
 
-    this.isLoading = false;
 
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width = '80%';
-    dialogConfig.height = '80%';
-    dialogConfig.data = { item };
-
-    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.isLoading = false;
-    });
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
   }
 }

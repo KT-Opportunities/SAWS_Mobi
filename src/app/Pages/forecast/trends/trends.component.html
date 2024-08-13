@@ -1,19 +1,12 @@
 <ion-content>
   <app-loading *ngIf="loading"></app-loading>
 
-  <!-- <section class="list-page"> -->
-
-    <app-package-content>
+   <app-package-content>
       <app-package-header>
-        METAR trend analysis for FAPP
+        METAR trend analysis
       </app-package-header>
-
-    <div class="trends-main-div">
-      <!-- <h1 class="heading-6">METAR trend analysis for FAPP</h1> -->
-      <div class="w-layout-grid trand-grid">
-        <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcc3-08dc15aa" class="div-block-15">
-          <div class="div-block-14"></div>
-        </div>
+      
+      <app-package-sub-header>
         <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcc5-08dc15aa" class="form-block w-form">
           <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
             data-wf-page-id="65c5f8d4368e2bdb08dc15aa" data-wf-element-id="6a0a6966-5958-4d57-f8ce-0295cfc1bcc6">
@@ -34,6 +27,9 @@
             </div>
           </form>
         </div>
+      </app-package-sub-header>
+
+      <app-package-list-items>
         <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcf0-08dc15aa">
           <h4 class="heading-18-copy">Last 5 METARs</h4>
           <div class="w-layout-grid heading-copy">
@@ -149,8 +145,153 @@
           <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
             loading="lazy" width="687" alt="" />
         </div>
-      </div>
-    </div>
+      </app-package-list-items>
+
+    <!-- <div class="trends-main-div"> -->
+      <!-- <h1 class="heading-6">METAR trend analysis for FAPP</h1> -->
+      <!-- <div class="w-layout-grid trand-grid"> -->
+        <!-- <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcc3-08dc15aa" class="div-block-15">
+          <div class="div-block-14"></div>
+        </div>
+        <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcc5-08dc15aa" class="form-block w-form">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
+            data-wf-page-id="65c5f8d4368e2bdb08dc15aa" data-wf-element-id="6a0a6966-5958-4d57-f8ce-0295cfc1bcc6">
+            <div>
+              <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                (click)="forecastDropdown('dropdown3')" style="z-index: 1000; position: relative">
+                <div class="w-dropdown-toggle">
+                  <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
+                  <div class="text-block">Select One</div>
+                </div>
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
+                  <a class="w-dropdown-link" (click)="selectOption('Total Cloud', 'dropdown3')">Option 1</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Medium level', 'dropdown3')">Option 2</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Low level', 'dropdown3')">Option 3</a>
+                  <a class="w-dropdown-link" (click)="selectOption('High Level', 'dropdown3')">Option 4</a>
+                </nav>
+              </div>
+            </div>
+          </form>
+        </div> -->
+
+
+        <!-- <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcf0-08dc15aa">
+          <h4 class="heading-18-copy">Last 5 METARs</h4>
+          <div class="w-layout-grid heading-copy">
+            <div id="w-node-_6b3c4011-ab92-bc1a-c98c-e86dca91f155-08dc15aa" class="cct-copy-copy">
+              <h1 class="heading-21">
+                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+              </h1>
+            </div>
+            <div id="w-node-_6b3c4011-ab92-bc1a-c98c-e86dca91f158-08dc15aa" class="cct-copy">
+              <button class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</button>
+            </div>
+          </div>
+          <div class="w-layout-grid heading-copy">
+            <div id="w-node-dff9d405-0d56-505d-ae65-91adf39a3ecc-08dc15aa" class="cct-copy-copy">
+              <h1 class="heading-21">
+                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+              </h1>
+            </div>
+            <div id="w-node-dff9d405-0d56-505d-ae65-91adf39a3ecf-08dc15aa" class="cct-copy">
+              <button class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</button>
+            </div>
+          </div>
+          <div class="w-layout-grid heading-copy">
+            <div id="w-node-e09cd6a8-0cd3-2ddd-2975-e95933cb124d-08dc15aa" class="cct-copy-copy">
+              <h1 class="heading-21">
+                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+              </h1>
+            </div>
+            <div id="w-node-e09cd6a8-0cd3-2ddd-2975-e95933cb1250-08dc15aa" class="cct-copy">
+              <button class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</button>
+            </div>
+          </div>
+          <div class="w-layout-grid heading-copy">
+            <div id="w-node-_5ad5d13a-eda8-4afe-b77e-03a61a6d0528-08dc15aa" class="cct-copy-copy">
+              <h1 class="heading-21">
+                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+              </h1>
+            </div>
+            <div id="w-node-_5ad5d13a-eda8-4afe-b77e-03a61a6d052b-08dc15aa" class="cct-copy">
+              <button class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</button>
+            </div>
+          </div>
+          <div class="w-layout-grid heading-copy">
+            <div id="w-node-bf359430-1eaf-8c1e-0417-ed4b8510f999-08dc15aa" class="cct-copy-copy">
+              <h1 class="heading-21">
+                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
+              </h1>
+            </div>
+            <div id="w-node-bf359430-1eaf-8c1e-0417-ed4b8510f99c-08dc15aa" class="cct-copy">
+              <button class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</button>
+            </div>
+          </div>
+        </div>
+        <h4 class="heading-18-copy">Recent trends</h4>
+        <div id="w-node-_32fa1da3-ec8e-2287-b099-1777af56f137-08dc15aa">
+          <div class="w-layout-grid grid-26">
+            <div style="width: 93vw" id="w-node-_2831ec07-9178-f247-23e8-74ec8d8279c6-08dc15aa" class="div-blue">
+              <h1 class="heading-18-copy-copy">phphphph</h1>
+            </div>
+            <div id="w-node-_7b94f6ac-a15d-11bd-9793-42488f62af06-08dc15aa" class="div-white">
+              <div class="w-layout-grid grid-27">
+                <div id="w-node-d5c612e6-82be-f36c-2825-54ff2c0c14cf-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">0100</h4>
+                </div>
+                <div id="w-node-d9258c83-a834-e7ee-fadf-302e5193fc04-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">1023</h4>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_4364189e-7533-569b-4202-f234740a5ba9-08dc15aa" class="div-blue-copy">
+              <div class="w-layout-grid grid-27">
+                <div id="w-node-e99390c0-062e-a085-84d5-3b4f508f3e91-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">0100</h4>
+                </div>
+                <div id="w-node-e99390c0-062e-a085-84d5-3b4f508f3e94-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">1023</h4>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-fdce030b-8893-82a4-4606-e7ead4d215f8-08dc15aa" class="div-white">
+              <div class="w-layout-grid grid-27">
+                <div id="w-node-fdce030b-8893-82a4-4606-e7ead4d215fa-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">0100</h4>
+                </div>
+                <div id="w-node-fdce030b-8893-82a4-4606-e7ead4d215fd-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">1023</h4>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-f2b16de9-1edf-5f62-9ecb-6689b47d089a-08dc15aa" class="div-blue-copy">
+              <div class="w-layout-grid grid-27">
+                <div id="w-node-f2b16de9-1edf-5f62-9ecb-6689b47d089c-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">0100</h4>
+                </div>
+                <div id="w-node-f2b16de9-1edf-5f62-9ecb-6689b47d089f-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">1023</h4>
+                </div>
+              </div>
+            </div>
+            <div id="w-node-_22798957-302f-17e7-7edf-a8fec698c683-08dc15aa" class="div-white">
+              <div class="w-layout-grid grid-27">
+                <div id="w-node-_22798957-302f-17e7-7edf-a8fec698c685-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">0100</h4>
+                </div>
+                <div id="w-node-_22798957-302f-17e7-7edf-a8fec698c688-08dc15aa" class="div-block-48">
+                  <h4 class="heading-21">1023</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bd1c-08dc15aa" class="w-layout-blockcontainer w-container">
+          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
+            loading="lazy" width="687" alt="" />
+        </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
   </app-package-content>
 
 

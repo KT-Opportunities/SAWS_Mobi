@@ -168,4 +168,9 @@ export class TakeOffDataComponent  implements OnInit {
     return takeOffLine || ''; // Return the line if found, otherwise an empty string
   }
 
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
+
 }

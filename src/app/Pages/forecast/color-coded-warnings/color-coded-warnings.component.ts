@@ -7,7 +7,7 @@ import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-color-coded-warnings',
+  selector: 'app-taf-accuracy-warnings',
   templateUrl: './color-coded-warnings.component.html',
   // styleUrls: ['./color-coded-warnings.component.scss'],
   styleUrls: ['./../forecast.page.scss'],

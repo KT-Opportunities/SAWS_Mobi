@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
@@ -6,13 +6,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-recent-tafs',
   templateUrl: './recent-tafs.component.html',
   styleUrls: ['./../forecast.page.scss'],
 })
-export class RecentTafsComponent implements OnInit {
+export class RecentTafsComponent implements OnInit, OnDestroy {
   loading = false;
   isLogged: boolean = false;
   isLoading: boolean = true;
@@ -27,6 +28,10 @@ export class RecentTafsComponent implements OnInit {
   selectedOption2: string = 'Last Hour';
   selectedOption3: string = '5 minutes';
 
+  currentDate: string | undefined;
+  currentTime: string | undefined;
+  intervalId: any;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -35,11 +40,30 @@ export class RecentTafsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private apiService: APIService,
     private dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
+    this.updateTime();
+    this.intervalId = setInterval(() => {
+      this.updateTime();
+    }, 1000);
+
     this.fetchRecentTafs();
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  updateTime() {
+    const now = new Date();
+    this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
+    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
+
   }
 
   forecastPageNavigation() {
@@ -152,5 +176,10 @@ export class RecentTafsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.isLoading = false;
     });
+  }
+
+  ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
   }
 }

@@ -7,19 +7,19 @@
     <app-service-list-items *ngIf="isLoggedIn && !isFreeSubscription">
       <app-service-list-items-grid>
         <app-service-list-item (click)="NavigateToColorCodedTaf()">
-          Color coded TAF
+          Color Coded TAF
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToColorcodedSigmetAirmet()">
-          Color coded: SIGMENT/AIRMET
+          Colour Coded Sigmet / Airmet
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToColorCodedWarnings()">
-          Color coded: Warnings
+          Colour Coded Warnings
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToSigmetAirmet()">
-          SIGMET/AIRMET
+          Sigmet / Airmet
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToTakeOffData()">
-          Take-off data
+          Take - Off Data
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToTafs()">
           TAFs
@@ -48,7 +48,7 @@
     <app-service-list-items *ngIf="isLoggedIn && isFreeSubscription">
       <app-service-list-items-grid>
         <app-service-list-item (click)="NavigateToSigmetAirmet()">
-          SIGMET/AIRMET
+          Sigmet / Airmet
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToTafs()">
           TAFs
@@ -65,7 +65,7 @@
     <app-service-list-items *ngIf="!isLoggedIn">
       <app-service-list-items-grid>
         <app-service-list-item (click)="NavigateToSigmetAirmet()">
-          SIGMET/AIRMET
+          Sigmet / Airmet
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToTafs()">
           TAFs

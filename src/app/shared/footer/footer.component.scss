@@ -11,3 +11,21 @@
     width: 100%;
     z-index: 999;
 }
+
+@media screen and (max-width: 991px) {
+    .image-footer {
+        margin-bottom: -101px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .image-footer {
+        margin-bottom: -71px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .image-footer {
+        margin-bottom: -11px;
+    }
+}
