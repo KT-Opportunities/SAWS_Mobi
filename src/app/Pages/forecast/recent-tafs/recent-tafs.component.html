@@ -1,180 +1,148 @@
 <ion-content>
   <app-loading *ngIf="loading"></app-loading>
 
-    <app-package-content>
+  <app-package-content>
 
-      <app-package-header>
-        Metar Recent TAFs
-      </app-package-header>
+    <app-package-header>
+      Metar Recent TAFs
+    </app-package-header>
 
-    <!-- <div class="recent-tafs"> -->
-      <!-- <h1 class="heading-6">Metar Recent TAFs</h1> -->
-      <div class="scrolltaffA">
-        <div class="w-layout-grid grid-6-copy">
-          <div id="w-node-c8da85be-f06f-2243-5777-654520b149b0-9377a649" class="div-block-15">
-            <div class="div-block-14">
-              <div class="w-layout-grid grid-19">
-                <div id="w-node-c8da85be-f06f-2243-5777-654520b149b3-9377a649" class="div-block-34">
-                  <h1 class="heading-23">Date:</h1>
-                  <h1 class="heading-23-copy">2024 -02-05</h1>
-                </div>
-                <div id="w-node-c8da85be-f06f-2243-5777-654520b149b8-9377a649" class="div-block-34">
-                  <h1 class="heading-23">Time</h1>
-                  <h1 class="heading-23-copy">2024/02/ 12:00Z</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="w-node-a4a2a6b3-fb94-67a5-1e0f-a72ba37feb73-9377a649" class="form-block w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
-              data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="a4a2a6b3-fb94-67a5-1e0f-a72ba37feb74">
-              <div class="w-layout-grid grid-24">
-                <div id="w-node-ca5eddba-f83b-3b16-a8ac-5450b410e804-9377a649" class="div-block-41">
-                  <label for="field-2" class="field-label">Template Name</label>
-                  <input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder=""
-                    type="text" id="field-2" required="" />
-                </div>
-                <div>
-                  <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
-                    (click)="forecastDropdown('dropdown1')">
-                    <div class="w-dropdown-toggle">
-                      <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
-                      <div class="text-block">{{ selectedOption1 }}</div>
-                    </div>
-                    <nav class="dropdown-list1" style="position: relative; z-index: 9999" *ngIf="isDropdownOpen1">
-                      <a class="w-dropdown-link" (click)="selectOption('Total Cloud', 'dropdown1',$event)">Total
-                        Cloud</a>
-                      <a class="w-dropdown-link" (click)="selectOption('Medium level', 'dropdown1',$event)">Medium
-                        level</a>
-                      <a class="w-dropdown-link" (click)="selectOption('Low level', 'dropdown1',$event)">Low level</a>
-                      <a class="w-dropdown-link" (click)="selectOption('High Level', 'dropdown1',$event)">High Level</a>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-
-              <div class="div-block-39">
-                <input type="submit" data-wait="Please wait..." class="submit-button-3-copy w-button" value="Save" />
-                <input type="submit" data-wait="Please wait..." class="submit-button-3 w-button" value="Cancel" />
-              </div>
-            </form>
-          </div>
-
-          <div id="w-node-_38257011-dae8-5f44-9e44-5a2e6988a1a7-9377a649">
-            <div id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649" class="div-block-14">
-              <h5 class="heading-9">Query TAFs</h5>
-              <form action="/search" class="search w-form" (submit)="onSearch($event)">
-                <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
-                  id="search" [(ngModel)]="searchQuery" (ngModelChange)="filterTafs()" required="" />
-                <input (click)="filterTafs()" type="submit" class="search-button w-button" value="Search" />
-              </form>
-            </div>
-            <div class="w-form">
-              <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
-                data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75">
-                <div class="w-layout-grid grid-25">
-                  <div id="w-node-_5ca72a72-b198-e603-e4a9-5569bcb17122-9377a649">
-                    <label for="" class="field-label">Time</label>
-                    <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
-                      (click)="forecastDropdown('dropdown2')">
-                      <div class="w-dropdown-toggle">
-                        <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
-                        <div class="text-block">{{ selectedOption2 }}</div>
-                      </div>
-                      <nav class="dropdown-list1" style="position: relative; z-index: 9999" *ngIf="isDropdownOpen2">
-                        <a class="w-dropdown-link" (click)="selectOption('Total Cloud', 'dropdown2',$event)">Total
-                          Cloud</a>
-                        <a class="w-dropdown-link" (click)="selectOption('Medium level', 'dropdown2',$event)">Medium
-                          level</a>
-                        <a class="w-dropdown-link" (click)="selectOption('Low level', 'dropdown2',$event)">Low level</a>
-                        <a class="w-dropdown-link" (click)="selectOption('High Level', 'dropdown2',$event)">High
-                          Level</a>
-                      </nav>
-                    </div>
-                  </div>
-                  <div id="w-node-_3e49d3ec-67c7-cead-1c50-d5e7fa7f12d9-9377a649">
-                    <label for="" class="field-label">Refresh This page every</label>
-                    <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
-                      (click)="forecastDropdown('dropdown3')" style="z-index: 1000; position: relative">
-                      <div class="w-dropdown-toggle">
-                        <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
-                        <div class="text-block">{{ selectedOption3 }}</div>
-                      </div>
-                      <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
-                        <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown3',$event)">1 min</a>
-                        <a class="w-dropdown-link" (click)="selectOption('2 min', 'dropdown3',$event)">2 Min</a>
-                        <a class="w-dropdown-link" (click)="selectOption('3 min', 'dropdown3',$event)">3 min</a>
-                        <a class="w-dropdown-link" (click)="selectOption('4 min', 'dropdown3',$event)">4 min</a>
-                        <a class="w-dropdown-link" (click)="selectOption('5 min', 'dropdown3',$event)">5 min</a>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+    <app-package-sub-header>
+      <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
+        <div id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea" class="cct">
+          <h1 class="heading-7">Date: </h1>
+          <h1 class="heading-8">{{ currentDate }}</h1>
         </div>
-
-        <div class="div-block-15" *ngFor="let taf of filteredTafs">
-          <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
-          <div class="div-block-32">
-            <div class="w-layout-grid ccta-grid">
-              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
-                <div class="button w-button">Normal</div>
-              </div>
-              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649" class="cct-copy">
-                <div class="button-2 w-button">Colour / Style Index</div>
-              </div>
-            </div>
-          </div>
-          <div class="div-block-34">
-            <!-- <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1> -->
-          </div>
-          <div class="div-block-45">
-            <div class="w-layout-grid heading-text">
-              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649" class="cct-copy-copy">
-                <h1 class="heading-21" style="position: relative; top: 6px">
-                  {{ taf.filetextcontent }}
-                </h1>
-              </div>
-              <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649" class="cct-copy">
-                <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
-                  View Decoded
-                </div>
-              </div>
-            </div>
-          </div>
-          <div></div>
-          <div></div>
+        <div id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea" class="cct">
+          <h1 class="heading-7">Time: </h1>
+          <h1 class="heading-8">{{ currentTime }}</h1>
         </div>
       </div>
-    <!-- </div> -->
-  
+
+      <div>
+        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
+          data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="a4a2a6b3-fb94-67a5-1e0f-a72ba37feb74">
+          <div class="w-layout-grid grid-24">
+            <div id="w-node-ca5eddba-f83b-3b16-a8ac-5450b410e804-9377a649" class="div-block-41">
+              <label for="field-2" class="field-label">Template Name</label>
+              <input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder=""
+                type="text" id="field-2" required="" />
+            </div>
+            
+            <div>
+              <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                (click)="forecastDropdown('dropdown1')">
+                <div class="w-dropdown-toggle">
+                  <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
+                  <div class="text-block">{{ selectedOption1 }}</div>
+                </div>
+                <nav class="dropdown-list1" style="position: relative; z-index: 9999" *ngIf="isDropdownOpen1">
+                  <a class="w-dropdown-link" (click)="selectOption('Total Cloud', 'dropdown1',$event)">Total
+                    Cloud</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Medium level', 'dropdown1',$event)">Medium
+                    level</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Low level', 'dropdown1',$event)">Low level</a>
+                  <a class="w-dropdown-link" (click)="selectOption('High Level', 'dropdown1',$event)">High Level</a>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649" class="div-block-14">
+        <!-- <h5 class="heading-9">Query TAFs</h5> -->
+        <form action="/search" class="search w-form" (submit)="onSearch($event)">
+          <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
+            id="search" [(ngModel)]="searchQuery" (ngModelChange)="filterTafs()" required="" />
+          <input (click)="filterTafs()" type="submit" class="search-button w-button" value="Search" />
+        </form>
+      </div>
+
+      <div class="w-form">
+        <form id="email-form-3" name="email-form-3" data-name="Email Form 3" method="get"
+          data-wf-page-id="65c0c298a377a85c9377a649" data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75">
+          <div class="w-layout-grid grid-25">
+            <div id="w-node-_5ca72a72-b198-e603-e4a9-5569bcb17122-9377a649">
+              <label for="" class="field-label">Time</label>
+              <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                (click)="forecastDropdown('dropdown2')">
+                <div class="w-dropdown-toggle">
+                  <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
+                  <div class="text-block">{{ selectedOption2 }}</div>
+                </div>
+                <nav class="dropdown-list1" style="position: relative; z-index: 9999" *ngIf="isDropdownOpen2">
+                  <a class="w-dropdown-link" (click)="selectOption('Total Cloud', 'dropdown2',$event)">Total
+                    Cloud</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Medium level', 'dropdown2',$event)">Medium
+                    level</a>
+                  <a class="w-dropdown-link" (click)="selectOption('Low level', 'dropdown2',$event)">Low level</a>
+                  <a class="w-dropdown-link" (click)="selectOption('High Level', 'dropdown2',$event)">High
+                    Level</a>
+                </nav>
+              </div>
+            </div>
+
+            <div id="w-node-_3e49d3ec-67c7-cead-1c50-d5e7fa7f12d9-9377a649">
+              <label for="" class="field-label">Refresh This page every</label>
+              <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                (click)="forecastDropdown('dropdown3')" style="position: relative">
+                <div class="w-dropdown-toggle">
+                  <div class="w-icon-dropdown-toggle" style="margin-left: 300px"></div>
+                  <div class="text-block">{{ selectedOption3 }}</div>
+                </div>
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
+                  <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown3',$event)">1 min</a>
+                  <a class="w-dropdown-link" (click)="selectOption('2 min', 'dropdown3',$event)">2 Min</a>
+                  <a class="w-dropdown-link" (click)="selectOption('3 min', 'dropdown3',$event)">3 min</a>
+                  <a class="w-dropdown-link" (click)="selectOption('4 min', 'dropdown3',$event)">4 min</a>
+                  <a class="w-dropdown-link" (click)="selectOption('5 min', 'dropdown3',$event)">5 min</a>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-package-sub-header>
+
+    <app-package-list-items>
+      <div class="div-block-15" *ngFor="let taf of filteredTafs">
+        <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
+        <div class="div-block-32">
+          <div class="w-layout-grid ccta-grid">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649" class="cct-copy-copy">
+              <div class="button w-button">Normal</div>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649" class="cct-copy">
+              <div class="button-2 w-button">Colour / Style Index</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="div-block-34">
+          <!-- <h1 class="heading-23">Last Modified: {{ taf.lastmodified }}</h1> -->
+        </div>
+        <div class="div-block-45">
+          <div class="w-layout-grid heading-text">
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649" class="cct-copy-copy">
+              <h1 class="heading-21" style="position: relative; top: 6px">
+                {{ taf.filetextcontent }}
+              </h1>
+            </div>
+            <div id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649" class="cct-copy">
+              <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
+                View Decoded
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+    </app-package-list-items>
+
   </app-package-content>
 </ion-content>
-
-<!-- <ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-    <div class="footerdiv" id="footerdivid1">
-      <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="
-            color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 4px;
-          ">
-          Forecast
-        </h6>
-      </div>
-    </div>
-  </div>
-</ion-footer> -->
 
 <app-footer></app-footer>
 
@@ -193,6 +161,6 @@
   </div>
 </div>
 
-<!-- <button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
   Top
-</button> -->
+</button>
