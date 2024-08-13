@@ -2,7 +2,7 @@
   <app-service-content>
     <app-service-header> AeroSport </app-service-header>
 
-    <app-service-list-items *ngIf="isLoggedIn">
+    <app-service-list-items *ngIf="isLoggedIn && !isFreeSubscription">
       <app-service-list-items-grid>
         <app-service-list-item (click)="NavigateToCentralInterior()">
           Central Interior
@@ -30,7 +30,7 @@
   </app-service-content>
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<!-- <ion-footer class="ion-no-border">
   <div class="">
     <img
       style="margin-top: -69px"
@@ -60,4 +60,21 @@
       </a>
     </div>
   </div>
-</ion-footer>
+</ion-footer> -->
+
+<app-footer></app-footer>
+
+<div class="footerdiv">
+  <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+      src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" style="
+        color: #fff;
+        margin-top: 9px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "></h6>
+  </a>
+</div>

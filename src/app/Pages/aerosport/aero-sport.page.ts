@@ -22,6 +22,10 @@ export class AeroSportPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
+  }
+
   NavigateToCentralInterior() {
     this.router.navigate(['aero-sport/central-interior']);
   }
