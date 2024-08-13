@@ -79,13 +79,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'sigmet-gamet',
-    loadChildren: () =>
-      import('./Pages/forecast/sigmet-gamet/sigmet-gamet.module').then(
-        (m) => m.sigmetGametPageModule
-      ),
-  },
-  {
     path: 'forecast/harmonized-grid',
     loadChildren: () =>
       import('./Pages/forecast/harmonized-grid/harmonized-grid.module').then(
