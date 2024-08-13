@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ColorCodedPage } from './color-coded.page';
+import { TafAccuracyPage } from './taf-accuracy.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ColorCodedPage
+    component: TafAccuracyPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ColorCodedPageRoutingModule {}
+export class TafAccuracyPageRoutingModule {}

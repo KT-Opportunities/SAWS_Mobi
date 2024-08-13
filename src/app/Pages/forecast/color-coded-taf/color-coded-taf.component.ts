@@ -16,7 +16,7 @@ interface FileData {
 }
 
 @Component({
-  selector: 'app-color-coded-taf',
+  selector: 'app-taf-accuracy-taf',
   templateUrl: './color-coded-taf.component.html',
   styleUrls: ['./../forecast.page.scss'],
 })

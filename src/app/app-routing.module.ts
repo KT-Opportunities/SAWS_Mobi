@@ -95,8 +95,8 @@ const routes: Routes = [
   {
     path: 'forecast/color-coded',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/taf-accuracy/taf-accuracy.module').then(
+        (m) => m.TafAccuracyPageModule
       ),
   },
 
@@ -154,8 +154,8 @@ const routes: Routes = [
   {
     path: 'forecast/taf-accuracy',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded/color-coded.module').then(
-        (m) => m.ColorCodedPageModule
+      import('./Pages/forecast/taf-accuracy/taf-accuracy.module').then(
+        (m) => m.TafAccuracyPageModule
       ),
   },
   {

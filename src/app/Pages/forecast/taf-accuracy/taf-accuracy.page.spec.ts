@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ColorCodedPage } from './color-coded.page';
+import { TafAccuracyPage } from './taf-accuracy.page';
 
-describe('ColorCodedPage', () => {
-  let component: ColorCodedPage;
-  let fixture: ComponentFixture<ColorCodedPage>;
+describe('TafAccuracyPage', () => {
+  let component: TafAccuracyPage;
+  let fixture: ComponentFixture<TafAccuracyPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(ColorCodedPage);
+    fixture = TestBed.createComponent(TafAccuracyPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

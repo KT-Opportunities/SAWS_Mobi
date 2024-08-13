@@ -10,7 +10,7 @@ import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-color-coded-sigment-airmet',
+  selector: 'app-taf-accuracy-sigment-airmet',
   templateUrl: './color-coded-sigment-airmet.component.html',
   // styleUrls: ['./color-coded-sigment-airmet.component.scss'],
   styleUrls: ['./../forecast.page.scss'],
