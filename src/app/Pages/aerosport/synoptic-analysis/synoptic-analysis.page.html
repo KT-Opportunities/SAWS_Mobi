@@ -1,8 +1,11 @@
-<ion-content [fullscreen]="true">
+<ion-content
+  [fullscreen]="true"
+  style="box-sizing: border-box; padding-bottom: 20px"
+>
   <section class="aerosport-ci" style="margin-top: 25%">
     <h1 class="heading-6">Synoptic Analysis</h1>
     <div class="aerosport">
-      <div class="aerosportScrol">
+      <div>
         <div class="div-block-464">
           <div class="w-slider-mask prev" style="margin-top: 84px">
             <img
@@ -12,7 +15,7 @@
               width="1216"
               alt="Synoptic Analysis Image"
               class="image"
-              style="width: 100%; height: 100%"
+           
             />
             <div *ngIf="isLoading">Loading...</div>
           </div>

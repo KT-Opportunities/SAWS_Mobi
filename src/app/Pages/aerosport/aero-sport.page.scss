@@ -10444,6 +10444,18 @@ textarea.w-select {
 }
 
 @media screen and (max-width: 991px) {
+  .w-slider-mask {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    height: 39vh;
+    white-space: nowrap;
+    overflow-y: hidden;
+  }
   #next-day-btn {
     background-color: #008c1d;
     color: #fff;
@@ -11418,7 +11430,7 @@ textarea.w-select {
   .icon-2 {
     color: #fff;
     margin-top: 5.4907px;
-    margin-right: -288px;
+    margin-right: -299px;
   }
   .text-field-blue {
     width: 58vw;
