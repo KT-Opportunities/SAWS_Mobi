@@ -10449,10 +10449,11 @@ textarea.w-select {
     display: block;
     overflow: hidden;
     overflow-y: hidden;
+    overflow-y: hidden;
     z-index: 1;
     left: 0;
     right: 0;
-    height: 39vh;
+    height: 47vh;
     white-space: nowrap;
     overflow-y: hidden;
   }
@@ -10728,6 +10729,8 @@ textarea.w-select {
 
   .button-2-copy {
     margin-top: 0;
+    height: 36px;
+    width: 89px;
   }
 
   .heading-21 {
@@ -11429,11 +11432,11 @@ textarea.w-select {
 @media screen and (max-width: 991px) {
   .icon-2 {
     color: #fff;
-    margin-top: 5.4907px;
-    margin-right: -299px;
+    margin-top: 13.491px;
+    margin-right: -331px;
   }
   .text-field-blue {
-    width: 58vw;
+    width: 62vw;
     height: 32px;
     color: #fff;
     background-image: linear-gradient(#00386c, #00386c);
@@ -14630,8 +14633,8 @@ textarea.w-select {
   }
   .icon-2 {
     color: #fff;
-    margin-top: 5.4907px;
-    margin-right: -182px;
+    margin-top: 10.491px;
+    margin-right: -202px;
   }
   .text-field-copy {
     width: 56vw;

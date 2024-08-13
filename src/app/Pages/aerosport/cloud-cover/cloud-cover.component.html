@@ -3,7 +3,7 @@
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
-  <section class="taf-accuracy" style="margin-top: 25%">
+  <section class="taf-accuracy" style="margin-top: 25%" scroll="false">
     <div class="cloud-cover">
       <h1 class="heading-12">SAWS Satelite</h1>
 
@@ -128,7 +128,7 @@
 
       <div class="div-block-15" *ngIf="selectedOptionFrame">
         <div>
-          <div class="scroll small-m">
+          <div class="small-m" scroll="false">
             <div class="rows-wrap">
               <div
                 data-delay="4000"
@@ -149,8 +149,8 @@
                     loading="lazy"
                     alt=""
                     class="image"
-                    width="80%"
-                    height="80%"
+                    width="70%"
+                    height="70%"
                   />
                 </div>
                 <div class="w-slider-arrow-left" (click)="previousImage()">

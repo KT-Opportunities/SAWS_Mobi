@@ -256,6 +256,18 @@
 
 /* Styles for iPhone X (375px x 812px) */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .section {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    margin-top: 158px;
+  }
   .div-block-5 {
     justify-content: center;
     align-items: center;
