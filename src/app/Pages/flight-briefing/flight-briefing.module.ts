@@ -10,7 +10,7 @@ import { FlightBriefingPage } from './flight-briefing.page';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -20,7 +20,8 @@ import { MatSortModule } from '@angular/material/sort';
     FlightBriefingPageRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    SharedModule
   ],
   declarations: [FlightBriefingPage]
 })

@@ -4,13 +4,15 @@ import { EditRoutingModule } from './edit-routing.module';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EditComponent } from './edit.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditRoutingModule
+    EditRoutingModule,
+    SharedModule
   ],
   declarations: [EditComponent]
 })
