@@ -20,7 +20,7 @@ import { APIService } from 'src/app/services/apis.service';
 })
 export class CentralInteriorComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
 
   isTSProbability: boolean = false;
   isCloudForecast: boolean = false;
@@ -170,11 +170,11 @@ export class CentralInteriorComponent implements OnInit {
         // TemperatureArray:any=[];
         this.filterItems();
 
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -384,7 +384,7 @@ export class CentralInteriorComponent implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -425,7 +425,7 @@ export class CentralInteriorComponent implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }

@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { SouthWestCapePageRoutingModule } from './south-west-cape-routing.module';
 
 import { SouthWestCapePage } from './south-west-cape.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     SouthWestCapePageRoutingModule
   ],
   declarations: [SouthWestCapePage]
