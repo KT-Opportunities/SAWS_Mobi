@@ -120,7 +120,7 @@
   background-color: #008c1d;
   border-radius: 5px;
   margin-left: 10px;
-  margin-right: 10px;
+  // margin-right: 10px;
   font-family: Montserrat, sans-serif;
   font-weight: 600;
 }
@@ -1926,7 +1926,7 @@
 
   .search {
     // width: 80vw;
-    padding: 0 90px;
+    padding: 0 95px;
   }
 
   .w-input {
@@ -4240,6 +4240,10 @@
 #w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea {
   grid-area: span 1 / span 1 / span 1 / span 1;
   align-self: center;
+}
+
+#w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea {
+  margin: 5px;
 }
 
 #w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea,
