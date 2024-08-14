@@ -10458,7 +10458,7 @@ textarea.w-select {
     z-index: 1;
     left: 0;
     right: 0;
-    height: 47vh;
+    // height: 47vh;
     white-space: nowrap;
     overflow-y: hidden;
   }
@@ -11503,10 +11503,6 @@ textarea.w-select {
     left: auto;
     right: auto;
   }
-  .aerosportScrol {
-    overflow-y: auto;
-    height: 34em;
-  }
 }
 @media screen and (max-width: 767px) {
   .grid-21 {
@@ -11874,10 +11870,7 @@ textarea.w-select {
     padding-right: 10px;
     font-size: 12px;
   }
-  .aerosportScrol {
-    overflow-y: auto;
-    height: 34em;
-  }
+
   .heading-21 {
     font-size: 10px;
     font-weight: 500;
@@ -14957,10 +14950,6 @@ textarea.w-select {
   }
   .w-col-tiny-12 {
     width: 100%;
-  }
-  .aerosportScrol {
-    overflow-y: auto;
-    height: 34em;
   }
 }
 @media screen and (max-width: 479px) {

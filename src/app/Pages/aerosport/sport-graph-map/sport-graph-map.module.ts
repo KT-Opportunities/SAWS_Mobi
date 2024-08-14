@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SportGraphMapRoutingModule } from './sport-graph-map-routing.module';
 import { SportGraphMapComponent } from './sport-graph-map.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -14,6 +15,7 @@ import { SportGraphMapComponent } from './sport-graph-map.component';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     SportGraphMapRoutingModule
   ],
   declarations: [SportGraphMapComponent]

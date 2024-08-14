@@ -17,7 +17,7 @@ import { APIService } from 'src/app/services/apis.service';
 export class TSProbabilityComponent implements OnInit {
   currentImageIndex: number = 0;
   TsProbability: any = [];
-  isLoading: boolean = false;
+  loading: boolean = false;
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
   prevday: boolean = false; // Define prevday property
@@ -40,7 +40,7 @@ export class TSProbabilityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoading = true;
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         try {
@@ -56,15 +56,15 @@ export class TSProbabilityComponent implements OnInit {
             this.updateButtonVisibility();
           }
 
-          this.isLoading = false;
+          this.loading = false;
         } catch (error) {
           console.log('Error parsing JSON data:', error);
-          this.isLoading = false;
+          this.loading = false;
         }
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -92,7 +92,7 @@ export class TSProbabilityComponent implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
