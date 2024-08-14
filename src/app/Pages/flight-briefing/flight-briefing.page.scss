@@ -3555,7 +3555,14 @@ flex-flow: wrap;
     display: block !important;
     margin-left: 29px;
 }
-
+.flightScrol{
+  height: 28em !important;overflow-x: auto;
+  width: 28em;
+}
+.table-contain{
+  width: 53em;
+  margin-left: 16px;
+}
 .text-field-blue-borders-copy {
   width: 10em !important;
   height: 32px;
@@ -3593,6 +3600,9 @@ flex-flow: wrap;
   bottom: 0%;
   left: 0%;
   right: 0%;
+}
+#layout{
+  height: 50em;
 }
 
 .text-field-blue-copy {
@@ -3667,6 +3677,15 @@ flex-flow: wrap;
 }
 
 @media screen and (max-width: 991px) {
+  // .flightScrol{
+  //   height: 28em !important;
+  // overflow-x: auto;
+  // width: 54em !important;
+  // }
+  // .table-container{
+  //   width: 92em !important;
+  // margin-left: 16px !important;
+  // }
   .list-page {
     margin-top: 84px !important ;
     position: static !important;
@@ -3675,12 +3694,38 @@ flex-flow: wrap;
     left: 0%;
     right: 0%;
   }
+  #sub{
+    width: 152px;
+  text-align: center;
+  padding: 12px;
+  }
   .heading-6{
     text-align: center;
   position: relative;
   top: 171px;
   }
+  #toplist{
+    margin-top: 101px;
+  }
+
 }
+
+
+@media screen and (min-width: 768px) and (max-width: 979px) {
+  
+
+  .flightScrol {
+    height: 28em !important; 
+    overflow-x: auto;        
+    width: 54em !important;  
+  }
+
+  .table-container {
+    width: 92em !important;   /* Sets the width of the container to 92em */
+    margin-left: 16px !important; /* Adds a left margin of 16px */
+  }
+}
+
 
 @media screen and (max-width: 991px) {
   .section {
@@ -4831,6 +4876,22 @@ flex-flow: wrap;
 }
 
 @media screen and (max-width: 479px) {
+  .scroll-y {
+    overflow-y: var(--overflow);
+    overscroll-behavior-y: contain;
+    height: 67em !important;
+  }
+  #toplist{
+    margin-top: 0px !important;
+  }
+  #sub{
+    width: 152px;
+    text-align: center;
+    padding: 7px;
+  }
+  #marleft{
+    margin-left: -13px;
+  }
   .div-block-470 {
     flex-flow: inherit;
     justify-content: space-between;

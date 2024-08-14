@@ -1,73 +1,80 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
+  <!-- <div *ngIf="loading" class="loading-indicator">
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  </div> -->
+  <app-loading *ngIf="loading"></app-loading>
+  <div id="top"></div>
 
-  <section class="edit-flight-section" style="margin-top: 100px">
-    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
-   
-    <h1 class="heading-6">Scheduled flights report</h1>
+  <app-package-content>
+    <app-package-header>
+      Scheduled flights report
+    </app-package-header>
 
-    <div class="flightScrol"
-    style="height: 28em !important;overflow-x: auto;
-    width: 28em;">
+    <section class="edit-flight-section" style="margin-top: 100px">
+      <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
+     
+      <!-- <h1 class="heading-6">Scheduled flights report</h1> -->
+  
+      <div class="flightScrol" id="ftscrol"
+      >
+      
+        <div class="table-contain" id="tableleft">
+          <div
+          >
+            <mat-table [dataSource]="dataSource" matSort>
+      
     
-      <div class="table-contain" >
-        <div  style="width: 53em;
-        margin-left: 16px;" 
-        >
-          <mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="Flight">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Flight  </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.Flight}} </mat-cell>
+              </ng-container>
+          
+            
+              <ng-container matColumnDef="departure">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Departure </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.departure}} </mat-cell>
+              </ng-container>
+          
+            
+              <ng-container matColumnDef="destination">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Destination</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.destination}} </mat-cell>
+              </ng-container>
     
-  
-            <ng-container matColumnDef="Flight">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Flight  </mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{row.Flight}} </mat-cell>
-            </ng-container>
-        
+              <ng-container matColumnDef="etd">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ETD </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.etd}} </mat-cell>
+              </ng-container>
           
-            <ng-container matColumnDef="departure">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Departure </mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{row.departure}} </mat-cell>
-            </ng-container>
-        
-          
-            <ng-container matColumnDef="destination">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Destination</mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{row.destination}} </mat-cell>
-            </ng-container>
-  
-            <ng-container matColumnDef="etd">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>ETD </mat-header-cell>
-              <mat-cell *matCellDef="let row"> {{row.etd}} </mat-cell>
-            </ng-container>
-        
-          
-            <ng-container matColumnDef="vfr">
-              <mat-header-cell *matHeaderCellDef>VFR/IFR</mat-header-cell>
-              <mat-cell *matCellDef="let row">
-               
-              </mat-cell>
-            </ng-container>
-  
-            <ng-container matColumnDef="edit">
-              <mat-header-cell *matHeaderCellDef>Edit/Generate</mat-header-cell>
-              <mat-cell *matCellDef="let row">
+            
+              <ng-container matColumnDef="vfr">
+                <mat-header-cell *matHeaderCellDef>VFR/IFR</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                 
+                </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef>Edit/Generate</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                
+                </mat-cell>
+              </ng-container>
               
-              </mat-cell>
-            </ng-container>
-            
-        
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
+          
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+          
         </div>
-        
       </div>
-    </div>
-            
-    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
-    
-    </section>
+              
+      <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      
+      </section>
+  </app-package-content>
+ 
 
 </ion-content>
 <ion-footer class="ion-no-border">
