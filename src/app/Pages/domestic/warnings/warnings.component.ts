@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WarningsComponent  implements OnInit {
 
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
   warnings: any[] = [];
 
   constructor(
@@ -41,7 +41,7 @@ export class WarningsComponent  implements OnInit {
 
   fetchWarnings() {
     // Set loading to true when starting data fetch
-    this.isLoading = true;
+    this.loading = true;
 
     // Display the loading indicator
     this.spinner.show();
@@ -50,7 +50,7 @@ export class WarningsComponent  implements OnInit {
       (data: any[]) => {
         console.log('Received warnings:', data);
         this.warnings = data;
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching warnings:', error);
@@ -59,7 +59,7 @@ export class WarningsComponent  implements OnInit {
       },
       () => {
         // Hide the loading indicator when data is successfully loaded or in case of error
-        this.isLoading = false;
+        this.loading = false;
         this.spinner.hide();
       }
     );

@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { QnhChartRoutingModule } from './qnh-chart-routing.module';
 
 import { QnhChartComponent } from './qnh-chart.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     QnhChartRoutingModule
   ],
   declarations: [QnhChartComponent]

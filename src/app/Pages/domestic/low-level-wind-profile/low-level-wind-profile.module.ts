@@ -6,12 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { LowLevelWindProfileRoutingModule } from './low-level-wind-profile-routing.module';
 import { LowLevelWindProfileComponent } from './low-level-wind-profile.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     LowLevelWindProfileRoutingModule
   ],
   declarations: [LowLevelWindProfileComponent]

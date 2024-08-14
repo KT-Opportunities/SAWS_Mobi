@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,19 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./domestic.page.scss'],
 })
 export class DomesticPage {
-
   isLogged: boolean = false;
   loading: boolean = false;
- 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
+
+  constructor(private router: Router, private authService: AuthService) {}
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-
+  get isFreeSubscription(): boolean {
+    return this.authService.getIsFreeSubscription();
+  }
   NavigateToWarnings() {
     this.router.navigate(['domestic/warnings']);
   }
@@ -44,14 +42,14 @@ export class DomesticPage {
   NavigateToLowLevelWindProfile() {
     this.router.navigate(['domestic/low-level-wind-profile']);
   }
-  
-  NavigateToTakeOff(){
+
+  NavigateToTakeOff() {
     this.router.navigate(['domestic/take-off-data']);
   }
   NavigateToSIGWXCharts() {
     this.router.navigate(['domestic/sigwx-charts']);
   }
-  
+
   NavigateToMetarMaps() {
     this.router.navigate(['domestic/metar-maps']);
   }

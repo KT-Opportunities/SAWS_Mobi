@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SigwxChartsRoutingModule } from './sigwx-charts-routing.module';
 import { SigwxChartsComponent } from './sigwx-charts.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { SigwxChartsComponent } from './sigwx-charts.component';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     SigwxChartsRoutingModule
   ],
   declarations: [SigwxChartsComponent]

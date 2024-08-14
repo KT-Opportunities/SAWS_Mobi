@@ -16,7 +16,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 export class WindsChartsComponent implements OnInit {
 
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
   chartsArray: any[] = []; // Ensure this is an array
   sevenDigitNumbers: number[] = []; // Explicitly declare the type of this array
  
@@ -48,7 +48,7 @@ export class WindsChartsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
+    this.loading = true;
     this.generateSevenDigitNumbers(7);
     this.fetchWindChartImages();
     if (!this.authService.getIsLoggedIn()) {
@@ -74,7 +74,7 @@ export class WindsChartsComponent implements OnInit {
         // Debug: Ensure 'data' is an array and contains objects with 'filename'
         if (!Array.isArray(data)) {
           console.error('API response is not an array:', data);
-          this.isLoading = false;
+          this.loading = false;
           return;
         }
 
@@ -106,11 +106,11 @@ export class WindsChartsComponent implements OnInit {
           console.warn('No valid data found in API response.');
         }
 
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching wind chart images:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -134,11 +134,11 @@ export class WindsChartsComponent implements OnInit {
     const fileName = item.filename;
 
     if (folderName === '' && fileName) {
-      this.isLoading = true;
+      this.loading = true;
 
       this.fetchSecondAPI(folderName, fileName)
         .then((filetextcontent) => {
-          this.isLoading = false;
+          this.loading = false;
 
           const dialogConfig = new MatDialogConfig();
           dialogConfig.autoFocus = true;
@@ -150,12 +150,12 @@ export class WindsChartsComponent implements OnInit {
           const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
           dialogRef.afterClosed().subscribe(() => {
-            this.isLoading = false;
+            this.loading = false;
           });
         })
         .catch((error) => {
           console.error('Error fetching file content:', error);
-          this.isLoading = false;
+          this.loading = false;
         });
     } else {
       console.error('Folder name or file name is undefined.');

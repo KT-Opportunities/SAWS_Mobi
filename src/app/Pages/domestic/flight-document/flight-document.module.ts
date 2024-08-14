@@ -6,13 +6,18 @@ import { IonicModule } from '@ionic/angular';
 
 import { FlightDocumentRoutingModule } from './flight-document-routing.module';
 import { FlightDocumentComponent } from './flight-document.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     FlightDocumentRoutingModule
+
+
+ 
   ],
   declarations: [FlightDocumentComponent]
 })

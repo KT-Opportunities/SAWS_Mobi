@@ -23,7 +23,7 @@ import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 export class SigwxChartsComponent implements OnInit {
   imageUrl: string | null = null;
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   Sigwx: any = [];
   Sigwxh: any = [];
   Sigwxm: any = [];
@@ -128,7 +128,7 @@ export class SigwxChartsComponent implements OnInit {
   }
 
   loadSynopticData() {
-    this.isLoading = true;
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
       (data) => {
         console.log('SIGWX', data);
@@ -149,16 +149,16 @@ export class SigwxChartsComponent implements OnInit {
           }
         });
 
-        this.isLoading = false;
+        this.loading = false;
         console.log('SIGWXH', this.Sigwxh);
         console.log('SIGWXM', this.Sigwxm);
         console.log('SIGWXL', this.Sigwxl);
         console.log('SSIGW', this.Sigwx);
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -166,11 +166,11 @@ export class SigwxChartsComponent implements OnInit {
     const folderName = '';
     const fileName = item.filename;
     console.log('file Name:', fileName);
-    this.isLoading = true;
+    this.loading = true;
 
     this.fetchSecondAPI(folderName, fileName)
       .then((filetextcontent) => {
-        this.isLoading = false;
+        this.loading = false;
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
@@ -182,12 +182,12 @@ export class SigwxChartsComponent implements OnInit {
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
         dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
+          this.loading = false;
         });
       })
       .catch((error) => {
         console.error('Error fetching file content:', error);
-        this.isLoading = false;
+        this.loading = false;
       });
   }
 
@@ -197,9 +197,9 @@ export class SigwxChartsComponent implements OnInit {
     const folderName = 'sigw';
     const fileName = item;
     console.log('Folder Name:', folderName);
-    this.isLoading = true;
+    this.loading = true;
 
-    this.isLoading = false;
+    this.loading = false;
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -211,7 +211,7 @@ export class SigwxChartsComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewSymbolPage, dialogConfig);
 
     dialogRef.afterClosed().subscribe(() => {
-      this.isLoading = false;
+      this.loading = false;
     });
   }
 

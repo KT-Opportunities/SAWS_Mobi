@@ -6,12 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { WindsChartsRoutingModule } from './winds-charts-routing.module';
 import { WindsChartsComponent } from './winds-charts.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     WindsChartsRoutingModule
   ],
   declarations: [WindsChartsComponent]

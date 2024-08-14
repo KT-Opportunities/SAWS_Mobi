@@ -6,12 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { IcaoLocationsRoutingModule } from './icao-locations-routing.module';
 import { IcaoLocationsComponent } from './icao-locations.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     IcaoLocationsRoutingModule
   ],
   declarations: [IcaoLocationsComponent]

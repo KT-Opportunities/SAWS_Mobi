@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -12,12 +17,10 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './flight-document.component.html',
   // styleUrls: ['./flight-document.component.scss'],
   styleUrls: ['./../domestic.page.scss'],
-
 })
-export class FlightDocumentComponent  implements OnInit {
-
+export class FlightDocumentComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
 
   selectedOption2: string = 'XXX';
   selectedOption3: string = 'XXX';
@@ -41,7 +44,7 @@ export class FlightDocumentComponent  implements OnInit {
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (!this.authService.getIsLoggedIn()) {

@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class IcaoLocationsComponent  implements OnInit {
 
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private router: Router,

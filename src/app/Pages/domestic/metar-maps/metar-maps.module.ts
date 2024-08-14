@@ -6,12 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { MetarMapsRoutingModule } from './metar-maps-routing.module';
 import { MetarMapsComponent } from './metar-maps.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     MetarMapsRoutingModule
   ],
   declarations: [MetarMapsComponent]

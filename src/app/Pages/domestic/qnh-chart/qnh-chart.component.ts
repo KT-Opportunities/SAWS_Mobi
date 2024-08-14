@@ -20,7 +20,7 @@ import { APIService } from 'src/app/services/apis.service';
 export class QnhChartComponent implements OnInit {
   imageUrl: string | null = null;
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   MetarMaps: any = [];
   fileBaseUrlSynoptic: SafeResourceUrl = '';
 
@@ -46,7 +46,7 @@ export class QnhChartComponent implements OnInit {
 
   loadSynopticData() {
   
-    this.isLoading = true;
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
       (data) => {
         this.MetarMaps = data.filter(
@@ -56,12 +56,12 @@ export class QnhChartComponent implements OnInit {
         if (this.MetarMaps.length > 0) {
           this.loadImage(this.MetarMaps[0].filename);
         } else {
-          this.isLoading = false;
+          this.loading = false;
         }
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -73,12 +73,12 @@ export class QnhChartComponent implements OnInit {
           'data:image/png;base64,' + data.filetextcontent;
         this.fileBaseUrlSynoptic =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
-        this.isLoading = false;
+        this.loading = false;
         this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
         console.error('Error fetching image data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }

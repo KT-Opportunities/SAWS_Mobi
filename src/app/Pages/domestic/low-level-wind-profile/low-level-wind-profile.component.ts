@@ -21,7 +21,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 })
 export class LowLevelWindProfileComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
   lowLevel: any = [];
   constructor(
     private router: Router,
@@ -36,7 +36,7 @@ export class LowLevelWindProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
+    this.loading = true;
     if (!this.authService.getIsLoggedIn()) {
       this.router.navigate(['/login']);
     } else {
@@ -51,11 +51,11 @@ export class LowLevelWindProfileComponent implements OnInit {
           .map((item: { filename: string }) => item.filename);
         console.log('lowLevel:', this.lowLevel);
 
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -63,11 +63,11 @@ export class LowLevelWindProfileComponent implements OnInit {
     const folderName = '';
     const fileName = item;
     console.log('file Name:', fileName);
-    this.isLoading = true;
+    this.loading = true;
 
     this.fetchSecondAPI(folderName, fileName)
       .then((filetextcontent) => {
-        this.isLoading = false;
+        this.loading = false;
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
@@ -79,12 +79,12 @@ export class LowLevelWindProfileComponent implements OnInit {
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
         dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
+          this.loading = false;
         });
       })
       .catch((error) => {
         console.error('Error fetching file content:', error);
-        this.isLoading = false;
+        this.loading = false;
       });
   }
   transformFilename(filename: string): string {
