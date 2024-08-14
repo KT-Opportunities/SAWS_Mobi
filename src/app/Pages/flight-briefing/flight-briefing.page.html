@@ -1,69 +1,47 @@
 <ion-content>
-<app-service-content>
-  <app-service-header>
-    Flight Briefing
-  </app-service-header>
+  <app-service-content>
+    <app-service-header>
+      Flight Briefing
+    </app-service-header>
 
-
-    <app-service-list-items>
-      <app-service-list-items-grid class="" [ngClass]="{'applied-styles': !isLoggedIn}" *ngIf="isLoggedIn">
-        <!-- <h1 class="heading-6" [ngStyle]="{'text-align': isLoggedIn ? 'center' : 'left'}">
-          Flight Briefing
-        </h1> -->
-        
-      
-          <app-service-list-item (click)="NavigateToFlightEdit()" 
-            >
-            Flight: Edit
-          </app-service-list-item>
-          <app-service-list-item  (click)="NavigateToImportExport()"
-           >
-            Flight: Import/Export
-          </app-service-list-item>
-          <app-service-list-item  (click)="NavigateToFlightSave()" 
-          >
-            Flight: Save
-          </app-service-list-item>
-          <app-service-list-item  (click)="NavigateToFlightShare()" 
-            >
-        Flight: Share
-          </app-service-list-item>
-          <app-service-list-item  (click)="NavigateToImportDepartureList()" 
-            >
-            Import Departure List
-          </app-service-list-item>
-
-          <app-service-list-item  (click)="NavigateToSheduleFlightReport()" 
-            >
-            Schedule Flight Report
-          </app-service-list-item>
-
-    
+    <app-service-list-items *ngIf="isLoggedIn && !isFreeSubscription">
+      <app-service-list-items-grid>
+        <app-service-list-item (click)="NavigateToFlightEdit()">
+          Flight: Edit
+        </app-service-list-item>
+        <app-service-list-item (click)="NavigateToImportExport()">
+          Flight: Import/Export
+        </app-service-list-item>
+        <app-service-list-item (click)="NavigateToFlightSave()">
+          Flight: Save
+        </app-service-list-item>
+        <app-service-list-item (click)="NavigateToFlightShare()">
+          Flight: Share
+        </app-service-list-item>
+        <app-service-list-item (click)="NavigateToImportDepartureList()">
+          Import Departure List
+        </app-service-list-item>
+        <app-service-list-item (click)="NavigateToSheduleFlightReport()">
+          Schedule Flight Report
+        </app-service-list-item>
       </app-service-list-items-grid>
     </app-service-list-items>
-
-
-</app-service-content>
-
-
+  </app-service-content>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img  style="margin-top: -69px" src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" />
-    <div class="footerdiv">
-      <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block"
-        style="position: relative; top: -11px"><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" style="
-            color: #fff;
-            margin-top: 9px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 4px;
-          "></h6>
-      </a>
-    </div>
-  </div>
-</ion-footer>
+<app-footer></app-footer>
+
+<div class="footerdiv">
+  <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+      src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" style="
+        color: #fff;
+        margin-top: 9px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "></h6>
+  </a>
+</div>
