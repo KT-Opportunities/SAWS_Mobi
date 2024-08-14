@@ -3620,6 +3620,9 @@ flex-flow: wrap;
   box-shadow: 0 2px 5px #00386c;
   background-color: white;
 }
+#shared{
+  margin-top: 100px
+}
 
 @media screen and (min-width: 1280px) {
   .user-managemnt-group {
@@ -3712,7 +3715,28 @@ flex-flow: wrap;
 
 
 @media screen and (min-width: 768px) and (max-width: 979px) {
-  
+  #shared{
+    margin-top: 100px
+  }
+  .button-2-copy {
+    margin-top: 20px;
+    width: 15em;
+    text-align: center;
+    padding-top: 12px;
+  }
+  .text-field {
+    width: 30vw;
+    height: 32px;
+    color: #00386c;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Open Sans, sans-serif;
+    box-shadow: 0 2px 5px #00386c;
+    position: relative;
+    top: 14px;
+  }
 
   .flightScrol {
     height: 28em !important; 
@@ -3724,6 +3748,8 @@ flex-flow: wrap;
     width: 92em !important;   /* Sets the width of the container to 92em */
     margin-left: 16px !important; /* Adds a left margin of 16px */
   }
+
+
 }
 
 
