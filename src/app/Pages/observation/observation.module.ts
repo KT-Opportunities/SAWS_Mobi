@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ObservationPageRoutingModule } from './observation-routing.module';
 
 import { ObservationPage } from './observation.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { ObservationPage } from './observation.page';
     FormsModule,
     IonicModule,
     ObservationPageRoutingModule,
-    
+    SharedModule
   ],
   declarations: [ObservationPage],
   providers: [DatePipe]

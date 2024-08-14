@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ImportDepartureListComponent } from './import-departure-list.component';
 import { ImportDepartureListRoutingModule } from './import-departure-list-routing.module';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ImportDepartureListRoutingModule
+    ImportDepartureListRoutingModule,
+    SharedModule
   ],
   declarations: [ImportDepartureListComponent]
 })

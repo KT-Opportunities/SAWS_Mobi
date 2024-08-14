@@ -1,14 +1,18 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="loading" class="loading-indicator">
+    <!-- <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading... -->
+  </app-loading>
 
   <section class="edit-flight-section" style="margin-top: 100px">
     <div class="div-block-2">
       <img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image">
     </div>
 
-    <h1 class="heading-6">nsWEBPIB Query</h1>
+    <!-- <h1 class="heading-6">nsWEBPIB Query</h1> -->
+    <app-package-header>
+      nsWEBPIB Query
+    </app-package-header>
+
     <div style="overflow-y: auto; height: 32em;">
       <div class="edit-flight-div">
         <div class="w-layout-grid grid-42">

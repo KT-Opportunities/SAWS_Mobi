@@ -454,13 +454,6 @@
   box-shadow: 0 2px 5px 6px rgba(0, 0, 0, 0.2);
 }
 
-.footerdiv {
-  justify-content: center;
-  align-items: center;
-  // margin-top: -95px;
-  display: flex;
-}
-
 .div-block-6 {
   flex-direction: column;
   justify-content: center;
@@ -2745,13 +2738,6 @@
 .button-4.active {
   background-color: #007bff;
   color: #fff;
-}
-
-.footerdiv {
-  justify-content: center;
-  align-items: center;
-  margin-top: -95px;
-  display: flex;
 }
 
 .div-block-6 {
@@ -7020,10 +7006,7 @@ th {
   #footerdivid {
     margin-top: -25%;
   }
-  .footerdiv {
-    margin-top: -87px;
-    padding-top: 0;
-  }
+
   #next-day-btn {
     background-color: #008c1d;
     color: #fff;
@@ -7142,11 +7125,6 @@ th {
     margin-right: 10px;
     padding-left: 19px;
     padding-right: 20px;
-  }
-
-  .footerdiv {
-    // margin-top: -96px;
-    padding-top: 0;
   }
 
   .registerlabel {
@@ -12843,11 +12821,6 @@ textarea.w-select {
     margin-right: 10px;
     padding-left: 19px;
     padding-right: 20px;
-  }
-
-  .footerdiv {
-    margin-top: -73px;
-    padding-top: 0;
   }
 
   .registerlabel {

@@ -13,6 +13,11 @@
   }
 }
 
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}
+
 .div-block-5 {
   justify-content: center;
   align-items: center;
@@ -3561,11 +3566,6 @@
     margin-right: 10px;
     padding-left: 19px;
     padding-right: 20px;
-  }
-
-  .footerdiv {
-    margin-top: -73px;
-    padding-top: 0;
   }
 
   .registerlabel {

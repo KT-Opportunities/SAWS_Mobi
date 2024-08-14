@@ -1,6 +1,8 @@
 <ion-content>
   <app-service-content>
-    <app-service-header> Forecast </app-service-header>
+    <app-service-header> 
+      Domestic 
+    </app-service-header>
 
     <app-service-list-items *ngIf="isLoggedIn && !isFreeSubscription">
       <app-service-list-items-grid>
@@ -42,14 +44,9 @@
 <app-footer></app-footer>
 
 <div class="footerdiv">
-  <a
-    (click)="NavigateToLandingPage()"
-    class="link-block-5 w-inline-block"
-    style="position: relative; top: -11px"
-    ><img src="../../assets/Group-3489.svg" loading="lazy" alt="" />
-    <h6
-      class="heading-10-copy"
-      style="
+  <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+      src="../../assets/Group-3489.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" style="
         color: #fff;
         margin-top: 9px;
         margin-bottom: 0;
@@ -57,8 +54,6 @@
         text-decoration: none;
         font-size: 12px;
         margin-top: 4px;
-      "
-    ></h6>
+      "></h6>
   </a>
 </div>
-` 
