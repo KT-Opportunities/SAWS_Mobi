@@ -20,7 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SynopticAnalysisPage implements OnInit {
   imageUrl: string | null = null;
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   Synoptic: any = [];
   fileBaseUrlSynoptic: SafeResourceUrl = '';
 
@@ -45,7 +45,7 @@ export class SynopticAnalysisPage implements OnInit {
   }
 
   loadSynopticData() {
-    this.isLoading = true;
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
       (data) => {
         this.Synoptic = data.filter(
@@ -54,12 +54,12 @@ export class SynopticAnalysisPage implements OnInit {
         if (this.Synoptic.length > 0) {
           this.loadImage(this.Synoptic[0].filename);
         } else {
-          this.isLoading = false;
+          this.loading = false;
         }
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -71,12 +71,12 @@ export class SynopticAnalysisPage implements OnInit {
           'data:image/png;base64,' + data.filetextcontent;
         this.fileBaseUrlSynoptic =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
-        this.isLoading = false;
+        this.loading = false;
         this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
         console.error('Error fetching image data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }

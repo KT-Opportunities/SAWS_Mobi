@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CloudForecastRoutingModule } from './cloud-forecast-routing.module';
 import { CloudForecastComponent } from './cloud-forecast.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     CloudForecastRoutingModule
   ],
   declarations: [CloudForecastComponent]

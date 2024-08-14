@@ -39,7 +39,7 @@ export class SportGraphMapComponent implements OnInit {
   TemperatureImage: any;
   imageUrl: string | null = null;
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   isFormVisible: boolean = true;
   isFormVisible1: boolean = false;
   isFormVisible2: boolean = false;
@@ -200,15 +200,15 @@ export class SportGraphMapComponent implements OnInit {
 
           console.log('DATA2:', this.TsProbability);
 
-          this.isLoading = false;
+          this.loading = false;
         } catch (error) {
           console.log('Error parsing JSON data:', error);
-          this.isLoading = false;
+          this.loading = false;
         }
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
 
@@ -220,11 +220,11 @@ export class SportGraphMapComponent implements OnInit {
 
         console.log('Synoptic:', this.Synoptic);
 
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -266,7 +266,7 @@ export class SportGraphMapComponent implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -289,7 +289,7 @@ export class SportGraphMapComponent implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }

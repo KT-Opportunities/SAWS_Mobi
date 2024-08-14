@@ -13,7 +13,7 @@ import { APIService } from 'src/app/services/apis.service';
 })
 export class SouthWestCapePage implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   isFormVisible: boolean = true;
   isFormVisible1: boolean = false;
   isFormVisible2: boolean = false;
@@ -157,11 +157,11 @@ export class SouthWestCapePage implements OnInit {
         // WindArray:any=[];
         // ThermalArray:any=[];
         // TemperatureArray:any=[];
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -331,7 +331,7 @@ export class SouthWestCapePage implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -354,7 +354,7 @@ export class SouthWestCapePage implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }

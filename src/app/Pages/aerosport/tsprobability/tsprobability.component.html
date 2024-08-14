@@ -1,50 +1,68 @@
-<ion-content [fullscreen]="true">
-  <section class="ob-metar-history">
-    <div class="cloud-cover">
-      <h1 class="heading6">TS Probability</h1>
-      <div class="w-layout-grid metar-history-grid">
-        <div class="date-container">
-          <button id="last-day-btn" class="button-spacing" (click)="previousDay()" *ngIf="prevday">
-            << Previous Day </button>
-              <span id="current-date"></span>
-              <button id="next-day-btn" class="button-spacing" (click)="nextDay()" *ngIf="nextday">
-                Next Day >>
-              </button>
-        </div>
-      </div>
+<ion-content>
+  <app-loading *ngIf="loading"></app-loading>
 
-      <div class="div-block-15">
-        <div>
-          <div class="scroll small-m">
-            <div class="rows-wrap">
-              <div data-delay="4000" data-animation="slide" class="slider-2 w-slider" data-autoplay="false"
-                data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0"
-                data-nav-spacing="3" data-duration="500" data-infinite="true">
-                <div class="w-slider-mask prev" *ngIf="prevday">
-                  <img [src]="fileBaseUrlPrevious" loading="lazy" width="1216" alt="" class="image" />
-                </div>
-                <div class="w-slider-mask next" *ngIf="nextday">
-                  <img [src]="fileBaseUrlNext" loading="lazy" width="1216" alt="" class="image" />
+  <div id="top"></div>
+  <app-package-content>
+    <app-package-header>TS Probability</app-package-header>
+
+    <app-package-sub-header> </app-package-sub-header>
+
+    <app-package-list-items>
+      <div class="cloud-cover">
+
+        <div class="w-layout-grid metar-history-grid">
+          <div class="date-container">
+            <button id="last-day-btn" class="button-spacing" (click)="previousDay()" *ngIf="prevday">
+              << Previous Day </button>
+                <span id="current-date"></span>
+                <button id="next-day-btn" class="button-spacing" (click)="nextDay()" *ngIf="nextday">
+                  Next Day >>
+                </button>
+          </div>
+        </div>
+  
+        <div class="div-block-15">
+          <div>
+            <div class="scroll small-m">
+              <div class="rows-wrap">
+                <div data-delay="4000" data-animation="slide" class="slider-2 w-slider" data-autoplay="false"
+                  data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0"
+                  data-nav-spacing="3" data-duration="500" data-infinite="true">
+                  <div class="w-slider-mask prev" *ngIf="prevday">
+                    <img [src]="fileBaseUrlPrevious" loading="lazy" width="1216" alt="" class="image" />
+                  </div>
+                  <div class="w-slider-mask next" *ngIf="nextday">
+                    <img [src]="fileBaseUrlNext" loading="lazy" width="1216" alt="" class="image" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </app-package-list-items>
+  </app-package-content>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+<app-footer></app-footer>
 
-    <div class="footerdiv" id="footerdivid">
-      <a (click)="NavigateToAerosport()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          Aerosport</h6>
-      </a>
-    </div>
+<div class="footerdiv" id="footerdivid1">
+  <div (click)="NavigateToAerosport()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+      Aerosport
+    </h6>
   </div>
-</ion-footer>
+</div>

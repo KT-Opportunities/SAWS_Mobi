@@ -20,7 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class KwazulNatalPage implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = true;
+  loading: boolean = true;
   isFormVisible: boolean = true;
   isFormVisible1: boolean = false;
   isFormVisible2: boolean = false;
@@ -164,11 +164,11 @@ export class KwazulNatalPage implements OnInit {
         // WindArray:any=[];
         // ThermalArray:any=[];
         // TemperatureArray:any=[];
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -328,7 +328,7 @@ export class KwazulNatalPage implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -351,7 +351,7 @@ export class KwazulNatalPage implements OnInit {
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
