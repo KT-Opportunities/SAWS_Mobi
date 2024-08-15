@@ -1,20 +1,26 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
+  <!-- <div *ngIf="loading" class="loading-indicator">
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  </div> -->
+  <app-loading *ngIf="loading"></app-loading>
+  <app-package-content>
+    <app-package-header>
+      Saved flight
+    </app-package-header>
+  </app-package-content>
 
-  <section class="edit-flight-section" style="margin-top: 100px">
+  <app-package-list-items class="edit-flight-section" style="margin-top: 100px">
     <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
 
-    <h1 class="heading-6">Saved flight </h1>
+    <!-- <h1 class="heading-6">Saved flight </h1> -->
 
     <div>
       <div style="margin-top: 3px !important;
-width: 51%;
-margin-left: 8px;" class="button-2-copy w-button">Click here to add a new flight</div>
+      width: 51%;
+      margin-left: 8px;" class="button-2-copy w-button">Click here to add a new flight</div>
       <div style="margin-top: 3px !important;
-   width: 51%;
-   margin-left: 8px;" class="button-2-copy w-button">Delete all flights </div>
+      width: 51%;
+      margin-left: 8px;" class="button-2-copy w-button">Delete all flights </div>
 
     </div>
 
@@ -74,7 +80,7 @@ margin-left: 8px;" class="button-2-copy w-button">Click here to add a new flight
     <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
 
 
-  </section>
+  </app-package-list-items>
 
 </ion-content>
 
