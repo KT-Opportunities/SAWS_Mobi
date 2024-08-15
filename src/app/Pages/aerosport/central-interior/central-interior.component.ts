@@ -293,11 +293,6 @@ export class CentralInteriorComponent implements OnInit {
       this.isDropdownOpen1 = false;
       this.isDropdownOpen2 = false;
     }
-    // if (dropdown === 'dropdown3') {
-    //   this.isDropdownOpen3 = !this.isDropdownOpen3;
-    //   this.isDropdownOpen1 = false;
-    //   this.isDropdownOpen2 = false;
-    // }
   }
 
   // selectOption(option: string, dropdown: string) {

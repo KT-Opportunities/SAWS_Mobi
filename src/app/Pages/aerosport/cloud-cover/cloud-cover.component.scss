@@ -2,7 +2,10 @@
 .w-slider-arrow-right {
   color: #002548 !important;
 }
-
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}
 @media screen and (max-width: 479px) {
   .bottomdiv {
     position: fixed;

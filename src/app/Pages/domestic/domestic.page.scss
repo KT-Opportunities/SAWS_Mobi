@@ -875,12 +875,13 @@ p {
   .heading-25 {
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
+    padding-left: 4px;
+    padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
     width: 100%;
   }
+
   #Serch1 {
     margin-top: -4px;
     margin-bottom: 14px;
@@ -1024,8 +1025,8 @@ p {
   .heading-25 {
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
+    padding-left: 4px;
+    padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
     width: 100%;
@@ -1171,8 +1172,8 @@ p {
   .heading-25 {
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 0;
-    // padding-right: 5px;
+     padding-left: 4px;
+    padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
     width: 100%;
@@ -1273,7 +1274,7 @@ p {
 }
 @media screen and (max-width: 479px) {
   #ICAO {
-    padding-left: 54px;
+    // padding-left: 54px;
     padding-right: 0;
     font-size: 13px;
     position: relative;
@@ -1358,7 +1359,7 @@ p {
   .heading-25 {
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 0;
+    padding-left: 4px;
     padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
@@ -1398,7 +1399,7 @@ p {
     font-weight: 600 !important;
     font-size: 13px !important;
   }
- 
+
   .button-2-copy {
     text-align: center;
     background-color: #00386c;
