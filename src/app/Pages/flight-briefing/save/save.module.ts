@@ -7,7 +7,7 @@ import { SaveComponent } from './save.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import { SharedModule } from "../../../shared/shared.module";
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { MatSortModule } from '@angular/material/sort';
     SaveRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    SharedModule
   ],
   declarations: [SaveComponent]
 })

@@ -4,13 +4,14 @@ import { ImportExportRoutingModule } from './import-export-routing.module';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ImportExportComponent } from './import-export.component';
-
+import { SharedModule } from "../../../shared/shared.module";
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ImportExportRoutingModule
+    ImportExportRoutingModule,
+    SharedModule
   ],
   declarations: [ImportExportComponent]
 })

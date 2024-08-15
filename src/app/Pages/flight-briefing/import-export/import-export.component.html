@@ -1,17 +1,27 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
+  <!-- <div *ngIf="loading" class="loading-indicator">
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  </div> -->
+  <app-loading *ngIf="loading"></app-loading>
+  <div id="top"></div>
+<app-package-content>
+  <app-service-header>
+    Import and export flights for <br>lefentse_kto
+  </app-service-header>
 
-  <section class="import-and-export-list" style="margin-top: 10px">
+  <app-package-list-items class="import-and-export-list" 
+  id="exportlis">
     <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
-    <div class="import-and-export-main-div" id="maindiv">
-      <h1 class="heading-6">Import and export flights for <br>lefentse_kto</h1>
+    <div class="import-and-export-main-div" >
+      <!-- <h1 class="heading-6">Import and export flights for <br>lefentse_kto</h1> -->
       <div class="w-layout-grid trand-grid">
         <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d083-8de35a57" class="div-block-15">
           <div class="div-block-14"></div>
         </div>
-        <h1 class="heading-6">Export a flight</h1>
+        <div class="export">
+          <h1 class="heading-6">Export a flight</h1>
+        </div>
+
         <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d085-8de35a57" class="form-block w-form">
           <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
             data-wf-page-id="66028f62f9359d328de35a57" data-wf-element-id="53e524b5-e4df-8ef2-c706-97ca6c55d086">
@@ -39,7 +49,10 @@
           <div class="w-form-fail">
           </div>
         </div>
-        <h1 class="heading-6">Import a flight</h1>
+        <div class="import">
+          <h1 class="heading-6">Import a flight</h1>
+        </div>
+       
         <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d094-8de35a57" class="div-block-467">
           <div id="w-node-_0e8e5c57-cfb1-5057-7316-e7393c323e61-8de35a57" class="form-block w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
@@ -70,7 +83,10 @@
       </div>
     </div>
 
-  </section>
+  </app-package-list-items>
+  </app-package-content>
+
+
 
 </ion-content>
 <ion-footer class="ion-no-border">
