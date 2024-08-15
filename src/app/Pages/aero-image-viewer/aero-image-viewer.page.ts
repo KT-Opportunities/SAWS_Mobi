@@ -12,7 +12,7 @@ export class AeroImageViewerPage implements OnInit {
   nextday: boolean = false;
   prevday: boolean = true;
   TsProbability: any = [];
-  isLoading: boolean = true;
+  loading: boolean = true;
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
   name: string = '';
@@ -59,7 +59,7 @@ export class AeroImageViewerPage implements OnInit {
     }
     console.log('ANOTHER:', this.anotherName);
 
-    this.isLoading = true;
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
       (data) => {
         try {
@@ -88,12 +88,12 @@ export class AeroImageViewerPage implements OnInit {
           this.loadImages(); // Load both images after filtering data
         } catch (error) {
           console.log('Error parsing JSON data:', error);
-          this.isLoading = false;
+          this.loading = false;
         }
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -141,13 +141,13 @@ export class AeroImageViewerPage implements OnInit {
       }
     } else {
       console.log('Insufficient data to display images.');
-      this.isLoading = false;
+      this.loading = false;
     }
   }
 
   checkLoadingState() {
     if (this.prevday && !this.nextday) {
-      this.isLoading = false;
+      this.loading = false;
     }
   }
 
@@ -155,7 +155,7 @@ export class AeroImageViewerPage implements OnInit {
     this.nextday = false;
     this.prevday = true;
 
-    this.isLoading = true;
+    this.loading = true;
     if (this.TsProbability.length > 0) {
       this.APIService.GetAviationFile(
         this.TsProbability[0].foldername,
@@ -166,11 +166,11 @@ export class AeroImageViewerPage implements OnInit {
             'data:image/gif;base64,' + data.filetextcontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
-          this.isLoading = false;
+          this.loading = false;
         },
         (error) => {
           console.log('Error fetching previous day image:', error);
-          this.isLoading = false;
+          this.loading = false;
         }
       );
     } else {
@@ -181,7 +181,7 @@ export class AeroImageViewerPage implements OnInit {
   nextDay() {
     this.nextday = true;
     this.prevday = false;
-    this.isLoading = true;
+    this.loading = true;
     if (this.TsProbability.length > 1) {
       this.APIService.GetAviationFile(
         this.TsProbability[1].foldername,
@@ -191,11 +191,11 @@ export class AeroImageViewerPage implements OnInit {
           const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent;
           this.fileBaseUrlNext =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-          this.isLoading = false;
+          this.loading = false;
         },
         (error) => {
           console.log('Error fetching next day image:', error);
-          this.isLoading = false;
+          this.loading = false;
         }
       );
     } else {
