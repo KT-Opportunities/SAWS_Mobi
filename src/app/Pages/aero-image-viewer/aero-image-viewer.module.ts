@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { AeroImageViewerPageRoutingModule } from './aero-image-viewer-routing.module';
 
 import { AeroImageViewerPage } from './aero-image-viewer.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     AeroImageViewerPageRoutingModule
   ],
   declarations: [AeroImageViewerPage]

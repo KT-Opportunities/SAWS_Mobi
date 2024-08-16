@@ -1,12 +1,19 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
+  <!-- <div *ngIf="loading" class="loading-indicator">
     <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  </div> -->
+  <app-loading *ngIf="loading"></app-loading>
+  <div id="top"></div>
+<app-package-content>
+  <app-service-header>
+    Folder sharing
+  </app-service-header>
 
-  <section class="shared-flight" style="margin-top: 100px">
+
+  <app-package-list-items >
     <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
     <div class="import-and-export-main-div">
-      <h1 class="heading-6">Folder sharing</h1>
+      <!-- <h1 class="heading-6">Folder sharing</h1> -->
       <div class="w-layout-grid trand-grid">
         <div id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba3-b80dd68f" class="div-block-15">
           <div class="div-block-14"></div>
@@ -40,7 +47,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-package-list-items>
+
+</app-package-content>
+
 
 
 </ion-content>

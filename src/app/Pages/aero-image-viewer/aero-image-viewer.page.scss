@@ -2333,7 +2333,10 @@
   grid-column-gap: 3px;
   grid-template-rows: auto;
 }
-
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}
 .heading-18-copy-copy {
   color: #fff;
   text-align: center;
@@ -6451,7 +6454,7 @@ th {
     font-family: Open Sans, sans-serif;
     font-size: 12px;
   }
-  .metar-history-grid{
+  .metar-history-grid {
     justify-items: center;
     margin-left: 0;
     margin-right: 0;
