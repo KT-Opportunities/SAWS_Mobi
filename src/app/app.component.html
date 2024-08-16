@@ -6,7 +6,7 @@
         <div class="navbar-wrapper">
           <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
             <div class="top-nav-div">
-              <div class="div-block-12" *ngIf="!isLoggedIn">
+              <div class="div-block-12">
                 <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
                   <div class="top-nav-div">
                     <div class="div-block-12">
@@ -18,7 +18,7 @@
                   </div>
                 </nav>
               </div>
-              <div class="div-block-12" *ngIf="isLoggedIn && userDetails">
+              <!-- <div class="div-block-12" *ngIf="isLoggedIn && userDetails">
                 <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
                   <div class="top-nav-div">
                     <div class="div-block-12">
@@ -28,7 +28,7 @@
                     </div>
                   </div>
                 </nav>
-              </div>
+              </div> -->
             </div>
             <mat-list role="list" class="nav-menu-two w-list-unstyled" autoClose="true">
               <ion-menu-toggle class="ion-menu-toggle2">
