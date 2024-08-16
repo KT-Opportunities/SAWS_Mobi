@@ -1172,7 +1172,7 @@ p {
   .heading-25 {
     margin-top: 0;
     margin-bottom: 0;
-     padding-left: 4px;
+    padding-left: 4px;
     padding-right: 5px;
     font-size: 12px;
     line-height: 20px;
@@ -1273,6 +1273,32 @@ p {
   }
 }
 @media screen and (max-width: 479px) {
+  .prev {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .div-block-37 {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-left: -20px;
+  }
+  #view {
+    position: relative;
+    top: -9px;
+    width: 62%;
+    align-items: center;
+    align-content: center;
+  }
+  .image {
+    margin-top: 14px;
+  }
+  #Serch1 {
+    margin-top: -4px;
+    margin-bottom: 8px;
+    margin-left: -29px;
+  }
   #ICAO {
     // padding-left: 54px;
     padding-right: 0;
