@@ -4,14 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SpeciRoutingModule } from './speci-routing.module';
 import { SpeciComponent } from './speci.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
     SpeciRoutingModule
   ],
   declarations: [SpeciComponent]

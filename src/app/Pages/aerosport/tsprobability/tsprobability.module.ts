@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { TSProbabilityRoutingModule } from './tsprobability-routing.module';
 import { TSProbabilityComponent } from './tsprobability.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxPanZoomModule } from 'ngx-panzoom';
 
 @NgModule({
   imports: [
@@ -16,7 +15,6 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     IonicModule,
     SharedModule,
     TSProbabilityRoutingModule,
-    NgxPanZoomModule
   ],
   declarations: [TSProbabilityComponent],
 })

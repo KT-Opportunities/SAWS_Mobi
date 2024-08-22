@@ -1,114 +1,57 @@
 <ion-content>
-  <app-loading *ngIf="loading"></app-loading>
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
+  </div>
 
-  <div id="top"></div>
-  <app-package-content>
-    <app-package-header>Metar History For FAOR </app-package-header>
+  <section class="list-page"></section>
 
-    <app-package-sub-header> </app-package-sub-header>
-
-    <app-package-list-items>
+  <section class="ob-metar-history">
+    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image">
       <div class="metar-history-main-div">
-        <!-- <h1 class="heading-6">Metar History For FAOR</h1> -->
+        <h1 class="heading-6">Metar History For FAOR</h1>
 
         <div>
-          <div
-            id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22c1-a9068d94"
-            class="div-block-15"
-          >
+          <div id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22c1-a9068d94" class="div-block-15">
             <div class="div-block-14"></div>
           </div>
-          <div
-            id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22ce-a9068d94"
-            class="form-block w-form"
-          >
-            <form
-              id="email-form-2"
-              name="email-form-2"
-              data-name="Email Form 2"
-              method="get"
-              data-wf-page-id="65c9ee145d072c23a9068d94"
-              data-wf-element-id="a3e89a9d-706c-301b-ed7f-a8d1997c22cf"
-            >
-              <div class="grid-24">
-                <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649">
-                  <label for="" class="field-label">Select Template</label>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="selectDropdown('dropdown5')"
-                  >
+          <div id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22ce-a9068d94" class="form-block w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
+              data-wf-page-id="65c9ee145d072c23a9068d94" data-wf-element-id="a3e89a9d-706c-301b-ed7f-a8d1997c22cf">
+              <div class=" grid-24">
+                <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649"><label for="" class="field-label">Select
+                    Template</label>
+                  <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                    (click)="selectDropdown('dropdown5')">
                     <div class="w-dropdown-toggle">
-                      <div
-                        class="icon-2 w-icon-dropdown-toggle"
-                        id="icon2"
-                      ></div>
-                      <div class="text-block">{{ selectedOption5 }}</div>
+                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption5}}</div>
                     </div>
                     <nav class="dropdown-list1" *ngIf="isDropdownOpen5">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown5')"
-                      >
-                        Link 1
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown5')"
-                      >
-                        Link 2
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown5')"
-                      >
-                        Link 3
-                      </div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 1</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 2</div>
+                      <div class="w-dropdown-link" (click)="selectOption('','dropdown5')">Link 3</div>
                     </nav>
                   </div>
                 </div>
-                <div id="w-node-_9bfb377b-e0d8-05d4-3338-378b893cc2eb-a9068d94">
-                  <label for="" class="field-label">Plot meteogram</label>
+                <div id="w-node-_9bfb377b-e0d8-05d4-3338-378b893cc2eb-a9068d94"><label for="" class="field-label">Plot
+                    meteogram</label>
 
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="selectDropdown('dropdown11')"
-                  >
+                  <div data-hover="false" data-delay="0" class="text-field-blue w-dropdown"
+                    (click)="selectDropdown('dropdown11')">
                     <div class="w-dropdown-toggle">
-                      <div
-                        class="icon-2 w-icon-dropdown-toggle"
-                        id="icon2"
-                      ></div>
-                      <div class="text-block">{{ selectedOption11 }}</div>
+                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div class="text-block">{{selectedOption11}}</div>
                     </div>
                     <nav class="dropdown-list1" *ngIf="isDropdownOpen11">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown11')"
-                      >
-                        Link 1
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown11')"
-                      >
-                        Link 2
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown11')"
-                      >
-                        Link 3
-                      </div>
+                      <div class="w-dropdown-link" (click)="selectOption('', 'dropdown11')">Link 1</div>
+                      <div class="w-dropdown-link" (click)="selectOption('', 'dropdown11')">Link 2</div>
+                      <div class="w-dropdown-link" (click)="selectOption('', 'dropdown11')">Link 3</div>
                     </nav>
                   </div>
                 </div>
               </div>
               <div class="div-block-451">
-                <div class="w-button" id="button-2">Download</div>
+                <div class=" w-button" id="button-2">Download</div>
               </div>
             </form>
             <div class="w-form-done">
@@ -117,13 +60,14 @@
             <div class="w-form-fail">
               <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
             </div>
+
           </div>
+
+
+
         </div>
         <div class="w-layout-grid grid-6" id="layout">
-          <div
-            class="ObservScrol"
-            style="overflow-y: auto; height: 21em !important"
-          >
+          <div class="ObservScrol" style="overflow-y: auto;height: 21em !important;">
             <div class="div-block-15">
               <div>
                 <div class="">
@@ -181,16 +125,9 @@
                                 </div>
                               </div>
                               <div class="table-row">
-                                <div class="table-box _2">
-                                  <img
-                                    src="../../assets/webclip.png"
-                                    width="32"
-                                    alt=""
-                                    class="image-7"
-                                  />
-                                  <div class="table-data name">
-                                    Walter A. Price
-                                  </div>
+                                <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt=""
+                                    class="image-7">
+                                  <div class="table-data name">Walter A. Price</div>
                                 </div>
                                 <div class="table-box _2">
                                   <div class="table-data link">email.com</div>
@@ -205,43 +142,24 @@
                                   <div class="table-data">May 22, 2020</div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-ix="toggle"
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a715288e"
-                                    class="togglebutton active w-inline-block"
-                                  >
+                                  <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a715288e"
+                                    class="togglebutton active w-inline-block">
                                     <div class="buttontoggle _2"></div>
                                   </div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
-                                    class="link-block-12 w-inline-block"
-                                  >
-                                    <img
-                                      src="../../assets/close-2.svg"
-                                      alt=""
-                                      class="table-action-icon"
-                                    />
-                                  </div>
+                                  <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
+                                    class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt=""
+                                      class="table-action-icon"></div>
                                 </div>
                               </div>
                               <div class="table-row">
-                                <div class="table-box _2">
-                                  <img
-                                    src="../../assets/webclip.png"
-                                    width="32"
-                                    alt=""
-                                    class="image-7"
-                                  />
-                                  <div class="table-data name">
-                                    Walter A. Price
-                                  </div>
+                                <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt=""
+                                    class="image-7">
+                                  <div class="table-data name">Walter A. Price</div>
                                 </div>
                                 <div class="table-box _2">
-                                  <div class="table-data link">
-                                    wpriceemail.com
-                                  </div>
+                                  <div class="table-data link">wpriceemail.com</div>
                                 </div>
                                 <div class="table-box _2">
                                   <div class="table-data">813-200-2741</div>
@@ -253,43 +171,24 @@
                                   <div class="table-data">May 22, 2020</div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-ix="toggle"
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528a7"
-                                    class="togglebutton active w-inline-block"
-                                  >
+                                  <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528a7"
+                                    class="togglebutton active w-inline-block">
                                     <div class="buttontoggle _2"></div>
                                   </div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
-                                    class="link-block-12 w-inline-block"
-                                  >
-                                    <img
-                                      src="../../assets/close-2.svg"
-                                      alt=""
-                                      class="table-action-icon"
-                                    />
-                                  </div>
+                                  <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
+                                    class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt=""
+                                      class="table-action-icon"></div>
                                 </div>
                               </div>
                               <div class="table-row">
-                                <div class="table-box _2">
-                                  <img
-                                    src="../../assets/webclip.png"
-                                    width="32"
-                                    alt=""
-                                    class="image-7"
-                                  />
-                                  <div class="table-data name">
-                                    Walter A. Price
-                                  </div>
+                                <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt=""
+                                    class="image-7">
+                                  <div class="table-data name">Walter A. Price</div>
                                 </div>
                                 <div class="table-box _2">
-                                  <div class="table-data link">
-                                    wpriceemail.com
-                                  </div>
+                                  <div class="table-data link">wpriceemail.com</div>
                                 </div>
                                 <div class="table-box _2">
                                   <div class="table-data">813-200-2741</div>
@@ -301,41 +200,24 @@
                                   <div class="table-data">May 22, 2020</div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-ix="toggle"
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528c0"
-                                    class="togglebutton active w-inline-block"
-                                  >
+                                  <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528c0"
+                                    class="togglebutton active w-inline-block">
                                     <div class="buttontoggle _2"></div>
                                   </div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
-                                    class="link-block-12 w-inline-block"
-                                  >
-                                    <img
-                                      src="../../assets/close-2.svg"
-                                      alt=""
-                                      class="table-action-icon"
-                                    />
-                                  </div>
+                                  <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
+                                    class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt=""
+                                      class="table-action-icon"></div>
                                 </div>
                               </div>
                               <div class="table-row">
-                                <div class="table-box _2">
-                                  <img
-                                    src="../../assets/webclip.png"
-                                    width="32"
-                                    alt=""
-                                    class="image-7"
-                                  />
+                                <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt=""
+                                    class="image-7">
                                   <div class="table-data name">John Smith</div>
                                 </div>
                                 <div class="table-box _2">
-                                  <div class="table-data link">
-                                    jsmithemail.com
-                                  </div>
+                                  <div class="table-data link">jsmithemail.com</div>
                                 </div>
                                 <div class="table-box _2">
                                   <div class="table-data">813-200-2741</div>
@@ -347,43 +229,24 @@
                                   <div class="table-data">May 16, 2020</div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-ix="toggle"
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528d9"
-                                    class="togglebutton active w-inline-block"
-                                  >
+                                  <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528d9"
+                                    class="togglebutton active w-inline-block">
                                     <div class="buttontoggle _2"></div>
                                   </div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
-                                    class="link-block-12 w-inline-block"
-                                  >
-                                    <img
-                                      src="../../assets/close-2.svg"
-                                      alt=""
-                                      class="table-action-icon"
-                                    />
-                                  </div>
+                                  <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
+                                    class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt=""
+                                      class="table-action-icon"></div>
                                 </div>
                               </div>
                               <div class="table-row">
-                                <div class="table-box _2">
-                                  <img
-                                    src="../../assets/webclip.png"
-                                    width="32"
-                                    alt=""
-                                    class="image-7"
-                                  />
-                                  <div class="table-data name">
-                                    Bianca Rossi
-                                  </div>
+                                <div class="table-box _2"><img src="../../assets/webclip.png" width="32" alt=""
+                                    class="image-7">
+                                  <div class="table-data name">Bianca Rossi</div>
                                 </div>
                                 <div class="table-box _2">
-                                  <div class="table-data link">
-                                    brossiemail.com
-                                  </div>
+                                  <div class="table-data link">brossiemail.com</div>
                                 </div>
                                 <div class="table-box _2">
                                   <div class="table-data">813-200-2741</div>
@@ -395,25 +258,16 @@
                                   <div class="table-data">May 04, 2020</div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-ix="toggle"
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f2"
-                                    class="togglebutton w-inline-block"
-                                  >
+                                  <div data-ix="toggle" data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f2"
+                                    class="togglebutton w-inline-block">
                                     <div class="buttontoggle"></div>
                                   </div>
                                 </div>
                                 <div class="table-box _2 action">
-                                  <div
-                                    data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
-                                    class="link-block-12 w-inline-block"
-                                  >
-                                    <img
-                                      src="../../assets/close-2.svg"
-                                      alt=""
-                                      class="table-action-icon"
-                                    />
-                                  </div>
+                                  <div data-w-id="ed5455b6-c8e4-85d0-85ac-7d98a71528f5"
+                                    class="link-block-12 w-inline-block"><img src="../../assets/close-2.svg" alt=""
+                                      class="table-action-icon"></div>
+
                                 </div>
                               </div>
                             </div>
@@ -427,30 +281,136 @@
             </div>
           </div>
         </div>
+
       </div>
-    </app-package-list-items>
-  </app-package-content>
+
+    </div>
+
+    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
+      <!-- <div class="footerdiv">
+        <a href="landing-page.html" class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
+          <h6 class="heading-10">Forecast</h6>
+        </a>
+      </div> -->
+    </div>
+  </section>
+
+
+  <!-- <section class="ob-randar">
+    <div class="metar-history-main-div">
+      <h1 class="heading-6">Randar Images</h1>
+      <div>
+        <div class="w-layout-grid grid-20">
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4552-df47fded" class="div-block-35">
+            <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4553-df47fded" class="w-layout-grid grid-21">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4554-df47fded" class="div-block-36">
+                <h4 class="heading-24">Individual Image</h4>
+              </div>
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4557-df47fded" class="div-block-36">
+                <h4 class="heading-24">View Image</h4>
+              </div>
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef455a-df47fded" class="div-block-36"></div>
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef455d-df47fded" class="div-block-36"></div>
+            </div>
+          </div>
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4560-df47fded" class="div-block-452">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4562-df47fded" class="div-block-37">
+                <h4 class="heading-25">George Mountain</h4>
+              </div>
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4565-df47fded" class="div-block-37">
+                <a href="https://aviation.weathersa.co.za/pib/webcams/index.html" class="button-2 w-button">View
+                  Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef456e-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4570-df47fded" class="div-block-37">
+                <h4 class="heading-25">Skukuza (South)</h4>
+              </div>
+              <div id="w-node-_5586f8de-500c-3d0d-41e6-8fc6e92cb068-df47fded" class="div-block-37">
+                <a href="https://aviation.weathersa.co.za/pib/webcams/Skukuza.html" class="button-2 w-button">View
+                  Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef457c-df47fded" class="div-block-453">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef457e-df47fded" class="div-block-37">
+                <h4 class="heading-25">Tzaneen (North-west) *</h4>
+              </div>
+              <div id="w-node-e7c9e1d2-4d07-0cf8-ea26-9a926eb740ec-df47fded" class="div-block-37">
+                <a href="https://aviation.weathersa.co.za/pib/webcams/Tzaneen.html" class="button-2 w-button">View
+                  Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef458a-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef458c-df47fded" class="div-block-37">
+                <h4 class="heading-25">FADN</h4>
+              </div>
+              <div id="w-node-_782976cf-bafb-5f5e-9603-d16b861e96af-df47fded" class="div-block-37">
+                <a href="#" class="button-2 w-button">View Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef4598-df47fded" class="div-block-454">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_354b2412-f49a-8b91-8aaa-52a332ef459a-df47fded" class="div-block-37">
+                <h4 class="heading-25">FADY</h4>
+              </div>
+              <div id="w-node-_35a877aa-3c3a-5cd6-9810-4b38617c6d8b-df47fded" class="div-block-37">
+                <a href="#" class="button-2 w-button">View Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da856-df47fded" class="div-block-38">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da858-df47fded" class="div-block-37">
+                <h4 class="heading-25">FADN</h4>
+              </div>
+              <div id="w-node-_175008b7-03e9-ac1a-057d-ade9f62da85b-df47fded" class="div-block-37">
+                <a href="#" class="button-2 w-button">View Image</a>
+              </div>
+            </div>
+          </div>
+          <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed3-df47fded" class="div-block-455">
+            <div class="w-layout-grid grid-22">
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed5-df47fded" class="div-block-37">
+                <h4 class="heading-25">FADY</h4>
+              </div>
+              <div id="w-node-_7f4e90fb-d37e-728c-a303-85e1ab38eed8-df47fded" class="div-block-37">
+                <a href="#" class="button-2 w-button">View Image</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section> -->
+
+
 </ion-content>
+<ion-footer class="ion-no-border">
+  <div class="">
+    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
 
-<app-footer></app-footer>
-
-<div class="footerdiv" id="footerdivid1">
-  <div (click)="NavigateToObservation()" class="link-block-5 w-inline-block">
-    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-    <h6
-      class="heading-10-copy"
-      id="styleh6"
-      style="
-        color: #fff;
-        margin-top: 10px;
-        margin-bottom: 0;
-        font-family: Montserrat, sans-serif;
-        text-decoration: none;
-        font-size: 12px;
-        margin-top: 4px;
-      "
-    >
-      Observation
-    </h6>
+    <div class="footerdiv" id="footerdivid1">
+      <div (click)=" NavigateToObservation()" class="link-block-5 w-inline-block">
+        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+             margin-top: 10px;
+             margin-bottom: 0;
+             font-family: Montserrat, sans-serif;
+             text-decoration: none;
+             font-size: 12px;
+             margin-top: 4px;">
+          Observation
+        </h6>
+      </div>
+    </div>
   </div>
-</div>
+</ion-footer>

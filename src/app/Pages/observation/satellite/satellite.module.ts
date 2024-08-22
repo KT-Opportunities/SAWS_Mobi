@@ -4,14 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SatelliteRoutingModule } from './satellite-routing.module';
 import { SatelliteComponent } from './satellite.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
     SatelliteRoutingModule
   ],
   declarations: [SatelliteComponent]

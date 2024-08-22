@@ -8,7 +8,6 @@ import { SynopticAnalysisPageRoutingModule } from './synoptic-analysis-routing.m
 
 import { SynopticAnalysisPage } from './synoptic-analysis.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxPanZoomModule } from 'ngx-panzoom';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     FormsModule,
     IonicModule,
     SharedModule,
-    SynopticAnalysisPageRoutingModule,
-    NgxPanZoomModule
+    SynopticAnalysisPageRoutingModule
   ],
   declarations: [SynopticAnalysisPage]
 })

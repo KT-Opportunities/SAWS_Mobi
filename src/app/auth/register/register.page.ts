@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  ViewChild,
-  ElementRef,
-  Renderer2,
-} from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -166,38 +159,26 @@ export class RegisterPage {
 
     if (this.userForm.invalid) {
       this.loading = false;
-      debugger;
       return;
     } else {
       this.api.createNewUser(body).subscribe(
         (data: any) => {
           if (data.Status === 'Success') {
-            debugger;
-
+    
             this.statusMessage = true;
             this.errorMessage = null;
             this.loading = false;
+            
+            this.presentToast('top','Account Created Successfully!', 'success', 'close');
 
-            this.presentToast(
-              'top',
-              'Account Created Successfully!',
-              'success',
-              'close'
-            );
-
-            // this.router.navigate(['login']);
+            this.router.navigate(['login']);
             this.onReset();
           }
         },
         (error: any) => {
           if (error.error.Message === 'User Exists') {
             // this.presentPopup();
-            this.presentToastReg(
-              'top',
-              'User Alredy Exists!',
-              'danger',
-              'close'
-            );
+            this.presentToastReg('top','User Alredy Exists!', 'danger', 'close'); 
           }
           this.loading = false;
         }
@@ -205,48 +186,40 @@ export class RegisterPage {
     }
   }
 
-  async presentToastReg(
-    position: 'top' | 'middle' | 'bottom',
-    message: string,
-    color: string,
-    icon: string
-  ) {
+  async presentToastReg(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass: 'custom-toast',
-      swipeGesture: 'vertical',
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
       buttons: [
         {
           side: 'end',
           text: 'Go to Login',
           handler: () => {
             this.router.navigate(['/login']);
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
 
     await toast.present();
   }
 
-  async presentToast(
-    position: 'top' | 'middle' | 'bottom',
-    message: string,
-    color: string,
-    icon: string
-  ) {
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass: 'custom-toast',
-      swipeGesture: 'vertical',
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
       buttons: [
         {
           icon: 'close',

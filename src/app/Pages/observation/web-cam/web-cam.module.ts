@@ -7,14 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { WebCamPageRoutingModule } from './web-cam-routing.module';
 
 import { WebCamPage } from './web-cam.page';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
     WebCamPageRoutingModule
   ],
   declarations: [WebCamPage]

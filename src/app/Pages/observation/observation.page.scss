@@ -1,3 +1,18 @@
+@media screen and (max-width: 479px) {
+  .bottomdiv {
+    position: fixed;
+    margin-top: 158%;
+  }
+  .heading-5 {
+    font-size: 14px;
+    color: #002f5a;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Montserrat, sans-serif;
+    font-weight: bold;
+  }
+}
+
 .footerdiv {
   padding-top: 0;
   z-index: 1000;
@@ -1044,7 +1059,7 @@
 }
 .w-layout-grid {
   // display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
   gap: 20px; /* Space between grid items */
 }
 
@@ -1052,8 +1067,7 @@
   margin-bottom: 20px; /* Space between each report section */
 }
 
-.cct-copy-copy,
-.cct-copy {
+.cct-copy-copy, .cct-copy {
   /* Ensure these divs are not overlapping or causing layout issues */
   padding: 10px;
   // border: 1px solid #ccc;
@@ -1949,10 +1963,10 @@
   background-color: #00ff00;
 }
 
-.metar-report h1,
-.metar-report p {
+.metar-report h1, .metar-report p {
   margin: 5px 0;
 }
+
 
 .chats-div {
   flex-direction: column;
@@ -1988,7 +2002,7 @@
 }
 .ObservScrol {
   /* Set the width of the container as needed */
-  width: 341px; /* Example width */
+  width: 341px;/* Example width */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
@@ -1999,6 +2013,7 @@
 }
 
 /* Additional styling for child elements if needed */
+
 
 .grid-35 {
   grid-template-rows: auto;
@@ -3494,20 +3509,7 @@
     margin-bottom: 20px;
   }
 }
-@media screen and (max-width: 479px) {
-  .bottomdiv {
-    position: fixed;
-    margin-top: 158%;
-  }
-  .heading-5 {
-    font-size: 14px;
-    color: #002f5a;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-family: Montserrat, sans-serif;
-    font-weight: bold;
-  }
-}
+
 @media screen and (max-width: 479px) {
   .section {
     padding-top: 0;
@@ -3743,7 +3745,7 @@
     width: 86vw;
     align-items: flex-start;
     position: relative;
-    top: -8px;
+  top: -8px;
   }
 
   .search-button {

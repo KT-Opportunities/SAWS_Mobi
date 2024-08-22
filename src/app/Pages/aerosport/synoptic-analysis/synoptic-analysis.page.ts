@@ -11,14 +11,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
-import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom'
+
 @Component({
   selector: 'app-synoptic-analysis',
   templateUrl: './synoptic-analysis.page.html',
   styleUrls: ['./../aero-sport.page.scss'],
 })
 export class SynopticAnalysisPage implements OnInit {
-  panZoomConfig: PanZoomConfig = new PanZoomConfig();
   imageUrl: string | null = null;
   isLogged: boolean = false;
   loading: boolean = true;
