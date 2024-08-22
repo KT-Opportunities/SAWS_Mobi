@@ -8,13 +8,19 @@ import {
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
-
+import {
+  PanZoomConfig,
+  PanZoomAPI,
+  PanZoomModel,
+  PanZoomConfigOptions,
+} from 'ngx-panzoom';
 @Component({
   selector: 'app-tsprobability',
   templateUrl: './tsprobability.component.html',
   styleUrls: ['./../aero-sport.page.scss'],
 })
 export class TSProbabilityComponent implements OnInit {
+  panZoomConfig: PanZoomConfig = new PanZoomConfig();
   currentImageIndex: number = 0;
   TsProbability: any = [];
   loading: boolean = false;
@@ -32,7 +38,8 @@ export class TSProbabilityComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
   NavigateToAerosport() {

@@ -17,7 +17,7 @@ interface MetarReport {
 @Component({
   selector: 'app-metar-color-coded',
   templateUrl: './metar-color-coded.component.html',
-  styleUrls: ['./metar-color-coded.component.scss'],
+  styleUrls: ['./../observation.page.scss'],
 })
 export class MetarColorCodedComponent implements OnInit {
   isLogged: boolean = false;
@@ -39,7 +39,7 @@ export class MetarColorCodedComponent implements OnInit {
     this.fetchMetarReports();
   }
 
-  navigateToObservation(): void {
+  NavigateToObservation(): void {
     this.router.navigate(['/observation']);
   }
 
@@ -70,7 +70,9 @@ export class MetarColorCodedComponent implements OnInit {
       this.filteredReports = this.metarReports; // If search query is empty, show all reports
     } else {
       this.filteredReports = this.metarReports.filter((report) =>
-        report.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+        report.filetextcontent
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase())
       );
     }
   }
@@ -83,21 +85,19 @@ export class MetarColorCodedComponent implements OnInit {
     console.log('Folder Name:', folderName);
     this.isLoading = true;
 
-  
-        this.isLoading = false;
+    this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { item };
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
 
-        const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-    
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
   }
 }

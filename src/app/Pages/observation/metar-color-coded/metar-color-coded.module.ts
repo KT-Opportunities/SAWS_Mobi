@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MetarColorCodedRoutingModule } from './metar-color-coded-routing.module';
 import { MetarColorCodedComponent } from './metar-color-coded.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     MetarColorCodedRoutingModule
   ],
   declarations: [MetarColorCodedComponent]

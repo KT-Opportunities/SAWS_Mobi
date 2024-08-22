@@ -305,6 +305,8 @@ export class APIService {
   //   );
   // }
 
+//"http://aviapp.weathersa.co.za:81/api/v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=aerosport&lasthours=24"
+
   getRecentTafs(foldername: string): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +

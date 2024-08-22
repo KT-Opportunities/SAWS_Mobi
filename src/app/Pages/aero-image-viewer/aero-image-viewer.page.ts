@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { APIService } from 'src/app/services/apis.service';
-
+import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom'
 @Component({
   selector: 'app-aero-image-viewer',
   templateUrl: './aero-image-viewer.page.html',
   styleUrls: ['./aero-image-viewer.page.scss'],
 })
 export class AeroImageViewerPage implements OnInit {
+  panZoomConfig: PanZoomConfig = new PanZoomConfig();
   nextday: boolean = false;
   prevday: boolean = true;
   TsProbability: any = [];
@@ -40,6 +41,8 @@ export class AeroImageViewerPage implements OnInit {
     this.fileBaseUrlPrevious =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
+ 
+  
 
   ngOnInit() {
     this.name = history.state.names || '';
@@ -97,7 +100,7 @@ export class AeroImageViewerPage implements OnInit {
       }
     );
   }
-
+ 
   loadImages() {
     if (this.TsProbability.length > 0) {
       // Load the previous day image first

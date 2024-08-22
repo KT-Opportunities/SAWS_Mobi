@@ -48,26 +48,30 @@
                   data-duration="500"
                   data-infinite="true"
                 >
-                  <div class="w-slider-mask prev" *ngIf="prevday">
-                    <img
-                      [src]="fileBaseUrlPrevious"
-                      loading="lazy"
-                      width="90%"
-                      height="90%"
-                      alt=""
-                      class="image"
-                    />
-                  </div>
-                  <div class="w-slider-mask next" *ngIf="nextday">
-                    <img
-                      [src]="fileBaseUrlNext"
-                      loading="lazy"
-                      width="90%"
-                      height="90%"
-                      alt=""
-                      class="image"
-                    />
-                  </div>
+                  <pan-zoom [config]="panZoomConfig">
+                    <div class="w-slider-mask prev" *ngIf="prevday">
+                      <img
+                        [src]="fileBaseUrlPrevious"
+                        loading="lazy"
+                        width="90%"
+                        height="90%"
+                        alt=""
+                        class="image"
+                      />
+                    </div>
+                  </pan-zoom>
+                  <pan-zoom [config]="panZoomConfig">
+                    <div class="w-slider-mask next" *ngIf="nextday">
+                      <img
+                        [src]="fileBaseUrlNext"
+                        loading="lazy"
+                        width="90%"
+                        height="90%"
+                        alt=""
+                        class="image"
+                      />
+                    </div>
+                  </pan-zoom>
                 </div>
               </div>
             </div>

@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { NgxPanZoomModule } from 'ngx-panzoom';
 import { AeroImageViewerPageRoutingModule } from './aero-image-viewer-routing.module';
-
 import { AeroImageViewerPage } from './aero-image-viewer.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     SharedModule,
-    AeroImageViewerPageRoutingModule
+    AeroImageViewerPageRoutingModule,
+    NgxPanZoomModule
+ 
+  
   ],
   declarations: [AeroImageViewerPage]
 })
