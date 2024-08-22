@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AeroImageViewerPageRoutingModule } from './aero-image-viewer-routing.module';
-
+import { NgxPanZoomModule } from 'ngx-panzoom';
 import { AeroImageViewerPage } from './aero-image-viewer.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -15,6 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     SharedModule,
+    NgxPanZoomModule,
     AeroImageViewerPageRoutingModule
   ],
   declarations: [AeroImageViewerPage]

@@ -6,39 +6,38 @@
     <app-package-header>
       {{name ||kwazulNatal|| (anotherName.startsWith('xl') ?
       anotherName.substring(2) :
-      anotherName)||filenameToDisplayName[displayName]}}</app-package-header
+      anotherName)||filenameToDisplayName[displayName]}}
+      <div class="w-layout-grid metar-history-grid">
+        <div class="date-container" *ngIf="TsProbability.length > 1">
+          <button
+            *ngIf="nextday"
+            id="last-day-btn"
+            class="button-spacing"
+            (click)="previousDay()"
+            [disabled]="!nextday"
+            [ngClass]="{'disabled-button': !nextday}"
+          >
+            << Previous Day
+          </button>
+          <span id="current-date"></span>
+          <button
+            *ngIf="prevday"
+            id="next-day-btn"
+            class="button-spacing"
+            (click)="nextDay()"
+            [disabled]="!prevday"
+            [ngClass]="{'disabled-button': !prevday}"
+          >
+            Next Day >>
+          </button>
+        </div>
+      </div></app-package-header
     >
 
     <app-package-sub-header> </app-package-sub-header>
 
     <app-package-list-items>
       <div class="cloud-cover">
-        <div class="w-layout-grid metar-history-grid">
-          <div class="date-container" *ngIf="TsProbability.length > 1">
-            <button
-              *ngIf="nextday"
-              id="last-day-btn"
-              class="button-spacing"
-              (click)="previousDay()"
-              [disabled]="!nextday"
-              [ngClass]="{'disabled-button': !nextday}"
-            >
-              << Previous Day
-            </button>
-            <span id="current-date"></span>
-            <button
-              *ngIf="prevday"
-              id="next-day-btn"
-              class="button-spacing"
-              (click)="nextDay()"
-              [disabled]="!prevday"
-              [ngClass]="{'disabled-button': !prevday}"
-            >
-              Next Day >>
-            </button>
-          </div>
-        </div>
-
         <div class="div-block-15">
           <div>
             <div class="scroll small-m">
@@ -56,26 +55,28 @@
                   data-duration="500"
                   data-infinite="true"
                 >
-                  <div *ngIf="prevday">
-                    <img
-                      [src]="fileBaseUrlPrevious"
-                      loading="lazy"
-                      width="80%"
-                      height="80%"
-                      alt=""
-                      class="image"
-                    />
-                  </div>
-                  <div *ngIf="nextday">
-                    <img
-                      [src]="fileBaseUrlNext"
-                      loading="lazy"
-                      width="80%"
-                      height="80%"
-                      alt=""
-                      class="image"
-                    />
-                  </div>
+                  <pan-zoom [config]="panZoomConfig">
+                    <div *ngIf="prevday">
+                      <img
+                        [src]="fileBaseUrlPrevious"
+                        loading="lazy"
+                        width="80%"
+                        height="80%"
+                        alt=""
+                        class="image"
+                      /></div
+                  ></pan-zoom>
+                  <pan-zoom [config]="panZoomConfig"
+                    ><div *ngIf="nextday">
+                      <img
+                        [src]="fileBaseUrlNext"
+                        loading="lazy"
+                        width="80%"
+                        height="80%"
+                        alt=""
+                        class="image"
+                      /></div
+                  ></pan-zoom>
                 </div>
               </div>
             </div>
