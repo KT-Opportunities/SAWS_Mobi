@@ -1,121 +1,68 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
-    Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <app-auth-content>
+    <app-auth-logo *ngIf="!isKeyboardVisible">
+      <img src="/assets/Mask-Group-33x.png" loading="lazy" width="212" alt="" class="mobile-images" />
+    </app-auth-logo>
 
-  <section class="section">
-    <div class="div-block">
-      <img
-        src="/assets/Mask-Group-33x.png"
-        loading="lazy"
-        width="212"
-        alt=""
-        class="mobile-images"
-      />
-    </div>
-    <div class="login-for">
-      <div class="w-form">
-        <form
-          [formGroup]="loginForm"
-          (ngSubmit)="onSubmit()"
-          id="email-form"
-          name="email-form"
-        >
-          <h1 class="login">LOGIN</h1>
-          <label for="name" class="field-label">Username</label>
-          <input
-            class="text-field w-input"
-            maxlength="256"
-            name="name"
-            placeholder="Type your username"
-            type="text"
-            id="name"
-            required=""
-            formControlName="username"
-          />
-          <div
-            *ngIf="loginForm.get('username')?.invalid && submitted"
-            class="error-message"
-          >
-            Username is required.
-          </div>
-          <label for="field" class="field-label-2">Password</label>
-          <div class="password-container">
-            <input
-              class="text-field w-input"
-              maxlength="256"
-              name="field"
-              placeholder="Type your Password"
-              [type]="showPassword ? 'text' : 'password'"
-              id="field"
-              required=""
-              formControlName="password"
-            />
-            <span class="toggle-password">
-              <i
-                class="fas"
-                [class.fa-eye]="showPassword"
-                [class.fa-eye-slash]="!showPassword"
-                (click)="togglePasswordVisibility()"
-              ></i>
-            </span>
-            <div
-              *ngIf="loginForm.get('password')?.invalid && submitted"
-              class="error-message"
-            >
-              Password is required.
+    <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div>
+
+    <app-auth-form>
+      <div class="login-for">
+        <div class="w-form">
+          <form #userFormRef [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="email-form" name="email-form">
+            <h2 class="login">Login</h2>
+            <label for="name" class="field-label">Username</label>
+            <input class="text-field w-input" maxlength="256" name="name" placeholder="Type your username" type="text"
+              id="name" required="" formControlName="username" />
+            <div *ngIf="loginForm.get('username')?.invalid && submitted" class="error-message">
+              Username is required.
             </div>
-          </div>
-          <div *ngIf="errorMessage" class="error-message">
-            {{ errorMessage }}
-          </div>
-          <div class="w-layout-grid grid">
-            <div
-              id="w-node-_5a2d7d19-0969-1d91-ec5c-ff2a96283cf6-b367414f"
-              class="div-block-4"
-            >
-              <div
-                (click)="forgortPassword()"
-                class="forgotpassword"
-                style="white-space: nowrap"
-              >
-                Forgot Password
+            <label for="field" class="field-label-2">Password</label>
+            <div class="password-container">
+              <input class="text-field w-input" maxlength="256" name="field" placeholder="Type your Password"
+                [type]="showPassword ? 'text' : 'password'" id="field" required="" formControlName="password" />
+              <span class="toggle-password">
+                <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                  (click)="togglePasswordVisibility()"></i>
+              </span>
+              <div *ngIf="loginForm.get('password')?.invalid && submitted" class="error-message">
+                Password is required.
               </div>
             </div>
+            <div *ngIf="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
+            <div class="w-layout-grid grid">
+              <div id="w-node-_5a2d7d19-0969-1d91-ec5c-ff2a96283cf6-b367414f" class="div-block-4">
+                <div (click)="forgortPassword()" class="forgotpassword" style="white-space: nowrap">
+                  Forgot Password
+                </div>
+              </div>
+            </div>
+            <input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Login" />
+          </form>
+        </div>
+        <div class="link-block-2 w-inline-block">
+          <div class="createlinktext">
+            <h5 class="">
+              Need an account?
+              <a (click)="register()" class="linkspace">Create account</a>
+            </h5>
           </div>
-          <input
-            type="submit"
-            data-wait="Please wait..."
-            class="submit-button w-button"
-            value="Login"
-          />
-        </form>
+        </div>
       </div>
-      <a class="link-block-2 w-inline-block">
-        <h5 class="createlinktext">
-          Need an account?
-          <a (click)="register()" class="linkspace">Create account</a>
-        </h5>
-      </a>
-    </div>
-  </section>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
+    </app-auth-form>
+  </app-auth-content>
 </ion-content>
+
 <app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
 <div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
   <div (click)="home()" class="link-block-5 w-inline-block">
     <img src="./../../../assets/Group-3489.svg" loading="lazy" alt="" />
-    <h6
-      class="heading-10-copy"
-      id="styleh6"
-      style="
+    <h6 class="heading-10-copy" id="styleh6" style="
         color: #fff;
         margin-top: 10px;
         margin-bottom: 0;
@@ -123,7 +70,6 @@
         text-decoration: none;
         font-size: 12px;
         margin-top: 4px;
-      "
-    ></h6>
+      "></h6>
   </div>
 </div>

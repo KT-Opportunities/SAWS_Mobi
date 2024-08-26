@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +16,7 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit, OnDestroy {
+  @ViewChild('userFormRef') userFormRef!: ElementRef;
   private mobileQuery: MediaQueryList;
   isMobile: boolean;
   notLogged = false;
@@ -59,6 +60,15 @@ export class LoginPage implements OnInit, OnDestroy {
     Keyboard.addListener('keyboardWillHide', () => {
       this.isKeyboardVisible = false;
     });
+  }
+
+  scrollToForm() {
+    if (this.userFormRef) {
+      this.userFormRef.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
   }
 
   ionViewDidLeave() {

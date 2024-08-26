@@ -7,15 +7,16 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
   @ViewChild('userFormRef') userFormRef!: ElementRef;
   showPassword: boolean = false;
   currentStep: number = 1;
@@ -46,6 +47,8 @@ export class RegisterPage {
     }
   }
 
+  isKeyboardVisible = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private api: APIService,
@@ -53,7 +56,8 @@ export class RegisterPage {
     private renderer: Renderer2,
     private alertController: AlertController,
     private authAPI: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private platform: Platform
   ) {
     this.userForm = this.formBuilder.group({
       Fullname: ['', Validators.required],
@@ -69,6 +73,20 @@ export class RegisterPage {
     });
     this.userForm.get('ConfirmPassword')?.valueChanges.subscribe(() => {
       this.clearPasswordError();
+    });
+  }
+
+  ngOnInit() {
+    this.platform.ready().then(() => {
+      // Listen for keyboard will show event
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      });
+
+      // Listen for keyboard will hide event
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      });
     });
   }
 
@@ -231,6 +249,10 @@ export class RegisterPage {
     });
 
     await toast.present();
+  }
+
+  login() {
+    this.router.navigate(['/login']);
   }
 
   onReset() {

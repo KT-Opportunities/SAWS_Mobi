@@ -12,7 +12,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { APIService } from 'src/app/services/apis.service';
 import { Keyboard } from '@capacitor/keyboard';
 
@@ -57,7 +57,8 @@ export class ForgotPasswordPage implements OnInit {
     private api: APIService,
     private router: Router,
     private alertController: AlertController,
-    private platform: Platform
+    private platform: Platform,
+    private toastController: ToastController
   ) {
     this.userForm = this.formBuilder.group({
       Email: ['', [Validators.required, this.emailValidator]],
@@ -72,7 +73,7 @@ export class ForgotPasswordPage implements OnInit {
     });
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.platform.ready().then(() => {
       // Listen for keyboard will show event
       Keyboard.addListener('keyboardWillShow', () => {
@@ -84,20 +85,33 @@ export class ForgotPasswordPage implements OnInit {
         this.isKeyboardVisible = false;
       });
     });
-   }
+  }
 
-  async Successfully() {
-    const alert = await this.alertController.create({
-      header: 'Success',
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
 
-      message: 'Thank you! Your submission has been received!',
-      buttons: ['OK'],
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 5000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass:"custom-toast",
+      swipeGesture: "vertical",
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
     });
 
-    await alert.present();
+    await toast.present();
   }
 
   onSubmit() {
+    this.loading = true;
     this.submitted = true;
 
     var body = {
@@ -105,36 +119,40 @@ export class ForgotPasswordPage implements OnInit {
     };
 
     if (this.userForm.invalid) {
+       this.presentToast('top','Invalid form submission!', 'danger', 'close');
+       this.loading = false;
       return;
     } else {
       this.api.RequestPasswordReset(body).subscribe(
         (data: any) => {
-          this.router.navigate([this.router.url]);
-          this.Successfully();
-          this.statusMessage = true;
+          this.loading = false;
+
+          this.presentToast('top','Request Successful! Please check your email for further intructions', 'success', 'checkmark');
+          
+          setTimeout(() => {
+            this.navigateToLogin();
+          }, 5000);
+
         },
         (error) => {
-          console.error('Error:', error);
           if (
             error &&
             error.error &&
             error.error.response === 'Invalid email'
           ) {
-            debugger;
-            // this.router.navigate(['/forgot-password']);
-            // Handle the case when the email doesn't exist
-            this.errorMgs = 'The provided email does not exist.';
+            this.presentToast('top','The provided email does not exist!', 'danger', 'close');
           } else {
-            // Handle other types of errors
-           
+            this.presentToast('top','Something went wrong the request!', 'danger', 'close');
           }
           this.loading = false;
         }
       );
     }
+
+    this.onReset();
   }
-  home() {
-    this.router.navigate(['/landing-page']);
+  login() {
+    this.router.navigate(['/login']);
   }
 
   onReset() {
@@ -144,10 +162,5 @@ export class ForgotPasswordPage implements OnInit {
 
   navigateToLogin() {
     this.router.navigate(['/login']);
-  }
-
-  submitForm() {
- 
-    console.log('Form submitted!');
   }
 }

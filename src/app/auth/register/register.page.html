@@ -1,143 +1,168 @@
 <ion-content>
-  <div *ngIf="loading" class="loading-indicator">Loading...</div>
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <section class="section" *ngIf="currentStep === 1">
+  <app-loading *ngIf="loading"></app-loading>
+
+  <app-auth-content>
+    <app-auth-logo *ngIf="!isKeyboardVisible">
+      <img src="/assets/Mask-Group-33x.png" loading="lazy" width="212" alt="" class="mobile-images" />
+    </app-auth-logo>
+
+    <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div>
+
+    <app-auth-form>
+      <div class="login-for">
+        <h2 class="login">Register</h2>
+        <h5 class="createlinktext">Required fields are marked with an (*)</h5>
+        <div class="w-form" #content>
+          <form #userFormRef [formGroup]="userForm" (ngSubmit)="onSubmit()" id="email-form" name="email-form"
+            data-name="Email Form" method="get" data-wf-page-id="659546cee040424c6fb9ee30"
+            data-wf-element-id="a22b6f92-06b8-59c2-8d8f-87fd0ef75429">
+            <div class="w-layout-grid grid-2">
+              <div id="w-node-b12f6374-1320-16d1-1054-374cc200f0b3-6fb9ee30">
+                <label for="name-2" class="registerlabel">Full Name (*)</label>
+                <input type="text" class="registerfield w-input" maxlength="256" name="name-2" data-name="Name 2"
+                  placeholder="Type your full name" id="name-2" required="" formControlName="Fullname" />
+                <div *ngIf="userForm.get('Fullname')?.invalid && userForm.get('Fullname') && submitted"
+                  class="error-message">
+                  Full Name is required.
+                </div>
+              </div>
+
+              <div id="w-node-_1162ffd6-f7de-04e5-2c9d-77b81f0dc4da-6fb9ee30">
+                <label for="name-2" class="registerlabel">Email Address (*)</label>
+                <input type="email" class="registerfield w-input" maxlength="256" name="name-2" data-name="Name 2"
+                  placeholder="Type your email address" id="name-2" required="" formControlName="Email" />
+                <div *ngIf="userForm.get('Email')?.invalid && userForm.get('Email') && submitted" class="error-message">
+                  Email is required.
+                </div>
+                <div *ngIf="submitted && userForm.get('Email')?.errors?.['invalidEmail']" class="error-message">
+                  Invalid email address format.
+                </div>
+              </div>
+              <div id="w-node-ccdda937-ce5c-ac70-b522-fdf10dd22378-6fb9ee30">
+                <label for="name-2" class="registerlabel">Password (*)</label>
+                <div class="input-with-icon">
+                  <input type="password" class="registerfield w-input" maxlength="256" name="Password"
+                    data-name="Name 2" placeholder="Type your password" type="{{ showPassword ? 'text' : 'password' }}"
+                    id="Password" required="" formControlName="Password" />
+                  <span class="toggle-password">
+                    <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                      (click)="togglePasswordVisibility()"></i></span>
+                </div>
+
+                <div
+                  *ngIf="userForm.get('Password')?.errors?.['invalidPassword'] && (userForm.get('Password')?.touched || submitted)"
+                  class="error-message">
+                  Password must be at least 8 characters long and contain at least
+                  one capital letter, one small letter, and one number.
+                </div>
+
+                <div
+                  *ngIf="userForm.get('Password')?.errors?.['required'] && (userForm.get('Password')?.touched || submitted)"
+                  class="error-message">
+                  Password is required.
+                </div>
+
+              </div>
+              <div id="w-node-_3131fc65-a7a7-d863-b1d4-1a1adb54aca2-6fb9ee30">
+                <label for="name-2" class="registerlabel">Confirm Passwords (*)</label>
+                <div class="input-with-icon">
+                  <input type="password" class="registerfield w-input" maxlength="256" name="ConfirmPassword"
+                    data-name="Name 2" placeholder="Re-type your password" id="ConfirmPassword" required=""
+                    formControlName="ConfirmPassword" />
+                  <span class="toggle-password">
+                    <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                      (click)="togglePasswordVisibility()"></i>
+                  </span>
+                </div>
+                <div *ngIf="errorMessage" class="error-message">
+                  {{ errorMessage }}
+                </div>
+                <div
+                  *ngIf="userForm.get('ConfirmPassword')?.errors?.['required'] && (userForm.get('ConfirmPassword')?.touched || submitted)"
+                  class="error-message">
+                  Confirm Password is required.
+                </div>
+              </div>
+            </div>
+            <div class="div-block-6">
+              <input type="submit" value="Subscribe" data-wait="Please wait..." class="continueb w-button" />
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </app-auth-form>
+
+
+  </app-auth-content>
+
+  <!-- <section class="section" *ngIf="currentStep === 1">
     <div class="div-block">
-      <img
-        src="../../../assets/Mask-Group-33x.png"
-        loading="lazy"
-        width="212"
-        alt=""
-        class="mobile-images"
-      />
+      <img src="../../../assets/Mask-Group-33x.png" loading="lazy" width="212" alt="" class="mobile-images" />
     </div>
     <div class="login-for">
       <h2 class="login">Register</h2>
       <h5 class="createlinktext">Required fields are marked with an (*)</h5>
       <div class="w-form" #content>
-        <form
-          #userFormRef
-          [formGroup]="userForm"
-          (ngSubmit)="onSubmit()"
-          id="email-form"
-          name="email-form"
-          data-name="Email Form"
-          method="get"
-          data-wf-page-id="659546cee040424c6fb9ee30"
-          data-wf-element-id="a22b6f92-06b8-59c2-8d8f-87fd0ef75429"
-        >
+        <form #userFormRef [formGroup]="userForm" (ngSubmit)="onSubmit()" id="email-form" name="email-form"
+          data-name="Email Form" method="get" data-wf-page-id="659546cee040424c6fb9ee30"
+          data-wf-element-id="a22b6f92-06b8-59c2-8d8f-87fd0ef75429">
           <div class="w-layout-grid grid-2">
             <div id="w-node-b12f6374-1320-16d1-1054-374cc200f0b3-6fb9ee30">
-              <label for="name-2" class="registerlabel">Full Name (*)</label
-              ><input
-                type="text"
-                class="registerfield w-input"
-                maxlength="256"
-                name="name-2"
-                data-name="Name 2"
-                placeholder="Type your full name"
-                id="name-2"
-                required=""
-                formControlName="Fullname"
-              />
-              <div
-                *ngIf="userForm.get('Fullname')?.invalid && userForm.get('Fullname') && submitted"
-                class="error-message"
-              >
+              <label for="name-2" class="registerlabel">Full Name (*)</label><input type="text"
+                class="registerfield w-input" maxlength="256" name="name-2" data-name="Name 2"
+                placeholder="Type your full name" id="name-2" required="" formControlName="Fullname" />
+              <div *ngIf="userForm.get('Fullname')?.invalid && userForm.get('Fullname') && submitted"
+                class="error-message">
                 Full Name is required.
               </div>
             </div>
 
             <div id="w-node-_1162ffd6-f7de-04e5-2c9d-77b81f0dc4da-6fb9ee30">
-              <label for="name-2" class="registerlabel">Email Address (*)</label
-              ><input
-                type="email"
-                class="registerfield w-input"
-                maxlength="256"
-                name="name-2"
-                data-name="Name 2"
-                placeholder="Type your email address"
-                id="name-2"
-                required=""
-                formControlName="Email"
-              />
-              <div
-                *ngIf="userForm.get('Email')?.invalid && userForm.get('Email') && submitted"
-                class="error-message"
-              >
+              <label for="name-2" class="registerlabel">Email Address (*)</label><input type="email"
+                class="registerfield w-input" maxlength="256" name="name-2" data-name="Name 2"
+                placeholder="Type your email address" id="name-2" required="" formControlName="Email" />
+              <div *ngIf="userForm.get('Email')?.invalid && userForm.get('Email') && submitted" class="error-message">
                 Email is required.
               </div>
-              <div
-                *ngIf="submitted && userForm.get('Email')?.errors?.['invalidEmail']"
-                class="error-message"
-              >
+              <div *ngIf="submitted && userForm.get('Email')?.errors?.['invalidEmail']" class="error-message">
                 Invalid email address format.
               </div>
             </div>
             <div id="w-node-ccdda937-ce5c-ac70-b522-fdf10dd22378-6fb9ee30">
               <label for="name-2" class="registerlabel">Password (*)</label>
               <div class="input-with-icon">
-                <input
-                  type="password"
-                  class="registerfield w-input"
-                  maxlength="256"
-                  name="Password"
-                  data-name="Name 2"
-                  placeholder="Type your password"
-                  type="{{ showPassword ? 'text' : 'password' }}"
-                  id="Password"
-                  required=""
-                  formControlName="Password"
-                />
+                <input type="password" class="registerfield w-input" maxlength="256" name="Password" data-name="Name 2"
+                  placeholder="Type your password" type="{{ showPassword ? 'text' : 'password' }}" id="Password"
+                  required="" formControlName="Password" />
                 <span class="toggle-password">
-                  <i
-                    class="fas"
-                    [class.fa-eye]="showPassword"
-                    [class.fa-eye-slash]="!showPassword"
-                    (click)="togglePasswordVisibility()"
-                  ></i
-                ></span>
+                  <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                    (click)="togglePasswordVisibility()"></i></span>
               </div>
 
               <div
                 *ngIf="userForm.get('Password')?.errors?.['invalidPassword'] && (userForm.get('Password')?.touched || submitted)"
-                class="error-message"
-              >
+                class="error-message">
                 Password must be at least 8 characters long and contain at least
                 one capital letter, one small letter, and one number.
               </div>
 
               <div
                 *ngIf="userForm.get('Password')?.errors?.['required'] && (userForm.get('Password')?.touched || submitted)"
-                class="error-message"
-              >
+                class="error-message">
                 Password is required.
               </div>
 
             </div>
             <div id="w-node-_3131fc65-a7a7-d863-b1d4-1a1adb54aca2-6fb9ee30">
-              <label for="name-2" class="registerlabel"
-                >Confirm Passwords (*)</label
-              >
+              <label for="name-2" class="registerlabel">Confirm Passwords (*)</label>
               <div class="input-with-icon">
-                <input
-                  type="password"
-                  class="registerfield w-input"
-                  maxlength="256"
-                  name="ConfirmPassword"
-                  data-name="Name 2"
-                  placeholder="Re-type your password"
-                  id="ConfirmPassword"
-                  required=""
-                  formControlName="ConfirmPassword"
-                />
+                <input type="password" class="registerfield w-input" maxlength="256" name="ConfirmPassword"
+                  data-name="Name 2" placeholder="Re-type your password" id="ConfirmPassword" required=""
+                  formControlName="ConfirmPassword" />
                 <span class="toggle-password">
-                  <i
-                    class="fas"
-                    [class.fa-eye]="showPassword"
-                    [class.fa-eye-slash]="!showPassword"
-                    (click)="togglePasswordVisibility()"
-                  ></i>
+                  <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                    (click)="togglePasswordVisibility()"></i>
                 </span>
               </div>
               <div *ngIf="errorMessage" class="error-message">
@@ -145,21 +170,14 @@
               </div>
               <div
                 *ngIf="userForm.get('ConfirmPassword')?.errors?.['required'] && (userForm.get('ConfirmPassword')?.touched || submitted)"
-                class="error-message"
-              >
+                class="error-message">
                 Confirm Password is required.
               </div>
             </div>
           </div>
           <div class="div-block-6">
-            <input
-              type="submit"
-              value="Subscribe"
-              data-wait="Please wait..."
-              class="continueb w-button"
-            />
+            <input type="submit" value="Subscribe" data-wait="Please wait..." class="continueb w-button" />
           </div>
-
         </form>
       </div>
       <a (click)="NavigateToLogin()" class="link-block w-inline-block">
@@ -169,16 +187,25 @@
       </a>
     </div>
     <div class="bottomdiv2">
-      <img
-        src="/assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
+      <img src="/assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
     </div>
-  </section>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-/></ion-content>
+  </section> -->
+
+</ion-content>
+
+<app-footer *ngIf="!isKeyboardVisible"></app-footer>
+
+<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
+  <div (click)=" login()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+         margin-top: 10px;
+         margin-bottom: 0;
+         font-family: Montserrat, sans-serif;
+         text-decoration: none;
+         font-size: 12px;
+         margin-top: 4px;">
+      Login
+    </h6>
+  </div>
+</div>

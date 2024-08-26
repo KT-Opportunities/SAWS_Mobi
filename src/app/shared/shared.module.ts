@@ -15,6 +15,9 @@ import { LoadingComponent } from './loading/loading.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PackageSubHeaderComponent } from './package-sub-header/package-sub-header.component';
 import { PackageListItemsComponent } from './package-list-items/package-list-items.component';
+import { AuthContentComponent } from './auth-content/auth-content.component';
+import { AuthLogoComponent } from './auth-logo/auth-logo.component';
+import { AuthFormComponent } from './auth-form/auth-form.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,9 @@ import { PackageListItemsComponent } from './package-list-items/package-list-ite
     PackageSubHeaderComponent,
     PackageContentComponent,
     PackageListItemsComponent,
+    AuthContentComponent,
+    AuthLogoComponent,
+    AuthFormComponent,
     LoadingComponent
   ],
   exports: [
@@ -49,6 +55,9 @@ import { PackageListItemsComponent } from './package-list-items/package-list-ite
     PackageSubHeaderComponent,
     PackageContentComponent,
     PackageListItemsComponent,
+    AuthContentComponent,
+    AuthLogoComponent,
+    AuthFormComponent,
     LoadingComponent
   ]
 })
