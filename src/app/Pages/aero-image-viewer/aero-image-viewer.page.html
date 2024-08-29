@@ -1,12 +1,12 @@
-<ion-content>
+<ion-content style="height: 100%; overflow: hidden">
   <app-loading *ngIf="loading"></app-loading>
 
   <div id="top"></div>
   <app-package-content>
     <app-package-header>
-      {{name ||kwazulNatal|| (anotherName.startsWith('xl') ?
-      anotherName.substring(2) :
-      anotherName)||filenameToDisplayName[displayName]}}
+      {{ name || kwazulNatal || (anotherName.startsWith('xl') ?
+      anotherName.substring(2) : anotherName) ||
+      filenameToDisplayName[displayName] }}
       <div class="w-layout-grid metar-history-grid">
         <div class="date-container" *ngIf="TsProbability.length > 1">
           <button
@@ -31,17 +31,17 @@
             Next Day >>
           </button>
         </div>
-      </div></app-package-header
-    >
+      </div>
+    </app-package-header>
 
-    <app-package-sub-header> </app-package-sub-header>
+    <app-package-sub-header></app-package-sub-header>
 
-    <app-package-list-items>
-      <div class="cloud-cover">
-        <div class="div-block-15">
-          <div>
-            <div class="scroll small-m">
-              <div>
+    <app-package-list-items style="height: 100%; overflow: hidden">
+      <div class="cloud-cover" style="height: 100%; overflow: hidden">
+        <div class="div-block-15" style="height: 100%; overflow: hidden">
+          <div style="height: 100%; overflow: hidden">
+            <div class="scroll small-m" style="height: 100%; overflow: hidden">
+              <div style="height: 100%; overflow: hidden">
                 <div
                   data-delay="4000"
                   data-animation="slide"
@@ -56,27 +56,29 @@
                   data-infinite="true"
                 >
                   <pan-zoom [config]="panZoomConfig">
-                    <div *ngIf="prevday">
+                    <div *ngIf="prevday" style="height: 100%">
                       <img
+                        [style.transform]="'rotate(' + rotationDegree + 'deg)'"
                         [src]="fileBaseUrlPrevious"
                         loading="lazy"
-                        width="80%"
-                        height="80%"
+                        style="width: 100%; height: 100%; object-fit: cover"
                         alt=""
                         class="image"
-                      /></div
-                  ></pan-zoom>
-                  <pan-zoom [config]="panZoomConfig"
-                    ><div *ngIf="nextday">
+                      />
+                    </div>
+
+                    <div *ngIf="nextday" style="height: 100%">
                       <img
+                        [style.transform]="'rotate(' + rotationDegree + 'deg)'"
                         [src]="fileBaseUrlNext"
                         loading="lazy"
-                        width="80%"
-                        height="80%"
+                        style="width: 100%; height: 100%; object-fit: cover"
                         alt=""
                         class="image"
-                      /></div
-                  ></pan-zoom>
+                      />
+                    </div>
+                    <button (click)="rotateImage()">Rotate</button>
+                  </pan-zoom>
                 </div>
               </div>
             </div>

@@ -1,14 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { APIService } from 'src/app/services/apis.service';
-import { PanZoomConfig, PanZoomAPI, PanZoomModel, PanZoomConfigOptions } from 'ngx-panzoom'
+import {
+  PanZoomConfig,
+  PanZoomAPI,
+  PanZoomModel,
+  PanZoomConfigOptions,
+} from 'ngx-panzoom';
 @Component({
   selector: 'app-aero-image-viewer',
   templateUrl: './aero-image-viewer.page.html',
   styleUrls: ['./aero-image-viewer.page.scss'],
 })
 export class AeroImageViewerPage implements OnInit {
+  rotationDegree = 0;
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange(event: any) {
+    this.updateImageRotation();
+  }
   panZoomConfig: PanZoomConfig = new PanZoomConfig();
   nextday: boolean = false;
   prevday: boolean = true;
@@ -41,7 +51,17 @@ export class AeroImageViewerPage implements OnInit {
     this.fileBaseUrlPrevious =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
+  rotateImage(): void {
+    this.rotationDegree += 90;
+    if (this.rotationDegree >= 360) {
+      this.rotationDegree = 0;
+    }
+  }
+  
 
+  10: 29;
+  fileBaseUrl: any = null; // Holds the image URL for display
+  rotationAngle: number = 0; // T
   ngOnInit() {
     this.name = history.state.names || '';
     this.anotherName = history.state.names2 || '';
@@ -97,8 +117,27 @@ export class AeroImageViewerPage implements OnInit {
         this.loading = false;
       }
     );
+    this.updateImageRotation();
   }
-
+  updateImageRotation() {
+    switch (window.orientation) {
+      case 0: // Portrait
+        this.rotationDegree = 0;
+        break;
+      case 90: // Landscape Right
+        this.rotationDegree = 90;
+        break;
+      case -90: // Landscape Left
+        this.rotationDegree = -90;
+        break;
+      case 180: // Upside-down Portrait
+        this.rotationDegree = 180;
+        break;
+      default:
+        this.rotationDegree = 0;
+    }
+  }
+  
   loadImages() {
     if (this.TsProbability.length > 0) {
       // Load the previous day image first

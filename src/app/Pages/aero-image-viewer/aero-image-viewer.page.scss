@@ -2,6 +2,9 @@
   position: fixed;
   margin-top: 155%;
 }
+.image {
+  transition: transform 0.3s ease-in-out;
+}
 
 .w-icon-dropdown-toggle {
   position: absolute;
