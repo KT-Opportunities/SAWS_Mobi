@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   DomSanitizer,
@@ -7,6 +7,7 @@ import {
   SafeUrl,
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { PanZoomConfig } from 'ngx-panzoom';
 import { APIService } from 'src/app/services/apis.service';
 
 @Component({
@@ -15,6 +16,13 @@ import { APIService } from 'src/app/services/apis.service';
   styleUrls: ['./../aero-sport.page.scss'],
 })
 export class TSProbabilityComponent implements OnInit {
+  rotationDegree = 0;
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange(event: any) {
+    this.updateImageRotation();
+  }
+  panZoomConfig: PanZoomConfig = new PanZoomConfig();
+
   currentImageIndex: number = 0;
   TsProbability: any = [];
   loading: boolean = false;
@@ -32,13 +40,50 @@ export class TSProbabilityComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+
+    this.panZoomConfig = new PanZoomConfig({
+      zoomLevels: 5,
+      scalePerZoomLevel: 1.5,
+      initialZoomLevel: 1, // Starts unzoomed
+      initialPanX: 0,
+      initialPanY: 0,
+      keepInBounds: true,
+      freeMouseWheel: false,
+    });
+  }
+  rotateImage(): void {
+    this.rotationDegree += 90;
+    if (this.rotationDegree >= 360) {
+      this.rotationDegree = 0;
+    }
   }
 
+  10: 29;
+  fileBaseUrl: any = null; // Holds the image URL for display
+  rotationAngle: number = 0; // T
   NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
-
+  updateImageRotation() {
+    switch (window.orientation) {
+      case 0: // Portrait
+        this.rotationDegree = 0;
+        break;
+      case 90: // Landscape Right
+        this.rotationDegree = 90;
+        break;
+      case -90: // Landscape Left
+        this.rotationDegree = -90;
+        break;
+      case 180: // Upside-down Portrait
+        this.rotationDegree = 180;
+        break;
+      default:
+        this.rotationDegree = 0;
+    }
+  }
   ngOnInit() {
     this.loading = true;
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
