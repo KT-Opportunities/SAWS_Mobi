@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   DomSanitizer,
@@ -13,16 +13,38 @@ import { APIService } from 'src/app/services/apis.service';
 @Component({
   selector: 'app-tsprobability',
   templateUrl: './tsprobability.component.html',
-  styleUrls: ['./../aero-sport.page.scss'],
+  styleUrls: ['./tsprobability.component.scss'],
 })
 export class TSProbabilityComponent implements OnInit {
   rotationDegree = 0;
+  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
+
+  scale = 1;
+
+  pinchStartScale = 1;
   @HostListener('window:orientationchange', ['$event'])
   onOrientationChange(event: any) {
     this.updateImageRotation();
   }
-  panZoomConfig: PanZoomConfig = new PanZoomConfig();
 
+  isZoomed = false;
+  @HostListener('dblclick', ['$event'])
+  onDoubleClick(event: MouseEvent): void {
+    this.toggleZoom();
+  }
+
+  toggleZoom(): void {
+    if (!this.imageContainer) {
+      console.error('Image container is not defined');
+      return;
+    }
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      this.isZoomed = !this.isZoomed;
+      imageElement.style.transform = this.isZoomed ? 'scale(5)' : 'scale(1)';
+      imageElement.style.cursor = this.isZoomed ? 'zoom-out' : 'zoom-in';
+    }
+  }
   currentImageIndex: number = 0;
   TsProbability: any = [];
   loading: boolean = false;
@@ -43,15 +65,7 @@ export class TSProbabilityComponent implements OnInit {
     this.fileBaseUrlPrevious =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
 
-    this.panZoomConfig = new PanZoomConfig({
-      zoomLevels: 5,
-      scalePerZoomLevel: 1.5,
-      initialZoomLevel: 1, // Starts unzoomed
-      initialPanX: 0,
-      initialPanY: 0,
-      keepInBounds: true,
-      freeMouseWheel: false,
-    });
+   
   }
   rotateImage(): void {
     this.rotationDegree += 90;
@@ -66,24 +80,7 @@ export class TSProbabilityComponent implements OnInit {
   NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
-  updateImageRotation() {
-    switch (window.orientation) {
-      case 0: // Portrait
-        this.rotationDegree = 0;
-        break;
-      case 90: // Landscape Right
-        this.rotationDegree = 90;
-        break;
-      case -90: // Landscape Left
-        this.rotationDegree = -90;
-        break;
-      case 180: // Upside-down Portrait
-        this.rotationDegree = 180;
-        break;
-      default:
-        this.rotationDegree = 0;
-    }
-  }
+
   ngOnInit() {
     this.loading = true;
     this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
@@ -125,7 +122,50 @@ export class TSProbabilityComponent implements OnInit {
       }
     }
   }
+  setupHammer() {
+    if (this.imageContainer && this.imageContainer.nativeElement) {
+      const hammer = new Hammer(this.imageContainer.nativeElement);
 
+      // Enable pinch gesture
+      hammer.get('pinch').set({ enable: true });
+
+      // Handle pinch start
+      hammer.on('pinchstart', (ev) => {
+        this.pinchStartScale = this.scale;
+      });
+
+      // Handle pinch move
+      hammer.on('pinchmove', (ev) => {
+        this.scale = this.pinchStartScale * ev.scale;
+        this.updateImageTransform();
+      });
+    }
+  }
+  updateImageRotation() {
+    switch (window.orientation) {
+      case 0: // Portrait
+        this.rotationDegree = 0;
+        break;
+      case 90: // Landscape Right
+        this.rotationDegree = 90;
+        break;
+      case -90: // Landscape Left
+        this.rotationDegree = -90;
+        break;
+      case 180: // Upside-down Portrait
+        this.rotationDegree = 180;
+        break;
+      default:
+        this.rotationDegree = 0;
+    }
+  }
+  updateImageTransform() {
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
+      imageElement.style.cursor = this.isZoomed ? 'zoom-out' : 'zoom-in';
+    }
+  }
   loadImage(index: number, target: 'fileBaseUrlPrevious' | 'fileBaseUrlNext') {
     this.APIService.GetAviationFile(
       this.TsProbability[index].foldername,
@@ -149,7 +189,7 @@ export class TSProbabilityComponent implements OnInit {
       this.updateButtonVisibility();
     }
   }
-
+  
   nextDay() {
     if (this.currentImageIndex < this.TsProbability.length - 1) {
       this.currentImageIndex++;
@@ -157,9 +197,11 @@ export class TSProbabilityComponent implements OnInit {
       this.updateButtonVisibility();
     }
   }
+  
 
   updateButtonVisibility() {
     this.prevday = this.currentImageIndex > 0;
     this.nextday = this.currentImageIndex < this.TsProbability.length - 1;
   }
+  
 }

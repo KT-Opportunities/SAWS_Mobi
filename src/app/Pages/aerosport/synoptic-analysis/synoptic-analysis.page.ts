@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-synoptic-analysis',
   templateUrl: './synoptic-analysis.page.html',
-  styleUrls: ['./../aero-sport.page.scss'],
+  styleUrls: ['./synoptic-analysis.page.scss'],
 })
 export class SynopticAnalysisPage implements OnInit {
   imageUrl: string | null = null;
@@ -23,7 +23,7 @@ export class SynopticAnalysisPage implements OnInit {
   loading: boolean = true;
   Synoptic: any = [];
   fileBaseUrlSynoptic: SafeResourceUrl = '';
-
+  rotationDegree = 0;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -84,7 +84,12 @@ export class SynopticAnalysisPage implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
-
+  rotateImage(): void {
+    this.rotationDegree += 90;
+    if (this.rotationDegree >= 360) {
+      this.rotationDegree = 0;
+    }
+  }
   NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
