@@ -1,0 +1,98 @@
+ion-content {
+    --background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+  
+    .package-header {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  
+    .metar-history-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+  
+      .nav-button {
+        color: #00386c;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+  
+      .disabled-button {
+        color: #ccc;
+      }
+  
+      .current-date {
+        font-size: 14px;
+        color: #555;
+        text-align: center;
+        .rotate-button {
+          --background: green;
+          --color: white;
+        }
+      }
+    }
+  
+    .listapp {
+      height: 100%;
+      overflow: hidden;
+    }
+  
+    .image-container {
+      overflow: auto; /* Enable scrolling */
+      position: relative;
+      width: 100%;
+      max-height: 56vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 94px;
+      margin-bottom: 10px; /* Add small bottom margin */
+      height: 56vh;
+      background-color: white;
+    }
+  
+    .responsive-image {
+      max-width: 100%;
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+  
+      transition: transform 0.3s ease-in-out;
+      cursor: zoom-in;
+    }
+  
+    .responsive-image.zoomed {
+      transform: scale(5); /* Adjust scale as needed */
+      cursor: zoom-out;
+    }
+  }
+  .zoomable-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Allow scrolling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .responsive-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure the image fits inside the container */
+    transition: transform 0.3s ease; /* Smooth transition when rotating */
+  }
+  
+  .footerdiv {
+    padding-top: 0;
+    z-index: 1000;
+  }
+  

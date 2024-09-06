@@ -1,4 +1,4 @@
-<ion-content>
+<!-- <ion-content>
   <app-loading *ngIf="loading"></app-loading>
 
   <div id="top"></div>
@@ -75,6 +75,96 @@
         </div>
       </div>
     </app-package-list-items>
+  </app-package-content>
+</ion-content>
+
+<app-footer></app-footer>
+
+<div class="footerdiv" id="footerdivid1">
+  <div (click)="NavigateToAerosport()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+      Aerosport
+    </h6>
+  </div>
+</div> -->
+
+<ion-content>
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div id="top"></div>
+  <app-package-content>
+    <app-package-header class="package-header">
+      TS Probability
+
+      <div class="metar-history-grid">
+        <ion-button
+          fill="clear"
+          class="nav-button"
+          (click)="previousDay()"
+          [disabled]="!prevday"
+        >
+          << Previous Day
+        </ion-button>
+        <span class="current-date">
+          <ion-button
+            expand="full"
+            (click)="rotateImage()"
+            class="rotate-button"
+          >
+            <ion-icon name="refresh-outline"></ion-icon>
+          </ion-button>
+        </span>
+        <ion-button
+          fill="clear"
+          class="nav-button"
+          (click)="nextDay()"
+          [disabled]="!nextday"
+        >
+          Next Day >>
+        </ion-button>
+      </div>
+    </app-package-header>
+
+    <app-package-sub-header> </app-package-sub-header>
+    <div class="listapp">
+      <div class="image-container" #imageContainer>
+        <div *ngIf="prevday">
+          <img
+            [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+            [src]="fileBaseUrlPrevious"
+            loading="lazy"
+            class="responsive-image"
+            alt="Previous Day Image"
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div *ngIf="nextday">
+          <img
+            [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+            [src]="fileBaseUrlNext"
+            loading="lazy"
+            class="responsive-image"
+            alt="Next Day Image"
+            width="100%"
+            height="100%"
+          />
+        </div>
+      </div>
+    </div>
   </app-package-content>
 </ion-content>
 
