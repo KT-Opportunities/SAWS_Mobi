@@ -8,13 +8,15 @@ import { SubscriptionPackagePageRoutingModule } from './subscription-package-rou
 
 import { SubscriptionPackagePage } from './subscription-package.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SubscriptionPackagePageRoutingModule
+    SubscriptionPackagePageRoutingModule,
+    SharedModule
   ],
   declarations: [SubscriptionPackagePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -27,9 +27,8 @@ export class AppComponent {
     this.authService.setLoggedInStatus(false);
     this.authService.setSubscriptionStatus('');
     this.router.navigate(['/login']);
-    // window.location.reload();
 
-    this.presentToast('top','Loggout Successful!', 'medium', 'checkmark');
+    this.presentToast('top','Logout Successful!', 'medium', 'checkmark');
 
 
   }

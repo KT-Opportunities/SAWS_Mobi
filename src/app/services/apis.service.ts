@@ -36,7 +36,7 @@ export class APIService {
   setFeedbackData(data: any): void {
     this.feedbackSubject.next(data);
   }
-  
+
   RequestPasswordReset(form: any) {
     return this.http
       .post<any>(
@@ -54,7 +54,7 @@ export class APIService {
 
   PostInsertNewFeedback(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Feedback/PostInsertNewFeedback',
+      environment.serverAPI + 'v1/Feedbacks/PostInsertNewFeedback',
       body
     );
   }
@@ -62,26 +62,20 @@ export class APIService {
   getPagedAllSubscribers(pageNumber: any, pageSize: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/Feedback/GetPagedAllFeedbacks?pageNumber=${pageNumber}&pageSize=${pageSize}`
-      // {
-      //   headers: new HttpHeaders().append(
-      //     'Authorization',
-      //     `Bearer ${this.token}`
-      //   ),
-      // }
+        `v1/Feedbacks/GetPagedAllFeedbacks?pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
   }
 
   getFeedbackById(id: number) {
     return this.http.get<any>(
-      environment.serverAPI + `v1/Feedback/GetFeedbackById?Id=${id}`
+      environment.serverAPI + `v1/Feedbacks/GetFeedbackById?Id=${id}`
     );
   }
 
   getFeedbackMessagesBySenderId(senderId: string) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/Feedback/GetFeedbackMessagesBySenderId?Id=${senderId}`
+        `v1/Feedbacks/GetFeedbackMessagesBySenderId?Id=${senderId}`
     );
   }
 
@@ -94,24 +88,15 @@ export class APIService {
 
   getAdvertByAdvertId(id: number) {
     return this.http.get<any>(
-      environment.serverAPI + `v1/Advert/GetAdvertByAdvertId?id=${id}`
+      environment.serverAPI + `v1/Adverts/GetAdvertByAdvertId?id=${id}`
     );
   }
 
   getAllAdverts() {
-    return this.http.get<any>(environment.serverAPI + `v1/Advert/GetAllAdverts`);
+    return this.http.get<any>(
+      environment.serverAPI + `v1/Adverts/GetAllAdverts`
+    );
   }
-
-  // getDocAdvertFileById(id: number) {
-  //   return this.http.get<any>(
-  //     environment.serverAPI +`v1/FileManager/GetDocAdvertFileById?Id=${id}`
-
-  //   );
-  // }
-
-  // GetAdvertByAdvertId(id: any): Observable<any> {
-  //   return this.http.get<any>(`${environment.serverAPI}v1/Advert/GetAdvertByAdvertId?Id=${id}`);
-  // }
 
   getDocAdvertFileById(id: any) {
     return this.http.get(
@@ -122,30 +107,22 @@ export class APIService {
 
   postInsertNewFeedback(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Feedback/PostInsertNewFeedback',
+      environment.serverAPI + 'v1/Feedbacks/PostInsertNewFeedback',
       body
-      // this.httpOptions
-      // {
-      //   headers: new HttpHeaders().append(
-      //     "Authorization",
-      //     `Bearer ${this.token}`
-      //   ),
-      // }
     );
   }
 
   PostInsertAdvertClick(body: {}) {
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Advert/PostInsertAdvertClick',
+      environment.serverAPI + 'v1/Adverts/PostInsertAdvertClick',
       body
     );
   }
 
   paySubscription(body: any) {
     console.log('Subscribe: ', body);
-    // debugger;
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Subscriber/MakeRecurringPayment',
+      environment.serverAPI + 'v1/Subscribers/MakeRecurringPayment',
       body
     );
   }
@@ -191,7 +168,7 @@ export class APIService {
     );
   }
 
-  GetSourceAviationFolderFilesListNull(time:any) {
+  GetSourceAviationFolderFilesListNull(time: any) {
     return this.http.get<any>(
       environment.serverAPI +
         `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
@@ -256,59 +233,49 @@ export class APIService {
   }
 
   PostInsertSubscription(body: any) {
-    console.log('postInsertSub: ', body);
-    debugger;
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Subscription/PostInsertSubscription',
+      environment.serverAPI + 'v1/Subscriptions/PostInsertSubscription',
       body
     );
   }
 
-  CancelSubscription(subscriptionId: number, userprofileId: number) {
+  CancelSubscription(subscriptionId: number) {
     const body = {
-      subscriptionId: subscriptionId,
-      userprofileId: userprofileId,
+      subscriptionId: subscriptionId
     };
-    
-    console.log('body: ', body);
-  
+
     return this.http.post<any>(
-      environment.serverAPI + `v1/Subscriber/CancelSubscription?subscriptionId=${subscriptionId}&userprofileId=${userprofileId}`,
-      body
+      environment.serverAPI +
+        `v1/Subscriptions/CancelSubscription?subscriptionId=${subscriptionId}`,
+        body
     );
   }
 
   GetSubscriptionByUserProfileId(Id: number) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/Subscription/GetSubscriptionByUserProfileId?Id=${Id}`
+        `v1/Subscriptions/GetActiveSubscriptionByUserProfileId?Id=${Id}`
     );
   }
 
   GetActiveSubscriptionByUserProfileId(Id: number) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/Subscription/GetActiveSubscriptionByUserProfileId?Id=${Id}`
+        `v1/Subscriptions/GetActiveSubscriptionByUserProfileId?Id=${Id}`
     );
   }
 
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +
-      'v1/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
+        'v1/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
     );
   }
-
-  // getRecentTafs(foldername: string): Observable<any> {
-  //   return this.http.get<any>(
-  //     `${environment.serverAPI}v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
-  //   );
-  // }
 
   getRecentTafs(foldername: string): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +
-      `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
     );
   }
 
@@ -319,30 +286,31 @@ export class APIService {
     );
   }
 
-    // Method to fetch wind chart images
-    // fetchWindChartImages(): Observable<any[]> {
-    //   const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=12`;
-    //   return this.http.get<any[]>(apiUrl);
-    // }
+  fetchWindChartImages(
+    foldername: any,
+    lasthours: number = 12
+  ): Observable<any[]> {
+    const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
 
-    fetchWindChartImages(foldername:any , lasthours: number = 12): Observable<any[]> {
-      const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
-      
-      // Construct the query parameters including foldername and lasthours
-      const queryParams = {
-        imagefoldername: foldername,
-        lasthours: lasthours.toString(),
-      };
-    
-      // Make the HTTP GET request with query parameters
-      return this.http.get<any[]>(apiUrl, { params: queryParams });
-    }
-    
+    // Construct the query parameters including foldername and lasthours
+    const queryParams = {
+      imagefoldername: foldername,
+      lasthours: lasthours.toString(),
+    };
 
-    fetchHourlyChartData(foldername: any , lasthours: number = 24): Observable<any[]> {
-      const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
-      const queryParams = { imagefoldername: foldername, lasthours: lasthours.toString() };
-      return this.http.get<any[]>(apiUrl, { params: queryParams });
-    }
-    
+    // Make the HTTP GET request with query parameters
+    return this.http.get<any[]>(apiUrl, { params: queryParams });
+  }
+
+  fetchHourlyChartData(
+    foldername: any,
+    lasthours: number = 24
+  ): Observable<any[]> {
+    const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
+    const queryParams = {
+      imagefoldername: foldername,
+      lasthours: lasthours.toString(),
+    };
+    return this.http.get<any[]>(apiUrl, { params: queryParams });
+  }
 }

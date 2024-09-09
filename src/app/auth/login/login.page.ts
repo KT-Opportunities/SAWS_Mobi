@@ -1,8 +1,14 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Renderer2,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { AuthService } from '../../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastController } from '@ionic/angular';
@@ -72,22 +78,25 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   ionViewDidLeave() {
+    const redirectUrl: string | null = this.authAPI.getRedirectUrl();
 
-    const redirectUrl: string | null =this.authAPI.getRedirectUrl();
-    
     if (this.userData != null) {
       this.UpdateSubscription(this.userData!.userprofileid);
 
       if (!this.authAPI.getIsFreeSubscription() && redirectUrl) {
-          this.router.navigateByUrl(redirectUrl);
+        this.router.navigateByUrl(redirectUrl);
       } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
         this.router.navigateByUrl(redirectUrl);
       } else if (redirectUrl == '/landing-page') {
         this.router.navigateByUrl(redirectUrl);
-      }  else if (this.authAPI.getIsFreeSubscription() && redirectUrl){
-        this.presentToastSub('top','Subscription is required to access Service!', 'danger', 'close');
+      } else if (this.authAPI.getIsFreeSubscription() && redirectUrl) {
+        this.presentToastSub(
+          'top',
+          'Subscription is required to access Service!',
+          'danger',
+          'close'
+        );
       }
-
     }
   }
 
@@ -148,7 +157,7 @@ export class LoginPage implements OnInit, OnDestroy {
 
   onSubmit() {
     this.submitted = true;
-    this.errorMessage = null; // Clear previous error messages
+    this.errorMessage = null;
     if (this.loginForm.valid) {
       this.loading = true;
       this.spinner.show();
@@ -156,42 +165,34 @@ export class LoginPage implements OnInit, OnDestroy {
         .login(this.loginForm.value)
         .subscribe(
           (response) => {
-            if (response.rolesList == 'Subscriber') {
-              this.userData = response;
-              this.authAPI.setLoggedInStatus(true);
-              this.authAPI.setUserData(this.userData);
-              this.authAPI.saveCurrentUser(response);
-              this.UpdateSubscription(response.userprofileid);
+            this.loginForm.reset();
 
-              const redirectUrl = this.authAPI.getRedirectUrl();
+            this.userData = response;
+            this.authAPI.setLoggedInStatus(true);
+            this.authAPI.setUserData(this.userData);
+            this.authAPI.saveCurrentUser(response);
+            this.UpdateSubscription(response.userprofileid);
 
-              console.log("redirectUrl:", redirectUrl)
+            const redirectUrl = this.authAPI.getRedirectUrl();
 
-              if (redirectUrl) {
-                this.router.navigateByUrl('/landing-page');
-              } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
-                this.router.navigateByUrl(redirectUrl);
-              } else {
-                this.router.navigate(['/landing-page']);
-                this.presentToast('top','Login Successful!', 'success', 'checkmark');
-              }
-
-              this.loginForm.reset();
-
+            this.presentToast('top', response.rolesList + ' Login Successful!','success','checkmark');
+            
+            if (redirectUrl) {
+              this.router.navigateByUrl('/landing-page');
+            } else if (this.authAPI.getIsFromSubscription() && redirectUrl) {
+              this.router.navigateByUrl(redirectUrl);
             } else {
-              // this.errorMessage = 'Only subscribers can login';
-              this.presentToast('top','Only subscribers can login!', 'danger', 'close');
-              // this.router.navigate(['login']);
+              this.router.navigate(['/landing-page']);
             }
           },
           (error) => {
-            if (error.statusText == 'Unauthorized') {
-              // this.errorMessage = 'Invalid username or password';
-              this.presentToast('top','Invalid username or password!', 'danger', 'close');
-            } else {
-              // this.errorMessage = 'An error occurred. Please try again.';
-              this.presentToast('top','An error occurred. Please try again!', 'danger', 'close');
-            }
+            this.presentToast(
+              'top',
+              error.error.errorMessages ?  error.error.errorMessages : "Server application error!",
+              'danger',
+              'close'
+            );
+
             this.notLogged = true;
             this.loading = false;
           }
@@ -203,16 +204,14 @@ export class LoginPage implements OnInit, OnDestroy {
     }
   }
 
-  UpdateSubscription(userId: number){
+  UpdateSubscription(userId: number) {
     this.apiService.GetActiveSubscriptionByUserProfileId(userId).subscribe(
       (data: any) => {
-        
-        if(data.length > 0) {
+        if (data.length > 0) {
           this.authAPI.setSubscriptionStatus(data[0].package_name);
         } else {
           this.authAPI.setSubscriptionStatus('');
         }
-
       },
       (err) => {
         console.log('postSub err: ', err);
@@ -220,16 +219,20 @@ export class LoginPage implements OnInit, OnDestroy {
     );
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
-
+  async presentToast(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass:"custom-toast",
-      swipeGesture: "vertical",
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
       buttons: [
         {
           icon: 'close',
@@ -243,25 +246,29 @@ export class LoginPage implements OnInit, OnDestroy {
     await toast.present();
   }
 
-  async presentToastSub(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
-
+  async presentToastSub(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass:"custom-toast",
-      swipeGesture: "vertical",
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
       buttons: [
         {
           side: 'end',
           text: 'Go to Subscription',
           handler: () => {
             this.router.navigate(['/subscription-package']);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await toast.present();
