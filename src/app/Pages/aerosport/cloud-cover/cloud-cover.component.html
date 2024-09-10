@@ -10,7 +10,7 @@
     <app-package-list-items>
       <div class="cloud-cover">
         <!-- <h1 class="heading-12">SAWS Satelite</h1> -->
-  
+
         <div
           class="w-layout-grid metar-history-grid"
           style="margin-right: 18px; margin-right: 18px; margin-top: 12px"
@@ -29,7 +29,7 @@
               <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
                 <label for="" class="field-label"> Select Product: </label>
               </div>
-  
+
               <div
                 data-hover="false"
                 data-delay="0"
@@ -40,7 +40,7 @@
                   <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
                   <div class="text-block">{{ selectedOptionProduct }}</div>
                 </div>
-  
+
                 <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
                   <div
                     class="w-dropdown-link"
@@ -50,14 +50,16 @@
                   >
                     Total cloud
                   </div>
-  
+
                   <div
                     class="w-dropdown-link"
-                    (click)="selectDropdownProduct('Low level', 'dropdown2', 'l')"
+                    (click)="
+                      selectDropdownProduct('Low level', 'dropdown2', 'l')
+                    "
                   >
                     Low level
                   </div>
-  
+
                   <div
                     class="w-dropdown-link"
                     (click)="
@@ -66,7 +68,7 @@
                   >
                     Medium level
                   </div>
-  
+
                   <div
                     class="w-dropdown-link"
                     (click)="
@@ -77,11 +79,11 @@
                   </div>
                 </nav>
               </div>
-  
+
               <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece">
                 <label for="" class="field-label"> Current Frame: </label>
               </div>
-  
+
               <div
                 id="email-form-3"
                 name="email-form-3"
@@ -99,12 +101,15 @@
                     (click)="cloudCoverDropdownFrameOpen()"
                   >
                     <div class="w-dropdown-toggle">
-                      <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                      <div
+                        class="icon-2 w-icon-dropdown-toggle"
+                        id="icon2"
+                      ></div>
                       <div class="text-block">
                         {{ formatTimestamp(selectedOptionFrame) }}
                       </div>
                     </div>
-  
+
                     <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
                       <div
                         *ngFor="let item of frameArray"
@@ -119,7 +124,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="w-form-done">
                 <div></div>
               </div>
@@ -129,7 +134,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="div-block-15" *ngIf="selectedOptionFrame">
           <div>
             <div class="small-m" scroll="false">
@@ -147,15 +152,22 @@
                   data-duration="500"
                   data-infinite="true"
                 >
+                  <div class="control-buttons">
+                    <button (click)="rotateImage()">Rotate</button>
+                  </div>
+
                   <div class="w-slider-mask">
                     <img
-                      [src]="fileBaseUrl"
-                      loading="lazy"
-                      alt=""
-                      class="image"
-                      width="70%"
-                      height="70%"
-                    />
+                    #imageElement
+                    [src]="fileBaseUrl"
+                    loading="lazy"
+                    alt=""
+                    class="image"
+                    width="70%"
+                    height="70%"
+                    [style.transform]="'scale(' + scale + ') rotate(' + rotation + 'deg)'"
+                    (pinch)="onPinch($event)"
+                  />
                   </div>
                   <div class="w-slider-arrow-left" (click)="previousImage()">
                     <div class="w-icon-slider-left"></div>
@@ -169,7 +181,7 @@
             </div>
           </div>
         </div>
-  
+
         <!-- <div *ngIf="!selectedOptionFrame">
           loading image...
         </div> -->
@@ -196,9 +208,7 @@
         margin-top: 4px;
       "
     >
-    Aerosport
+      Aerosport
     </h6>
   </div>
 </div>
-
-
