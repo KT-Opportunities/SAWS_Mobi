@@ -149,7 +149,16 @@ pan-zoom {
   transition: transform 0.3s ease-in-out;
 }
 
+.btnn{
+  position: relative;
 
+  background-color: blue;
+  color: white;
+  height: 27px;
+  width: 63px;
+  border-radius: 6px;
+  left: -219px;
+}
 .mat-dialog-content {
   position: relative;
   padding: 0; /* Remove any padding */
