@@ -38,17 +38,33 @@ export class AeroImageViewerPage implements OnInit {
   onDoubleClick(event: MouseEvent): void {
     this.toggleZoom();
   }
-
   toggleZoom(): void {
     if (!this.imageContainer) {
       console.error('Image container is not defined');
       return;
     }
+
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
     if (imageElement) {
       this.isZoomed = !this.isZoomed;
-      imageElement.style.transform = this.isZoomed ? 'scale(5)' : 'scale(1)';
-      imageElement.style.cursor = this.isZoomed ? 'zoom-out' : 'zoom-in';
+
+      if (this.isZoomed) {
+        imageElement.style.transform = 'scale(3)'; // Adjust zoom level
+        imageElement.style.cursor = 'zoom-out';
+        this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
+
+        // Add margins when zoomed in
+        imageElement.style.marginTop = '946px';
+        imageElement.style.marginLeft = '391px';
+      } else {
+        imageElement.style.transform = 'scale(1)';
+        imageElement.style.cursor = 'zoom-in';
+        this.imageContainer.nativeElement.style.overflow = 'hidden'; // Disable scrolling
+
+        // Remove margins when not zoomed
+        imageElement.style.marginTop = '0';
+        imageElement.style.marginLeft = '0';
+      }
     }
   }
 
@@ -159,6 +175,8 @@ export class AeroImageViewerPage implements OnInit {
   setupHammer() {
     if (this.imageContainer && this.imageContainer.nativeElement) {
       const hammer = new Hammer(this.imageContainer.nativeElement);
+      const imageElement =
+        this.imageContainer.nativeElement.querySelector('img');
 
       // Enable pinch gesture
       hammer.get('pinch').set({ enable: true });
@@ -172,9 +190,34 @@ export class AeroImageViewerPage implements OnInit {
       hammer.on('pinchmove', (ev) => {
         this.scale = this.pinchStartScale * ev.scale;
         this.updateImageTransform();
+
+        // Adjust margins based on the zoom level
+        if (imageElement) {
+          const zoomFactor = this.scale;
+          const containerWidth = this.imageContainer.nativeElement.clientWidth;
+          const containerHeight =
+            this.imageContainer.nativeElement.clientHeight;
+          const imageWidth = imageElement.offsetWidth * zoomFactor;
+          const imageHeight = imageElement.offsetHeight * zoomFactor;
+
+          // Calculate margins to prevent content from being cut off
+          const marginLeft = Math.max(0, (imageWidth - containerWidth) / 2);
+          const marginTop = Math.max(0, (imageHeight - containerHeight) / 2);
+
+          imageElement.style.marginLeft = `${marginLeft}px`;
+          imageElement.style.marginTop = `${marginTop}px`;
+        }
+      });
+
+      // Handle pan gestures for scrolling
+      hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+      hammer.on('panmove', (ev) => {
+        this.imageContainer.nativeElement.scrollLeft -= ev.deltaX;
+        this.imageContainer.nativeElement.scrollTop -= ev.deltaY;
       });
     }
   }
+
   updateImageRotation() {
     switch (window.orientation) {
       case 0: // Portrait

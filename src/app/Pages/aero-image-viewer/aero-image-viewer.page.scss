@@ -34,6 +34,7 @@ ion-content {
       font-size: 14px;
       color: #555;
       text-align: center;
+
       .rotate-button {
         --background: green;
         --color: white;
@@ -42,53 +43,45 @@ ion-content {
   }
 
   .listapp {
-    height: 100%;
+    flex: 1;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .image-container {
-    overflow: auto; /* Enable scrolling */
     position: relative;
     width: 100%;
     max-height: 56vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 94px;
-    margin-bottom: 10px; /* Add small bottom margin */
-    height: 56vh;
     background-color: white;
+    overflow: hidden;
+    margin-top: 101px;
   }
 
   .responsive-image {
     max-width: 100%;
     max-height: 100%;
-    height: 100%;
-    width: 100%;
-
+    object-fit: contain;
     transition: transform 0.3s ease-in-out;
-    cursor: zoom-in;
   }
 
-  .responsive-image.zoomed {
-    transform: scale(5); /* Adjust scale as needed */
-    cursor: zoom-out;
+  .footerdiv {
+    padding-top: 0;
+    z-index: 1000;
   }
 }
+
 .zoomable-container {
   width: 100%;
   height: 100%;
-  overflow: auto; /* Allow scrolling */
+  overflow: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.responsive-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Ensure the image fits inside the container */
-  transition: transform 0.3s ease; /* Smooth transition when rotating */
 }
 
 .footerdiv {
