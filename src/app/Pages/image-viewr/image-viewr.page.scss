@@ -1,188 +1,191 @@
-.cancel-icon {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.fileImage {
-  margin: 0 auto;
-  /* width: 100%; */
-  /* height: 100%; */
-  overflow: scroll;
-}
-
-.attachment-file {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.w-button {
-  /* margin-top: 10px; */
-  width: 100px !important;
-}
-
-.paragraph-3 {
-  color: #fff;
-  font-family: Montserrat, sans-serif;
-}
-
-.admin-div-chat {
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 0.25fr;
-}
-
-.adm {
-  color: #00386c;
-  text-align: right;
-  /* margin-top: 0; */
-  /* margin-bottom: 0; */
-  font-family: Montserrat, sans-serif;
-  font-size: 12px;
-  /* font-weight: 700; */
-}
-
-.grid-16 {
-  grid-template-rows: auto;
-  grid-template-columns: 0.25fr 1fr;
-}
-
-.grid-17 {
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 0.1fr;
-}
-
-.div-block-446 {
-  background-color: #00386c;
-  border-radius: 10px;
-  padding: 5px;
-}
-
-.div-block-447 {
-  margin-bottom: 10px;
-}
-
-.time-heading-copy {
-  color: #fff;
-  text-align: left;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-family: Montserrat, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  font-style: italic;
-  text-transform: lowercase;
-  letter-spacing: 1.5px;
-}
-
-.grid-13 {
-  background-color: #ebeff3;
-  background-image: linear-gradient(
-      rgba(235, 239, 243, 0.86),
-      rgba(235, 239, 243, 0.86)
-    ),
-    url("../../../assets/Mask-Group-12.svg");
-  background-position: 0 0, 48% 53%;
-  background-repeat: repeat, repeat-y;
-  background-size: auto, 294px 654%;
-  border-radius: 10px;
-  grid-template-rows: auto auto auto auto;
-  grid-template-columns: 1fr;
-  padding: 10px;
-  background-attachment: fixed;
-
-  max-height: 100vh;
-  overflow-y: auto;
-}
-
-iframe:focus {
-  outline: none;
-}
-
-iframe[seamless] {
-  display: block;
-}
-.fileImage {
-  // width: 100%;
-  // height: 100%;
-  justify-content: center;
-  height: 92%;
-  // object-fit: contain; /* Ensures the image maintains aspect ratio while filling the container */
-}
-
-.attachment-file.grid-13 {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  overflow: hidden; /* Prevent content overflow */
-}
-
-.cancel-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-pan-zoom {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
+// .cancel-icon {
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+//   position: absolute;
+//   top: 10px;
+//   right: 10px;
+// }
 
 // .fileImage {
-//   max-width: 100%;
-//   max-height: 100%;
-//   display: block;
-
+//   margin: 0 auto;
+//   /* width: 100%; */
+//   /* height: 100%; */
+//   overflow: scroll;
 // }
-.image {
-  transition: transform 0.3s ease-in-out;
-}
 
-.btnn{
-  position: relative;
+// .attachment-file {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-  background-color: blue;
-  color: white;
-  height: 27px;
-  width: 63px;
-  border-radius: 6px;
-  left: -219px;
-}
-.mat-dialog-content {
-  position: relative;
-  padding: 0; /* Remove any padding */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .w-button {
+//   /* margin-top: 10px; */
+//   width: 100px !important;
+// }
 
-.fileImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensures the image maintains its aspect ratio while fitting inside the container */
-}
+// .paragraph-3 {
+//   color: #fff;
+//   font-family: Montserrat, sans-serif;
+// }
 
-pan-zoom {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* Prevents overflow of the pan-zoom container */
-}
+// .admin-div-chat {
+//   grid-template-rows: auto;
+//   grid-template-columns: 1fr 0.25fr;
+// }
+
+// .adm {
+//   color: #00386c;
+//   text-align: right;
+//   /* margin-top: 0; */
+//   /* margin-bottom: 0; */
+//   font-family: Montserrat, sans-serif;
+//   font-size: 12px;
+//   /* font-weight: 700; */
+// }
+
+// .grid-16 {
+//   grid-template-rows: auto;
+//   grid-template-columns: 0.25fr 1fr;
+// }
+
+// .grid-17 {
+//   grid-template-rows: auto;
+//   grid-template-columns: 1fr 0.1fr;
+// }
+
+// .div-block-446 {
+//   background-color: #00386c;
+//   border-radius: 10px;
+//   padding: 5px;
+// }
+
+// .div-block-447 {
+//   margin-bottom: 10px;
+// }
+
+// .time-heading-copy {
+//   color: #fff;
+//   text-align: left;
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   font-family: Montserrat, sans-serif;
+//   font-size: 12px;
+//   font-weight: 500;
+//   font-style: italic;
+//   text-transform: lowercase;
+//   letter-spacing: 1.5px;
+// }
+
+// .grid-13 {
+//   background-color: #ebeff3;
+//   background-image: linear-gradient(
+//       rgba(235, 239, 243, 0.86),
+//       rgba(235, 239, 243, 0.86)
+//     ),
+//     url("../../../assets/Mask-Group-12.svg");
+//   background-position: 0 0, 48% 53%;
+//   background-repeat: repeat, repeat-y;
+//   background-size: auto, 294px 654%;
+//   border-radius: 10px;
+//   grid-template-rows: auto auto auto auto;
+//   grid-template-columns: 1fr;
+//   padding: 10px;
+//   background-attachment: fixed;
+
+//   max-height: 100vh;
+//   overflow-y: auto;
+// }
+
+// iframe:focus {
+//   outline: none;
+// }
+
+// iframe[seamless] {
+//   display: block;
+// }
+// .fileImage {
+//   // width: 100%;
+//   // height: 100%;
+//   justify-content: center;
+//   height: 92%;
+//   // object-fit: contain; /* Ensures the image maintains aspect ratio while filling the container */
+// }
+
+// .attachment-file.grid-13 {
+//   display: grid;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100%;
+//   overflow: hidden; /* Prevent content overflow */
+// }
+
+// .cancel-icon {
+//   position: absolute;
+//   top: 10px;
+//   right: 10px;
+//   cursor: pointer;
+// }
+
+// pan-zoom {
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: hidden;
+// }
+
+// // .fileImage {
+// //   max-width: 100%;
+// //   max-height: 100%;
+// //   display: block;
+
+// // }
+// .image {
+//   transition: transform 0.3s ease-in-out;
+// }
+
+// .btnn{
+//   position: relative;
+
+//   background-color: blue;
+//   color: white;
+//   height: 27px;
+//   width: 63px;
+//   border-radius: 6px;
+//   left: -219px;
+// }
+// .mat-dialog-content {
+//   position: relative;
+//   padding: 0; 
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .fileImage {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: contain; 
+  
+  
+// }
+
+// pan-zoom {
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: hidden; 
+  
+// }
 
 .cancel-icon {
   background-color: transparent;
@@ -191,6 +194,17 @@ pan-zoom {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+
+.btn1{
+  position: relative;
+  left: 227px;
+  background-color: green;
+  color: white;
+  height: 36px;
+  width: 79px;
+  top: -13px;
 }
 
 

@@ -1,17 +1,20 @@
 <mat-dialog-content class="mat-dialog-content">
   <span (click)="closeImageDialog()" class="cancel-icon">
-    <button class="btnn" (click)="rotateImage()">Rotate
-      
-    </button>
+  
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
       
       <path id="Icon_material-cancel" data-name="Icon material-cancel" d="M18,3A15,15,0,1,0,33,18,14.986,14.986,0,0,0,18,3Zm7.5,20.385L23.385,25.5,18,20.115,12.615,25.5,10.5,23.385,15.885,18,10.5,12.615,12.615,10.5,18,15.885,23.385,10.5,25.5,12.615,20.115,18Z" transform="translate(-3 -3)" fill="#e03c32"/>
       
     </svg>
-    <pan-zoom [config]="panZoomConfig">
+    <img class="fileImage" [src]="fileBaseUrl" alt="Selected Image"/>
+    <!-- <pan-zoom [config]="panZoomConfig">
       <img class="fileImage" [src]="fileBaseUrl" alt="Selected Image"/>
-    </pan-zoom>
+    </pan-zoom> -->
   </span>
+
+  <button class="btn1" (click)="rotateImage()">Rotate
+      
+  </button>
 
 </mat-dialog-content>
 
