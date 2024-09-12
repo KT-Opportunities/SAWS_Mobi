@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 23px;
 }
 
 .fileImage {
@@ -27,9 +28,12 @@
 .rotate-icon{
   --background: green;
   --color: white;
-  position: relative;
+  // position: relative;
   // right: 142px;
   font-size: 11px;
+  position: fixed;
+  top: 11%;
+  z-index: 10;
 
 }
 
