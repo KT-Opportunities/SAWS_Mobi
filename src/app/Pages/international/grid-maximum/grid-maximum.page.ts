@@ -83,7 +83,7 @@ export class GridMaximumPage implements OnInit {
     this.isLoading = true;
 
     this.fetchSecondAPI(folderName, fileName)
-      .then((filetextcontent) => {
+      .then((filecontent) => {
         this.isLoading = false;
 
         const dialogConfig = new MatDialogConfig();
@@ -97,7 +97,7 @@ export class GridMaximumPage implements OnInit {
    
 
 
-        dialogConfig.data = { filetextcontent };
+        dialogConfig.data = { filecontent };
 
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
@@ -112,16 +112,16 @@ export class GridMaximumPage implements OnInit {
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filetextcontent
+    // Return a promise that resolves with filecontent
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetChartsFile(folderName, fileName).subscribe(
         (response) => {
-          // Assuming filetextcontent is obtained from the response
-          const filetextcontent = response.filetextcontent;
-          // Log filetextcontent to verify
-          console.log('File Text Content:', filetextcontent);
-          // Resolve the promise with filetextcontent
-          resolve(filetextcontent);
+          // Assuming filecontent is obtained from the response
+          const filecontent = response.filecontent;
+          // Log filecontent to verify
+          console.log('File Text Content:', filecontent);
+          // Resolve the promise with filecontent
+          resolve(filecontent);
         },
         (error) => {
           // Reject the promise if there's an error

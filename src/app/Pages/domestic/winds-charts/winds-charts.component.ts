@@ -67,7 +67,7 @@ export class WindsChartsComponent implements OnInit {
   }
   
   fetchWindChartImages() {
-    this.APIService.fetchWindChartImages('', 12).subscribe(
+    this.APIService.fetchWindChartImages('').subscribe(
       (data: any[]) => {
         console.log('API Response:', data);
 
@@ -137,7 +137,7 @@ export class WindsChartsComponent implements OnInit {
       this.loading = true;
 
       this.fetchSecondAPI(folderName, fileName)
-        .then((filetextcontent) => {
+        .then((filecontent) => {
           this.loading = false;
 
           const dialogConfig = new MatDialogConfig();
@@ -145,7 +145,7 @@ export class WindsChartsComponent implements OnInit {
           dialogConfig.disableClose = true;
           dialogConfig.width = '80%';
           dialogConfig.height = '80%';
-          dialogConfig.data = { filetextcontent };
+          dialogConfig.data = { filecontent };
 
           const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
@@ -166,9 +166,9 @@ export class WindsChartsComponent implements OnInit {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(folderName, fileName).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
-          console.log('File Text Content:', filetextcontent);
-          resolve(filetextcontent);
+          const filecontent = response.filecontent;
+          console.log('File Text Content:', filecontent);
+          resolve(filecontent);
         },
         (error) => {
           reject(error);

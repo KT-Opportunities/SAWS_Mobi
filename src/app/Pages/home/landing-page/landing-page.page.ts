@@ -105,17 +105,24 @@ export class LandingPage implements OnInit {
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
 
+    debugger
+
     if(this.isLoggedIn){
 
-        this.apiService.GetActiveSubscriptionByUserProfileId(userLoginDetails?.userprofileid).subscribe(
+
+        this.apiService.GetActiveSubscriptionByUserProfileId(userLoginDetails?.userProfileId).subscribe(
         (data: any) => {
-          
-          if(data.length > 0) {
-            this.authService.setSubscriptionStatus(data[0].package_name);
+
+          debugger
+
+          if (data.detailDescription.subscription.isactive) {
+            this.authService.setSubscriptionStatus(data.detailDescription.subscription.package_name);
+            debugger
           } else {
             this.authService.setSubscriptionStatus('');
           }
 
+          
         },
         (err) => {
           console.log('postSub err: ', err);

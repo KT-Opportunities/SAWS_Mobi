@@ -1,4 +1,11 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -175,28 +182,41 @@ export class RegisterPage implements OnInit {
       UserRole: this.userForm.get('UserRole')?.value,
     };
 
+    var emailbody = {
+      username: body.Username,
+      password: body.Password,
+    };
+
     if (this.userForm.invalid) {
       this.loading = false;
       return;
     } else {
       this.api.createNewUser(body).subscribe(
         (data: any) => {
-          if (data.Status === 'Success') {
-    
-            this.statusMessage = true;
-            this.errorMessage = null;
-            this.loading = false;
-            
-            this.presentToast('top','Account Created Successfully!', 'success', 'close');
+          this.statusMessage = true;
+          this.errorMessage = null;
+          this.loading = false;
 
-            this.router.navigate(['login']);
-            this.onReset();
-          }
+          this.presentToast(
+            'top',
+            'Account Created Successfully!',
+            'success',
+            'close'
+          );
+          this.sendEmail(emailbody);
+
+          this.router.navigate(['login']);
+          this.onReset();
         },
         (error: any) => {
           if (error.error.Message === 'User Exists') {
             // this.presentPopup();
-            this.presentToastReg('top','User Alredy Exists!', 'danger', 'close'); 
+            this.presentToastReg(
+              'top',
+              'User Alredy Exists!',
+              'danger',
+              'close'
+            );
           }
           this.loading = false;
         }
@@ -204,40 +224,55 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  async presentToastReg(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
+  sendEmail(body: any) {
+    this.api.sendCredentials(body).subscribe(
+      (data: any) => {},
+      (err) => console.log('error', err)
+    );
+  }
 
+  async presentToastReg(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass:"custom-toast",
-      swipeGesture: "vertical",
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
       buttons: [
         {
           side: 'end',
           text: 'Go to Login',
           handler: () => {
             this.router.navigate(['/login']);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await toast.present();
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
-
+  async presentToast(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass:"custom-toast",
-      swipeGesture: "vertical",
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
       buttons: [
         {
           icon: 'close',

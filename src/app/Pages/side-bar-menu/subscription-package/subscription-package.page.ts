@@ -236,7 +236,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.returnUrl = landingPage + 'subscription-successful';
     // this.subsObj.notifyUrl = landingPage + 'subscription-successful/:token';
     // this.subsObj.notifyUrl = 'http://160.119.253.130/saws/#/subscription/success';
-    this.subsObj.notifyUrl = environment.serverAPI + 'v1/Subscriber/Notify';
+    this.subsObj.notifyUrl = environment.serverAPI + 'v1/Subscriptions/Notify';
     this.subsObj.cancelUrl = landingPage + 'subscription-package';
   }
 
@@ -291,8 +291,6 @@ export class SubscriptionPackagePage implements OnInit {
 
         this.subsArray = response.detailDescription.subscription;
 
-        debugger
-
         if (this.subsArray.package_id == 2 || this.subsArray.package_id == 9) {
           this.isSubscribedPremiumMonthly = true;
           this.premiumMontlySubscribedId = this.subsArray.subscriptionId;
@@ -319,17 +317,19 @@ export class SubscriptionPackagePage implements OnInit {
     const userLoginDetails = JSON.parse(user);
 
     this.APIService.GetSubscriptionByUserProfileId(
-      userLoginDetails?.userprofileid
+      userLoginDetails?.userProfileId
     ).subscribe(
       (response: any) => {
         // Initialize a flag to check if the subscriptionPackageId exists
         let packageExists = false;
 
-        response.forEach((element: any) => {
-          if (element.package_id == subscriptionPackageId) {
+        // responsede.forEach((element: any) => {
+          if (response.detailDescription.subscription.package_id == subscriptionPackageId) {
             packageExists = true;
           }
-        });
+        // });
+
+        debugger
 
         if (packageExists) {
           this.presentToast(
@@ -340,7 +340,7 @@ export class SubscriptionPackagePage implements OnInit {
           );
           this.router.navigate(['/subscription-package']);
           this.GetSubscriptions();
-        } else if (response.length >= 1 && !packageExists) {
+        } else if (response.detailDescription.subscription != null && !packageExists) {
           this.presentActionSheetSwitch();
           this.GetSubscriptions();
           this.selectedSubscriptionPackageId = subscriptionPackageId;
@@ -432,7 +432,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.m_payment_id = packageId.toString();
     this.subsObj.amount = Number(amount.toFixed(2));
     this.subsObj.item_name = this.subscriptionType;
-    this.subsObj.userId = userLoginDetails?.userprofileid;
+    this.subsObj.userId = userLoginDetails?.userProfileId;
     this.subsObj.item_description = this.subscriptionType;
     // Customer details
     this.subsObj.name_first = userLoginDetails?.aspUserName;
@@ -474,6 +474,8 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   provideFeedback(subscriptionPackageId: number, amount?: number) {
+    debugger
+    console.log("subscriptionPackageId", subscriptionPackageId)
     if (!this.authService.getIsLoggedIn()) {
       const redirectUrl = `/subscription-package?id=${subscriptionPackageId}`;
       this.authService.setRedirectUrl(redirectUrl);
@@ -554,7 +556,7 @@ export class SubscriptionPackagePage implements OnInit {
       );
     }
 
-    this.updateSub.userprofileid = userLoginDetails?.userprofileid;
+    this.updateSub.userprofileid = userLoginDetails?.userProfileId;
 
     debugger;
 

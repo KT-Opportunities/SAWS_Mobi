@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, catchError, BehaviorSubject } from 'rxjs';
+import { CredentialsDetails } from '../Models/credential';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,13 @@ export class APIService {
   createNewUser(body: {}) {
     return this.http.post<any>(
       environment.serverAPI + 'v1/Authenticate/RegisterSubscriber',
+      body
+    );
+  }
+
+  sendCredentials(body: CredentialsDetails) {
+    return this.http.post<any>(
+      environment.serverAPI + "v1/Authenticate/SendCredentials",
       body
     );
   }
@@ -122,7 +130,7 @@ export class APIService {
   paySubscription(body: any) {
     console.log('Subscribe: ', body);
     return this.http.post<any>(
-      environment.serverAPI + 'v1/Subscribers/MakeRecurringPayment',
+      environment.serverAPI + 'v1/Subscriptions/RecurringPayment',
       body
     );
   }
@@ -130,17 +138,16 @@ export class APIService {
   GetSourceTextFolderFiles(foldername: string) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}&lasthours=6`
+        `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
     );
   }
 
-  GetSourceTextFolderFilesTime(foldername: string, time: number) {
+  GetSourceTextFolderFilesTime(foldername: string) {
     const url = `${environment.serverAPI}v1/RawSource/GetSourceTextFolderFiles`;
 
     // Construct the query parameters including foldername and lasthours
     const queryParams = {
-      textfoldername: foldername,
-      lasthours: time,
+      foldername: foldername
     };
 
     // Make the HTTP GET request with query parameters
@@ -154,24 +161,24 @@ export class APIService {
     );
   }
 
-  GetSourceChartFolderFilesListtime(foldername: any, time: any) {
+  GetSourceChartFolderFilesListtime(foldername: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
     );
   }
 
-  GetSourceAviationFolderFilesList(foldername: any, time: any) {
+  GetSourceAviationFolderFilesList(foldername: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}`
     );
   }
 
-  GetSourceAviationFolderFilesListNull(time: any) {
+  GetSourceAviationFolderFilesListNull() {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=`
     );
   }
 
@@ -268,34 +275,32 @@ export class APIService {
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +
-        'v1/RawSource/GetSourceTextFolderFiles?textfoldername=speci'
+        'v1/RawSource/GetSourceTextFolderFiles?foldername=speci'
     );
   }
 
   getRecentTafs(foldername: string): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceTextFolderFiles?textfoldername=${foldername}`
+        `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
     );
   }
 
   getRecentMetarReports(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}&lasthours=${time}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}`
     );
   }
 
   fetchWindChartImages(
-    foldername: any,
-    lasthours: number = 12
+    foldername: any
   ): Observable<any[]> {
     const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
 
     // Construct the query parameters including foldername and lasthours
     const queryParams = {
-      imagefoldername: foldername,
-      lasthours: lasthours.toString(),
+      imagefoldername: foldername
     };
 
     // Make the HTTP GET request with query parameters
@@ -303,13 +308,11 @@ export class APIService {
   }
 
   fetchHourlyChartData(
-    foldername: any,
-    lasthours: number = 24
+    foldername: any
   ): Observable<any[]> {
     const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
     const queryParams = {
-      imagefoldername: foldername,
-      lasthours: lasthours.toString(),
+      imagefoldername: foldername
     };
     return this.http.get<any[]>(apiUrl, { params: queryParams });
   }

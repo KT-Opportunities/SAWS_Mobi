@@ -166,12 +166,11 @@ export class LoginPage implements OnInit, OnDestroy {
         .subscribe(
           (response) => {
             this.loginForm.reset();
-
             this.userData = response;
             this.authAPI.setLoggedInStatus(true);
             this.authAPI.setUserData(this.userData);
             this.authAPI.saveCurrentUser(response);
-            this.UpdateSubscription(response.userprofileid);
+            this.UpdateSubscription(response.userProfileId);
 
             const redirectUrl = this.authAPI.getRedirectUrl();
 

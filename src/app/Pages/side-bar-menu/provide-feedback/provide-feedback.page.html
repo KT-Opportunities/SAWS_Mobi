@@ -1,195 +1,66 @@
-<section class="feedback">
-  <div class="div-block-2">
-    <ion-menu-button class="left-aligned-menu-button"></ion-menu-button>
-    <img
-      src="../../assets/Path-3452.svg"
-      loading="lazy"
-      width="1216"
-      alt=""
-      class="image"
-    />
-  </div>
+<ion-content>
+  <app-package-content>
+    <app-package-header>
+      Provide Feedback
+    </app-package-header>
 
-  <div class="round-image">
-    <img
-      src="../../assets/Mask-Group-33x.png"
-      width="212"
-      alt=""
-      loading="lazy"
-      width="115"
-      alt=""
-      class="mobile-images"
-    />
-  </div>
-  <div class="form-container"></div>
-  <div class="feedback-div">
-    <div class="div-block-26">
-      <h1 class="heading-12" id="feedback-heading">Feedback</h1>
-      <div class="w-form">
-        <form
-          [formGroup]="feedbackForm"
-          (ngSubmit)="onSubmit()"
-          id="email-form1"
-          name="email-form"
-          data-name="Email Form"
-          method="get"
-          data-wf-page-id="65b37dc83e5b85e23fc5ea08"
-          data-wf-element-id="250cd369-1376-16af-4b58-4f9ff70033f3"
-        >
-          <!-- <div class="form-group">
-            <label for="name" class="form-label">Username:</label>
-            <input
-              type="text"
-              id="name"
-              class="form-input"
-              [value]="aspUserName"
-              formControlName="Username"
-              readonly
-            />
-          </div> -->
+    <app-package-list-items>
+      <div class="form-container">
+        <!-- d="email-form1" -->
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" name="email-form" data-name="Email Form" method="get"
+          data-wf-page-id="65b37dc83e5b85e23fc5ea08" data-wf-element-id="250cd369-1376-16af-4b58-4f9ff70033f3">
           <div class="form-group">
-            <label for="email" class="form-label">Subject:</label>
-            <input
-              type="text"
-              id="email"
-              class="form-input"
-              placeholder="Enter your subject"
-              formControlName="title"
-            />
-          </div>
-          <div class="form-group">
-            <label for="email" class="form-label">Message:</label>
-
-            <textarea
-              class="form-input"
-              placeholder="Enter your feedback message"
-              formControlName="message"
-              style="height: 180px"
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="feedbackFile" class="form-label">Attachment:</label>
-
-            <div class="file-input-container">
-              <input
-                style="color: #fff"
-                #myFileInput
-                type="file"
-                id="feedbackFile"
-                class="form-input"
-                formControlName="feedbackFile"
-                (change)="onFileSelected($event)"
-              />
-              <span *ngIf="selectedFileName" class="selected-file-name"
-                >{{ selectedFileName }}</span
-              >
+            <label for="subject" class="form-label">Subject:</label>
+            <input type="text" id="subject" class="form-input" placeholder="Enter your subject"
+              formControlName="title" />
+            <div *ngIf="feedbackForm.get('title')?.invalid && submitted" class="error-message">
+              Title is required.
             </div>
           </div>
 
-          <br /><input
-            type="submit"
-            data-wait="Please wait..."
-            class="submit-button-2 w-button"
-            value="Submit"
-            id="submitbutton"
-          />
-        </form>
-        <!-- <div class="w-form-done">
-            <div>Thank you! Your submission has been received!</div>
-          </div>
-          <div class="w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
-          </div> -->
-      </div>
-    </div>
-  </div>
-  <!-- <div class="feedback-div">
-    <div class="div-block-26">
-      <h1 class="heading-12" id="feedback-heading">Feedback</h1>
-      <div class="w-form" style="margin-top: -50px; width: 101%">
-        <form
-          [formGroup]="feedbackForm"
-          (ngSubmit)="onSubmit()"
-          id="email-form1"
-          name="email-form"
-          data-name="Email Form"
-          method="get"
-          data-wf-page-id="65b37dc83e5b85e23fc5ea08"
-          data-wf-element-id="250cd369-1376-16af-4b58-4f9ff70033f3"
-        >
-        
-          <div class="form-group">
-            <label for="email" class="form-label">Subject:</label>
-            <input
-              type="text"
-              id="email"
-              class="form-input"
-              placeholder="Enter your subject"
-              formControlName="title"
-            />
-          </div>
           <div class="form-group">
             <label for="email" class="form-label">Message:</label>
-
-            <textarea
-              class="form-input"
-              placeholder="Enter your feedback message"
-              formControlName="message"
-              style="height: 200px"
-            ></textarea>
+            <textarea class="form-input" placeholder="Enter your feedback message" formControlName="message"
+              style="height: 100px"></textarea>
+            <div *ngIf="feedbackForm.get('message')?.invalid && submitted" class="error-message">
+              Message field can't be empty.
+            </div>
           </div>
 
           <div class="form-group">
             <label for="feedbackFile" class="form-label">Attachment:</label>
-            <input
-              #myFileInput
-              type="file"
-              id="feedbackFile"
-              class="form-input"
-              formControlName="feedbackFile"
-              (change)="onFileSelected($event)"
-            />
+            <div class="file-input-container">
+              <input style="color: #fff" #myFileInput type="file" id="feedbackFile" class="form-input"
+                formControlName="feedbackFile" (change)="onFileSelected($event)" />
+              <span *ngIf="selectedFileName" class="selected-file-name">{{ selectedFileName }}</span>
+            </div>
           </div>
 
-          <input
-            type="submit"
-            data-wait="Please wait..."
-            class="submit-button-2 w-button"
-            value="Submit"
-            id="submitbutton"
-          />
+          <br />
+
+          <input type="submit" data-wait="Please wait..." class="submit-button-2 w-button" value="Submit"
+            id="submitbutton" />
         </form>
       </div>
-    </div>
-  </div> -->
-  <div class="bottomdiv" style="margin-top: 210%">
-    <img
-      src="../../assets/Path-3447.svg"
-      loading="lazy"
-      width="1216"
-      alt=""
-      class="image"
-    />
+    </app-package-list-items>
 
-    <div class="footerdiv" id="footerdivid">
-      <a (click)="BacktoMessagelist()" class="link-block-5 w-inline-block"
-        ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6
-          class="heading-10-copy"
-          style="
-            color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            text-decoration: none;
-            font-size: 10px;
-            margin-top: -4px;
-            margin-left: 8px;
-          "
-        >
-          Back
-        </h6></a
-      >
-    </div>
+  </app-package-content>
+
+</ion-content>
+
+<app-footer></app-footer>
+
+<div class="footerdiv" id="footerdivid1">
+  <div (click)=" BacktoMessagelist()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
+         margin-top: 10px;
+         margin-bottom: 0;
+         font-family: Montserrat, sans-serif;
+         text-decoration: none;
+         font-size: 12px;
+         margin-top: 4px;">
+      Messages
+    </h6>
   </div>
-</section>
+</div>

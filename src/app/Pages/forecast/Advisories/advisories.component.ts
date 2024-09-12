@@ -8,7 +8,7 @@ export interface textFile {
   foldername: string;
   filename: string;
   lastmodified: string;
-  filetextcontent: string;
+  filecontent: string;
 }
 @Component({
   selector: 'app-advisories',
@@ -40,37 +40,39 @@ export class AdvisoriesComponent implements OnInit {
     var SWX: any = [];
     this.api.GetSourceTextFolderFiles('alerts').subscribe((Response) => {
       Response.forEach((element: any) => {
-        element.Id = element.filetextcontent.split('\n')[2];
+        element.Id = element.filecontent.split('\n')[2];
         if (element.Id.split(' ')[0] == 'VA') {
-          var vwValue = element.filetextcontent.split('\n')[5];
+          var vwValue = element.filecontent.split('\n')[5];
           element.heading = vwValue;
           vwValue = vwValue.split('VOLCANO: ')[1];
           if (vwValue == undefined) {
-            vwValue = element.filetextcontent.split('\n')[5];
+            vwValue = element.filecontent.split('\n')[5];
           }
           var obj = {
-            value: element.filetextcontent.split('\n')[0],
+            value: element.filecontent.split('\n')[0],
             viewValue: vwValue,
           };
           this.VolcanoList.push(obj);
-          element.Id = element.filetextcontent.split('\n')[0];
+          element.Id = element.filecontent.split('\n')[0];
         }
         if (element.Id.split(' ')[0] == 'TC') {
-          var vwValue = element.filetextcontent.split('\n')[5];
+          var vwValue = element.filecontent.split('\n')[5];
           element.heading = vwValue;
           vwValue = vwValue.split('TC:')[1].trim();
           var obj = {
-            value: element.filetextcontent.split('\n')[0],
+            value: element.filecontent.split('\n')[0],
             viewValue: vwValue,
           };
           this.CycloneList.push(obj);
-          element.Id = element.filetextcontent.split('\n')[0];
+          element.Id = element.filecontent.split('\n')[0];
         }
       });
       this.AdvisoriesList = Response;
       console.log('Response ', this.AdvisoriesList);
       this.isLoading = false;
       this.spinner.hide();
+
+      // this.updateTime(this.TAFArray[0]?.lastmodified)
     });
 
     document.addEventListener('scroll', () => {
@@ -85,6 +87,12 @@ export class AdvisoriesComponent implements OnInit {
       }
     });
   }
+
+  // updateTime(date: string ) {
+  //   this.currentDate =
+  //     this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+  //   this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
+  // }
 
   ScrollToFilter(event: any) {
     var element = document.getElementById(event.target.value);

@@ -46,7 +46,7 @@ export class SynopticAnalysisPage implements OnInit {
 
   loadSynopticData() {
     this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.Synoptic = data.filter(
           (item: any) => item.filename === 'synoptic.png'
@@ -68,7 +68,7 @@ export class SynopticAnalysisPage implements OnInit {
     this.APIService.GetAviationFile('', filename).subscribe(
       (data) => {
         const imageUrlSynoptic =
-          'data:image/png;base64,' + data.filetextcontent;
+          'data:image/png;base64,' + data.filecontent;
         this.fileBaseUrlSynoptic =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
         this.loading = false;

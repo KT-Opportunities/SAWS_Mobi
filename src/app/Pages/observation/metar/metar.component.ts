@@ -77,7 +77,7 @@ export class MetarComponent  implements OnInit {
       return this.metarReports;
     }
     return this.metarReports.filter(item =>
-      item.filetextcontent.toLowerCase().includes(this.searchQuery)
+      item.filecontent.toLowerCase().includes(this.searchQuery)
     );
   }
 

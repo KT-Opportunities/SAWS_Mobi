@@ -10,7 +10,7 @@ import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 
 // Define an interface to strongly type the MetarReport
 interface MetarReport {
-  filetextcontent: string;
+  filecontent: string;
   // Add other properties of the MetarReport object here
 }
 
@@ -70,7 +70,7 @@ export class MetarColorCodedComponent implements OnInit {
       this.filteredReports = this.metarReports; // If search query is empty, show all reports
     } else {
       this.filteredReports = this.metarReports.filter((report) =>
-        report.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+        report.filecontent.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
   }

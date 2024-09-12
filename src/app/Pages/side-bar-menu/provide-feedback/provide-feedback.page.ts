@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { fileDataFeedback } from 'src/app/Models/File';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -29,11 +29,9 @@ interface Message {
 })
 export class ProvideFeedbackPage implements OnInit {
   feedback: any;
-
   feedbackForm: FormGroup;
-
   fdMessages: any;
-
+  submitted = false;
   username: any;
   Id: any;
   response: any;
@@ -66,7 +64,8 @@ export class ProvideFeedbackPage implements OnInit {
     private alertController: AlertController,
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastController: ToastController,
   ) {
     this.feedbackForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -80,7 +79,7 @@ export class ProvideFeedbackPage implements OnInit {
     if (user) {
       const userLoginDetails = JSON.parse(user);
       this.userEmail = userLoginDetails.aspUserEmail;
-      this.userId = userLoginDetails.aspUserID;
+      this.userId = userLoginDetails.aspUserId;
       this.fullname = userLoginDetails.fullname;
     }
   }
@@ -97,7 +96,10 @@ export class ProvideFeedbackPage implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    
     if (this.feedbackForm.valid) {
+      debugger
       const formValues = this.feedbackForm.value;
       const body = {
         fullname: this.fullname,
@@ -127,12 +129,13 @@ export class ProvideFeedbackPage implements OnInit {
 
       this.APIService.postInsertNewFeedback(body).subscribe(
         (data: any) => {
-          const feedbackId = data.DetailDescription.feedbackId;
+          debugger
+          const feedbackId = data.newId;
           this.uploadFile(feedbackId);
 
           this.feedbackForm.reset();
-          this.responseData = data;
-          console.log('this.responseData', this.responseData);
+          // this.responseData = data;
+          // console.log('this.responseData', this.responseData);
 
           if (this.fileFeedback.file) {
             // Check if file is selected
@@ -148,6 +151,8 @@ export class ProvideFeedbackPage implements OnInit {
           this.presentErrorAlert();
         }
       );
+    } else {
+      this.presentToast('top','Form is invalid!','danger','close');
     }
   }
 
@@ -189,6 +194,7 @@ export class ProvideFeedbackPage implements OnInit {
       return;
     }
   }
+
   async uploadFile(feedbackId: number) {
     if (this.files.length > 0) {
       this.files[0].Id = 0;
@@ -214,6 +220,7 @@ export class ProvideFeedbackPage implements OnInit {
       }
     }
   }
+
   updateFeedbackForm(body: any) {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
@@ -227,6 +234,7 @@ export class ProvideFeedbackPage implements OnInit {
       }
     );
   }
+
   updateFeedbackFormWithAttachment(body: any) {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
@@ -243,17 +251,47 @@ export class ProvideFeedbackPage implements OnInit {
       }
     );
   }
+
   resetFilesInp() {
     this.myFileInputVariable.nativeElement.value = '';
+  }
+
+  async presentToast(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: position,
+      color: color,
+      icon: icon,
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
+      buttons: [
+        {
+          icon: 'close',
+          htmlAttributes: {
+            'aria-label': 'close',
+          },
+        },
+      ],
+    });
+
+    await toast.present();
   }
 
   home() {
     // Check if the current route is the login page
     this.router.navigate(['/landing-page']);
   }
+
   BacktoMessagelist() {
     this.router.navigate(['/message-list']);
   }
+
   async presentErrorAlert() {
     const alert = await this.alertController.create({
       header: 'Error',
@@ -263,6 +301,7 @@ export class ProvideFeedbackPage implements OnInit {
 
     await alert.present();
   }
+
   async presentSuccessAlert() {
     const alert = await this.alertController.create({
       header: 'Success',
@@ -272,6 +311,7 @@ export class ProvideFeedbackPage implements OnInit {
 
     await alert.present();
   }
+
   checkBroadcast() {
     // Check if any message has broadcast and it's not a feedback
     this.isBroadcastMessage = this.fdMessages.some((message: any) => {
@@ -282,6 +322,7 @@ export class ProvideFeedbackPage implements OnInit {
       );
     });
   }
+
   shouldShowChatRow(): boolean {
     return (
       this.fdMessages &&
@@ -289,6 +330,7 @@ export class ProvideFeedbackPage implements OnInit {
       this.fdMessages.some((message: any) => message.broadcast === null)
     );
   }
+
   updateFileData(
     fileDataToUpdate: fileDataFeedback,
     newFile: File,
@@ -309,6 +351,7 @@ export class ProvideFeedbackPage implements OnInit {
       }
     }
   }
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.selectedFile = file;

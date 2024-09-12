@@ -10,7 +10,7 @@ interface ResponseItem {
   foldername: string;
   filename: string;
   lastmodified: string;
-  filetextcontent: string;
+  filecontent: string;
   // Add other properties if needed
 }
 
@@ -48,19 +48,19 @@ export class TakeOffDataComponent  implements OnInit {
   ngOnInit() {
 
     this.VermetArray.forEach((airportData: any) => {
-      const time = airportData.filetextcontent
+      const time = airportData.filecontent
         .split('\n')[7]
         .substring(0, 4)
         .trim();
-      const temp = airportData.filetextcontent
+      const temp = airportData.filecontent
         .split('\n')[7]
         .substring(5, 8)
         .trim();
-      const qnh = airportData.filetextcontent
+      const qnh = airportData.filecontent
         .split('\n')[7]
         .substring(13, 17)
         .trim();
-      const qan = airportData.filetextcontent
+      const qan = airportData.filecontent
         .split('\n')[7]
         .substring(20)
         .trim();
@@ -104,11 +104,11 @@ export class TakeOffDataComponent  implements OnInit {
 
       // Optional: Filter based on 'TAKE-OFF' condition
       this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filetextcontent.includes('TAKE-OFF');
+        return item.filecontent.includes('TAKE-OFF');
       });
 
       this.VermetArray.forEach((item: any) => {
-        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
+        const tableData = item.filecontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
 
         const formattedData = tableData.reduce((acc: any[], row: string) => {
           const trimmedRow = row.trim();
@@ -157,9 +157,9 @@ export class TakeOffDataComponent  implements OnInit {
   }
 
    // Inside ForecastPage class
-   extractTakeOffData(filetextcontent: string): string {
-    // Split the filetextcontent into lines
-    const lines = filetextcontent.split('\n');
+   extractTakeOffData(filecontent: string): string {
+    // Split the filecontent into lines
+    const lines = filecontent.split('\n');
 
     // Find the line that contains "TAKE-OFF DATA"
     const takeOffLine = lines.find((line) => line.includes('TAKE-OFF DATA'));

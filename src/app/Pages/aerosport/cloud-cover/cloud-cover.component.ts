@@ -50,7 +50,7 @@ export class CloudCoverComponent  implements OnInit {
   }
 
   getCloudCoverImage(foldername: any, time: any, productname: any){
-    this.APIService.GetSourceAviationFolderFilesList(foldername, time).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList(foldername).subscribe(
       (response) => {
         // this.frameArray = response;
 
@@ -71,8 +71,8 @@ export class CloudCoverComponent  implements OnInit {
         if (this.frameArray.length > 0) {
             this.selectedOptionFrame = this.frameArray[0].lastmodified;
     
-            this.displayImage(this.folderName, this.frameArray[0].filename).then((filetextcontent) => {
-              const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+            this.displayImage(this.folderName, this.frameArray[0].filename).then((filecontent) => {
+              const imageUrlNext = 'data:image/gif;base64,' + filecontent;
               this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
           });
         }    
@@ -90,8 +90,8 @@ export class CloudCoverComponent  implements OnInit {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(imagefoldername, imagefilename).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
-          resolve(filetextcontent);
+          const filecontent = response.filecontent;
+          resolve(filecontent);
         },
         (error) => {
           reject(error);
@@ -131,8 +131,8 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
 
   this.selectedOptionFrame = selectOption;
 
-  this.displayImage(this.folderName, imagefilename).then((filetextcontent) => {
-      const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+  this.displayImage(this.folderName, imagefilename).then((filecontent) => {
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
       this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
   });
 
@@ -164,8 +164,8 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
 
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified; 
     const fileName = this.frameArray[this.currentIndex].filename;
-    this.displayImage(this.folderName, fileName).then((filetextcontent) => {
-        const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+    this.displayImage(this.folderName, fileName).then((filecontent) => {
+        const imageUrlNext = 'data:image/gif;base64,' + filecontent;
         this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
     
@@ -177,8 +177,8 @@ selectDropdownFrame(selectOption: string, imagefilename: string ) {
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;    
     const fileName = this.frameArray[this.currentIndex].filename;
 
-    this.displayImage(this.folderName, fileName).then((filetextcontent) => {
-        const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
+    this.displayImage(this.folderName, fileName).then((filecontent) => {
+        const imageUrlNext = 'data:image/gif;base64,' + filecontent;
         this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
   }
