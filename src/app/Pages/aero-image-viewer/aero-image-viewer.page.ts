@@ -172,6 +172,7 @@ export class AeroImageViewerPage implements OnInit {
     );
     this.updateImageRotation();
   }
+  
   setupHammer() {
     if (this.imageContainer && this.imageContainer.nativeElement) {
       const hammer = new Hammer(this.imageContainer.nativeElement);

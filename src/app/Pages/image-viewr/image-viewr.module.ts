@@ -11,7 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,6 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ImageViewrPageRoutingModule,
     NgxPanZoomModule,
     SharedModule,
+    MatButtonModule
 
     
   ],
