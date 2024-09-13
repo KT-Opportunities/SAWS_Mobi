@@ -21,14 +21,14 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
   rotationDegree = 0;
   fileBaseUrl: SafeResourceUrl;
   isZoomedIn = false;
-  currentScale = 1; // Track the current scale
-  lastScale = 1; // Keep track of the last scale to accumulate zoom
+  currentScale = 1; // Track the current scale for zoom
+  lastScale = 1; // Store the last scale to handle multiple zoom actions
   hammer!: HammerManager;
 
-  panX = 0; // Track horizontal panning
-  panY = 0; // Track vertical panning
-  lastPanX = 0; // Store last pan X position
-  lastPanY = 0; // Store last pan Y position
+  panX = 0; // Horizontal panning position
+  panY = 0; // Vertical panning position
+  lastPanX = 0; // Store the last panX position when panning ends
+  lastPanY = 0; // Store the last panY position when panning ends
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -47,7 +47,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.setupPinchToZoom();
   }
 
-  // Initialize pinch-to-zoom and pan functionality with Hammer.js
+  // Set up Hammer.js to handle pinch-to-zoom and panning
   setupPinchToZoom() {
     const imageContainer = this.imageContainer.nativeElement as HTMLElement;
     this.hammer = new Hammer(imageContainer);
@@ -56,27 +56,43 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.hammer.get('pinch').set({ enable: true });
     this.hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
-    // Handle pinch (zoom) events
+    // Handle pinchmove event for zooming
     this.hammer.on('pinchmove', (event) => {
-      this.currentScale = Math.max(1, Math.min(this.lastScale * event.scale, 4)); // Limit zoom between 1x and 4x
+      this.currentScale = Math.max(1, Math.min(this.lastScale * event.scale, 4)); // Restrict zoom between 1x and 4x
       this.applyImageTransform();
     });
 
-    // Store the final scale when pinch ends
+    // Update last scale when pinch ends
     this.hammer.on('pinchend', () => {
-      this.lastScale = this.currentScale; // Save the last scale for the next pinch event
+      this.lastScale = this.currentScale;
     });
 
-    // Handle pan (drag) events
+    // Handle panning (dragging) the image
     this.hammer.on('panmove', (event) => {
-      if (this.currentScale > 1) { // Only allow panning if the image is zoomed in
+      if (this.currentScale > 1) {
         this.panX = this.lastPanX + event.deltaX;
         this.panY = this.lastPanY + event.deltaY;
+
+        // Adjust the pan boundaries to allow full scrolling when zoomed in
+        const containerWidth = this.imageContainer.nativeElement.offsetWidth;
+        const containerHeight = this.imageContainer.nativeElement.offsetHeight;
+
+        const imageElement = this.imageContainer.nativeElement.querySelector('img');
+        const scaledImageWidth = imageElement.offsetWidth * this.currentScale;
+        const scaledImageHeight = imageElement.offsetHeight * this.currentScale;
+
+        const maxPanX = (scaledImageWidth - containerWidth) / 2;
+        const maxPanY = (scaledImageHeight - containerHeight) / 2;
+
+        // Ensure panning stays within bounds (allow panning to all sides)
+        this.panX = Math.max(-maxPanX, Math.min(maxPanX, this.panX));
+        this.panY = Math.max(-maxPanY, Math.min(maxPanY, this.panY));
+
         this.applyImageTransform();
       }
     });
 
-    // Store pan positions when panning ends
+    // Store the final pan positions after pan ends
     this.hammer.on('panend', () => {
       this.lastPanX = this.panX;
       this.lastPanY = this.panY;
@@ -89,31 +105,32 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.toggleZoom();
   }
 
+  // Toggle zoom functionality
   toggleZoom() {
     const image = this.imageContainer.nativeElement.querySelector('.fileImage') as HTMLElement;
 
     if (this.isZoomedIn) {
-      this.currentScale = 1; // Reset zoom (zoom out)
+      this.currentScale = 1; // Reset zoom
       this.panX = 0;
       this.panY = 0; // Reset panning
       image.style.cursor = 'zoom-in';
     } else {
-      this.currentScale = 2; // Zoom in
+      this.currentScale = 2; // Zoom in to 2x
       image.style.cursor = 'zoom-out';
     }
 
     this.isZoomedIn = !this.isZoomedIn; // Toggle zoom state
-    this.lastScale = this.currentScale; // Update last scale
-    this.applyImageTransform(); // Apply zoom and panning
+    this.lastScale = this.currentScale; // Update the last scale
+    this.applyImageTransform(); // Apply the transformation
   }
 
-  // Rotate the image by 90 degrees
+  // Rotate image by 90 degrees on each call
   rotateImage(): void {
     this.rotationDegree = (this.rotationDegree + 90) % 360;
     this.applyImageTransform();
   }
 
-  // Apply scale, rotation, and pan transformations to the image
+  // Apply the transformation to scale, rotate, and pan the image
   applyImageTransform(): void {
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
     if (imageElement) {
@@ -122,18 +139,18 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     }
   }
 
-  // Close the dialog
+  // Close the dialog when needed
   closeImageDialog() {
     this.dialogRef.close();
   }
 
-  // Handle orientation changes (optional)
+  // Handle orientation change and adjust rotation accordingly
   @HostListener('window:orientationchange', ['$event'])
   onOrientationChange(event: any) {
     this.updateImageRotation();
   }
 
-  // Update image rotation based on screen orientation (optional)
+  // Update the image rotation based on device orientation
   updateImageRotation(): void {
     switch (window.orientation) {
       case 0:
