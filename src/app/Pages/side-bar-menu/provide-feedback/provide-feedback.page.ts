@@ -130,17 +130,17 @@ export class ProvideFeedbackPage implements OnInit {
       this.APIService.postInsertNewFeedback(body).subscribe(
         (data: any) => {
           debugger
-          const feedbackId = data.newId;
+          const feedbackId = data.detailDescription.feedbackId;
           this.uploadFile(feedbackId);
 
           this.feedbackForm.reset();
-          // this.responseData = data;
+          this.responseData = data.detailDescription;
           // console.log('this.responseData', this.responseData);
 
           if (this.fileFeedback.file) {
             // Check if file is selected
             this.feedbackForm.reset();
-            this.openAttachmentDialog(data.DetailDescription, '500ms', '500ms');
+            this.openAttachmentDialog(data.detailDescription, '500ms', '500ms');
           } else {
             this.feedbackForm.reset();
             alert('Successfully Created');
@@ -161,25 +161,25 @@ export class ProvideFeedbackPage implements OnInit {
       const formValues = this.feedbackForm.value;
 
       const body = {
-        feedbackId: this.responseData.DetailDescription.feedbackId,
+        feedbackId: this.responseData.feedbackId,
         fullname: this.fullname,
         senderId: this.userId,
         senderEmail: this.userEmail,
         responderId: '',
         responderEmail: '',
-        created_at: this.responseData.DetailDescription.created_at,
-        title: this.responseData.DetailDescription.title,
+        created_at: this.responseData.created_at,
+        title: this.responseData.title,
         isresponded: false,
         FeedbackMessages: [
           {
-            senderId: this.responseData.DetailDescription.senderId,
-            senderEmail: this.responseData.DetailDescription.senderEmail,
+            senderId: this.responseData.senderId,
+            senderEmail: this.responseData.senderEmail,
             responderId: '',
             responderEmail: '',
             feedback: '',
             response: '',
             feedbackAttachment:
-              this.responseData.DetailDescription.responseMessage,
+              this.responseData.responseMessage,
             feedbackAttachmentFileName: this.selectedFileName,
             responseAttachment: '',
             responseAttachmentFileName: '',
@@ -196,6 +196,7 @@ export class ProvideFeedbackPage implements OnInit {
   }
 
   async uploadFile(feedbackId: number) {
+    debugger
     if (this.files.length > 0) {
       this.files[0].Id = 0;
       this.files[0].feedbackMessageId = feedbackId;
@@ -353,7 +354,9 @@ export class ProvideFeedbackPage implements OnInit {
   }
 
   onFileSelected(event: any) {
+    debugger
     const file = event.target.files[0];
+
     this.selectedFile = file;
     this.selectedFileName = file.name;
     this.selectedFileType = file.type;
@@ -365,6 +368,7 @@ export class ProvideFeedbackPage implements OnInit {
         this.addFile = true;
 
         console.log('DATA CHECK::', this.feedback);
+        console.log('DATA CHECK:: 2', this.responseData);
         this.openAttachmentDialog(this.feedback, '800ms', '500ms');
       };
 
