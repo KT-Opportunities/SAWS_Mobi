@@ -81,7 +81,7 @@ export class SigwxChartsComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    this.APIService.GetSourceAviationFolderFilesList('sigw', 72).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('sigw').subscribe(
       (data) => {
         console.log('Data received:', data);
 
@@ -261,7 +261,7 @@ export class SigwxChartsComponent implements OnInit {
     this.isLoading = true;
 
     this.fetchSecondAPI(folderName, fileName)
-      .then((filetextcontent) => {
+      .then((filecontent) => {
         this.isLoading = false;
 
         const dialogConfig = new MatDialogConfig();
@@ -269,7 +269,7 @@ export class SigwxChartsComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.width = '80%';
         dialogConfig.height = '80%';
-        dialogConfig.data = { filetextcontent };
+        dialogConfig.data = { filecontent };
 
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
@@ -284,16 +284,16 @@ export class SigwxChartsComponent implements OnInit {
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filetextcontent
+    // Return a promise that resolves with filecontent
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(folderName, fileName).subscribe(
         (response) => {
-          // Assuming filetextcontent is obtained from the response
-          const filetextcontent = response.filetextcontent;
-          // Log filetextcontent to verify
-          console.log('File Text Content:', filetextcontent);
-          // Resolve the promise with filetextcontent
-          resolve(filetextcontent);
+          // Assuming filecontent is obtained from the response
+          const filecontent = response.filecontent;
+          // Log filecontent to verify
+          console.log('File Text Content:', filecontent);
+          // Resolve the promise with filecontent
+          resolve(filecontent);
         },
         (error) => {
           // Reject the promise if there's an error

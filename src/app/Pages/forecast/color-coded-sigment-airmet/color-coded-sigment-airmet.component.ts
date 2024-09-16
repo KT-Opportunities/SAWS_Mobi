@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
   // styleUrls: ['./color-coded-sigment-airmet.component.scss'],
   styleUrls: ['./../forecast.page.scss'],
 })
-export class ColorCodedSigmentAirmetComponent  implements OnInit, OnDestroy {
+export class ColorCodedSigmentAirmetComponent  implements OnDestroy {
 
   isLogged: boolean = false;
   loading: boolean = false;
@@ -37,13 +37,8 @@ export class ColorCodedSigmentAirmetComponent  implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private datePipe: DatePipe
   ) {}
-  ngOnInit() {
 
-    this.updateTime();
-    this.intervalId = setInterval(() => {
-      this.updateTime();
-    }, 1000);
-  }
+  // ngOnInit() {}
 
   ngOnDestroy(): void {
     if (this.intervalId) {
@@ -51,11 +46,18 @@ export class ColorCodedSigmentAirmetComponent  implements OnInit, OnDestroy {
     }
   }
 
-  updateTime() {
-    const now = new Date();
-    this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
-    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
+  // updateTime() {
+  //   const now = new Date();
+  //   this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
+  //   this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
 
+  // }
+
+  updateTime(date: string ) {
+    // const now = new Date();
+    this.currentDate =
+      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
 
   forecastPageNavigation() {

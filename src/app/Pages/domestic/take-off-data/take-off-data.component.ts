@@ -8,7 +8,7 @@ interface ResponseItem {
   foldername: string;
   filename: string;
   lastmodified: string;
-  filetextcontent: string;
+  filecontent: string;
   // Add other properties if needed
 }
 @Component({
@@ -59,9 +59,9 @@ export class TakeOffDataComponent implements OnInit {
   }
 
   // Inside ForecastPage class
-  extractTakeOffData(filetextcontent: string): string {
-    // Split the filetextcontent into lines
-    const lines = filetextcontent.split('\n');
+  extractTakeOffData(filecontent: string): string {
+    // Split the filecontent into lines
+    const lines = filecontent.split('\n');
 
     // Find the line that contains "TAKE-OFF DATA"
     const takeOffLine = lines.find((line) => line.includes('TAKE-OFF DATA'));
@@ -99,13 +99,13 @@ export class TakeOffDataComponent implements OnInit {
 
       // Optional: Filter based on 'TAKE-OFF' condition
       this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filetextcontent.includes('TAKE-OFF');
+        return item.filecontent.includes('TAKE-OFF');
       });
 
       console.log('Filtered and latest Response ', this.VermetArray);
 
       this.VermetArray.forEach((item: any) => {
-        const tableData = item.filetextcontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
+        const tableData = item.filecontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
 
         const formattedData = tableData.reduce((acc: any[], row: string) => {
           const trimmedRow = row.trim();

@@ -46,7 +46,7 @@ export class MetarMapsComponent implements OnInit {
   loadSynopticData() {
   
     this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.MetarMaps = data.filter(
           (item: any) => item.filename === 'CP000_None_SOUTH_AFRICA_SAWS.png'
@@ -69,7 +69,7 @@ export class MetarMapsComponent implements OnInit {
     this.APIService.GetAviationFile('', filename).subscribe(
       (data) => {
         const imageUrlSynoptic =
-          'data:image/png;base64,' + data.filetextcontent;
+          'data:image/png;base64,' + data.filecontent;
         this.fileBaseUrlSynoptic =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
         this.loading = false;

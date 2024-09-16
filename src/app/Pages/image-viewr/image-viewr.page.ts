@@ -35,7 +35,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     private dialogRef: MatDialogRef<ImageViewrPage>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    const imageUrl = 'data:image/jpeg/gif;base64,' + data.filetextcontent;
+    const imageUrl = 'data:image/jpeg/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
 

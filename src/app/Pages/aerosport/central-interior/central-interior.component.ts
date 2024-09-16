@@ -115,7 +115,7 @@ export class CentralInteriorComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         this.centralInterio = data.filter((item: any) =>
           item.filename.toLowerCase().includes('cint')
@@ -371,7 +371,7 @@ export class CentralInteriorComponent implements OnInit {
       (data) => {
         console.log('IMAGE:', data);
         const imageUrlPrevious =
-          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+          'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
         this.fileBaseUrlPrevious =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
 
@@ -412,7 +412,7 @@ export class CentralInteriorComponent implements OnInit {
     ).subscribe(
       (data) => {
         console.log('IMAGE:', data);
-        const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        const imageUrlNext = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
         this.fileBaseUrlNext =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
 

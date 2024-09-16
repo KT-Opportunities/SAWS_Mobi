@@ -45,10 +45,10 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.updateTime();
-    this.intervalId = setInterval(() => {
-      this.updateTime();
-    }, 1000);
+    // this.updateTime();
+    // this.intervalId = setInterval(() => {
+    //   this.updateTime();
+    // }, 1000);
 
     this.fetchRecentTafs();
   }
@@ -59,11 +59,11 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateTime() {
-    const now = new Date();
-    this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
-    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
-
+  updateTime(date: string ) {
+    // const now = new Date();
+    this.currentDate =
+      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
 
   forecastPageNavigation() {
@@ -84,6 +84,8 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
         this.loading = false;
         // Hide the spinner
         this.spinner.hide();
+
+        this.updateTime(this.recentTafs[0]?.lastmodified)
       },
       (error) => {
         // Log error to console
@@ -104,7 +106,7 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
     // Filter the TAFs based on the search query
     if (this.searchQuery.trim()) {
       this.filteredTafs = this.recentTafs.filter(taf =>
-        taf.filetextcontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+        taf.filecontent.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     } else {
       this.filteredTafs = this.recentTafs;

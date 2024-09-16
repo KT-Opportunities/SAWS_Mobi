@@ -12,7 +12,7 @@ interface FileData {
   foldername: string;
   filename: string;
   lastmodified: string;
-  filetextcontent: string;
+  filecontent: string;
 }
 
 @Component({
@@ -43,14 +43,14 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.updateTime();
-    this.intervalId = setInterval(() => {
-      this.updateTime();
-    }, 1000);
+    // this.updateTime();
+    // this.intervalId = setInterval(() => {
+    //   this.updateTime();
+    // }, 1000);
 
     this.spinner.show();
     this.loading = true;
-    this.apiService.GetSourceTextFolderFilesTime('taffc', 4).subscribe(
+    this.apiService.GetSourceTextFolderFilesTime('taffc').subscribe(
       (Response: FileData[]) => {
         this.TAFArray = Response.map((item: FileData) => {
           const parts = item.filename.split('/');
@@ -68,6 +68,8 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
         this.spinner.hide();
         console.log('Response received:', Response);
         // Handle response data
+
+        this.updateTime(this.TAFArray[0]?.lastmodified)
       },
       (error) => {
         console.error('API Error:', error);
@@ -84,22 +86,22 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     }
   }
 
-  updateTime() {
-    const now = new Date();
-    this.currentDate = this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';;
-    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';;
-
+  updateTime(date: string ) {
+    // const now = new Date();
+    this.currentDate =
+      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
 
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }
 
-  extractHeadingContent(fileTextContent: string): string | null {
+  extractHeadingContent(filecontent: string): string | null {
     // Use a regular expression to find the content starting with 'TAF'
     const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
   
-    const match = fileTextContent.match(regex);
+    const match = filecontent.match(regex);
   
     if (match) {
       return match[0]; // Return the matched content
@@ -108,10 +110,10 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     }
   }
 
-  extractRemainingContent(filetextcontent: string): string {
+  extractRemainingContent(filecontent: string): string {
     // Extract remaining content after the content used for <h1> (e.g., using regex or string manipulation)
     // Return the extracted content
-    return filetextcontent.substring(filetextcontent.indexOf('TEMPO') + 5);
+    return filecontent.substring(filecontent.indexOf('TEMPO') + 5);
   }
   ImageViewer(item: any) {
     console.log('file Name:', item);

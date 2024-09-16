@@ -134,7 +134,7 @@ export class AeroImageViewerPage implements OnInit {
     console.log('ANOTHER:', this.anotherName);
 
     this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         try {
           console.log('Fetched Data:', data);
@@ -253,7 +253,7 @@ export class AeroImageViewerPage implements OnInit {
       ).subscribe(
         (data) => {
           const imageUrlPrevious =
-            'data:image/gif;base64,' + data.filetextcontent;
+            'data:image/gif;base64,' + data.filecontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
           this.prevday = true;
@@ -273,7 +273,7 @@ export class AeroImageViewerPage implements OnInit {
         ).subscribe(
           (data) => {
             const imageUrlNext =
-              'data:image/gif;base64,' + data.filetextcontent;
+              'data:image/gif;base64,' + data.filecontent;
             this.fileBaseUrlNext =
               this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
             this.nextday = false; // Ensure nextday is false initially
@@ -309,7 +309,7 @@ export class AeroImageViewerPage implements OnInit {
       ).subscribe(
         (data) => {
           const imageUrlPrevious =
-            'data:image/gif;base64,' + data.filetextcontent;
+            'data:image/gif;base64,' + data.filecontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
           this.loading = false;
@@ -334,7 +334,7 @@ export class AeroImageViewerPage implements OnInit {
         this.TsProbability[1].filename
       ).subscribe(
         (data) => {
-          const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent;
+          const imageUrlNext = 'data:image/gif;base64,' + data.filecontent;
           this.fileBaseUrlNext =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
           this.loading = false;

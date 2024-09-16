@@ -3,6 +3,10 @@
   --black: black;
 }
 
+.error-message {
+  margin-left: -70px;
+}
+
 .w-layout-grid {
   grid-row-gap: 16px;
   grid-column-gap: 16px;
@@ -62,6 +66,16 @@
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.b-container {
+  margin-top: 10px;
+  z-index: 1000;
+}
+
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
 }
 
 @media screen and (max-width: 991px) {
@@ -845,7 +859,7 @@
   grid-template-rows: auto auto auto auto;
   grid-template-columns: 1fr;
   margin-top: 10px;
-  height: 51vh;
+  // height: 51vh;
   overflow-y: auto;
 }
 
@@ -2650,8 +2664,9 @@
 
 .chat-date {
   color: #002f5a;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-top: 10px;
+  // margin-bottom: 10px;
+  margin: 0;
   font-family: Montserrat, sans-serif;
   font-size: 18px;
 }
@@ -5353,6 +5368,12 @@
   #w-node-cd3e9c90-8e08-db1f-b9df-21d1e229733d-ce3d400c {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+
+  .form-container {
+    margin-top: 150px;
+    width: 200px;
+    padding-right: 20px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -5361,9 +5382,21 @@
   #w-node-_282bf718-407a-47de-bb05-370afd11ee83-eca2c248 {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+
+  .form-container {
+    margin-top: 100px;
+    width: 200px;
+    padding-right: 20px;
+  }
 }
 
 @media screen and (max-width: 479px) {
+  .form-container {
+    margin-top: 0;
+    width: 150px;
+    padding-right: 20px;
+  }
+  
   .grid-38 {
     width: 340px;
     height: 55vh;
@@ -5437,12 +5470,16 @@
   outline: none;
   box-shadow: 0px 0px 1px 1px hsla(209, 100%, 21%, 1);
 }
-.form-container {
-  width: 300px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-}
+
+// .form-container {
+//   width: 300px;
+//   padding: 20px;
+//   background-color: #fff;
+//   border-radius: 10px;
+
+//   width: 150px;
+//   padding-right: 20px;
+// }
 
 .form-group {
   margin-bottom: 20px;
@@ -5493,6 +5530,7 @@
   box-shadow: 0px 0px 6px 1px hsl(209, 100%, 21%);
   margin-left: -69px;
   color: #00386c;
+  background: white;
   font-size: 12px;
   font-family: verdana, regular;
 }
