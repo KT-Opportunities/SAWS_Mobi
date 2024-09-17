@@ -232,7 +232,7 @@ export class LandingPage implements OnInit {
     this.apiService.getAllAdverts().subscribe(
       (data: any[]) => {
         this.advertisements = data.map(ad => {
-          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(ad.file_url);
+          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' +ad.file_url);
 
           const advertUrl = this.ensureValidURL(ad.advert_url);
 
