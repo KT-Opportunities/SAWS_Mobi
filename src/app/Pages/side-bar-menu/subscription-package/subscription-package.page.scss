@@ -414,13 +414,6 @@ li::before {
   box-shadow: 0 2px 5px 6px rgba(0, 0, 0, 0.2);
 }
 
-.footerdiv {
-  justify-content: center;
-  align-items: center;
-  // margin-top: -95px;
-  display: flex;
-}
-
 .div-block-6 {
   flex-direction: column;
   justify-content: center;
@@ -2715,11 +2708,8 @@ li::before {
 }
 
 .footerdiv {
-  justify-content: center;
-  align-items: center;
-  // margin-top: -95px;
-  margin-top: -78px;
-  display: flex;
+  padding-top: 0;
+  z-index: 1000;
 }
 
 .div-block-6 {
@@ -7072,11 +7062,6 @@ th {
     margin-right: 10px;
     padding-left: 19px;
     padding-right: 20px;
-  }
-
-  .footerdiv {
-    // margin-top: -96px;
-    padding-top: 0;
   }
 
   .registerlabel {

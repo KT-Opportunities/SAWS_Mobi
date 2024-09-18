@@ -81,9 +81,9 @@ export class RadarComponent  implements OnInit {
 
       this.apiService.GetAviationFile(this.folderName, filename).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
-          resolve(filetextcontent);
-          this.openImageViewer(filetextcontent);
+          const filecontent = response.filecontent;
+          resolve(filecontent);
+          this.openImageViewer(filecontent);
         },
         (error) => {
           reject(error);
@@ -98,14 +98,14 @@ export class RadarComponent  implements OnInit {
     });
   }
 
-  openImageViewer(filetextcontent: any) {
+  openImageViewer(filecontent: any) {
     const dialogConfig = new MatDialogConfig();
       dialogConfig.autoFocus = true;
       dialogConfig.disableClose = true;
       dialogConfig.width = '80%';
       dialogConfig.height = '80%';
       dialogConfig.data = {
-        filetextcontent: filetextcontent,
+        filecontent: filecontent,
       };
       
       const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);

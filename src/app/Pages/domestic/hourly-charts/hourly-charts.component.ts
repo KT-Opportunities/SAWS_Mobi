@@ -81,7 +81,7 @@ export class HourlyChartsComponent implements OnInit {
   // Method to fetch hourly chart data
   fetchHourlyChartData() {
     this.loading = true;
-    this.APIService.fetchHourlyChartData('', 12).subscribe(
+    this.APIService.fetchHourlyChartData('').subscribe(
       (data: any[]) => {
         console.log('API Response:', data); // Log the API response
         // Check if data is valid and not empty
@@ -221,7 +221,7 @@ export class HourlyChartsComponent implements OnInit {
 
     // Call fetchSecondAPI with an empty folder name and the constructed file name
     this.fetchSecondAPI('', fileName)
-      .then((filetextcontent) => {
+      .then((filecontent) => {
         this.loading = false;
 
         // Open the image viewer with the file content
@@ -230,7 +230,7 @@ export class HourlyChartsComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.width = '80%';
         dialogConfig.height = '80%';
-        dialogConfig.data = { filetextcontent };
+        dialogConfig.data = { filecontent };
 
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
@@ -252,16 +252,16 @@ export class HourlyChartsComponent implements OnInit {
   }
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filetextcontent
+    // Return a promise that resolves with filecontent
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(folderName, fileName).subscribe(
         (response) => {
-          // Assuming filetextcontent is obtained from the response
-          const filetextcontent = response.filetextcontent;
-          // Log filetextcontent to verify
-          console.log('File Text Content:', filetextcontent);
-          // Resolve the promise with filetextcontent
-          resolve(filetextcontent);
+          // Assuming filecontent is obtained from the response
+          const filecontent = response.filecontent;
+          // Log filecontent to verify
+          console.log('File Text Content:', filecontent);
+          // Resolve the promise with filecontent
+          resolve(filecontent);
         },
         (error) => {
           // Reject the promise if there's an error

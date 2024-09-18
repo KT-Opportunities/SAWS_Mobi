@@ -39,6 +39,7 @@ export class AuthService {
     );
   }
   private isLoggedIn = false;
+  private isAdmin = false;
   private isFreeSubscription = true;
   private isFromSubscription = false;
   private isToReturnToSub = false;
@@ -53,6 +54,10 @@ export class AuthService {
 
   getIsLoggedIn(): boolean {
     return this.isLoggedIn;
+  }
+
+  getIsAdmin(): boolean {
+    return this.isAdmin;
   }
 
   getIsFromSubscription(): boolean {
@@ -74,6 +79,10 @@ export class AuthService {
   setLoggedInStatus(status: boolean): void {
     this.isLoggedIn = status;
     this.loginEventSubject.next(status);
+  }
+
+  setAdminStatus(status: boolean): void {
+    this.isAdmin = status;
   }
 
   setSubscriptionStatus(status: string): void {

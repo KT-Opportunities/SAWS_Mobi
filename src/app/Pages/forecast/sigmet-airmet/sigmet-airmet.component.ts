@@ -36,10 +36,10 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.updateTime();
-    this.intervalId = setInterval(() => {
-      this.updateTime();
-    }, 1000);
+    // this.updateTime();
+    // this.intervalId = setInterval(() => {
+    //   this.updateTime();
+    // }, 1000);
 
     this.getSigmetTextFiles();
   }
@@ -50,11 +50,11 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateTime() {
-    const now = new Date();
+  updateTime(date: string ) {
+    // const now = new Date();
     this.currentDate =
-      this.datePipe.transform(now, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
-    this.currentTime = this.datePipe.transform(now, 'HH:mm:ss') ?? '13:15:45';
+      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
 
   async getSigmetTextFiles() {
@@ -62,9 +62,9 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
       .GetSourceTextFolderFiles('sigmet')
       .subscribe((Response) => {
         Response.forEach((element: any) => {
-          element.Id = element.filetextcontent.split('\n')[2];
+          element.Id = element.filecontent.split('\n')[2];
 
-          var vwValue = element.filetextcontent.split('\n')[2];
+          var vwValue = element.filecontent.split('\n')[2];
           element.heading = vwValue;
         });
 
@@ -72,6 +72,8 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
         this.filteredList = Response;
         this.getAirmetTextFiles();
         console.log('Response ', this.SigmetList);
+
+        this.updateTime(this.SigmetList[0]?.lastmodified)
 
         // this.isLoading = false;
       });
@@ -81,9 +83,9 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
       .GetSourceTextFolderFiles('airmet')
       .subscribe((Response) => {
         Response.forEach((element: any) => {
-          element.Id = element.filetextcontent.split('\n')[2];
+          element.Id = element.filecontent.split('\n')[2];
 
-          var vwValue = element.filetextcontent.split('\n')[2];
+          var vwValue = element.filecontent.split('\n')[2];
           element.heading = vwValue;
         });
 
@@ -104,9 +106,9 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
       .GetSourceTextFolderFiles('gamet')
       .subscribe((Response) => {
         Response.forEach((element: any) => {
-          element.Id = element.filetextcontent.split('\n')[2];
+          element.Id = element.filecontent.split('\n')[2];
 
-          var vwValue = element.filetextcontent.split('\n')[2];
+          var vwValue = element.filecontent.split('\n')[2];
           element.heading = vwValue;
         });
         //push gamet into the sigmet List
@@ -132,7 +134,7 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     }
 
     this.SigmetList = this.SigmetList.filter((a: any) =>
-      a.filetextcontent?.toLowerCase().includes(filterValue.toLowerCase())
+      a.filecontent?.toLowerCase().includes(filterValue.toLowerCase())
     );
   }
 

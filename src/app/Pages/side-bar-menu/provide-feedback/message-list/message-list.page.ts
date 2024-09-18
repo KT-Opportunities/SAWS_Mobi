@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MessageListPage implements OnInit {
   isLogged: boolean = false;
+  isLoading: boolean = true;
   userData: any;
   userLoginDetails: UserLoggedIn[] = [];
   feedbackMessages: any[] = [];
@@ -28,11 +29,13 @@ export class MessageListPage implements OnInit {
 
   ngOnInit() {
     // Check if user is logged in
+
+    // debugger
     var user: any = this.authService.getCurrentUser();
     console.log('userData in ProvideFeedbackPage:', this.userData);
     const userLoginDetails = JSON.parse(user);
     this.aspUserName = userLoginDetails?.aspUserName;
-    this.aspUserID = userLoginDetails?.aspUserID;
+    this.aspUserID = userLoginDetails?.aspUserId;
     this.aspUserEmail = userLoginDetails?.aspUserEmail;
     console.log('userData in ProvideFeedbackPage:', this.aspUserName);
     if (!this.authService.getIsLoggedIn()) {
@@ -44,14 +47,19 @@ export class MessageListPage implements OnInit {
   }
 
   feedbacks() {
+
+       // debugger
     this.APIService.getFeedbackMessagesBySenderId(this.aspUserID).subscribe(
-      (response) => {
+      (response) => {        
         this.feedbackMessages = response;
-        console.log(response);
-        console.log('1'); // Handle the response here
+
+        this.isLoading = false;
+
       },
       (error) => {
         console.error('Error fetching feedback messages:', error);
+
+        this.isLoading = false;
       }
     );
   }
@@ -59,13 +67,15 @@ export class MessageListPage implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();
   }
+  
   providerfeedback() {
     this.router.navigate(['/provide-feedback']);
   }
 
   home() {
-    this.router.navigate(['../../landing-page']);
+    this.router.navigate(['/landing-page']);
   }
+
   navigateToChat(id: string, username: string) {
     this.router.navigate(['/chat', { Id: id, usname: username }]); // Navigate to the 'chat' route
   }

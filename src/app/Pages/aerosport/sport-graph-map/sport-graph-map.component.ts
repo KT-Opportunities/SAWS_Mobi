@@ -116,7 +116,7 @@ export class SportGraphMapComponent implements OnInit {
 
     // Display the first TsProbability image
 
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         this.TsProbability = data.filter(
           (item: any) =>
@@ -212,7 +212,7 @@ export class SportGraphMapComponent implements OnInit {
       }
     );
 
-    this.APIService.GetSourceAviationFolderFilesListNull(24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.Synoptic = data.filter(
           (item: any) => item.filename === 'synoptic.png'
@@ -233,10 +233,10 @@ export class SportGraphMapComponent implements OnInit {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(folderName, fileName).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
+          const filecontent = response.filecontent;
           console.log('DATA2:', this.TsProbability);
 
-          resolve(filetextcontent);
+          resolve(filecontent);
         },
         (error) => {
           reject(error);
@@ -258,7 +258,7 @@ export class SportGraphMapComponent implements OnInit {
       (data) => {
         console.log('IMAGE:', data);
         const imageUrlPrevious =
-          'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+          'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
         this.fileBaseUrlPrevious =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
 
@@ -281,7 +281,7 @@ export class SportGraphMapComponent implements OnInit {
     ).subscribe(
       (data) => {
         console.log('IMAGE:', data);
-        const imageUrlNext = 'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        const imageUrlNext = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
         this.fileBaseUrlNext =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
 

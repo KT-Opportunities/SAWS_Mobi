@@ -58,11 +58,8 @@ export class CloudCoverComponent implements OnInit {
     this.isDropdownFrameOpen = false;
   }
 
-  getCloudCoverImage(foldername: any, time: any, productname: any) {
-    this.APIService.GetSourceAviationFolderFilesList(
-      foldername,
-      time
-    ).subscribe(
+  getCloudCoverImage(foldername: any, time: any, productname: any){
+    this.APIService.GetSourceAviationFolderFilesList(foldername).subscribe(
       (response) => {
         // this.frameArray = response;
 
@@ -81,16 +78,13 @@ export class CloudCoverComponent implements OnInit {
         console.log('this.frameArray', this.frameArray);
 
         if (this.frameArray.length > 0) {
-          this.selectedOptionFrame = this.frameArray[0].lastmodified;
-
-          this.displayImage(this.folderName, this.frameArray[0].filename).then(
-            (filetextcontent) => {
-              const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
-              this.fileBaseUrl =
-                this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-            }
-          );
-        }
+            this.selectedOptionFrame = this.frameArray[0].lastmodified;
+    
+            this.displayImage(this.folderName, this.frameArray[0].filename).then((filecontent) => {
+              const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+              this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+          });
+        }    
 
         this.loading = false;
       },
@@ -108,8 +102,8 @@ export class CloudCoverComponent implements OnInit {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(imagefoldername, imagefilename).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
-          resolve(filetextcontent);
+          const filecontent = response.filecontent;
+          resolve(filecontent);
         },
         (error) => {
           reject(error);
@@ -166,14 +160,14 @@ export class CloudCoverComponent implements OnInit {
   selectDropdownFrame(selectOption: string, imagefilename: string) {
     this.selectedOptionFrame = selectOption;
 
-    this.displayImage(this.folderName, imagefilename).then(
-      (filetextcontent) => {
-        const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
-        this.fileBaseUrl =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-      }
-    );
-  }
+  this.selectedOptionFrame = selectOption;
+
+  this.displayImage(this.folderName, imagefilename).then((filecontent) => {
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+      this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+  });
+
+}
 
   NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
@@ -201,10 +195,9 @@ export class CloudCoverComponent implements OnInit {
 
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
-    this.displayImage(this.folderName, fileName).then((filetextcontent) => {
-      const imageUrlNext = 'data:image/gif;base64,' + filetextcontent;
-      this.fileBaseUrl =
-        this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+    this.displayImage(this.folderName, fileName).then((filecontent) => {
+        const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+        this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
   }
 

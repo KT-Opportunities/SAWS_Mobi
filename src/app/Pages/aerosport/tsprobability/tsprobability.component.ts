@@ -83,7 +83,7 @@ export class TSProbabilityComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         try {
           this.TsProbability = data.filter(
@@ -172,7 +172,7 @@ export class TSProbabilityComponent implements OnInit {
       this.TsProbability[index].filename
     ).subscribe(
       (data) => {
-        const imageUrl = 'data:image/gif;base64,' + data.filetextcontent; // Adjust the MIME type accordingly
+        const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
         this[target] = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
       },
       (error) => {

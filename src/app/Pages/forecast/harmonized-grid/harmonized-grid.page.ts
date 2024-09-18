@@ -10,7 +10,7 @@ interface WAFItem {
   foldername: string;
   filename: string;
   lastmodified: string;
-  filetextcontent: string;
+  filecontent: string;
 }
 
 @Component({
@@ -42,7 +42,7 @@ export class HarmonizedGridPage implements OnInit {
   }
 
   ngOnInit() {
-    this.APIService.GetSourceAviationFolderFilesList('aerosport', 24).subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         try {
           this.TsProbability = data.filter(
@@ -172,7 +172,7 @@ export class HarmonizedGridPage implements OnInit {
     this.isLoading = true;
 
     this.fetchSecondAPI(folderName, fileName)
-      .then((filetextcontent) => {
+      .then((filecontent) => {
         this.isLoading = false;
 
         const dialogConfig = new MatDialogConfig();
@@ -180,7 +180,7 @@ export class HarmonizedGridPage implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.width = '80%';
         dialogConfig.height = '80%';
-        dialogConfig.data = { filetextcontent };
+        dialogConfig.data = { filecontent };
 
         const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
@@ -198,9 +198,9 @@ export class HarmonizedGridPage implements OnInit {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetChartsFile(folderName, fileName).subscribe(
         (response) => {
-          const filetextcontent = response.filetextcontent;
-          console.log('File Text Content:', filetextcontent);
-          resolve(filetextcontent);
+          const filecontent = response.filecontent;
+          console.log('File Text Content:', filecontent);
+          resolve(filecontent);
         },
         (error) => {
           reject(error);
