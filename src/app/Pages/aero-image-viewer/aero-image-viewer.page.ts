@@ -49,21 +49,31 @@ export class AeroImageViewerPage implements OnInit {
       this.isZoomed = !this.isZoomed;
 
       if (this.isZoomed) {
-        imageElement.style.transform = 'scale(3)'; // Adjust zoom level
+        imageElement.style.transform = 'scale(2)'; // Adjust zoom level
         imageElement.style.cursor = 'zoom-out';
-        this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
 
-        // Add margins when zoomed in
-        imageElement.style.marginTop = '946px';
-        imageElement.style.marginLeft = '391px';
+        // Ensure the image zooms from the center and is scrollable in all directions
+        imageElement.style.position = 'relative';
+        imageElement.style.transformOrigin = '0 0'; // Set origin to top-left for better scrolling
+        imageElement.style.top = '0';
+        imageElement.style.left = '0';
+        imageElement.style.margin = '0'; // Remove any margin that may cause issues
+        imageElement.style.width = 'auto'; // Let image width adjust naturally
+        imageElement.style.height = 'auto'; // Let image height adjust naturally
+
+        this.imageContainer.nativeElement.style.overflow = 'scroll'; // Enable scrolling in all directions
       } else {
-        imageElement.style.transform = 'scale(1)';
+        imageElement.style.transform = 'scale(1)'; // Reset zoom
         imageElement.style.cursor = 'zoom-in';
-        this.imageContainer.nativeElement.style.overflow = 'hidden'; // Disable scrolling
 
-        // Remove margins when not zoomed
-        imageElement.style.marginTop = '0';
-        imageElement.style.marginLeft = '0';
+        // Reset the image position and margins
+        imageElement.style.position = 'initial';
+        imageElement.style.transformOrigin = 'center'; // Reset transform origin
+        imageElement.style.top = '0';
+        imageElement.style.left = '0';
+        imageElement.style.margin = '0';
+
+        this.imageContainer.nativeElement.style.overflow = 'hidden'; // Disable scrolling when not zoomed
       }
     }
   }
@@ -172,8 +182,11 @@ export class AeroImageViewerPage implements OnInit {
     );
     this.updateImageRotation();
   }
-  
   setupHammer() {
+    const defaultScale = 1; // Default scale for the image
+    const minScrollScale = 1.2; // Minimum scale where scrolling is enabled
+    const maxScale = 4; // Maximum scale allowed for zooming
+
     if (this.imageContainer && this.imageContainer.nativeElement) {
       const hammer = new Hammer(this.imageContainer.nativeElement);
       const imageElement =
@@ -189,7 +202,18 @@ export class AeroImageViewerPage implements OnInit {
 
       // Handle pinch move
       hammer.on('pinchmove', (ev) => {
-        this.scale = this.pinchStartScale * ev.scale;
+        // Calculate new scale based on pinch, limiting the zoom level
+        this.scale = Math.min(
+          Math.max(this.pinchStartScale * ev.scale, defaultScale),
+          maxScale
+        );
+
+        // Immediately enable scrolling if the image is larger than the container
+        if (this.scale > minScrollScale) {
+          this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
+        }
+
+        // Update image transformation (like scale)
         this.updateImageTransform();
 
         // Adjust margins based on the zoom level
@@ -213,9 +237,41 @@ export class AeroImageViewerPage implements OnInit {
       // Handle pan gestures for scrolling
       hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
       hammer.on('panmove', (ev) => {
-        this.imageContainer.nativeElement.scrollLeft -= ev.deltaX;
-        this.imageContainer.nativeElement.scrollTop -= ev.deltaY;
+        // Enable scrolling when the image is zoomed beyond a threshold scale
+        if (this.scale > minScrollScale) {
+          // Calculate the maximum scrollable area
+          const maxScrollLeft =
+            imageElement.offsetWidth * this.scale -
+            this.imageContainer.nativeElement.clientWidth;
+          const maxScrollTop =
+            imageElement.offsetHeight * this.scale -
+            this.imageContainer.nativeElement.clientHeight;
+
+          // Scroll the container within its limits
+          this.imageContainer.nativeElement.scrollLeft = Math.min(
+            Math.max(
+              this.imageContainer.nativeElement.scrollLeft - ev.deltaX,
+              0
+            ),
+            maxScrollLeft
+          );
+          this.imageContainer.nativeElement.scrollTop = Math.min(
+            Math.max(
+              this.imageContainer.nativeElement.scrollTop - ev.deltaY,
+              0
+            ),
+            maxScrollTop
+          );
+        }
       });
+    }
+  }
+
+  updateImageTransform() {
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      imageElement.style.transform = `scale(${this.scale})`;
+      imageElement.style.transformOrigin = '0 0'; // Keep origin at top-left for better control
     }
   }
 
@@ -237,13 +293,13 @@ export class AeroImageViewerPage implements OnInit {
         this.rotationDegree = 0;
     }
   }
-  updateImageTransform() {
-    const imageElement = this.imageContainer.nativeElement.querySelector('img');
-    if (imageElement) {
-      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
-      imageElement.style.cursor = this.isZoomed ? 'zoom-out' : 'zoom-in';
-    }
-  }
+  // updateImageTransform() {
+  //   const imageElement = this.imageContainer.nativeElement.querySelector('img');
+  //   if (imageElement) {
+  //     imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
+  //     imageElement.style.cursor = this.isZoomed ? 'zoom-out' : 'zoom-in';
+  //   }
+  // }
   loadImages() {
     if (this.TsProbability.length > 0) {
       // Load the previous day image first
