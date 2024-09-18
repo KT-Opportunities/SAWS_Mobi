@@ -36,7 +36,7 @@ export class APIService {
 
   sendCredentials(body: CredentialsDetails) {
     return this.http.post<any>(
-      environment.serverAPI + "v1/Authenticate/SendCredentials",
+      environment.serverAPI + 'v1/Authenticate/SendCredentials',
       body
     );
   }
@@ -147,7 +147,7 @@ export class APIService {
 
     // Construct the query parameters including foldername and lasthours
     const queryParams = {
-      foldername: foldername
+      foldername: foldername,
     };
 
     // Make the HTTP GET request with query parameters
@@ -171,7 +171,7 @@ export class APIService {
   GetSourceAviationFolderFilesList(foldername: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceAviationFolderFilesList?imagefoldername=${foldername}`
+        `v1/RawSource/GetSourceAviationFolderFilesList?foldername=${foldername}`
     );
   }
 
@@ -248,13 +248,13 @@ export class APIService {
 
   CancelSubscription(subscriptionId: number) {
     const body = {
-      subscriptionId: subscriptionId
+      subscriptionId: subscriptionId,
     };
 
     return this.http.post<any>(
       environment.serverAPI +
         `v1/Subscriptions/CancelSubscription?subscriptionId=${subscriptionId}`,
-        body
+      body
     );
   }
 
@@ -293,26 +293,22 @@ export class APIService {
     );
   }
 
-  fetchWindChartImages(
-    foldername: any
-  ): Observable<any[]> {
+  fetchWindChartImages(foldername: any): Observable<any[]> {
     const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
 
     // Construct the query parameters including foldername and lasthours
     const queryParams = {
-      imagefoldername: foldername
+      imagefoldername: foldername,
     };
 
     // Make the HTTP GET request with query parameters
     return this.http.get<any[]>(apiUrl, { params: queryParams });
   }
 
-  fetchHourlyChartData(
-    foldername: any
-  ): Observable<any[]> {
+  fetchHourlyChartData(foldername: any): Observable<any[]> {
     const apiUrl = `${environment.serverAPI}v1/RawSource/GetSourceAviationFolderFilesList`;
     const queryParams = {
-      imagefoldername: foldername
+      imagefoldername: foldername,
     };
     return this.http.get<any[]>(apiUrl, { params: queryParams });
   }
