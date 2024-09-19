@@ -9,13 +9,16 @@
 
 .image-wrapper {
   position: relative;
-  overflow: auto; /* Enable scrolling */
+  overflow: auto; /* Enable scrolling in all directions */
   width: 100%;
-  height: 100%; /* Adjust height as needed */
+  height: 100%; /* Ensure the container takes full height */
   display: flex;
   justify-content: center;
   align-items: center;
   top: 23px;
+  /* Added to ensure the container expands to fit content */
+  min-height: 0;
+  min-width: 0;
 }
 
 .fileImage {
@@ -23,33 +26,26 @@
   max-width: none; /* Allow the image to grow larger than its container */
   max-height: none;
   cursor: grab; /* Cursor changes for panning */
+  /* Ensure the image maintains its aspect ratio and scales correctly */
+  width: auto;
+  height: auto;
+  position: absolute; /* Positioning context for transformation */
+  /* Ensures the image doesn’t exceed the bounds of its container */
+  display: block;
 }
 
-// .image-wrapper {
-//   position: relative;
-//   overflow: hidden; /* Make sure it's hidden initially */
-//   width: 100%;
-//   height: 100%; 
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-
-
-
-.rotate-icon{
+/* Keep this for optional rotation icon styling */
+.rotate-icon {
   --background: green;
   --color: white;
-  // position: relative;
-  // right: 142px;
   font-size: 11px;
   position: fixed;
   top: 11%;
   z-index: 10;
-
 }
 
+
+/* Other styles remain unchanged */
 .attachment-file {
   display: flex;
   flex-direction: column;
@@ -59,7 +55,6 @@
 }
 
 .w-button {
-  /* margin-top: 10px; */
   width: 100px !important;
 }
 
@@ -76,11 +71,8 @@
 .adm {
   color: #00386c;
   text-align: right;
-  /* margin-top: 0; */
-  /* margin-bottom: 0; */
   font-family: Montserrat, sans-serif;
   font-size: 12px;
-  /* font-weight: 700; */
 }
 
 .grid-16 {
@@ -142,11 +134,4 @@ iframe:focus {
 
 iframe[seamless] {
   display: block;
-}
-.fileImage {
-  // width: 100%;
-  // height: 100%;
-  justify-content: center;
-  height: 92%;
-  // object-fit: contain; /* Ensures the image maintains aspect ratio while filling the container */
 }
