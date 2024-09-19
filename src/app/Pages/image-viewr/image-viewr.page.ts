@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  ElementRef,
-  ViewChild,
-  Inject,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, Inject, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
@@ -36,7 +28,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     private dialogRef: MatDialogRef<ImageViewrPage>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    const imageUrl = 'data:image/jpeg/gif;base64,' + data.filecontent; // Image data
+    const imageUrl = 'data:image/jpeg;base64,' + data.filecontent; // Image data
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
 
@@ -110,7 +102,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
 
   // Toggle zoom with screen reader feedback
   toggleZoom() {
-    const image = this.imageContainer.nativeElement.querySelector('.fileImage') as HTMLElement;
+    const image = this.imageContainer.nativeElement.querySelector('img') as HTMLElement;
 
     if (this.isZoomedIn) {
       this.currentScale = 1;
