@@ -45,6 +45,8 @@
 
 
 <mat-dialog-content>
+  <div #liveRegion aria-live="polite" style="position: absolute; width: 0; height: 0; overflow: hidden;"></div>
+
   <ion-button (click)="rotateImage()" class="rotate-icon">
     <ion-icon name="refresh-outline"></ion-icon>
   </ion-button>
@@ -64,7 +66,9 @@
       />
     </svg>
   </span>
-  <div class="top"></div>
+  <div class="top" style="position: relative;
+  margin-top: 9px;
+  left: 3px !important;"></div>
   <div class="image-wrapper" #imageContainer>
     <img [src]="fileBaseUrl" alt="Selected Image" class="fileImage" />
   </div>

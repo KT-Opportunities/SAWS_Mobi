@@ -18,24 +18,25 @@ import * as Hammer from 'hammerjs';
 })
 export class ImageViewrPage implements OnInit, AfterViewInit {
   @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
+  @ViewChild('liveRegion', { static: true }) liveRegion!: ElementRef; // Element for screen reader announcements
   rotationDegree = 0;
   fileBaseUrl: SafeResourceUrl;
   isZoomedIn = false;
-  currentScale = 1; // Track the current scale for zoom
-  lastScale = 1; // Store the last scale to handle multiple zoom actions
+  currentScale = 1;
+  lastScale = 1;
   hammer!: HammerManager;
 
-  panX = 0; // Horizontal panning position
-  panY = 0; // Vertical panning position
-  lastPanX = 0; // Store the last panX position when panning ends
-  lastPanY = 0; // Store the last panY position when panning ends
+  panX = 0;
+  panY = 0;
+  lastPanX = 0;
+  lastPanY = 0;
 
   constructor(
     private sanitizer: DomSanitizer,
     private dialogRef: MatDialogRef<ImageViewrPage>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    const imageUrl = 'data:image/jpeg/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+    const imageUrl = 'data:image/jpeg/gif;base64,' + data.filecontent; // Image data
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
 
@@ -45,35 +46,45 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.setupPinchToZoom();
+    this.setupDoubleTap();
+    this.setupKeyboardAccessibility();
   }
 
-  // Set up Hammer.js to handle pinch-to-zoom and panning
+  // Set up double-tap zoom functionality
+  setupDoubleTap() {
+    const imageContainer = this.imageContainer.nativeElement as HTMLElement;
+    this.hammer = new Hammer(imageContainer);
+    this.hammer.get('doubletap').set({ taps: 2 });
+
+    this.hammer.on('doubletap', () => {
+      this.toggleZoom();
+      this.announceScreenReader('Image zoom toggled.');
+    });
+  }
+
+  // Pinch-to-zoom and panning setup
   setupPinchToZoom() {
     const imageContainer = this.imageContainer.nativeElement as HTMLElement;
     this.hammer = new Hammer(imageContainer);
 
-    // Enable pinch and pan gestures
     this.hammer.get('pinch').set({ enable: true });
     this.hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
-    // Handle pinchmove event for zooming
     this.hammer.on('pinchmove', (event) => {
-      this.currentScale = Math.max(1, Math.min(this.lastScale * event.scale, 4)); // Restrict zoom between 1x and 4x
+      this.currentScale = Math.max(1, Math.min(this.lastScale * event.scale, 4));
       this.applyImageTransform();
+      this.announceScreenReader('Zooming in progress.');
     });
 
-    // Update last scale when pinch ends
     this.hammer.on('pinchend', () => {
       this.lastScale = this.currentScale;
     });
 
-    // Handle panning (dragging) the image
     this.hammer.on('panmove', (event) => {
       if (this.currentScale > 1) {
         this.panX = this.lastPanX + event.deltaX;
         this.panY = this.lastPanY + event.deltaY;
 
-        // Adjust the pan boundaries to allow full scrolling when zoomed in
         const containerWidth = this.imageContainer.nativeElement.offsetWidth;
         const containerHeight = this.imageContainer.nativeElement.offsetHeight;
 
@@ -84,7 +95,6 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
         const maxPanX = (scaledImageWidth - containerWidth) / 2;
         const maxPanY = (scaledImageHeight - containerHeight) / 2;
 
-        // Ensure panning stays within bounds (allow panning to all sides)
         this.panX = Math.max(-maxPanX, Math.min(maxPanX, this.panX));
         this.panY = Math.max(-maxPanY, Math.min(maxPanY, this.panY));
 
@@ -92,46 +102,35 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
       }
     });
 
-    // Store the final pan positions after pan ends
     this.hammer.on('panend', () => {
       this.lastPanX = this.panX;
       this.lastPanY = this.panY;
     });
   }
 
-  // Toggle zoom on double-click
-  @HostListener('dblclick', ['$event'])
-  onDoubleClick(event: MouseEvent): void {
-    this.toggleZoom();
-  }
-
-  // Toggle zoom functionality
+  // Toggle zoom with screen reader feedback
   toggleZoom() {
     const image = this.imageContainer.nativeElement.querySelector('.fileImage') as HTMLElement;
 
     if (this.isZoomedIn) {
-      this.currentScale = 1; // Reset zoom
+      this.currentScale = 1;
       this.panX = 0;
-      this.panY = 0; // Reset panning
+      this.panY = 0;
       image.style.cursor = 'zoom-in';
+      this.announceScreenReader('Zoomed out.');
     } else {
-      this.currentScale = 2; // Zoom in to 2x
+      this.currentScale = 2;
       image.style.cursor = 'zoom-out';
+      this.announceScreenReader('Zoomed in.');
     }
 
-    this.isZoomedIn = !this.isZoomedIn; // Toggle zoom state
-    this.lastScale = this.currentScale; // Update the last scale
-    this.applyImageTransform(); // Apply the transformation
-  }
-
-  // Rotate image by 90 degrees on each call
-  rotateImage(): void {
-    this.rotationDegree = (this.rotationDegree + 90) % 360;
+    this.isZoomedIn = !this.isZoomedIn;
+    this.lastScale = this.currentScale;
     this.applyImageTransform();
   }
 
-  // Apply the transformation to scale, rotate, and pan the image
-  applyImageTransform(): void {
+  // Apply zoom, pan, and rotate transformations
+  applyImageTransform() {
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
     if (imageElement) {
       const scale = this.currentScale;
@@ -139,19 +138,71 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     }
   }
 
-  // Close the dialog when needed
-  closeImageDialog() {
-    this.dialogRef.close();
+  // Rotate the image and announce it to screen readers
+  rotateImage() {
+    this.rotationDegree = (this.rotationDegree + 90) % 360;
+    this.applyImageTransform();
+    this.announceScreenReader(`Image rotated to ${this.rotationDegree} degrees.`);
   }
 
-  // Handle orientation change and adjust rotation accordingly
+  // Close the dialog
+  closeImageDialog() {
+    this.dialogRef.close();
+    this.announceScreenReader('Image dialog closed.');
+  }
+
+  // Handle keyboard navigation for accessibility
+  setupKeyboardAccessibility() {
+    this.imageContainer.nativeElement.setAttribute('tabindex', '0'); // Make the image container focusable
+
+    this.imageContainer.nativeElement.addEventListener('keydown', (event: KeyboardEvent) => {
+      switch (event.key) {
+        case 'ArrowUp':
+          this.panY -= 10;
+          this.applyImageTransform();
+          break;
+        case 'ArrowDown':
+          this.panY += 10;
+          this.applyImageTransform();
+          break;
+        case 'ArrowLeft':
+          this.panX -= 10;
+          this.applyImageTransform();
+          break;
+        case 'ArrowRight':
+          this.panX += 10;
+          this.applyImageTransform();
+          break;
+        case '+':
+          this.currentScale = Math.min(4, this.currentScale + 0.1);
+          this.applyImageTransform();
+          break;
+        case '-':
+          this.currentScale = Math.max(1, this.currentScale - 0.1);
+          this.applyImageTransform();
+          break;
+        case 'r':
+          this.rotateImage();
+          break;
+        case 'Escape':
+          this.closeImageDialog();
+          break;
+      }
+    });
+  }
+
+  // Announce messages to screen readers
+  announceScreenReader(message: string) {
+    this.liveRegion.nativeElement.innerText = message;
+  }
+
+  // Handle window orientation changes
   @HostListener('window:orientationchange', ['$event'])
-  onOrientationChange(event: any) {
+  onOrientationChange() {
     this.updateImageRotation();
   }
 
-  // Update the image rotation based on device orientation
-  updateImageRotation(): void {
+  updateImageRotation() {
     switch (window.orientation) {
       case 0:
         this.rotationDegree = 0;
