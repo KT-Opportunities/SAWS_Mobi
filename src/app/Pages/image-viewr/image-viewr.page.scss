@@ -9,30 +9,29 @@
 
 .image-wrapper {
   position: relative;
-  overflow: auto; /* Enable scrolling in all directions */
+  overflow: auto; /* Enable scrolling */
   width: 100%;
   height: 100%; /* Ensure the container takes full height */
   display: flex;
   justify-content: center;
   align-items: center;
   top: 23px;
-  /* Added to ensure the container expands to fit content */
   min-height: 0;
   min-width: 0;
 }
 
 .fileImage {
+  transform-origin: center center;
   transition: transform 0.3s ease; /* Smooth zoom transition */
   max-width: none; /* Allow the image to grow larger than its container */
   max-height: none;
   cursor: grab; /* Cursor changes for panning */
-  /* Ensure the image maintains its aspect ratio and scales correctly */
-  width: auto;
+  width: auto; /* Ensure image size adapts */
   height: auto;
-  position: absolute; /* Positioning context for transformation */
-  /* Ensures the image doesn’t exceed the bounds of its container */
+  position: relative; /* Positioning context for transformation */
   display: block;
 }
+
 
 /* Keep this for optional rotation icon styling */
 .rotate-icon {
@@ -42,6 +41,12 @@
   position: fixed;
   top: 11%;
   z-index: 10;
+  height: 25px;
+  min-height: 14px;
+  width: 35px;
+  min-width: 22px;
+  
+  left: 43px;
 }
 
 
