@@ -5598,9 +5598,9 @@
 .selected-file-name {
   position: absolute; /* Position absolutely relative to parent */
   top: 50%; /* Position vertically at 50% of parent */
-  left: 5px; /* Adjust left offset for spacing */
+  left: 30px; /* Adjust left offset for spacing */
   transform: translateY(-50%); /* Center vertically */
-
+  color: #00386c;
   overflow: hidden; /* Hide overflow text */
   white-space: nowrap; /* Prevent text wrapping */
   text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
