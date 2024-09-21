@@ -49,31 +49,45 @@ export class AeroImageViewerPage implements OnInit {
       this.isZoomed = !this.isZoomed;
 
       if (this.isZoomed) {
-        imageElement.style.transform = 'scale(2)'; // Adjust zoom level
+        // Enable zoom
+        imageElement.style.transform = 'scale(2)'; // Set zoom level
         imageElement.style.cursor = 'zoom-out';
 
-        // Ensure the image zooms from the center and is scrollable in all directions
-        imageElement.style.position = 'relative';
-        imageElement.style.transformOrigin = '0 0'; // Set origin to top-left for better scrolling
+        // Ensure zoom is centered and scrollable
+        imageElement.style.transformOrigin = 'center center'; // Ensure zoom from center
+        imageElement.style.position = 'sticky'; // Allow free movement within the container
         imageElement.style.top = '0';
         imageElement.style.left = '0';
-        imageElement.style.margin = '0'; // Remove any margin that may cause issues
-        imageElement.style.width = 'auto'; // Let image width adjust naturally
-        imageElement.style.height = 'auto'; // Let image height adjust naturally
+        imageElement.style.width = 'auto'; // Auto-size to prevent fixed sizes causing cutoffs
+        imageElement.style.height = 'auto';
+        imageElement.style.maxWidth = '100%'; // Ensure no image cutoffs due to max-width
+        imageElement.style.maxHeight = '100%';
+        // imageElement.style.marginTop = '131px';
+        // imageElement.style.marginLeft = '377px';
 
-        this.imageContainer.nativeElement.style.overflow = 'scroll'; // Enable scrolling in all directions
+        // Ensure container allows scrolling and behaves like a viewport
+        this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
+        this.imageContainer.nativeElement.style.position = 'relative'; // Ensure relative positioning
+        this.imageContainer.nativeElement.style.height = '100%'; // Container should fill its parent
+        this.imageContainer.nativeElement.style.width = '100%';
+
+        // Ensure that the container can grow to fit the zoomed image
+        this.imageContainer.nativeElement.style.display = 'block';
       } else {
-        imageElement.style.transform = 'scale(1)'; // Reset zoom
+        // Disable zoom
+        imageElement.style.transform = 'scale(1)';
         imageElement.style.cursor = 'zoom-in';
 
-        // Reset the image position and margins
-        imageElement.style.position = 'initial';
-        imageElement.style.transformOrigin = 'center'; // Reset transform origin
+        // Reset image positioning
+        imageElement.style.position = 'relative';
+        imageElement.style.transformOrigin = 'center';
         imageElement.style.top = '0';
         imageElement.style.left = '0';
-        imageElement.style.margin = '0';
+        imageElement.style.width = '100%'; // Reset to default size
+        imageElement.style.height = 'auto';
 
-        this.imageContainer.nativeElement.style.overflow = 'hidden'; // Disable scrolling when not zoomed
+        // Disable scrolling when zoom is off
+        this.imageContainer.nativeElement.style.overflow = 'hidden';
       }
     }
   }
@@ -121,7 +135,6 @@ export class AeroImageViewerPage implements OnInit {
     }
   }
 
-  10: 29;
   fileBaseUrl: any = null; // Holds the image URL for display
   rotationAngle: number = 0; // T
   ngOnInit() {
@@ -270,8 +283,8 @@ export class AeroImageViewerPage implements OnInit {
   updateImageTransform() {
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
     if (imageElement) {
-      imageElement.style.transform = `scale(${this.scale})`;
-      imageElement.style.transformOrigin = '0 0'; // Keep origin at top-left for better control
+      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
+      imageElement.style.transformOrigin = '20px 20px'; // Always zoom from the center
     }
   }
 
@@ -308,8 +321,7 @@ export class AeroImageViewerPage implements OnInit {
         this.TsProbability[0].filename
       ).subscribe(
         (data) => {
-          const imageUrlPrevious =
-            'data:image/gif;base64,' + data.filecontent;
+          const imageUrlPrevious = 'data:image/gif;base64,' + data.filecontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
           this.prevday = true;
@@ -328,8 +340,7 @@ export class AeroImageViewerPage implements OnInit {
           this.TsProbability[1].filename
         ).subscribe(
           (data) => {
-            const imageUrlNext =
-              'data:image/gif;base64,' + data.filecontent;
+            const imageUrlNext = 'data:image/gif;base64,' + data.filecontent;
             this.fileBaseUrlNext =
               this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
             this.nextday = false; // Ensure nextday is false initially
@@ -364,8 +375,7 @@ export class AeroImageViewerPage implements OnInit {
         this.TsProbability[0].filename
       ).subscribe(
         (data) => {
-          const imageUrlPrevious =
-            'data:image/gif;base64,' + data.filecontent;
+          const imageUrlPrevious = 'data:image/gif;base64,' + data.filecontent;
           this.fileBaseUrlPrevious =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
           this.loading = false;
