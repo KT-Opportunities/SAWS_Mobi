@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { GpmComponent } from './gpm.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
 @NgModule({
   imports: [
     CommonModule,
