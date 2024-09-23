@@ -107,9 +107,10 @@ export class ChatPage implements OnInit {
     console.log('id: ', this.Id);
     console.log('id: ', this.username);
 
-    this.APIService.getFeedbackById(this.Id).subscribe((fback: Feedback) => {
-      this.feedback = fback;
-      this.fdMessages = fback.FeedbackMessages;
+    this.APIService.getFeedbackById(this.Id).subscribe((fback: any) => {
+      this.feedback = fback.detailDescription;
+      debugger
+      this.fdMessages = fback.detailDescription.feedbackMessages;
       console.log('feedback: ', this.feedback);
       this.feedbackForm.patchValue(fback);
       this.cdr.detectChanges();
