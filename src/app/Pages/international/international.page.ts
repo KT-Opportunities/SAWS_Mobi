@@ -11,8 +11,6 @@ import { ImageViewrPage } from '../image-viewr/image-viewr.page';
 })
 export class InternationalPage {
   isLogged: boolean = false;
-  fileBaseUrl: any = null; // Holds the image URL for display
-  rotationAngle: number = 0; // Tracks the rotation angle
 
   constructor(
       private router: Router,
@@ -62,14 +60,5 @@ export class InternationalPage {
   NavigateToGraphicalSigmetAirmet() {
     this.router.navigate(['/international/graphic-sigmet-airmet']);
  }
-
- 
- // New method to rotate the image
- rotateImage(): void {
-  this.rotationAngle += 90;
-  if (this.rotationAngle >= 360) {
-    this.rotationAngle = 0;
-  }
-}
 
 }
