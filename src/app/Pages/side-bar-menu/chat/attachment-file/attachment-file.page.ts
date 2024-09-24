@@ -51,6 +51,8 @@ export class AttachmentFilePage implements OnInit {
     const routerUrl = this.router.url;
     if(routerUrl.includes("chat")){
       this.buttonText = "Send";
+    }else{
+      this.buttonText = "close";
     }
     console.log('DATA++++', this.data);
     console.log('DATA++++', this.data.imageSRC);
