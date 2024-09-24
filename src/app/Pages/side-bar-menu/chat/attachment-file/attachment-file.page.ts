@@ -21,6 +21,7 @@ export class AttachmentFilePage implements OnInit {
   isVideo: boolean = false;
   isAudio: boolean = false;
   isApplication: boolean = false;
+  buttonText:string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +47,11 @@ export class AttachmentFilePage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("RouterURL", this.router.url);
+    const routerUrl = this.router.url;
+    if(routerUrl.includes("chat")){
+      this.buttonText = "Send";
+    }
     console.log('DATA++++', this.data);
     console.log('DATA++++', this.data.imageSRC);
   }
