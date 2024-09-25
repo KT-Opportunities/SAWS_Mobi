@@ -91,110 +91,6 @@ export class AeroImageViewerPage implements OnInit {
       }
     }
   }
-
-  panZoomConfig: PanZoomConfig = new PanZoomConfig();
-  nextday: boolean = false;
-  prevday: boolean = true;
-  TsProbability: any = [];
-  loading: boolean = true;
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  name: string = '';
-  anotherName: string = '';
-  displayName: string = '';
-  kwazulNatal: string = '';
-
-  isPanning = false;
-  initialPanX = 0;
-  initialPanY = 0;
-  filenameToDisplayName: { [key: string]: string } = {
-    'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
-    'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
-    'xl-25.7328.18_spot_d1.gif': 'Pretoria',
-    'xl-28.40229.373_spot_d1.gif': 'Van Reenen',
-    'xl-27.99824.749_spot_d1.gif': 'Jan Kempdorp ',
-    'xl-26.3528.46_spot_d1.gif': 'Dunnottar',
-    'xl-24.3531.00_spot_d1.gif': 'Hoeadspruid',
-    'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
-    'xl-26.038827.587_spot_d1.gif': 'Orient',
-  };
-
-  constructor(
-    private http: HttpClient,
-    private APIService: APIService,
-    private sanitizer: DomSanitizer
-  ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-  }
-  rotateImage(): void {
-    this.rotationDegree += 90;
-    if (this.rotationDegree >= 360) {
-      this.rotationDegree = 0;
-    }
-  }
-
-  fileBaseUrl: any = null; // Holds the image URL for display
-  rotationAngle: number = 0; // T
-  ngOnInit() {
-    this.setupHammer();
-    this.name = history.state.names || '';
-    this.anotherName = history.state.names2 || '';
-    this.displayName = history.state.names2 || '';
-    this.kwazulNatal = history.state.kwazulNatal || '';
-    console.log('ANOTHER:', this.kwazulNatal);
-
-    if (this.anotherName.includes('_spot_d1')) {
-      this.anotherName = this.anotherName.split('_spot_d1')[0];
-    } else if (this.anotherName.includes('_spot_d2')) {
-      this.anotherName = this.anotherName.split('_spot_d2')[0];
-    } else if (this.kwazulNatal.includes('_d1.gif')) {
-      this.kwazulNatal = this.kwazulNatal.split('_d1.gif')[0];
-    } else if (this.kwazulNatal.includes('_d2.gif')) {
-      this.kwazulNatal = this.kwazulNatal.split('_d2.gif')[0];
-    }
-    console.log('ANOTHER:', this.anotherName);
-
-    this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
-      (data) => {
-        try {
-          console.log('Fetched Data:', data);
-          if (this.name) {
-            this.TsProbability = data.filter(
-              (item: any) =>
-                item.filename === 'xl' + this.name + '_spot_d1.gif' ||
-                item.filename === 'xl' + this.name + '_spot_d2.gif'
-            );
-          } else if (this.anotherName) {
-            this.TsProbability = data.filter(
-              (item: any) =>
-                item.filename === this.anotherName + '_spot_d1.gif' ||
-                item.filename === this.anotherName + '_spot_d2.gif'
-            );
-          } else if (this.kwazulNatal) {
-            this.TsProbability = data.filter(
-              (item: any) =>
-                item.filename === this.kwazulNatal + '_d1.gif' ||
-                item.filename === this.kwazulNatal + '_d2.gif'
-            );
-          }
-
-          console.log('Filtered TsProbability:', this.TsProbability);
-          this.loadImages(); // Load both images after filtering data
-        } catch (error) {
-          console.log('Error parsing JSON data:', error);
-          this.loading = false;
-        }
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
-    this.updateImageRotation();
-  }
   setupHammer() {
     const defaultScale = 1; // Default scale for the image
     const minScrollScale = 1.2; // Minimum scale where scrolling is enabled
@@ -306,6 +202,110 @@ export class AeroImageViewerPage implements OnInit {
         this.rotationDegree = 0;
     }
   }
+  fileBaseUrl: any = null; // Holds the image URL for display
+  rotationAngle: number = 0; // T
+  ngOnInit() {
+    this.setupHammer();
+    this.name = history.state.names || '';
+    this.anotherName = history.state.names2 || '';
+    this.displayName = history.state.names2 || '';
+    this.kwazulNatal = history.state.kwazulNatal || '';
+    console.log('ANOTHER:', this.kwazulNatal);
+
+    if (this.anotherName.includes('_spot_d1')) {
+      this.anotherName = this.anotherName.split('_spot_d1')[0];
+    } else if (this.anotherName.includes('_spot_d2')) {
+      this.anotherName = this.anotherName.split('_spot_d2')[0];
+    } else if (this.kwazulNatal.includes('_d1.gif')) {
+      this.kwazulNatal = this.kwazulNatal.split('_d1.gif')[0];
+    } else if (this.kwazulNatal.includes('_d2.gif')) {
+      this.kwazulNatal = this.kwazulNatal.split('_d2.gif')[0];
+    }
+    console.log('ANOTHER:', this.anotherName);
+
+    this.loading = true;
+    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
+      (data) => {
+        try {
+          console.log('Fetched Data:', data);
+          if (this.name) {
+            this.TsProbability = data.filter(
+              (item: any) =>
+                item.filename === 'xl' + this.name + '_spot_d1.gif' ||
+                item.filename === 'xl' + this.name + '_spot_d2.gif'
+            );
+          } else if (this.anotherName) {
+            this.TsProbability = data.filter(
+              (item: any) =>
+                item.filename === this.anotherName + '_spot_d1.gif' ||
+                item.filename === this.anotherName + '_spot_d2.gif'
+            );
+          } else if (this.kwazulNatal) {
+            this.TsProbability = data.filter(
+              (item: any) =>
+                item.filename === this.kwazulNatal + '_d1.gif' ||
+                item.filename === this.kwazulNatal + '_d2.gif'
+            );
+          }
+
+          console.log('Filtered TsProbability:', this.TsProbability);
+          this.loadImages(); // Load both images after filtering data
+        } catch (error) {
+          console.log('Error parsing JSON data:', error);
+          this.loading = false;
+        }
+      },
+      (error) => {
+        console.log('Error fetching JSON data:', error);
+        this.loading = false;
+      }
+    );
+    this.updateImageRotation();
+  }
+ 
+  panZoomConfig: PanZoomConfig = new PanZoomConfig();
+  nextday: boolean = false;
+  prevday: boolean = true;
+  TsProbability: any = [];
+  loading: boolean = true;
+  fileBaseUrlNext: SafeResourceUrl;
+  fileBaseUrlPrevious: SafeResourceUrl;
+  name: string = '';
+  anotherName: string = '';
+  displayName: string = '';
+  kwazulNatal: string = '';
+
+  isPanning = false;
+  initialPanX = 0;
+  initialPanY = 0;
+  filenameToDisplayName: { [key: string]: string } = {
+    'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
+    'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
+    'xl-25.7328.18_spot_d1.gif': 'Pretoria',
+    'xl-28.40229.373_spot_d1.gif': 'Van Reenen',
+    'xl-27.99824.749_spot_d1.gif': 'Jan Kempdorp ',
+    'xl-26.3528.46_spot_d1.gif': 'Dunnottar',
+    'xl-24.3531.00_spot_d1.gif': 'Hoeadspruid',
+    'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
+    'xl-26.038827.587_spot_d1.gif': 'Orient',
+  };
+
+  constructor(
+    private http: HttpClient,
+    private APIService: APIService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
+  rotateImage(): void {
+    this.rotationDegree += 90;
+    if (this.rotationDegree >= 360) {
+      this.rotationDegree = 0;
+    }
+  }
+
   // updateImageTransform() {
   //   const imageElement = this.imageContainer.nativeElement.querySelector('img');
   //   if (imageElement) {

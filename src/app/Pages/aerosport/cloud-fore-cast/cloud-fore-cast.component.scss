@@ -14,7 +14,6 @@
   overflow: scroll; /* Enable scrolling when zoom is active */
 }
 
-
 .w-slider-arrow-left,
 .w-slider-arrow-right {
   color: #002548;
@@ -153,6 +152,30 @@
   height: 50vh;
 }
 
+.icon-2-copy {
+  color: #fff;
+  margin-top: 10.4907px;
+  margin-right: -179px;
+}
+.w-slider-arrow-left,
+.w-slider-arrow-right {
+  color: #002548 !important;
+}
+.image-container {
+  position: relative;
+  width: 100%;
+  max-height: 56vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  overflow: hidden;
+  margin-top: 101px;
+
+  margin-bottom: 10px;
+  height: 56vh;
+}
+
 .responsive-image {
   transition: transform 0.2s ease; /* Smooth transition for scaling */
   max-width: 100%;
@@ -167,8 +190,8 @@
   justify-content: center;
   align-items: center;
 }
-.icon-2-copy {
-  color: #fff;
-  margin-top: 10.4907px;
-  margin-right: -179px;
+.rotate-button {
+  --background: #28a745; /* Green color */
+  --background-activated: #219638; /* Darker green when clicked */
+  --background-hover: #36b55b; /* Lighter green on hover */
 }

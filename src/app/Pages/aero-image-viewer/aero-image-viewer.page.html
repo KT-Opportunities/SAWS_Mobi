@@ -4,17 +4,35 @@
   <div id="top"></div>
   <app-package-content>
     <app-package-header class="package-header">
-      {{ name || kwazulNatal || (anotherName.startsWith('xl') ? anotherName.substring(2) : anotherName) || filenameToDisplayName[displayName] }}
-      <div class="metar-history-grid" *ngIf="TsProbability.length > 1">
-        <ion-button fill="clear" class="nav-button" (click)="previousDay()" [disabled]="!nextday" [ngClass]="{ 'disabled-button': !nextday }">
+      {{ name || kwazulNatal || (anotherName.startsWith('xl') ?
+      anotherName.substring(2) : anotherName) ||
+      filenameToDisplayName[displayName] }}
+      <div class="metar-history-grid">
+        <ion-button
+          fill="clear"
+          class="nav-button"
+          (click)="previousDay()"
+          [disabled]="TsProbability.length === 1 || !nextday"
+          [ngClass]="{ 'disabled-button': TsProbability.length === 1 || !nextday }"
+        >
           << Previous Day
         </ion-button>
         <span class="current-date">
-          <ion-button expand="full" (click)="rotateImage()" class="rotate-button">
+          <ion-button
+            expand="full"
+            (click)="rotateImage()"
+            class="rotate-button"
+          >
             <ion-icon name="refresh-outline"></ion-icon>
           </ion-button>
         </span>
-        <ion-button fill="clear" class="nav-button" (click)="nextDay()" [disabled]="!prevday" [ngClass]="{ 'disabled-button': !prevday }">
+        <ion-button
+          fill="clear"
+          class="nav-button"
+          (click)="nextDay()"
+          [disabled]="TsProbability.length === 1 || !prevday"
+          [ngClass]="{ 'disabled-button': TsProbability.length === 1 || !prevday }"
+        >
           Next Day >>
         </ion-button>
       </div>
@@ -30,7 +48,7 @@
           loading="lazy"
           class="responsive-image"
           alt="Previous Day Image"
-          style="width: auto; height: auto;"
+          style="width: auto; height: auto"
         />
       </div>
       <div *ngIf="nextday">
@@ -40,7 +58,7 @@
           loading="lazy"
           class="responsive-image"
           alt="Next Day Image"
-          style="width: auto; height: auto;"
+          style="width: auto; height: auto"
         />
       </div>
     </div>
@@ -52,7 +70,17 @@
 <div class="footerdiv" id="footerdivid1">
   <div (click)="Aerosport()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-    <h6 class="heading-10-copy" id="styleh6" style="color: #fff; margin-top: 4px; font-family: Montserrat, sans-serif; text-decoration: none; font-size: 12px;">
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 4px;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+      "
+    >
       Aerosport
     </h6>
   </div>

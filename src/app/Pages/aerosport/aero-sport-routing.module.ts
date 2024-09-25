@@ -6,8 +6,15 @@ import { AeroSportPage } from './aero-sport.page';
 const routes: Routes = [
   {
     path: '',
-    component: AeroSportPage
-  }
+    component: AeroSportPage,
+  },
+  {
+    path: 'cloud-fore-cast',
+    loadChildren: () =>
+      import('./cloud-fore-cast/cloud-fore-cast.module').then(
+        (m) => m.CloudForeCastModule
+      ),
+  },
 ];
 
 @NgModule({

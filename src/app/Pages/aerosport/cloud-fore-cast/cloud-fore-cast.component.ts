@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import * as Hammer from 'hammerjs';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 @Component({
-  selector: 'app-cloud-cover',
-  templateUrl: './cloud-cover.component.html',
-  styleUrls: ['./cloud-cover.component.scss'],
+  selector: 'app-cloud-fore-cast',
+  templateUrl: './cloud-fore-cast.component.html',
+  styleUrls: ['./../aero-sport.page.scss'],
 })
-export class CloudCoverComponent implements OnInit {
-  @ViewChild('imageElement', { static: false }) imageElement!: ElementRef;
-  @ViewChild('sliderMask', { static: false }) sliderMask!: ElementRef;
+export class CloudForeCastComponent implements OnInit {
   scale: number = 1;
   rotation: number = 0;
   isLogged: boolean = false;
@@ -34,7 +34,138 @@ export class CloudCoverComponent implements OnInit {
 
   fileBaseUrl: SafeResourceUrl | undefined;
   currentIndex: number = 0;
+  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
 
+  rotationDegree = 0;
+  pinchStartScale = 1;
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange(event: any) {
+    this.updateImageRotation();
+  }
+
+  isZoomed = false;
+  @HostListener('dblclick', ['$event'])
+  onDoubleClick(event: MouseEvent): void {
+    this.toggleZoom();
+  }
+  toggleZoom(): void {
+    if (!this.imageContainer) {
+      console.error('Image container is not defined');
+      return;
+    }
+
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      this.isZoomed = !this.isZoomed;
+
+      if (this.isZoomed) {
+        // Enable zoom
+        this.scale = 2; // You can dynamically set this based on user input or pinch scale
+        imageElement.style.transform = `scale(${this.scale})`;
+        imageElement.style.cursor = 'zoom-out'; // Change cursor to indicate zoom-out
+
+        // Ensure zoom is centered and scrollable
+        imageElement.style.transformOrigin = 'center center';
+        imageElement.style.position = 'relative'; // Allow movement
+        imageElement.style.width = 'auto'; // Adjust width for zooming
+        imageElement.style.height = 'auto';
+
+        // Enable scrolling when zoomed in
+        this.imageContainer.nativeElement.style.overflow = 'auto';
+      } else {
+        // Disable zoom
+        this.scale = 1; // Reset scale
+        imageElement.style.transform = 'scale(1)';
+        imageElement.style.cursor = 'zoom-in'; // Change cursor to indicate zoom-in
+
+        // Reset image positioning
+        imageElement.style.position = 'relative';
+        imageElement.style.width = '100%'; // Reset to full width
+        imageElement.style.height = 'auto';
+
+        // Disable scrolling when zoom is off
+        this.imageContainer.nativeElement.style.overflow = 'hidden';
+      }
+    }
+  }
+
+  setupHammer() {
+    const defaultScale = 1;
+    const minScrollScale = 1.2;
+    const maxScale = 4;
+
+    if (this.imageContainer && this.imageContainer.nativeElement) {
+      const hammer = new Hammer(this.imageContainer.nativeElement);
+      const imageElement =
+        this.imageContainer.nativeElement.querySelector('img');
+
+      // Enable pinch gesture
+      hammer.get('pinch').set({ enable: true });
+
+      hammer.on('pinchstart', (ev) => {
+        this.pinchStartScale = this.scale;
+      });
+
+      hammer.on('pinchmove', (ev) => {
+        // Update scale based on pinch gesture
+        this.scale = Math.min(
+          Math.max(this.pinchStartScale * ev.scale, defaultScale),
+          maxScale
+        );
+
+        // Enable scrolling if zoomed in
+        if (this.scale > minScrollScale) {
+          this.imageContainer.nativeElement.style.overflow = 'auto';
+          imageElement.style.cursor = 'zoom-out'; // Change cursor during pinch
+        } else {
+          this.imageContainer.nativeElement.style.overflow = 'hidden';
+          imageElement.style.cursor = 'zoom-in'; // Reset cursor
+        }
+
+        // Update image transformation
+        this.updateImageTransform();
+      });
+
+      // Handle pan gestures for scrolling
+      hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+      hammer.on('panmove', (ev) => {
+        if (this.scale > minScrollScale) {
+          // Scroll container within its limits
+          this.imageContainer.nativeElement.scrollLeft -= ev.deltaX;
+          this.imageContainer.nativeElement.scrollTop -= ev.deltaY;
+        }
+      });
+    }
+  }
+
+  updateImageTransform() {
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
+      imageElement.style.transformOrigin = 'center center'; // Ensure zoom from center
+    }
+  }
+
+  updateImageRotation() {
+    switch (window.orientation) {
+      case 0: // Portrait
+        this.rotationDegree = 0;
+        break;
+      case 90: // Landscape Right
+        this.rotationDegree = 90;
+        break;
+      case -90: // Landscape Left
+        this.rotationDegree = -90;
+        break;
+      case 180: // Upside-down Portrait
+        this.rotationDegree = 180;
+        break;
+      default:
+        this.rotationDegree = 0;
+    }
+  }
+
+  rotationAngle: number = 0; // T
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -45,8 +176,6 @@ export class CloudCoverComponent implements OnInit {
   ngOnInit() {
     this.getCloudCoverImage(this.folderName, this.lastModifiedHours, 'tc');
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
-
-
   }
 
   get isLoggedIn(): boolean {
@@ -223,14 +352,9 @@ export class CloudCoverComponent implements OnInit {
     this.updateImageTransform();
   }
 
-
-
-  updateImageTransform(): void {
-    if (this.imageElement) {
-      this.imageElement.nativeElement.style.transform = `scale(${this.scale}) rotate(${this.rotation}deg)`;
-    }
-  }
-
-
-
+  // updateImageTransform(): void {
+  //   if (this.imageElement) {
+  //     this.imageElement.nativeElement.style.transform = `scale(${this.scale}) rotate(${this.rotation}deg)`;
+  //   }
+  // }
 }

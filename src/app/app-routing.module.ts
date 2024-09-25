@@ -93,8 +93,6 @@ const routes: Routes = [
       ),
   },
 
-
-  
   {
     path: 'forecast/advisories',
     loadChildren: () =>
@@ -112,16 +110,16 @@ const routes: Routes = [
   {
     path: 'forecast/color-coded-warnings',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded-warnings/color-coded-warnings.module').then(
-        (m) => m.ColorCodedWarningsModule
-      ),
+      import(
+        './Pages/forecast/color-coded-warnings/color-coded-warnings.module'
+      ).then((m) => m.ColorCodedWarningsModule),
   },
   {
     path: 'forecast/color-coded-sigment-airmet',
     loadChildren: () =>
-      import('./Pages/forecast/color-coded-sigment-airmet/color-coded-sigment-airmet.module').then(
-        (m) => m.ColorCodedSigmentAirmetModule
-      ),
+      import(
+        './Pages/forecast/color-coded-sigment-airmet/color-coded-sigment-airmet.module'
+      ).then((m) => m.ColorCodedSigmentAirmetModule),
   },
   {
     path: 'forecast/take-off-data',
@@ -133,9 +131,7 @@ const routes: Routes = [
   {
     path: 'forecast/taf',
     loadChildren: () =>
-      import('./Pages/forecast/taf/taf.module').then(
-        (m) => m.TafModule
-      ),
+      import('./Pages/forecast/taf/taf.module').then((m) => m.TafModule),
   },
   {
     path: 'forecast/recent-tafs',
@@ -337,7 +333,6 @@ const routes: Routes = [
       ).then((m) => m.SubscriptionPackagePageModule),
   },
 
-
   // --- International url paths
   {
     path: 'international',
@@ -374,11 +369,17 @@ const routes: Routes = [
   },
   {
     path: 'international/image-browser',
-    loadChildren: () => import('./Pages/international/image-browser/image-browser.module').then( m => m.ImageBrowserModule),
+    loadChildren: () =>
+      import('./Pages/international/image-browser/image-browser.module').then(
+        (m) => m.ImageBrowserModule
+      ),
   },
   {
     path: 'international/graphic-sigmet-airmet',
-    loadChildren: () => import('./Pages/international/graphical-sigmet-airmet/graphical-sigmet-airmet.module').then( m => m.GraphicalSigmetAirmetModule),
+    loadChildren: () =>
+      import(
+        './Pages/international/graphical-sigmet-airmet/graphical-sigmet-airmet.module'
+      ).then((m) => m.GraphicalSigmetAirmetModule),
   },
   {
     path: 'international/sigwx-charts',
@@ -427,16 +428,16 @@ const routes: Routes = [
   {
     path: 'flight-briefing/import-departure-list',
     loadChildren: () =>
-      import('./Pages/flight-briefing/import-departure-list/import-departure-list.module').then(
-        (m) => m.ImportDepartureListModule
-      ),
+      import(
+        './Pages/flight-briefing/import-departure-list/import-departure-list.module'
+      ).then((m) => m.ImportDepartureListModule),
   },
   {
     path: 'flight-briefing/schedule-flight-report',
     loadChildren: () =>
-      import('./Pages/flight-briefing/schedule-flight-report/schedule-flight-report.module').then(
-        (m) => m.ScheduleFlightReportModule
-      ),
+      import(
+        './Pages/flight-briefing/schedule-flight-report/schedule-flight-report.module'
+      ).then((m) => m.ScheduleFlightReportModule),
   },
 
   // --- Domestic url paths
@@ -513,9 +514,9 @@ const routes: Routes = [
   {
     path: 'domestic/low-level-wind-profile',
     loadChildren: () =>
-      import('./Pages/domestic/low-level-wind-profile/low-level-wind-profile.module').then(
-        (m) => m.LowLevelWindProfileModule
-      ),
+      import(
+        './Pages/domestic/low-level-wind-profile/low-level-wind-profile.module'
+      ).then((m) => m.LowLevelWindProfileModule),
   },
 
   // --- Auth url paths
@@ -533,18 +534,12 @@ const routes: Routes = [
         (m) => m.CentralInteriorModule
       ),
   },
+
   {
-    path: 'aero-sport/cloud-cover',
+    path: 'aero-sport/cloud-fore-cast',
     loadChildren: () =>
-      import('./Pages/aerosport/cloud-cover/cloud-cover.module').then(
-        (m) => m.CloudCoverModule
-      ),
-  },
-  {
-    path: 'aero-sport/cloud-forecast',
-    loadChildren: () =>
-      import('./Pages/aerosport/cloud-forecast/cloud-forecast.module').then(
-        (m) => m.CloudForecastModule
+      import('./Pages/aerosport/cloud-fore-cast/cloud-fore-cast.module').then(
+        (m) => m.CloudForeCastModule
       ),
   },
   {
@@ -620,13 +615,18 @@ const routes: Routes = [
   },
   {
     path: 'view-decoded',
-    loadChildren: () => import('./Pages/view-decoded/view-decoded.module').then( m => m.ViewDecodedPageModule)
+    loadChildren: () =>
+      import('./Pages/view-decoded/view-decoded.module').then(
+        (m) => m.ViewDecodedPageModule
+      ),
   },
   {
     path: 'view-symbol',
-    loadChildren: () => import('./Pages/view-symbol/view-symbol.module').then( m => m.ViewSymbolPageModule)
+    loadChildren: () =>
+      import('./Pages/view-symbol/view-symbol.module').then(
+        (m) => m.ViewSymbolPageModule
+      ),
   },
-
 ];
 
 @NgModule({
