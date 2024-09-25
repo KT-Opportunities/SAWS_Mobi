@@ -7,10 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./aero-sport.page.scss'],
 })
 export class AeroSportPage implements OnInit {
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     if (!this.authService.getIsLoggedIn()) {
@@ -55,6 +52,6 @@ export class AeroSportPage implements OnInit {
   }
 
   NavigateToCloudForecast() {
-    this.router.navigate(['/aero-sport/cloud-cover']);
+    this.router.navigate(['/aero-sport/cloud-fore-cast']);
   }
 }

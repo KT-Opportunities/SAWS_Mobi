@@ -7,13 +7,13 @@
       {{ name || kwazulNatal || (anotherName.startsWith('xl') ?
       anotherName.substring(2) : anotherName) ||
       filenameToDisplayName[displayName] }}
-      <div class="metar-history-grid" *ngIf="TsProbability.length > 1">
+      <div class="metar-history-grid">
         <ion-button
           fill="clear"
           class="nav-button"
           (click)="previousDay()"
-          [disabled]="!nextday"
-          [ngClass]="{ 'disabled-button': !nextday }"
+          [disabled]="TsProbability.length === 1 || !nextday"
+          [ngClass]="{ 'disabled-button': TsProbability.length === 1 || !nextday }"
         >
           << Previous Day
         </ion-button>
@@ -30,8 +30,8 @@
           fill="clear"
           class="nav-button"
           (click)="nextDay()"
-          [disabled]="!prevday"
-          [ngClass]="{ 'disabled-button': !prevday }"
+          [disabled]="TsProbability.length === 1 || !prevday"
+          [ngClass]="{ 'disabled-button': TsProbability.length === 1 || !prevday }"
         >
           Next Day >>
         </ion-button>
