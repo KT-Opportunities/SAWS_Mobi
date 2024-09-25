@@ -49,6 +49,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.applyImageTransform(); // Apply initial transform settings
   }
 
+  // Functionality for double-tapping to toggle zoom (in/out)
   setupDoubleTap() {
     const imageContainer = this.imageContainer.nativeElement as HTMLElement;
     this.hammer = new Hammer(imageContainer);
@@ -61,6 +62,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     });
   }
 
+  // Functionality for pinch-to-zoom and panning using touch gestures
   setupPinchToZoom() {
     const imageContainer = this.imageContainer.nativeElement as HTMLElement;
     this.hammer = new Hammer(imageContainer);
@@ -95,6 +97,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     });
   }
 
+  // Function to toggle zoom in or out when double-tapped
   toggleZoom() {
     const image = this.imageContainer.nativeElement.querySelector('img') as HTMLElement;
 
@@ -117,6 +120,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.applyImageTransform();
   }
 
+  // Apply the CSS transforms for zooming, panning, and rotating the image
   applyImageTransform() {
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
     if (imageElement) {
@@ -126,17 +130,20 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     }
   }
 
+  // Rotate the image by 90 degrees each time the function is called
   rotateImage() {
     this.rotationDegree = (this.rotationDegree + 90) % 360; // Rotate image by 90 degrees
     this.applyImageTransform();
     this.announceScreenReader(`Image rotated to ${this.rotationDegree} degrees.`);
   }
 
+  // Close the dialog when the user clicks the close button or presses Escape
   closeImageDialog() {
     this.dialogRef.close(); // Close the dialog
     this.announceScreenReader('Image dialog closed.');
   }
 
+  // Set up keyboard navigation and accessibility for screen readers
   setupKeyboardAccessibility() {
     this.imageContainer.nativeElement.setAttribute('tabindex', '0'); // Make container focusable
 
@@ -177,15 +184,18 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     });
   }
 
+  // Function to announce events for screen reader accessibility
   announceScreenReader(message: string) {
     this.liveRegion.nativeElement.innerText = message; // Announce messages for screen readers
   }
 
+  // Handle screen orientation changes and rotate the image accordingly
   @HostListener('window:orientationchange', ['$event'])
   onOrientationChange() {
     this.updateImageRotation(); // Update image rotation on orientation change
   }
 
+  // Update the image rotation based on the screen orientation
   updateImageRotation() {
     switch (window.orientation) {
       case 0:
