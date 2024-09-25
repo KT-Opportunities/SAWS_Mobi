@@ -6,7 +6,16 @@
     <app-package-header class="package-header">
       Synoptic Analysis
       <span class="current-date">
-        <ion-button expand="full" (click)="rotateImage()" class="rotate-button">
+        <ion-button
+          expand="full"
+          (click)="rotateImage()"
+          class="rotate-button"
+          style="
+            --background: #28a745;
+            --background-activated: #219638;
+            --background-hover: #36b55b;
+          "
+        >
           <ion-icon name="refresh-outline"></ion-icon>
         </ion-button>
       </span>
@@ -16,14 +25,13 @@
 
     <div class="listapp">
       <div class="image-container" #imageContainer>
-        <div *ngIf="!loading && fileBaseUrlSynoptic">
+        <div>
           <img
             [style.transform]="'rotate(' + rotationDegree + 'deg) scale(' + scale + ')'"
             [src]="fileBaseUrlSynoptic"
             loading="lazy"
             class="responsive-image"
             alt="Synoptic Analysis Image"
-            (pinch)="onPinch($event)"
           />
         </div>
       </div>

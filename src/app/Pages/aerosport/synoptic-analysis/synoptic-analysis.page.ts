@@ -50,6 +50,7 @@ export class SynopticAnalysisPage implements OnInit {
     this.loading = true;
     this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
+        console.log('Fetched data:', data); // Add this line
         const filteredData = data.filter(
           (item: any) => item.filename === 'synoptic.png'
         );
@@ -69,8 +70,7 @@ export class SynopticAnalysisPage implements OnInit {
   loadImage(filename: string) {
     this.APIService.GetAviationFile('', filename).subscribe(
       (data) => {
-        const imageUrlSynoptic =
-          'data:image/png;base64,' + data.filecontent;
+        const imageUrlSynoptic = 'data:image/png;base64,' + data.filecontent;
         this.fileBaseUrlSynoptic =
           this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlSynoptic);
         this.loading = false;
@@ -90,21 +90,63 @@ export class SynopticAnalysisPage implements OnInit {
     }
   }
 
-  onPinch(event: any) {
-    const newScale = this.scale * event.scale;
-    if (newScale >= this.minScale && newScale <= this.maxScale) {
-      this.scale = newScale;
-      this.applyZoom();
+  toggleZoom(): void {
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    const container = this.imageContainer.nativeElement;
+
+    if (imageElement) {
+      this.isZoomed = !this.isZoomed;
+
+      if (this.isZoomed) {
+        this.scale = 2; // Zoom in by 2x
+        imageElement.style.cursor = 'zoom-out';
+        imageElement.style.transformOrigin = 'center center';
+        container.style.overflow = 'auto'; // Enable scrolling
+
+        // Apply margins and padding during zoom
+        imageElement.style.marginLeft = '215px';
+        imageElement.style.marginTop = '697px';
+        imageElement.style.marginRight = '217px';
+        imageElement.style.marginBottom = '120px';
+        imageElement.style.padding = '0px';
+
+        // Reflow layout and adjust scroll position to center
+        setTimeout(() => {
+          const scrollLeft =
+            (container.scrollWidth - container.clientWidth) / 2;
+          const scrollTop =
+            (container.scrollHeight - container.clientHeight) / 2;
+          container.scrollTo(scrollLeft, scrollTop); // Center scroll to middle
+        }, 0);
+      } else {
+        // Reset zoom to default (centered)
+        this.scale = 1;
+        imageElement.style.cursor = 'zoom-in';
+
+        // Reset margins and padding to default (no additional margins)
+        imageElement.style.marginLeft = '0px';
+        imageElement.style.marginTop = '0px';
+        imageElement.style.marginRight = '0px';
+        imageElement.style.marginBottom = '0px';
+        imageElement.style.padding = '0px';
+
+        // Reset scroll to the top-left (default view)
+        setTimeout(() => {
+          container.scrollTo(0, 0); // Scroll back to default position
+        }, 0);
+
+        container.style.overflow = 'hidden'; // Disable scrolling
+      }
+
+      this.updateImageTransform();
     }
   }
 
-  applyZoom() {
-    const imageElement = document.querySelector('.zoomed-image') as HTMLElement;
-    if (imageElement) {
-      imageElement.style.transform = `scale(${this.scale})`;
-    }
-  }
   setupHammer() {
+    const defaultScale = 1; // Default scale for the image
+    const minScrollScale = 1.2; // Minimum scale where scrolling is enabled
+    const maxScale = 4; // Maximum scale allowed for zooming
+
     if (this.imageContainer && this.imageContainer.nativeElement) {
       const hammer = new Hammer(this.imageContainer.nativeElement);
       const imageElement =
@@ -120,7 +162,18 @@ export class SynopticAnalysisPage implements OnInit {
 
       // Handle pinch move
       hammer.on('pinchmove', (ev) => {
-        this.scale = this.pinchStartScale * ev.scale;
+        // Calculate new scale based on pinch, limiting the zoom level
+        this.scale = Math.min(
+          Math.max(this.pinchStartScale * ev.scale, defaultScale),
+          maxScale
+        );
+
+        // Immediately enable scrolling if the image is larger than the container
+        if (this.scale > minScrollScale) {
+          this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
+        }
+
+        // Update image transformation (like scale)
         this.updateImageTransform();
 
         // Adjust margins based on the zoom level
@@ -144,8 +197,32 @@ export class SynopticAnalysisPage implements OnInit {
       // Handle pan gestures for scrolling
       hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
       hammer.on('panmove', (ev) => {
-        this.imageContainer.nativeElement.scrollLeft -= ev.deltaX;
-        this.imageContainer.nativeElement.scrollTop -= ev.deltaY;
+        // Enable scrolling when the image is zoomed beyond a threshold scale
+        if (this.scale > minScrollScale) {
+          // Calculate the maximum scrollable area
+          const maxScrollLeft =
+            imageElement.offsetWidth * this.scale -
+            this.imageContainer.nativeElement.clientWidth;
+          const maxScrollTop =
+            imageElement.offsetHeight * this.scale -
+            this.imageContainer.nativeElement.clientHeight;
+
+          // Scroll the container within its limits
+          this.imageContainer.nativeElement.scrollLeft = Math.min(
+            Math.max(
+              this.imageContainer.nativeElement.scrollLeft - ev.deltaX,
+              0
+            ),
+            maxScrollLeft
+          );
+          this.imageContainer.nativeElement.scrollTop = Math.min(
+            Math.max(
+              this.imageContainer.nativeElement.scrollTop - ev.deltaY,
+              0
+            ),
+            maxScrollTop
+          );
+        }
       });
     }
   }
@@ -180,35 +257,7 @@ export class SynopticAnalysisPage implements OnInit {
   onDoubleClick(event: MouseEvent): void {
     this.toggleZoom();
   }
-  toggleZoom(): void {
-    if (!this.imageContainer) {
-      console.error('Image container is not defined');
-      return;
-    }
 
-    const imageElement = this.imageContainer.nativeElement.querySelector('img');
-    if (imageElement) {
-      this.isZoomed = !this.isZoomed;
-
-      if (this.isZoomed) {
-        imageElement.style.transform = 'scale(3)'; // Adjust zoom level
-        imageElement.style.cursor = 'zoom-out';
-        this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
-
-        // Add margins when zoomed in
-        imageElement.style.marginTop = '946px';
-        imageElement.style.marginLeft = '391px';
-      } else {
-        imageElement.style.transform = 'scale(1)';
-        imageElement.style.cursor = 'zoom-in';
-        this.imageContainer.nativeElement.style.overflow = 'hidden'; // Disable scrolling
-
-        // Remove margins when not zoomed
-        imageElement.style.marginTop = '0';
-        imageElement.style.marginLeft = '0';
-      }
-    }
-  }
   NavigateToAerosport() {
     this.router.navigate(['/aero-sport']);
   }
