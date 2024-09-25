@@ -136,11 +136,11 @@
                             >
                               <div
                                 class="div-block-451"
-                                (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                                (click)="openAttachmentDialog(message.docFeedbacks[0], '10000ms', '10000ms')"
                               >
                                 <img
-                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
-                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  *ngIf="message.docFeedbacks[0].file_mimetype.includes('image')"
+                                  [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                                   loading="lazy"
                                   width="327"
                                   sizes="(max-width: 479px) 69vw, 327px"
@@ -149,8 +149,8 @@
                                 />
 
                                 <audio
-                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
-                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  *ngIf="message.docFeedbacks[0].file_mimetype.includes('audio')"
+                                  [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                                   autoplay
                                   controls
                                   class="image-10"
@@ -159,16 +159,16 @@
                                 </audio>
 
                                 <video
-                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
-                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  *ngIf="message.docFeedbacks[0].file_mimetype.includes('video')"
+                                  [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                                   width="327"
                                   sizes="(max-width: 479px) 69vw, 327px"
                                   class="image-10"
                                 ></video>
 
                                 <iframe
-                                  *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
-                                  [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                                  *ngIf="message.docFeedbacks[0].file_mimetype.includes('application')"
+                                  [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                                   width="327"
                                   sizes="(max-width: 479px) 69vw, 327px"
                                   class="image-10"
@@ -229,15 +229,15 @@
                     <div
                       id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7e5-4350eb02"
                       class="div-block-444"
-                      *ngIf="message.DocFeedbacks && message.DocFeedbacks.length > 0"
+                      *ngIf="message.docFeedbacks && message.docFeedbacks.length > 0"
                     >
                       <div
                         class="div-block-451"
-                        (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                        (click)="openAttachmentDialog(message.docFeedbacks[0], '10000ms', '10000ms')"
                       >
                         <img
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('image')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           loading="lazy"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
@@ -246,8 +246,8 @@
                         />
 
                         <audio
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('audio')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           autoplay
                           controls
                           class="image-10"
@@ -256,16 +256,16 @@
                         </audio>
 
                         <video
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('video')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
                           class="image-10"
                         ></video>
 
                         <iframe
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('application')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
                           class="image-10"
@@ -310,15 +310,15 @@
                     <div
                       id="w-node-_00f517dd-1c68-5ad5-ef28-9cb272bef7f2-4350eb02"
                       class="div-block-446"
-                      *ngIf="message.DocFeedbacks && message.DocFeedbacks.length > 0"
+                      *ngIf="message.docFeedbacks && message.docFeedbacks.length > 0"
                     >
                       <div
                         class="div-block-451"
-                        (click)="openAttachmentDialog(message.DocFeedbacks[0], '10000ms', '10000ms')"
+                        (click)="openAttachmentDialog(message.docFeedbacks[0], '10000ms', '10000ms')"
                       >
                         <img
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('image')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('image')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           loading="lazy"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
@@ -327,8 +327,8 @@
                         />
 
                         <audio
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('audio')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('audio')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           autoplay
                           controls
                           class="image-10"
@@ -337,16 +337,16 @@
                         </audio>
 
                         <video
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('video')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('video')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
                           class="image-10"
                         ></video>
 
                         <iframe
-                          *ngIf="message.DocFeedbacks[0].file_mimetype.includes('application')"
-                          [src]="getSafeUrl(message.DocFeedbacks[0].file_url)"
+                          *ngIf="message.docFeedbacks[0].file_mimetype.includes('application')"
+                          [src]="getSafeUrl(message.docFeedbacks[0].file_url,message.docFeedbacks[0].file_mimetype)"
                           width="327"
                           sizes="(max-width: 479px) 69vw, 327px"
                           class="image-10"
@@ -368,7 +368,7 @@
                       </div>
                       <p
                         class="paragraph-12"
-                        *ngIf="!message.feedbackAttachment"
+                        *ngIf="message.feedbackAttachment"
                       >
                         {{ message.feedbackAttachment }}
                       </p>
