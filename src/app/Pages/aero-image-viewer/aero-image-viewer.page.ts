@@ -39,58 +39,57 @@ export class AeroImageViewerPage implements OnInit {
     this.toggleZoom();
   }
   toggleZoom(): void {
-    if (!this.imageContainer) {
-      console.error('Image container is not defined');
-      return;
-    }
-
     const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    const container = this.imageContainer.nativeElement;
+
     if (imageElement) {
       this.isZoomed = !this.isZoomed;
 
       if (this.isZoomed) {
-        // Enable zoom
-        imageElement.style.transform = 'scale(2)'; // Set zoom level
+        this.scale = 2; // Zoom in by 2x
         imageElement.style.cursor = 'zoom-out';
+        imageElement.style.transformOrigin = 'center center';
+        container.style.overflow = 'auto'; // Enable scrolling
 
-        // Ensure zoom is centered and scrollable
-        imageElement.style.transformOrigin = 'center center'; // Ensure zoom from center
-        imageElement.style.position = 'sticky'; // Allow free movement within the container
-        imageElement.style.top = '0';
-        imageElement.style.left = '0';
-        imageElement.style.width = 'auto'; // Auto-size to prevent fixed sizes causing cutoffs
-        imageElement.style.height = 'auto';
-        imageElement.style.maxWidth = '100%'; // Ensure no image cutoffs due to max-width
-        imageElement.style.maxHeight = '100%';
-        // imageElement.style.marginTop = '131px';
-        // imageElement.style.marginLeft = '377px';
+        // Apply margins and padding during zoom
+        imageElement.style.marginLeft = '215px';
+        imageElement.style.marginTop = '697px';
+        imageElement.style.marginRight = '217px';
+        imageElement.style.marginBottom = '120px';
+        imageElement.style.padding = '0px';
 
-        // Ensure container allows scrolling and behaves like a viewport
-        this.imageContainer.nativeElement.style.overflow = 'auto'; // Enable scrolling
-        this.imageContainer.nativeElement.style.position = 'relative'; // Ensure relative positioning
-        this.imageContainer.nativeElement.style.height = '100%'; // Container should fill its parent
-        this.imageContainer.nativeElement.style.width = '100%';
-
-        // Ensure that the container can grow to fit the zoomed image
-        this.imageContainer.nativeElement.style.display = 'block';
+        // Reflow layout and adjust scroll position to center
+        setTimeout(() => {
+          const scrollLeft =
+            (container.scrollWidth - container.clientWidth) / 2;
+          const scrollTop =
+            (container.scrollHeight - container.clientHeight) / 2;
+          container.scrollTo(scrollLeft, scrollTop); // Center scroll to middle
+        }, 0);
       } else {
-        // Disable zoom
-        imageElement.style.transform = 'scale(1)';
+        // Reset zoom to default (centered)
+        this.scale = 1;
         imageElement.style.cursor = 'zoom-in';
 
-        // Reset image positioning
-        imageElement.style.position = 'relative';
-        imageElement.style.transformOrigin = 'center';
-        imageElement.style.top = '0';
-        imageElement.style.left = '0';
-        imageElement.style.width = '100%'; // Reset to default size
-        imageElement.style.height = 'auto';
+        // Reset margins and padding to default (no additional margins)
+        imageElement.style.marginLeft = '0px';
+        imageElement.style.marginTop = '0px';
+        imageElement.style.marginRight = '0px';
+        imageElement.style.marginBottom = '0px';
+        imageElement.style.padding = '0px';
 
-        // Disable scrolling when zoom is off
-        this.imageContainer.nativeElement.style.overflow = 'hidden';
+        // Reset scroll to the top-left (default view)
+        setTimeout(() => {
+          container.scrollTo(0, 0); // Scroll back to default position
+        }, 0);
+
+        container.style.overflow = 'hidden'; // Disable scrolling
       }
+
+      this.updateImageTransform();
     }
   }
+
   setupHammer() {
     const defaultScale = 1; // Default scale for the image
     const minScrollScale = 1.2; // Minimum scale where scrolling is enabled
@@ -176,14 +175,6 @@ export class AeroImageViewerPage implements OnInit {
     }
   }
 
-  updateImageTransform() {
-    const imageElement = this.imageContainer.nativeElement.querySelector('img');
-    if (imageElement) {
-      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
-      imageElement.style.transformOrigin = '20px 20px'; // Always zoom from the center
-    }
-  }
-
   updateImageRotation() {
     switch (window.orientation) {
       case 0: // Portrait
@@ -202,6 +193,57 @@ export class AeroImageViewerPage implements OnInit {
         this.rotationDegree = 0;
     }
   }
+  updateImageTransform(): void {
+    const imageElement = this.imageContainer.nativeElement.querySelector('img');
+    if (imageElement) {
+      imageElement.style.transform = `scale(${this.scale}) rotate(${this.rotationDegree}deg)`;
+      imageElement.style.transformOrigin = 'center center'; // Ensure zoom happens from the center
+    }
+  }
+
+  panZoomConfig: PanZoomConfig = new PanZoomConfig();
+  nextday: boolean = false;
+  prevday: boolean = true;
+  TsProbability: any = [];
+  loading: boolean = true;
+  fileBaseUrlNext: SafeResourceUrl;
+  fileBaseUrlPrevious: SafeResourceUrl;
+  name: string = '';
+  anotherName: string = '';
+  displayName: string = '';
+  kwazulNatal: string = '';
+
+  isPanning = false;
+  initialPanX = 0;
+  initialPanY = 0;
+  filenameToDisplayName: { [key: string]: string } = {
+    'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
+    'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
+    'xl-25.7328.18_spot_d1.gif': 'Pretoria',
+    'xl-28.40229.373_spot_d1.gif': 'Van Reenen',
+    'xl-27.99824.749_spot_d1.gif': 'Jan Kempdorp ',
+    'xl-26.3528.46_spot_d1.gif': 'Dunnottar',
+    'xl-24.3531.00_spot_d1.gif': 'Hoeadspruid',
+    'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
+    'xl-26.038827.587_spot_d1.gif': 'Orient',
+  };
+
+  constructor(
+    private http: HttpClient,
+    private APIService: APIService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
+  rotateImage(): void {
+    this.rotationDegree += 90;
+    if (this.rotationDegree >= 360) {
+      this.rotationDegree = 0;
+    }
+  }
+
   fileBaseUrl: any = null; // Holds the image URL for display
   rotationAngle: number = 0; // T
   ngOnInit() {
@@ -261,49 +303,6 @@ export class AeroImageViewerPage implements OnInit {
       }
     );
     this.updateImageRotation();
-  }
- 
-  panZoomConfig: PanZoomConfig = new PanZoomConfig();
-  nextday: boolean = false;
-  prevday: boolean = true;
-  TsProbability: any = [];
-  loading: boolean = true;
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  name: string = '';
-  anotherName: string = '';
-  displayName: string = '';
-  kwazulNatal: string = '';
-
-  isPanning = false;
-  initialPanX = 0;
-  initialPanY = 0;
-  filenameToDisplayName: { [key: string]: string } = {
-    'xl-25.8327.75_spot_d1.gif': 'Haartebeesspoort',
-    'xl-25.2527.0_spot_d1.gif': 'Pilanesberg',
-    'xl-25.7328.18_spot_d1.gif': 'Pretoria',
-    'xl-28.40229.373_spot_d1.gif': 'Van Reenen',
-    'xl-27.99824.749_spot_d1.gif': 'Jan Kempdorp ',
-    'xl-26.3528.46_spot_d1.gif': 'Dunnottar',
-    'xl-24.3531.00_spot_d1.gif': 'Hoeadspruid',
-    'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
-    'xl-26.038827.587_spot_d1.gif': 'Orient',
-  };
-
-  constructor(
-    private http: HttpClient,
-    private APIService: APIService,
-    private sanitizer: DomSanitizer
-  ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-  }
-  rotateImage(): void {
-    this.rotationDegree += 90;
-    if (this.rotationDegree >= 360) {
-      this.rotationDegree = 0;
-    }
   }
 
   // updateImageTransform() {

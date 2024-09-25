@@ -42,7 +42,7 @@
 
     <div class="image-container" #imageContainer>
       <div *ngIf="prevday">
-        <img
+        <img #img
           [style.transform]="'rotate(' + rotationDegree + 'deg)'"
           [src]="fileBaseUrlPrevious"
           loading="lazy"
@@ -52,7 +52,7 @@
         />
       </div>
       <div *ngIf="nextday">
-        <img
+        <img #img
           [style.transform]="'rotate(' + rotationDegree + 'deg)'"
           [src]="fileBaseUrlNext"
           loading="lazy"

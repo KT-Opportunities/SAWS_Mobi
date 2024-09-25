@@ -44,7 +44,7 @@ export class ProvideFeedbackPage implements OnInit {
   files: fileDataFeedback[] = [];
 
   selectedFile: File | undefined;
-  selectedFileName: string | undefined;
+  selectedFileName: any;
   selectedFileSrc: string | ArrayBuffer | null = null;
   selectedFileType: string | undefined;
   responseData: any;
@@ -65,7 +65,7 @@ export class ProvideFeedbackPage implements OnInit {
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private toastController: ToastController,
+    private toastController: ToastController
   ) {
     this.feedbackForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -97,11 +97,12 @@ export class ProvideFeedbackPage implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    
+
     if (this.feedbackForm.valid) {
-      debugger
+      debugger;
       const formValues = this.feedbackForm.value;
-      const body = {
+
+      let body = {
         fullname: this.fullname,
         senderId: this.userId,
         senderEmail: this.userEmail,
@@ -109,7 +110,7 @@ export class ProvideFeedbackPage implements OnInit {
         responderEmail: '',
         title: formValues.title,
         isresponded: false,
-        FeedbackMessages: [
+        feedbackMessages: [
           {
             senderId: this.userId,
             senderEmail: this.userEmail,
@@ -127,24 +128,64 @@ export class ProvideFeedbackPage implements OnInit {
         ],
       };
 
+      if (this.addFile == true) {
+        body = {
+          fullname: this.fullname,
+          senderId: this.userId,
+          senderEmail: this.userEmail,
+          responderId: '',
+          responderEmail: '',
+          title: formValues.title,
+          isresponded: false,
+          feedbackMessages: [
+            {
+              senderId: this.userId,
+              senderEmail: this.userEmail,
+              responderId: '',
+              responderEmail: '',
+              feedback: '',
+              response: '',
+              broadcast: null,
+              broadcastId: null,
+              feedbackAttachment: formValues.message,
+              feedbackAttachmentFileName: this.selectedFileName,
+              responseAttachment: '',
+              responseAttachmentFileName: '',
+            },
+          ],
+        };
+      }
+
       this.APIService.postInsertNewFeedback(body).subscribe(
         (data: any) => {
-          debugger
           const feedbackId = data.detailDescription.feedbackId;
-          this.uploadFile(feedbackId);
-
+          if(this.addFile == true){
+            this.uploadFile(
+              data.detailDescription.feedbackMessages[0].feedbackMessageId
+            );
+          }
+          
           this.feedbackForm.reset();
           this.responseData = data.detailDescription;
           // console.log('this.responseData', this.responseData);
 
-          if (this.fileFeedback.file) {
-            // Check if file is selected
-            this.feedbackForm.reset();
-            this.openAttachmentDialog(data.detailDescription, '500ms', '500ms');
-          } else {
-            this.feedbackForm.reset();
-            alert('Successfully Created');
-          }
+          this.selectedFile = undefined;
+          this.selectedFileSrc = null;
+          this.selectedFileType = undefined;
+          this.addFile = false;
+
+          this.presentToast('top','Feedback Successfully Sent!','success','checkmark');
+
+          this.router.navigate(['/message-list']);
+          // this.feedbackForm.reset();
+          // if (this.fileFeedback.file) {
+          //   // Check if file is selected
+          //   this.feedbackForm.reset();
+          //   this.openAttachmentDialog(data.detailDescription, '500ms', '500ms');
+          // } else {
+          //   this.feedbackForm.reset();
+          //   alert('Successfully Created');
+          // }
         },
         (error) => {
           console.error('Error submitting feedback:', error);
@@ -152,7 +193,7 @@ export class ProvideFeedbackPage implements OnInit {
         }
       );
     } else {
-      this.presentToast('top','Form is invalid!','danger','close');
+      this.presentToast('top', 'Form is invalid!', 'danger', 'close');
     }
   }
 
@@ -178,11 +219,10 @@ export class ProvideFeedbackPage implements OnInit {
             responderEmail: '',
             feedback: '',
             response: '',
-            feedbackAttachment:
-              this.responseData.responseMessage,
+            feedbackAttachment: this.responseData.responseMessage,
             feedbackAttachmentFileName: this.selectedFileName,
             responseAttachment: '',
-            responseAttachmentFileName: '',
+            responseAttachmentFileName: this.selectedFileName,
           },
         ],
       };
@@ -196,7 +236,7 @@ export class ProvideFeedbackPage implements OnInit {
   }
 
   async uploadFile(feedbackId: number) {
-    debugger
+    debugger;
     if (this.files.length > 0) {
       this.files[0].Id = 0;
       this.files[0].feedbackMessageId = feedbackId;
@@ -240,9 +280,9 @@ export class ProvideFeedbackPage implements OnInit {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
         this.feedbackForm.reset();
-
+        debugger;
         this.uploadFile(
-          data.DetailDescription.FeedbackMessages[0].feedbackMessageId
+          data.detailDescription.feedbackMessages[0].feedbackMessageId
         );
         this.getFeedback();
       },
@@ -354,7 +394,7 @@ export class ProvideFeedbackPage implements OnInit {
   }
 
   onFileSelected(event: any) {
-    debugger
+    debugger;
     const file = event.target.files[0];
 
     this.selectedFile = file;
@@ -366,10 +406,10 @@ export class ProvideFeedbackPage implements OnInit {
       reader.onload = () => {
         this.selectedFileSrc = reader.result;
         this.addFile = true;
-
+        this.feedback = file;
         console.log('DATA CHECK::', this.feedback);
         console.log('DATA CHECK:: 2', this.responseData);
-        this.openAttachmentDialog(this.feedback, '800ms', '500ms');
+        this.openAttachmentDialogSelected(this.feedback, '800ms', '500ms');
       };
 
       reader.onerror = (error) => {
@@ -428,7 +468,7 @@ export class ProvideFeedbackPage implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 'submit') {
-        this.onSubmitAttachment();
+        // this.onSubmitAttachment();
         this.shouldScrollToBottom = true;
       }
 
@@ -436,7 +476,54 @@ export class ProvideFeedbackPage implements OnInit {
       this.selectedFileSrc = null;
       this.selectedFileType = undefined;
       this.addFile = false;
-      this.feedbackForm.reset();
+      // this.feedbackForm.reset();
+    });
+  }
+
+  openAttachmentDialogSelected(
+    element: any,
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ) {
+    // if (!element) {
+    //   // If feedback data is not available, return or handle appropriately
+    //   return;
+    // }
+    debugger;
+
+    this.fileType = this.APIService.getFileType(
+      element.file_mimetype || this.selectedFileType
+    );
+
+    this.shouldScrollToBottom = false;
+
+    const formValues = this.feedbackForm.value;
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+
+    const dialogRef = this.dialog.open(AttachmentFilePage, {
+      data: {
+        feedbackData: element,
+        imageSRC: this.selectedFileSrc || element.file_url,
+        message: formValues.responseMessage || '',
+        responderEmail: this.userEmail,
+        resonderId: this.userId,
+        addFile: this.addFile,
+        fileType: this.fileType,
+      },
+      // enterAnimationDuration,
+      // exitAnimationDuration,
+      width: '85%',
+      height: '80%',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 'submit') {
+        this.shouldScrollToBottom = true;
+      }
     });
   }
 }

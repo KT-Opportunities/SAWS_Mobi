@@ -82,7 +82,7 @@ export class ChatPage implements OnInit {
       isresponded: [],
       feedbackFile: [''],
       responseMessage: ['', Validators.required],
-      FeedbackMessages: [[]],
+      feedbackMessages: [[]],
     });
   }
 
@@ -107,19 +107,25 @@ export class ChatPage implements OnInit {
     console.log('id: ', this.Id);
     console.log('id: ', this.username);
 
-    this.APIService.getFeedbackById(this.Id).subscribe((fback: Feedback) => {
-      this.feedback = fback;
-      this.fdMessages = fback.FeedbackMessages;
+    this.APIService.getFeedbackById(this.Id).subscribe((fback: any) => {
+      this.feedback = fback.detailDescription;
+      debugger
+      this.fdMessages = fback.detailDescription.feedbackMessages;
       console.log('feedback: ', this.feedback);
-      this.feedbackForm.patchValue(fback);
+      this.feedbackForm.patchValue(this.feedback);
       this.cdr.detectChanges();
     });
   }
-  getSafeUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  getSafeUrl(url: string,type: string): SafeResourceUrl {
+    if(type.includes("application")){
+      return this.sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + url);
+    }else{
+      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
   }
   onSubmit() {
     const formValues = this.feedbackForm.value;
+    debugger
     if (formValues != null) {
       const body = {
         feedbackId: formValues.feedbackId,
@@ -131,7 +137,7 @@ export class ChatPage implements OnInit {
         created_at: formValues.created_at,
         title: formValues.title,
         isresponded: true,
-        FeedbackMessages: [
+        feedbackMessages: [
           {
             senderId: formValues.senderId,
             senderEmail: formValues.senderEmail,
@@ -156,7 +162,6 @@ export class ChatPage implements OnInit {
   onSubmitAttachment() {
     if (this.selectedFile) {
       const formValues = this.feedbackForm.value;
-
       const body = {
         feedbackId: formValues.feedbackId,
         fullname: formValues.fullname,
@@ -167,7 +172,7 @@ export class ChatPage implements OnInit {
         created_at: formValues.created_at,
         title: formValues.title,
         isresponded: true,
-        FeedbackMessages: [
+        feedbackMessages: [
           {
             senderId: formValues.senderId,
             senderEmail: formValues.senderEmail,
@@ -217,6 +222,7 @@ export class ChatPage implements OnInit {
   updateFeedbackForm(body: any) {
     this.APIService.postInsertNewFeedback(body).subscribe(
       (data: any) => {
+        debugger
         this.feedbackForm.reset();
 
         this.getFeedback();
@@ -232,7 +238,7 @@ export class ChatPage implements OnInit {
       (data: any) => {
         this.feedbackForm.reset();
         this.uploadFile(
-          data.DetailDescription.FeedbackMessages[0].feedbackMessageId
+          data.detailDescription.feedbackMessages[0].feedbackMessageId
         );
         this.getFeedback();
       },
