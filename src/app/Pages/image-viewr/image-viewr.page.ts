@@ -92,8 +92,7 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     });
 
     this.hammer.on('panend', () => {
-      this.lastPanX = this.panX; // Update last pan offsets after panning ends
-      this.lastPanY = this.panY;
+      this.lastScale = this.currentScale; // Update last scale after pinch ends
     });
   }
 
@@ -121,14 +120,43 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
   }
 
   // Apply the CSS transforms for zooming, panning, and rotating the image
-  applyImageTransform() {
-    const imageElement = this.imageContainer.nativeElement.querySelector('img');
-    if (imageElement) {
-      // Apply transform properties to image for panning, zooming, and rotating
-      imageElement.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentScale}) rotate(${this.rotationDegree}deg)`;
-      imageElement.style.transition = 'transform 0.2s ease-in-out'; // Smooth transition for transformations
-    }
+ // Apply the CSS transforms for zooming, panning, and rotating the image
+applyImageTransform() {
+  const imageElement = this.imageContainer.nativeElement.querySelector('img');
+  if (imageElement) {
+    // Set transform origin to the center of the image
+    imageElement.style.transformOrigin = '0 0';
+
+    // Apply the pan, zoom, and rotation transforms
+    imageElement.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentScale}) rotate(${this.rotationDegree}deg)`;
+    imageElement.style.transition = 'transform 0.2s ease-in-out'; // Smooth transition for transformations
+
+    // After applying transform, call function to prevent image from going out of bounds
+    this.preventImageOverflow(imageElement);
   }
+}
+preventImageOverflow(imageElement: HTMLElement) {
+  const img = imageElement as HTMLImageElement; // Cast to HTMLImageElement
+  const containerWidth = this.imageContainer.nativeElement.clientWidth;
+  const containerHeight = this.imageContainer.nativeElement.clientHeight;
+  
+  const imageWidth = img.naturalWidth * this.currentScale;
+  const imageHeight = img.naturalHeight * this.currentScale;
+  
+  // Calculate the limits for panning based on image size and container size
+  const maxPanX = (imageWidth - containerWidth) / 2;
+  const maxPanY = (imageHeight - containerHeight) / 2;
+
+  // Adjust panX and panY to prevent the image from going out of bounds
+  this.panX = Math.max(-maxPanX, Math.min(this.panX, maxPanX));
+  this.panY = Math.max(-maxPanY, Math.min(this.panY, maxPanY));
+
+  // Reapply the updated pan values
+  img.style.transform = `translate(${this.panX}px, ${this.panY}px) scale(${this.currentScale}) rotate(${this.rotationDegree}deg)`;
+}
+
+
+
 
   // Rotate the image by 90 degrees each time the function is called
   rotateImage() {
@@ -151,19 +179,19 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
     this.imageContainer.nativeElement.addEventListener('keydown', (event: KeyboardEvent) => {
       switch (event.key) {
         case 'ArrowUp':
-          this.panY -= 10;
+          this.panY -= 10; // Move up
           this.applyImageTransform();
           break;
         case 'ArrowDown':
-          this.panY += 10;
+          this.panY += 10; // Move down
           this.applyImageTransform();
           break;
         case 'ArrowLeft':
-          this.panX -= 10;
+          this.panX -= 10; // Move left
           this.applyImageTransform();
           break;
         case 'ArrowRight':
-          this.panX += 10;
+          this.panX += 10; // Move right
           this.applyImageTransform();
           break;
         case '+':
@@ -213,6 +241,6 @@ export class ImageViewrPage implements OnInit, AfterViewInit {
       default:
         this.rotationDegree = 0;
     }
-    this.applyImageTransform();
+    this.applyImageTransform(); // Apply the rotation to the image
   }
 }
