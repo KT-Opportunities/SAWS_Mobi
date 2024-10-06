@@ -48,9 +48,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatTableModule, // Add MatTableModule
     MatPaginatorModule, // Add MatPaginatorModule
     MatSortModule, // Add MatSortModule
-    HammerModule
-
-    // SwiperModule,
+    HammerModule,
+    IonicModule.forRoot(),
+ 
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

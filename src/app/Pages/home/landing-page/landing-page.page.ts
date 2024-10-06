@@ -58,7 +58,6 @@ export class LandingPage implements OnInit {
   }
 
   ngOnInit() {
-
     this.loadAllAdvertisements();
 
     this.rotateAdvertisements();
@@ -66,30 +65,25 @@ export class LandingPage implements OnInit {
     setInterval(() => {
       this.rotateAdvertisements();
     }, 6000);
-
   }
 
   addAdvertClick(body: any) {
     console.log('Success:', body);
     this.apiService.PostInsertAdvertClick(body).subscribe(
-      (data: any) => {
-        
-      },
-      (err) => {
-
-      }
+      (data: any) => {},
+      (err) => {}
     );
   }
-  
+
   rotateAdvertisements() {
-    if (this.advertisements.length > 0)
-     {
-      this.currentAdvertisementIndex = (this.currentAdvertisementIndex + 1) % this.advertisements.length;
-      this.currentAdvertisement = this.advertisements[this.currentAdvertisementIndex];
+    if (this.advertisements.length > 0) {
+      this.currentAdvertisementIndex =
+        (this.currentAdvertisementIndex + 1) % this.advertisements.length;
+      this.currentAdvertisement =
+        this.advertisements[this.currentAdvertisementIndex];
     }
     if (this.currentAdvertisement) {
     }
-
   }
 
   get isLoggedIn(): boolean {
@@ -100,36 +94,28 @@ export class LandingPage implements OnInit {
     return this.authService.getIsFreeSubscription();
   }
 
-  UpdateSubscriptionStatus(){
-
+  UpdateSubscriptionStatus() {
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
 
-    debugger
-
-    if(this.isLoggedIn){
-
-
-        this.apiService.GetActiveSubscriptionByUserProfileId(userLoginDetails?.userProfileId).subscribe(
-        (data: any) => {
-
-          debugger
-
-          if (data.detailDescription.subscription.isactive) {
-            this.authService.setSubscriptionStatus(data.detailDescription.subscription.package_name);
-            debugger
-          } else {
-            this.authService.setSubscriptionStatus('');
+    if (this.isLoggedIn) {
+      this.apiService
+        .GetActiveSubscriptionByUserProfileId(userLoginDetails?.userProfileId)
+        .subscribe(
+          (data: any) => {
+            if (data.detailDescription.subscription.isactive) {
+              this.authService.setSubscriptionStatus(
+                data.detailDescription.subscription.package_name
+              );
+            } else {
+              this.authService.setSubscriptionStatus('');
+            }
+          },
+          (err) => {
+            console.log('postSub err: ', err);
           }
-
-          
-        },
-        (err) => {
-          console.log('postSub err: ', err);
-        }
-      );
-
-    } 
+        );
+    }
   }
 
   openInAppBrowser(url: string) {
@@ -141,29 +127,32 @@ export class LandingPage implements OnInit {
       //hideurlbar: 'yes',
     });
 
-    console.log('this.browser', this.browser)
-
+    console.log('this.browser', this.browser);
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
-
+  async presentToast(
+    position: 'top' | 'middle' | 'bottom',
+    message: string,
+    color: string,
+    icon: string
+  ) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
       position: position,
       color: color,
       icon: icon,
-      cssClass:"custom-toast",
-      swipeGesture: "vertical",
+      cssClass: 'custom-toast',
+      swipeGesture: 'vertical',
       buttons: [
         {
           side: 'end',
           text: 'Go to Subscription',
           handler: () => {
             this.router.navigate(['/subscription-package']);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await toast.present();
@@ -178,11 +167,16 @@ export class LandingPage implements OnInit {
   }
 
   aerosportPage() {
-    if (this.isLoggedIn && !this.isFreeSubscription ) {
+    if (this.isLoggedIn && !this.isFreeSubscription) {
       this.router.navigate(['/aero-sport']);
     } else if (this.isLoggedIn && this.isFreeSubscription) {
-      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
-    } else {      
+      this.presentToast(
+        'top',
+        'Subscription is required to access Service!',
+        'danger',
+        'close'
+      );
+    } else {
       this.authService.setRedirectUrl('/aero-sport');
       this.router.navigate(['/login']);
     }
@@ -193,11 +187,15 @@ export class LandingPage implements OnInit {
   }
 
   FlightBriefing() {
-
     if (this.isLoggedIn && !this.isFreeSubscription) {
       this.router.navigate(['/flight-briefing']);
     } else if (this.isLoggedIn && this.isFreeSubscription) {
-      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
+      this.presentToast(
+        'top',
+        'Subscription is required to access Service!',
+        'danger',
+        'close'
+      );
     } else {
       this.authService.setRedirectUrl('/flight-briefing');
       this.router.navigate(['/login']);
@@ -208,12 +206,16 @@ export class LandingPage implements OnInit {
     if (this.isLoggedIn && !this.isFreeSubscription) {
       this.router.navigate(['/domestic']);
     } else if (this.isLoggedIn && this.isFreeSubscription) {
-      this.presentToast('top','Subscription is required to access Service!', 'danger', 'close');
+      this.presentToast(
+        'top',
+        'Subscription is required to access Service!',
+        'danger',
+        'close'
+      );
     } else {
       this.authService.setRedirectUrl('/domestic');
       this.router.navigate(['/login']);
     }
-    
   }
 
   goBack() {
@@ -231,8 +233,10 @@ export class LandingPage implements OnInit {
   loadAllAdvertisements() {
     this.apiService.getAllAdverts().subscribe(
       (data: any[]) => {
-        this.advertisements = data.map(ad => {
-          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' +ad.file_url);
+        this.advertisements = data.map((ad) => {
+          const imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            'data:image/png;base64,' + ad.file_url
+          );
 
           const advertUrl = this.ensureValidURL(ad.advert_url);
 
@@ -266,11 +270,10 @@ export class LandingPage implements OnInit {
 
     const body = {
       advertClickId: 0,
-      advertId: advertId
-    }
+      advertId: advertId,
+    };
 
-    this.addAdvertClick(body)
-
+    this.addAdvertClick(body);
   }
 
   initializeSwiper() {
@@ -285,7 +288,6 @@ export class LandingPage implements OnInit {
         navigation: false,
         allowTouchMove: true,
       });
-    } 
+    }
   }
-
 }

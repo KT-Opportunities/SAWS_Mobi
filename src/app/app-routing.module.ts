@@ -627,6 +627,11 @@ const routes: Routes = [
         (m) => m.ViewSymbolPageModule
       ),
   },
+  {
+    path: 'image-modal',
+    loadChildren: () => import('./Pages/image-modal/image-modal.module').then( m => m.ImageModalPageModule)
+  },
+
 ];
 
 @NgModule({

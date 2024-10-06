@@ -145,8 +145,8 @@
 
     <app-package-sub-header> </app-package-sub-header>
     <div class="listapp">
-      <div class="image-container" #imageContainer>
-        <div *ngIf="prevday">
+      <div class="image-container">
+        <pinch-zoom *ngIf="prevday">
           <img
             [style.transform]="'rotate(' + rotationDegree + 'deg)'"
             [src]="fileBaseUrlPrevious"
@@ -156,8 +156,8 @@
             width="100%"
             height="100%"
           />
-        </div>
-        <div *ngIf="nextday">
+        </pinch-zoom>
+        <pinch-zoom *ngIf="nextday">
           <img
             [style.transform]="'rotate(' + rotationDegree + 'deg)'"
             [src]="fileBaseUrlNext"
@@ -167,7 +167,7 @@
             width="100%"
             height="100%"
           />
-        </div>
+        </pinch-zoom>
       </div>
     </div>
   </app-package-content>

@@ -12,6 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import * as Hammer from 'hammerjs';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+
+import { SwiperOptions } from 'swiper/types';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 @Component({
   selector: 'app-cloud-fore-cast',
   templateUrl: './cloud-fore-cast.component.html',
@@ -88,7 +92,7 @@ export class CloudForeCastComponent implements OnInit {
       }
     }
   }
-
+ 
   setupHammer() {
     const defaultScale = 1;
     const minScrollScale = 1.2;
@@ -170,7 +174,8 @@ export class CloudForeCastComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private APIService: APIService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -347,14 +352,24 @@ export class CloudForeCastComponent implements OnInit {
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
   }
+  config: SwiperOptions = {
+    zoom: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+  };
+  async openPreview(img: any){
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        img // image link passed on click event
+      },
+      cssClass: 'transparent-modal'
+    });
+    modal.present();
+  }
   rotateImage(): void {
     this.rotation = (this.rotation + 90) % 360; // Rotate by 90 degrees
     this.updateImageTransform();
   }
 
-  // updateImageTransform(): void {
-  //   if (this.imageElement) {
-  //     this.imageElement.nativeElement.style.transform = `scale(${this.scale}) rotate(${this.rotation}deg)`;
-  //   }
-  // }
 }

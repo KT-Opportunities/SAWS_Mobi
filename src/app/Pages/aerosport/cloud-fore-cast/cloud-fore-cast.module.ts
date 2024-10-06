@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CloudForeCastPageRoutingModule } from './cloud-fore-cast-routing.module';
 import { CloudForeCastComponent } from './cloud-fore-cast.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PinchZoomModule } from '@meddv/ngx-pinch-zoom';
 
 
 
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     SharedModule,
-    CloudForeCastPageRoutingModule
+    CloudForeCastPageRoutingModule,
+    PinchZoomModule,
   ],
   declarations: [CloudForeCastComponent]
 })

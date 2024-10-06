@@ -14,7 +14,7 @@ import {
   PanZoomModel,
   PanZoomConfigOptions,
 } from 'ngx-panzoom';
-import PanZoom from '@panzoom/panzoom';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig } from '@angular/platform-browser';
 @Component({
@@ -231,12 +231,17 @@ export class AeroImageViewerPage implements OnInit {
   constructor(
     private http: HttpClient,
     private APIService: APIService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private ng2ImgMax: Ng2ImgMaxService
   ) {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
     this.fileBaseUrlPrevious =
       this.sanitizer.bypassSecurityTrustResourceUrl('');
-  }
+  
+      
+    }
+
+
   rotateImage(): void {
     this.rotationDegree += 90;
     if (this.rotationDegree >= 360) {

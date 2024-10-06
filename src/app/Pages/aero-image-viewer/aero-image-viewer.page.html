@@ -39,29 +39,35 @@
     </app-package-header>
 
     <app-package-sub-header></app-package-sub-header>
-
-    <div class="image-container" #imageContainer>
-      <div *ngIf="prevday">
-        <img #img
-          [style.transform]="'rotate(' + rotationDegree + 'deg)'"
-          [src]="fileBaseUrlPrevious"
-          loading="lazy"
-          class="responsive-image"
-          alt="Previous Day Image"
-          style="width: auto; height: auto"
-        />
-      </div>
-      <div *ngIf="nextday">
-        <img #img
-          [style.transform]="'rotate(' + rotationDegree + 'deg)'"
-          [src]="fileBaseUrlNext"
-          loading="lazy"
-          class="responsive-image"
-          alt="Next Day Image"
-          style="width: auto; height: auto"
-        />
+    <div class="listapp">
+      <div class="image-container">
+        <div class="image-wrapper">
+          <pinch-zoom *ngIf="prevday">
+            <img
+              #img
+              [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+              [src]="fileBaseUrlPrevious"
+              loading="lazy"
+              class="responsive-image"
+              alt="Previous Day Image"
+            />
+          </pinch-zoom>
+  
+          <pinch-zoom *ngIf="nextday">
+            <img
+              #img
+              [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+              [src]="fileBaseUrlNext"
+              loading="lazy"
+              class="responsive-image"
+              alt="Next Day Image"
+            />
+          </pinch-zoom>
+        </div>
       </div>
     </div>
+
+ 
   </app-package-content>
 </ion-content>
 
@@ -75,10 +81,12 @@
       id="styleh6"
       style="
         color: #fff;
-        margin-top: 4px;
+        margin-top: 10px;
+        margin-bottom: 0;
         font-family: Montserrat, sans-serif;
         text-decoration: none;
         font-size: 12px;
+        margin-top: 4px;
       "
     >
       Aerosport

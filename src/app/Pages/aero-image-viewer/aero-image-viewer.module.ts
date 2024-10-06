@@ -9,7 +9,9 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
 import { AeroImageViewerPage } from './aero-image-viewer.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
+import { PinchZoomModule } from '@meddv/ngx-pinch-zoom';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +21,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     NgxImageZoomModule,
     HammerModule,
     NgxPanZoomModule,
+    Ng2ImgMaxModule,
+    PinchZoomModule,
 
     AeroImageViewerPageRoutingModule,
   ],
