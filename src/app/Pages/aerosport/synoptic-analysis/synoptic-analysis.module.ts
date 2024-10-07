@@ -8,7 +8,7 @@ import { SynopticAnalysisPageRoutingModule } from './synoptic-analysis-routing.m
 
 import { SynopticAnalysisPage } from './synoptic-analysis.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PinchZoomModule } from '@meddv/ngx-pinch-zoom';
+
 
 @NgModule({
   imports: [
@@ -16,7 +16,6 @@ import { PinchZoomModule } from '@meddv/ngx-pinch-zoom';
     FormsModule,
     IonicModule,
     SharedModule,
-    PinchZoomModule,
     SynopticAnalysisPageRoutingModule
   ],
   declarations: [SynopticAnalysisPage]

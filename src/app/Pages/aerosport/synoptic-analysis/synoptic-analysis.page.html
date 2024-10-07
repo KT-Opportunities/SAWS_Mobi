@@ -28,7 +28,7 @@
 
     <div class="listapp">
       <div class="image-container">
-        <pinch-zoom *ngIf="!loading && fileBaseUrlSynoptic">
+        <div *ngIf="!loading && fileBaseUrlSynoptic">
           <img
             [style.transform]="'rotate(' + rotationDegree + 'deg) scale(' + scale + ')'"
             [src]="fileBaseUrlSynoptic"
@@ -37,7 +37,7 @@
             alt="Synoptic Analysis Image"
             (pinch)="onPinch($event)"
           />
-        </pinch-zoom>
+        </div>
       </div>
     </div>
   </app-package-content>

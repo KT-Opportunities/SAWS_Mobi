@@ -1,10 +1,10 @@
 <ion-content>
-  <swiper-container #swiper>
-    <ng-template swiperSlide>
+  <swiper-container zoom="true" appSwiper [config]="swiperConfig" #swiper>
+    <swiper-slide>
       <div class="swiper-zoom-container">
         <img [src]="rotatedImg ? rotatedImg : img" class="centered-image" />
       </div>
-    </ng-template>
+    </swiper-slide>
   </swiper-container>
 </ion-content>
 <ion-footer>

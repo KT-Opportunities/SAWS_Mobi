@@ -42,7 +42,7 @@
     <div class="listapp">
       <div class="image-container">
         <div class="image-wrapper">
-          <pinch-zoom *ngIf="prevday">
+          <div *ngIf="prevday">
             <img
               #img
               [style.transform]="'rotate(' + rotationDegree + 'deg)'"
@@ -51,9 +51,9 @@
               class="responsive-image"
               alt="Previous Day Image"
             />
-          </pinch-zoom>
+          </div>
   
-          <pinch-zoom *ngIf="nextday">
+          <div *ngIf="nextday">
             <img
               #img
               [style.transform]="'rotate(' + rotationDegree + 'deg)'"
@@ -62,7 +62,7 @@
               class="responsive-image"
               alt="Next Day Image"
             />
-          </pinch-zoom>
+          </div>
         </div>
       </div>
     </div>
