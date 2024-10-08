@@ -118,20 +118,7 @@
         >
           << Previous Day
         </ion-button>
-        <span class="current-date">
-          <ion-button
-            expand="full"
-            (click)="rotateImage()"
-            class="rotate-button"
-            style="
-              --background: #28a745;
-              --background-activated: #219638;
-              --background-hover: #36b55b;
-            "
-          >
-            <ion-icon name="refresh-outline"></ion-icon>
-          </ion-button>
-        </span>
+     
         <ion-button
           fill="clear"
           class="nav-button"
@@ -145,10 +132,11 @@
 
     <app-package-sub-header> </app-package-sub-header>
     <div class="listapp">
-      <div class="image-container" #imageContainer>
-        <div *ngIf="prevday">
+      <div class="image-container">
+        <swiper [config]="config" *ngIf="prevday">
           <img
-            [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+          tappable
+          (click)="openPreview(fileBaseUrlPrevious)"
             [src]="fileBaseUrlPrevious"
             loading="lazy"
             class="responsive-image"
@@ -156,10 +144,11 @@
             width="100%"
             height="100%"
           />
-        </div>
-        <div *ngIf="nextday">
+        </swiper>
+        <swiper [config]="config" *ngIf="nextday">
           <img
-            [style.transform]="'rotate(' + rotationDegree + 'deg)'"
+          tappable
+          (click)="openPreview(fileBaseUrlNext)"
             [src]="fileBaseUrlNext"
             loading="lazy"
             class="responsive-image"
@@ -167,7 +156,7 @@
             width="100%"
             height="100%"
           />
-        </div>
+        </swiper>
       </div>
     </div>
   </app-package-content>

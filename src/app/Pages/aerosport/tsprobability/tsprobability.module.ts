@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { TSProbabilityComponent } from './tsprobability.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,8 +17,10 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     IonicModule,
     SharedModule,
     NgxPanZoomModule,
+  
     TSProbabilityRoutingModule,
   ],
   declarations: [TSProbabilityComponent],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class TSProbabilityModule {}

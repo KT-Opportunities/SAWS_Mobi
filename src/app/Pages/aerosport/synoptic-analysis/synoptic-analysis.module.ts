@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { SynopticAnalysisPageRoutingModule } from './synoptic-analysis-routing.m
 import { SynopticAnalysisPage } from './synoptic-analysis.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     SynopticAnalysisPageRoutingModule
   ],
-  declarations: [SynopticAnalysisPage]
+  declarations: [SynopticAnalysisPage],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class SynopticAnalysisPageModule {}

@@ -9,7 +9,7 @@ import { CentralInteriorRoutingModule} from './central-interior-routing.module';
 
 import { CentralInteriorComponent } from './central-interior.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxImageZoomModule } from 'ngx-image-zoom';
+
 import { HammerModule } from '@angular/platform-browser';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 
@@ -23,7 +23,6 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     FormsModule,
     IonicModule,
     SharedModule,
-    NgxImageZoomModule,
     HammerModule,
     NgxPanZoomModule,
     CentralInteriorRoutingModule,
