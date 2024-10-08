@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { SwiperModule } from 'swiper/types';
 import { Swiper } from 'swiper';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import 'swiper/css';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
