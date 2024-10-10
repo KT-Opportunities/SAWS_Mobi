@@ -50,7 +50,10 @@
                   <div
                     id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba0b0-bb9b1d15"
                     class="div-block-454"
-                    *ngFor="let item of xlFAItems; let i = index"
+                    *ngFor="
+                      let item of viewFilters(xlFAItems, 'd1');
+                      let i = index
+                    "
                     [ngClass]="i % 2 === 0 ? 'div-block-454' : 'div-block-38'"
                   >
                     <div class="w-layout-grid grid-41">

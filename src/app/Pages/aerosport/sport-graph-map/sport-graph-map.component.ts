@@ -298,4 +298,9 @@ export class SportGraphMapComponent implements OnInit {
   viewFilter(item: any[], filter: string) {
     return item.filter((x) => x.includes(filter));
   }
+  viewFilters(items: any[], filter: string) {
+    return items.filter((x) => x.filename.includes(filter));
+  }
+  
 }
+
