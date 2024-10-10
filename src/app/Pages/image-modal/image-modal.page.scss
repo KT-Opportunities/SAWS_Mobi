@@ -10,3 +10,21 @@ swiper-container {
 .rotated-icon {
   transform: rotateY(180deg);
 }
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 8%;
+  width: 100%;
+}
+
+.navigation ion-button {
+  --ion-button-padding-start: 10px;
+  --ion-button-padding-end: 10px;
+  --ion-button-padding-top: 5px;
+  --ion-button-padding-bottom: 5px;
+  --ion-button-color: #fff;
+  --ion-button-background-color: #007bff;
+  --ion-button-shape: round;
+}

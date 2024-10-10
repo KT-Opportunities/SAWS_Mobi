@@ -1,6 +1,9 @@
 // Import necessary Angular modules
 import { Injectable, NgModule } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -20,6 +23,8 @@ import { HammerModule } from '@angular/platform-browser';
 import { HammerGestureConfig } from '@angular/platform-browser';
 
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+
+
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -50,7 +55,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatSortModule, // Add MatSortModule
     HammerModule,
     IonicModule.forRoot(),
- 
+   
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
