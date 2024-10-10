@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-kwazul-natal',
@@ -20,13 +22,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class KwazulNatalPage implements OnInit {
   isLogged: boolean = false;
-  loading: boolean = true;
-  isFormVisible: boolean = true;
-  isFormVisible1: boolean = false;
-  isFormVisible2: boolean = false;
-  isFormVisible3: boolean = false;
-  isKwazulNatal: boolean = false;
-  isSpotGfraph: boolean = false;
+  loading: boolean = false;
+
   isTSProbability: boolean = false;
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
@@ -34,7 +31,7 @@ export class KwazulNatalPage implements OnInit {
   isDropdownOpen3: boolean = false;
   isDropdownOpen4: boolean = false;
   isDropdownOpen5: boolean = false;
-  //selectedOption1: string = 'Low';
+  selectedOption1: string = 'Low';
   selectedOption2: string = 'FL060';
   selectedOption3: string = 'Normal';
   selectedOption4: string = 'Total cloud';
@@ -42,34 +39,33 @@ export class KwazulNatalPage implements OnInit {
   nextday: boolean = true;
   prevday: boolean = false;
   TsProbability: any = [];
-  KwazulNatal: any = [];
+  centralInterio: any = [];
   CloudCover: any = [];
+  KwazulNatal: any = [];
   ConvectiveCloudBase: any = [];
   WindArray: any = [];
   ThermalArray: any = [];
   TemperatureArray: any = [];
+  filteredWindData: any = [];
+
   selectedOption = 'Low';
 
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  fileBaseUrlSynoptic: SafeResourceUrl;
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
+  filteredConvectiveCloudBase: any = []; // To hold filtered items
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
-
     private http: HttpClient,
-
     private APIService: APIService,
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController
   ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlSynoptic =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
   getTimeFromFilename(imageName: string): string {
     const time = imageName.split('_')[0].substring(1); // Extracts the time part after "cb"
@@ -129,32 +125,37 @@ export class KwazulNatalPage implements OnInit {
         console.log('KWAZUL NATAL:', this.KwazulNatal);
         this.CloudCover = this.KwazulNatal.filter(
           (item: { filename: string }) =>
-            /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
+            /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) ||
+          /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('CloudCover:', this.CloudCover);
 
         this.ConvectiveCloudBase = this.KwazulNatal.filter(
           (item: { filename: string }) =>
-            /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
+            /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) ||
+          /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
 
         console.log('ConvectiveCloudBase:', this.ConvectiveCloudBase);
         this.WindArray = this.KwazulNatal.filter(
           (item: { filename: string }) =>
-            /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
+            /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) ||
+          /^[s6810121416].*kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
 
         console.log('WindArray:', this.WindArray);
         this.ThermalArray = this.KwazulNatal.filter(
           (item: { filename: string }) =>
-            /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
+            /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename)||
+          /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('ThermalArray:', this.ThermalArray);
         this.TemperatureArray = this.KwazulNatal.filter(
           (item: { filename: string }) =>
-            /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
+            /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) ||
+          /^[td][^c].*kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
         ).map((item: { filename: string }) => item.filename);
 
         console.log('TemperatureArray:', this.TemperatureArray);
@@ -176,16 +177,39 @@ export class KwazulNatalPage implements OnInit {
   selectOption(option: string, dropdown: string) {
     if (this.selectedOption) {
       this.selectedOption = option;
+      this.filterItems(); // Filter items based on the new selection
     }
   }
-  selectOption2(option: string, dropdown: string) {
-    if (this.selectedOption2) {
+  selectOption2(option: string) {
+    if (this.selectedOption2 !== option) {
       this.selectedOption2 = option;
+      // Call the filtering function here if needed
+      this.filterItems();
     }
   }
+
   selectOption3(option: string, dropdown: string) {
     if (this.selectedOption3) {
       this.selectedOption3 = option;
+      this.filterItems();
+    }
+  }
+  
+  filterItems() {
+    if (this.selectedOption === 'Low') {
+      this.filteredConvectiveCloudBase = this.ConvectiveCloudBase.filter(
+        (item: any) => item.startsWith('cb00')
+      );
+    } else if (this.selectedOption === 'Middle') {
+      this.filteredConvectiveCloudBase = this.ConvectiveCloudBase.filter(
+        (item: any) => item.startsWith('cb12')
+      );
+    } else if (this.selectedOption === 'High') {
+      this.filteredConvectiveCloudBase = this.ConvectiveCloudBase.filter(
+        (item: any) => item.startsWith('cb23')
+      );
+    } else {
+      this.filteredConvectiveCloudBase = this.ConvectiveCloudBase;
     }
   }
   getFilteredItems() {
@@ -307,64 +331,55 @@ export class KwazulNatalPage implements OnInit {
     window.history.back();
   }
 
-  previousDay() {
-    // Add logic for navigating to the previous day
-    this.nextday = false;
-    this.prevday = true;
-    this.TsProbability[0];
-    console.log('ARRAY AT 0:', this.TsProbability[0]);
-    this.APIService.GetAviationFile(
-      this.TsProbability[0].foldername,
-      this.TsProbability[0].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlPrevious =
-          'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlPrevious =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
 
-        console.log('back to image:', this.fileBaseUrlPrevious);
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
       },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
-  }
-
-  nextDay() {
-    this.nextday = true;
-    this.prevday = false;
-    this.TsProbability[1];
-    this.APIService.GetAviationFile(
-      this.TsProbability[1].foldername,
-      this.TsProbability[1].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlNext = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlNext =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-
-        console.log('back to image:', this.fileBaseUrlNext);
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
-  }
-  ImageViewer(imageName: any) {
-
-    console.log("imageName", imageName)
-    this.router.navigate(['aero-image-viewer'], {
-      state: { kwazulNatal: imageName },
+      cssClass: 'transparent-modal',
     });
+    modal.present();
   }
-  ImageViewer2(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
-      state: { kwazulNatal: imageName },
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITYEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(name));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('aerosport', element).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
     });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
+  }
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
   }
 }

@@ -16,7 +16,10 @@ export class ImageModalPage implements OnInit {
   @ViewChild('swiper') swiperRef!: ElementRef<HTMLElement>; // Use ElementRef for Swiper 11
   // @ViewChild('swiper', { static: true }) swiperElement?: ElementRef;
   swiper!: Swiper;
-  @Input() img: any;
+  @Input() imgs: any;
+  currentIndex: number = 0;
+  imgsIsArray: boolean = false;
+  img: any;
   rotatedImg: string | null = null;
   rotation: number = 0;
   swiperConfig: SwiperOptions = {
@@ -37,7 +40,14 @@ export class ImageModalPage implements OnInit {
     console.log(this.img);
 
     console.log('Image Source:', this.rotatedImg ? this.rotatedImg : this.img);
+    if (Array.isArray(this.imgs)) {
+      this.img = this.imgs[this.currentIndex]; // Set the initial image
+      this.imgsIsArray = true;
+    } else {
+      this.img = this.imgs;
+    }
   }
+
   close() {
     this.modalCtrl.dismiss();
   }
@@ -56,7 +66,7 @@ export class ImageModalPage implements OnInit {
     const imgElement = new Image();
     imgElement.crossOrigin = 'Anonymous'; // Allow cross-origin requests
 
-    imgElement.src = this.img.changingThisBreaksApplicationSecurity; // Load the original image
+    imgElement.src = this.img; // Load the original image
     console.log('The Image:', this.img);
     console.log('The Image2:', imgElement.src);
 
@@ -91,5 +101,22 @@ export class ImageModalPage implements OnInit {
     imgElement.onerror = (error) => {
       console.error('Error loading image:', error);
     };
+  }
+
+  next() {
+    this.currentIndex++; // Increment the index
+    console.log('this.currentIndex:', this.currentIndex);
+    if (this.currentIndex >= this.imgs.length) {
+      this.currentIndex = 0; // Loop back to the first image if at the end
+    }
+    this.img = this.imgs[this.currentIndex]; // Update the current image
+  }
+
+  prev() {
+    this.currentIndex--; // Decrement the index
+    if (this.currentIndex < 0) {
+      this.currentIndex = this.imgs.length - 1; // Loop back to the last image if at the beginning
+    }
+    this.img = this.imgs[this.currentIndex]; // Update the current image
   }
 }

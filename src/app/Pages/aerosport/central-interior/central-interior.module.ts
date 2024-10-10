@@ -13,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HammerModule } from '@angular/platform-browser';
 import { NgxPanZoomModule } from 'ngx-panzoom';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +27,7 @@ import { NgxPanZoomModule } from 'ngx-panzoom';
     HammerModule,
     NgxPanZoomModule,
     CentralInteriorRoutingModule,
+  
    
   ],
   declarations: [CentralInteriorComponent]

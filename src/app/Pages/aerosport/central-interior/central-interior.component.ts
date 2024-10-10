@@ -12,6 +12,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-central-interior',
@@ -39,17 +41,19 @@ export class CentralInteriorComponent implements OnInit {
   TsProbability: any = [];
   centralInterio: any = [];
   CloudCover: any = [];
+  CloudCover2: any = [];
   ConvectiveCloudBase: any = [];
   WindArray: any = [];
   ThermalArray: any = [];
   TemperatureArray: any = [];
   filteredWindData: any = [];
+
   selectedOption = 'Low';
 
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  fileBaseUrlSynoptic: SafeResourceUrl;
+  fileBaseUrl: SafeResourceUrl;
+
   filteredConvectiveCloudBase: any = []; // To hold filtered items
+  ImageArray: any = [];
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -57,13 +61,11 @@ export class CentralInteriorComponent implements OnInit {
     private http: HttpClient,
     private APIService: APIService,
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController
   ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlSynoptic =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
+  
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
   getTimeFromFilename(imageName: string): string {
     const time = imageName.split('_')[0].substring(1); // Extracts the time part after "cb"
@@ -124,7 +126,8 @@ export class CentralInteriorComponent implements OnInit {
         this.CloudCover = this.centralInterio
           .filter(
             (item: { filename: string }) =>
-              /^[lmhLMH](([0-9]{1,2})|tm)_cint_d1\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
+              /^[lmhLMH](([0-9]{1,2})|tm)_cint_d1\.gif$/i.test(item.filename) ||
+              /^[lmhLMH](([0-9]{1,2})|tm)_cint_d2\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
           )
           .map((item: { filename: string }) => item.filename);
 
@@ -133,7 +136,10 @@ export class CentralInteriorComponent implements OnInit {
         this.ConvectiveCloudBase = this.centralInterio
           .filter(
             (item: { filename: string }) =>
-              /^cb(([01]?[0-9]|2[0-3])|tm)_cint_d1\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
+              /^cb(([01]?[0-9]|2[0-3])|tm)_cint_d1\.gif$/i.test(
+                item.filename
+              ) ||
+              /^cb(([01]?[0-9]|2[0-3])|tm)_cint_d2\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
           )
           .map((item: { filename: string }) => item.filename);
 
@@ -141,7 +147,8 @@ export class CentralInteriorComponent implements OnInit {
         this.WindArray = this.centralInterio
           .filter(
             (item: { filename: string }) =>
-              /^[s6810121416].*cint_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
+              /^[s6810121416].*cint_d1\.gif$/i.test(item.filename) ||
+              /^[s6810121416].*cint_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
           )
           .map((item: { filename: string }) => item.filename);
 
@@ -149,7 +156,10 @@ export class CentralInteriorComponent implements OnInit {
         this.ThermalArray = this.centralInterio
           .filter(
             (item: { filename: string }) =>
-              /^lf(([01]?[0-9]|2[0-3])|tm)_cint_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
+              /^lf(([01]?[0-9]|2[0-3])|tm)_cint_d1\.gif$/i.test(
+                item.filename
+              ) ||
+              /^lf(([01]?[0-9]|2[0-3])|tm)_cint_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
           )
           .map((item: { filename: string }) => item.filename);
 
@@ -157,17 +167,13 @@ export class CentralInteriorComponent implements OnInit {
         this.TemperatureArray = this.centralInterio
           .filter(
             (item: { filename: string }) =>
-              /^[td][^c].*cint_d1\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
+              /^[td][^c].*cint_d1\.gif$/i.test(item.filename) ||
+              /^[td][^c].*cint_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
           )
           .map((item: { filename: string }) => item.filename);
 
         console.log('TemperatureArray:', this.TemperatureArray);
 
-        //CloudCover:any=[];
-        //ConvectiveCloudBase:any=[];
-        // WindArray:any=[];
-        // ThermalArray:any=[];
-        // TemperatureArray:any=[];
         this.filterItems();
 
         this.loading = false;
@@ -239,15 +245,6 @@ export class CentralInteriorComponent implements OnInit {
     }
   }
 
-  // getFilteredItemsThermal() {
-  //   if (this.selectedOption3 === 'Normal') {
-  //     return this.TemperatureArray.filter((item: any) => item.startsWith('t'));
-  //   } else if (this.selectedOption3 === 'Dewpoint') {
-  //     return this.TemperatureArray.filter((item: any) => item.startsWith('d'));
-  //   } else {
-  //     return this.TemperatureArray;
-  //   }
-  // }
 
   getFilteredItemsThermal() {
     if (this.selectedOption3 === 'Normal') {
@@ -295,16 +292,6 @@ export class CentralInteriorComponent implements OnInit {
     }
   }
 
-  // selectOption(option: string, dropdown: string) {
-  //   if (dropdown === 'dropdown1') {
-  //     this.selectedOption1 = option;
-  //     this.isDropdownOpen1 = false;
-  //     this.updateFilteredCloudCover();
-  //   } else if (dropdown === 'dropdown2') {
-  //     this.selectedOption2 = option;
-  //     this.isDropdownOpen2 = false;
-  //   }
-  // }
 
   forecastDropdown(dropdown: string) {
     if (dropdown === 'dropdown1') {
@@ -358,31 +345,6 @@ export class CentralInteriorComponent implements OnInit {
     this.router.navigate(['/aero-sport']);
   }
 
-  previousDay() {
-    // Add logic for navigating to the previous day
-    this.nextday = false;
-    this.prevday = true;
-    this.TsProbability[0];
-    console.log('ARRAY AT 0:', this.TsProbability[0]);
-    this.APIService.GetAviationFile(
-      this.TsProbability[0].foldername,
-      this.TsProbability[0].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlPrevious =
-          'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlPrevious =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
-
-        console.log('back to image:', this.fileBaseUrlPrevious);
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
-  }
 
   filterItems() {
     if (this.selectedOption === 'Low') {
@@ -402,36 +364,56 @@ export class CentralInteriorComponent implements OnInit {
     }
   }
 
-  nextDay() {
-    this.nextday = true;
-    this.prevday = false;
-    this.TsProbability[1];
-    this.APIService.GetAviationFile(
-      this.TsProbability[1].foldername,
-      this.TsProbability[1].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlNext = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlNext =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
 
-        console.log('back to image:', this.fileBaseUrlNext);
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
       },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
-  }
-  ImageViewer(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
-      state: { kwazulNatal: imageName },
+      cssClass: 'transparent-modal',
     });
+    modal.present();
   }
-  ImageViewer2(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
-      state: { kwazulNatal: imageName },
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITYEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(name));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('aerosport', element).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
     });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
+  }
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
   }
 }
