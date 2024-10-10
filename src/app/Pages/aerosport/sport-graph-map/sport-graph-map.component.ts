@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 @Component({
   selector: 'app-sport-graph-map',
   templateUrl: './sport-graph-map.component.html',
@@ -80,10 +82,9 @@ export class SportGraphMapComponent implements OnInit {
     'xl-25.53327.775_spot_d1.gif': 'Brits A/F',
     'xl-26.038827.587_spot_d1.gif': 'Orient',
   };
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  fileBaseUrlSynoptic: SafeResourceUrl;
 
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
   constructor(
     private router: Router,
     private APIService: APIService,
@@ -93,13 +94,11 @@ export class SportGraphMapComponent implements OnInit {
     private http: HttpClient,
 
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController
   ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlSynoptic =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
   extractAlphabetical(filename: string): string {
     return filename.replace(/[^a-zA-Z]/g, '');
@@ -184,8 +183,9 @@ export class SportGraphMapComponent implements OnInit {
 
           data.forEach((item: any) => {
             if (
-              item.filename.startsWith('xlFA') &&
-              item.filename.endsWith('_spot_d1.gif')
+              (item.filename.startsWith('xlFA') &&
+                item.filename.endsWith('_spot_d1.gif')) ||
+              item.filename.endsWith('_spot_d2.gif')
             ) {
               const baseFilename = item.filename.split('_spot_d1.gif')[0];
               if (!uniqueFilenames.has(baseFilename)) {
@@ -244,63 +244,58 @@ export class SportGraphMapComponent implements OnInit {
       );
     });
   }
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
 
-  previousDay() {
-    // Add logic for navigating to the previous day
-    this.nextday = false;
-    this.prevday = true;
-    this.TsProbability[0];
-    console.log('ARRAY AT 0:', this.TsProbability[0]);
-    this.APIService.GetAviationFile(
-      this.TsProbability[0].foldername,
-      this.TsProbability[0].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlPrevious =
-          'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlPrevious =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlPrevious);
-
-        console.log('back to image:', this.fileBaseUrlPrevious);
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
       },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
   }
 
-  nextDay() {
-    this.nextday = true;
-    this.prevday = false;
-    this.TsProbability[1];
-    this.APIService.GetAviationFile(
-      this.TsProbability[1].foldername,
-      this.TsProbability[1].filename
-    ).subscribe(
-      (data) => {
-        console.log('IMAGE:', data);
-        const imageUrlNext = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-        this.fileBaseUrlNext =
-          this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
 
-        console.log('back to image:', this.fileBaseUrlNext);
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(name));
+
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
   }
-  ImageViewer(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
-      state: { names: imageName },
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('aerosport', element.filename).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
     });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
   }
-  ImageViewer2(imageName: any) {
-    this.router.navigate(['/aero-image-viewer'], {
-      state: { names2: imageName },
-    });
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
   }
 }
