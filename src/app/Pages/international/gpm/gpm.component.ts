@@ -147,14 +147,27 @@ export class GpmComponent  implements OnInit {
     );
   }
   
-  async openImageViewer(imageUrl: SafeResourceUrl) {
+  // async openImageViewer(imageUrl: SafeResourceUrl) {
+  //   const modal = await this.moodalCtrl.create({
+  //     component: ImageModalPage,
+  //     componentProps: { img: imageUrl },
+  //     cssClass: 'transparent-modal',
+  //   });
+  
+  //   await modal.present();
+  // }
+
+  async openImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
     const modal = await this.moodalCtrl.create({
       component: ImageModalPage,
-      componentProps: { img: imageUrl },
+      componentProps: {
+        imgs, // image link passed on click event
+      },
       cssClass: 'transparent-modal',
     });
-  
-    await modal.present();
+    modal.present();
   }
   
 
