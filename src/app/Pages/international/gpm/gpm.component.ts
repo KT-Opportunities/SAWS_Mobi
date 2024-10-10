@@ -4,7 +4,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 import { ModalController } from '@ionic/angular';
 import { ImageModalPage } from '../../image-modal/image-modal.page';
 
@@ -13,185 +12,105 @@ import { ImageModalPage } from '../../image-modal/image-modal.page';
   templateUrl: './gpm.component.html',
   styleUrls: ['./../international.page.scss'],
 })
-export class GpmComponent  implements OnInit {
+export class GpmComponent implements OnInit {
 
-  isLogged: boolean = false;
-  frameArray: any = [];
+  isLogged: boolean = false; // Indicates if the user is logged in
+  frameArray: any = []; // Array to hold frame data
+  ImageArray: any = []; // Array to hold images
+  fileBaseUrl: SafeResourceUrl | undefined; // Safe URL for image display
+  loading: boolean = false; // Loading state for image fetching
 
-  fileBaseUrl: SafeResourceUrl | undefined;
-  loading: boolean = false;
-
-  selectedOption: string = 'West';
-  selectedOptionFilename: string = 'gw_west';
-  isDropdownOpen: boolean = false;
-  folderName: string = 'gw';
-  lastModifiedHours: number = 12;
+  selectedOption: string = 'West'; // Default selected option for dropdown
+  selectedOptionFilename: string = 'gw_west'; // Filename prefix based on the selected option
+  isDropdownOpen: boolean = false; // State for managing dropdown visibility
+  folderName: string = 'gw'; // Folder name for image fetching
+  lastModifiedHours: number = 12; // Time to filter recent images
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private APIService: APIService,
     private sanitizer: DomSanitizer,
-    private dialog: MatDialog,
     private moodalCtrl: ModalController
   ) { }
 
   ngOnInit() {
+    // Initializing the component, set up any necessary state here
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
   get isLoggedIn(): boolean {
+    // Check if user is logged in through AuthService
     return this.authService.getIsLoggedIn();
   }
 
   NavigateToInternational() {
+    // Navigate to the international page
     this.router.navigate(['/international']);
   }
 
   gpmDropdownOpen() {
+    // Toggle dropdown visibility
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   selectOption(option: string, dropdown: string, selectedOption: string) {
-    if (dropdown === 'dropdown1') {
-      this.selectedOption = selectedOption;
-      this.selectedOptionFilename = option;
-    } 
-
-    if (dropdown === 'dropdown2') {
-      this.selectedOption = selectedOption;
-      this.selectedOptionFilename = option;
-    }
-
-    if (dropdown === 'dropdown3') {
-      this.selectedOption = selectedOption;
-      this.selectedOptionFilename = option;
-    }
-
-    if (dropdown === 'dropdown4') {
-      this.selectedOption = selectedOption;
-      this.selectedOptionFilename = option;
-    }
+    // Set selected option based on the dropdown type
+    this.selectedOption = selectedOption;
+    this.selectedOptionFilename = option;
   }
 
-
-  // viewImage(imagefilename: string): Promise<string> {
-  //   return new Promise<string>((resolve, reject) => {
-  //     this.loading = true;
-
-  //     const filename = this.selectedOptionFilename + imagefilename;
-
-
-  //     this.APIService.GetAviationFile(this.folderName, filename).subscribe(
-  //       (response) => {
-  //         const filecontent = response.filecontent;
-  //         resolve(filecontent);
-  //         this.openImageViewer(filecontent);
-  //       },
-  //       (error) => {
-  //         reject(error);
-  //         this.loading = false;
-  //       }
-  //     );
-  //   });
-  // }
-  
-  // async  openImageViewer(img: any){
-  //   const imageUrl = 'data:image/jpeg;base64,' + img; // Image data
-    
-  //   const imageUrlbase = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-  //   console.log('testing4' + imageUrlbase);
-  //   // const urlimages = 'data:image/gif;base64,' + img
-  //   console.log(' teting2'  + imageUrl);
-  //   const modal = await this.moodalCtrl.create({
-  //     component: ImageModalPage,
-  //     componentProps: {
-
-  //       imageUrlbase  // image link passed on click event
-  //     },
-  //     cssClass: 'transparent-modal'
-  //   });
-  //   modal.present();
-  // }
-
-
   viewImage(imageFilename: string) {
-    this.loading = true;
-  
+    this.loading = true; // Set loading state to true
+
+    // Construct the filename using the selected option and provided filename
     const filename = this.selectedOptionFilename + imageFilename;
-  
+
+    // Fetch the image from the API
     this.APIService.GetAviationFile(this.folderName, filename).subscribe(
       (response) => {
-        const fileContent = response.filecontent;
-  
+        const fileContent = response.filecontent; // Get the file content from the response
+        console.log('File content received:', fileContent); // Log the file content
+
+        // Check if file content exists
         if (fileContent) {
-          const imageUrl = 'data:image/gif;base64,' + fileContent;
+          // Create a base64 image URL from the file content
+          const imageUrl = 'data:image/gif;base64,' + fileContent; // Ensure the format is correct for your image
+          console.log('Image URL:', imageUrl); // Log the constructed image URL
+
+          // Sanitize the image URL for safe use in the application
           this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-  
+
+          // Check if the fileBaseUrl is defined
           if (this.fileBaseUrl) {
-            // Use type narrowing to ensure fileBaseUrl is not undefined
             setTimeout(() => {
+              // Open the image viewer modal with the sanitized image URL
               this.openImageViewer(this.fileBaseUrl!); // Using '!' to assert it's not undefined
-            }, 1000);
+            }, 1000); // Optional delay to simulate loading
           }
         } else {
           console.error('No valid image data found.');
         }
-  
+
+        // Set loading state to false after processing
         this.loading = false;
       },
       (error) => {
         console.error('Error fetching the image:', error);
-        this.loading = false;
+        this.loading = false; // Set loading state to false on error
       }
     );
   }
-  
-  // async openImageViewer(imageUrl: SafeResourceUrl) {
-  //   const modal = await this.moodalCtrl.create({
-  //     component: ImageModalPage,
-  //     componentProps: { img: imageUrl },
-  //     cssClass: 'transparent-modal',
-  //   });
-  
-  //   await modal.present();
-  // }
 
-  async openImageViewer(imgs: any) {
-    console.log('The img:', imgs);
-
+  async openImageViewer(imgs: SafeResourceUrl) {
+    // Create and present a modal to view the image
     const modal = await this.moodalCtrl.create({
       component: ImageModalPage,
       componentProps: {
-        imgs, // image link passed on click event
+        imgs, // Pass the image URL to the modal
       },
       cssClass: 'transparent-modal',
     });
-    modal.present();
+    await modal.present();
   }
-  
-
-
-
-
-
-
-
-  // openImageViewer(filecontent: any) {
-  //   console.log('Testing' + filecontent);
-  //   const dialogConfig = new MatDialogConfig();
-  //     dialogConfig.autoFocus = true;
-  //     dialogConfig.disableClose = true;
-  //     dialogConfig.width = '80%';
-  //     dialogConfig.height = '80%';
-  //     dialogConfig.data = {
-  //       filecontent: filecontent,
-        
-
-  //     };
-      
-  //     const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-  //     this.loading = false;
-  // }
-
 }

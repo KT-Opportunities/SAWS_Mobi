@@ -13,6 +13,8 @@ import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-grid-winds',
@@ -22,7 +24,7 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 export class GridWindsPage implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = false;
-
+  // loading: boolean = false;
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
   isDropdownOpen2: boolean = false;
@@ -41,10 +43,10 @@ export class GridWindsPage implements OnInit {
   WestGridWindArray: any = [];
   EastGridWindArray: any = [];
   SouthGridWindArray: any = [];
-
-  fileBaseUrlNext: SafeResourceUrl;
-  fileBaseUrlPrevious: SafeResourceUrl;
-  fileBaseUrlSynoptic: SafeResourceUrl;
+  ImageArray: any = [];
+  fileBaseUrl: SafeResourceUrl;
+  // fileBaseUrlPrevious: SafeResourceUrl;
+  // fileBaseUrlSynoptic: SafeResourceUrl;
 
   constructor(
     private router: Router,
@@ -52,16 +54,14 @@ export class GridWindsPage implements OnInit {
     private elRef: ElementRef,
 
     private http: HttpClient,
-
+    private moodalCtrl: ModalController,
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer
   ) {
-    this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlPrevious =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.fileBaseUrlSynoptic =
-      this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+   
+   
   }
   getTimeFromFilename(imageName: any) {
     // Extract the portion before '.gif'
@@ -401,52 +401,58 @@ export class GridWindsPage implements OnInit {
   NavigateToInternational() {
     this.router.navigate(['/international']);
   }
-  ImageViewer(item: any) {
-    console.log('file Name:', item);
-    const folderName = item.substring(0, 2);
-    const fileName = item;
-    console.log('Folder Name:', folderName);
 
-    this.fetchSecondAPI(folderName, fileName)
-      .then((filecontent) => {
-        this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filecontent };
 
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.isLoading = false;
-      });
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
   }
 
-  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filecontent
-    return new Promise<string>((resolve, reject) => {
-      this.APIService.GetAviationFile(folderName, fileName).subscribe(
-        (response) => {
-          // Assuming filecontent is obtained from the response
-          const filecontent = response.filecontent;
-          // Log filecontent to verify
-          console.log('File Text Content:', filecontent);
-          // Resolve the promise with filecontent
-          resolve(filecontent);
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITYEM:', item, ' TYPE:', type);
+    // let name = item.split('_')[0];
+    // console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(item));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('gw', element).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
         },
         (error) => {
-          // Reject the promise if there's an error
-          reject(error);
+          console.log('Error fetching JSON data:', error);
+          this.isLoading= false;
         }
       );
     });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
+  }
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
   }
 }

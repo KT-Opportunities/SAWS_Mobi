@@ -297,6 +297,8 @@ export class HumidityComponent implements OnInit {
   NavigateToInternational() {
     this.router.navigate(['/international']);
   }
+
+  
   ImageViewer(item: any) {
     const folderName = item.substring(0, 2);
     const fileName = item;
