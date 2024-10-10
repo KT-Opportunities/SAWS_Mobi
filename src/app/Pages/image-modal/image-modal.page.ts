@@ -1,12 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import Swiper from 'swiper';
-import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { Zoom } from 'swiper/modules';
 import { DomSanitizer } from '@angular/platform-browser';
 
-// Use Swiper's Zoom module
 Swiper.use([Zoom]);
 
 @Component({
@@ -15,20 +13,18 @@ Swiper.use([Zoom]);
   styleUrls: ['./image-modal.page.scss'],
 })
 export class ImageModalPage implements OnInit {
-  @ViewChild('swiper') swiperRef!: ElementRef<HTMLElement>; // Reference to Swiper element
-  swiper!: Swiper; // Swiper instance
-  @Input() imgs: any; // Input for images array
+  @ViewChild('swiper') swiperRef!: ElementRef<HTMLElement>;
+  swiper!: Swiper;
+  @Input() imgs: any;
+  currentIndex: number = 0;
+  imgsIsArray: boolean = false;
+  img: any;
+  rotatedImg: string | null = null; // Store rotated image
+  rotation: number = 0; // Track current rotation
 
-  currentIndex: number = 0; // Current image index
-  imgsIsArray: boolean = false; // Flag to check if imgs is an array
-  img: any; // Current image source
-  rotatedImg: string | null = null; // Rotated image data URL
-  rotation: number = 0; // Rotation angle in degrees
-
-  // Swiper configuration options
   swiperConfig: SwiperOptions = {
-    zoom: true, // Enable zoom
-    touchEventsTarget: 'container', // Handle touch events on the container
+    zoom: true,
+    touchEventsTarget: 'container',
     on: {
       // Prevent default behavior on touch start
       touchStart: (swiper, event) => {
@@ -43,15 +39,13 @@ export class ImageModalPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('Initial Image Source:', this.img);
-    
-    // Initialize the image based on input
     if (Array.isArray(this.imgs)) {
-      this.img = this.imgs[this.currentIndex]; // Set the initial image if imgs is an array
+      this.img = this.imgs[this.currentIndex]; // Set initial image
       this.imgsIsArray = true;
     } else {
       this.img = this.imgs; // Set img directly if it's a single image
     }
+    this.rotateImage(); // Apply the current rotation to the initial image
   }
 
   close() {
@@ -59,44 +53,49 @@ export class ImageModalPage implements OnInit {
   }
 
   rotateLeft() {
-    this.rotation -= 90; // Decrease rotation by 90 degrees
-    this.rotation = this.rotation < 0 ? this.rotation + 360 : this.rotation; // Normalize rotation
-    this.rotateImage(); // Rotate the image
+    this.rotation -= 90;
+    if (this.rotation < 0) this.rotation += 360;
+    this.rotateImage(); // Apply the rotation
   }
 
   rotateRight() {
-    this.rotation += 90; // Increase rotation by 90 degrees
-    this.rotation = this.rotation >= 360 ? this.rotation - 360 : this.rotation; // Normalize rotation
-    this.rotateImage(); // Rotate the image
+    this.rotation += 90;
+    if (this.rotation >= 360) this.rotation -= 360;
+    this.rotateImage(); // Apply the rotation
   }
 
   rotateImage() {
     const imgElement = new Image();
     imgElement.crossOrigin = 'Anonymous'; // Allow cross-origin requests
-    imgElement.src = this.img; // Load the original image
 
+    imgElement.src = this.img; // Load the current image
     imgElement.onload = () => {
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d')!;
 
-      // Calculate new dimensions based on rotation
       const angleInRadians = (this.rotation * Math.PI) / 180;
       const width = imgElement.width;
       const height = imgElement.height;
-      const newWidth = Math.abs(Math.cos(angleInRadians) * width) + Math.abs(Math.sin(angleInRadians) * height);
-      const newHeight = Math.abs(Math.sin(angleInRadians) * width) + Math.abs(Math.cos(angleInRadians) * height);
 
-      // Set canvas dimensions
+      // Calculate new dimensions based on rotation
+      const newWidth =
+        Math.abs(Math.cos(angleInRadians) * width) +
+        Math.abs(Math.sin(angleInRadians) * height);
+      const newHeight =
+        Math.abs(Math.sin(angleInRadians) * width) +
+        Math.abs(Math.cos(angleInRadians) * height);
+
+      // Set canvas dimensions to match the rotated image
       canvas.width = newWidth;
       canvas.height = newHeight;
 
-      // Translate context to the center of the canvas and rotate
-      ctx!.translate(newWidth / 2, newHeight / 2);
-      ctx!.rotate(angleInRadians);
-      ctx!.drawImage(imgElement, -width / 2, -height / 2); // Draw the image centered
+      // Translate context to center of canvas before rotating
+      ctx.translate(newWidth / 2, newHeight / 2);
+      ctx.rotate(angleInRadians);
+      ctx.drawImage(imgElement, -width / 2, -height / 2);
 
-      // Get the data URL of the rotated image
-      this.rotatedImg = canvas.toDataURL(); // Update rotated image source
+      // Get rotated image as base64 URL
+      this.rotatedImg = canvas.toDataURL();
     };
 
     imgElement.onerror = (error) => {
@@ -105,18 +104,20 @@ export class ImageModalPage implements OnInit {
   }
 
   next() {
-    this.currentIndex++; // Increment the index
+    this.currentIndex++;
     if (this.currentIndex >= this.imgs.length) {
-      this.currentIndex = 0; // Loop back to the first image if at the end
+      this.currentIndex = 0; // Loop back to first image
     }
-    this.img = this.imgs[this.currentIndex]; // Update the current image
+    this.img = this.imgs[this.currentIndex]; // Update current image
+    this.rotateImage(); // Reapply the current rotation to the new image
   }
 
   prev() {
-    this.currentIndex--; // Decrement the index
+    this.currentIndex--;
     if (this.currentIndex < 0) {
-      this.currentIndex = this.imgs.length - 1; // Loop back to the last image if at the beginning
+      this.currentIndex = this.imgs.length - 1; // Loop back to last image
     }
-    this.img = this.imgs[this.currentIndex]; // Update the current image
+    this.img = this.imgs[this.currentIndex]; // Update current image
+    this.rotateImage(); // Reapply the current rotation to the new image
   }
 }
