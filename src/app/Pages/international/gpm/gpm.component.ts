@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-gpm',
@@ -30,7 +32,8 @@ export class GpmComponent  implements OnInit {
     private authService: AuthService,
     private APIService: APIService,
     private sanitizer: DomSanitizer,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private moodalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -72,40 +75,110 @@ export class GpmComponent  implements OnInit {
   }
 
 
-  viewImage(imagefilename: string): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      this.loading = true;
+  // viewImage(imagefilename: string): Promise<string> {
+  //   return new Promise<string>((resolve, reject) => {
+  //     this.loading = true;
 
-      const filename = this.selectedOptionFilename + imagefilename;
+  //     const filename = this.selectedOptionFilename + imagefilename;
 
 
-      this.APIService.GetAviationFile(this.folderName, filename).subscribe(
-        (response) => {
-          const filecontent = response.filecontent;
-          resolve(filecontent);
-          this.openImageViewer(filecontent);
-        },
-        (error) => {
-          reject(error);
-          this.loading = false;
+  //     this.APIService.GetAviationFile(this.folderName, filename).subscribe(
+  //       (response) => {
+  //         const filecontent = response.filecontent;
+  //         resolve(filecontent);
+  //         this.openImageViewer(filecontent);
+  //       },
+  //       (error) => {
+  //         reject(error);
+  //         this.loading = false;
+  //       }
+  //     );
+  //   });
+  // }
+  
+  // async  openImageViewer(img: any){
+  //   const imageUrl = 'data:image/jpeg;base64,' + img; // Image data
+    
+  //   const imageUrlbase = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+  //   console.log('testing4' + imageUrlbase);
+  //   // const urlimages = 'data:image/gif;base64,' + img
+  //   console.log(' teting2'  + imageUrl);
+  //   const modal = await this.moodalCtrl.create({
+  //     component: ImageModalPage,
+  //     componentProps: {
+
+  //       imageUrlbase  // image link passed on click event
+  //     },
+  //     cssClass: 'transparent-modal'
+  //   });
+  //   modal.present();
+  // }
+
+
+  viewImage(imageFilename: string) {
+    this.loading = true;
+  
+    const filename = this.selectedOptionFilename + imageFilename;
+  
+    this.APIService.GetAviationFile(this.folderName, filename).subscribe(
+      (response) => {
+        const fileContent = response.filecontent;
+  
+        if (fileContent) {
+          const imageUrl = 'data:image/gif;base64,' + fileContent;
+          this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+  
+          if (this.fileBaseUrl) {
+            // Use type narrowing to ensure fileBaseUrl is not undefined
+            setTimeout(() => {
+              this.openImageViewer(this.fileBaseUrl!); // Using '!' to assert it's not undefined
+            }, 1000);
+          }
+        } else {
+          console.error('No valid image data found.');
         }
-      );
+  
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching the image:', error);
+        this.loading = false;
+      }
+    );
+  }
+  
+  async openImageViewer(imageUrl: SafeResourceUrl) {
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: { img: imageUrl },
+      cssClass: 'transparent-modal',
     });
+  
+    await modal.present();
   }
+  
 
-  openImageViewer(filecontent: any) {
-    const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.disableClose = true;
-      dialogConfig.width = '80%';
-      dialogConfig.height = '80%';
-      dialogConfig.data = {
-        filecontent: filecontent,
 
-      };
+
+
+
+
+
+  // openImageViewer(filecontent: any) {
+  //   console.log('Testing' + filecontent);
+  //   const dialogConfig = new MatDialogConfig();
+  //     dialogConfig.autoFocus = true;
+  //     dialogConfig.disableClose = true;
+  //     dialogConfig.width = '80%';
+  //     dialogConfig.height = '80%';
+  //     dialogConfig.data = {
+  //       filecontent: filecontent,
+        
+
+  //     };
       
-      const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-      this.loading = false;
-  }
+  //     const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+  //     this.loading = false;
+  // }
 
 }
