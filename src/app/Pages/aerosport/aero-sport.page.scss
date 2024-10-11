@@ -14951,4 +14951,23 @@ textarea.w-select {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
+ion-toast.custom-toast {
+  --background: #28a745; /* Green background */
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: #ffffff; /* White text */
+}
 
+ion-toast.custom-toast::part(message) {
+  font-style: italic;
+  color: #ffffff; /* White message text */
+}
+
+ion-toast.custom-toast::part(icon) {
+  color: #ffffff; /* White icon */
+}
+
+ion-toast.custom-toast::part(button) {
+  border-left: 1px solid #d2d2d2;
+  color: #ffffff; /* White button text */
+  font-size: 12px;
+}

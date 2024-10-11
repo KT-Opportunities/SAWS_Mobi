@@ -77,7 +77,7 @@ export class DomesticPage {
     return loading;
   }
   async NavigateToMetarMaps() {
-    this.loading = true;
+    this.loading = true; // Start loading
     this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.MetarMaps = data.filter(
@@ -86,16 +86,17 @@ export class DomesticPage {
         if (this.MetarMaps.length > 0) {
           this.ImagesArray(this.MetarMaps[0].filename, this.MetarMaps);
         }
-        this.loading = false;
+        this.loading = false; // Stop loading after processing
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.loading = false;
+        this.loading = false; // Stop loading on error
       }
     );
   }
+
   async NavigateToQnhChart() {
-    this.loading = true;
+    this.loading = true; // Start loading
     this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.MetarMaps = data.filter(
@@ -105,12 +106,12 @@ export class DomesticPage {
         if (this.MetarMaps.length > 0) {
           this.ImagesArray(this.MetarMaps[0].filename, this.MetarMaps);
         } else {
-          this.loading = false;
+          this.loading = false; // Stop loading if no maps found
         }
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.loading = false;
+        this.loading = false; // Stop loading on error
       }
     );
   }
@@ -133,7 +134,13 @@ export class DomesticPage {
       },
       cssClass: 'transparent-modal',
     });
-    modal.present();
+
+    // Listen for the modal will dismiss event
+    modal.onWillDismiss().then(() => {
+      this.loading = false; // Stop loading when the modal is closed
+    });
+
+    await modal.present();
   }
 
   ImagesArray(item: any, type: any[]) {

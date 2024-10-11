@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import * as Hammer from 'hammerjs';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 import { SwiperOptions } from 'swiper/types';
 import { ImageModalPage } from '../../image-modal/image-modal.page';
@@ -36,12 +36,11 @@ export class CloudForeCastComponent implements OnInit {
   isDropdownProductOpen: boolean = false;
   isDropdownFrameOpen: boolean = false;
 
-  fileBaseUrl: SafeResourceUrl | undefined;
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
   currentIndex: number = 0;
 
-
   isZoomed = false;
-
 
   rotationAngle: number = 0; // T
   constructor(
@@ -49,10 +48,63 @@ export class CloudForeCastComponent implements OnInit {
     private authService: AuthService,
     private APIService: APIService,
     private sanitizer: DomSanitizer,
-    private moodalCtrl: ModalController
-  ) {}
+    private moodalCtrl: ModalController,
+    private toastController: ToastController
+  ) {
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
+  async presentForecastToast() {
+    const toast = await this.toastController.create({
+      message: 'Tap the image to zoom in',
+      duration: 3000,
+      position: 'top',
+      icon: 'information-circle', // Change the icon to the information icon
+      cssClass: 'custom-toast', // Custom class for the toast
+      buttons: [
+        {
+          side: 'end',
+          text: 'Close',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    // Apply custom styles directly to the toast
+    toast.classList.add('custom-toast');
+
+    // Set styles directly
+    const styles = `
+      ion-toast.custom-toast {
+        --background: #28a745; /* Green background */
+        --color: #ffffff; /* White text */
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+      }
+      ion-toast.custom-toast::part(message) {
+        font-style: italic;
+        color: #ffffff; /* White message text */
+      }
+      ion-toast.custom-toast::part(icon) {
+        color: #ffffff; /* White icon */
+      }
+      ion-toast.custom-toast::part(button) {
+        border-left: 1px solid #d2d2d2;
+        color: #ffffff; /* White button text */
+        font-size: 12px;
+      }
+    `;
+
+    // Create a style element and append it to the document
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = styles;
+    document.head.appendChild(styleElement);
+
+    await toast.present();
+  }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.presentForecastToast();
+    }, 500); // Delay by 500ms
     this.getCloudCoverImage(this.folderName, this.lastModifiedHours, 'tc');
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
@@ -231,16 +283,60 @@ export class CloudForeCastComponent implements OnInit {
     slidesPerView: 1,
     spaceBetween: 10,
   };
-  async openPreview(img: any){
+  async openPreview(img: any) {
+    this.ImagesArray(img, this.frameArray);
+  }
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
     const modal = await this.moodalCtrl.create({
       component: ImageModalPage,
       componentProps: {
-        img // image link passed on click event
+        imgs, // image link passed on click event
       },
-      cssClass: 'transparent-modal'
+      cssClass: 'transparent-modal',
     });
     modal.present();
   }
 
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
 
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(name));
+    let foldername = ImageArray[0].foldername;
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray, foldername);
+  }
+
+  ConvertImagesArray(ImageArray: any[], foldername: string) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile(foldername, element.filename).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust MIME type if necessary
+
+          // Sanitize the URL and push it to the image array
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    });
+
+    // Wait for the images to load, then trigger the image viewer
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray); // You can adjust this to pass a specific image or array of images
+    }, 1000);
+  }
 }

@@ -16,7 +16,7 @@ import { ImageModalPage } from '../image-modal/image-modal.page';
   styleUrls: ['./aero-sport.page.scss'],
 })
 export class AeroSportPage implements OnInit {
-  loading: boolean = true;
+  loading: boolean = false;
   fileBaseUrl: SafeResourceUrl;
   ImageArray: any = [];
   TsProbability: any = [];
@@ -70,7 +70,7 @@ export class AeroSportPage implements OnInit {
     this.router.navigate(['/aero-sport/cloud-fore-cast']);
   }
   NavigateToTSProbability() {
-    // this.router.navigate(['aero-sport/tsprobability']);
+    this.loading = true; // Start loading
     this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
       (data) => {
         try {
@@ -86,24 +86,23 @@ export class AeroSportPage implements OnInit {
               this.TsProbability[0].filename,
               this.TsProbability
             );
+          } else {
+            this.loading = false; // No files found
           }
-
-          this.loading = false;
         } catch (error) {
           console.log('Error parsing JSON data:', error);
-          this.loading = false;
+          this.loading = false; // Stop loading on error
         }
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.loading = false;
+        this.loading = false; // Stop loading on error
       }
     );
   }
-  NavigateToSynopticAnalysis() {
-    // this.router.navigate(['aero-sport/synoptic-analysis']);
 
-    this.loading = true;
+  NavigateToSynopticAnalysis() {
+    this.loading = true; // Start loading
     this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         const filteredData = data.filter(
@@ -112,12 +111,12 @@ export class AeroSportPage implements OnInit {
         if (filteredData.length > 0) {
           this.ImagesArray(filteredData[0].filename, filteredData);
         } else {
-          this.loading = false;
+          this.loading = false; // No files found
         }
       },
       (error) => {
         console.error('Error fetching JSON data:', error);
-        this.loading = false;
+        this.loading = false; // Stop loading on error
       }
     );
   }
@@ -132,7 +131,13 @@ export class AeroSportPage implements OnInit {
       },
       cssClass: 'transparent-modal',
     });
-    modal.present();
+
+    // Listen for the modal will dismiss event
+    modal.onWillDismiss().then(() => {
+      this.loading = false; // Stop loading when the modal is closed
+    });
+
+    await modal.present();
   }
 
   ImagesArray(item: any, type: any[]) {
@@ -147,7 +152,7 @@ export class AeroSportPage implements OnInit {
     this.ConvertImagesArray(ImageArray, foldername);
   }
 
-  ConvertImagesArray(ImageArray: any[],foldername:any) {
+  ConvertImagesArray(ImageArray: any[], foldername: any) {
     this.ImageArray = [];
     console.log('IMAGE ARRAY', ImageArray);
     ImageArray.forEach((element) => {

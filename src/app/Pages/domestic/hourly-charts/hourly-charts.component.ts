@@ -6,12 +6,14 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-hourly-charts',
@@ -23,6 +25,9 @@ export class HourlyChartsComponent implements OnInit {
   loading: boolean = false;
   images: { name: string; url: string }[] = [];
   hourlyChartData: any = [];
+
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
   // Define the chartData array with the correct structure
   chartData: { heading: string; information: string; imageUrl?: string }[] = [
     { heading: 'QNH Colour', information: 'Information about QNH Colour' },
@@ -65,8 +70,11 @@ export class HourlyChartsComponent implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private moodalCtrl: ModalController
+  ) {
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   ngOnInit() {
     this.fetchHourlyChartData();
@@ -158,93 +166,6 @@ export class HourlyChartsComponent implements OnInit {
     return [];
   }
 
-  openImageViewer(chart: any, time: string) {
-    this.loading = true;
-    console.log('Opening', chart);
-
-    let fileName = '';
-
-    switch (chart.heading) {
-      case 'QNH Colour':
-        if (time === 'Most Recent') {
-          fileName = 'qnhC.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `qnhC${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-      case 'QNH Greyscale':
-        if (time === 'Most Recent') {
-          fileName = 'qnhCbw.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `qnhCbw${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-
-      case 'Air Temperature Colour':
-        if (time === 'Most Recent') {
-          fileName = 'airtemp.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `airtemp${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-
-      case 'Air Temperature Greyscale':
-        if (time === 'Most Recent') {
-          fileName = 'airtempbw.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `airtempbw${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-
-      case 'Dewpoint Temperature Colour':
-        if (time === 'Most Recent') {
-          fileName = 'dewtemp.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `dewtemp${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-
-      case 'Dewpoint Temperature Greyscale':
-        if (time === 'Most Recent') {
-          fileName = 'dewtempbw.gif'; // Set fileName to the default for 'Most Recent'
-        } else {
-          fileName = `dewtempbw${this.getHourFormatted(time)}.gif`;
-        }
-        break;
-      // Handle other chart types similarly
-
-      default:
-        console.error('Unsupported chart type.');
-        this.loading = false;
-        return; // Exit the method if the chart type is not supported
-    }
-
-    // Call fetchSecondAPI with an empty folder name and the constructed file name
-    this.fetchSecondAPI('', fileName)
-      .then((filecontent) => {
-        this.loading = false;
-
-        // Open the image viewer with the file content
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filecontent };
-
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-
-        // Subscribe to the afterClosed event of the dialog
-        dialogRef.afterClosed().subscribe(() => {
-          this.loading = false;
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.loading = false;
-      });
-  }
-
   // Helper method to format the hour part of the time string
   private getHourFormatted(time: string): string {
     const hour = parseInt(time.slice(0, -1)); // Extract the hour part from the time string
@@ -273,5 +194,128 @@ export class HourlyChartsComponent implements OnInit {
 
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
+  }
+  openImageViewer(chart: any, time: string) {
+    this.loading = true; // Set loading to true initially
+    console.log('Opening', chart);
+
+    let fileName = '';
+
+    // Construct the filename based on the chart type and time
+    switch (chart.heading) {
+      case 'QNH Colour':
+        fileName =
+          time === 'Most Recent'
+            ? 'qnhC.gif'
+            : `qnhC${this.getHourFormatted(time)}.gif`;
+        break;
+      case 'QNH Greyscale':
+        fileName =
+          time === 'Most Recent'
+            ? 'qnhCbw.gif'
+            : `qnhCbw${this.getHourFormatted(time)}.gif`;
+        break;
+      case 'Air Temperature Colour':
+        fileName =
+          time === 'Most Recent'
+            ? 'airtemp.gif'
+            : `airtemp${this.getHourFormatted(time)}.gif`;
+        break;
+      case 'Air Temperature Greyscale':
+        fileName =
+          time === 'Most Recent'
+            ? 'airtempbw.gif'
+            : `airtempbw${this.getHourFormatted(time)}.gif`;
+        break;
+      case 'Dewpoint Temperature Colour':
+        fileName =
+          time === 'Most Recent'
+            ? 'dewtemp.gif'
+            : `dewtemp${this.getHourFormatted(time)}.gif`;
+        break;
+      case 'Dewpoint Temperature Greyscale':
+        fileName =
+          time === 'Most Recent'
+            ? 'dewtempbw.gif'
+            : `dewtempbw${this.getHourFormatted(time)}.gif`;
+        break;
+      default:
+        console.error('Unsupported chart type.');
+        this.loading = false; // Set loading to false if unsupported
+        return; // Exit if chart type is not supported
+    }
+
+    // Fetch the image content and open the viewer
+    this.fetchSecondAPI('', fileName)
+      .then((filecontent) => {
+        this.loading = false; // Stop loading
+
+        // Create the image URL
+        const imageUrl = 'data:image/gif;base64,' + filecontent; // Adjust MIME type if necessary
+
+        // Open the ImageViewer modal with the image URL
+        this.ImageViewer([imageUrl]); // Wrap in an array if ImageViewer expects an array
+      })
+      .catch((error) => {
+        console.error('Error fetching file content:', error);
+        this.loading = false; // Stop loading
+      });
+  }
+
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+
+    // Listen for the modal will dismiss event
+    modal.onWillDismiss().then(() => {
+      this.loading = false; // Stop loading when the modal is closed
+    });
+
+    await modal.present();
+  }
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
+
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(name));
+    let foldername = ImageArray[0].foldername;
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray, foldername);
+  }
+
+  ConvertImagesArray(ImageArray: any[], foldername: any) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile(foldername, element.filename).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
   }
 }

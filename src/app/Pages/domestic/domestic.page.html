@@ -1,6 +1,7 @@
 <ion-content>
   <!-- <app-loading *ngIf="loading"></app-loading> -->
   <app-service-content>
+    <app-loading *ngIf="loading"></app-loading>
     <app-service-header> Domestic </app-service-header>
 
     <app-service-list-items *ngIf="isLoggedIn && !isFreeSubscription">

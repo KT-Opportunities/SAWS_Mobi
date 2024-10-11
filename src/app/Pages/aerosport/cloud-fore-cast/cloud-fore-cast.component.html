@@ -156,7 +156,6 @@
             </div>
 
             <div class="div-block-15" *ngIf="selectedOptionFrame">
-            
               <div>
                 <div class="small-m" scroll="false">
                   <div class="rows-wrap">
@@ -176,14 +175,13 @@
                       <swiper [config]="config" class="image-container">
                         <img
                           tappable
-                          (click)="openPreview(fileBaseUrl)"
+                          (click)="ImageViewer(fileBaseUrl)"
                           [src]="fileBaseUrl"
                           loading="lazy"
                           alt=""
                           class="responsive-image"
                           width="100%"
                           height="100%"
-                        
                         />
                       </swiper>
                       <div
