@@ -404,18 +404,7 @@ export class GridWindsPage implements OnInit {
 
 
 
-  async ImageViewer(imgs: any) {
-    console.log('The img:', imgs);
-
-    const modal = await this.moodalCtrl.create({
-      component: ImageModalPage,
-      componentProps: {
-        imgs, // image link passed on click event
-      },
-      cssClass: 'transparent-modal',
-    });
-    modal.present();
-  }
+ 
 
   ImagesArray(item: any, type: any[]) {
     console.log('ITYEM:', item, ' TYPE:', type);
@@ -454,5 +443,17 @@ export class GridWindsPage implements OnInit {
 
   viewFilter(item: any[], filter: string) {
     return item.filter((x) => x.includes(filter));
+  }
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
   }
 }
