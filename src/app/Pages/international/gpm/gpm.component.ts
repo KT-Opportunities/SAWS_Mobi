@@ -19,7 +19,7 @@ export class GpmComponent implements OnInit {
   ImageArray: any = []; // Array to hold images
   fileBaseUrl: SafeResourceUrl | undefined; // Safe URL for image display
   loading: boolean = false; // Loading state for image fetching
-
+  ImageinfoArray: any = [];
   selectedOption: string = 'West'; // Default selected option for dropdown
   selectedOptionFilename: string = 'gw_west'; // Filename prefix based on the selected option
   isDropdownOpen: boolean = false; // State for managing dropdown visibility
@@ -61,56 +61,77 @@ export class GpmComponent implements OnInit {
   }
 
   viewImage(imageFilename: string) {
-    this.loading = true; // Set loading state to true
-
-    // Construct the filename using the selected option and provided filename
     const filename = this.selectedOptionFilename + imageFilename;
+    const foldername = this.folderName; // Assuming folderName is already defined
+    // Create an object with foldername and filename
+    const imageInfo = { foldername, filename };
+    
+    // Initialize the array if it's not already initialized
+    if (!this.ImageinfoArray) {
+        this.ImageinfoArray = [];
+    }
 
-    // Fetch the image from the API
-    this.APIService.GetAviationFile(this.folderName, filename).subscribe(
-      (response) => {
-        const fileContent = response.filecontent; // Get the file content from the response
-        console.log('File content received:', fileContent); // Log the file content
+    // Push the image information into the array
+    this.ImageinfoArray.push(imageInfo);
+    console.log('Image info array:', this.ImageinfoArray);
+    
+    // Call the method to handle the array (you likely want to pass the whole array, not just the push result)
+    this.ImagesArray(filename, this.ImageinfoArray);
+}
 
-        // Check if file content exists
-        if (fileContent) {
-          // Create a base64 image URL from the file content
-          const imageUrl = 'data:image/gif;base64,' + fileContent; // Ensure the format is correct for your image
-          console.log('Image URL:', imageUrl); // Log the constructed image URL
+ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+    
+    // Filter to get the image info corresponding to the selected filename
+    let ImageArray = type.filter((x) => x.filename.includes(item));
+    console.log('Filtered image array:', ImageArray);
+    
+    // Pass only the first matching image to ConvertImagesArray
+    if (ImageArray.length > 0) {
+        this.ConvertImagesArray([ImageArray[0]]);
+    }
+}
 
-          // Sanitize the image URL for safe use in the application
-          this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+ConvertImagesArray(ImageArray: any[]) {
+    // Clear the ImageArray
+    this.ImageArray = [];
 
-          // Check if the fileBaseUrl is defined
-          if (this.fileBaseUrl) {
-            setTimeout(() => {
-              // Open the image viewer modal with the sanitized image URL
-              this.openImageViewer(this.fileBaseUrl!); // Using '!' to assert it's not undefined
-            }, 1000); // Optional delay to simulate loading
-          }
-        } else {
-          console.error('No valid image data found.');
-        }
+    console.log('IMAGE ARRAY:', ImageArray);
+    
+    if (ImageArray.length > 0) {
+        // Fetch the first image's data
+        this.APIService.GetAviationFile('gw', ImageArray[0].filename).subscribe(
+            (data) => {
+                console.log('IMAGE:', data);
+                const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
 
-        // Set loading state to false after processing
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching the image:', error);
-        this.loading = false; // Set loading state to false on error
-      }
-    );
-  }
+                // Set the safe URL for the image
+                this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+                
+                // Store the single image in the ImageArray
+                this.ImageArray.push(imageUrl);
 
-  async openImageViewer(imgs: SafeResourceUrl) {
+                // Present the modal with the single image
+                this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
+            },
+            (error) => {
+                console.log('Error fetching JSON data:', error);
+                this.loading = false;
+            }
+        );
+    }
+}
+
+async ImageViewer(img: SafeResourceUrl) {
     // Create and present a modal to view the image
     const modal = await this.moodalCtrl.create({
-      component: ImageModalPage,
-      componentProps: {
-        imgs, // Pass the image URL to the modal
-      },
-      cssClass: 'transparent-modal',
+        component: ImageModalPage,
+        componentProps: {
+            imgs: img, // Pass the single image URL to the modal
+        },
+        cssClass: 'transparent-modal',
     });
     await modal.present();
-  }
+}
+
 }
