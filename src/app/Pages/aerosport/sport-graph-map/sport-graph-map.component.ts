@@ -98,7 +98,7 @@ export class SportGraphMapComponent implements OnInit {
     private moodalCtrl: ModalController
   ) {
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
-    this.sanitizer.bypassSecurityTrustResourceUrl('');
+  
   }
   extractAlphabetical(filename: string): string {
     return filename.replace(/[^a-zA-Z]/g, '');
@@ -229,21 +229,6 @@ export class SportGraphMapComponent implements OnInit {
     );
   }
 
-  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      this.APIService.GetAviationFile(folderName, fileName).subscribe(
-        (response) => {
-          const filecontent = response.filecontent;
-          console.log('DATA2:', this.TsProbability);
-
-          resolve(filecontent);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
   async ImageViewer(imgs: any) {
     console.log('The img:', imgs);
 

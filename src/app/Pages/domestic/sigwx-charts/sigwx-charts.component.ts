@@ -14,6 +14,8 @@ import { APIService } from 'src/app/services/apis.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 import { ViewSymbolPage } from '../../view-symbol/view-symbol.page';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sigwx-charts',
@@ -28,7 +30,8 @@ export class SigwxChartsComponent implements OnInit {
   Sigwxh: any = [];
   Sigwxm: any = [];
   Sigwxl: any = [];
-  fileBaseUrlSynoptic: SafeResourceUrl = '';
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
 
   constructor(
     private router: Router,
@@ -39,8 +42,11 @@ export class SigwxChartsComponent implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private moodalCtrl: ModalController
+  ) {
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   ngOnInit() {
     if (!this.authService.getIsLoggedIn()) {
@@ -162,58 +168,28 @@ export class SigwxChartsComponent implements OnInit {
       }
     );
   }
-  openImageViewer(item: any) {
-    const folderName = '';
-    const fileName = item.filename;
-    console.log('file Name:', fileName);
-    this.loading = true;
 
-    this.fetchSecondAPI(folderName, fileName)
-      .then((filecontent) => {
-        this.loading = false;
-
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filecontent };
-
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-
-        dialogRef.afterClosed().subscribe(() => {
-          this.loading = false;
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.loading = false;
-      });
-  }
-
-  item: any;
   openImageViewerSymbol(item: any) {
-    console.log('file Name:', item);
+    console.log('File Name:', item);
+    
+    // Define the folder name
     const folderName = 'sigw';
     const fileName = item;
     console.log('Folder Name:', folderName);
-    this.loading = true;
-
-    this.loading = false;
-
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width = '80%';
-    dialogConfig.height = '80%';
-    dialogConfig.data = { item };
-
-    const dialogRef = this.dialog.open(ViewSymbolPage, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.loading = false;
-    });
+  
+    // Create the array to hold folderName and fileName
+    const type = [
+      { folderName: folderName, filename: fileName },
+      // Add more entries if needed
+    ];
+  
+    // Call the ImagesArray method with item and the type array
+    this.ImagesArray(item, type);
+  
+  
   }
+  item: any;
+
 
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filecontent
@@ -241,5 +217,61 @@ export class SigwxChartsComponent implements OnInit {
 
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
+  }
+
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
+  }
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(item.filename));
+
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('', element.filename).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
+  }
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
+  }
+  viewFilters(items: any[], filter: string) {
+    return items.filter((x) => x.filename.includes(filter));
   }
 }

@@ -17,7 +17,7 @@
           class="image"
         />
       </div>
-  
+
       <div class="scrollclass">
         <div class="low-level-main-div">
           <div class="div-block-466">
@@ -63,7 +63,9 @@
                     id="w-node-_14588279-bdc8-ee9d-e926-6a691607a846-b2ace610"
                     class="div-block-37"
                   >
-                    <h4 class="heading-25">{{ transformFilename(item) }}</h4>
+                    <h4 class="heading-25">
+                      {{ transformFilename(item.filename) }}
+                    </h4>
                   </div>
                   <div
                     id="w-node-_14588279-bdc8-ee9d-e926-6a691607a849-b2ace610"
@@ -72,7 +74,7 @@
                     <div
                       class="button-2-copy w-button"
                       id="view"
-                      (click)="openImageViewer(item)"
+                      (click)="ImagesArray(item, lowLevel)"
                     >
                       View
                     </div>
@@ -83,8 +85,8 @@
             <div class="div-block-479">
               <p class="paragraph-13">
                 <strong>Note:</strong> Not all stations do ascents every day (or
-                twice daily). <br />Availability of a profile depends on the time
-                of day <br />and season.
+                twice daily). <br />Availability of a profile depends on the
+                time of day <br />and season.
               </p>
             </div>
           </div>
@@ -116,4 +118,3 @@
     </h6>
   </div>
 </div>
-

@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-winds-charts',
@@ -19,7 +21,8 @@ export class WindsChartsComponent implements OnInit {
   loading: boolean = false;
   chartsArray: any[] = []; // Ensure this is an array
   sevenDigitNumbers: number[] = []; // Explicitly declare the type of this array
- 
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
   chart = [
     // Sample data
     { title: 'Low level (surface to FL180)', filename: 'chart1.png' },
@@ -44,8 +47,11 @@ export class WindsChartsComponent implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private moodalCtrl: ModalController,
+  ) {
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -179,5 +185,61 @@ export class WindsChartsComponent implements OnInit {
 
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
+  }
+
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
+  }
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(item.filename));
+
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('', element.filename).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+    }, 1000);
+  }
+
+  viewFilter(item: any[], filter: string) {
+    return item.filter((x) => x.includes(filter));
+  }
+  viewFilters(items: any[], filter: string) {
+    return items.filter((x) => x.filename.includes(filter));
   }
 }
