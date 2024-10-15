@@ -8,204 +8,169 @@
     <app-package-sub-header> </app-package-sub-header>
 
     <div class="aerosport">
-      <div class="aerosportScrol">
-        <div class="div-block-464">
-          <div class="image-container">
+      <div class="div-block-464">
+        <div class="image-container">
+          <div
+            class="w-layout-grid metar-history-grid"
+            style="margin-right: 18px; margin-right: 18px; margin-top: 12px"
+          >
             <div
-              class="w-layout-grid metar-history-grid"
-              style="margin-right: 18px; margin-right: 18px; margin-top: 12px"
+              id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
+              class="div-block-15"
             >
-              <div
-                id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
-                class="div-block-15"
-              >
-                <div class="div-block-14"></div>
-              </div>
-              <div
-                id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
-                class="form-block w-form"
-              >
-                <div class="w-form">
-                  <div
-                    id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece"
-                  >
-                    <label for="" class="field-label"> Select Product: </label>
+              <div class="div-block-14"></div>
+            </div>
+            <div
+              id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
+              class="form-block w-form"
+            >
+              <div class="w-form">
+                <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
+                  <label for="" class="field-label"> Select Product: </label>
+                </div>
+
+                <div
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="cloudCoverDropdownProductOpen()"
+                >
+                  <div class="w-dropdown-toggle">
+                    <div class="text-block">
+                      {{ selectedOptionProduct }}
+                    </div>
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
                   </div>
 
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="cloudCoverDropdownProductOpen()"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div
-                        class="icon-2 w-icon-dropdown-toggle"
-                        id="icon2"
-                      ></div>
-                      <div class="text-block">
-                        {{ selectedOptionProduct }}
-                      </div>
+                  <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
+                    <div
+                      class="w-dropdown-link"
+                      (click)="
+                        selectDropdownProduct('Total cloud', 'dropdown1', 'tc')
+                      "
+                    >
+                      Total cloud
                     </div>
 
-                    <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="
-                          selectDropdownProduct(
-                            'Total cloud',
-                            'dropdown1',
-                            'tc'
-                          )
-                        "
-                      >
-                        Total cloud
-                      </div>
-
-                      <div
-                        class="w-dropdown-link"
-                        (click)="
-                          selectDropdownProduct('Low level', 'dropdown2', 'l')
-                        "
-                      >
-                        Low level
-                      </div>
-
-                      <div
-                        class="w-dropdown-link"
-                        (click)="
-                          selectDropdownProduct(
-                            'Medium level',
-                            'dropdown3',
-                            'm'
-                          )
-                        "
-                      >
-                        Medium level
-                      </div>
-
-                      <div
-                        class="w-dropdown-link"
-                        (click)="
-                          selectDropdownProduct('High level', 'dropdown4', 'h')
-                        "
-                      >
-                        High level
-                      </div>
-                    </nav>
-                  </div>
-
-                  <div
-                    id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece"
-                  >
-                    <label for="" class="field-label"> Current Frame: </label>
-                  </div>
-
-                  <div
-                    id="email-form-3"
-                    name="email-form-3"
-                    data-name="Email Form 3"
-                    method="get"
-                    class="form-3"
-                    data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-                    data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
-                  >
-                    <div>
-                      <div
-                        data-hover="false"
-                        data-delay="0"
-                        class="text-field-blue w-dropdown"
-                        (click)="cloudCoverDropdownFrameOpen()"
-                      >
-                        <div class="w-dropdown-toggle">
-                          <div
-                            class="icon-2 w-icon-dropdown-toggle"
-                            id="icon2"
-                          ></div>
-                          <div class="text-block">
-                            {{ formatTimestamp(selectedOptionFrame) }}
-                          </div>
-                        </div>
-
-                        <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
-                          <div
-                            *ngFor="let item of frameArray"
-                            class="w-dropdown-link"
-                            (click)="
-                              selectDropdownFrame(
-                                item.lastmodified,
-                                item.filename
-                              )
-                            "
-                          >
-                            {{ formatTimestamp(item.lastmodified) }}
-                          </div>
-                        </nav>
-                      </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="
+                        selectDropdownProduct('Low level', 'dropdown2', 'l')
+                      "
+                    >
+                      Low level
                     </div>
+
+                    <div
+                      class="w-dropdown-link"
+                      (click)="
+                        selectDropdownProduct('Medium level', 'dropdown3', 'm')
+                      "
+                    >
+                      Medium level
+                    </div>
+
+                    <div
+                      class="w-dropdown-link"
+                      (click)="
+                        selectDropdownProduct('High level', 'dropdown4', 'h')
+                      "
+                    >
+                      High level
+                    </div>
+                  </nav>
+                </div>
+
+                <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
+                  <label for="" class="field-label"> Current Frame: </label>
+                </div>
+
+                <div
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="cloudCoverDropdownFrameOpen()"
+                >
+                  <div class="w-dropdown-toggle">
+                    <div class="text-block">
+                      {{ formatTimestamp(selectedOptionFrame) }}
+                    </div>
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon4"></div>
                   </div>
 
-                  <div class="w-form-done">
-                    <div></div>
-                  </div>
-                  <div class="w-form-fail">
-                    <div></div>
-                  </div>
+                  <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
+                    <div
+                      *ngFor="let item of frameArray"
+                      class="w-dropdown-link"
+                      (click)="
+                        selectDropdownFrame(item.lastmodified, item.filename)
+                      "
+                    >
+                      {{ formatTimestamp(item.lastmodified) }}
+                    </div>
+                  </nav>
+                </div>
+
+                <div class="w-form-done">
+                  <div></div>
+                </div>
+                <div class="w-form-fail">
+                  <div></div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="div-block-15" *ngIf="selectedOptionFrame">
-              <div>
-                <div class="small-m" scroll="false">
-                  <div class="rows-wrap">
+          <div class="div-block-15" *ngIf="selectedOptionFrame">
+            <div>
+              <div class="small-m" scroll="false">
+                <div class="rows-wrap">
+                  <div
+                    data-delay="4000"
+                    data-animation="slide"
+                    class="slider-2 w-slider"
+                    data-autoplay="false"
+                    data-easing="ease"
+                    data-hide-arrows="false"
+                    data-disable-swipe="false"
+                    data-autoplay-limit="0"
+                    data-nav-spacing="3"
+                    data-duration="500"
+                    data-infinite="true"
+                  >
+                    <swiper [config]="config" class="image-container">
+                      <img
+                        tappable
+                        (click)="ImageViewer(fileBaseUrl)"
+                        [src]="fileBaseUrl"
+                        loading="lazy"
+                        alt=""
+                        class="responsive-image"
+                        width="100%"
+                        height="100%"
+                      />
+                    </swiper>
                     <div
-                      data-delay="4000"
-                      data-animation="slide"
-                      class="slider-2 w-slider"
-                      data-autoplay="false"
-                      data-easing="ease"
-                      data-hide-arrows="false"
-                      data-disable-swipe="false"
-                      data-autoplay-limit="0"
-                      data-nav-spacing="3"
-                      data-duration="500"
-                      data-infinite="true"
+                      class="w-slider-arrow-left"
+                      style="color: #002548"
+                      (click)="previousImage()"
                     >
-                      <swiper [config]="config" class="image-container">
-                        <img
-                          tappable
-                          (click)="ImageViewer(fileBaseUrl)"
-                          [src]="fileBaseUrl"
-                          loading="lazy"
-                          alt=""
-                          class="responsive-image"
-                          width="100%"
-                          height="100%"
-                        />
-                      </swiper>
                       <div
-                        class="w-slider-arrow-left"
+                        class="w-icon-slider-left"
                         style="color: #002548"
-                        (click)="previousImage()"
-                      >
-                        <div
-                          class="w-icon-slider-left"
-                          style="color: #002548"
-                        ></div>
-                      </div>
-                      <div
-                        class="w-slider-arrow-right"
-                        style="color: #002548"
-                        (click)="nextImage()"
-                      >
-                        <div
-                          class="w-icon-slider-right"
-                          style="color: #002548"
-                        ></div>
-                      </div>
-                      <div class="w-slider-nav w-round w-num"></div>
+                      ></div>
                     </div>
+                    <div
+                      class="w-slider-arrow-right"
+                      style="color: #002548"
+                      (click)="nextImage()"
+                    >
+                      <div
+                        class="w-icon-slider-right"
+                        style="color: #002548"
+                      ></div>
+                    </div>
+                    <div class="w-slider-nav w-round w-num"></div>
                   </div>
                 </div>
               </div>

@@ -259,6 +259,8 @@ export class CloudForeCastComponent implements OnInit {
 
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileName);
+
     this.displayImage(this.folderName, fileName).then((filecontent) => {
       const imageUrlNext = 'data:image/gif;base64,' + filecontent;
       this.fileBaseUrl =
@@ -283,60 +285,37 @@ export class CloudForeCastComponent implements OnInit {
     slidesPerView: 1,
     spaceBetween: 10,
   };
-  async openPreview(img: any) {
-    this.ImagesArray(img, this.frameArray);
-  }
+
   async ImageViewer(imgs: any) {
     console.log('The img:', imgs);
+
+    let formattedImages: string[];
+
+    // Check if imgs is an object with the specific property
+    if (
+      typeof imgs === 'object' &&
+      imgs.changingThisBreaksApplicationSecurity
+    ) {
+      // Convert it to an array
+      formattedImages = [imgs.changingThisBreaksApplicationSecurity];
+    } else if (Array.isArray(imgs)) {
+      // If imgs is already an array, use it directly
+      formattedImages = imgs;
+    } else {
+      // Handle unexpected formats
+      console.error('Unexpected format for imgs:', imgs);
+      formattedImages = [];
+    }
 
     const modal = await this.moodalCtrl.create({
       component: ImageModalPage,
       componentProps: {
-        imgs, // image link passed on click event
+        imgs: formattedImages, // Pass the formatted array of image links
       },
       cssClass: 'transparent-modal',
     });
     modal.present();
   }
 
-  ImagesArray(item: any, type: any[]) {
-    console.log('ITEM:', item, ' TYPE:', type);
-    let name = item.split('_')[0];
-    console.log('NAME:', name);
-
-    // Ensure you are checking the filename property of each object
-    let ImageArray = type.filter((x) => x.filename.includes(name));
-    let foldername = ImageArray[0].foldername;
-    console.log('Image arrays:', ImageArray);
-    this.ConvertImagesArray(ImageArray, foldername);
-  }
-
-  ConvertImagesArray(ImageArray: any[], foldername: string) {
-    this.ImageArray = [];
-    console.log('IMAGE ARRAY', ImageArray);
-
-    ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile(foldername, element.filename).subscribe(
-        (data) => {
-          console.log('IMAGE:', data);
-          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust MIME type if necessary
-
-          // Sanitize the URL and push it to the image array
-          this.fileBaseUrl =
-            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-          this.ImageArray.push(imageUrl);
-        },
-        (error) => {
-          console.log('Error fetching JSON data:', error);
-          this.loading = false;
-        }
-      );
-    });
-
-    // Wait for the images to load, then trigger the image viewer
-    setTimeout(() => {
-      console.log('this.ImageArray:', this.ImageArray.length);
-      this.ImageViewer(this.ImageArray); // You can adjust this to pass a specific image or array of images
-    }, 1000);
-  }
+  
 }

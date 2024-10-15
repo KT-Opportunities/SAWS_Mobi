@@ -53,7 +53,11 @@
   z-index: 900;
 }
 #icon2 {
-  padding-right: 61px !important;
+  padding-right: 76px !important;
+  margin-left: -47px !important;
+}
+#icon4{
+  padding-right: 125px !important;
   margin-left: -47px !important;
 }
 #icon3 {
@@ -207,8 +211,8 @@
 
 .field-label {
   color: #00386c;
-  margin-top: 5px;
-  margin-bottom: 5p x;
+  margin-top: 16px;
+  margin-bottom: 5px;
   padding-left: 0;
   font-family: Open Sans, sans-serif;
   font-size: 13px;
@@ -361,7 +365,7 @@
 
 .field-label {
   color: #00386c;
-  margin-top: 5px;
+  margin-top: 16px;
   margin-bottom: 5px;
   padding-left: 0;
   font-family: Open Sans, sans-serif;
@@ -2642,7 +2646,7 @@
 
 .field-label {
   color: #00386c;
-  margin-top: 5px;
+  margin-top: 16px;
   margin-bottom: 5px;
   padding-left: 0;
   font-family: Open Sans, sans-serif;
@@ -14951,23 +14955,50 @@ textarea.w-select {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
-ion-toast.custom-toast {
-  --background: #28a745; /* Green background */
-  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
-  --color: #ffffff; /* White text */
+
+.div-block-464 {
+  width: 100%; /* Full width of the container */
+  max-width: 1200px; /* Optional max width */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center elements horizontally */
+  box-sizing: border-box;
+  padding: 20px;
 }
 
-ion-toast.custom-toast::part(message) {
-  font-style: italic;
-  color: #ffffff; /* White message text */
+.image-container,
+.metar-history-grid,
+.form-block {
+  width: 100%; /* Full width */
+  display: block; /* Ensure each element is on a new line */
+  text-align: center; /* Center all inline elements */
 }
 
-ion-toast.custom-toast::part(icon) {
-  color: #ffffff; /* White icon */
+.w-dropdown,
+.responsive-image {
+  width: 100%; /* Full width for dropdown and image */
+  max-width: 600px; /* Max width for responsiveness */
+  margin-bottom: 20px; /* Spacing between elements */
 }
 
-ion-toast.custom-toast::part(button) {
-  border-left: 1px solid #d2d2d2;
-  color: #ffffff; /* White button text */
-  font-size: 12px;
+/* Align this div's content to the left for "Select Product" */
+#w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece {
+  width: 100%; /* Full width of the container */
+  text-align: left; /* Align content (like label) to the left */
+  margin-bottom: 10px; /* Optional spacing below */
+}
+
+#w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece .field-label {
+  margin-left: 0; /* Ensure no extra margin pushes it to the center */
+}
+
+/* Align this div's content to the left for "Current Frame" */
+#w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece {
+  width: 100%; /* Full width of the container */
+  text-align: left; /* Align content (like label) to the left */
+  margin-bottom: 10px; /* Optional spacing below */
+}
+
+#w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece .field-label {
+  margin-left: 0; /* Ensure no extra margin pushes it to the center */
 }
