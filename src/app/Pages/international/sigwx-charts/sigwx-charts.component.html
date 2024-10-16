@@ -1,15 +1,18 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>Loading...
-  </div>
-  <section class="aerosport-ci" style="margin-top: 107px !important">
-    <h1 class="heading-6">Sigwx charts</h1>
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div id="top"></div>
+
+<app-package-content>
+  <app-package-header> Sigwx charts</app-package-header>
+<app-package-list-items>
+
 
     <div class="aerosport">
       <div class="aerosportScrol" style="margin-left: 6px">
         <!-- SIGWX Charts -->
         <div class="div-block-464">
-          <h1 class="sub-headings">SIGWX Charts</h1>
+          <!-- <h1 class="sub-headings">SIGWX Charts</h1> -->
           <div class="w-form">
             <form
               id="email-form-3"
@@ -139,7 +142,9 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="ImageViewer(item)"
+                      
+                      
+                      (click)="ImagesArray(item,getFilteredItemSouth())"
                     >
                       View
                     </button>
@@ -284,7 +289,8 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="ImageViewer(item)"
+                      (click)="ImagesArray(item,getFilteredItemChart())"
+                     
                     >
                       View
                     </button>
@@ -318,7 +324,11 @@
         >
       </div>
     </div> -->
-  </section>
+
+</app-package-list-items>
+</app-package-content>
+  
+
 </ion-content>
 
 <ion-footer class="ion-no-border">
