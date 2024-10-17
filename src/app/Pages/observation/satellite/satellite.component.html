@@ -1,29 +1,24 @@
 <ion-content>
-  <div 
-  *ngIf="loading" class="loading-indicator"
-  >
-    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
-  <section class="list-page"></section>
-  
-  <section class="taf-accuracy">
+  <div id="top"></div>
+  <app-package-content>
+    <app-package-header class="package-header">
+      SAWS Satelite
+    </app-package-header>
 
-    <div class="cloud-cover">
-      <h1 class="heading-12">
-        SAWS Satelite
-      </h1>
+    <app-package-sub-header></app-package-sub-header>
 
-      <div class="w-layout-grid metar-history-grid" style="margin-right: 18px; 
-      margin-right: 18px;
-       margin-top: 171px;">
+    <app-package-list-items>
+      <div
+        class="w-layout-grid metar-history-grid"
+        style="margin-right: 18px; margin-right: 18px; margin-top: 171px"
+      >
         <div
           id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
           class="div-block-15"
         >
-          <div class="div-block-14">
-
-          </div>
+          <div class="div-block-14"></div>
         </div>
         <div
           id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
@@ -31,67 +26,59 @@
         >
           <div class="w-form">
             <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
-              <label
-                for="" 
-                class="field-label"
-              >
-                Select Product:
-              </label>
+              <label for="" class="field-label"> Select Product: </label>
             </div>
 
-              <div
-                data-hover="false"
-                data-delay="0"
-                class="text-field-blue w-dropdown"
-                (click)="sateliteDropdownProductOpen()"
-                >
-                  <div
-                    class="w-dropdown-toggle"
-                  >
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
-                    <div class="text-block">{{selectedOptionProduct}}</div>
-                  </div>
-
-                  <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
-                    <div
-                      
-                      class="w-dropdown-link"
-                      (click)="selectDropdownProduct('IR108_RSA', 'dropdown1')"
-                      >IR108_RSA</div
-                    >
-                    <div
-                        
-                    class="w-dropdown-link"
-                    (click)="selectDropdownProduct('IR108_GLOBE', 'dropdown2')"
-                    >IR108_GLOBE</div
-                  >
-                  <div
-                    
-                    class="w-dropdown-link"
-                    (click)="selectDropdownProduct('FOG A', 'dropdown3')"
-                    >FOG A</div
-                  >
-                    <div                      
-                        class="w-dropdown-link"
-                        (click)="selectDropdownProduct('Day Natural Colours', 'dropdown4')"
-                        >Day Natural Colours</div
-                      >
-
-                      <div                      
-                        class="w-dropdown-link"
-                        (click)="selectDropdownProduct('ColorGlobe', 'dropdown5')"
-                        >ColorGlobe</div
-                      >
-                    </nav>
+            <div
+              data-hover="false"
+              data-delay="0"
+              class="text-field-blue w-dropdown"
+              (click)="sateliteDropdownProductOpen()"
+            >
+              <div class="w-dropdown-toggle">
+                <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
+                <div class="text-block">{{ selectedOptionProduct }}</div>
               </div>
 
-            <div
-              id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece">
-              <label
-                for="" 
-                class="field-label">
-                  Current Frame:
-              </label>
+              <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
+                <div
+                  class="w-dropdown-link"
+                  (click)="selectDropdownProduct('IR108_RSA', 'dropdown1')"
+                >
+                  IR108_RSA
+                </div>
+                <div
+                  class="w-dropdown-link"
+                  (click)="selectDropdownProduct('IR108_GLOBE', 'dropdown2')"
+                >
+                  IR108_GLOBE
+                </div>
+                <div
+                  class="w-dropdown-link"
+                  (click)="selectDropdownProduct('FOG A', 'dropdown3')"
+                >
+                  FOG A
+                </div>
+                <div
+                  class="w-dropdown-link"
+                  (click)="
+                    selectDropdownProduct('Day Natural Colours', 'dropdown4')
+                  "
+                >
+                  Day Natural Colours
+                </div>
+
+                <div
+                  class="w-dropdown-link"
+                  (click)="selectDropdownProduct('ColorGlobe', 'dropdown5')"
+                >
+                  ColorGlobe
+                </div>
+              </nav>
+            </div>
+
+            <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece">
+              <label for="" class="field-label"> Current Frame: </label>
             </div>
 
             <div
@@ -111,10 +98,9 @@
                   (click)="sateliteDropdownFrameOpen()"
                 >
                   <div class="w-dropdown-toggle">
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"  >
-                    </div>
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
                     <div class="text-block">
-                      {{formatTimestamp(selectedOptionFrame)}}
+                      {{ formatTimestamp(selectedOptionFrame) }}
                     </div>
                   </div>
 
@@ -122,9 +108,10 @@
                     <div
                       *ngFor="let item of frameArray"
                       class="w-dropdown-link"
-                      (click)="selectDropdownFrame(item.lastmodified, item.filename
-                      )"
-                      >
+                      (click)="
+                        selectDropdownFrame(item.lastmodified, item.filename)
+                      "
+                    >
                       {{ formatTimestamp(item.lastmodified) }}
                     </div>
                   </nav>
@@ -161,24 +148,20 @@
               >
                 <div class="w-slider-mask">
                   <img
-                  [src]="fileBaseUrl"
-                  loading="lazy"
-                  alt=""
-                  class="image"
-                  width="100%"
-                  height="100%"
-                />
+                    tappable
+                    (click)="ImageViewer(fileBaseUrl)"
+                    [src]="fileBaseUrl"
+                    loading="lazy"
+                    alt=""
+                    class="image"
+                    width="100%"
+                    height="100%"
+                  />
                 </div>
-                <div 
-                class="w-slider-arrow-left"
-                (click)="previousImage()"
-                >
+                <div class="w-slider-arrow-left" (click)="previousImage()">
                   <div class="w-icon-slider-left"></div>
                 </div>
-                <div 
-                class="w-slider-arrow-right"
-                (click)="nextImage()"
-                >
+                <div class="w-slider-arrow-right" (click)="nextImage()">
                   <div class="w-icon-slider-right"></div>
                 </div>
                 <div class="w-slider-nav w-round w-num"></div>
@@ -187,43 +170,28 @@
           </div>
         </div>
       </div>
-      
-    </div>
-
-</section>
+    </app-package-list-items>
+  </app-package-content>
 </ion-content>
+<app-footer></app-footer>
 
-<ion-footer class="ion-no-border">
- <div class="" 
+<div class="footerdiv" id="footerdivid1">
+  <div (click)="navigateToObservation()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
     >
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
-
-      <div class="footerdiv" id="footerdivid1" >
-        <div    
-        (click)=" NavigateToObservation()" 
-        class="link-block-5 w-inline-block"
-          >
-          <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-          <h6 
-            class="heading-10-copy"
-            id="styleh6"
-            style="color: #fff;
-            margin-top: 10px;
-            margin-bottom: 0;
-            font-family: Montserrat, sans-serif;
-            text-decoration: none;
-            font-size: 12px;
-            margin-top: 4px;">
-            Observation
-          </h6>
-          </div
-        >
-      </div>
-    </div>
-</ion-footer>
+      Observation
+    </h6>
+  </div>
+</div>

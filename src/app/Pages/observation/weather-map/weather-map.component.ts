@@ -43,7 +43,7 @@ export class WeatherMapComponent  implements OnInit {
 
   ngOnInit() {}
 
-  NavigateToObservation() {
+  navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

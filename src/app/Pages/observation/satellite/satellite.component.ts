@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-satellite',
@@ -28,7 +30,8 @@ export class SatelliteComponent  implements OnInit {
     private router: Router,
     private authService: AuthService,
     private APIService: APIService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController,
 
    ) { }
 
@@ -129,7 +132,7 @@ export class SatelliteComponent  implements OnInit {
 
   }
 
-  NavigateToObservation() {
+  navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 
@@ -172,5 +175,36 @@ export class SatelliteComponent  implements OnInit {
         const imageUrlNext = 'data:image/gif;base64,' + filecontent;
         this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
+  }
+
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    let formattedImages: string[];
+
+    // Check if imgs is an object with the specific property
+    if (
+      typeof imgs === 'object' &&
+      imgs.changingThisBreaksApplicationSecurity
+    ) {
+      // Convert it to an array
+      formattedImages = [imgs.changingThisBreaksApplicationSecurity];
+    } else if (Array.isArray(imgs)) {
+      // If imgs is already an array, use it directly
+      formattedImages = imgs;
+    } else {
+      // Handle unexpected formats
+      console.error('Unexpected format for imgs:', imgs);
+      formattedImages = [];
+    }
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs: formattedImages, // Pass the formatted array of image links
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
   }
 }

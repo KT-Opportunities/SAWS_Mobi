@@ -27,7 +27,7 @@ export class WebCamPage implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  NavigateToObservation() {
+  navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 

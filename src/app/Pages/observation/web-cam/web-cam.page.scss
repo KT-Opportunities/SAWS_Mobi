@@ -2,7 +2,10 @@
   --white: white;
   --black: black;
 }
-
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}
 .w-layout-grid {
   grid-row-gap: 16px;
   grid-column-gap: 16px;

@@ -40,8 +40,8 @@ export class GridMaximumPage implements OnInit {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);
     if (timeMatch) {
       const timeString = timeMatch[0];
-      const hours = timeString.substring(0, 2);
-      const minutes = timeString.substring(2, 4);
+      const hours = timeString.substring(2, 4);
+      const minutes = '00';
       return `${hours}:${minutes}`;
     }
     return '';
@@ -56,13 +56,13 @@ export class GridMaximumPage implements OnInit {
       this.router.navigate(['/login']);
     }
     this.isLoading = true;
-    this.APIService.GetSourceChartFolderFilesList('PW').subscribe(
+    this.APIService.GetSourceAviationFolderFilesList('mxw').subscribe(
       (response) => {
         this.MaximumArray = response;
         console.log('Response:', this.MaximumArray);
 
         this.MaximumArray = response.filter((item: any) =>
-          item.filename.includes('PWRD98')
+          item.filename.includes('mxw_EURAFI-AREA-C')
         );
         console.log('Response after filter:', this.MaximumArray);
 
@@ -94,8 +94,6 @@ export class GridMaximumPage implements OnInit {
         dialogConfig.maxWidth = '97vw';
         dialogConfig.maxHeight = '99%';
         dialogConfig.panelClass = 'custom-dialog-container';
-   
-
 
         dialogConfig.data = { filecontent };
 

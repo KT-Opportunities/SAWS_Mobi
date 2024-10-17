@@ -218,18 +218,7 @@ export class CloudCoverComponent implements OnInit {
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
   }
-  rotateImage(): void {
-    this.rotation = (this.rotation + 90) % 360; // Rotate by 90 degrees
-    this.updateImageTransform();
-  }
-
-
-
-  updateImageTransform(): void {
-    if (this.imageElement) {
-      this.imageElement.nativeElement.style.transform = `scale(${this.scale}) rotate(${this.rotation}deg)`;
-    }
-  }
+ 
 
 
 

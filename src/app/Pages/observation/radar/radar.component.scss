@@ -12,7 +12,10 @@
       font-weight: bold;
     }
   }
-
+  .footerdiv {
+    padding-top: 0;
+    z-index: 1000;
+  }
 // .w-dropdown-toggle {
 //   position: relative;
 //   vertical-align: top;

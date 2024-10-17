@@ -50,7 +50,7 @@ export class SpeciComponent  implements OnInit {
     this.fetchSpeciReport();
   }
 
-  NavigateToObservation() {
+  navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 
