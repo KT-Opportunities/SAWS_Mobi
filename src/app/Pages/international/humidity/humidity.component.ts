@@ -13,6 +13,8 @@ import { APIService } from 'src/app/services/apis.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { ModalController } from '@ionic/angular';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
 
 @Component({
   selector: 'app-humidity',
@@ -21,8 +23,10 @@ import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
 })
 export class HumidityComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = false;
 
+  loading: boolean = false;
+  ImageArray: any = [];
+  // fileBaseUrl: SafeResourceUrl;
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
   isDropdownOpen2: boolean = false;
@@ -44,6 +48,7 @@ export class HumidityComponent implements OnInit {
   fileBaseUrlNext: SafeResourceUrl;
   fileBaseUrlPrevious: SafeResourceUrl;
   fileBaseUrlSynoptic: SafeResourceUrl;
+  fileBaseUrl: SafeResourceUrl | undefined;
 
   constructor(
     private router: Router,
@@ -52,7 +57,8 @@ export class HumidityComponent implements OnInit {
     private http: HttpClient,
     private APIService: APIService,
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController,
   ) {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
     this.fileBaseUrlPrevious =
@@ -104,11 +110,11 @@ export class HumidityComponent implements OnInit {
         ).map((item: { filename: string }) => item.filename);
         console.log('SouthGridWindArray:', this.SouthGridWindArray);
 
-        this.isLoading = false;
+        this.loading = false;
       },
       (error) => {
         console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
+        this.loading = false;
       }
     );
   }
@@ -137,22 +143,22 @@ export class HumidityComponent implements OnInit {
   getFilteredItemCentral() {
     if (this.selectedOption2 === 'FL050') {
       return this.CentralGridWindArray.filter((item: any) => {
-        const pattern = /rh_cent050\d{2}\.png/;
+        const pattern = /rh_cent05\d{2}\.png/;
         return pattern.test(item);
       });
     } else if (this.selectedOption2 === 'FL100') {
       return this.CentralGridWindArray.filter((item: any) => {
-        const pattern = /rh_cent100\d{2}\.png/;
+        const pattern = /rh_cent10\d{2}\.png/;
         return pattern.test(item);
       });
     } else if (this.selectedOption2 === 'FL140') {
       return this.CentralGridWindArray.filter((item: any) => {
-        const pattern = /rh_cent140\d{2}\.png/;
+        const pattern = /rh_cent14\d{2}\.png/;
         return pattern.test(item);
       });
     } else if (this.selectedOption2 === 'FL180') {
       return this.CentralGridWindArray.filter((item: any) => {
-        const pattern = /rh_cent180\d{2}\.png/;
+        const pattern = /rh_cent18\d{2}\.png/;
         return pattern.test(item);
       });
     } else {
@@ -299,51 +305,110 @@ export class HumidityComponent implements OnInit {
   }
 
   
-  ImageViewer(item: any) {
-    const folderName = item.substring(0, 2);
-    const fileName = item;
-    this.isLoading = true;
+  // ImageViewer(item: any) {
+  //   const folderName = item.substring(0, 2);
+  //   const fileName = item;
+  //   this.isLoading = true;
 
-    this.fetchSecondAPI(folderName, fileName)
-      .then((filecontent) => {
-        this.isLoading = false;
+  //   this.fetchSecondAPI(folderName, fileName)
+  //     .then((filecontent) => {
+  //       this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filecontent };
+  //       const dialogConfig = new MatDialogConfig();
+  //       dialogConfig.autoFocus = true;
+  //       dialogConfig.disableClose = true;
+  //       dialogConfig.width = '80%';
+  //       dialogConfig.height = '80%';
+  //       dialogConfig.data = { filecontent };
 
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
+  //       const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.isLoading = false;
-      });
-  }
+  //       dialogRef.afterClosed().subscribe(() => {
+  //         this.isLoading = false;
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching file content:', error);
+  //       this.isLoading = false;
+  //     });
+  // }
 
-  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filecontent
-    return new Promise<string>((resolve, reject) => {
-      this.APIService.GetAviationFile(folderName, fileName).subscribe(
-        (response) => {
-          // Assuming filecontent is obtained from the response
-          const filecontent = response.filecontent;
-          // Log filecontent to verify
-          console.log('File Text Content:', filecontent);
-          // Resolve the promise with filecontent
-          resolve(filecontent);
+
+
+
+ 
+
+
+
+ConvertImagesArray(ImageArray: any[]) {
+  this.loading = true;
+    // Clear the ImageArray
+    this.ImageArray = [];
+
+    console.log('IMAGE ARRAY:', ImageArray);
+    
+    if (ImageArray.length > 0) {
+        // Fetch the first image's data
+        this.APIService.GetAviationFile('rh', ImageArray[0]).subscribe(
+            (data) => {
+                console.log('IMAGE:', data);
+                const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+                // Set the safe URL for the image
+                this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+                
+                // Store the single image in the ImageArray
+                this.ImageArray.push(imageUrl);
+
+                // Present the modal with the single image
+                this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
+            },
+            (error) => {
+                console.log('Error fetching JSON data:', error);
+                this.loading = false;
+            }
+        );
+    }
+}
+
+async ImageViewer(img: SafeResourceUrl) {
+    // Create and present a modal to view the image
+    const modal = await this.moodalCtrl.create({
+        component: ImageModalPage,
+        componentProps: {
+            imgs: img, // Pass the single image URL to the modal
         },
-        (error) => {
-          // Reject the promise if there's an error
-          reject(error);
-        }
-      );
+        cssClass: 'transparent-modal',
     });
+    await modal.present();
+}
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITYEM:', item, ' TYPE:', type);
+    // let name = item.split('_')[0];
+    // console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(item));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
   }
+
+
+  openImageViewerSymbol(item: any) {
+    console.log('File Name:', item);
+    // Define the folder name
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    // Create the array to hold folderName and fileName
+    const type = [
+      { folderName: folderName, filename: fileName },
+      // Add more entries if needed
+    ];
+    // Call the ImagesArray method with item and the type array
+    this.ImagesArray(item, type);
+  }
+
+
+
+
 }

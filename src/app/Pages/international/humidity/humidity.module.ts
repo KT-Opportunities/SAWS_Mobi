@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HumidityComponent } from './humidity.component';
 import { HumidityRoutingModule } from './humidity-routing.module';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HumidityRoutingModule],
+  imports: [CommonModule, FormsModule, IonicModule, HumidityRoutingModule, SharedModule],
   declarations: [HumidityComponent],
 })
 export class HumidityModule {}

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GridWindsPageRoutingModule } from './grid-winds-routing.module';
 
 import { GridWindsPage } from './grid-winds.page';
+import { SharedModule } from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GridWindsPageRoutingModule
+    GridWindsPageRoutingModule,
+    SharedModule
   ],
   declarations: [GridWindsPage]
 })

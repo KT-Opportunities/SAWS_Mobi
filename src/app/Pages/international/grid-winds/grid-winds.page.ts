@@ -24,6 +24,7 @@ import { ImageModalPage } from '../../image-modal/image-modal.page';
 export class GridWindsPage implements OnInit {
   isLogged: boolean = false;
   isLoading: boolean = false;
+  loading: boolean = false;
   // loading: boolean = false;
   isCloudForecast: boolean = false;
   isDropdownOpen1: boolean = false;
@@ -406,54 +407,71 @@ export class GridWindsPage implements OnInit {
 
  
 
-  ImagesArray(item: any, type: any[]) {
-    console.log('ITYEM:', item, ' TYPE:', type);
-    // let name = item.split('_')[0];
-    // console.log('NAME:', name);
-    let ImageArray = type.filter((x) => x.includes(item));
-    console.log('Image arrays:', ImageArray);
-    this.ConvertImagesArray(ImageArray);
-  }
-
   ConvertImagesArray(ImageArray: any[]) {
-    this.ImageArray = [];
-    console.log('IMAGE ARRAY', ImageArray);
-    ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile('gw', element).subscribe(
-        (data) => {
-          console.log('IMAGE:', data);
-          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-
-          this.fileBaseUrl =
-            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-
-          this.ImageArray.push(imageUrl);
-        },
-        (error) => {
-          console.log('Error fetching JSON data:', error);
-          this.isLoading= false;
-        }
-      );
-    });
-    setTimeout(() => {
-      console.log('this.ImageArray:', this.ImageArray.length);
-      this.ImageViewer(this.ImageArray);
-    }, 1000);
+    this.loading = true;
+      // Clear the ImageArray
+      this.ImageArray = [];
+  
+      console.log('IMAGE ARRAY:', ImageArray);
+      
+      if (ImageArray.length > 0) {
+          // Fetch the first image's data
+          this.APIService.GetAviationFile('gw', ImageArray[0]).subscribe(
+              (data) => {
+                  console.log('IMAGE:', data);
+                  const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+  
+                  // Set the safe URL for the image
+                  this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+                  
+                  // Store the single image in the ImageArray
+                  this.ImageArray.push(imageUrl);
+  
+                  // Present the modal with the single image
+                  this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
+              },
+              (error) => {
+                  console.log('Error fetching JSON data:', error);
+                  this.loading = false;
+              }
+          );
+      }
   }
-
-  viewFilter(item: any[], filter: string) {
-    return item.filter((x) => x.includes(filter));
+  
+  async ImageViewer(img: SafeResourceUrl) {
+      // Create and present a modal to view the image
+      const modal = await this.moodalCtrl.create({
+          component: ImageModalPage,
+          componentProps: {
+              imgs: img, // Pass the single image URL to the modal
+          },
+          cssClass: 'transparent-modal',
+      });
+      await modal.present();
   }
-  async ImageViewer(imgs: any) {
-    console.log('The img:', imgs);
-
-    const modal = await this.moodalCtrl.create({
-      component: ImageModalPage,
-      componentProps: {
-        imgs, // image link passed on click event
-      },
-      cssClass: 'transparent-modal',
-    });
-    modal.present();
-  }
+  
+    ImagesArray(item: any, type: any[]) {
+      console.log('ITYEM:', item, ' TYPE:', type);
+      // let name = item.split('_')[0];
+      // console.log('NAME:', name);
+      let ImageArray = type.filter((x) => x.includes(item));
+      console.log('Image arrays:', ImageArray);
+      this.ConvertImagesArray(ImageArray);
+    }
+  
+  
+    openImageViewerSymbol(item: any) {
+      console.log('File Name:', item);
+      // Define the folder name
+      const folderName = 'gw';
+      const fileName = item;
+      console.log('Folder Name:', folderName);
+      // Create the array to hold folderName and fileName
+      const type = [
+        { folderName: folderName, filename: fileName },
+        // Add more entries if needed
+      ];
+      // Call the ImagesArray method with item and the type array
+      this.ImagesArray(item, type);
+    }
 }

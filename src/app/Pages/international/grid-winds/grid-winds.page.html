@@ -1,12 +1,13 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner
-    >Loading...
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
 
-  <section class="aerosport-ci" style="margin-top: 107px !important">
-    <h1 class="heading-6">Grid wind Charts</h1>
+  <div id="top"></div>
 
+  <app-package-content>
+    <app-package-header> Grid wind Charts</app-package-header>
+
+    
+  <app-package-list-items>
     <div class="aerosport">
       <div class="aerosportScrol">
         <!-- Central -->
@@ -130,7 +131,7 @@
               <div
                 id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
                 class="div-block-452"
-                *ngFor="let item of getFilteredItemWest(); let i = index"
+                *ngFor="let item of getFilteredItemCentral(); let i = index"
                 [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
               >
                 <div class="w-layout-grid grid-41">
@@ -140,7 +141,7 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="ImagesArray(item,getFilteredItemWest())"
+                      (click)="ImagesArray(item,getFilteredItemCentral())"
                     >
                       View
                     </button>
@@ -435,7 +436,8 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="ImageViewer(item)"
+                      (click)="ImagesArray(item,getFilteredItemEast())"
+                 
                     >
                       View
                     </button>
@@ -582,7 +584,8 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="ImageViewer(item)"
+                      (click)="ImagesArray(item,getFilteredItemSouth())"
+                    
                     >
                       View
                     </button>
@@ -600,7 +603,13 @@
         </div>
       </div>
     </div>
-  </section>
+
+
+    </app-package-list-items>
+ </app-package-content>
+
+  
+
 </ion-content>
 
 
