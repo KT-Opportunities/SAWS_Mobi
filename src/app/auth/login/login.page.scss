@@ -60,6 +60,37 @@
   color: #00386c;
 }
 /* Default styles for all screen sizes */
+.text-field {
+  width: 100%;
+}
+.submit-button {
+  width: 100%;
+  color: #ffffff;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.text-field {
+  width: 100%;
+  padding-right: 40px; /* Space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.fas {
+  font-size: 18px; /* Adjust size as needed */
+  color: #000000;
+}
 
 /* Styles for small devices (phones) */
 @media only screen and (max-width: 600px) {
@@ -131,10 +162,7 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
-  .submit-button {
-    width: 41vw;
-    color: #ffffff;
-  }
+
   .custom-content {
     --ion-background-color: #ffffff; /* Set background color */
     --ion-text-color: #000000; /* Set text color */
@@ -172,10 +200,7 @@
   .linkspace {
     margin-left: 4px;
   }
-  .submit-button {
-    width: 41vw;
-    color: #ffffff;
-  }
+
   // #mainsection{
   //   overflow-y: clip !important;
   //   overscroll-behavior-y: none !important;
@@ -224,10 +249,7 @@
   .linkspace {
     margin-left: 4px;
   }
-  .submit-button {
-    width: 41vw;
-    color: #ffffff;
-  }
+
   // #mainsection{
   //   overflow-y: clip !important;
   //   overscroll-behavior-y: none !important;
@@ -288,10 +310,7 @@
   .linkspace {
     margin-left: 4px;
   }
-  .submit-button {
-    width: 77vw;
-    color: #ffffff;
-  }
+
   // #mainsection{
   //   overflow-y: clip !important;
   //   overscroll-behavior-y: none !important;
