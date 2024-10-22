@@ -16,11 +16,9 @@ export interface Metar {
   selector: 'app-metar',
   templateUrl: './metar.component.html',
   // styleUrls: ['./metar.component.scss'],
-  styleUrls: ['./../observation.page.scss'],
-
+  styleUrls: ['./metar.component.scss'],
 })
-export class MetarComponent  implements OnInit {
-
+export class MetarComponent implements OnInit {
   isLogged: boolean = false;
   loading: boolean = false;
   metarReports: any[] = [];
@@ -34,8 +32,7 @@ export class MetarComponent  implements OnInit {
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-
-   ) { }
+  ) {}
 
   ngOnInit() {
     this.fetchMetarReports();
@@ -72,15 +69,14 @@ export class MetarComponent  implements OnInit {
   }
 
   // Method to filter TAFArray based on search query
-  get filteredmetarReports():any  {
+  get filteredmetarReports(): any {
     if (!this.searchQuery) {
       return this.metarReports;
     }
-    return this.metarReports.filter(item =>
+    return this.metarReports.filter((item) =>
       item.filecontent.toLowerCase().includes(this.searchQuery)
     );
   }
-
 
   isLoading: boolean = true;
   item: any;
@@ -91,21 +87,19 @@ export class MetarComponent  implements OnInit {
     console.log('Folder Name:', folderName);
     this.isLoading = true;
 
-  
-        this.isLoading = false;
+    this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { item };
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
 
-        const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-    
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
   }
 }

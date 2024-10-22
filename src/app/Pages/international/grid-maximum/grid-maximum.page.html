@@ -6,7 +6,6 @@
 
   <div id="top"></div>
 
-
   <section class="maximum-wind-section" style="margin-top: 162px">
     <h1 class="heading-6">Maximum Winds</h1>
 
@@ -60,7 +59,7 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      (click)="openImageViewer(item)"
+                      (click)="ImagesArray(item,MaximumArray)"
                     >
                       View
                     </button>
@@ -78,19 +77,26 @@
         </div>
       </div>
     </div>
-
   </section>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+    <img
+      src="../../assets/Path-3447.svg"
+      loading="lazy"
+      width="1216"
+      alt=""
+      class="image"
+    />
 
     <div class="footerdiv" id="footerdivid">
-      <a (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+      <a
+        (click)="NavigateToInternational()"
+        class="link-block-5 w-inline-block"
+      >
         <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          International</h6>
+        <h6 class="heading-10-copy" id="styleh6">International</h6>
       </a>
     </div>
   </div>

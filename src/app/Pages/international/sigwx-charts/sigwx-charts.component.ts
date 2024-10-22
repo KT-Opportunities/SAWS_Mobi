@@ -36,7 +36,7 @@ export class SigwxChartsComponent implements OnInit {
   selectedOption2: string = 'Africa';
   selectedOption3: string = 'Africa';
   selectedOption4: string = 'Africa';
- 
+
   WAFS: any = [];
   SIGW: any = [];
   ImageArray: any = [];
@@ -55,7 +55,7 @@ export class SigwxChartsComponent implements OnInit {
     private APIService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private moodalCtrl: ModalController,
+    private moodalCtrl: ModalController
   ) {
     this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
     this.fileBaseUrlPrevious =
@@ -287,92 +287,74 @@ export class SigwxChartsComponent implements OnInit {
   //     });
   // }
 
- 
-
-
-
-
-
-
   ConvertImagesArray(ImageArray: any[]) {
     this.loading = true;
-      // Clear the ImageArray
-      this.ImageArray = [];
-  
-      console.log('IMAGE ARRAY:', ImageArray);
-      
-      if (ImageArray.length > 0) {
-          // Fetch the first image's data
-          this.APIService.GetAviationFile('sigw', ImageArray[0]).subscribe(
-              (data) => {
-                  console.log('IMAGE:', data);
-                  const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-  
-                  // Set the safe URL for the image
-                  this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-                  
-                  // Store the single image in the ImageArray
-                  this.ImageArray.push(imageUrl);
-  
-                  // Present the modal with the single image
-                  this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
-              },
-              (error) => {
-                  console.log('Error fetching JSON data:', error);
-                  this.loading = false;
-              }
-          );
-      }
+    // Clear the ImageArray
+    this.ImageArray = [];
+
+    console.log('IMAGE ARRAY:', ImageArray);
+
+    if (ImageArray.length > 0) {
+      // Fetch the first image's data
+      this.APIService.GetAviationFile('sigw', ImageArray[0]).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          // Set the safe URL for the image
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          // Store the single image in the ImageArray
+          this.ImageArray.push(imageUrl);
+
+          // Present the modal with the single image
+          this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    }
   }
-  
+
   async ImageViewer(img: SafeResourceUrl) {
-      // Create and present a modal to view the image
-      const modal = await this.moodalCtrl.create({
-          component: ImageModalPage,
-          componentProps: {
-              imgs: img, // Pass the single image URL to the modal
-          },
-          cssClass: 'transparent-modal',
-      });
-      await modal.present();
+    // Create and present a modal to view the image
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs: img, // Pass the single image URL to the modal
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.onWillDismiss().then(() => {
+      this.loading = false; // Stop loading when the modal is closed
+    });
+    await modal.present();
   }
-  
-    ImagesArray(item: any, type: any[]) {
-      console.log('ITYEM:', item, ' TYPE:', type);
-      // let name = item.split('_')[0];
-      // console.log('NAME:', name);
-      let ImageArray = type.filter((x) => x.includes(item));
-      console.log('Image arrays:', ImageArray);
-      this.ConvertImagesArray(ImageArray);
-    }
-  
-  
-    openImageViewerSymbol(item: any) {
-      console.log('File Name:', item);
-      // Define the folder name
-      const folderName = 'sigw';
-      const fileName = item;
-      console.log('Folder Name:', folderName);
-      // Create the array to hold folderName and fileName
-      const type = [
-        { folderName: folderName, filename: fileName },
-        // Add more entries if needed
-      ];
-      // Call the ImagesArray method with item and the type array
-      this.ImagesArray(item, type);
-    }
-  
 
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITYEM:', item, ' TYPE:', type);
+    // let name = item.split('_')[0];
+    // console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(item));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
+  openImageViewerSymbol(item: any) {
+    console.log('File Name:', item);
+    // Define the folder name
+    const folderName = 'sigw';
+    const fileName = item;
+    console.log('Folder Name:', folderName);
+    // Create the array to hold folderName and fileName
+    const type = [
+      { folderName: folderName, filename: fileName },
+      // Add more entries if needed
+    ];
+    // Call the ImagesArray method with item and the type array
+    this.ImagesArray(item, type);
+  }
 }

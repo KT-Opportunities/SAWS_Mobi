@@ -11,8 +11,7 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './satellite.component.html',
   styleUrls: ['./../observation.page.scss'],
 })
-export class SatelliteComponent  implements OnInit {
-
+export class SatelliteComponent implements OnInit {
   isLogged: boolean = false;
   frameArray: any = [];
 
@@ -31,9 +30,8 @@ export class SatelliteComponent  implements OnInit {
     private authService: AuthService,
     private APIService: APIService,
     private sanitizer: DomSanitizer,
-    private moodalCtrl: ModalController,
-
-   ) { }
+    private moodalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.getSatelliteImage('', 12, this.selectedOptionProduct);
@@ -44,12 +42,12 @@ export class SatelliteComponent  implements OnInit {
     return this.authService.getIsLoggedIn();
   }
 
-  sateliteDropdownProductOpen(){
+  sateliteDropdownProductOpen() {
     this.isDropdownProductOpen = !this.isDropdownProductOpen;
     this.isDropdownFrameOpen = false;
   }
 
-  getSatelliteImage(foldername: any, time: any, productname: any){
+  getSatelliteImage(foldername: any, time: any, productname: any) {
     this.APIService.GetSourceAviationFolderFilesList(foldername).subscribe(
       (response) => {
         // this.frameArray = response;
@@ -59,13 +57,16 @@ export class SatelliteComponent  implements OnInit {
         );
 
         if (this.frameArray.length > 0) {
-            this.selectedOptionFrame = this.frameArray[0].lastmodified;
-    
-            this.displayImage('', this.frameArray[0].filename).then((filecontent) => {
+          this.selectedOptionFrame = this.frameArray[0].lastmodified;
+
+          this.displayImage('', this.frameArray[0].filename).then(
+            (filecontent) => {
               const imageUrlNext = 'data:image/gif;base64,' + filecontent;
-              this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-          });
-        }    
+              this.fileBaseUrl =
+                this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+            }
+          );
+        }
 
         this.loading = false;
       },
@@ -76,7 +77,10 @@ export class SatelliteComponent  implements OnInit {
     );
   }
 
-  displayImage(imagefoldername: string, imagefilename: string): Promise<string> {
+  displayImage(
+    imagefoldername: string,
+    imagefilename: string
+  ): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetAviationFile(imagefoldername, imagefilename).subscribe(
         (response) => {
@@ -90,46 +94,43 @@ export class SatelliteComponent  implements OnInit {
     });
   }
 
-  sateliteDropdownFrameOpen(){
+  sateliteDropdownFrameOpen() {
     this.isDropdownFrameOpen = !this.isDropdownFrameOpen;
   }
 
   selectDropdownProduct(selectOption: string, dropdown: string) {
-      if (dropdown === 'dropdown1') {
-        this.selectedOptionProduct = selectOption;
-        this.getSatelliteImage('', 12, selectOption);
-      }
+    if (dropdown === 'dropdown1') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
 
-      if (dropdown === 'dropdown2') {
-        this.selectedOptionProduct = selectOption;
-        this.getSatelliteImage('', 12, selectOption);
-      }
-      
-      if (dropdown === 'dropdown3') {
-        this.selectedOptionProduct = selectOption;
-        this.getSatelliteImage('', 12, selectOption);
-      
-      }
-      if (dropdown === 'dropdown4') {
-        this.selectedOptionProduct = selectOption;
-        this.getSatelliteImage('', 12, selectOption);
-      
-      }
-      if (dropdown === 'dropdown5') {
-        this.selectedOptionProduct = selectOption;
-        this.getSatelliteImage('', 12, selectOption);
-      }
+    if (dropdown === 'dropdown2') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+
+    if (dropdown === 'dropdown3') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+    if (dropdown === 'dropdown4') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+    if (dropdown === 'dropdown5') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
   }
 
-  selectDropdownFrame(selectOption: string, imagefilename: string ) {
+  selectDropdownFrame(selectOption: string, imagefilename: string) {
+    this.selectedOptionFrame = selectOption;
 
-      this.selectedOptionFrame = selectOption;
-
-      this.displayImage('', imagefilename).then((filecontent) => {
-          const imageUrlNext = 'data:image/gif;base64,' + filecontent;
-          this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
-      });
-
+    this.displayImage('', imagefilename).then((filecontent) => {
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+      this.fileBaseUrl =
+        this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+    });
   }
 
   navigateToObservation() {
@@ -137,7 +138,6 @@ export class SatelliteComponent  implements OnInit {
   }
 
   formatTimestamp(timestamp: string): string {
-   
     let date: Date;
     if (timestamp === '') {
       date = new Date(Date.now());
@@ -154,26 +154,28 @@ export class SatelliteComponent  implements OnInit {
   }
 
   previousImage(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.frameArray.length) % this.frameArray.length;
+    this.currentIndex =
+      (this.currentIndex - 1 + this.frameArray.length) % this.frameArray.length;
 
-    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified; 
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
     this.displayImage('', fileName).then((filecontent) => {
-        const imageUrlNext = 'data:image/gif;base64,' + filecontent;
-        this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+      this.fileBaseUrl =
+        this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
-    
   }
 
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.frameArray.length;
 
-    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;    
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
 
     this.displayImage('', fileName).then((filecontent) => {
-        const imageUrlNext = 'data:image/gif;base64,' + filecontent;
-        this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+      this.fileBaseUrl =
+        this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
   }
 

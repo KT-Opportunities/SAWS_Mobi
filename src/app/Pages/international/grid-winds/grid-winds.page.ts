@@ -447,6 +447,9 @@ export class GridWindsPage implements OnInit {
           },
           cssClass: 'transparent-modal',
       });
+      modal.onWillDismiss().then(() => {
+        this.loading = false; // Stop loading when the modal is closed
+      });
       await modal.present();
   }
   
