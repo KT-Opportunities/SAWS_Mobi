@@ -570,6 +570,30 @@
   margin-top: 5px;
 }
 
+
+// Icons
+
+
+
+[class^="w-icon-"],
+[class*=" w-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "webflow-icons" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+// End
+
 .text-field-copy {
   width: 30vw;
   height: 32px;
@@ -5024,6 +5048,14 @@
   #w-node-cd3e9c90-8e08-db1f-b9df-21d1e229731b-ce3d400c,
   #w-node-cd3e9c90-8e08-db1f-b9df-21d1e229733d-ce3d400c {
     grid-area: span 1 / span 1 / span 1 / span 1;
+  }
+
+  .w-layout-blockcontainer w-container{
+
+    margin-top: 23px;
+  }
+  #img{
+    margin-top: 31px;
   }
 }
 
