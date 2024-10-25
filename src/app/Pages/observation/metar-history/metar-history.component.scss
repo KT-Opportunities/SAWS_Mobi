@@ -1080,7 +1080,7 @@
 
 .text-block {
   color: #fff;
-  margin-top: -17px;
+  //margin-top: -17px;
   font-family: Montserrat, sans-serif;
 }
 #icon2 {
@@ -1233,7 +1233,7 @@
 
 .text-block-2 {
   color: #fff;
-  margin-top: 5px;
+ // margin-top: 5px;
 }
 
 .text-field-copy {
@@ -5670,4 +5670,92 @@ ion-content {
   min-height: 300px; /* Optional for minimum height */
   width: 100%;
   background-color: #f0f0f0; /* Optional for visibility */
+}
+/* Dropdown container */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 95%;
+  cursor: pointer;
+}
+
+/* Dropdown toggle with text and arrow */
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1; /* Same color */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Arrow icon */
+.dropdown-arrow {
+  font-size: 1.2em;
+  color: #fff; /* Arrow color */
+}
+
+/* Dropdown list */
+.dropdown-list1 {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 100;
+  max-height: 40vh;
+  overflow-y: auto;
+  display: block;
+  background-color: linear-gradient(#00386c, #00386c);
+  margin-left: 2px;
+  margin-top: 33px;
+}
+.dropdown-item:hover {
+  background-color: #eee;
+}
+
+/* Dropdown arrow */
+.dropdown-arrow {
+  margin-left: 10px; /* Space between text and arrow */
+}
+
+.dropdown-arrow img {
+  width: 40px; /* Increase the size of the icon */
+  height: 40px; /* Increase the size of the icon */
+  vertical-align: middle; /* Aligns icon with text */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)
+    contrast(100%);
+  /* Makes the icon white */
+}
+/* Responsive adjustments */
+.dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-image: linear-gradient(#00386c, #00386c);
+}
+@media (max-width: 768px) {
+  .dropdown-toggle {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-image: linear-gradient(#00386c, #00386c);
+  }
+
+  .dropdown-item {
+    padding: 2px;
+  }
+}
+.image-container,
+.metar-history-grid,
+.form-block {
+  width: 100%; /* Full width */
+  display: block; /* Ensure each element is on a new line */
+  text-align: center; /* Center all inline elements */
+  padding-left: 10px;
+  align-items: center;
 }

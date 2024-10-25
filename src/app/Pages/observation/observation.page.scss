@@ -1059,7 +1059,7 @@
 }
 .w-layout-grid {
   // display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px; /* Space between grid items */
 }
 
@@ -1067,7 +1067,8 @@
   margin-bottom: 20px; /* Space between each report section */
 }
 
-.cct-copy-copy, .cct-copy {
+.cct-copy-copy,
+.cct-copy {
   /* Ensure these divs are not overlapping or causing layout issues */
   padding: 10px;
   // border: 1px solid #ccc;
@@ -1085,7 +1086,7 @@
   font-family: Montserrat, sans-serif;
 }
 #icon2 {
-  margin-left: 293px !important;
+  margin-left: 316px !important;
 }
 .icon-2 {
   color: #fff;
@@ -1963,10 +1964,10 @@
   background-color: #00ff00;
 }
 
-.metar-report h1, .metar-report p {
+.metar-report h1,
+.metar-report p {
   margin: 5px 0;
 }
-
 
 .chats-div {
   flex-direction: column;
@@ -2002,7 +2003,7 @@
 }
 .ObservScrol {
   /* Set the width of the container as needed */
-  width: 341px;/* Example width */
+  width: 341px; /* Example width */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
@@ -2013,7 +2014,6 @@
 }
 
 /* Additional styling for child elements if needed */
-
 
 .grid-35 {
   grid-template-rows: auto;
@@ -3745,7 +3745,7 @@
     width: 86vw;
     align-items: flex-start;
     position: relative;
-  top: -8px;
+    top: -8px;
   }
 
   .search-button {

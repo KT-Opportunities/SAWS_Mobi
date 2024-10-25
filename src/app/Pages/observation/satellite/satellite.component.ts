@@ -4,12 +4,13 @@ import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ImageModalPage } from '../../image-modal/image-modal.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+import { SwiperOptions } from 'swiper/types';
 
 @Component({
   selector: 'app-satellite',
   templateUrl: './satellite.component.html',
-  styleUrls: ['./../observation.page.scss'],
+  styleUrls: ['./satellite.component.scss'],
 })
 export class SatelliteComponent implements OnInit {
   isLogged: boolean = false;
@@ -30,10 +31,67 @@ export class SatelliteComponent implements OnInit {
     private authService: AuthService,
     private APIService: APIService,
     private sanitizer: DomSanitizer,
-    private moodalCtrl: ModalController
+    private moodalCtrl: ModalController,
+    private toastController: ToastController
   ) {}
 
+  config: SwiperOptions = {
+    zoom: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+  };
+  async presentForecastToast() {
+    const toast = await this.toastController.create({
+      message: 'Tap the image to zoom in',
+      duration: 3000,
+      position: 'top',
+      icon: 'information-circle', // Change the icon to the information icon
+      cssClass: 'custom-toast', // Custom class for the toast
+      buttons: [
+        {
+          side: 'end',
+          text: 'Close',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    // Apply custom styles directly to the toast
+    toast.classList.add('custom-toast');
+
+    // Set styles directly
+    const styles = `
+      ion-toast.custom-toast {
+        --background: #28a745; /* Green background */
+        --color: #ffffff; /* White text */
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+      }
+      ion-toast.custom-toast::part(message) {
+        font-style: italic;
+        color: #ffffff; /* White message text */
+      }
+      ion-toast.custom-toast::part(icon) {
+        color: #ffffff; /* White icon */
+      }
+      ion-toast.custom-toast::part(button) {
+        border-left: 1px solid #d2d2d2;
+        color: #ffffff; /* White button text */
+        font-size: 12px;
+      }
+    `;
+
+    // Create a style element and append it to the document
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = styles;
+    document.head.appendChild(styleElement);
+
+    await toast.present();
+  }
   ngOnInit() {
+    this.loading = true;
+    setTimeout(() => {
+      this.presentForecastToast();
+    }, 500); // Delay by 500ms
     this.getSatelliteImage('', 12, this.selectedOptionProduct);
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
@@ -48,6 +106,7 @@ export class SatelliteComponent implements OnInit {
   }
 
   getSatelliteImage(foldername: any, time: any, productname: any) {
+    this.loading = true;
     this.APIService.GetSourceAviationFolderFilesList(foldername).subscribe(
       (response) => {
         // this.frameArray = response;
@@ -99,6 +158,7 @@ export class SatelliteComponent implements OnInit {
   }
 
   selectDropdownProduct(selectOption: string, dropdown: string) {
+    this.loading = true;
     if (dropdown === 'dropdown1') {
       this.selectedOptionProduct = selectOption;
       this.getSatelliteImage('', 12, selectOption);
@@ -154,6 +214,7 @@ export class SatelliteComponent implements OnInit {
   }
 
   previousImage(): void {
+    this.loading = true;
     this.currentIndex =
       (this.currentIndex - 1 + this.frameArray.length) % this.frameArray.length;
 
@@ -164,6 +225,7 @@ export class SatelliteComponent implements OnInit {
       this.fileBaseUrl =
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
     });
+    this.loading = false;
   }
 
   nextImage(): void {

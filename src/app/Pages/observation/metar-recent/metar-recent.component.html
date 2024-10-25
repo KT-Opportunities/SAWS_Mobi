@@ -9,8 +9,6 @@
 
     <app-package-sub-header></app-package-sub-header>
 
-   
-
     <app-package-list-items>
       <div>
         <div class="w-layout-grid1 grid-6-copy">
@@ -168,17 +166,19 @@
                   >
                     <label for="" class="field-label">Time</label>
                     <div
-                      data-hover="false"
-                      data-delay="0"
-                      class="text-field-blue w-dropdown"
+                      class="dropdown-container"
                       (click)="selectDropdown('dropdown6')"
                     >
-                      <div class="w-dropdown-toggle">
-                        <div
-                          class="icon-2 w-icon-dropdown-toggle"
-                          id="icon2"
-                        ></div>
+                      <div class="dropdown-toggle">
                         <div class="text-block">{{ selectedOption6 }}</div>
+                        <div class="dropdown-arrow">
+                          <img
+                            src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                            loading="lazy"
+                            alt=""
+                          />
+                        </div>
+                        <!-- Arrow icon -->
                       </div>
                       <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
                         <div
@@ -208,18 +208,21 @@
                     <label for="" class="field-label"
                       >Refresh This page every</label
                     >
+
                     <div
-                      data-hover="false"
-                      data-delay="0"
-                      class="text-field-blue w-dropdown"
+                      class="dropdown-container"
                       (click)="selectDropdown('dropdown7')"
                     >
-                      <div class="dropdown-toggle w-dropdown-toggle">
-                        <div
-                          class="icon-2-copy w-icon-dropdown-toggle"
-                          id="icon2"
-                        ></div>
+                      <div class="dropdown-toggle">
                         <div class="text-block">{{ selectedOption7 }}</div>
+                        <div class="dropdown-arrow">
+                          <img
+                            src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                            loading="lazy"
+                            alt=""
+                          />
+                        </div>
+                        <!-- Arrow icon -->
                       </div>
                       <nav class="dropdown-list1" *ngIf="isDropdownOpen7">
                         <div

@@ -41,16 +41,6 @@ export class GridMaximumPage implements OnInit {
     private moodalCtrl: ModalController
   ) {}
 
-  // extractTime(filename: string): string {
-  //   const timeMatch = filename.match(/(\d{4})(?=.png$)/);
-  //   if (timeMatch) {
-  //     const timeString = timeMatch[0];
-  //     const hours = timeString.substring(2, 4);
-  //     const minutes = timeString.substring(2, 4);
-  //     return `${hours}:${minutes}`;
-  //   }
-  //   return '';
-  // }
   extractTime(filename: string): string {
     const timeMatch = filename.match(/(\d{4})(?=.png$)/);
     if (timeMatch) {
@@ -70,7 +60,7 @@ export class GridMaximumPage implements OnInit {
       // If not logged in, navigate to the login page
       this.router.navigate(['/login']);
     }
-    this.isLoading = true;
+    this.loading = true;
 
     this.APIService.GetSourceAviationFolderFilesList('mxw').subscribe(
       (response) => {
@@ -88,43 +78,12 @@ export class GridMaximumPage implements OnInit {
       },
       (error) => {
         console.error('Error fetching data:', error);
-        this.isLoading = false; // Set loading to false in case of error
+        this.loading = false; // Set loading to false in case of error
         // Handle error appropriately (e.g., show error message)
       }
     );
   }
 
-  // openImageViewer(item: any) {
-  //   const folderName = item.foldername;
-  //   const fileName = item.filename;
-  //   this.isLoading = true;
-
-  //   this.fetchSecondAPI(folderName, fileName)
-  //     .then((filecontent) => {
-  //       this.isLoading = false;
-
-  //       const dialogConfig = new MatDialogConfig();
-  //       dialogConfig.autoFocus = true;
-  //       dialogConfig.disableClose = true;
-  //       dialogConfig.width = '100vw';
-  //       dialogConfig.height = '100%';
-  //       dialogConfig.maxWidth = '97vw';
-  //       dialogConfig.maxHeight = '99%';
-  //       dialogConfig.panelClass = 'custom-dialog-container';
-
-  //       dialogConfig.data = { filecontent };
-
-  //       const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-
-  //       dialogRef.afterClosed().subscribe(() => {
-  //         this.isLoading = false;
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching file content:', error);
-  //       this.isLoading = false;
-  //     });
-  // }
 
   ConvertImagesArray(ImageArray: any[]) {
     this.loading = true;
@@ -152,6 +111,7 @@ export class GridMaximumPage implements OnInit {
 
           // Present the modal with the single image
           this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
+          this.loading = false;
         },
         (error) => {
           console.log('Error fetching JSON data:', error);

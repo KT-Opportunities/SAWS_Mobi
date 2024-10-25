@@ -10,112 +10,90 @@
     <app-package-sub-header></app-package-sub-header>
 
     <app-package-list-items>
-      <div class="content-wrapper">
-        <div
-          id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22c1-a9068d94"
-          class="div-block-15"
-        >
-          <div class="div-block-14"></div>
-        </div>
-        <div
-          id="w-node-a3e89a9d-706c-301b-ed7f-a8d1997c22ce-a9068d94"
-          class="form-block w-form"
-        >
-          <form
-            id="email-form-2"
-            name="email-form-2"
-            data-name="Email Form 2"
-            method="get"
-            data-wf-page-id="65c9ee145d072c23a9068d94"
-            data-wf-element-id="a3e89a9d-706c-301b-ed7f-a8d1997c22cf"
-          >
-            <div class="grid-24" style="">
-              <div id="w-node-baad291d-2bab-45c3-5004-d7d652581b41-9377a649">
-                <label for="" class="field-label">Select Template</label>
-                <div
-                  data-hover="false"
-                  data-delay="0"
-                  class="text-field-blue w-dropdown"
-                  (click)="selectDropdown('dropdown5')"
-                >
-                  <div class="w-dropdown-toggle">
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
-                    <div class="text-block">{{ selectedOption5 }}</div>
-                  </div>
-                  <nav class="dropdown-list1" *ngIf="isDropdownOpen5">
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown5')"
-                    >
-                      Link 1
-                    </div>
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown5')"
-                    >
-                      Link 2
-                    </div>
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown5')"
-                    >
-                      Link 3
-                    </div>
-                  </nav>
-                </div>
-              </div>
-              <div id="w-node-_9bfb377b-e0d8-05d4-3338-378b893cc2eb-a9068d94">
-                <label for="" class="field-label">Plot meteogram</label>
+      <div class="image-container">
+        <div class="div-block-15"></div>
 
-                <div
-                  data-hover="false"
-                  data-delay="0"
-                  class="text-field-blue w-dropdown"
-                  (click)="selectDropdown('dropdown11')"
-                >
-                  <div class="w-dropdown-toggle">
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
-                    <div class="text-block">{{ selectedOption11 }}</div>
-                  </div>
-                  <nav class="dropdown-list1" *ngIf="isDropdownOpen11">
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown11')"
-                    >
-                      Link 1
-                    </div>
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown11')"
-                    >
-                      Link 2
-                    </div>
-                    <div
-                      class="w-dropdown-link"
-                      (click)="selectOption('', 'dropdown11')"
-                    >
-                      Link 3
-                    </div>
-                  </nav>
-                </div>
+        <div class="form-block w-form">
+          <label for="" class="field-label">Select Template:</label>
+          <div class="dropdown-container" (click)="selectDropdown('dropdown5')">
+            <div class="dropdown-toggle">
+              <div class="text-block">{{ selectedOption5 }}</div>
+              <div class="dropdown-arrow">
+                <img
+                  src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                  loading="lazy"
+                  alt=""
+                />
               </div>
+              <!-- Arrow icon -->
             </div>
-            <div class="div-block-451">
-              <div class="w-button" id="button-2">Download</div>
-            </div>
-          </form>
-          <div class="w-form-done">
-            <!-- <div>Thank you! Your submission has been received!</div> -->
+            <nav class="dropdown-list1" *ngIf="isDropdownOpen5">
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown5')"
+              >
+                Link 1
+              </div>
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown5')"
+              >
+                Link 2
+              </div>
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown5')"
+              >
+                Link 3
+              </div>
+            </nav>
           </div>
-          <div class="w-form-fail">
-            <!-- <div>Oops! Something went wrong while submitting the form.</div> -->
+
+          <label for="" class="field-label">Plot meteogram:</label>
+          <div
+            class="dropdown-container"
+            (click)="selectDropdown('dropdown11')"
+          >
+            <div class="dropdown-toggle">
+              <div class="text-block">
+                {{ selectedOption11 }}
+              </div>
+              <div class="dropdown-arrow">
+                <img
+                  src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                  loading="lazy"
+                  alt=""
+                />
+              </div>
+              <!-- Arrow icon -->
+            </div>
+            <nav class="dropdown-list1" *ngIf="isDropdownOpen11">
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown11')"
+              >
+                Link 1
+              </div>
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown11')"
+              >
+                Link 2
+              </div>
+              <div
+                class="w-dropdown-link"
+                (click)="selectOption('', 'dropdown11')"
+              >
+                Link 3
+              </div>
+            </nav>
           </div>
         </div>
       </div>
       <div class="w-layout-grid grid-6" id="layout">
         <div
           class="ObservScrol"
-          style="overflow-y: auto; height: 21em !important"
+          style="overflow-y: auto; height: 35em !important"
         >
           <div class="div-block-15">
             <div>
