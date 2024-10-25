@@ -12,8 +12,7 @@ import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
   templateUrl: './metar-taf-recent.component.html',
   styleUrls: ['./metar-taf-recent.component.scss'],
 })
-export class MetarTafRecentComponent  implements OnInit {
-
+export class MetarTafRecentComponent implements OnInit {
   isLogged: boolean = false;
   loading: boolean = false;
 
@@ -45,20 +44,20 @@ export class MetarTafRecentComponent  implements OnInit {
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
+  ) {}
 
-   ) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchRecentTafs();
+  }
 
   navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 
-  
   fetchRecentTafs(): void {
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner
-  
+
     const foldername = 'taffc'; // Specify the folder name
     this.apiService.getRecentTafs(foldername).subscribe(
       (data) => {
@@ -84,7 +83,7 @@ export class MetarTafRecentComponent  implements OnInit {
     if (dropdown === 'dropdown1') {
       this.selectedOption1 = option;
       this.isDropdownOpen1 = false;
-    } 
+    }
     if (dropdown === 'dropdown2') {
       this.selectedOption2 = option;
       this.isDropdownOpen2 = false;
@@ -97,7 +96,6 @@ export class MetarTafRecentComponent  implements OnInit {
       this.selectedOption11 = option;
       this.isDropdownOpen5 = false;
     }
-    
   }
 
   selectDropdown(dropdown: string) {
@@ -106,19 +104,16 @@ export class MetarTafRecentComponent  implements OnInit {
       this.isDropdownOpen6 = false;
       this.isDropdownOpen7 = false;
       this.isDropdownOpen11 = false;
-    
     }
     if (dropdown === 'dropdown6') {
       this.isDropdownOpen6 = !this.isDropdownOpen6;
       this.isDropdownOpen5 = false;
       this.isDropdownOpen7 = false;
-    
     }
     if (dropdown === 'dropdown7') {
       this.isDropdownOpen7 = !this.isDropdownOpen7;
       this.isDropdownOpen6 = false;
       this.isDropdownOpen5 = false;
-    
     }
     if (dropdown === 'dropdown11') {
       this.isDropdownOpen11 = !this.isDropdownOpen11;
@@ -134,21 +129,19 @@ export class MetarTafRecentComponent  implements OnInit {
     console.log('Folder Name:', folderName);
     this.isLoading = true;
 
-  
-        this.isLoading = false;
+    this.isLoading = false;
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { item };
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
 
-        const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-    
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
   }
 }

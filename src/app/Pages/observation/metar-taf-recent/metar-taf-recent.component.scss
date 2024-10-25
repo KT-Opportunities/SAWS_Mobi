@@ -1080,7 +1080,7 @@
 
 .text-block {
   color: #fff;
-  margin-top: -17px;
+  //margin-top: -17px;
   font-family: Montserrat, sans-serif;
 }
 #icon2 {
@@ -1233,7 +1233,7 @@
 
 .text-block-2 {
   color: #fff;
-  margin-top: 5px;
+  // margin-top: 5px;
 }
 
 .text-field-copy {
@@ -2001,8 +2001,9 @@
 }
 .ObservScrol {
   /* Set the width of the container as needed */
-  width: 341px; /* Example width */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  width: 100vw; /* Example width */
+  overflow-x: auto; /* Hide horizontal scrollbar */
+  height: 100vh;
 }
 
 .vertical-scroll-container {
@@ -2225,6 +2226,7 @@
     sans-serif;
   font-weight: 600;
   line-height: 18px;
+  width: 13vw;
 }
 
 .div-block-406 {
@@ -2579,6 +2581,9 @@
 }
 
 @media screen and (min-width: 1280px) {
+  .grid-24 {
+    margin-left: 34%;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -2586,12 +2591,18 @@
     padding-top: 60px;
     padding-bottom: 60px;
   }
+  .grid-24 {
+    margin-left: 34%;
+  }
 }
 
 @media screen and (min-width: 1920px) {
   .paragraph-12 {
     font-size: 20px;
     line-height: 30px;
+    .grid-24 {
+      margin-left: 34%;
+    }
   }
 
   .heading-name {
@@ -2623,7 +2634,7 @@
     left: 0%;
     right: 0%;
   }
-
+  // .grid-24{margin-left: 34%}
   .image {
     height: auto;
     margin-top: 0;
@@ -2958,7 +2969,7 @@
   .image {
     margin-top: 0;
   }
-
+  //.grid-24{margin-left: 34%}
   .div-block-2 {
     height: auto;
     margin-top: 0;
@@ -5625,7 +5636,82 @@
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
+.div-block-15 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto; /* Adjust if needed */
+  height: auto; /* Adjust if needed */
+}
+/* To center all contents inside the ion-content */
+ion-content {
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
+  height: 100%; /* Full height for proper vertical alignment */
+  padding: 1rem;
+}
 
+/* Optional for further specific alignment */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  width: 100%;
+  max-width: 1200px; /* Adjust to your needs */
+}
+
+/* Center the specific div */
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* Optional for minimum height */
+  width: 100%;
+  background-color: #f0f0f0; /* Optional for visibility */
+}
+/* Dropdown container */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 95%;
+  cursor: pointer;
+}
+
+/* Dropdown toggle with text and arrow */
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1; /* Same color */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Arrow icon */
+.dropdown-arrow {
+  font-size: 1.2em;
+  color: #fff; /* Arrow color */
+}
+
+/* Dropdown list */
+.dropdown-list1 {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 100;
+  max-height: 40vh;
+  overflow-y: auto;
+  display: block;
+  background-color: linear-gradient(#00386c, #00386c);
+  margin-left: 2px;
+  margin-top: 33px;
+}
 .dropdown-item:hover {
   background-color: #eee;
 }
@@ -5672,4 +5758,86 @@
   text-align: center; /* Center all inline elements */
   padding-left: 10px;
   align-items: center;
+}
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  width: 100%;
+}
+
+app-package-content,
+app-package-header,
+app-package-sub-header,
+app-package-list-items,
+.image-container,
+.form-block,
+.div-block-41 {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.div-block-14 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns children (h5 and form) to the left */
+}
+
+.heading-9 {
+  margin: 0 0 8px 0; /* Adds some spacing below the heading */
+}
+
+.search {
+  width: 100%; /* Ensures the form takes up the full width */
+}
+
+.search-input {
+  width: calc(
+    100% - 80px
+  ); /* Adjust width if you want input and button on the same row */
+  margin-right: 8px; /* Spacing between input and button */
+}
+
+.search-button {
+  width: 72px;
+}
+.w-input {
+  margin-bottom: -9px;
+}
+/* Add space below buttons */
+.submit-button-3-copy,
+.submit-button-3 {
+  margin-bottom: 16px; /* Adjust the spacing as needed */
+}
+
+/* Add space above dropdown */
+.dropdown-container {
+  margin-top: 16px; /* Adjust the spacing as needed */
+}
+.dropdown-container,
+.search {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input,
+.search-button,
+.dropdown-toggle {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.search-input {
+  width: 80%;
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  width: 20%;
+  max-width: 20%;
+  box-sizing: border-box;
 }
