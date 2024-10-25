@@ -1,0 +1,16 @@
+@media screen and (max-width: 800px) {
+
+    .text-field-blue {
+        width: 53em;
+        height: 32px;
+        color: #fff;
+        background-image: linear-gradient(#00386c, #00386c);
+        border-radius: 5px;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 4px 10px;
+        font-family: Open Sans, sans-serif;
+        display: block;
+        box-shadow: 0 2px 5px #00386c;
+      }
+}
