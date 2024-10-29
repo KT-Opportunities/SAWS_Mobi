@@ -283,8 +283,8 @@
 
 .div-block-15 {
   border: 1px #000;
-  margin-left: 10px;
-  margin-right: 10px;
+  // margin-left: 10px;
+  // margin-right: 10px;
 }
 #block-15 {
   margin-top: 2px !important;
@@ -822,15 +822,15 @@
 }
 
 .div-block-32 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-top: 10px;
+  // margin-bottom: 10px;
 }
 
 .heading-text {
   background-color: #bfcdda;
   border-radius: 10px;
   grid-template-rows: auto;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px 0 20px;
@@ -2742,8 +2742,8 @@
   }
 
   .div-block-15 {
-    margin-left: 47px;
-    margin-right: 47px;
+    // margin-left: 47px;
+    // margin-right: 47px;
   }
 
   .paragraph-2 {
@@ -3085,8 +3085,8 @@
   }
 
   .div-block-15 {
-    margin-left: 10px;
-    margin-right: 10px;
+    // margin-left: 10px;
+    // margin-right: 10px;
   }
 
   .aviationhome {
@@ -3762,8 +3762,8 @@
   }
 
   .div-block-15 {
-    margin-left: 0;
-    margin-right: 0;
+    // margin-left: 0;
+    // margin-right: 0;
   }
 
   .view-decoded {
@@ -5624,4 +5624,121 @@
   #w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+}
+.search-input,
+.search-button,
+.dropdown-toggle {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.search-input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  width: 20%;
+  max-width: 20%;
+  box-sizing: border-box;
+}
+.w-input {
+  margin-bottom: -9px;
+}
+ion-content,
+.dropdown-container,
+.form-block,
+.div-block-15,
+.search {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding does not affect total width */
+}
+
+ion-content {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding does not affect width */
+}
+
+ion-content * {
+  width: 100%;
+}
+.grid-cct-copy,
+.div-block-14-copy,
+.div-block-15 {
+  width: 100%;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+}
+
+.search-input {
+  width: 80%; /* Adjust input field width as needed */
+}
+
+.search-button {
+  width: 20%; /* Adjust button width as needed */
+}
+.heading-text {
+  display: grid;
+  grid-template-columns: 80% 30%;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.grid-18 {
+  display: grid;
+  grid-template-columns: 30% 80%;
+  gap: 10px; /* Adjust the gap as needed */
+  justify-content: center;
+  max-width: 100%; /* Ensures it doesn't exceed screen width */
+  margin: 0 auto; /* Centers the grid on the page */
+  border-radius: 5px;
+}
+.heading-text {
+  display: grid;
+  grid-template-columns: 80% 20%; /* Adjust column sizes as needed */
+  gap: 10px;
+  overflow: hidden; /* Prevents content from going outside the container */
+}
+
+.button-2-copy {
+  white-space: nowrap; /* Prevents text overflow within the button */
+  overflow: hidden;
+  flex-shrink: 0; /* Prevents the button from shrinking */
+  text-align: center;
+}
+#Normal,
+#style {
+  text-align: center;
+}
+.heading-text {
+  display: flex;
+  align-items: center;
+}
+
+.cct-copy-copy {
+  flex-basis: 95%;
+}
+.heading-text {
+  display: flex;
+  align-items: center;
+}
+
+.cct-copy-copy {
+  flex: 1 1 80%; /* Allows content to take 80% */
+
+  white-space: normal; /* Allows content to wrap instead of truncating */
+  overflow: visible;
+}
+
+.cct-copy {
+  flex: 0 0 20%; /* Button takes up exactly 20% */
+  display: flex;
+  justify-content: center;
+}
+
+.button-2-copy {
+  white-space: nowrap; /* Prevents text from wrapping in the button */
 }

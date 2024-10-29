@@ -7,9 +7,7 @@
       Meteorological Aerodrome Report
     </app-package-header>
 
-    <app-package-sub-header></app-package-sub-header>
-
-    <app-package-list-items>
+    <app-package-sub-header>
       <div
         id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
         class="w-layout-grid grid-cct-copy"
@@ -18,48 +16,40 @@
           id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
           class="cct"
         >
-          <h1 class="heading-7">Date :</h1>
+          <h1 class="heading-7">Date:</h1>
           <h1 class="heading-8">2024 - 01 - 22</h1>
         </div>
         <div
           id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
           class="cct"
         >
-          <h1 class="heading-7">Time :</h1>
+          <h1 class="heading-7">Time:</h1>
           <h1 class="heading-8">13:15:45</h1>
         </div>
       </div>
+    </app-package-sub-header>
 
+    <app-package-list-items>
       <div
         id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea"
         class="div-block-14-copy"
       >
-        <div>
-          <h5 class="heading-9">Query TAFs</h5>
-          <form
-            action="/search"
-            style="width: 80vw !important"
-            (ngSubmit)="onSearch($event)"
-            class="search w-form"
-          >
-            <input
-              class="search-input w-input"
-              [(ngModel)]="searchQuery"
-              maxlength="256"
-              name="query"
-              placeholder="Search…"
-              type="search"
-              id="search"
-              required=""
-            />
-            <input
-              type="submit"
-              (click)="onSearch($event)"
-              class="search-button w-button"
-              value="Search"
-            />
-          </form>
-        </div>
+        <h5 class="heading-9">Query TAFs</h5>
+        <form action="/search" class="search w-form">
+          <input
+            class="search-input w-input"
+            maxlength="256"
+            name="query"
+            placeholder="Search…"
+            type="search"
+            id="search"
+            required=""
+          /><input
+            type="submit"
+            class="search-button w-button"
+            value="Search"
+          />
+        </form>
       </div>
 
       <div
@@ -84,35 +74,24 @@
             </div>
           </div>
         </div>
-        <div>
+
+        <div
+          class="w-layout-grid heading-text"
+          *ngFor="let report of filteredmetarReports"
+        >
           <div
-            class="w-layout-grid heading-text"
-            *ngFor="let report of filteredmetarReports"
+            id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea"
+            class="cct-copy-copy"
           >
-            <div
-              id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea"
-              class="cct-copy-copy"
-            >
-              <h1 class="heading-21">{{ report.filecontent }}</h1>
-            </div>
-            <div
-              id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea"
-              class="cct-copy"
-            >
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">
-                View Decoded
-              </div>
-            </div>
+            <h1 class="heading-21">{{ report.filecontent }}</h1>
           </div>
-          <div class="w-layout-grid grid-18">
-            <div
-              id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a16-5aa24fea"
-              class="div-block-16"
-            ></div>
-            <div
-              id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a22-5aa24fea"
-              class="div-block-17"
-            ></div>
+          <div
+            id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea"
+            class="cct-copy"
+          >
+            <div class="button-2-copy w-button" (click)="ImageViewer(item)">
+              View Decoded
+            </div>
           </div>
         </div>
         <div></div>

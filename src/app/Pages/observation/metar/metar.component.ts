@@ -25,6 +25,8 @@ export class MetarComponent implements OnInit {
   metarData: Metar[] = [];
   searchQuery: string = '';
 
+  currentDate: string | undefined;
+  currentTime: string | undefined;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -36,6 +38,7 @@ export class MetarComponent implements OnInit {
 
   ngOnInit() {
     this.fetchMetarReports();
+    
   }
 
   NavigateToObservation() {
