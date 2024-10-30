@@ -7,7 +7,9 @@
       Meteorological Aerodrome Report
     </app-package-header>
 
-    <app-package-sub-header>
+    <app-package-sub-header></app-package-sub-header>
+
+    <app-package-list-items>
       <div
         id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
         class="w-layout-grid grid-cct-copy"
@@ -16,20 +18,18 @@
           id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
           class="cct"
         >
-          <h1 class="heading-7">Date:</h1>
+          <h1 class="heading-7">Date :</h1>
           <h1 class="heading-8">2024 - 01 - 22</h1>
         </div>
         <div
           id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
           class="cct"
         >
-          <h1 class="heading-7">Time:</h1>
+          <h1 class="heading-7">Time :</h1>
           <h1 class="heading-8">13:15:45</h1>
         </div>
       </div>
-    </app-package-sub-header>
 
-    <app-package-list-items>
       <div
         id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea"
         class="div-block-14-copy"
@@ -55,6 +55,7 @@
       <div
         id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea"
         class="div-block-15"
+        *ngFor="let report of filteredmetarReports"
       >
         <div class="div-block-32">
           <div class="w-layout-grid ccta-grid">
@@ -75,10 +76,7 @@
           </div>
         </div>
 
-        <div
-          class="w-layout-grid heading-text"
-          *ngFor="let report of filteredmetarReports"
-        >
+        <div class="w-layout-grid heading-text">
           <div
             id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea"
             class="cct-copy-copy"

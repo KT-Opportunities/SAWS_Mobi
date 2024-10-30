@@ -11,6 +11,11 @@
     font-family: Montserrat, sans-serif;
     font-weight: bold;
   }
+  .search-button {
+    margin-top: 6px;
+    margin-bottom: 0;
+    margin-left: 54px;
+  }
 }
 .footerdiv {
   padding-top: 0;
@@ -227,9 +232,6 @@
   background-position: 0%;
   background-repeat: repeat-y;
   background-size: 0;
-  border-radius: 10px;
-  margin-top: -9px;
-  margin-left: -15px;
 }
 
 .search-input {
@@ -239,6 +241,7 @@
   margin-left: 0;
   margin-right: 0;
   font-family: Montserrat, sans-serif;
+  margin-right: -130px;
 }
 
 .heading-9 {
@@ -3552,8 +3555,9 @@
   }
 
   .search-button {
-    margin-top: 0;
+    margin-top: 6px;
     margin-bottom: 0;
+    margin-left: 54px;
   }
 
   .heading-9 {
@@ -5586,7 +5590,7 @@ app-package-list-items,
   width: calc(
     100% - 80px
   ); /* Adjust width if you want input and button on the same row */
-  margin-right: 8px; /* Spacing between input and button */
+  margin-right: -130px; /* Spacing between input and button */
 }
 
 .search-button {
@@ -5642,4 +5646,25 @@ ion-content,
 .text-field,
 .search-input {
   width: 100%; /* Ensure full width for inputs and dropdown */
+}
+.search {
+  display: flex;
+  width: 100%;
+  // align-items: center;
+}
+
+.search-input {
+  // flex: 0 1 80%; /* 80% width for input */
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.search-button {
+  flex: 0 1 20%; /* 20% width for button */
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-left: auto;
 }

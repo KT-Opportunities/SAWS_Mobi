@@ -5742,3 +5742,15 @@ ion-content * {
 .button-2-copy {
   white-space: nowrap; /* Prevents text from wrapping in the button */
 }
+.w-button {
+  height: 40px;
+}
+#layout,
+.ObservScrol,
+.grid-6 {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: column; /* Stack items vertically */
+  text-align: center;
+}

@@ -26,6 +26,36 @@ export class MetarColorCodedComponent implements OnInit {
   filteredReports: MetarReport[] = [];
   searchQuery: string = '';
 
+
+  selectedProvince: string = 'Gauteng'; // Default selected province
+
+  airportProvinceMapping: { [key: string]: string } = {
+    FAOR: 'Gauteng', FALA: 'Gauteng', FAJB: 'Gauteng', FAIR: 'Gauteng', FAWB: 'Gauteng',
+    FAWK: 'Gauteng', FAGC: 'Gauteng', FAGM: 'Gauteng', FASI: 'Gauteng', FAVV: 'Gauteng',
+    FAPP: 'Limpopo', FALM: 'Limpopo', FAHS: 'Limpopo', FATH: 'Limpopo', FATV: 'Limpopo',
+    FAER: 'Limpopo', FATZ: 'Limpopo', FATI: 'Limpopo', FAVM: 'Limpopo', FAKN: 'Mpumalanga',
+    FANS: 'Mpumalanga', FAEO: 'Mpumalanga', FASR: 'Mpumalanga', FAWI: 'Mpumalanga', FAKP: 'Mpumalanga',
+    FASZ: 'Mpumalanga', FAMM: 'Northwest Province', FALI: 'Northwest Province', FAKD: 'Northwest Province',
+    FARG: 'Northwest Province', FAPN: 'Northwest Province', FAPS: 'Northwest Province', FAMK: 'Northwest Province',
+    FACT: 'Western Cape', FAGG: 'Western Cape', FALW: 'Western Cape', FAOB: 'Western Cape', FABY: 'Western Cape',
+    FAPG: 'Western Cape', FAYP: 'Western Cape', FAOH: 'Western Cape', FAPE: 'Eastern Cape', FAEL: 'Eastern Cape',
+    FAUT: 'Eastern Cape', FABE: 'Eastern Cape', FALE: 'KwaZulu Natal', FAPM: 'KwaZulu Natal', FARB: 'KwaZulu Natal',
+    FAMG: 'KwaZulu Natal', FAVG: 'KwaZulu Natal', FAGY: 'KwaZulu Natal', FAUL: 'KwaZulu Natal', FALY: 'KwaZulu Natal',
+    FANC: 'KwaZulu Natal', FAMX: 'KwaZulu Natal', FABL: 'Freestate', FABM: 'Freestate', FAWM: 'Freestate',
+    FAHV: 'Freestate', FAKS: 'Freestate', FAFB: 'Freestate', FAUP: 'Northern Cape', FAKM: 'Northern Cape',
+    FADY: 'Northern Cape', FACV: 'Northern Cape', FASB: 'Northern Cape', FAAB: 'Northern Cape', FASS: 'Northern Cape',
+    FDMS: 'Swaziland', FDSK: 'Swaziland', FXMM: 'Lesotho', FBSK: 'Botswana', FBMN: 'Botswana', FBFT: 'Botswana',
+    FBGZ: 'Botswana', FBJW: 'Botswana', FBKE: 'Botswana', FBMP: 'Botswana', FBPA: 'Botswana', FBTE: 'Botswana',
+    FBTS: 'Botswana', FBSN: 'Botswana', FBSP: 'Botswana', FBSW: 'Botswana', FBLT: 'Botswana', FYWH: 'Namibia',
+    FYWW: 'Namibia', FYWE: 'Namibia', FYKM: 'Namibia', FYKT: 'Namibia', FYWB: 'Namibia', FYGF: 'Namibia',
+    FYLZ: 'Namibia', FYOA: 'Namibia', FYOG: 'Namibia', FYRU: 'Namibia', FQMA: 'Mozambique', FQBR: 'Mozambique',
+    FQNP: 'Mozambique', FQIN: 'Mozambique', FQLC: 'Mozambique', FQPB: 'Mozambique', FQQL: 'Mozambique',
+    FQTE: 'Mozambique', FQTT: 'Mozambique', FQVL: 'Mozambique', FVRG: 'Zimbabwe', FVJN: 'Zimbabwe', FVKB: 'Zimbabwe',
+    FVFA: 'Zimbabwe', FVCZ: 'Zimbabwe', FVTL: 'Zimbabwe', FVWN: 'Zimbabwe', FWKI: 'Other Regions', FWCL: 'Other Regions',
+    FLKK: 'Other Regions', FLSK: 'Other Regions', FNLU: 'Other Regions', FLHN: 'Other Regions', FLND: 'Other Regions',
+    FAME: 'Other Stations'
+  };
+  
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -38,7 +68,11 @@ export class MetarColorCodedComponent implements OnInit {
   ngOnInit() {
     this.fetchMetarReports();
   }
-
+  getFilteredReports() {
+    // return this.metarReports.filter(
+    //   // report => this.airportProvinceMapping[report.airportCode] === this.selectedProvince
+    // );
+  }
   navigateToObservation(): void {
     this.router.navigate(['/observation']);
   }

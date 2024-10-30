@@ -54,42 +54,44 @@
                 required=""
               />
             </div>
-            <label for="" class="field-label">select template:</label>
-            <div
-              class="dropdown-container"
-              (click)="selectDropdown('dropdown6')"
-            >
-              <div class="dropdown-toggle">
-                <div class="text-block">{{ selectedOption6 }}</div>
-                <div class="dropdown-arrow">
-                  <img
-                    src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
-                    loading="lazy"
-                    alt=""
-                  />
+            <div>
+              <div
+                class="dropdown-container"
+                (click)="selectDropdown('dropdown6')"
+              >
+                <label for="" class="field-label">select template:</label>
+                <div class="dropdown-toggle">
+                  <div class="text-block">{{ selectedOption6 }}</div>
+                  <div class="dropdown-arrow">
+                    <img
+                      src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                      loading="lazy"
+                      alt=""
+                    />
+                  </div>
+                  <!-- Arrow icon -->
                 </div>
-                <!-- Arrow icon -->
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
+                  <div
+                    class="w-dropdown-link"
+                    (click)="selectOption('', 'dropdown6')"
+                  >
+                    Link 1
+                  </div>
+                  <div
+                    class="w-dropdown-link"
+                    (click)="selectOption('', 'dropdown6')"
+                  >
+                    Link 2
+                  </div>
+                  <div
+                    class="w-dropdown-link"
+                    (click)="selectOption('', 'dropdown6')"
+                  >
+                    Link 3
+                  </div>
+                </nav>
               </div>
-              <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown6')"
-                >
-                  Link 1
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown6')"
-                >
-                  Link 2
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown6')"
-                >
-                  Link 3
-                </div>
-              </nav>
             </div>
             <div style="margin-top: 5px">
               <div class="div-block-39">
@@ -105,10 +107,7 @@
                   value="Cancel"
                 />
               </div>
-              <div
-                id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649"
-                class="div-block-14"
-              >
+              <div class="div-block-14">
                 <h5 class="heading-9">Query TAFs</h5>
                 <form action="/search" class="search w-form">
                   <input
@@ -119,13 +118,15 @@
                     type="search"
                     id="search"
                     required=""
-                  /><input
+                  />
+                  <input
                     type="submit"
                     class="search-button w-button"
                     value="Search"
                   />
                 </form>
               </div>
+
               <!-- <h4 class="heading-45">Successfully added a template</h4> -->
             </div>
           </div>

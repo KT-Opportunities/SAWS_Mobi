@@ -267,7 +267,7 @@
   background-color: rgba(0, 56, 108, 0.25);
   border-radius: 10px;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: -11px;
   font-family: Montserrat, sans-serif;
 }
 
@@ -2421,8 +2421,8 @@
   grid-template-rows: auto auto auto;
   grid-template-columns: 1fr;
   margin-bottom: 10px;
-  margin-left: 0;
-  margin-right: 0;
+  // margin-left: 0;
+  // margin-right: 0;
 }
 
 .webcmas-grid2 {
@@ -3483,8 +3483,10 @@
 
   .webcams-grid,
   .other-webcams {
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100%;
+    align-items: center;
+    // margin-left: 10px;
+    // margin-right: 10px;
   }
 
   .aerosport {
@@ -5624,4 +5626,162 @@
   #w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+}
+.search-input,
+.search-button,
+.dropdown-toggle {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.search-input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  width: 20%;
+  max-width: 20%;
+  box-sizing: border-box;
+}
+.w-input {
+  margin-bottom: -2px;
+}
+ion-content,
+.dropdown-container,
+.form-block,
+.div-block-15,
+.search {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding does not affect total width */
+}
+
+ion-content {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding does not affect width */
+}
+
+ion-content * {
+  width: 100%;
+}
+.grid-cct-copy,
+.div-block-14-copy,
+.div-block-15 {
+  width: 100%;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+}
+
+.search-input {
+  width: 80%; /* Adjust input field width as needed */
+}
+
+.search-buttons {
+  width: 20%; /* Adjust button width as needed */
+}
+.heading-text {
+  display: grid;
+  grid-template-columns: 80% 30%;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.grid-18 {
+  display: grid;
+  grid-template-columns: 30% 80%;
+  gap: 10px; /* Adjust the gap as needed */
+  justify-content: center;
+  max-width: 100%; /* Ensures it doesn't exceed screen width */
+  margin: 0 auto; /* Centers the grid on the page */
+  border-radius: 5px;
+}
+.heading-text {
+  display: grid;
+  grid-template-columns: 80% 20%; /* Adjust column sizes as needed */
+  gap: 10px;
+  overflow: hidden; /* Prevents content from going outside the container */
+}
+
+.button-2-copy {
+  white-space: nowrap; /* Prevents text overflow within the button */
+  overflow: hidden;
+  flex-shrink: 0; /* Prevents the button from shrinking */
+  text-align: center;
+}
+#Normal,
+#style {
+  text-align: center;
+}
+.heading-text {
+  display: flex;
+  align-items: center;
+}
+
+.cct-copy-copy {
+  flex-basis: 95%;
+}
+.heading-text {
+  display: flex;
+  align-items: center;
+}
+
+.cct-copy-copy {
+  flex: 1 1 80%; /* Allows content to take 80% */
+
+  white-space: normal; /* Allows content to wrap instead of truncating */
+  overflow: visible;
+}
+
+.cct-copy {
+  flex: 0 0 20%; /* Button takes up exactly 20% */
+  display: flex;
+  justify-content: center;
+}
+
+.button-2-copy {
+  white-space: nowrap; /* Prevents text from wrapping in the button */
+}
+.w-button {
+  height: 40px;
+}
+ion-content {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  text-align: center; /* Centers text content */
+}
+
+#layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; /* Adjust max-width as needed */
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+}
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; /* Adjust the max-width if needed */
+  gap: 8px; /* Adds a bit of spacing between input and button */
+}
+
+.search-input {
+  flex: 8; /* 80% width */
+}
+
+.search-buttons {
+  flex: 2; /* 20% width */
 }
