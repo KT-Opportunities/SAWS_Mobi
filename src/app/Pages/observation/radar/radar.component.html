@@ -26,54 +26,54 @@
             data-wf-page-id="65ef0e606bbd1609bb9b1d15"
             data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
           >
-            <div>
-              <div
-                data-hover="false"
-                data-delay="0"
-                class="text-field-blue w-dropdown"
-                (click)="radarDropdownOpen()"
-              >
-                <div class="w-dropdown-toggle">
-                  <div class="icon-2 w-icon-dropdown-toggle"></div>
-                  <div class="text-block">{{ selectedOption }}</div>
+            <div class="dropdown-container" (click)="radarDropdownOpen()">
+              <div class="dropdown-toggle">
+                <div class="text-block">{{ selectedOption }}</div>
+                <div class="dropdown-arrow">
+                  <img
+                    src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                    loading="lazy"
+                    alt=""
+                  />
                 </div>
-                <nav class="dropdown-list1" *ngIf="isDropdownOpen">
-                  <div
-                    class="w-dropdown-link"
-                    (click)="
-                      selectOption('.gif', 'dropdown1', 'Individual image')
-                    "
-                  >
-                    Individual image
-                  </div>
-
-                  <div
-                    class="w-dropdown-link"
-                    (click)="
-                      selectOption(
-                        '50.gif',
-                        'dropdown2',
-                        'Individual 50km Images'
-                      )
-                    "
-                  >
-                    Individual 50km Images
-                  </div>
-
-                  <div
-                    class="w-dropdown-link"
-                    (click)="
-                      selectOption(
-                        '75.gif',
-                        'dropdown3',
-                        'Individual 75km Images'
-                      )
-                    "
-                  >
-                    Individual 75km Images
-                  </div>
-                </nav>
+                <!-- Arrow icon -->
               </div>
+              <nav class="dropdown-list1" *ngIf="isDropdownOpen">
+                <div
+                  class="w-dropdown-link"
+                  (click)="
+                    selectOption('.gif', 'dropdown1', 'Individual image')
+                  "
+                >
+                  Individual image
+                </div>
+
+                <div
+                  class="w-dropdown-link"
+                  (click)="
+                    selectOption(
+                      '50.gif',
+                      'dropdown2',
+                      'Individual 50km Images'
+                    )
+                  "
+                >
+                  Individual 50km Images
+                </div>
+
+                <div
+                  class="w-dropdown-link"
+                  (click)="
+                    selectOption(
+                      '75.gif',
+                      'dropdown3',
+                      'Individual 75km Images'
+                    )
+                  "
+                >
+                  Individual 75km Images
+                </div>
+              </nav>
             </div>
           </div>
           <div class="w-form-done">
