@@ -170,6 +170,29 @@
 
 }
 
+[class^="w-icon-"],
+[class*=" w-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "webflow-icons" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+#icon3{
+  padding-right: 0px;
+  margin-top: 5px !important;
+  position: absolute;
+  margin-left: 80vw !important;
+}
+
 .paragraph-11 {
   font-family: Montserrat, sans-serif;
 }
@@ -5040,7 +5063,10 @@
 }
 
 @media screen and (max-width: 991px) {
-
+#hed29{
+  position: relative;
+  top: 124px;
+}
   #w-node-f1c778ee-c811-ecc1-ff28-ed39c451c414-871273fb,
   #w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb,
   #w-node-f2fdc661-12f8-3e0c-2870-5daeb4d3de5e-871273fb,
@@ -5069,6 +5095,10 @@
 }
 
 @media screen and (max-width: 479px) {
+  #hed29 {
+    position: relative;
+    top: 0px;
+  }
 
   #w-node-_98a40e1d-dd8c-3085-b8fc-2c6e0851cc2f-847dc521,
   #w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea,
