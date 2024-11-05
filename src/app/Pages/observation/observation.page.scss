@@ -2446,6 +2446,7 @@
 ._3-rows-grid {
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
+  padding: 6px;
 }
 
 .div-block-456 {
@@ -5622,3 +5623,31 @@
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
+.button-2-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.button-2-copy[_ngcontent-ng-c482163497] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+  .button-2-copy {
+    background-color: #00386c;
+    margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 10px;
+    width: 100px;
+    width: 100px;
+    padding-bottom: 10px;
+    padding-top: 4px;
+    height: 4vh;
+    border-radius: 5px;
+  }
