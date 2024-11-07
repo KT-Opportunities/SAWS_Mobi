@@ -3,113 +3,115 @@
 
   <div id="top"></div>
   <app-package-content>
-    <app-package-header class="package-header">
+    <app-package-header>
       Current METAR/SYNOP temperatures and weather
     </app-package-header>
 
     <app-package-sub-header></app-package-sub-header>
 
-  
+    <div class="aerosport">
+      <div class="div-block-464">
+        <div class="image-container">
+          <div
+            class="w-layout-grid metar-history-grid"
+            style="margin-right: 18px; margin-top: 12px"
+          >
+            <div class="div-block-15"></div>
 
-    <app-package-list-items>
-      <div class="w-layout-grid metar-history-grid">
-        <div
-          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db26-7830bece"
-          class="div-block-15"
-        >
-          <div class="div-block-14"></div>
-        </div>
-        <div
-          id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db28-7830bece"
-          class="form-block w-form"
-        >
-          <div class="w-form">
-            <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
+            <!-- Updated Dropdown with Arrows -->
+            <div class="form-block w-form">
               <label for="" class="field-label">Last Updated:</label>
-            </div>
-            <div>
-              <form
-                id="email-form-3"
-                name="email-form-3"
-                data-name="Email Form 3"
-                method="get"
-                class="form-3"
-                data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-                data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
+              <div
+                class="dropdown-container"
+                (click)="sateliteDropdownFrameOpen()"
               >
-                <div>
+                <div class="dropdown-toggle">
+                  <div class="text-block">
+                    {{ formatTimestamp(selectedOptionFrame) }}
+                  </div>
+                  <div class="dropdown-arrow">
+                    <img
+                      src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                      loading="lazy"
+                      alt=""
+                    />
+                  </div>
+                  <!-- Arrow icon -->
+                </div>
+                <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
                   <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown8')"
-                    style="z-index: 1000; position: relative"
+                    *ngFor="let item of frameArray"
+                    class="dropdown-item"
+                    (click)="
+                      selectDropdownFrame(item.lastmodified, item.filename)
+                    "
                   >
-                    <div class="w-dropdown-toggle">
+                    {{ formatTimestamp(item.lastmodified) }}
+                  </div>
+                </nav>
+              </div>
+            </div>
+
+            <!-- Image slider section -->
+            <div class="div-block-15" *ngIf="!loading">
+              <div>
+                <div class="small-m" scroll="false">
+                  <div class="rows-wrap">
+                    <div
+                      data-delay="4000"
+                      data-animation="slide"
+                      class="slider-2 w-slider"
+                      data-autoplay="false"
+                      data-easing="ease"
+                      data-hide-arrows="false"
+                      data-disable-swipe="false"
+                      data-autoplay-limit="0"
+                      data-nav-spacing="3"
+                      data-duration="500"
+                      data-infinite="true"
+                    >
+                      <swiper [config]="config" class="image-container">
+                        <img
+                          tappable
+                          (click)="ImageViewer(fileBaseUrl)"
+                          [src]="fileBaseUrl"
+                          loading="lazy"
+                          alt="No Image"
+                          class="responsive-image"
+                          width="100%"
+                          height="100%"
+                        />
+                      </swiper>
                       <div
-                        class="icon-2 w-icon-dropdown-toggle"
-                        id="icon2"
-                      ></div>
-                      <div class="text-block">{{ selectedOption8 }}</div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('', 'dropdown8')"
+                        class="w-slider-arrow-left"
+                        style="color: #fff"
+                        (click)="previousImage()"
                       >
-                        2024-03-20 13:15
+                        <div
+                          class="w-icon-slider-left"
+                          style="color: #fff"
+                        ></div>
                       </div>
-                    </nav>
+                      <div
+                        class="w-slider-arrow-right"
+                        style="color: #fff"
+                        (click)="nextImage()"
+                      >
+                        <div
+                          class="w-icon-slider-right"
+                          style="color: #fff"
+                        ></div>
+                      </div>
+                      <div class="w-slider-nav w-round w-num"></div>
+                    </div>
                   </div>
                 </div>
-              </form>
-            </div>
-
-            <div></div>
-
-            <div class="w-form-done">
-              <div></div>
-            </div>
-            <div class="w-form-fail">
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="div-block-15">
-        <div>
-          <div class="">
-            <div class="rows-wrap">
-              <div
-                data-delay="4000"
-                data-animation="slide"
-                class="slider-2 w-slider"
-                data-autoplay="false"
-                data-easing="ease"
-                data-hide-arrows="false"
-                data-disable-swipe="false"
-                data-autoplay-limit="0"
-                data-nav-spacing="3"
-                data-duration="500"
-                data-infinite="true"
-              >
-                <div class="w-slider-mask">
-                  <div class="w-slide"></div>
-                  <div class="w-slide"></div>
-                </div>
-                <div class="w-slider-arrow-left">
-                  <div class="w-icon-slider-left"></div>
-                </div>
-                <div class="w-slider-arrow-right">
-                  <div class="w-icon-slider-right"></div>
-                </div>
-                <div class="w-slider-nav w-round w-num"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </app-package-list-items>
+    </div>
   </app-package-content>
 </ion-content>
 

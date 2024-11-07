@@ -1,169 +1,280 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
+import { SwiperOptions } from 'swiper/types';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-weather-map',
   templateUrl: './weather-map.component.html',
-  styleUrls: ['./../observation.page.scss'],
+  styleUrls: ['./weather-map.component.scss'],
 })
-export class WeatherMapComponent  implements OnInit {
-
+export class WeatherMapComponent implements OnInit {
   isLogged: boolean = false;
+  frameArray: any = [];
+
+  isDropdownProductOpen: boolean = false;
+  isDropdownFrameOpen: boolean = false;
+
+  selectedOptionProduct: string = 'IR108_RSA';
+  selectedOptionFrame: string = '';
   loading: boolean = false;
 
-  isDropdownOpen1: boolean = false;
-  isDropdownOpen2: boolean = false;
-  isDropdownOpen3: boolean = false;
-  isDropdownOpen4: boolean = false;
-  isDropdownOpen5: boolean = false;
-  isDropdownOpen6: boolean = false;
-  isDropdownOpen7: boolean = false;
-  isDropdownOpen8: boolean = false;
-  isDropdownOpen11: boolean = false;
-  isDropdownOpen: boolean = false;
-  selectedOption1: string = 'Animation Type';
-  selectedOption2: string = '2024-03-20 13:15';
-  selectedOption3: string = 'FAVV';
-  selectedOption11: string = 'Select Plot meteogram';
-  selectedOption5: string = 'Select saved Template';
-  selectedOption6: string = 'Last Hour';
-  selectedOption7: string = '5 Min';
-  selectedOption8: string = '2024-03-20 13:15';
+  fileBaseUrl: SafeResourceUrl | undefined;
+  currentIndex: number = 0;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private apiService: APIService,
-    private sanitizer: DomSanitizer
+    private APIService: APIService,
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController,
+    private toastController: ToastController
+  ) {}
 
-   ) { }
+  config: SwiperOptions = {
+    zoom: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+  };
+  async presentForecastToast() {
+    const toast = await this.toastController.create({
+      message: 'Tap the image to zoom in',
+      duration: 3000,
+      position: 'top',
+      icon: 'information-circle', // Change the icon to the information icon
+      cssClass: 'custom-toast', // Custom class for the toast
+      buttons: [
+        {
+          side: 'end',
+          text: 'Close',
+          role: 'cancel',
+        },
+      ],
+    });
 
-  ngOnInit() {}
+    // Apply custom styles directly to the toast
+    toast.classList.add('custom-toast');
+
+    // Set styles directly
+    const styles = `
+      ion-toast.custom-toast {
+        --background: #28a745; /* Green background */
+        --color: #ffffff; /* White text */
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+      }
+      ion-toast.custom-toast::part(message) {
+        font-style: italic;
+        color: #ffffff; /* White message text */
+      }
+      ion-toast.custom-toast::part(icon) {
+        color: #ffffff; /* White icon */
+      }
+      ion-toast.custom-toast::part(button) {
+        border-left: 1px solid #d2d2d2;
+        color: #ffffff; /* White button text */
+        font-size: 12px;
+      }
+    `;
+
+    // Create a style element and append it to the document
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = styles;
+    document.head.appendChild(styleElement);
+
+    await toast.present();
+  }
+  ngOnInit() {
+    this.loading = true;
+    this.frameArray = [
+      { filename: 'dummy-image-1.jpg', lastmodified: new Date().toISOString() },
+      { filename: 'dummy-image-2.jpg', lastmodified: new Date().toISOString() },
+      { filename: 'dummy-image-3.jpg', lastmodified: new Date().toISOString() },
+    ];
+    this.selectedOptionFrame = this.frameArray[0].lastmodified;
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      '../../assets/placeholder2.jpg'
+    ); // Placeholder image
+
+    setTimeout(() => {
+      this.presentForecastToast();
+    }, 500); // Delay by 500ms
+    // this.getSatelliteImage('', 12, this.selectedOptionProduct);
+    this.loading = false; // this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.getIsLoggedIn();
+  }
+
+  sateliteDropdownProductOpen() {
+    this.isDropdownProductOpen = !this.isDropdownProductOpen;
+    this.isDropdownFrameOpen = false;
+  }
+
+  getSatelliteImage(foldername: any, time: any, productname: any) {
+    this.loading = true;
+    this.APIService.GetSourceAviationFolderFilesList(foldername).subscribe(
+      (response) => {
+        // this.frameArray = response;
+
+        this.frameArray = response.filter((item: any) =>
+          item.filename.includes(productname)
+        );
+
+        if (this.frameArray.length > 0) {
+          this.selectedOptionFrame = this.frameArray[0].lastmodified;
+
+          this.displayImage('', this.frameArray[0].filename).then(
+            (filecontent) => {
+              const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+              this.fileBaseUrl =
+                this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+            }
+          );
+        }
+
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+        this.loading = false;
+      }
+    );
+  }
+
+  displayImage(
+    imagefoldername: string,
+    imagefilename: string
+  ): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.APIService.GetAviationFile(imagefoldername, imagefilename).subscribe(
+        (response) => {
+          const filecontent = response.filecontent;
+          resolve(filecontent);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  sateliteDropdownFrameOpen() {
+    this.isDropdownFrameOpen = !this.isDropdownFrameOpen;
+  }
+
+  selectDropdownProduct(selectOption: string, dropdown: string) {
+    this.loading = true;
+    if (dropdown === 'dropdown1') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+
+    if (dropdown === 'dropdown2') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+
+    if (dropdown === 'dropdown3') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+    if (dropdown === 'dropdown4') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+    if (dropdown === 'dropdown5') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('', 12, selectOption);
+    }
+  }
+
+  selectDropdownFrame(selectOption: string, imagefilename: string) {
+    this.selectedOptionFrame = selectOption;
+
+    this.displayImage('', imagefilename).then((filecontent) => {
+      const imageUrlNext = 'data:image/gif;base64,' + filecontent;
+      this.fileBaseUrl =
+        this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
+    });
+  }
 
   navigateToObservation() {
     this.router.navigate(['/observation']);
   }
 
-  selectOption(option: string, dropdown: string) {
-    if (dropdown === 'dropdown1') {
-      this.selectedOption1 = option;
-      this.isDropdownOpen1 = false;
-    } 
-    if (dropdown === 'dropdown2') {
-      this.selectedOption2 = option;
-      this.isDropdownOpen2 = false;
-    }
-    if (dropdown === 'dropdown3') {
-      this.selectedOption3 = option;
-      this.isDropdownOpen2 = false;
-    }
-    if (dropdown === 'dropdown11') {
-      this.selectedOption11 = option;
-      this.isDropdownOpen5 = false;
-    }
-    
+  // formatTimestamp(timestamp: string): string {
+  //   let date: Date;
+  //   if (timestamp === '') {
+  //     date = new Date(Date.now());
+  //   } else {
+  //     date = new Date(timestamp);
+  //   }
+
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, '0');
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   const hours = String(date.getHours()).padStart(2, '0');
+  //   const minutes = String(date.getMinutes()).padStart(2, '0');
+  //   return `${year}-${month}-${day} ${hours}:${minutes}`;
+  // }
+  previousImage(): void {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.frameArray.length) % this.frameArray.length;
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      '../../assets/placeholder2.jpg'
+    );
   }
 
-  selectDropdown(dropdown: string) {
-    if (dropdown === 'dropdown5') {
-      this.isDropdownOpen5 = !this.isDropdownOpen5;
-      this.isDropdownOpen6 = false;
-      this.isDropdownOpen7 = false;
-      this.isDropdownOpen11 = false;
-    
-    }
-    if (dropdown === 'dropdown6') {
-      this.isDropdownOpen6 = !this.isDropdownOpen6;
-      this.isDropdownOpen5 = false;
-      this.isDropdownOpen7 = false;
-    
-    }
-    if (dropdown === 'dropdown7') {
-      this.isDropdownOpen7 = !this.isDropdownOpen7;
-      this.isDropdownOpen6 = false;
-      this.isDropdownOpen5 = false;
-    
-    }
-    if (dropdown === 'dropdown11') {
-      this.isDropdownOpen11 = !this.isDropdownOpen11;
-      this.isDropdownOpen5 = false;
-    }
+  nextImage(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.frameArray.length;
+    this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      '../../assets/placeholder2.jpg'
+    );
   }
-
-  toggleDropdown(dropdown: string) {
-    if (dropdown === 'dropdown1') {
-      this.isDropdownOpen1 = !this.isDropdownOpen1;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
-   
-    }
-
-    if (dropdown === 'dropdown2') {
-      this.isDropdownOpen2 = !this.isDropdownOpen2;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      
-    
-    }
-    
-    if (dropdown === 'dropdown3') {
-      this.isDropdownOpen3 = !this.isDropdownOpen3;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen4 = false;
-    
-    }
-    if (dropdown === 'dropdown4') {
-      this.isDropdownOpen4 = !this.isDropdownOpen4;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-    
-    }
-    if (dropdown === 'dropdown5') {
-      this.isDropdownOpen5 = !this.isDropdownOpen5;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen11 = false;
-    
-    }
-    if (dropdown === 'dropdown6') {
-      this.isDropdownOpen6 = !this.isDropdownOpen6;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
-    
-    }
-    if (dropdown === 'dropdown7') {
-      this.isDropdownOpen7 = !this.isDropdownOpen7;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
-      this.isDropdownOpen6 = false;
-    }
-
-    if (dropdown === 'dropdown11') {
-      this.isDropdownOpen11 = !this.isDropdownOpen11;
-      this.isDropdownOpen1 = false;
-      this.isDropdownOpen2 = false;
-      this.isDropdownOpen3 = false;
-      this.isDropdownOpen4 = false;
-      this.isDropdownOpen5 = false;
-    
-    }
-   
+  formatTimestamp(timestamp: string): string {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
   }
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
 
+    let formattedImages: string[];
+
+    // Check if imgs is an object with the specific property
+    if (
+      typeof imgs === 'object' &&
+      imgs.changingThisBreaksApplicationSecurity
+    ) {
+      // Convert it to an array
+      formattedImages = [imgs.changingThisBreaksApplicationSecurity];
+    } else if (Array.isArray(imgs)) {
+      // If imgs is already an array, use it directly
+      formattedImages = imgs;
+    } else {
+      // Handle unexpected formats
+      console.error('Unexpected format for imgs:', imgs);
+      formattedImages = [];
+    }
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs: formattedImages, // Pass the formatted array of image links
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
+  }
 }

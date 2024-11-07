@@ -5775,3 +5775,67 @@ ion-content > * {
   width: 100%;
   max-width: 100vw;
 }
+ion-content,
+.webcams-grid {
+  width: 100%;
+}
+
+.form-3 {
+  width: 100%;
+}
+
+.dropdown-container {
+  width: 100%;
+}
+.webcams-grid,
+.grid-20,
+.grid-21,
+.grid-22 {
+  display: grid;
+  grid-template-columns: 1fr; /* Make it responsive */
+  width: 100%;
+}
+.full-width-container {
+  width: 100%;
+  padding: 0 16px; /* Adjust padding as needed */
+  box-sizing: border-box;
+}
+.div-block-35,
+.div-block-452,
+.div-block-38,
+.grid-22,
+.dropdown-container {
+  width: 100%;
+  max-width: none;
+}
+ion-content,
+ion-content > * {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.webcams-grid,
+.form-3,
+.grid-20,
+.grid-21,
+.grid-22 {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+#grid21,
+#grid22 {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.div-block-36,
+.div-block-37,
+.div-block-38 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
