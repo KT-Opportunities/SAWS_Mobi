@@ -285,7 +285,12 @@ export class APIService {
         `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
     );
   }
-
+  getRecentTafsTime(foldername: string,time:any): Observable<any> {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
+    );
+  }
   getRecentMetarReports(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +

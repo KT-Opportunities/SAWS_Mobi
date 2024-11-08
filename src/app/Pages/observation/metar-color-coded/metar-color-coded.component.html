@@ -7,30 +7,29 @@
       Colour Coded METAR
     </app-package-header>
 
-    <app-package-sub-header></app-package-sub-header>
-
+    <app-package-sub-header>
+      <div
+        id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
+        class="w-layout-grid grid-cct-copy"
+      >
+        <div
+          id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Date:</h1>
+          <h1 class="heading-8">{{ currentDate }}</h1>
+        </div>
+        <div
+          id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Time:</h1>
+          <h1 class="heading-8">{{ currentTime }}</h1>
+        </div>
+      </div>
+    </app-package-sub-header>
     <app-package-list-items>
       <div class="w-layout-grid grid-6" id="layout">
-        <div
-          id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
-          class="w-layout-grid grid-cct-copy"
-        >
-          <div
-            id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
-            class="cct"
-          >
-            <h1 class="heading-7">Date :</h1>
-            <h1 class="heading-8">2024 - 01 - 22</h1>
-          </div>
-          <div
-            id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
-            class="cct"
-          >
-            <h1 class="heading-7">Time :</h1>
-            <h1 class="heading-8">13:15:45</h1>
-          </div>
-        </div>
-
         <div
           id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea"
           class="div-block-14-copy"
@@ -82,10 +81,7 @@
           </div>
           <div>
             <!-- Iterate over filteredReports to show the filtered results -->
-            <div
-              class="w-layout-grid heading-text"
-            
-            >
+            <div class="w-layout-grid heading-text">
               <div
                 id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea"
                 class="cct-copy-copy"

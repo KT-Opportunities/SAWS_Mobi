@@ -8,87 +8,75 @@
     <app-package-sub-header> Air stations</app-package-sub-header>
 
     <app-package-list-items>
-      <div class="div-block-2">
-        <img
-          src="images/Path-3452.svg"
-          loading="lazy"
-          width="1216"
-          alt=""
-          class="image"
-        />
-      </div>
-
-      <div class="scrollclass">
-        <div class="low-level-main-div">
-          <div class="div-block-466">
-            <div class="w-layout-grid lowlevel-grid">
+      <div class="low-level-main-div">
+        <div class="div-block-466">
+          <div class="w-layout-grid lowlevel-grid">
+            <div
+              id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83a-b2ace610"
+              class="div-block-35"
+            >
               <div
-                id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83a-b2ace610"
-                class="div-block-35"
+                id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83b-b2ace610"
+                class="w-layout-grid low-grid"
               >
                 <div
-                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83b-b2ace610"
-                  class="w-layout-grid low-grid"
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83c-b2ace610"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24" id="heading224">Wind Profile</h4>
+                </div>
+                <div
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83f-b2ace610"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24" id="heading224">View Image</h4>
+                </div>
+                <div
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a842-b2ace610"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a843-b2ace610"
+                  class="div-block-36"
+                ></div>
+              </div>
+            </div>
+            <div
+              id="w-node-_14588279-bdc8-ee9d-e926-6a691607a844-b2ace610"
+              class="div-block-452"
+              *ngFor="let item of lowLevel; let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
+            >
+              <div class="w-layout-grid wind-grid">
+                <div
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a846-b2ace610"
+                  class="div-block-37"
+                >
+                  <h4 class="heading-25">
+                    {{ transformFilename(item.filename) }}
+                  </h4>
+                </div>
+                <div
+                  id="w-node-_14588279-bdc8-ee9d-e926-6a691607a849-b2ace610"
+                  class="div-block-37"
                 >
                   <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83c-b2ace610"
-                    class="div-block-36"
+                    class="button-2-copy w-button"
+                    id="view"
+                    (click)="ImagesArray(item, lowLevel)"
                   >
-                    <h4 class="heading-24" id="heading224">Wind Profile</h4>
-                  </div>
-                  <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a83f-b2ace610"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24" id="heading224">View Image</h4>
-                  </div>
-                  <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a842-b2ace610"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a843-b2ace610"
-                    class="div-block-36"
-                  ></div>
-                </div>
-              </div>
-              <div
-                id="w-node-_14588279-bdc8-ee9d-e926-6a691607a844-b2ace610"
-                class="div-block-452"
-                *ngFor="let item of lowLevel; let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-              >
-                <div class="w-layout-grid wind-grid">
-                  <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a846-b2ace610"
-                    class="div-block-37"
-                  >
-                    <h4 class="heading-25">
-                      {{ transformFilename(item.filename) }}
-                    </h4>
-                  </div>
-                  <div
-                    id="w-node-_14588279-bdc8-ee9d-e926-6a691607a849-b2ace610"
-                    class="div-block-37"
-                  >
-                    <div
-                      class="button-2-copy w-button"
-                      id="view"
-                      (click)="ImagesArray(item, lowLevel)"
-                    >
-                      View
-                    </div>
+                    View
                   </div>
                 </div>
               </div>
             </div>
-            <div class="div-block-479">
-              <p class="paragraph-13">
-                <strong>Note:</strong> Not all stations do ascents every day (or
-                twice daily). <br />Availability of a profile depends on the
-                time of day <br />and season.
-              </p>
-            </div>
+          </div>
+          <div class="div-block-479">
+            <p class="paragraph-13">
+              <strong>Note:</strong> Not all stations do ascents every day (or
+              twice daily). <br />Availability of a profile depends on the time
+              of day <br />and season.
+            </p>
           </div>
         </div>
       </div>

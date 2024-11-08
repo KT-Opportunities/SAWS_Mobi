@@ -25,7 +25,8 @@ export class MetarColorCodedComponent implements OnInit {
   metarReports: MetarReport[] = [];
   filteredReports: MetarReport[] = [];
   searchQuery: string = '';
-
+  currentDate: string | undefined;
+  currentTime: string | undefined;
 
   selectedProvince: string = 'Gauteng'; // Default selected province
 
@@ -67,6 +68,16 @@ export class MetarColorCodedComponent implements OnInit {
 
   ngOnInit() {
     this.fetchMetarReports();
+
+    this.updateDateTime();
+    setInterval(() => {
+      this.updateDateTime();
+    }, 1000);
+  }
+  updateDateTime() {
+    const now = new Date();
+    this.currentDate = now.toLocaleDateString('en-CA'); // Format as YYYY-MM-DD
+    this.currentTime = now.toLocaleTimeString(); // Format as HH:MM:SS
   }
   getFilteredReports() {
     // return this.metarReports.filter(

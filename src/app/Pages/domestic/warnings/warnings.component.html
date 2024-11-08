@@ -8,57 +8,39 @@
     <app-package-sub-header> </app-package-sub-header>
 
     <app-package-list-items>
-      <div class="div-block-2">
-        <img
-          src="images/Path-3452.svg"
-          loading="lazy"
-          width="1216"
-          alt=""
-          class="image"
-        />
-      </div>
-
-      <div class="scrollclass">
-        <div
-          class="warning-div"
-          *ngFor="let warning of warnings"
-          class="warning"
-        >
-          <div class="warning-div">
-            <div class="w-layout-grid grid-warning">
+      <div class="warning-div" *ngFor="let warning of warnings">
+        <div class="w-layout-grid grid-warning">
+          <div
+            id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8"
+            class="div-block-15"
+          >
+            <div class="div-block-14"></div>
+          </div>
+          <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
+            <h4 class="heading-18-copy">
+              <strong>WARNING FOR FAPE {{ warning.filename }}</strong>
+            </h4>
+            <div class="w-layout-grid heading-copy">
               <div
-                id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5b6-1f99f7e8"
-                class="div-block-15"
+                id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8"
+                class="cct-copy-copy"
               >
-                <div class="div-block-14"></div>
+                <h1 class="heading-21">{{ warning.filecontent }}</h1>
               </div>
-              <div id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c5-1f99f7e8">
-                <h4 class="heading-18-copy">
-                  <strong>WARNING FOR FAPE {{ warning.filename }}</strong>
-                </h4>
-                <div class="w-layout-grid heading-copy">
-                  <div
-                    id="w-node-_5f908698-a616-0e42-1de9-1ddc0560b5c9-1f99f7e8"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">{{ warning.filecontent }}</h1>
-                  </div>
-                </div>
-              </div>
-              <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
-                <h4 class="heading-18-copy">
-                  <strong>WARNING FOR FALE - 20240409 16:05</strong>
-                </h4>
-                <div class="w-layout-grid heading-copy">
-                  <div
-                    id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8"
-                    class="cct-copy-copy"
-                  >
-                    <h1 class="heading-21">
-                      FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=
-                    </h1>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div id="w-node-_5e297b24-79c8-0486-a104-116229a600cc-1f99f7e8">
+            <h4 class="heading-18-copy">
+              <strong>WARNING FOR FALE - 20240409 16:05</strong>
+            </h4>
+            <div class="w-layout-grid heading-copy">
+              <div
+                id="w-node-_5e297b24-79c8-0486-a104-116229a600d1-1f99f7e8"
+                class="cct-copy-copy"
+              >
+                <h1 class="heading-21">
+                  FALE AD WRNG 1 VALID 091605/091905 TS OBS MOV SE INT=
+                </h1>
               </div>
             </div>
           </div>

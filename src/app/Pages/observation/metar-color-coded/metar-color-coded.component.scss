@@ -5754,3 +5754,19 @@ ion-content * {
   flex-direction: column; /* Stack items vertically */
   text-align: center;
 }
+.button-2-copy {
+  background-color: #00386c;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 10px;
+  width: 100px;
+  height: 4vh;
+  border-radius: 5px;
+
+  /* Centering content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
