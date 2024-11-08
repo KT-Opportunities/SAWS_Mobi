@@ -88,10 +88,10 @@ ngx-spinner {
 .button-2-copy {
   background-color: #00386c;
   border-radius: 5px !important;
-  margin: 20px 0 0 20px;
+
   margin-top: 20px;
-  margin-right: 0px;
-  margin-left: 20px;
+  // margin-right: 0px;
+  // margin-left: 20px;
   font-family: Montserrat, sans-serif;
   font-weight: 600;
 }
@@ -848,7 +848,7 @@ p {
     background-color: #00386c;
     margin-top: 20px;
     // margin-left: 6px !important;
-    margin-right: 0;
+
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -999,7 +999,7 @@ p {
     background-color: #00386c;
     margin-top: 20px;
     // margin-left: 6px !important;
-    margin-right: 0;
+
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -1146,7 +1146,7 @@ p {
     background-color: #00386c;
     margin-top: 20px;
     // margin-left: 6px !important;
-    margin-right: 0;
+
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -1273,8 +1273,8 @@ p {
     text-align: center;
     background-color: #00386c;
     margin-top: 20px;
-    margin-left: 6px !important;
-    margin-right: 0;
+    // margin-left: 6px !important;
+    // margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -1414,7 +1414,7 @@ p {
     margin-right: 20px;
   }
   #heading224 {
-   // padding-left: 30px;
+    // padding-left: 30px;
     padding-right: 0;
     font-size: 13px;
     position: relative;
@@ -1439,8 +1439,8 @@ p {
     text-align: center;
     background-color: #00386c;
     margin-top: 20px;
-    margin-left: 6px !important;
-    margin-right: 0;
+    // margin-left: 6px !important;
+    // margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -1456,8 +1456,8 @@ p {
     text-align: center;
     background-color: #00386c;
     margin-top: 20px;
-    margin-left: 6px !important;
-    margin-right: 0;
+    // margin-left: 6px !important;
+    // margin-right: 0;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 10px;
@@ -1588,10 +1588,58 @@ ion-content {
 }
 .w-layout-grid {
   grid-row-gap: 0px;
-  grid-column-gap: 21px;
+  grid-column-gap: 3px;
   grid-template-rows: auto auto;
+  padding: 5px;
 }
 .div-block-35 {
   background-image: linear-gradient(#00386c, #00386c);
   width: 96vw;
+}
+/* Define the grid layout */
+.grid-take-off {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Equal columns for each item */
+  align-items: center;
+  gap: 10px; /* Space between items */
+}
+
+/* Style for the select dropdown */
+.selection {
+  padding: 8px 0 8px; /* Matches button padding */
+  margin: 0;
+  width: 100%; /* Full width within grid cell */
+  height: 40px; /* Ensures equal height with buttons */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Consistent box sizing */
+  text-align: center; /* Center align text */
+  width: 30vw;
+}
+
+/* Style for button containers */
+.div-off {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button styling with equal sizes */
+.leftbtn,
+.rightbtn {
+  width: 100%; /* Full width within grid cell */
+  height: 40px; /* Same height as .selection */
+  padding: 8px 0; /* Matches .selection padding */
+  margin: 0;
+  border-radius: 4px;
+  box-sizing: border-box; /* Consistent box sizing */
+  text-align: center; /* Centers text inside buttons */
+  cursor: pointer;
+}
+
+/* Optional: Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .grid-take-off {
+    grid-template-columns: 1fr 1fr 1fr; /* Stack items on smaller screens */
+  }
 }
