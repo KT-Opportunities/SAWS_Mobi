@@ -126,10 +126,7 @@ export class MetarColorCodedComponent implements OnInit {
     const folderName = 'sigw';
     const fileName = item;
     console.log('Folder Name:', folderName);
-    this.isLoading = true;
-
-  
-        this.isLoading = false;
+    
 
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;

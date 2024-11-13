@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -38,7 +43,8 @@ export class MetarComponent implements OnInit {
     private apiService: APIService,
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -56,29 +62,26 @@ export class MetarComponent implements OnInit {
   NavigateToObservation() {
     this.router.navigate(['/observation']);
   }
-
   fetchMetarReports(): void {
     this.loading = true;
     this.spinner.show();
 
     const foldername = 'metar';
-    this.apiService
-      .getRecentTafsTime(foldername, 1.5)
-      .pipe(
-        shareReplay(1), // Cache the latest response
-        catchError((error) => {
-          console.error('Error fetching Metar Reports:', error);
-          this.loading = false;
-          this.spinner.hide();
-          return of([]); // Return an empty array if an error occurs
-        })
-      )
-      .subscribe((data) => {
+    this.apiService.getRecentTafs(foldername).subscribe(
+      (data: any) => {
         console.log('Metar reports fetched successfully:', data);
         this.metarReports = data;
         this.loading = false;
         this.spinner.hide();
-      });
+        this.cdr.detectChanges(); // Trigger change detection
+      },
+      (error) => {
+        console.error('Error fetching Metar Reports:', error);
+        this.loading = false;
+        this.spinner.hide();
+        this.cdr.detectChanges(); // Trigger change detection
+      }
+    );
   }
 
   // Handle search form submission
