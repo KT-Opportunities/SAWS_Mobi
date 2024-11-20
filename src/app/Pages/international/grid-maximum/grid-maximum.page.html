@@ -11,99 +11,95 @@
   <app-package-sub-header> </app-package-sub-header>
 
   <app-package-list-items>
-    <section class="maximum-wind-section" style="margin-top: 162px">
-      <div class="aerosport">
-        <div class="aerosportScrol">
-          <div class="div-block-464">
-            <h1 class="sub-headings">EURAFI (AREA C)</h1>
+    <div class="aerosport">
+      <div class="div-block-464">
+        <h1 class="sub-headings">EURAFI (AREA C)</h1>
 
-            <div class="grid-div">
-              <div class="w-layout-grid central-grid">
+        <div class="grid-div">
+          <div class="w-layout-grid central-grid">
+            <div
+              id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15"
+              class="div-block-35"
+            >
+              <div
+                id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa5-bb9b1d15"
+                class="w-layout-grid grid-21"
+              >
                 <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa4-bb9b1d15"
-                  class="div-block-35"
+                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa6-bb9b1d15"
+                  class="div-block-36"
                 >
-                  <div
-                    id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa5-bb9b1d15"
-                    class="w-layout-grid grid-21"
-                  >
-                    <div
-                      id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa6-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">Maximum Winds</h4>
-                    </div>
-                    <div
-                      id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
-                      class="div-block-36"
-                    >
-                      <h4 class="heading-24">View Image</h4>
-                    </div>
-                    <div
-                      id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aac-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                    <div
-                      id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aad-bb9b1d15"
-                      class="div-block-36"
-                    ></div>
-                  </div>
+                  <h4 class="heading-24">Maximum Winds</h4>
                 </div>
                 <div
-                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aae-bb9b1d15"
-                  class="div-block-452"
-                  *ngFor="let item of MaximumArray;let i = index"
-                  [ngClass]="i % 2 === 0 ? 'div-block-38' : 'div-block-453'"
+                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aa9-bb9b1d15"
+                  class="div-block-36"
                 >
-                  <div class="w-layout-grid grid-41">
-                    <div
-                      id="w-node-_707270c1-b2ff-8f51-f118-3b3665aeea79-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <button
-                        class="button-2-copy w-button"
-                        (click)="ImagesArray(item,MaximumArray)"
-                      >
-                        View
-                      </button>
-                    </div>
-                    <div
-                      id="w-node-_5e42ce22-6a2b-b585-398b-a09e34e0d36c-bb9b1d15"
-                      class="div-block-465"
-                    >
-                      <h1 class="heading-25">
-                        {{ extractTime(item.filename) }}
-                      </h1>
-                    </div>
-                  </div>
+                  <h4 class="heading-24">View Image</h4>
+                </div>
+                <div
+                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aac-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aad-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+              </div>
+            </div>
+            <div
+              id="w-node-cfe5f63b-1252-659b-3929-d5675cc02aae-bb9b1d15"
+              class="div-block-452"
+              *ngFor="let item of MaximumArray;let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-38' : 'div-block-453'"
+            >
+              <div class="w-layout-grid grid-41">
+                <div
+                  id="w-node-_707270c1-b2ff-8f51-f118-3b3665aeea79-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <button
+                    class="button-2-copy w-button"
+                    (click)="ImagesArray(item,MaximumArray)"
+                  >
+                    View
+                  </button>
+                </div>
+                <div
+                  id="w-node-_5e42ce22-6a2b-b585-398b-a09e34e0d36c-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <h1 class="heading-25">{{ extractTime(item.filename) }}</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </app-package-list-items>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img
-      src="../../assets/Path-3447.svg"
-      loading="lazy"
-      width="1216"
-      alt=""
-      class="image"
-    />
 
-    <div class="footerdiv" id="footerdivid">
-      <div
-        (click)="NavigateToInternational()"
-        class="link-block-5 w-inline-block"
-      >
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">International</h6>
-      </div>
-    </div>
+<app-footer></app-footer>
+
+<div class="footerdiv" id="footerdivid1">
+  <div  (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+    International
+    </h6>
   </div>
-</ion-footer>
+</div>

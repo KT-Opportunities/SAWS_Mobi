@@ -1,549 +1,518 @@
-<ion-content >
+<ion-content>
   <app-loading *ngIf="loading"></app-loading>
 
   <div id="top"></div>
 
   <app-package-content>
-   <app-package-header> Humidity</app-package-header>
-   
+    <app-package-header> Humidity</app-package-header>
 
-   <app-package-sub-header> </app-package-sub-header>
-   <app-package-list-items>
-
-     
-        <!-- Central -->
-        <div class="div-block-464">
-          <h1 class="sub-headings">Central</h1>
-          <div class="w-form">
-            <form
-              id="email-form-3"
-              name="email-form-3"
-              data-name="Email Form 3"
-              method="get"
-              class="form-3"
-              data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-              data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
-            >
-              <div class="w-layout-grid grid-25">
-                <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
-                  <label for="" class="field-label">Select Wind Type</label>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown2')"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div class="icon-2 w-icon-dropdown-toggle" id="icon3"
-                      style="padding-right: 0px;
-                      margin-top: 5px !important;
-                      position: absolute;
-                      margin-left: 80vw !important;"></div>
-                      <div class="text-block">{{ selectedOption2 }}</div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen2">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption2('FL050', 'dropdown2')"
-                      >
-                        FL050
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption2('FL100', 'dropdown2')"
-                      >
-                        FL100
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption2('FL140', 'dropdown2')"
-                      >
-                        FL140
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption2('FL180', 'dropdown2')"
-                      >
-                        FL180
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="grid-div">
-            <div class="w-layout-grid central-grid">
-              <div
-                id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
-                class="div-block-35"
-              >
+    <app-package-sub-header> </app-package-sub-header>
+    <app-package-list-items>
+      <!-- Central -->
+      <div class="div-block-464">
+        <h1 class="sub-headings">Central</h1>
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            class="form-3"
+            data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+            data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
+          >
+            <div class="w-layout-grid grid-25">
+              <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
+                <label for="" class="field-label">Select Wind Type</label>
                 <div
-                  id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
-                  class="w-layout-grid grid-21"
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="toggleDropdown('dropdown2')"
                 >
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">Surface</h4>
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+                    <div class="text-block">{{ selectedOption2 }}</div>
                   </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">View Image</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                </div>
-              </div>
-
-              <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15" class="div-block-452"
-                *ngFor="let item of  getFilteredItemCentral(); let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'">
-                <div class="w-layout-grid grid-41">
-                  <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15" class="div-block-465">
-                    <button   class="button-2-copy w-button" 
-
-                      (click)="ImagesArray(item,getFilteredItemCentral())">
-                      View
-                    </button>
-                  </div>
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                    class="div-block-465"
-                  >
-                    <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- West -->
-        <div class="div-block-464">
-          <h1 class="sub-headings">West</h1>
-          <div class="w-form">
-            <form
-              id="email-form-3"
-              name="email-form-3"
-              data-name="Email Form 3"
-              method="get"
-              class="form-3"
-              data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-              data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
-            >
-              <div class="w-layout-grid grid-25">
-                <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
-                  <label for="" class="field-label">Select Wind Type</label>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown3')"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div class="icon-2 w-icon-dropdown-toggle" id="icon3"
-                      style="padding-right: 0px;
-                      margin-top: 5px !important;
-                      position: absolute;
-                      margin-left: 80vw !important;"
-                      
-                      ></div>
-                      <div class="text-block">{{ selectedOption3 }}</div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption3('FL050', 'dropdown3')"
-                      >
-                        FL050
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption3('FL100', 'dropdown3')"
-                      >
-                        FL100
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption3('FL140', 'dropdown3')"
-                      >
-                        FL140
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption3('FL180', 'dropdown3')"
-                      >
-                        FL180
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="grid-div">
-            <div class="w-layout-grid central-grid">
-              <div
-                id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
-                class="div-block-35"
-              >
-                <div
-                  id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
-                  class="w-layout-grid grid-21"
-                >
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">Surface</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">View Image</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                </div>
-              </div>
-
-              <div
-                id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                class="div-block-452"
-                *ngFor="let item of getFilteredItemWest(); let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-              >
-                <div class="w-layout-grid grid-41">
-                  <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15" class="div-block-465">
-                    <button class="button-2-copy w-button"(click)="ImagesArray(item,getFilteredItemWest())" >
-                      View
-                    </button>
-                  </div>
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                    class="div-block-465"
-                  >
-                    <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--East-->
-        <div class="div-block-464">
-          <h1 class="sub-headings">East</h1>
-          <div class="w-form">
-            <form
-              id="email-form-3"
-              name="email-form-3"
-              data-name="Email Form 3"
-              method="get"
-              class="form-3"
-              data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-              data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
-            >
-              <div class="w-layout-grid grid-25">
-                <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
-                  <label for="" class="field-label">Select Wind Type</label>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown4')"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div class="icon-2 w-icon-dropdown-toggle"  
-                      style="
-                       padding-right: 0px;
-                        margin-top: 5px !important;
-                        position: absolute;
-                        margin-left: 80vw !important;
-                      "
-                      id="icon3"></div>
-                      <div class="text-block">{{ selectedOption4 }}</div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen4">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption4('FL050', 'dropdown4')"
-                      >
-                        FL050
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption4('FL100', 'dropdown4')"
-                      >
-                        FL100
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption4('FL140', 'dropdown4')"
-                      >
-                        FL140
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption4('FL180', 'dropdown4')"
-                      >
-                        FL180
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="grid-div">
-            <div class="w-layout-grid central-grid">
-              <div
-                id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
-                class="div-block-35"
-              >
-                <div
-                  id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
-                  class="w-layout-grid grid-21"
-                >
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">Surface</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">View Image</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                </div>
-              </div>
-
-              <div
-                id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                class="div-block-452"
-                *ngFor="let item of getFilteredItemEast(); let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-              >
-                <div class="w-layout-grid grid-41">
-                  <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15" class="div-block-465">
-                    <button class="button-2-copy w-button"
-                    
-                    (click)="ImagesArray(item,getFilteredItemEast())"
+                  <nav class="dropdown-list1" *ngIf="isDropdownOpen2">
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption2('FL050', 'dropdown2')"
                     >
-                      View
-                    </button>
-                  </div>
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                    class="div-block-465"
-                  >
-                    <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
-                  </div>
+                      FL050
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption2('FL100', 'dropdown2')"
+                    >
+                      FL100
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption2('FL140', 'dropdown2')"
+                    >
+                      FL140
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption2('FL180', 'dropdown2')"
+                    >
+                      FL180
+                    </div>
+                  </nav>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-        <!--South-->
-        <div class="div-block-464">
-          <h1 class="sub-headings">South</h1>
-          <div class="w-form">
-            <form
-              id="email-form-3"
-              name="email-form-3"
-              data-name="Email Form 3"
-              method="get"
-              class="form-3"
-              data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-              data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
-            >
-              <div class="w-layout-grid grid-25">
-                <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
-                  <label for="" class="field-label">Select Wind Type</label>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown1')"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div class="icon-2 w-icon-dropdown-toggle" id="icon3"
-                      
-                      style="
-                       padding-right: 0px;
-                        margin-top: 5px !important;
-                        position: absolute;
-                        margin-left: 80vw !important;
-                      "
-                      
-                      ></div>
-                      <div class="text-block">{{ selectedOption }}</div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('FL050', 'dropdown1')"
-                      >
-                        FL050
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('FL100', 'dropdown1')"
-                      >
-                        FL100
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('FL140', 'dropdown1')"
-                      >
-                        FL140
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('FL180', 'dropdown1')"
-                      >
-                        FL180
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
 
-          <div class="grid-div">
-            <div class="w-layout-grid central-grid">
+        <div class="grid-div">
+          <div class="w-layout-grid central-grid">
+            <div
+              id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
+              class="div-block-35"
+            >
               <div
-                id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
-                class="div-block-35"
+                id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
+                class="w-layout-grid grid-21"
               >
                 <div
-                  id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
-                  class="w-layout-grid grid-21"
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
+                  class="div-block-36"
                 >
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">Surface</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
-                    class="div-block-36"
-                  >
-                    <h4 class="heading-24">View Image</h4>
-                  </div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
-                  <div
-                    id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
-                    class="div-block-36"
-                  ></div>
+                  <h4 class="heading-24">Surface</h4>
                 </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">View Image</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
+                  class="div-block-36"
+                ></div>
               </div>
+            </div>
 
-              <div
-                id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
-                class="div-block-452"
-                *ngFor="let item of getFilteredItemSouth(); let i = index"
-                [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
-              >
-                <div class="w-layout-grid grid-41">
-                  <div id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15" class="div-block-465">
-                    <button class="button-2-copy w-button"
-                    
-                    (click)="ImagesArray(item,getFilteredItemSouth())"
-                   >
-                      View
-                    </button>
-                  </div>
-                  <div
-                    id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
-                    class="div-block-465"
+            <div
+              id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
+              class="div-block-452"
+              *ngFor="let item of getFilteredItemCentral(); let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
+            >
+              <div class="w-layout-grid grid-41">
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <button
+                    class="button-2-copy w-button"
+                    (click)="ImagesArray(item, getFilteredItemCentral())"
                   >
-                    <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
-                  </div>
+                    View
+                  </button>
+                </div>
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
-     
-   </app-package-list-items>
-   
+      </div>
+      <!-- West -->
+      <div class="div-block-464">
+        <h1 class="sub-headings">West</h1>
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            class="form-3"
+            data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+            data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
+          >
+            <div class="w-layout-grid grid-25">
+              <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
+                <label for="" class="field-label">Select Wind Type</label>
+                <div
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="toggleDropdown('dropdown3')"
+                >
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+                    <div class="text-block">{{ selectedOption3 }}</div>
+                  </div>
+                  <nav class="dropdown-list1" *ngIf="isDropdownOpen3">
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption3('FL050', 'dropdown3')"
+                    >
+                      FL050
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption3('FL100', 'dropdown3')"
+                    >
+                      FL100
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption3('FL140', 'dropdown3')"
+                    >
+                      FL140
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption3('FL180', 'dropdown3')"
+                    >
+                      FL180
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
 
+        <div class="grid-div">
+          <div class="w-layout-grid central-grid">
+            <div
+              id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
+              class="div-block-35"
+            >
+              <div
+                id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
+                class="w-layout-grid grid-21"
+              >
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">Surface</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">View Image</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+              </div>
+            </div>
+
+            <div
+              id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
+              class="div-block-452"
+              *ngFor="let item of getFilteredItemWest(); let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
+            >
+              <div class="w-layout-grid grid-41">
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <button
+                    class="button-2-copy w-button"
+                    (click)="ImagesArray(item, getFilteredItemWest())"
+                  >
+                    View
+                  </button>
+                </div>
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--East-->
+      <div class="div-block-464">
+        <h1 class="sub-headings">East</h1>
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            class="form-3"
+            data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+            data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
+          >
+            <div class="w-layout-grid grid-25">
+              <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
+                <label for="" class="field-label">Select Wind Type</label>
+                <div
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="toggleDropdown('dropdown4')"
+                >
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+                    <div class="text-block">{{ selectedOption4 }}</div>
+                  </div>
+                  <nav class="dropdown-list1" *ngIf="isDropdownOpen4">
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption4('FL050', 'dropdown4')"
+                    >
+                      FL050
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption4('FL100', 'dropdown4')"
+                    >
+                      FL100
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption4('FL140', 'dropdown4')"
+                    >
+                      FL140
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption4('FL180', 'dropdown4')"
+                    >
+                      FL180
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="grid-div">
+          <div class="w-layout-grid central-grid">
+            <div
+              id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
+              class="div-block-35"
+            >
+              <div
+                id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
+                class="w-layout-grid grid-21"
+              >
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">Surface</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">View Image</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+              </div>
+            </div>
+
+            <div
+              id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
+              class="div-block-452"
+              *ngFor="let item of getFilteredItemEast(); let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
+            >
+              <div class="w-layout-grid grid-41">
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <button
+                    class="button-2-copy w-button"
+                    (click)="ImagesArray(item, getFilteredItemEast())"
+                  >
+                    View
+                  </button>
+                </div>
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--South-->
+      <div class="div-block-464">
+        <h1 class="sub-headings">South</h1>
+        <div class="w-form">
+          <form
+            id="email-form-3"
+            name="email-form-3"
+            data-name="Email Form 3"
+            method="get"
+            class="form-3"
+            data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+            data-wf-element-id="263303c5-1301-967e-e68c-c272135c633f"
+          >
+            <div class="w-layout-grid grid-25">
+              <div id="w-node-_263303c5-1301-967e-e68c-c272135c6341-bb9b1d15">
+                <label for="" class="field-label">Select Wind Type</label>
+                <div
+                  data-hover="false"
+                  data-delay="0"
+                  class="text-field-blue w-dropdown"
+                  (click)="toggleDropdown('dropdown1')"
+                >
+                  <div class="w-dropdown-toggle">
+                    <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+                    <div class="text-block">{{ selectedOption }}</div>
+                  </div>
+                  <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption('FL050', 'dropdown1')"
+                    >
+                      FL050
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption('FL100', 'dropdown1')"
+                    >
+                      FL100
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption('FL140', 'dropdown1')"
+                    >
+                      FL140
+                    </div>
+                    <div
+                      class="w-dropdown-link"
+                      (click)="selectOption('FL180', 'dropdown1')"
+                    >
+                      FL180
+                    </div>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="grid-div">
+          <div class="w-layout-grid central-grid">
+            <div
+              id="w-node-_263303c5-1301-967e-e68c-c272135c6358-bb9b1d15"
+              class="div-block-35"
+            >
+              <div
+                id="w-node-_263303c5-1301-967e-e68c-c272135c6359-bb9b1d15"
+                class="w-layout-grid grid-21"
+              >
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635a-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">Surface</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c635d-bb9b1d15"
+                  class="div-block-36"
+                >
+                  <h4 class="heading-24">View Image</h4>
+                </div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6360-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+                <div
+                  id="w-node-_263303c5-1301-967e-e68c-c272135c6361-bb9b1d15"
+                  class="div-block-36"
+                ></div>
+              </div>
+            </div>
+
+            <div
+              id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba090-bb9b1d15"
+              class="div-block-452"
+              *ngFor="let item of getFilteredItemSouth(); let i = index"
+              [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
+            >
+              <div class="w-layout-grid grid-41">
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba092-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <button
+                    class="button-2-copy w-button"
+                    (click)="ImagesArray(item, getFilteredItemSouth())"
+                  >
+                    View
+                  </button>
+                </div>
+                <div
+                  id="w-node-_3a2b9a5a-cc94-4474-e9b2-321530eba095-bb9b1d15"
+                  class="div-block-465"
+                >
+                  <h1 class="heading-25">{{ getTimeFromFilename(item) }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-package-list-items>
   </app-package-content>
 </ion-content>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img
-      src="../../assets/Path-3447.svg"
-      loading="lazy"
-      width="1216"
-      alt=""
-      class="image"
-    />
+<app-footer></app-footer>
 
-    <div class="footerdiv" id="footerdivid">
-      <a
-        (click)="NavigateToInternational()"
-        class="link-block-5 w-inline-block"
-      >
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">International</h6>
-      </a>
-    </div>
+<div class="footerdiv" id="footerdivid1">
+  <div  (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+    International
+    </h6>
   </div>
-</ion-footer>
+</div>
 
-<!-- <ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
 
-    <div class="footerdiv" id="footerdivid1">
-      <div (click)=" NagivateToInternational()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-             margin-top: 10px;
-             margin-bottom: 0;
-             font-family: Montserrat, sans-serif;
-             text-decoration: none;
-             font-size: 12px;
-             margin-top: 4px;">
-          International
-        </h6>
-      </div>
-    </div>
-  </div>
-</ion-footer> -->

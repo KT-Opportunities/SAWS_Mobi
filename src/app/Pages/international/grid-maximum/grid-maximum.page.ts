@@ -74,7 +74,7 @@ export class GridMaximumPage implements OnInit {
 
         console.log('Response:', this.MaximumArray);
 
-        this.isLoading = false; // Set loading to false after processing
+        this.loading = false; // Set loading to false after processing
       },
       (error) => {
         console.error('Error fetching data:', error);

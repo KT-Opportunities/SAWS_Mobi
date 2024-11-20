@@ -6,10 +6,8 @@
   <app-package-content>
     <app-package-header> Grid wind Charts</app-package-header>
 
-    
-  <app-package-list-items>
-    <div class="aerosport">
-      <div class="aerosportScrol">
+    <app-package-list-items>
+      <div class="aerosport">
         <!-- Central -->
         <div class="div-block-464">
           <h1 class="sub-headings">Central</h1>
@@ -288,7 +286,6 @@
                   >
                     <button
                       class="button-2-copy w-button"
-                      
                       (click)="ImagesArray(item,getFilteredItemWest())"
                     >
                       View
@@ -437,7 +434,6 @@
                     <button
                       class="button-2-copy w-button"
                       (click)="ImagesArray(item,getFilteredItemEast())"
-                 
                     >
                       View
                     </button>
@@ -585,7 +581,6 @@
                     <button
                       class="button-2-copy w-button"
                       (click)="ImagesArray(item,getFilteredItemSouth())"
-                    
                     >
                       View
                     </button>
@@ -602,27 +597,29 @@
           </div>
         </div>
       </div>
-    </div>
-
-
     </app-package-list-items>
- </app-package-content>
-
-  
-
+  </app-package-content>
 </ion-content>
 
+<app-footer></app-footer>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
-    <div class="footerdiv" id="footerdivid">
-      <a (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          International</h6>
-      </a>
-    </div>
+<div class="footerdiv" id="footerdivid1">
+  <div  (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+    International
+    </h6>
   </div>
-</ion-footer>
+</div>

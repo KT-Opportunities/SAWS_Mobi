@@ -5396,7 +5396,7 @@
     width: 150px;
     padding-right: 20px;
   }
-  
+
   .grid-38 {
     width: 340px;
     height: 55vh;
@@ -5604,4 +5604,12 @@
   overflow: hidden; /* Hide overflow text */
   white-space: nowrap; /* Prevent text wrapping */
   text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
+}
+.selected-file-name {
+  display: inline-block;
+  max-width: 194px; /* Adjust as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }

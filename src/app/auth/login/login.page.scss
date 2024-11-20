@@ -1,361 +1,63 @@
-.div-block-5 {
-  justify-content: center;
-  align-items: center;
-  margin-top: -78px;
-  display: flex;
-}
-
-.keyboardopen {
-  margin-bottom: 90px;
-}
-
-.linkspace {
-  margin-left: 4px;
-  padding: 6px;
-  cursor: pointer;
-}
-
-.footerdiv {
-  padding-top: 0;
-  z-index: 1000;
-}
-
-.forgotpassword {
-  margin: 8px 50px 8px 0 !important;
-}
-
-// #mainsection{
-//   overflow-y: clip !important;
-//   overscroll-behavior-y: none !important;
-// }
-.fas {
-  position: absolute;
-  right: 37px;
-  margin-top: -23px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-.custom-content {
-  --ion-background-color: #ffffff; /* Set background color */
-  --ion-text-color: #000000; /* Set text color */
-}
-
-.custom-content.dark {
-  --ion-background-color: #ffffff; /* Set background color for dark mode */
-  --ion-text-color: #121212; /* Set text color for dark mode */
-}
-.w-checkbox-input {
-  background-color: #ffffff;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin-right: 5px;
-  color: #00386c;
-}
-
-/* Checkbox label styling */
-.checkbox-label {
-  font-size: 14px;
-  color: #00386c;
-}
-/* Default styles for all screen sizes */
-.text-field {
+.w-button {
   width: 100%;
 }
-.submit-button {
-  width: 100%;
-  color: #ffffff;
-}
-
 .password-container {
   position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .text-field {
   width: 100%;
-  padding-right: 40px; /* Space for the icon */
+  padding-right: 40px; /* Adds space for the eye icon */
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px; /* Adjust as needed */
   top: 50%;
+  right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
+  color: #aaa;
 }
 
-.fas {
-  font-size: 18px; /* Adjust size as needed */
-  color: #000000;
+.toggle-password i {
+  font-size: 20px;
 }
 
-/* Styles for small devices (phones) */
-@media only screen and (max-width: 600px) {
-  .div-block-5 {
-    justify-content: center;
-    align-items: center;
-    margin-top: -78px;
-    display: flex;
-  }
-  .linkspace {
-    margin-left: 4px;
-  }
-  // #mainsection{
-  //   overflow-y: clip !important;
-  //   overscroll-behavior-y: none !important;
-  // }
-  .fas {
-    position: absolute;
-    right: 37px;
-    margin-top: -23px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .custom-content {
-    --ion-background-color: #ffffff; /* Set background color */
-    --ion-text-color: #000000; /* Set text color */
-  }
-
-  .custom-content.dark {
-    --ion-background-color: #ffffff; /* Set background color for dark mode */
-    --ion-text-color: #121212; /* Set text color for dark mode */
-  }
-  .w-checkbox-input {
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 5px;
-    color: #00386c;
-  }
-
-  /* Checkbox label styling */
-  .checkbox-label {
-    font-size: 14px;
-    color: #00386c;
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .toggle-password i {
+    font-size: 18px;
   }
 }
 
-/* Styles for medium devices (tablets) */
-@media only screen and (min-width: 601px) and (max-width: 768px) {
-  .div-block-5 {
-    justify-content: center;
-    align-items: center;
-    margin-top: -78px;
-    display: flex;
-  }
-  .linkspace {
-    margin-left: 4px;
-  }
-  // #mainsection{
-  //   overflow-y: clip !important;
-  //   overscroll-behavior-y: none !important;
-  // }
-  .fas {
-    position: absolute;
-    right: 233px;
-    margin-top: -23px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-
-  .custom-content {
-    --ion-background-color: #ffffff; /* Set background color */
-    --ion-text-color: #000000; /* Set text color */
-  }
-
-  .custom-content.dark {
-    --ion-background-color: #ffffff; /* Set background color for dark mode */
-    --ion-text-color: #121212; /* Set text color for dark mode */
-  }
-  .w-checkbox-input {
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 5px;
-    color: #00386c;
-  }
-
-  /* Checkbox label styling */
-  .checkbox-label {
-    font-size: 14px;
-    color: #00386c;
+@media (max-width: 480px) {
+  .toggle-password i {
+    font-size: 16px;
   }
 }
-
-/* Styles for large devices (desktops/laptops) */
-@media only screen and (min-width: 769px) and (max-width: 992px) {
-  .div-block-5 {
-    justify-content: center;
-    align-items: center;
-    margin-top: -78px;
-    display: flex;
-  }
-  .linkspace {
-    margin-left: 4px;
-  }
-
-  // #mainsection{
-  //   overflow-y: clip !important;
-  //   overscroll-behavior-y: none !important;
-  // }
-  .fas {
-    position: absolute;
-    right: 249px;
-    margin-top: -23px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .custom-content {
-    --ion-background-color: #ffffff; /* Set background color */
-    --ion-text-color: #000000; /* Set text color */
-  }
-
-  .custom-content.dark {
-    --ion-background-color: #ffffff; /* Set background color for dark mode */
-    --ion-text-color: #121212; /* Set text color for dark mode */
-  }
-  .w-checkbox-input {
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 5px;
-    color: #00386c;
-  }
-
-  /* Checkbox label styling */
-  .checkbox-label {
-    font-size: 14px;
-    color: #00386c;
-  }
+.login-for {
+  width: 80vw;
+}
+/* When keyboard is visible */
+.keyboardopen {
+  margin-bottom: 0; /* Remove unnecessary bottom margin */
+  padding-bottom: 0; /* Remove unnecessary padding */
 }
 
-/* Styles for extra large devices (large desktops) */
-@media only screen and (min-width: 993px) {
-  .div-block-5 {
-    justify-content: center;
-    align-items: center;
-    margin-top: -78px;
-    display: flex;
-  }
-  .linkspace {
-    margin-left: 4px;
-  }
-
-  // #mainsection{
-  //   overflow-y: clip !important;
-  //   overscroll-behavior-y: none !important;
-  // }
-  .fas {
-    position: absolute;
-    right: 233px;
-    margin-top: -23px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .custom-content {
-    --ion-background-color: #ffffff; /* Set background color */
-    --ion-text-color: #000000; /* Set text color */
-  }
-
-  .custom-content.dark {
-    --ion-background-color: #ffffff; /* Set background color for dark mode */
-    --ion-text-color: #121212; /* Set text color for dark mode */
-  }
-  .w-checkbox-input {
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 5px;
-    color: #00386c;
-  }
-
-  /* Checkbox label styling */
-  .checkbox-label {
-    font-size: 14px;
-    color: #00386c;
-  }
+/* Default margin for non-keyboard state */
+ion-content {
+  margin-bottom: 56px; /* Adjust as needed for footer or other elements */
+  --padding-bottom: 0;
 }
 
-/* Styles for iPhone X (375px x 812px) */
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
-  .section {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-    position: absolute;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-    margin-top: 158px;
-  }
-  .div-block-5 {
-    justify-content: center;
-    align-items: center;
-    margin-top: -78px;
-    display: flex;
-  }
-  .linkspace {
-    margin-left: 4px;
-  }
+.login-for{
+  width: 80vw;
 
-  // #mainsection{
-  //   overflow-y: clip !important;
-  //   overscroll-behavior-y: none !important;
-  // }
-  .fas {
-    position: absolute;
-    right: 37px;
-    margin-top: -23px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .custom-content {
-    --ion-background-color: #ffffff; /* Set background color */
-    --ion-text-color: #000000; /* Set text color */
-  }
+  height: 42vh;
 
-  .custom-content.dark {
-    --ion-background-color: #ffffff; /* Set background color for dark mode */
-    --ion-text-color: #121212; /* Set text color for dark mode */
-  }
-  .w-checkbox-input {
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 5px;
-    color: #00386c;
-  }
+  align-items: center;
 
-  /* Checkbox label styling */
-  .checkbox-label {
-    font-size: 14px;
-    color: #00386c;
-  }
-  .section {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-    position: absolute;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
-    margin-top: 131px;
-  }
+  align-content: center;
+
 }

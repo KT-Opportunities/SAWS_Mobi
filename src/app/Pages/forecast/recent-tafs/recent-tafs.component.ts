@@ -1,12 +1,17 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { DatePipe } from '@angular/common';
+import { Keyboard } from '@capacitor/keyboard';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { FormBuilder } from '@angular/forms';
+import { Platform, ToastController } from '@ionic/angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recent-tafs',
@@ -32,18 +37,45 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
   currentTime: string | undefined;
   intervalId: any;
 
+
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
+  isMobile: boolean;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
+    private mediaMatcher: MediaMatcher,
     private authService: AuthService,
-    private elRef: ElementRef,
-    private iab: InAppBrowser,
-    private spinner: NgxSpinnerService,
     private apiService: APIService,
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private renderer: Renderer2,
+    private toastController: ToastController,
+    private platform: Platform,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private datePipe: DatePipe
-  ) {}
+    private sanitizer: DomSanitizer,
+    private elRef: ElementRef,
+    private iab: InAppBrowser,
 
+  
+  
+    private datePipe: DatePipe
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+  }
   ngOnInit() {
     // this.updateTime();
     // this.intervalId = setInterval(() => {

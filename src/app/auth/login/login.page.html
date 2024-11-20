@@ -3,7 +3,13 @@
 
   <app-auth-content>
     <app-auth-logo *ngIf="!isKeyboardVisible">
-      <img src="/assets/Mask-Group-33x.png" loading="lazy" width="212" alt="" class="mobile-images" />
+      <img
+        src="/assets/Mask-Group-33x.png"
+        loading="lazy"
+        width="212"
+        alt="App Logo"
+        class="mobile-images"
+      />
     </app-auth-logo>
 
     <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div>
@@ -11,48 +17,87 @@
     <app-auth-form>
       <div class="login-for">
         <div class="w-form">
-          <form #userFormRef [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="email-form" name="email-form">
+          <form
+            #userFormRef
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            id="email-form"
+            name="email-form"
+          >
             <h2 class="login">Login</h2>
 
+            <!-- Username Field -->
             <label for="name" class="field-label">Username</label>
-            <input class="text-field w-input" maxlength="256" name="name" placeholder="Type your username" type="text"
-              id="name" required="" formControlName="username" />
-            <div *ngIf="loginForm.get('username')?.invalid && submitted" class="error-message">
+            <input
+              class="text-field w-input"
+              maxlength="256"
+              name="name"
+              placeholder="Type your username"
+              type="text"
+              id="name"
+              required=""
+              formControlName="username"
+            />
+            <div
+              *ngIf="loginForm.get('username')?.invalid && submitted"
+              class="error-message"
+            >
               Username is required.
             </div>
 
+            <!-- Password Field with Toggle Eye Icon -->
             <label for="field" class="field-label-2">Password</label>
             <div class="password-container">
-              <input class="text-field w-input" maxlength="256" name="field" placeholder="Type your Password"
-                [type]="showPassword ? 'text' : 'password'" id="field" required="" formControlName="password" />
-              <span class="toggle-password">
-                <i class="fas" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
-                  (click)="togglePasswordVisibility()"></i>
-              </span>
-              <div *ngIf="loginForm.get('password')?.invalid && submitted" class="error-message">
+              <input
+                class="text-field w-input"
+                maxlength="256"
+                name="field"
+                placeholder="Type your Password"
+                [type]="showPassword ? 'text' : 'password'"
+                id="field"
+                required=""
+                formControlName="password"
+              />
+              <ion-icon
+                [attr.name]="showPassword ? 'eye-off' : 'eye'"
+                class="toggle-password"
+                (click)="togglePasswordVisibility()"
+              ></ion-icon>
+              <div
+                *ngIf="loginForm.get('password')?.invalid && submitted"
+                class="error-message"
+              >
                 Password is required.
               </div>
             </div>
 
+            <!-- Error Message -->
             <div *ngIf="errorMessage" class="error-message">
               {{ errorMessage }}
             </div>
 
+            <!-- Forgot Password Link -->
             <div class="w-layout-grid grid">
-              <div id="w-node-_5a2d7d19-0969-1d91-ec5c-ff2a96283cf6-b367414f" class="div-block-4">
-                <div (click)="forgortPassword()" class="forgotpassword" style="white-space: nowrap">
+              <div class="div-block-4">
+                <div
+                  (click)="forgortPassword()"
+                  class="forgotpassword"
+                  style="white-space: nowrap"
+                >
                   Forgot Password
                 </div>
               </div>
             </div>
-            
-            <input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Login" />
-            
+
+            <!-- Login Button -->
+            <input type="submit" class="submit-button w-button" value="Login" />
           </form>
         </div>
+
+        <!-- Create Account Link -->
         <div class="link-block-2 w-inline-block">
           <div class="createlinktext">
-            <h5 class="">
+            <h5>
               Need an account?
               <a (click)="register()" class="linkspace">Create account</a>
             </h5>
@@ -65,17 +110,14 @@
 
 <app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
-<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
+<div class="footerdiv" *ngIf="!isKeyboardVisible">
   <div (click)="home()" class="link-block-5 w-inline-block">
     <img src="./../../../assets/Group-3489.svg" loading="lazy" alt="" />
-    <h6 class="heading-10-copy" id="styleh6" style="
-        color: #fff;
-        margin-top: 10px;
-        margin-bottom: 0;
-        font-family: Montserrat, sans-serif;
-        text-decoration: none;
-        font-size: 12px;
-        margin-top: 4px;
-      "></h6>
+    <h6
+      class="heading-10-copy"
+      style="color: #fff; font-size: 12px; margin-top: 4px"
+    >
+      Home
+    </h6>
   </div>
 </div>

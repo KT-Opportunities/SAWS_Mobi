@@ -3,16 +3,21 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Renderer2,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { of } from 'rxjs';
 import { switchMap, catchError, shareReplay } from 'rxjs/operators';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { FormBuilder } from '@angular/forms';
+import { Platform, ToastController } from '@ionic/angular';
+import { Keyboard } from '@capacitor/keyboard';
 
 export interface Metar {
   raw_text: string;
@@ -37,16 +42,39 @@ export class MetarComponent implements OnInit {
   isLoading: boolean = true;
   item: any;
 
+
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
+  isMobile: boolean;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
+    private mediaMatcher: MediaMatcher,
     private authService: AuthService,
     private apiService: APIService,
-    private sanitizer: DomSanitizer,
+    private fb: FormBuilder,
     private spinner: NgxSpinnerService,
+    private renderer: Renderer2,
+    private toastController: ToastController,
+    private platform: Platform,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
 
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+  }
   ngOnInit() {
     this.fetchMetarReports();
     this.updateDateTime();

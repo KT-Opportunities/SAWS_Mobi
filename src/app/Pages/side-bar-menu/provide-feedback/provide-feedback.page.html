@@ -30,11 +30,25 @@
           <div class="form-group">
             <label for="feedbackFile" class="form-label">Attachment:</label>
             <div class="file-input-container">
-              <input style="color: #fff" #myFileInput type="file" id="feedbackFile" class="form-input"
-                formControlName="feedbackFile" (change)="onFileSelected($event)" />
-              <span *ngIf="selectedFileName" class="selected-file-name">{{ selectedFileName }}</span>
+              <input
+                style="color: #fff"
+                #myFileInput
+                type="file"
+                id="feedbackFile"
+                class="form-input"
+                formControlName="feedbackFile"
+                (change)="onFileSelected($event)"
+              />
+              <span
+                *ngIf="selectedFileName"
+                class="selected-file-name"
+                title="{{ selectedFileName }}"
+              >
+                {{ selectedFileName }}
+              </span>
             </div>
           </div>
+          
 
           <br />
 
