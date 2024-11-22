@@ -1,36 +1,55 @@
-<ion-content [fullscreen]="true">
-  <div *ngIf="isLoading" class="loading-indicator">
-    <ion-spinner *ngIf="isLoading" name="bubbles"></ion-spinner>
-    Loading...
+<ion-content>
+  <div *ngIf="loading" class="loading-indicator">
+    <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>Loading...
   </div>
 
-  <section class="ob-metar-histor" style="margin-top: 240px !important">
-    <div class="cloud-cover">
-      <h1 class="heading6">Graphical SIGMET/AIRMET</h1>
+  <div id="top"></div>
+  <app-package-content>
+    <app-package-header> Graphical SIGMET/AIRMET</app-package-header>
+    <app-package-sub-header
+      ><h1 class="sub-headings"></h1>
+    </app-package-sub-header>
 
+    <app-package-list-items>
       <div class="div-block-15">
         <div>
           <div class="scroll small-m">
             <div class="rows-wrap">
-              <div data-delay="4000" data-animation="slide" class="slider-2 w-slider" data-autoplay="false"
-                data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0"
-                data-nav-spacing="3" data-duration="500" data-infinite="true">
+              <div
+                data-delay="4000"
+                data-animation="slide"
+                class="slider-2 w-slider"
+                data-autoplay="false"
+                data-easing="ease"
+                data-hide-arrows="false"
+                data-disable-swipe="false"
+                data-autoplay-limit="0"
+                data-nav-spacing="3"
+                data-duration="500"
+                data-infinite="true"
+              >
                 <div class="w-slider-mask prev">
-                  <img src="../../assets/graphicSigmentAirmet.png" loading="lazy" width="1216" alt="" class="image" />
+                  <img
+                    src="../../assets/graphicSigmentAirmet.png"
+                    loading="lazy"
+                    width="1216"
+                    alt=""
+                    class="image"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </app-package-list-items>
+  </app-package-content>
 </ion-content>
+
 <app-footer></app-footer>
 
 <div class="footerdiv" id="footerdivid1">
-  <div  (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
+  <div (click)="NavigateToInternational()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6
       class="heading-10-copy"
@@ -45,7 +64,7 @@
         margin-top: 4px;
       "
     >
-    International
+      International
     </h6>
   </div>
 </div>
