@@ -108,7 +108,7 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
 
         this.updateTime(this.SigmetList[0]?.lastmodified)
 
-        // this.isLoading = false;
+         this.isLoading = false;
       });
   }
   async getAirmetTextFiles() {

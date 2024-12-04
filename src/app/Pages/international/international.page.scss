@@ -14788,3 +14788,19 @@ textarea.w-select {
 .prev {
   background-color: #fff;
 }
+.transparent-modal {
+  --width: 100%;
+  --height: 100%;
+  --max-width: 100%;
+  --max-height: 100%;
+  --border-radius: 0;
+}
+
+.transparent-modal .modal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}

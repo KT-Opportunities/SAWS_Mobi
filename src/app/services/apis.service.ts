@@ -157,11 +157,11 @@ export class APIService {
   GetSourceChartFolderFilesList(foldername: any) {
     return this.http.get<any>(
       environment.serverAPI +
-        `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
+        `v1/RawSource/GetSourceChartFolderFilesList?foldername=${foldername}`
     );
   }
 
-  GetSourceChartFolderFilesListtime(foldername: any) {
+  GetSourceChartFolderFilesListtime(foldername: any, time: any) {
     return this.http.get<any>(
       environment.serverAPI +
         `v1/RawSource/GetSourceChartFolderFilesList?imagefoldername=${foldername}`
@@ -285,7 +285,7 @@ export class APIService {
         `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
     );
   }
-  getRecentTafsTime(foldername: string,time:any): Observable<any> {
+  getRecentTafsTime(foldername: string, time: any): Observable<any> {
     return this.http.get<any>(
       environment.serverAPI +
         `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`

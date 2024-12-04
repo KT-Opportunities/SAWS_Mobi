@@ -62,9 +62,11 @@
 
 </ion-content>
 
-<app-footer></app-footer>
+<app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
-<div class="footerdiv" id="footerdivid1">
+
+
+<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
   <div (click)=" BacktoMessagelist()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6 class="heading-10-copy" id="styleh6" style="color: #fff;

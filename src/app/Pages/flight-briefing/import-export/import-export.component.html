@@ -4,101 +4,155 @@
   </div> -->
   <app-loading *ngIf="loading"></app-loading>
   <div id="top"></div>
-<app-package-content>
-  <app-service-header>
-    Import and export flights for <br>lefentse_kto
-  </app-service-header>
+  <app-package-content>
+    <app-service-header>
+      Import and export flights for <br />lefentse_kto
+    </app-service-header>
 
-  <app-package-list-items class="import-and-export-list" 
-  id="exportlis">
-    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
-    <div class="import-and-export-main-div" >
-      <!-- <h1 class="heading-6">Import and export flights for <br>lefentse_kto</h1> -->
-      <div class="w-layout-grid trand-grid">
-        <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d083-8de35a57" class="div-block-15">
-          <div class="div-block-14"></div>
-        </div>
-        <div class="export">
-          <h1 class="heading-6">Export a flight</h1>
-        </div>
+    <app-package-list-items>
+      <div class="import-and-export-main-div">
+        <!-- <h1 class="heading-6">Import and export flights for <br>lefentse_kto</h1> -->
+        <div class="w-layout-grid trand-grid">
+          <div
+            id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d083-8de35a57"
+            class="div-block-15"
+          >
+            <div class="div-block-14"></div>
+          </div>
+          <div class="export">
+            <h1 class="heading-6">Export a flight</h1>
+          </div>
 
-        <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d085-8de35a57" class="form-block w-form">
-          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
-            data-wf-page-id="66028f62f9359d328de35a57" data-wf-element-id="53e524b5-e4df-8ef2-c706-97ca6c55d086">
-            <div class="div-block-44">
-              <div class="div-block-43"><label for="field-3" class="field-label-2">Choose a flight to be exported to a
-                  file:</label>
-                <div data-hover="false" data-delay="0" (click)="selectDropdown('dropdown1')"
-                  class="text-field-blue-copy w-dropdown">
-                  <div class="w-dropdown-toggle">
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon2"></div>
-                    <div class="text-block">{{selectedOption1}}</div>
-                  </div>
-                  <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
-                    <div class="w-dropdown-link" (click)="selectOption('','dropdown1')">Link 1</div>
-                    <div class="w-dropdown-link" (click)="selectOption('','dropdown1')">Link 2</div>
-                    <div class="w-dropdown-link" (click)="selectOption ('','dropdown1')">Link 3</div>
-                  </nav>
-                </div>
-              </div>
-              <div class="button-2-copy w-button">Export</div>
-            </div>
-          </form>
-          <div class="w-form-done">
-          </div>
-          <div class="w-form-fail">
-          </div>
-        </div>
-        <div class="import">
-          <h1 class="heading-6">Import a flight</h1>
-        </div>
-       
-        <div id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d094-8de35a57" class="div-block-467">
-          <div id="w-node-_0e8e5c57-cfb1-5057-7316-e7393c323e61-8de35a57" class="form-block w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
-              data-wf-page-id="66028f62f9359d328de35a57" data-wf-element-id="0e8e5c57-cfb1-5057-7316-e7393c323e62">
+          <div
+            id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d085-8de35a57"
+            class="form-block w-form"
+          >
+            <form
+              id="email-form-2"
+              name="email-form-2"
+              data-name="Email Form 2"
+              method="get"
+              class="form-2"
+              data-wf-page-id="66028f62f9359d328de35a57"
+              data-wf-element-id="53e524b5-e4df-8ef2-c706-97ca6c55d086"
+            >
               <div class="div-block-44">
-                <div class="div-block-43"><label for="field-2" class="field-label-2">Choose File</label>
-                  <div class="upload-div-copy">
-                    <div class="upload-div">
-                      <div class="w-embed">
-                        <form action="/action_page.php">
-                          <input type="file" id="myFile" name="filename">
-                        </form>
+                <div class="div-block-43">
+                  <label for="field-3" class="field-label-2"
+                    >Choose a flight to be exported to a file:</label
+                  >
+                  <div
+                    data-hover="false"
+                    data-delay="0"
+                    (click)="selectDropdown('dropdown1')"
+                    class="text-field-blue-copy w-dropdown"
+                  >
+                    <div class="w-dropdown-toggle">
+                   
+                      <div class="text-block">{{ selectedOption1 }}</div>
+                      <div class="dropdown-arrow">
+                        <img
+                          src="../../assets/icon/arrow-drop-down-svgrepo-com.svg"
+                          loading="lazy"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
+                      <div
+                        class="w-dropdown-link"
+                        (click)="selectOption('', 'dropdown1')"
+                      >
+                        Link 1
+                      </div>
+                      <div
+                        class="w-dropdown-link"
+                        (click)="selectOption('', 'dropdown1')"
+                      >
+                        Link 2
+                      </div>
+                      <div
+                        class="w-dropdown-link"
+                        (click)="selectOption('', 'dropdown1')"
+                      >
+                        Link 3
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+                <div class="button-2-copy w-button">Export</div>
+              </div>
+            </form>
+            <div class="w-form-done"></div>
+            <div class="w-form-fail"></div>
+          </div>
+          <div class="import">
+            <h1 class="heading-6">Import a flight</h1>
+          </div>
+
+          <div
+            id="w-node-_53e524b5-e4df-8ef2-c706-97ca6c55d094-8de35a57"
+            class="div-block-467"
+          >
+            <div
+              id="w-node-_0e8e5c57-cfb1-5057-7316-e7393c323e61-8de35a57"
+              class="form-block w-form"
+            >
+              <form
+                id="email-form-2"
+                name="email-form-2"
+                data-name="Email Form 2"
+                method="get"
+                class="form-2"
+                data-wf-page-id="66028f62f9359d328de35a57"
+                data-wf-element-id="0e8e5c57-cfb1-5057-7316-e7393c323e62"
+              >
+                <div class="div-block-44">
+                  <div class="div-block-43">
+                    <label for="field-2" class="field-label-2"
+                      >Choose File</label
+                    >
+                    <div class="upload-div-copy">
+                      <div class="upload-div">
+                        <div class="w-embed">
+                          <form action="/action_page.php">
+                            <input type="file" id="myFile" name="filename" />
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div class="div-block-469">
+                    <a href="#" class="button-2-copy w-button">Upload</a>
+                  </div>
                 </div>
-                <div class="div-block-469">
-                  <a href="#" class="button-2-copy w-button">Upload</a>
-                </div>
-              </div>
-            </form>
-            <div class="w-form-done">
-            </div>
-            <div class="w-form-fail">
+              </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-  </app-package-list-items>
+    </app-package-list-items>
   </app-package-content>
-
-
-
 </ion-content>
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
+<app-footer></app-footer>
 
-    <div class="footerdiv" id="footerdivid">
-      <a (click)="NavigateToFlightBriefing()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          Flight Briefing</h6>
-      </a>
-    </div>
+<div class="footerdiv" id="footerdivid1">
+  <div (click)="NavigateToFlightBriefing()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+      Flight Briefing
+    </h6>
   </div>
-</ion-footer>
+</div>

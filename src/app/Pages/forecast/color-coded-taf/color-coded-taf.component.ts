@@ -7,6 +7,9 @@ import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { DatePipe } from '@angular/common';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Keyboard } from '@capacitor/keyboard';
+import { Platform } from '@ionic/angular';
 
 interface FileData {
   foldername: string;
@@ -29,7 +32,9 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
   currentDate: string | undefined;
   currentTime: string | undefined;
   intervalId: any;
-  
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  isMobile: boolean;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -38,8 +43,21 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private apiService: APIService,
     private dialog: MatDialog,
-    private datePipe: DatePipe
-  ) { }
+    private datePipe: DatePipe,
+    private mediaMatcher: MediaMatcher,
+    private platform: Platform
+  ) {    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });}
 
   ngOnInit() {
 
@@ -78,12 +96,28 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
       }
     );
 
+    this.platform.ready().then(() => {
+      // Listen for keyboard will show event
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      });
+
+      // Listen for keyboard will hide event
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      });
+    });
   }
+  private mobileQueryListener: () => void;
+
 
   ngOnDestroy(): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
   }
 
   updateTime(date: string ) {

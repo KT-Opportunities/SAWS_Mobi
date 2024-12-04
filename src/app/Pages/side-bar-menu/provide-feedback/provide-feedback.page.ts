@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { fileDataFeedback } from 'src/app/Models/File';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AttachmentFilePage } from '../chat/attachment-file/attachment-file.page';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APIService } from 'src/app/services/apis.service';
+import { Keyboard } from '@capacitor/keyboard';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 interface Message {
   feedback?: string;
@@ -51,6 +53,9 @@ export class ProvideFeedbackPage implements OnInit {
   fileFeedback: any = {};
   addFile: boolean = false;
   feedbackData: any;
+  private mobileQuery: MediaQueryList;
+  isMobile: boolean;
+  isKeyboardVisible = false;
   @ViewChild('scroll') scroll: any;
   @ViewChild('myFileInput') myFileInputVariable!: ElementRef;
   @ViewChild('content') content!: ElementRef;
@@ -65,12 +70,27 @@ export class ProvideFeedbackPage implements OnInit {
     private cdr: ChangeDetectorRef,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private mediaMatcher: MediaMatcher,
+    private platform: Platform
   ) {
     this.feedbackForm = this.formBuilder.group({
       title: ['', Validators.required],
       message: ['', Validators.required],
       feedbackFile: [null], // This will hold the file object
+    });
+
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
     });
   }
 
@@ -82,8 +102,25 @@ export class ProvideFeedbackPage implements OnInit {
       this.userId = userLoginDetails.aspUserId;
       this.fullname = userLoginDetails.fullname;
     }
-  }
 
+    this.platform.ready().then(() => {
+      // Listen for keyboard will show event
+      Keyboard.addListener('keyboardWillShow', () => {
+        this.isKeyboardVisible = true;
+      });
+
+      // Listen for keyboard will hide event
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardVisible = false;
+      });
+    });
+  }
+  private mobileQueryListener: () => void;
+  ngOnDestroy() {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
+  }
   getFeedback() {
     // this.Id = this.route.snapshot.paramMap.get('Id');
     // this.username = this.route.snapshot.paramMap.get('usname');
