@@ -52,6 +52,7 @@ export class MetarRecentComponent implements OnInit {
   }
 
   fetchRecentTafs(): void {
+    debugger;
     this.loading = true; // Set loading to true when fetching starts
     this.spinner.show(); // Show the spinner
 

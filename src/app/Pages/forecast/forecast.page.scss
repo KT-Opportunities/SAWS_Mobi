@@ -5232,7 +5232,6 @@
 .text-field {
   padding: 0.5rem;
   width: 95vw;
-  margin-left: -17px;
 }
 
 .w-dropdown {
@@ -5251,4 +5250,51 @@
   padding: 0.5rem;
   text-align: left;
   width: 100%;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+form {
+  width: 95vw;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.text-field-blue.w-select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+#img {
+  width: 95vw;
+  max-width: 687px; /* Keeps the image proportionate */
+  height: auto;
+  margin: 16px auto;
+  display: block;
+}
+.text-field.w-select {
+  width: 95vw; /* Set the width of each dropdown to 95% of the viewport */
+  margin: 10px auto; /* Center each dropdown horizontally with margin */
+  display: block; /* Ensure each dropdown starts on a new line */
+}
+
+.field-label {
+  width: 95vw; /* Align the label with the dropdown */
+  margin: 0 auto; /* Center the label */
+  display: block; /* Place the label above each dropdown */
 }

@@ -25,85 +25,83 @@
         </div>
       </div>
 
-      <div
-        id="w-node-_6a0a6966-5958-4d57-f8ce-0295cfc1bcc5-08dc15aa"
-        class="form-block w-form"
-      >
+      <div class="w-form">
         <form
-          id="email-form-2"
-          name="email-form-2"
-          data-name="Email Form 2"
+          id="email-form-3"
+          name="email-form-3"
+          data-name="Email Form 3"
           method="get"
-          class="form-2 centered-form"
-          data-wf-page-id="65c5f8d4368e2bdb08dc15aa"
-          data-wf-element-id="6a0a6966-5958-4d57-f8ce-0295cfc1bcc6"
+          class="stacked-form"
+          data-wf-page-id="65c0c298a377a85c9377a649"
+          data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75"
         >
-          <!-- Template Name Field -->
-          <div id="w-node-ca5eddba-f83b-3b16-a8ac-5450b410e804-9377a649">
-            <label for="field-2" class="field-label">Template Name</label>
-            <input
-              class="text-field w-input"
-              maxlength="256"
-              name="field-2"
-              data-name="Field 2"
-              placeholder=""
-              type="text"
-              id="field-2"
-              required=""
-            />
-          </div>
-
-          <!-- Dropdown -->
-          <div class="dropdown-container" style="margin-left: -9px">
-            <div
-              data-hover="false"
-              data-delay="0"
-              class="text-field-blue w-dropdown"
-              id="selct"
-              (click)="forecastDropdown('dropdown1')"
-            >
-              <div class="w-dropdown-toggle">
-                <div class="dropdown-header">
-                  <div class="text-block">{{ selectedOption1 }}</div>
-                  <ion-icon
-                    name="chevron-down-outline"
-                    id="dropdown-icon"
-                    [class.rotate]="isDropdownOpen1"
-                  ></ion-icon>
+          <label for="field-2" class="field-label">Template Name</label>
+          <input
+            class="text-field"
+            maxlength="256"
+            name="field-2"
+            data-name="Field 2"
+            placeholder=""
+            type="text"
+            required=""
+          />
+        </form>
+        <form
+          id="email-form-3"
+          name="email-form-3"
+          data-name="Email Form 3"
+          method="get"
+          class="stacked-form"
+          data-wf-page-id="65c0c298a377a85c9377a649"
+          data-wf-element-id="f1b8684b-0b39-7e93-2135-f1650deadc75"
+        >
+          <!-- Time Dropdown -->
+          <div class="dropdown-item">
+            <!-- <label for="" class="field-label">Time</label> -->
+            <div class="dropdown-container">
+              <div
+                data-hover="false"
+                data-delay="0"
+                class="text-field-blue w-dropdown"
+                id="selct"
+                (click)="forecastDropdown('dropdown1')"
+              >
+                <div class="w-dropdown-toggle">
+                  <div class="dropdown-header">
+                    <div class="text-block">{{ selectedOption1 }}</div>
+                    <ion-icon
+                      name="chevron-down-outline"
+                      id="dropdown-icon"
+                      [class.rotate]="isDropdownOpen1"
+                    ></ion-icon>
+                  </div>
                 </div>
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
+                  <a
+                    class="w-dropdown-link"
+                    (click)="selectOption('Total Cloud', 'dropdown1', $event)"
+                    >Total Cloud</a
+                  >
+                  <a
+                    class="w-dropdown-link"
+                    (click)="selectOption('Medium level', 'dropdown1', $event)"
+                    >Medium level</a
+                  >
+                  <a
+                    class="w-dropdown-link"
+                    (click)="selectOption('Low level', 'dropdown1', $event)"
+                    >Low level</a
+                  >
+                  <a
+                    class="w-dropdown-link"
+                    (click)="selectOption('High Level', 'dropdown1', $event)"
+                    >High Level</a
+                  >
+                </nav>
               </div>
-              <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
-                <a
-                  class="w-dropdown-link"
-                  (click)="selectOption('Total Cloud', 'dropdown1', $event)"
-                  >Total Cloud</a
-                >
-                <a
-                  class="w-dropdown-link"
-                  (click)="selectOption('Medium level', 'dropdown1', $event)"
-                  >Medium level</a
-                >
-                <a
-                  class="w-dropdown-link"
-                  (click)="selectOption('Low level', 'dropdown1', $event)"
-                  >Low level</a
-                >
-                <a
-                  class="w-dropdown-link"
-                  (click)="selectOption('High Level', 'dropdown1', $event)"
-                  >High Level</a
-                >
-              </nav>
             </div>
           </div>
         </form>
-      </div>
-
-      <div
-        id="w-node-_31003eb4-ce66-d881-6d3a-e92898efc8f5-9377a649"
-        class="div-block-14"
-      >
-        <!-- <h5 class="heading-9">Query TAFs</h5> -->
         <form
           action="/search"
           class="search w-form"
