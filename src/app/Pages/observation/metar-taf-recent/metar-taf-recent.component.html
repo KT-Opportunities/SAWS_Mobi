@@ -210,6 +210,46 @@
           </div>
         </div>
       </div>
+
+      <div *ngFor="let taf of recentTafs">
+        <!-- <h1 class="heading-22">Gauteng</h1> -->
+        <!-- Display the foldername and filename -->
+        <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
+
+        <div class="div-block-45">
+          <div class="w-layout-grid ccta-grid" style="margin-bottom: 2px">
+            <div
+              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649"
+              class="cct-copy-copy"
+            >
+              <div class="button w-button">Normal</div>
+            </div>
+            <div
+              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649"
+              class="cct-copy"
+            >
+              <div class="button-2 w-button">Colour / Style Index</div>
+            </div>
+          </div>
+
+          <div class="w-layout-grid heading-text">
+            <div
+              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649"
+              class="cct-copy-copy"
+            >
+              <h1 class="heading-21">{{ taf.filecontent }}</h1>
+            </div>
+            <div
+              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649"
+              class="cct-copy"
+            >
+              <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
+                View Decoded
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </app-package-list-items>
   </app-package-content>
 </ion-content>

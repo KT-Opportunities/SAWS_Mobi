@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ImageModalPage } from '../../image-modal/image-modal.page';
+import { ModalController } from '@ionic/angular';
 
 interface WAFItem {
   foldername: string;
@@ -26,15 +29,20 @@ export class HarmonizedGridPage implements OnInit {
   WAF3: WAFItem[] = [];
   TsProbability: any = [];
   isLoading: boolean = true;
-
+  fileBaseUrl: SafeResourceUrl;
+  ImageArray: any = [];
   constructor(
     private http: HttpClient,
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
     private APIService: APIService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private sanitizer: DomSanitizer,
+    private moodalCtrl: ModalController
+  ) {
+    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   forecastPage() {
     window.history.back();
@@ -42,29 +50,6 @@ export class HarmonizedGridPage implements OnInit {
   }
 
   ngOnInit() {
-    this.APIService.GetSourceAviationFolderFilesList('aerosport').subscribe(
-      (data) => {
-        try {
-          this.TsProbability = data.filter(
-            (item: any) =>
-              item.filename === 'tsprob_d1.gif' ||
-              item.filename === 'tsprob_d2.gif'
-          );
-
-          console.log('DATA2:', this.TsProbability);
-
-          this.isLoading = false;
-        } catch (error) {
-          console.log('Error parsing JSON data:', error);
-          this.isLoading = false;
-        }
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.isLoading = false;
-      }
-    );
-
     this.APIService.GetSourceChartFolderFilesList('wafs').subscribe(
       (data) => {
         try {
@@ -164,36 +149,6 @@ export class HarmonizedGridPage implements OnInit {
     );
   }
 
-  openImageViewer(item: any) {
-    console.log('file Name:', item);
-    const folderName = item.foldername;
-    const fileName = item.filename;
-    console.log('Folder Name:', folderName);
-    this.isLoading = true;
-
-    this.fetchSecondAPI(folderName, fileName)
-      .then((filecontent) => {
-        this.isLoading = false;
-
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { filecontent };
-
-        const dialogRef = this.dialog.open(ImageViewrPage, dialogConfig);
-
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching file content:', error);
-        this.isLoading = false;
-      });
-  }
-
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       this.APIService.GetChartsFile(folderName, fileName).subscribe(
@@ -207,6 +162,60 @@ export class HarmonizedGridPage implements OnInit {
         }
       );
     });
+  }
+  async ImageViewer(imgs: any) {
+    console.log('The img:', imgs);
+
+    const modal = await this.moodalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        imgs, // image link passed on click event
+      },
+      cssClass: 'transparent-modal',
+    });
+    modal.present();
+  }
+
+  ImagesArray(item: any, type: any[]) {
+    console.log('ITEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
+
+    // Ensure you are checking the filename property of each object
+    let ImageArray = type.filter((x) => x.filename.includes(name));
+
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray(ImageArray);
+  }
+  ConvertImagesArray(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetChartsFile('wafs', element.filename).subscribe(
+        (data) => {
+          if (data && data.filecontent) {
+            const imageUrl = 'data:image/gif;base64,' + data.filecontent;
+            this.fileBaseUrl =
+              this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+            this.ImageArray.push(imageUrl);
+          } else {
+            console.error('Invalid image content for:', element.filename);
+          }
+        },
+        (error) => {
+          console.error('Error fetching image data:', error);
+          this.isLoading = false;
+        }
+      );
+    });
+    setTimeout(() => {
+      if (this.ImageArray.length > 0) {
+        console.log('this.ImageArray:', this.ImageArray.length);
+        this.ImageViewer(this.ImageArray);
+      } else {
+        console.error('No images to display.');
+      }
+    }, 1000);
   }
 
   forecastPageNavigation() {

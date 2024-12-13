@@ -7,6 +7,9 @@ import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { DatePipe } from '@angular/common';
+import { Platform } from '@ionic/angular';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Keyboard } from '@capacitor/keyboard';
 
 interface FileData {
   foldername: string;
@@ -33,6 +36,12 @@ export class TafComponent implements OnInit, OnDestroy {
   currentTime: string | undefined;
   intervalId: any;
 
+
+
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  isMobile: boolean;
+  
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -41,8 +50,24 @@ export class TafComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private apiService: APIService,
     private dialog: MatDialog,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+
+    private mediaMatcher: MediaMatcher,
+    private platform: Platform
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+  }
 
   ngOnInit() {
     this.spinner.show();
@@ -52,10 +77,20 @@ export class TafComponent implements OnInit, OnDestroy {
     // this.intervalId = setInterval(() => {
     //   this.updateTime();
     // }, 1000);
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
 
-    this.apiService.GetSourceTextFolderFilesTime('taffc').subscribe(
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+    this.apiService.GetSourceTextFolderFilesTime('taffc', 6).subscribe(
       (Response: FileData[]) => {
-     
         this.TAFArray = Response.slice(0, 20).map((item: FileData) => {
           const parts = item.filename.split('/');
           if (parts.length > 1) {
@@ -73,7 +108,7 @@ export class TafComponent implements OnInit, OnDestroy {
         this.spinner.hide();
         // Handle response data
 
-        this.updateTime(this.TAFArray[0]?.lastmodified)
+        this.updateTime(this.TAFArray[0]?.lastmodified);
       },
       (error) => {
         console.error('API Error:', error);
@@ -82,14 +117,17 @@ export class TafComponent implements OnInit, OnDestroy {
       }
     );
   }
+  private mobileQueryListener: () => void;
 
   ngOnDestroy(): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-  }
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
 
-  updateTime(date: string ) {
+    Keyboard.removeAllListeners();
+  }
+  updateTime(date: string) {
     // const now = new Date();
     this.currentDate =
       this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';

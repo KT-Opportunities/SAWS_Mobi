@@ -62,7 +62,9 @@
           class="div-block-15"
           *ngFor="let report of filteredReports"
         >
-          <h1 class="heading-22">Gauteng</h1>
+          <h1 class="heading-22">
+            {{ getProvinceFromContent(report.filecontent) }}
+          </h1>
           <div class="div-block-32">
             <div class="w-layout-grid ccta-grid">
               <div

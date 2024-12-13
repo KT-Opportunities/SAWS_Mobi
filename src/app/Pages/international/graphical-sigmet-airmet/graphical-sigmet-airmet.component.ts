@@ -11,10 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './graphical-sigmet-airmet.component.html',
   styleUrls: ['./../international.page.scss'],
 })
-export class GraphicalSigmetAirmetComponent  implements OnInit {
-
+export class GraphicalSigmetAirmetComponent implements OnInit {
   isLogged: boolean = false;
-  isLoading: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -24,7 +23,7 @@ export class GraphicalSigmetAirmetComponent  implements OnInit {
     private apiService: APIService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   ngOnInit() {}
 
@@ -35,5 +34,4 @@ export class GraphicalSigmetAirmetComponent  implements OnInit {
   NavigateToInternational() {
     this.router.navigate(['/international']);
   }
-
 }

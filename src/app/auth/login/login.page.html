@@ -7,16 +7,18 @@
         src="/assets/Mask-Group-33x.png"
         loading="lazy"
         width="212"
-        alt="App Logo"
+        alt=""
         class="mobile-images"
       />
     </app-auth-logo>
 
-    <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div>
+    <!-- <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div> -->
 
     <app-auth-form>
       <div class="login-for">
-        <div class="w-form">
+        <h2 class="login">LOGIN</h2>
+
+        <div class="w-form" #content>
           <form
             #userFormRef
             [formGroup]="loginForm"
@@ -24,59 +26,60 @@
             id="email-form"
             name="email-form"
           >
-            <h2 class="login">Login</h2>
+            <div class="w-layout-grid grid-2">
+              <div id="w-node-b12f6374-1320-16d1-1054-374cc200f0b3-6fb9ee30">
+                <label for="name" class="field-label">Username</label>
+                <input
+                  class="text-field w-input"
+                  maxlength="256"
+                  name="name"
+                  placeholder="Type your username"
+                  type="text"
+                  id="name"
+                  required=""
+                  formControlName="username"
+                />
+                <div
+                  *ngIf="loginForm.get('username')?.invalid && submitted"
+                  class="error-message"
+                >
+                  Username is required.
+                </div>
+              </div>
 
-            <!-- Username Field -->
-            <label for="name" class="field-label">Username</label>
-            <input
-              class="text-field w-input"
-              maxlength="256"
-              name="name"
-              placeholder="Type your username"
-              type="text"
-              id="name"
-              required=""
-              formControlName="username"
-            />
-            <div
-              *ngIf="loginForm.get('username')?.invalid && submitted"
-              class="error-message"
-            >
-              Username is required.
-            </div>
+              <div id="w-node-ccdda937-ce5c-ac70-b522-fdf10dd22378-6fb9ee30">
+                <!-- Password Field with Toggle Eye Icon -->
+                <label for="field" class="field-label-2">Password</label>
+                <div class="password-container">
+                  <input
+                    class="text-field w-input"
+                    maxlength="256"
+                    name="field"
+                    placeholder="Type your Password"
+                    [type]="showPassword ? 'text' : 'password'"
+                    id="field"
+                    required=""
+                    formControlName="password"
+                  />
+                  <ion-icon
+                    [attr.name]="showPassword ? 'eye-off' : 'eye'"
+                    class="toggle-password"
+                    (click)="togglePasswordVisibility()"
+                  ></ion-icon>
+                  <div
+                    *ngIf="loginForm.get('password')?.invalid && submitted"
+                    class="error-message"
+                  >
+                    Password is required.
+                  </div>
+                </div>
 
-            <!-- Password Field with Toggle Eye Icon -->
-            <label for="field" class="field-label-2">Password</label>
-            <div class="password-container">
-              <input
-                class="text-field w-input"
-                maxlength="256"
-                name="field"
-                placeholder="Type your Password"
-                [type]="showPassword ? 'text' : 'password'"
-                id="field"
-                required=""
-                formControlName="password"
-              />
-              <ion-icon
-                [attr.name]="showPassword ? 'eye-off' : 'eye'"
-                class="toggle-password"
-                (click)="togglePasswordVisibility()"
-              ></ion-icon>
-              <div
-                *ngIf="loginForm.get('password')?.invalid && submitted"
-                class="error-message"
-              >
-                Password is required.
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="error-message">
+                  {{ errorMessage }}
+                </div>
               </div>
             </div>
-
-            <!-- Error Message -->
-            <div *ngIf="errorMessage" class="error-message">
-              {{ errorMessage }}
-            </div>
-
-            <!-- Forgot Password Link -->
             <div class="w-layout-grid grid">
               <div class="div-block-4">
                 <div
@@ -88,13 +91,15 @@
                 </div>
               </div>
             </div>
-
-            <!-- Login Button -->
-            <input type="submit" class="submit-button w-button" value="Login" />
+            <div class="div-block-6">
+              <input
+                type="submit"
+                class="submit-button w-button"
+                value="Login"
+              />
+            </div>
           </form>
         </div>
-
-        <!-- Create Account Link -->
         <div class="link-block-2 w-inline-block">
           <div class="createlinktext">
             <h5>

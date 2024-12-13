@@ -12,10 +12,9 @@ import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
   selector: 'app-speci',
   templateUrl: './speci.component.html',
   styleUrls: ['./speci.component.scss'],
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
-export class SpeciComponent  implements OnInit {
-
+export class SpeciComponent implements OnInit {
   isLogged: boolean = false;
   loading: boolean = false;
   currentDate: string;
@@ -29,8 +28,7 @@ export class SpeciComponent  implements OnInit {
     private datePipe: DatePipe,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-
-   ) { 
+  ) {
     this.speciReportData = [
       {
         date: '2024-05-14',
@@ -44,7 +42,7 @@ export class SpeciComponent  implements OnInit {
 
     // const now = new Date();
     // this.currentDate = this.datePipe.transform(now, 'shortDate') || '';
-   }
+  }
 
   ngOnInit() {
     this.fetchSpeciReport();
@@ -61,12 +59,11 @@ export class SpeciComponent  implements OnInit {
     return formattedDate + ' ' + formattedTime;
   }
 
-
   fetchSpeciReport() {
     // Show loading indicator before making the API call
     this.loading = true;
     this.spinner.show();
-  
+
     this.apiService.getSpeciReport().subscribe(
       (data) => {
         console.log('Speci report data:', data);
@@ -86,28 +83,27 @@ export class SpeciComponent  implements OnInit {
   isLoading: boolean = true;
   item: any;
   ImageViewer(item: any) {
-    console.log('file Name:', item);
+    console.log('File Name:', item);
     const folderName = 'sigw';
     const fileName = item;
     console.log('Folder Name:', folderName);
+
     this.isLoading = true;
 
-  
-        this.isLoading = false;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '100vw'; // Use viewport width
+    dialogConfig.height = '100vh'; // Use viewport height
+    dialogConfig.maxWidth = '100vw'; // Ensure no constraints
+    dialogConfig.maxHeight = '100vh';
+    dialogConfig.panelClass = 'full-screen-dialog'; // Add a custom class for further styling
+    dialogConfig.data = { item };
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = '80%';
-        dialogConfig.height = '80%';
-        dialogConfig.data = { item };
+    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
 
-        const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
-
-        dialogRef.afterClosed().subscribe(() => {
-          this.isLoading = false;
-        });
-    
+    dialogRef.afterClosed().subscribe(() => {
+      this.isLoading = false;
+    });
   }
-
 }

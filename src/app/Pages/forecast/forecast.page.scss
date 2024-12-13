@@ -13,20 +13,19 @@
 }
 
 .search {
-  width: 100vw;
-  padding: 0 90px;
+  width: 95vw;
+  //padding: 0 90px;
 }
 
 @media screen and (max-width: 991px) {
-
   .w-layout-blockcontainer {
     max-width: 728px;
     margin-bottom: 150px;
   }
 
   .search {
-    width: 100vw;
-    padding: 0 40px;
+    width: 95vw;
+    // padding: 0 40px;
   }
 }
 
@@ -37,8 +36,8 @@
   }
 
   .search {
-    width: 100vw;
-    padding: 0 20px !important;
+    width: 95vw;
+    // padding: 0 20px !important;
   }
 }
 
@@ -153,6 +152,8 @@
   align-items: center;
   padding: 0 10px 0 20px;
   display: flex;
+  min-height: 7vh;
+  width: 95vw;
 }
 
 .button-2-copy {
@@ -166,8 +167,7 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  width: auto;
-
+  width: 13vw;
 }
 
 [class^="w-icon-"],
@@ -185,12 +185,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-#icon3{
+#icon3 {
   padding-right: 0px;
   margin-top: 5px !important;
   position: absolute;
-  margin-left: 80vw !important;
+  margin-left: 88vw !important;
 }
 
 .paragraph-11 {
@@ -593,10 +592,7 @@
   margin-top: 5px;
 }
 
-
 // Icons
-
-
 
 [class^="w-icon-"],
 [class*=" w-icon-"] {
@@ -612,8 +608,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 // End
 
@@ -635,7 +629,7 @@
 }
 
 .text-field-blue {
-  width: 30vw;
+  width: 95vw;
   height: 32px;
   color: #fff;
   background-image: linear-gradient(#00386c, #00386c);
@@ -830,6 +824,7 @@
   margin-bottom: 10px;
   margin-left: 0;
   margin-right: 0;
+  margin-top: 15%;
 }
 
 .grid-28 {
@@ -1754,6 +1749,7 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
+  width: 95vw;
 }
 
 .webcams-section {
@@ -1956,9 +1952,8 @@
 }
 
 @media screen and (max-width: 991px) {
-
   .heading-5 {
-    margin: 10px !important
+    margin: 10px !important;
   }
 
   .heading-9 {
@@ -1968,17 +1963,17 @@
   .search-button {
     margin-top: -1px !important;
     margin-left: -72px;
-    height: 50px;
+    //height: 40px;
   }
 
   .search {
     // width: 80vw;
-    padding: 0 95px;
+    //padding: 0 95px;
   }
 
   .w-input {
     margin-bottom: 0;
-    height: 50px;
+    //height: 50px;
     // margin-left: 50px;
   }
 
@@ -2229,9 +2224,16 @@
   }
 
   .heading-22 {
-    display: block;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 44px;
+    font-size: 18px;
   }
-
+  .heading-25 {
+    line-height: 30px;
+    font-size: 11px;
+  }
   .province {
     display: none;
   }
@@ -2297,7 +2299,7 @@
     font: 400 24px/32px Roboto, sans-serif;
   }
 
-  #items{
+  #items {
     margin-right: 40px;
     margin-left: 40px;
     position: relative;
@@ -2311,7 +2313,7 @@
     grid-template-rows: auto;
     grid-template-columns: 1fr;
     grid-auto-columns: 1fr;
-    display: grid;
+    display: flex;
   }
 
   .wafs,
@@ -2471,9 +2473,6 @@
 }
 
 @media screen and (max-width: 767px) {
-
-
-
   .image {
     margin-top: 0;
   }
@@ -2877,6 +2876,7 @@
 
   .heading-25 {
     line-height: 30px;
+    font-size: 11px;
   }
 
   .recent-tafs {
@@ -2908,7 +2908,7 @@
 
   .text-field-copy,
   .text-field-blue {
-    width: 45vw;
+    width: 95vw;
   }
 
   .button-2-copy-copy {
@@ -3110,24 +3110,23 @@
 }
 
 @media screen and (max-width: 479px) {
-
   .w-input {
     margin-left: 0;
   }
 
   .search-button {
-    height: 38px;
+    //height: 38px;
     margin-top: 5px !important;
     margin-left: -71px;
   }
 
   .search {
-    width: 100vw;
-    padding: 0 20px;
+    width: 95vw;
+    //padding: 0 20px;
   }
 
   .w-input {
-    height: 38px;
+    //height: 38px;
   }
 
   .list-div {
@@ -3552,19 +3551,7 @@
     width: 100px;
     padding-bottom: 10px;
     padding-top: 6px;
-    height: 5vh;
-    // background-color: #00386c;
-    // margin-top: 0;
-    // margin-left: 0;
-    // margin-right: 0;
-    // padding-left: 10px;
-    // padding-right: 10px;
-    // font-size: 10px;
-    // width: 100px;
-    // width: 100px;
-    // padding-bottom: 10px;
-    // padding-top: 10px;
-    // height: 4vh;
+    height: 3vh;
   }
 
   .heading-21 {
@@ -3787,7 +3774,7 @@
 
   .text-field-copy,
   .text-field-blue {
-    width: 92vw;
+    width: 95vw;
   }
 
   .div-block-42 {
@@ -3871,9 +3858,10 @@
   }
 
   .wafs-grid {
-    justify-items: start;
+    justify-items: center;
     margin-left: 0;
     margin-right: 0;
+    width: 95vw;
   }
 
   .grid-28 {
@@ -5071,10 +5059,10 @@
 }
 
 @media screen and (max-width: 991px) {
-#hed29{
-  position: relative;
-  top: 124px;
-}
+  #hed29 {
+    position: relative;
+    top: 124px;
+  }
   #w-node-f1c778ee-c811-ecc1-ff28-ed39c451c414-871273fb,
   #w-node-_1c3f6fe6-e4db-7e6a-a477-03e3d9b9bab2-871273fb,
   #w-node-f2fdc661-12f8-3e0c-2870-5daeb4d3de5e-871273fb,
@@ -5084,17 +5072,15 @@
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 
-  .w-layout-blockcontainer w-container{
-
+  .w-layout-blockcontainer w-container {
     margin-top: 23px;
   }
-  #img{
+  #img {
     margin-top: 31px;
   }
 }
 
 @media screen and (max-width: 767px) {
-
   #w-node-_20b18408-8c74-80d2-287d-98258cd86ab1-eca2c248,
   #w-node-c547babf-737c-635b-62ed-283a9a2ce662-eca2c248,
   #w-node-_282bf718-407a-47de-bb05-370afd11ee83-eca2c248 {
@@ -5168,4 +5154,158 @@
   #w-node-e56588f0-a404-c7f6-783b-ec1c6c397ea2-bb9b1d15 {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+}
+.button-2-copy {
+  background-color: #00386c;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 10px;
+  width: 100px;
+  width: 100px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  height: 4vh;
+}
+.heading-23-copy {
+  font-size: 12px;
+  line-height: 20px;
+}
+.dropdown-list1 {
+  background-image: linear-gradient(#bfcdda, #bfcdda);
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 92%;
+  margin-left: -9px;
+  width: 93vw;
+  position: relative;
+  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.heading-copy {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  flex-direction: row;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  grid-auto-columns: 1fr;
+  display: flex;
+  padding: 7px;
+}
+
+/* Flex container for dropdown toggle */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between text and icon */
+  width: 92vw; /* Dropdown width (responsive) */
+}
+
+/* Dropdown text styling */
+.text-block {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Icon styling */
+#dropdown-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate the icon when dropdown is open */
+// #dropdown-icon.rotate {
+//   transform: rotate(180deg);
+// }
+.form-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-form {
+  display: flex;
+  flex-direction: column; /* Ensures elements are stacked vertically */
+  gap: 1rem; /* Adds spacing between elements */
+  width: 95vw; /* Ensures the form takes up the desired width */
+  max-width: 93vw; /* Optional: Limit maximum width */
+}
+
+.dropdown-container {
+  position: relative;
+  width: 95vw;
+}
+
+.text-field {
+  padding: 0.5rem;
+  width: 95vw;
+}
+
+.w-dropdown {
+  width: 100%; /* Ensures the dropdown takes full width */
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 91vw;
+}
+
+.w-dropdown-link {
+  display: block;
+  padding: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+form {
+  width: 95vw;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.text-field-blue.w-select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+#img {
+  width: 95vw;
+  max-width: 687px; /* Keeps the image proportionate */
+  height: auto;
+  margin: 16px auto;
+  display: block;
+}
+.text-field.w-select {
+  width: 95vw; /* Set the width of each dropdown to 95% of the viewport */
+  margin: 10px auto; /* Center each dropdown horizontally with margin */
+  display: block; /* Ensure each dropdown starts on a new line */
+}
+
+.field-label {
+  width: 95vw; /* Align the label with the dropdown */
+  margin: 0 auto; /* Center the label */
+  display: block; /* Place the label above each dropdown */
 }

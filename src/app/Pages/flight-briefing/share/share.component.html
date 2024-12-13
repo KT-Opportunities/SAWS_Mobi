@@ -4,67 +4,86 @@
   </div> -->
   <app-loading *ngIf="loading"></app-loading>
   <div id="top"></div>
-<app-package-content>
-  <app-service-header>
-    Folder sharing
-  </app-service-header>
+  <app-package-content>
+    <app-service-header> Folder sharing </app-service-header>
 
-
-  <app-package-list-items >
-    <div class="div-block-2"><img src="images/Path-3452.svg" loading="lazy" width="1216" alt="" class="image"></div>
-    <div class="import-and-export-main-div">
-      <!-- <h1 class="heading-6">Folder sharing</h1> -->
-      <div class="w-layout-grid trand-grid">
-        <div id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba3-b80dd68f" class="div-block-15">
-          <div class="div-block-14"></div>
-        </div>
-        <h1 class="sub-heading-share-flight">Shared users are able to view (but not edit and save) your flights.</h1>
-        <h1 id="w-node-d9fe79e2-2e25-5a60-a725-9b5aeb764182-b80dd68f" class="sub-heading-share-flight">You do not have
-          any users shared at the moment.</h1>
-        <div id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba7-b80dd68f" class="form-block w-form">
-          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form-2"
-            data-wf-page-id="66053bcf8df3e25ab80dd68f" data-wf-element-id="3d077699-f5ce-4c2f-6a31-1953017efba8">
-            <div class="div-block-44">
-              <div class="div-block-43"><label for="field-2" class="field-label-2"><strong>Enter a username to
-                    share</strong></label>
-                <input class="text-field w-input" maxlength="256" name="field-2" data-name="Field 2"
-                  placeholder="Example Text" type="text" id="field-2" required="" style="margin-top: -5px;">
+    <app-package-list-items>
+      <div class="import-and-export-main-div">
+        <!-- <h1 class="heading-6">Folder sharing</h1> -->
+        <div class="w-layout-grid trand-grid">
+          <div
+            id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba3-b80dd68f"
+            class="div-block-15"
+          >
+            <div class="div-block-14"></div>
+          </div>
+          <h1 class="sub-heading-share-flight">
+            Shared users are able to view (but not edit and save) your flights.
+          </h1>
+          <h1
+            id="w-node-d9fe79e2-2e25-5a60-a725-9b5aeb764182-b80dd68f"
+            class="sub-heading-share-flight"
+          >
+            You do not have any users shared at the moment.
+          </h1>
+          <div
+            id="w-node-_3d077699-f5ce-4c2f-6a31-1953017efba7-b80dd68f"
+            class="form-block w-form"
+          >
+            <form
+              id="email-form-2"
+              name="email-form-2"
+              data-name="Email Form 2"
+              method="get"
+              class="form-2"
+              data-wf-page-id="66053bcf8df3e25ab80dd68f"
+              data-wf-element-id="3d077699-f5ce-4c2f-6a31-1953017efba8"
+            >
+              <div class="div-block-44">
+                <div class="div-block-43">
+                  <label for="field-2" class="field-label-2">
+                    <strong>Enter a username to share</strong>
+                  </label>
+                  <input
+                    class="text-field w-input"
+                    maxlength="256"
+                    name="field-2"
+                    data-name="Field 2"
+                    placeholder="Example Text"
+                    type="text"
+                    id="field-2"
+                    required=""
+                    style="margin-top: -5px"
+                  />
+                </div>
+                <div class="button-2-copy w-button">Export</div>
               </div>
-              <div class="button-2-copy w-button">Export</div>
-            </div>
-          </form>
-          <div class="w-form-done">
-          </div>
-          <div class="w-form-fail">
+            </form>
           </div>
         </div>
       </div>
-    </div>
-    <div class="bottomdiv"><img src="images/Path-3447.svg" loading="lazy" width="1216" alt="" class="image">
-      <div class="footerdiv">
-        <div class="link-block-5 w-inline-block"><img src="images/Group-4522.svg" loading="lazy" width="35" alt="">
-          <h6 class="heading-10">Forecast</h6>
-        </div>
-      </div>
-    </div>
-  </app-package-list-items>
-
-</app-package-content>
-
-
-
+    </app-package-list-items>
+  </app-package-content>
 </ion-content>
+<app-footer></app-footer>
 
-<ion-footer class="ion-no-border">
-  <div class="">
-    <img src="../../assets/Path-3447.svg" loading="lazy" width="1216" alt="" class="image" />
-
-    <div class="footerdiv" id="footerdivid">
-      <a (click)="NavigateToFlightBriefing()" class="link-block-5 w-inline-block">
-        <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-        <h6 class="heading-10-copy" id="styleh6">
-          Flight Briefing</h6>
-      </a>
-    </div>
+<div class="footerdiv" id="footerdivid1">
+  <div (click)="NavigateToFlightBriefing()" class="link-block-5 w-inline-block">
+    <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+      Flight Briefing
+    </h6>
   </div>
-</ion-footer>
+</div>

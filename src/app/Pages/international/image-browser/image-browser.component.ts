@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ImageBrowserComponent  implements OnInit {
 
-  isLoading: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private router: Router,

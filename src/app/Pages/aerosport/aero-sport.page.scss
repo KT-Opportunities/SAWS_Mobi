@@ -56,7 +56,7 @@
   padding-right: 76px !important;
   margin-left: -47px !important;
 }
-#icon4{
+#icon4 {
   padding-right: 125px !important;
   margin-left: -47px !important;
 }
@@ -4171,6 +4171,8 @@
 .div-block-36 {
   padding-left: 10px;
   padding-right: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .grid-22 {
@@ -7046,6 +7048,7 @@ textarea.w-select {
   display: inline-block;
   cursor: pointer;
   padding-right: 40px;
+  width: 92vw;
 }
 .w-dropdown-toggle:focus {
   outline: 0;
@@ -10480,6 +10483,7 @@ textarea.w-select {
   .grid-21 {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
+    width: 95vw;
   }
   .aerosport-ci {
     margin-top: 250;
@@ -11498,6 +11502,7 @@ textarea.w-select {
   .grid-21 {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
+    width: 95vw;
   }
   .aerosport-ci {
     margin-top: 191;
@@ -15001,4 +15006,13 @@ textarea.w-select {
 
 #w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db3a-7830bece .field-label {
   margin-left: 0; /* Ensure no extra margin pushes it to the center */
+}
+.w-icon-dropdown-toggle2 {
+  width: 16px; /* Adjust the size as needed */
+  height: 16px;
+  background-image: url("../../../assets/Icon\ ionic-ios-arrow-down.svg"); /* Replace with the correct path to your icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-left: 78vw;
 }

@@ -72,32 +72,6 @@ export class RadarComponent implements OnInit {
     }
   }
 
-  // viewImage(imagefilename: string): Promise<string> {
-  //   return new Promise<string>((resolve, reject) => {
-  //     this.loading = true;
-
-  //     const filename = imagefilename + this.selectedOptionFilename;
-
-  //     console.log('filename', filename);
-
-  //     this.apiService.GetAviationFile(this.folderName, filename).subscribe(
-  //       (response) => {
-  //         const filecontent = response.filecontent;
-  //         resolve(filecontent);
-  //         this.openImageViewer(filecontent);
-  //       },
-  //       (error) => {
-  //         reject(error);
-  //         this.loading = false;
-  //         this.imageNotFound = true;
-
-  //         setTimeout(() => {
-  //           this.imageNotFound = false;
-  //         }, 2000);
-  //       }
-  //     );
-  //   });
-  // }
 
   openImageViewer(filecontent: any) {
     const dialogConfig = new MatDialogConfig();
