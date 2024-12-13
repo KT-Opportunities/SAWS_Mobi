@@ -1641,6 +1641,7 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
+  width: 95vw;
 }
 
 .webcams-section {
@@ -4978,4 +4979,59 @@
   #w-node-e56588f0-a404-c7f6-783b-ec1c6c397ea2-bb9b1d15 {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+}
+ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wafs-grid {
+  width: 100%;
+  max-width: 98vw; /* Optional: To limit the max width */
+  margin: 0 auto; /* Centers the grid */
+}
+
+.w-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.w-layout-grid.grid-20 {
+  grid-template-columns: 1fr 1fr 1fr; /* Adjust if needed */
+}
+
+.w-layout-grid.grid-21-copy,
+.w-layout-grid.grid-22-copy {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .w-layout-grid {
+    grid-template-columns: 1fr; /* Stack columns on small screens */
+  }
+  .wafs-grid {
+    grid-row-gap: 0px;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-columns: 1fr;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 27%;
+  }
+  .wafs-grid {
+    justify-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    width: 95vw;
+  }
+}
+.wafs-grid {
+  justify-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  width: 95vw;
 }

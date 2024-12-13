@@ -37,7 +37,7 @@
         >
           <label for="field-2" class="field-label">Template Name</label>
           <input
-            class="text-field"
+            class="text-field w-input"
             maxlength="256"
             name="field-2"
             data-name="Field 2"
@@ -289,9 +289,9 @@
   </app-package-content>
 </ion-content>
 
-<app-footer></app-footer>
+<app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
-<div class="footerdiv" id="footerdivid1">
+<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
   <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6

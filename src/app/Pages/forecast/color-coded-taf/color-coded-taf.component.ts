@@ -23,18 +23,22 @@ interface FileData {
   templateUrl: './color-coded-taf.component.html',
   styleUrls: ['./../forecast.page.scss'],
 })
-export class ColorCodedTafComponent  implements OnInit, OnDestroy {
+export class ColorCodedTafComponent implements OnInit, OnDestroy {
   loading = false;
   isLogged: boolean = false;
+
   TAFArray: FileData[] = [];
   isLoading: boolean = true;
+  searchQuery: string = ''; // Variable to hold the search query
 
   currentDate: string | undefined;
   currentTime: string | undefined;
   intervalId: any;
+
   isKeyboardVisible = false;
   private mobileQuery: MediaQueryList;
   isMobile: boolean;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -44,9 +48,11 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     private apiService: APIService,
     private dialog: MatDialog,
     private datePipe: DatePipe,
+
     private mediaMatcher: MediaMatcher,
     private platform: Platform
-  ) {    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     this.isMobile = this.mobileQuery.matches;
@@ -57,20 +63,32 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
 
     Keyboard.addListener('keyboardWillHide', () => {
       this.isKeyboardVisible = false;
-    });}
+    });
+  }
 
   ngOnInit() {
+    this.spinner.show();
+    this.loading = true;
 
     // this.updateTime();
     // this.intervalId = setInterval(() => {
     //   this.updateTime();
     // }, 1000);
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
 
-    this.spinner.show();
-    this.loading = true;
-    this.apiService.GetSourceTextFolderFilesTime('taffc').subscribe(
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+    this.apiService.GetSourceTextFolderFilesTime('taffc', 6).subscribe(
       (Response: FileData[]) => {
-        this.TAFArray = Response.map((item: FileData) => {
+        this.TAFArray = Response.slice(0, 20).map((item: FileData) => {
           const parts = item.filename.split('/');
           if (parts.length > 1) {
             const newFilename = parts.slice(1).join('/');
@@ -82,12 +100,12 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
             return item;
           }
         });
+        // this.searchQuery = this.searchQuery;
         this.loading = false;
         this.spinner.hide();
-        console.log('Response received:', Response);
         // Handle response data
 
-        this.updateTime(this.TAFArray[0]?.lastmodified)
+        this.updateTime(this.TAFArray[0]?.lastmodified);
       },
       (error) => {
         console.error('API Error:', error);
@@ -95,21 +113,8 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
         this.spinner.hide(); // Ensure spinner is hidden on error
       }
     );
-
-    this.platform.ready().then(() => {
-      // Listen for keyboard will show event
-      Keyboard.addListener('keyboardWillShow', () => {
-        this.isKeyboardVisible = true;
-      });
-
-      // Listen for keyboard will hide event
-      Keyboard.addListener('keyboardWillHide', () => {
-        this.isKeyboardVisible = false;
-      });
-    });
   }
   private mobileQueryListener: () => void;
-
 
   ngOnDestroy(): void {
     if (this.intervalId) {
@@ -119,8 +124,7 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
 
     Keyboard.removeAllListeners();
   }
-
-  updateTime(date: string ) {
+  updateTime(date: string) {
     // const now = new Date();
     this.currentDate =
       this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
@@ -130,13 +134,28 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }
+  // Method to handle search form submission
+  onSearch(event: Event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    this.searchQuery = this.searchQuery.trim().toLowerCase();
+  }
+
+  // Method to filter TAFArray based on search query
+  get filteredTAFArray(): FileData[] {
+    if (!this.searchQuery) {
+      return this.TAFArray;
+    }
+    return this.TAFArray.filter((item) =>
+      item.filecontent.toLowerCase().includes(this.searchQuery)
+    );
+  }
 
   extractHeadingContent(filecontent: string): string | null {
     // Use a regular expression to find the content starting with 'TAF'
     const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
-  
+
     const match = filecontent.match(regex);
-  
+
     if (match) {
       return match[0]; // Return the matched content
     } else {
@@ -153,7 +172,6 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     console.log('file Name:', item);
     const folderName = 'sigw';
     const fileName = item;
-    console.log('Folder Name:', folderName);
     this.isLoading = true;
 
     this.isLoading = false;
@@ -176,5 +194,4 @@ export class ColorCodedTafComponent  implements OnInit, OnDestroy {
     var element = document.getElementById(value);
     element?.scrollIntoView({ behavior: 'smooth' });
   }
-
 }

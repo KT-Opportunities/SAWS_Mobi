@@ -190,9 +190,9 @@ export class MetarColorCodedComponent implements OnInit {
     this.spinner.show(); // Show spinner while fetching data
 
     const foldername = 'metar';
-    this.apiService.getRecentTafs(foldername).subscribe(
+    this.apiService.getMetarReports(foldername, 3000).subscribe(
       (data: MetarReport[]) => {
-        console.log('Metar reports fetched successfully:', data);
+        console.log('Metar reports fetched successfullyssssss:', data);
         this.metarReports = data;
         this.filteredReports = data; // Initialize filteredReports with all reports
         this.loading = false; // Set loading to false after data is fetched
@@ -204,6 +204,18 @@ export class MetarColorCodedComponent implements OnInit {
         this.spinner.hide(); // Hide spinner in case of error
       }
     );
+  }
+  getProvinceFromContent(content: any): any {
+    // Extract the airport code from the content
+    const airportCodeMatch = content.match(/\b[A-Z]{4}\b/); // Matches the first 4-letter uppercase word
+    const airportCode = airportCodeMatch ? airportCodeMatch[0] : null;
+
+    // Map the airport code to the province
+    if (airportCode && this.airportProvinceMapping[airportCode]) {
+      return this.airportProvinceMapping[airportCode];
+    }
+
+    return 'Gauteng'; // Fallback if no match is found
   }
 
   // Function to filter the reports based on the search query

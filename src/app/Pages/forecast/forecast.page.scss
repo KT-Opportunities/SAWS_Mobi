@@ -824,6 +824,7 @@
   margin-bottom: 10px;
   margin-left: 0;
   margin-right: 0;
+  margin-top: 15%;
 }
 
 .grid-28 {
@@ -1748,6 +1749,7 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
+  width: 95vw;
 }
 
 .webcams-section {
@@ -2222,9 +2224,16 @@
   }
 
   .heading-22 {
-    display: block;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 44px;
+    font-size: 18px;
   }
-
+  .heading-25 {
+    line-height: 30px;
+    font-size: 11px;
+  }
   .province {
     display: none;
   }
@@ -2867,6 +2876,7 @@
 
   .heading-25 {
     line-height: 30px;
+    font-size: 11px;
   }
 
   .recent-tafs {
@@ -3848,9 +3858,10 @@
   }
 
   .wafs-grid {
-    justify-items: start;
+    justify-items: center;
     margin-left: 0;
     margin-right: 0;
+    width: 95vw;
   }
 
   .grid-28 {

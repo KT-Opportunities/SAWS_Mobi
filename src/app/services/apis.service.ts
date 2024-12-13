@@ -142,7 +142,7 @@ export class APIService {
     );
   }
 
-  GetSourceTextFolderFilesTime(foldername: string) {
+  GetSourceTextFolderFilesTime(foldername: string, time: any) {
     const url = `${environment.serverAPI}v1/RawSource/GetSourceTextFolderFiles`;
 
     // Construct the query parameters including foldername and lasthours
@@ -289,6 +289,13 @@ export class APIService {
     return this.http.get<any>(
       environment.serverAPI +
         `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}`
+    );
+  }
+
+  getMetarReports(foldername: any, limits: any) {
+    return this.http.get<any>(
+      environment.serverAPI +
+        `v1/RawSource/GetSourceTextFolderFiles?foldername=${foldername}&limit=${limits}`
     );
   }
   getRecentMetarReports(foldername: any, time: any) {

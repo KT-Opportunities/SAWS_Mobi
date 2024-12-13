@@ -1,4 +1,120 @@
-.w-button {
+/* Example */
+.w-layout-grid {
+  // max-height: 260px;
+  // overflow-y: auto;
+}
+
+// .toggle-password {
+//   position: relative;
+//   right: -284px;
+//   top: -22% !important;
+//   transform: translateY(-50%);
+//   cursor: pointer;
+// }
+.registerfield {
+  width: 100%;
+}
+
+// .fas {
+//   position: absolute;
+//   right: -253px;
+//   transform: translateY(-183%);
+//   cursor: pointer;
+//   z-index: 2;
+//   padding-bottom: -20px;
+// }
+.fas {
+  position: absolute;
+  right: 14px;
+  margin-top: 3px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.bottomdiv2 {
+  position: fixed;
+  margin-top: 150%;
+}
+
+.div-block {
+  margin-top: -35px;
+}
+
+.login-for {
+  margin-top: -18px;
+}
+
+.ion-padding {
+  height: 50%;
+  overflow-y: hidden;
+}
+
+// .form-container {
+//   max-height: 300px; /* Adjust height as needed */
+//   overflow-y: auto; /* Enable vertical scrolling */
+// }
+.login-for {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 11px;
+
+  width: 80vw;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-right: 40px;
+  /* Adjust the value based on the icon size */
+}
+
+.input-with-icon .toggle-password {
+  position: absolute;
+  right: 10px;
+  /* Adjust the value based on the desired icon position */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.alert-wrapper ion-alert .alert-message ion-icon {
+  font-size: 36px;
+  /* Adjust the font size of the icon */
+  color: #4caf50;
+  /* Change the color of the icon to green */
+  margin-right: 10px;
+  /* Add some margin to the right of the icon */
+}
+
+.my-custom-class .alert-header {
+  background-color: #007bff;
+  /* Change to your desired header background color */
+  color: #ffffff;
+  /* Change to your desired header text color */
+}
+
+.footerdiv {
+  padding-top: 0;
+  z-index: 1000;
+}
+
+.login-for {
+  //margin-top: 15px;
+  padding-bottom: 10px;
+}
+ 
+.keyboardopen {
+  margin-bottom: 90px;
+}
+.w-button,
+.text-field {
   width: 100%;
 }
 .password-container {
@@ -24,40 +140,38 @@
   font-size: 20px;
 }
 
-/* Media queries for smaller screens */
-@media (max-width: 768px) {
-  .toggle-password i {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .toggle-password i {
-    font-size: 16px;
-  }
-}
 .login-for {
   width: 80vw;
-}
-/* When keyboard is visible */
-.keyboardopen {
-  margin-bottom: 0; /* Remove unnecessary bottom margin */
-  padding-bottom: 0; /* Remove unnecessary padding */
-}
-
-/* Default margin for non-keyboard state */
-ion-content {
-  margin-bottom: 56px; /* Adjust as needed for footer or other elements */
-  --padding-bottom: 0;
-}
-
-.login-for{
-  width: 80vw;
-
-  height: 42vh;
 
   align-items: center;
 
   align-content: center;
+}
+element {
+}
+.w-layout-grid {
+  grid-row-gap: 16px;
 
+  grid-column-gap: 16px;
+
+  grid-template-rows: auto auto;
+
+  grid-template-columns: 1fr;
+
+  grid-auto-columns: 1fr;
+
+  display: grid;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  app-auth-form {
+    justify-content: center;
+    display: flex;
+    margin-top: 13%;
+  }
+
+  .footerdiv {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 }

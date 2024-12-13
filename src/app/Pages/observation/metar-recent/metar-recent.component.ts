@@ -57,7 +57,7 @@ export class MetarRecentComponent implements OnInit {
     this.spinner.show(); // Show the spinner
 
     const foldername = 'taffc'; // Specify the folder name
-    this.apiService.getRecentTafs(foldername).subscribe(
+    this.apiService.getRecentTafsTime(foldername, 6).subscribe(
       (data) => {
         // Assign fetched data to recentTafs array
         this.recentTafs = data;
