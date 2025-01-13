@@ -85,10 +85,13 @@ export class RecentTafsComponent implements OnInit, OnDestroy {
     this.fetchRecentTafs();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
   }
 
   updateTime(date: string ) {

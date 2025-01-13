@@ -69,20 +69,20 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
-    // this.updateTime();
-    // this.intervalId = setInterval(() => {
-    //   this.updateTime();
-    // }, 1000);
+
 
     this.getSigmetTextFiles();
   }
 
-  ngOnDestroy(): void {
+ 
+  ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-  }
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
 
+    Keyboard.removeAllListeners();
+  }
   updateTime(date: string ) {
     // const now = new Date();
     this.currentDate =

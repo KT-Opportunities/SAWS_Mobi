@@ -44,10 +44,19 @@
   width: 89vw;
   margin-bottom: 3px;
 }
-
-.advertisement-image {
-  width: 89vw; /* Makes the image fill the width of the device */
-  height: auto; /* Maintains the aspect ratio */
-  max-height: 100px; /* Optional: Limit the max height if needed */
-  object-fit: cover; /* Ensures the image covers the container properly */
+@media (max-width: 429px) {
+  /* Styles specifically for very small screens (phones with max width 429px) */
+  .advertisement-image {
+    width: 81vw;
+    height: auto;
+    max-height: 5vh;
+    object-fit: cover;
+  }
+}
+@media (min-width: 768px) {
+  .advertisement-image {
+    width: 61vw;
+    max-height: 11vh;
+    margin-bottom: 13px;
+  }
 }

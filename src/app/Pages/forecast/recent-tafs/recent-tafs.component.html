@@ -112,7 +112,7 @@
             maxlength="256"
             name="query"
             placeholder="Search…"
-            type="search"
+            type="text"
             id="search"
             [(ngModel)]="searchQuery"
             (ngModelChange)="filterTafs()"
@@ -312,6 +312,11 @@
   </div>
 </div>
 
-<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
+<button
+  *ngIf="!isKeyboardVisible"
+  (click)="ScrollToTop('top')"
+  id="btntotop"
+  title="Go to top"
+>
   Top
 </button>

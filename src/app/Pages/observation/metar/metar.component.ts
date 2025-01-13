@@ -35,14 +35,14 @@ export class MetarComponent implements OnInit {
   loading: boolean = false;
   metarReports: any[] = [];
   metarData: Metar[] = [];
+
   searchQuery: string = '';
   currentDate: string | undefined;
   currentTime: string | undefined;
 
   isLoading: boolean = true;
   item: any;
-
-
+  intervalId: any;
   isKeyboardVisible = false;
   private mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
@@ -82,6 +82,14 @@ export class MetarComponent implements OnInit {
       this.updateDateTime();
     }, 1000);
   }
+
+  ngOnDestroy() {
+  
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
+  }
+
   updateDateTime() {
     const now = new Date();
     this.currentDate = now.toLocaleDateString('en-CA'); // Format as YYYY-MM-DD
@@ -113,11 +121,17 @@ export class MetarComponent implements OnInit {
   }
 
   // Handle search form submission
-  onSearch(event: Event) {
-    event.preventDefault();
-    this.searchQuery = this.searchQuery.trim().toLowerCase();
+  onSearch(): void {
+    if (this.searchQuery.trim() === '') {
+      this.metarReports = this.metarReports; // If search query is empty, show all reports
+    } else {
+      this.metarReports = this.metarReports.filter((report) =>
+        report.filecontent
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase())
+      );
+    }
   }
-
   // Filter metarReports based on search query
   get filteredmetarReports(): any[] {
     if (!this.searchQuery) {

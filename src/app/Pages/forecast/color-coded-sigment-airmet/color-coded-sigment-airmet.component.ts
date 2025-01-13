@@ -8,6 +8,9 @@ import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { DatePipe } from '@angular/common';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Platform } from '@ionic/angular';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-taf-accuracy-sigment-airmet',
@@ -26,6 +29,9 @@ export class ColorCodedSigmentAirmetComponent  implements OnDestroy {
   currentTime: string | undefined;
   intervalId: any;
 
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  isMobile: boolean;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -35,16 +41,36 @@ export class ColorCodedSigmentAirmetComponent  implements OnDestroy {
     private apiService: APIService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+
+    
+        private mediaMatcher: MediaMatcher,
+        private platform: Platform
+  ) { this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });}
 
   // ngOnInit() {}
+  private mobileQueryListener: () => void;
 
   ngOnDestroy(): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+
+    Keyboard.removeAllListeners();
   }
+
 
   // updateTime() {
   //   const now = new Date();

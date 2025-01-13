@@ -251,14 +251,14 @@
   display: flex;
 }
 
-.search-buttons {
+.search-button {
   background-color: #00386c;
   // background-image: url('../images/Icon-awesome-search.svg');
   background-position: 0%;
   background-repeat: repeat-y;
   background-size: 0;
   border-radius: 10px;
-  margin-top: -11px;
+  margin-top: -9px;
   margin-left: -15px;
 }
 
@@ -283,8 +283,8 @@
 
 .div-block-15 {
   border: 1px #000;
-  // margin-left: 10px;
-  // margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 #block-15 {
   margin-top: 2px !important;
@@ -822,15 +822,15 @@
 }
 
 .div-block-32 {
-  // margin-top: 10px;
-  // margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .heading-text {
   background-color: #bfcdda;
   border-radius: 10px;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px 0 20px;
@@ -2742,8 +2742,8 @@
   }
 
   .div-block-15 {
-    // margin-left: 47px;
-    // margin-right: 47px;
+    margin-left: 47px;
+    margin-right: 47px;
   }
 
   .paragraph-2 {
@@ -3085,8 +3085,8 @@
   }
 
   .div-block-15 {
-    // margin-left: 10px;
-    // margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .aviationhome {
@@ -3751,8 +3751,8 @@
     top: -8px;
   }
 
-  .search-buttons {
-    margin-top: 5px;
+  .search-button {
+    margin-top: 3px;
     margin-bottom: 0;
   }
 
@@ -3762,8 +3762,8 @@
   }
 
   .div-block-15 {
-    // margin-left: 0;
-    // margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .view-decoded {
@@ -5643,9 +5643,9 @@
   max-width: 20%;
   box-sizing: border-box;
 }
-.w-input {
-  margin-bottom: -9px;
-}
+// .w-input {
+//   margin-bottom: -9px;
+// }
 ion-content,
 .dropdown-container,
 .form-block,
