@@ -56,118 +56,129 @@ export class SigwxChartsComponent implements OnInit {
     }
   }
 
-  getTimeFromFilenamexh(item: any) {
-    // Extract filename without extension
-    const filename = item.filename;
+ getTimeFromFilenamexh(item: any) {
+  const filename = item.filename;
 
-    // Check if filename starts with "sigwxh" and ends with ".gif"
-    if (filename.startsWith('sigwxh') && filename.endsWith('.gif')) {
-      // Remove "sigwxh" from the filename and strip the ".gif" extension
-      const timeString = filename.slice(6, -4);
-
-      // Check if timeString is empty, if so, return "A4-size images\nmost recent"
-      if (timeString) {
-        const hour = parseInt(timeString, 10);
-        if (!isNaN(hour)) {
-          // Return formatted hour as HH:00
-          return hour < 10 ? `0${hour}:00` : `${hour}:00`;
-        } else {
-          return 'most recent';
-        }
-      } else {
-        // timeString is empty after removing "sigwxh" and ".gif"
-        return 'most recent';
-      }
+  if (
+    filename.startsWith('sigw_aaxx') ||
+    filename.startsWith('sigw_egrr_aaxx')
+  ) {
+    const timeString = filename.slice(6, -4);
+    if (timeString) {
+      const hour = parseInt(timeString, 10);
+      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
+    } else {
+      return 'most recent';
     }
-    return null;
   }
+  return null;
+}
 
-  getTimeFromFilenamexm(item: any) {
-    // Extract filename without extension
-    const filename = item.filename;
+getTimeFromFilenamexm(item: any) {
+  const filename = item.filename;
 
-    // Check if filename starts with "sigwxh" and ends with ".gif"
-    if (filename.startsWith('sigwxm') && filename.endsWith('.gif')) {
-      // Remove "sigwxh" from the filename and strip the ".gif" extension
-      const timeString = filename.slice(6, -4);
-
-      // Check if timeString is empty, if so, return "A4-size images\nmost recent"
-      if (timeString) {
-        const hour = parseInt(timeString, 10);
-        if (!isNaN(hour)) {
-          // Return formatted hour as HH:00
-          return hour < 10 ? `0${hour}:00` : `${hour}:00`;
-        } else {
-          return 'most recent';
-        }
-      } else {
-        // timeString is empty after removing "sigwxh" and ".gif"
-        return 'most recent';
-      }
+  if (
+    filename.startsWith('sigw_afxx') ||
+    filename.startsWith('sigw_egrr_afxx')
+  ) {
+    const timeString = filename.slice(6, -4);
+    if (timeString) {
+      const hour = parseInt(timeString, 10);
+      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
+    } else {
+      return 'most recent';
     }
-    return null;
   }
+  return null;
+}
 
-  getTimeFromFilenamexl(item: any) {
-    const filename = item.filename;
+getTimeFromFilenamexl(item: any) {
+  const filename = item.filename;
 
-    // Check if filename starts with "sigwxh" and ends with ".gif"
-    if (filename.startsWith('sigwxl') && filename.endsWith('.gif')) {
-      // Remove "sigwxh" from the filename and strip the ".gif" extension
-      const timeString = filename.slice(6, -4);
-
-      // Check if timeString is empty, if so, return "A4-size images\nmost recent"
-      if (timeString) {
-        const hour = parseInt(timeString, 10);
-        if (!isNaN(hour)) {
-          // Return formatted hour as HH:00
-          return hour < 10 ? `0${hour}:00` : `${hour}:00`;
-        } else {
-          return 'most recent';
-        }
-      } else {
-        // timeString is empty after removing "sigwxh" and ".gif"
-        return 'most recent';
-      }
+  if (
+    filename.startsWith('sigw_egrr_euxx') ||
+    filename.startsWith('sigw_egrr_fexx') ||
+    filename.startsWith('sigw_egrr_mexx') ||
+    filename.startsWith('sigw_egrr_naxx') ||
+    filename.startsWith('sigw_egrr_saxx') ||
+    filename.startsWith('sigw_euxx') ||
+    filename.startsWith('sigw_fexx') ||
+    filename.startsWith('sigw_mexx') ||
+    filename.startsWith('sigw_naxx') ||
+    filename.startsWith('sigw_saxx')
+  ) {
+    const timeString = filename.slice(6, -4);
+    if (timeString) {
+      const hour = parseInt(timeString, 10);
+      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
+    } else {
+      return 'most recent';
     }
-    return null;
   }
+  return null;
+}
 
-  loadSynopticData() {
-    this.loading = true;
-    this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
-      (data) => {
-        console.log('SIGWX', data);
+getTimeFromFilenamexUnknown(item: any) {
+  const filename = item.filename;
 
-        data.forEach((item: any) => {
-          const itemStr = JSON.stringify(item).toLowerCase();
-          if (itemStr.includes('sig')) {
-            if (itemStr.includes('xh')) {
-              this.Sigwxh.push(item);
-            } else if (itemStr.includes('xm')) {
-              this.Sigwxm.push(item);
-            } else if (itemStr.includes('xl')) {
-              this.Sigwxl.push(item);
-            }
-          }
-          if (itemStr.includes('ss')) {
-            this.Sigwx.push(item);
-          }
-        });
-
-        this.loading = false;
-        console.log('SIGWXH', this.Sigwxh);
-        console.log('SIGWXM', this.Sigwxm);
-        console.log('SIGWXL', this.Sigwxl);
-        console.log('SSIGW', this.Sigwx);
-        this.loading = false;
-      },
-      (error) => {
-        console.error('Error fetching JSON data:', error);
-        this.loading = false;
-      }
-    );
+  if (
+    filename.includes('ssxx') ||
+    filename.includes('unknown')
+  ) {
+    const timeString = filename.slice(6, -4);
+    if (timeString) {
+      const hour = parseInt(timeString, 10);
+      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
+    } else {
+      return 'most recent';
+    }
   }
+  return null;
+}
+
+loadSynopticData() {
+  this.loading = true;
+  this.Sigwxh = [];
+  this.Sigwxm = [];
+  this.Sigwxl = [];
+  this.Sigwx = [];
+
+  this.APIService.GetSourceAviationFolderFilesList('sigw').subscribe(
+    (data) => {
+      console.log('SIGWX', data);
+     
+      data.forEach((item: any) => {
+        const filename = item.filename.toLowerCase();
+
+        if (filename.includes('aaxx')) {
+          this.Sigwxh.push(item);
+        } else if (filename.includes('afxx')) {
+          this.Sigwxm.push(item);
+        } else if (filename.includes('euxx') || filename.includes('fexx')) {
+          this.Sigwxl.push(item);
+        } else if (filename.includes('ssxx') || filename.includes('unknownxx')) {
+          this.Sigwx.push(item);
+        } else {
+          // Fallback or miscellaneous
+          console.log('Uncategorized file:', filename);
+        }
+      });
+
+    this.loading = false;
+       this.spinner.hide();
+      console.log('SIGWXH (AAXX)', this.Sigwxh);
+      console.log('SIGWXM (AFXX)', this.Sigwxm);
+      console.log('SIGWXL (EUXX/FEXX)', this.Sigwxl);
+      console.log('SSIGW (SSXX/UNKNOWN)', this.Sigwx);
+    },
+    (error) => {
+      console.error('Error fetching SIGW data:', error);
+      this.loading = false;
+      this.spinner.hide(); 
+    }
+  );
+}
+
 
   openImageViewerSymbol(item: any) {
     console.log('File Name:', item);
@@ -194,7 +205,7 @@ export class SigwxChartsComponent implements OnInit {
   fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
     // Return a promise that resolves with filecontent
     return new Promise<string>((resolve, reject) => {
-      this.APIService.GetAviationFile('', fileName).subscribe(
+      this.APIService.GetAviationFile(folderName, fileName).subscribe(
         (response) => {
           // Assuming filecontent is obtained from the response
           const filecontent = response.filecontent;
@@ -246,7 +257,7 @@ export class SigwxChartsComponent implements OnInit {
     this.ImageArray = [];
     console.log('IMAGE ARRAY', ImageArray);
     ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile('', element.filename).subscribe(
+      this.APIService.GetAviationFile('sigw', element.filename).subscribe(
         (data) => {
           console.log('IMAGE:', data);
           const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly

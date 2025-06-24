@@ -68,7 +68,7 @@ export class GridMaximumPage implements OnInit {
         console.log('Response:', this.MaximumArray);
 
         this.MaximumArray = response.filter((item: any) =>
-          item.filename.includes('mxw_EURAFI-AREA')
+          item.filename.includes('mxw_EURAFI')
         );
         console.log('Response after filter:', this.MaximumArray);
 

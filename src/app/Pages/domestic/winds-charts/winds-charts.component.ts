@@ -20,6 +20,9 @@ export class WindsChartsComponent implements OnInit {
   isLogged: boolean = false;
   loading: boolean = false;
   chartsArray: any[] = []; // Ensure this is an array
+  BlockWinds: any[] = [];
+  blockWindsWH: any[] = [];
+blockWindsWL: any[] = [];
   sevenDigitNumbers: number[] = []; // Explicitly declare the type of this array
   fileBaseUrl: SafeResourceUrl;
   ImageArray: any = [];
@@ -56,7 +59,8 @@ export class WindsChartsComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.generateSevenDigitNumbers(7);
-    this.fetchWindChartImages();
+    this.fetchBlockWindChartImages();
+     this.fetchWindChartImage();
     if (!this.authService.getIsLoggedIn()) {
       this.router.navigate(['/login']);
     }
@@ -72,8 +76,8 @@ export class WindsChartsComponent implements OnInit {
     console.log('Generated and Sorted Seven Digit Numbers:', this.sevenDigitNumbers);
   }
   
-  fetchWindChartImages() {
-    this.APIService.fetchWindChartImages('').subscribe(
+  fetchBlockWindChartImages() {
+    this.APIService.GetSourceAviationFolderFilesList('winds/blockwinds').subscribe(
       (data: any[]) => {
         console.log('API Response:', data);
 
@@ -88,26 +92,14 @@ export class WindsChartsComponent implements OnInit {
 
         if (data && data.length > 0) {
           // Check if 'filename' exists and contains expected substrings
-          const filteredData = data.filter(item => item.filename && (item.filename.includes('glwl') || item.filename.includes('vglwh')));
-          console.log('Filtered Data:', filteredData);
+          const filteredData = data.filter(item => item.filename);
+        
+          this.BlockWinds = data
 
-          const limitedData = filteredData.slice(0, 7);
-          console.log('Limited Data:', limitedData);
-
-          // Ensure that each item in filteredData gets a sevenDigitNumber
-          this.chartsArray = limitedData.map((item, index) => {
-            const format = this.getChartFormat(item.filename);
-            // Use modulus operator to handle cases where index >= sevenDigitNumbers.length
-            const sevenDigitNumber = this.sevenDigitNumbers[index % this.sevenDigitNumbers.length] || 'N/A';
-            console.log('Mapping item:', item, 'Format:', format, 'Seven Digit Number:', sevenDigitNumber);
-            return {
-              format: format,
-              filename: item.filename,
-              sevenDigitNumber: sevenDigitNumber
-            };
-          });
-
-          console.log('Charts Array:', this.chartsArray);
+          console.log('Charts Array:', this.BlockWinds);
+          this.blockWindsWH = this.BlockWinds.filter(item => item.filename.includes('WH'));
+          this.blockWindsWL = this.BlockWinds.filter(item => item.filename.includes('WL'));
+          debugger
         } else {
           console.warn('No valid data found in API response.');
         }
@@ -121,6 +113,55 @@ export class WindsChartsComponent implements OnInit {
     );
   }
   
+   fetchWindChartImage() {
+    this.APIService.GetSourceAviationFolderFilesList('winds/vectorwinds').subscribe(
+      (data: any[]) => {
+        console.log('API Response:', data);
+
+        // Debug: Ensure 'data' is an array and contains objects with 'filename'
+        if (!Array.isArray(data)) {
+          console.error('API response is not an array:', data);
+          this.loading = false;
+          return;
+        }
+
+        console.log('Seven Digit Numbers:', this.sevenDigitNumbers);
+
+        if (data && data.length > 0) {
+          // Check if 'filename' exists and contains expected substrings
+          const filteredData = data.filter(item => item.filename );
+          console.log('Filtered Data:', filteredData);
+
+          const limitedData = filteredData.slice(0, 7);
+          console.log('Limited Data:', limitedData);
+
+          // Ensure that each item in filteredData gets a sevenDigitNumber
+          // this.chartsArray = limitedData.map((item, index) => {
+          //   const format = this.getChartFormat(item.filename);
+          //   // Use modulus operator to handle cases where index >= sevenDigitNumbers.length
+          //   const sevenDigitNumber = this.sevenDigitNumbers[index % this.sevenDigitNumbers.length] || 'N/A';
+          //   console.log('Mapping item:', item, 'Format:', format, 'Seven Digit Number:', sevenDigitNumber);
+          //   return {
+          //     format: format,
+          //     filename: item.filename,
+          //     sevenDigitNumber: sevenDigitNumber
+          //   };
+          // });
+          this.chartsArray = data;
+          console.log('Charts Array:', this.chartsArray);
+          debugger
+        } else {
+          console.warn('No valid data found in API response.');
+        }
+
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching wind chart images:', error);
+        this.loading = false;
+      }
+    );
+  }
   getChartFormat(filename: string): string {
     if (filename.includes('30')) return '30';
     if (filename.includes('36')) return '36';
@@ -136,10 +177,10 @@ export class WindsChartsComponent implements OnInit {
 
   openImageViewer(item: any) {
     console.log('Opening', item);
-    const folderName = '';
+    const folderName = item.foldername;
     const fileName = item.filename;
 
-    if (folderName === '' && fileName) {
+    if (folderName  && fileName) {
       this.loading = true;
 
       this.fetchSecondAPI(folderName, fileName)
@@ -207,6 +248,7 @@ export class WindsChartsComponent implements OnInit {
     let ImageArray = type.filter((x) => x.filename.includes(item.filename));
 
     console.log('Image arrays:', ImageArray);
+    debugger
     this.ConvertImagesArray(ImageArray);
   }
 
@@ -214,7 +256,7 @@ export class WindsChartsComponent implements OnInit {
     this.ImageArray = [];
     console.log('IMAGE ARRAY', ImageArray);
     ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile('', element.filename).subscribe(
+      this.APIService.GetAviationFile(element.foldername, element.filename).subscribe(
         (data) => {
           console.log('IMAGE:', data);
           const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly

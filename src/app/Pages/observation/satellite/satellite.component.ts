@@ -19,7 +19,7 @@ export class SatelliteComponent implements OnInit {
   isDropdownProductOpen: boolean = false;
   isDropdownFrameOpen: boolean = false;
 
-  selectedOptionProduct: string = 'IR108_RSA';
+  selectedOptionProduct: string = 'VIS008';
   selectedOptionFrame: string = '';
   loading: boolean = false;
 
@@ -92,7 +92,7 @@ export class SatelliteComponent implements OnInit {
     setTimeout(() => {
       this.presentForecastToast();
     }, 500); // Delay by 500ms
-    this.getSatelliteImage('', 12, this.selectedOptionProduct);
+    this.getSatelliteImage('satellite', 12, this.selectedOptionProduct);
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
@@ -118,7 +118,7 @@ export class SatelliteComponent implements OnInit {
         if (this.frameArray.length > 0) {
           this.selectedOptionFrame = this.frameArray[0].lastmodified;
 
-          this.displayImage('', this.frameArray[0].filename).then(
+          this.displayImage('satellite', this.frameArray[0].filename).then(
             (filecontent) => {
               const imageUrlNext = 'data:image/gif;base64,' + filecontent;
               this.fileBaseUrl =
@@ -161,32 +161,37 @@ export class SatelliteComponent implements OnInit {
     this.loading = true;
     if (dropdown === 'dropdown1') {
       this.selectedOptionProduct = selectOption;
-      this.getSatelliteImage('', 12, selectOption);
+      this.getSatelliteImage('satellite', 12, selectOption);
     }
 
     if (dropdown === 'dropdown2') {
       this.selectedOptionProduct = selectOption;
-      this.getSatelliteImage('', 12, selectOption);
+      this.getSatelliteImage('satellite', 12, selectOption);
     }
 
     if (dropdown === 'dropdown3') {
       this.selectedOptionProduct = selectOption;
-      this.getSatelliteImage('', 12, selectOption);
+      this.getSatelliteImage('satellite', 12, selectOption);
     }
     if (dropdown === 'dropdown4') {
       this.selectedOptionProduct = selectOption;
-      this.getSatelliteImage('', 12, selectOption);
+      this.getSatelliteImage('satellite', 12, selectOption);
     }
     if (dropdown === 'dropdown5') {
       this.selectedOptionProduct = selectOption;
-      this.getSatelliteImage('', 12, selectOption);
+      this.getSatelliteImage('satellite', 12, selectOption);
     }
+    if (dropdown === 'dropdown6') {
+      this.selectedOptionProduct = selectOption;
+      this.getSatelliteImage('satellite', 12, selectOption);
+    }
+   
   }
 
   selectDropdownFrame(selectOption: string, imagefilename: string) {
     this.selectedOptionFrame = selectOption;
 
-    this.displayImage('', imagefilename).then((filecontent) => {
+    this.displayImage('satellite', imagefilename).then((filecontent) => {
       const imageUrlNext = 'data:image/gif;base64,' + filecontent;
       this.fileBaseUrl =
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
@@ -220,7 +225,7 @@ export class SatelliteComponent implements OnInit {
 
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
-    this.displayImage('', fileName).then((filecontent) => {
+    this.displayImage('satellite', fileName).then((filecontent) => {
       const imageUrlNext = 'data:image/gif;base64,' + filecontent;
       this.fileBaseUrl =
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
@@ -234,7 +239,7 @@ export class SatelliteComponent implements OnInit {
     this.selectedOptionFrame = this.frameArray[this.currentIndex].lastmodified;
     const fileName = this.frameArray[this.currentIndex].filename;
 
-    this.displayImage('', fileName).then((filecontent) => {
+    this.displayImage('satellite', fileName).then((filecontent) => {
       const imageUrlNext = 'data:image/gif;base64,' + filecontent;
       this.fileBaseUrl =
         this.sanitizer.bypassSecurityTrustResourceUrl(imageUrlNext);
