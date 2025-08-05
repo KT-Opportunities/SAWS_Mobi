@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { FormBuilder } from '@angular/forms';
+import { Platform, ToastController } from '@ionic/angular';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-metar-recent',
@@ -17,6 +21,11 @@ export class MetarRecentComponent implements OnInit {
   loading: boolean = false;
   recentTafs: any[] = [];
 
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
+  isMobile: boolean;
+  intervalId: any;
   isDropdownOpen1: boolean = false;
   isDropdownOpen2: boolean = false;
   isDropdownOpen3: boolean = false;
@@ -36,14 +45,40 @@ export class MetarRecentComponent implements OnInit {
   selectedOption7: string = '5 Min';
   selectedOption8: string = '2024-03-20 13:15';
 
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private mediaMatcher: MediaMatcher,
+    private fb: FormBuilder,
+    private renderer: Renderer2,
+    private toastController: ToastController,
+    private platform: Platform,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+  }
+
+  ngOnDestroy() {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+    Keyboard.removeAllListeners();
+  }
 
   ngOnInit() {}
 

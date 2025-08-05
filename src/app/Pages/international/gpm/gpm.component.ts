@@ -20,9 +20,9 @@ export class GpmComponent implements OnInit {
   loading: boolean = false; // Loading state for image fetching
   ImageinfoArray: any = [];
   selectedOption: string = 'West'; // Default selected option for dropdown
-  selectedOptionFilename: string = 'gw_west'; // Filename prefix based on the selected option
+  selectedOptionFilename: string = 'gpm_west'; // Filename prefix based on the selected option
   isDropdownOpen: boolean = false; // State for managing dropdown visibility
-  folderName: string = 'gw'; // Folder name for image fetching
+  folderName: string = 'gpm'; // Folder name for image fetching
   lastModifiedHours: number = 12; // Time to filter recent images
 
   constructor(
@@ -99,11 +99,11 @@ export class GpmComponent implements OnInit {
     this.loading = true;
     if (ImageArray.length > 0) {
       // Fetch the first image's data
-      this.APIService.GetAviationFile('gw', ImageArray[0].filename).subscribe(
+      this.APIService.GetAviationFile('gpm', ImageArray[0].filename).subscribe(
         (data) => {
           console.log('IMAGE:', data);
-          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
-
+          const imageUrl = 'data:image/png;base64,' + data.filecontent; // Adjust the MIME type accordingly
+debugger
           // Set the safe URL for the image
           this.fileBaseUrl =
             this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);

@@ -1,17 +1,19 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
+import { FormBuilder } from '@angular/forms';
+import { Platform, ToastController } from '@ionic/angular';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Keyboard } from '@capacitor/keyboard';
 
-// Define an interface to strongly type the MetarReport
 interface MetarReport {
   filecontent: string;
-  // Add other properties of the MetarReport object here
 }
 
 @Component({
@@ -27,8 +29,8 @@ export class MetarColorCodedComponent implements OnInit {
   searchQuery: string = '';
   currentDate: string | undefined;
   currentTime: string | undefined;
+  selectedProvince: string = 'Gauteng';
 
-  selectedProvince: string = 'Gauteng'; // Default selected province
 
   airportProvinceMapping: { [key: string]: string } = {
     FAOR: 'Gauteng',
@@ -154,74 +156,63 @@ export class MetarColorCodedComponent implements OnInit {
     FAME: 'Other Stations',
   };
 
+  isKeyboardVisible = false;
+  private mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
+  isMobile: boolean;
+  intervalId: any;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private apiService: APIService,
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private mediaMatcher: MediaMatcher,
+    private fb: FormBuilder,
+    private renderer: Renderer2,
+    private toastController: ToastController,
+    private platform: Platform,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    this.isMobile = this.mobileQuery.matches;
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      this.isKeyboardVisible = true;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      this.isKeyboardVisible = false;
+    });
+  }
+
+  ngOnDestroy() {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+    Keyboard.removeAllListeners();
+  }
 
   ngOnInit() {
     this.fetchMetarReports();
-
     this.updateDateTime();
     setInterval(() => {
       this.updateDateTime();
     }, 1000);
   }
+
   updateDateTime() {
     const now = new Date();
     this.currentDate = now.toLocaleDateString('en-CA'); // Format as YYYY-MM-DD
     this.currentTime = now.toLocaleTimeString(); // Format as HH:MM:SS
   }
-  getFilteredReports() {
-    // return this.metarReports.filter(
-    //   // report => this.airportProvinceMapping[report.airportCode] === this.selectedProvince
-    // );
-  }
-  navigateToObservation(): void {
-    this.router.navigate(['/observation']);
-  }
 
-  fetchMetarReports(): void {
-    this.loading = true; // Set loading to true before fetching data
-    this.spinner.show(); // Show spinner while fetching data
-
-    const foldername = 'metar';
-    this.apiService.getMetarReports(foldername, 3000).subscribe(
-      (data: MetarReport[]) => {
-        console.log('Metar reports fetched successfullyssssss:', data);
-        this.metarReports = data;
-        this.filteredReports = data; // Initialize filteredReports with all reports
-        this.loading = false; // Set loading to false after data is fetched
-        this.spinner.hide(); // Hide spinner after data is fetched
-      },
-      (error) => {
-        console.error('Error fetching Metar Reports:', error);
-        this.loading = false; // Set loading to false in case of error
-        this.spinner.hide(); // Hide spinner in case of error
-      }
-    );
-  }
-  getProvinceFromContent(content: any): any {
-    // Extract the airport code from the content
-    const airportCodeMatch = content.match(/\b[A-Z]{4}\b/); // Matches the first 4-letter uppercase word
-    const airportCode = airportCodeMatch ? airportCodeMatch[0] : null;
-
-    // Map the airport code to the province
-    if (airportCode && this.airportProvinceMapping[airportCode]) {
-      return this.airportProvinceMapping[airportCode];
-    }
-
-    return 'Gauteng'; // Fallback if no match is found
-  }
-
-  // Function to filter the reports based on the search query
   onSearch(): void {
     if (this.searchQuery.trim() === '') {
-      this.filteredReports = this.metarReports; // If search query is empty, show all reports
+      this.filteredReports = this.metarReports;
     } else {
       this.filteredReports = this.metarReports.filter((report) =>
         report.filecontent
@@ -230,13 +221,43 @@ export class MetarColorCodedComponent implements OnInit {
       );
     }
   }
-  isLoading: boolean = true;
-  item: any;
+
+  fetchMetarReports(): void {
+    this.loading = true;
+    this.spinner.show();
+
+    const foldername = 'metar';
+    this.apiService.getMetarReports(foldername, 3000).subscribe(
+      (data: MetarReport[]) => {
+        console.log('Metar reports fetched successfully:', data);
+        this.metarReports = data;
+        this.filteredReports = data;
+        this.loading = false;
+        this.spinner.hide();
+      },
+      (error) => {
+        console.error('Error fetching Metar Reports:', error);
+        this.loading = false;
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getProvinceFromContent(content: any): any {
+    const airportCodeMatch = content.match(/\b[A-Z]{4}\b/);
+    const airportCode = airportCodeMatch ? airportCodeMatch[0] : null;
+
+    if (airportCode && this.airportProvinceMapping[airportCode]) {
+      return this.airportProvinceMapping[airportCode];
+    }
+
+    return 'Gauteng';
+  }
+
   ImageViewer(item: any) {
-    console.log('file Name:', item);
+    console.log('File Name:', item);
     const folderName = 'sigw';
     const fileName = item;
-    console.log('Folder Name:', folderName);
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -248,7 +269,10 @@ export class MetarColorCodedComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
 
     dialogRef.afterClosed().subscribe(() => {
-      this.isLoading = false;
+      this.loading = false;
     });
+  }
+  navigateToObservation(): void {
+    this.router.navigate(['/observation']);
   }
 }

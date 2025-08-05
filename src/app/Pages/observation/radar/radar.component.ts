@@ -24,7 +24,7 @@ export class RadarComponent implements OnInit {
   selectedOption: string = 'Individual image';
   selectedOptionFilename: string = '.gif';
   isDropdownOpen: boolean = false;
-  folderName: string = '';
+  folderName: string = 'radar';
   lastModifiedHours: number = 12;
   ImageinfoArray: any = [];
 
@@ -122,12 +122,12 @@ export class RadarComponent implements OnInit {
   ConvertImagesArray(ImageArray: any[]) {
     // Clear the ImageArray
     this.ImageArray = [];
-
+     this.loading = true;
     console.log('IMAGE ARRAY:', ImageArray);
 
     if (ImageArray.length > 0) {
       // Fetch the first image's data
-      this.APIService.GetAviationFile('', ImageArray[0].filename).subscribe(
+      this.APIService.GetAviationFile(this.folderName, ImageArray[0].filename).subscribe(
         (data) => {
           console.log('IMAGE:', data);
           const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
@@ -138,7 +138,7 @@ export class RadarComponent implements OnInit {
 
           // Store the single image in the ImageArray
           this.ImageArray.push(imageUrl);
-
+          this.loading = false; 
           // Present the modal with the single image
           this.ImageViewer(this.ImageArray[0]); // Pass the single image URL
         },

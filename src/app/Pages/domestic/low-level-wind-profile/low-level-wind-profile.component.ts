@@ -68,7 +68,7 @@ export class LowLevelWindProfileComponent implements OnInit {
   }
 
   transformFilename(filename: string): string {
-    if (filename.startsWith('up') && filename.endsWith('.gif')) {
+    if (filename.startsWith('up') && filename.endsWith('.png')) {
       return filename.slice(2, -4);
     }
     return filename;

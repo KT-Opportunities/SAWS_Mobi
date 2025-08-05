@@ -49,7 +49,7 @@
           >
             <div
               class="w-layout-grid grid-22"
-              *ngFor="let chart of chartsArray; let i = index"
+              *ngFor="let chart of blockWindsWL; let i = index"
               [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
             >
               <div
@@ -66,7 +66,7 @@
                 <div
                   class="button-2-copy w-button"
                   id="view"
-                  (click)="ImagesArray(chart, chartsArray)"
+                  (click)="ImagesArray(chart, BlockWinds)"
                 >
                   View
                 </div>
@@ -120,7 +120,7 @@
           >
             <div
               class="w-layout-grid grid-22"
-              *ngFor="let chart of chartsArray; let i = index"
+              *ngFor="let chart of blockWindsWH; let i = index"
               [ngClass]="i % 2 === 0 ? 'div-block-455' : 'div-block-38'"
             >
               <div
@@ -137,7 +137,7 @@
                 <div
                   class="button-2-copy w-button"
                   id="view"
-                  (click)="ImagesArray(chart, chartsArray)"
+                  (click)="ImagesArray(chart, BlockWinds)"
                 >
                   View
                 </div>

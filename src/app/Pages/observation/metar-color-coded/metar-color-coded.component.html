@@ -109,9 +109,9 @@
   </app-package-content>
 </ion-content>
 
-<app-footer></app-footer>
+<app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
-<div class="footerdiv" id="footerdivid1">
+<div class="footerdiv" *ngIf="!isKeyboardVisible">
   <div (click)="navigateToObservation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6
