@@ -1,0 +1,47 @@
+
+<ion-content [fullscreen]="true">
+  <!-- Colour / Style Index Popup -->
+
+<div class="style-popup" >
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Colour / Style Index</h2>
+       <span (click)="closeImageDialog()" class="cancel-icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+    >
+      <path
+        id="Icon_material-cancel"
+        data-name="Icon material-cancel"
+        d="M18,3A15,15,0,1,0,33,18,14.986,14.986,0,0,0,18,3Zm7.5,20.385L23.385,25.5,18,20.115,12.615,25.5,10.5,23.385,15.885,18,10.5,12.615,12.615,10.5,18,15.885,23.385,10.5,25.5,12.615,20.115,18Z"
+        transform="translate(-3 -3)"
+        fill="#e03c32"
+      />
+    </svg>
+  </span>
+    </div>
+
+    <ul class="legend-list">
+      <li><span class="green bold">Difference between temperature and dewpoint below 5</span></li>
+      <li><span class="red">Difference between temperature and dewpoint more than 10</span></li>
+      <li><span class="lime bold">Temperature and dewpoint is equal</span></li>
+      <li><span class="blue bold">Cloud height is below 1000 m</span></li>
+      <li><span class="orange">Remarks</span></li>
+      <li><span class="purple bold">Weather</span></li>
+      <li><span class="brown">Recent weather</span></li>
+      <li><span class="blue-light">Wind speed</span></li>
+      <li><span class="blue-medium">Wind gusts</span></li>
+      <li><span class="blue-bold">Wind gusts exceeding previous reported value by 10 knots</span></li>
+      <li><span class="darkred">Visibility below 5000</span></li>
+      <li><span class="black">Wind direction</span></li>
+      <li><span class="gray">Old data</span></li>
+      <li><span class="red bold">SPECI</span></li>
+      <li><span class="blue bold">Trends</span></li>
+    </ul>
+  </div>
+</div>
+
+</ion-content>
