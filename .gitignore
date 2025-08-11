@@ -74,3 +74,6 @@ android1/wrapper/dists/gradle-8.0.2-all/25ipb77ce0ypy3f9xdton1ae6/gradle-8.0.2/s
 *.jar
 /android1
 capacitor.config.ts
+/ios_
+/ios
+/www_
