@@ -90,27 +90,58 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
 
-  async getSigmetTextFiles() {
-    await this.apiService
-      .GetSourceTextFolderFiles('sigmet')
-      .subscribe((Response) => {
-        Response.forEach((element: any) => {
-          element.Id = element.filecontent.split('\n')[2];
+async getSigmetTextFiles() {
+  await this.apiService
+    .GetSourceTextFolderFiles('sigmet')
+    .subscribe((Response) => {
+      // FIR mapping
+      const firMap: Record<string, string> = {
+        FAJA: "JOHANNESBURG FIR",
+        FACA: "CAPE TOWN FIR",
+        FAJO: "JOHANNESBURG OCEANIC FIR"
+      };
 
-          var vwValue = element.filecontent.split('\n')[2];
-          element.heading = vwValue;
+      this.SigmetList = Response
+        .filter((el: any) =>
+          Object.keys(firMap).some(fir => el.filecontent.includes(fir))
+        )
+        .map((el: any) => {
+          // Find matching FIR
+          let matchedFir = Object.keys(firMap).find(fir =>
+            el.filecontent.includes(fir)
+          );
+
+          // Clean content → skip first 3 lines, keep the SIGMET
+          const lines = el.filecontent.split('\n');
+          const sigmetText = lines.slice(3).join('\n').trim();
+
+          return {
+            ...el,
+            heading: `${matchedFir} (${firMap[matchedFir!]})`,
+            filecontent: sigmetText
+          };
         });
 
-        this.SigmetList = Response;
-        this.filteredList = Response;
-        this.getAirmetTextFiles();
-        console.log('Response ', this.SigmetList);
+      this.filteredList = this.SigmetList;
+      this.getAirmetTextFiles();
 
-        this.updateTime(this.SigmetList[0]?.lastmodified)
+      console.log("Formatted SIGMETs:", this.SigmetList);
 
-         this.isLoading = false;
-      });
-  }
+      this.updateTime(this.SigmetList[0]?.lastmodified);
+      this.isLoading = false;
+    });
+}
+
+
+// Utility to clean & extract the SIGMET message
+private extractSigmet(fileContent: string): string {
+  let lines = fileContent.split('\n');
+  // Skip the first 2–3 metadata lines, keep the SIGMET part
+  let sigmetLines = lines.slice(3).join('\n');
+  return sigmetLines.trim();
+}
+
+
   async getAirmetTextFiles() {
     await this.apiService
       .GetSourceTextFolderFiles('airmet')

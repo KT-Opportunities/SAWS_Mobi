@@ -4,7 +4,7 @@
   <div id="top"></div>
   <app-package-content>
     <app-package-header class="package-header">
-      Colour Coded METAR
+      METAR
     </app-package-header>
 
     <app-package-sub-header>
@@ -58,51 +58,46 @@
             </form>
           </div>
         </div>
-        <div
-          id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea"
-          class="div-block-15"
-          *ngFor="let report of metarReports"
-        >
-          <h1 class="heading-22">Gauteng</h1>
-          <div class="div-block-32">
-            <div class="w-layout-grid ccta-grid">
-              <div
-                id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea"
-                class="cct-copy-copy"
-              >
-                <div class="button w-button" id="Normal">Normal</div>
-              </div>
-              <div
-                id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea"
-                class="cct-copy"
-              >
-                <div class="button-2 w-button">Colour / Style Index</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <!-- Iterate over filteredReports to show the filtered results -->
-            <div class="w-layout-grid heading-text">
-              <div
-                id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea"
-                class="cct-copy-copy"
-              >
-                <h1 class="heading-21">{{ report.filecontent }}</h1>
-              </div>
-              <div
-                id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea"
-                class="cct-copy"
-              >
-                <div
-                  class="button-2-copy w-button"
-                  (click)="ImageViewer(report)"
-                >
-                  View Decoded
-                </div>
-              </div>
-            </div>
+        <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
+  <div class="div-block-15">
+    <!-- Display province heading only once -->
+    <h1 class="heading-22">{{ province }}</h1>
+
+    <div class="div-block-32">
+      <div class="w-layout-grid ccta-grid">
+        <div class="cct-copy-copy">
+         <div class="button w-button" id="Normal" (click)="toggleCoded()">
+  {{ coded ? 'Normal' : 'Color Coded' }}
+</div>
+        
+        </div>
+        <div class="cct-copy">
+          <div class="button-2 w-button" (click)="ViewColorCodedStyle()">Colour / Style Index</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loop through each report in the province -->
+    <div *ngFor="let report of groupedReportsByProvince[province]">
+      <div class="w-layout-grid heading-text">
+        <div class="cct-copy-copy">
+         <h1 *ngIf="!coded" class="heading-21" style="white-space: pre-wrap;">
+  {{ report.filecontent }}
+</h1>
+
+<!-- Show color-coded version if coded -->
+<h1 *ngIf="coded" class="heading-21" style="white-space: pre-wrap;" [innerHTML]="parseColorCoded(report.filecontent)">
+</h1>
+        </div>
+        <div class="cct-copy">
+          <div class="button-2-copy w-button" (click)="ImageViewer(report)">
+            View Decoded
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
       </div>
     </app-package-list-items>
   </app-package-content>
