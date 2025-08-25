@@ -71,7 +71,7 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
 
-    this.getSigmetTextFiles();
+    this.loadSigmetAndAirmet();
   }
 
  
@@ -89,104 +89,167 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
       this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
     this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
+async loadSigmetAndAirmet() {
+  this.isLoading = true;
 
-async getSigmetTextFiles() {
-  await this.apiService
-    .GetSourceTextFolderFiles('sigmet')
-    .subscribe((Response) => {
-      // FIR mapping
-      const firMap: Record<string, string> = {
-        FAJA: "JOHANNESBURG FIR",
-        FACA: "CAPE TOWN FIR",
-        FAJO: "JOHANNESBURG OCEANIC FIR"
-      };
+  const firMapping: { [key: string]: string } = {
+    'FACA CAPE TOWN FIR': 'FACA (CAPE TOWN FIR)',
+    'FAJO JOHANNESBURG OCEANIC FIR': 'FAJO (JOHANNESBURG OCEANIC FIR)',
+    'FAJA JOHANNESBURG FIR': 'FAJA (JOHANNESBURG FIR)',
+  };
 
-      this.SigmetList = Response
-        .filter((el: any) =>
-          Object.keys(firMap).some(fir => el.filecontent.includes(fir))
-        )
-        .map((el: any) => {
-          // Find matching FIR
-          let matchedFir = Object.keys(firMap).find(fir =>
-            el.filecontent.includes(fir)
-          );
+  const sortedFirs = Object.keys(firMapping).sort((a, b) => b.length - a.length);
 
-          // Clean content → skip first 3 lines, keep the SIGMET
-          const lines = el.filecontent.split('\n');
-          const sigmetText = lines.slice(3).join('\n').trim();
+  // Helper to process each response
+  const processResponse = (response: any[]) =>
+    response
+      .map((el: any) => {
+        const fileContent = el.filecontent.toUpperCase();
+        const afterFaor = fileContent.split('FAOR-')[1] || '';
+        const firKey = sortedFirs.find(fir =>
+          new RegExp(`\\b${fir}\\b`).test(afterFaor)
+        );
 
-          return {
-            ...el,
-            heading: `${matchedFir} (${firMap[matchedFir!]})`,
-            filecontent: sigmetText
-          };
-        });
+        return {
+          heading: firKey ? firMapping[firKey] : 'Unknown FIR',
+          filecontent: el.filecontent,
+        };
+      })
+      .filter(el => el.heading !== 'Unknown FIR');
 
-      this.filteredList = this.SigmetList;
-      this.getAirmetTextFiles();
+  // Fetch both requests in parallel
+  this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
+    this.apiService.GetSourceTextFolderFiles('airmet').subscribe((airmets: any[]) => {
+      
+      const sigmetList = processResponse(sigmets);
+      const airmetList = processResponse(airmets);
 
-      console.log("Formatted SIGMETs:", this.SigmetList);
+      // Combine both arrays
+      this.SigmetList = [...sigmetList, ...airmetList];
 
-      this.updateTime(this.SigmetList[0]?.lastmodified);
+      console.log("Combined Data:", this.SigmetList);
       this.isLoading = false;
     });
+  });
 }
 
 
-// Utility to clean & extract the SIGMET message
-private extractSigmet(fileContent: string): string {
-  let lines = fileContent.split('\n');
-  // Skip the first 2–3 metadata lines, keep the SIGMET part
-  let sigmetLines = lines.slice(3).join('\n');
-  return sigmetLines.trim();
+formatSigmetForDisplay(content: string): string {
+  if (!content) return '';
+
+  // 1) Clean up control characters and normalize newlines
+  let cleaned = content
+    .replace(/[\u0000-\u0009\u000B-\u000C\u000E-\u001F]+/g, '')
+    .replace(/\r\r\n|\r\n|\r/g, '\n')
+    .replace(/^\s*\d+\s*$/gm, '') // remove lines that are only numbers
+    .trim();
+
+  // 2) Find first real message line (FA?? SIGMET/AIRMET)
+  const startRegex = /\bFA(?:CA|JA|JO)\s+(?:SIGMET|AIRMET)\b/;
+  const startIdx = cleaned.search(startRegex);
+  cleaned = startIdx >= 0 ? cleaned.slice(startIdx) : cleaned;
+
+  // 3) Keep until first "=" (end of message)
+  const endIdx = cleaned.indexOf('=');
+  let singleMsg = endIdx >= 0 ? cleaned.slice(0, endIdx + 1) : cleaned;
+
+  // 4) Force newline after FAOR-
+  singleMsg = singleMsg.replace(/FAOR-(?!\n)/g, 'FAOR-\n');
+
+  // 5) Force newline after WI
+  singleMsg = singleMsg.replace(/\bWI\b/g, 'WI\n');
+
+  // 6) Break coordinate lines after every 4th dash
+  const lines = singleMsg.split('\n');
+  const formattedLines = lines.map(line => {
+    if (line.includes('-')) {
+      const parts = line.split(' - ');
+      const newParts = [];
+      for (let i = 0; i < parts.length; i += 4) {
+        newParts.push(parts.slice(i, i + 4).join(' - '));
+      }
+      return newParts.join(' -\n');
+    }
+    return line;
+  });
+
+  // 🔑 Replace "\n" with <br> for HTML rendering
+  return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
 }
 
 
-  async getAirmetTextFiles() {
-    await this.apiService
-      .GetSourceTextFolderFiles('airmet')
-      .subscribe((Response) => {
-        Response.forEach((element: any) => {
-          element.Id = element.filecontent.split('\n')[2];
 
-          var vwValue = element.filecontent.split('\n')[2];
-          element.heading = vwValue;
-        });
 
-        //Push airmet into the sigmet List
-        this.SigmetList.push(Response);
-        this.filteredList.push(Response);
-        console.log('Response - airmet  ', this.SigmetList);
+// async getSigmetTextFiles() {
+//   await this.apiService
+//     .GetSourceTextFolderFiles('sigmet')
+//     .subscribe((Response) => {
+//       // FIR mapping
+//       const firMap: Record<string, string> = {
+//         FAJA: "JOHANNESBURG FIR",
+//         FACA: "CAPE TOWN FIR",
+//         FAJO: "JOHANNESBURG OCEANIC FIR"
+//       };
 
-        this.getGametTextFiles();
-      }),
-      (error: any) => {
-        console.error('Error occurred while fetching airmet data: ', error);
-        this.isLoading = false;
-      };
-  }
-  async getGametTextFiles() {
-    await this.apiService
-      .GetSourceTextFolderFiles('gamet')
-      .subscribe((Response) => {
-        Response.forEach((element: any) => {
-          element.Id = element.filecontent.split('\n')[2];
+//      this.SigmetList = Response
+//   .filter((el: any) =>
+//     Object.keys(firMap).some(fir =>
+//       el.filecontent.toUpperCase().includes(fir)
+//     )
+//   )
+//   .map((el: any) => {
+//     // Find matching FIR
+//     let matchedFir = Object.keys(firMap).find(fir =>
+//       el.filecontent.toUpperCase().includes(fir)
+//     );
 
-          var vwValue = element.filecontent.split('\n')[2];
-          element.heading = vwValue;
-        });
-        //push gamet into the sigmet List
-        this.SigmetList.push(Response);
-        this.filteredList.push(Response);
-        console.log('Response - gamet ', this.SigmetList);
+//     // Clean content → skip first 3 lines, keep the SIGMET
+//     const lines = el.filecontent.split('\n');
+//     const sigmetText = lines.slice(3).join('\n').trim();
 
-        this.isLoading = false;
-      }),
-      (error: any) => {
-        console.error('Error occurred while fetching gamet data: ', error);
-        this.isLoading = false;
-      };
-  }
+//     return {
+//       ...el,
+//       heading: `${matchedFir} (${firMap[matchedFir!]})`,
+//       filecontent: sigmetText
+//     };
+//   });
+
+
+//       this.filteredList = this.SigmetList;
+//       this.getAirmetTextFiles();
+
+//       console.log("Formatted SIGMETs:", this.SigmetList);
+
+//       this.updateTime(this.SigmetList[0]?.lastmodified);
+//       this.isLoading = false;
+//     });
+// }
+
+
+  // async getAirmetTextFiles() {
+  //   await this.apiService
+  //     .GetSourceTextFolderFiles('gamet')
+  //     .subscribe((Response) => {
+  //       Response.forEach((element: any) => {
+  //         element.Id = element.filecontent.split('\n')[2];
+
+  //         var vwValue = element.filecontent.split('\n')[2];
+  //         element.heading = vwValue;
+  //       });
+
+  //       //Push airmet into the sigmet List
+  //       this.SigmetList.push(Response);
+  //       // this.filteredList.push(Response);
+  //       console.log('Response - airmet  ', this.SigmetList);
+
+       
+  //     }),
+  //     (error: any) => {
+  //       console.error('Error occurred while fetching airmet data: ', error);
+  //       this.isLoading = false;
+  //     };
+  // }
+
 
   filterbySearch(event: Event) {
     let element = document.getElementById('searchValue');
@@ -202,15 +265,6 @@ private extractSigmet(fileContent: string): string {
     );
   }
 
-  filterNosearchValue() {
-    let element = document.getElementById('searchValue');
-    console.log('value ', element);
-    let filterValue = (element as HTMLInputElement).value;
-    if (!filterValue) {
-      this.SigmetList = this.filteredList;
-      return;
-    }
-  }
 
   ScrollToTop(value: any) {
     var element = document.getElementById(value);
