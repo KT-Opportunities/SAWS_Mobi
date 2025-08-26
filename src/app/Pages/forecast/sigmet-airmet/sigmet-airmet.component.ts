@@ -127,6 +127,13 @@ async loadSigmetAndAirmet() {
       // Combine both arrays
       this.SigmetList = [...sigmetList, ...airmetList];
 
+      this.SigmetList.sort((a: any, b: any) => {
+  const headingA = a.heading ?? '';
+  const headingB = b.heading ?? '';
+  return headingA.localeCompare(headingB);
+});
+
+
       console.log("Combined Data:", this.SigmetList);
       this.isLoading = false;
     });
@@ -156,100 +163,30 @@ formatSigmetForDisplay(content: string): string {
   // 4) Force newline after FAOR-
   singleMsg = singleMsg.replace(/FAOR-(?!\n)/g, 'FAOR-\n');
 
-  // 5) Force newline after WI
-  singleMsg = singleMsg.replace(/\bWI\b/g, 'WI\n');
+  // 5) Force newline after WI, but not if already followed by one
+  singleMsg = singleMsg.replace(/\bWI\b(?!\n)/g, 'WI\n');
 
-  // 6) Break coordinate lines after every 4th dash
+  // 5b) Collapse multiple newlines into one
+  singleMsg = singleMsg.replace(/\n{2,}/g, '\n');
+
+  // 6) Format coordinate lines neatly (preserve dashes)
   const lines = singleMsg.split('\n');
   const formattedLines = lines.map(line => {
-    if (line.includes('-')) {
-      const parts = line.split(' - ');
-      const newParts = [];
-      for (let i = 0; i < parts.length; i += 4) {
-        newParts.push(parts.slice(i, i + 4).join(' - '));
-      }
-      return newParts.join(' -\n');
+    if (line.match(/[NS]\d{4}\s+[EW]\d{5}/)) {
+      const parts = line.split(/\s*-\s*/);
+
+      // pad each coordinate so they align in columns
+      const padded = parts.map(p => p.trim().padEnd(15, ' '));
+
+      // join back with " - " so dash is preserved
+      return padded.join(' - ');
     }
     return line;
   });
 
-  // 🔑 Replace "\n" with <br> for HTML rendering
+  // 🔑 Return with <br> for HTML display
   return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
 }
-
-
-
-
-// async getSigmetTextFiles() {
-//   await this.apiService
-//     .GetSourceTextFolderFiles('sigmet')
-//     .subscribe((Response) => {
-//       // FIR mapping
-//       const firMap: Record<string, string> = {
-//         FAJA: "JOHANNESBURG FIR",
-//         FACA: "CAPE TOWN FIR",
-//         FAJO: "JOHANNESBURG OCEANIC FIR"
-//       };
-
-//      this.SigmetList = Response
-//   .filter((el: any) =>
-//     Object.keys(firMap).some(fir =>
-//       el.filecontent.toUpperCase().includes(fir)
-//     )
-//   )
-//   .map((el: any) => {
-//     // Find matching FIR
-//     let matchedFir = Object.keys(firMap).find(fir =>
-//       el.filecontent.toUpperCase().includes(fir)
-//     );
-
-//     // Clean content → skip first 3 lines, keep the SIGMET
-//     const lines = el.filecontent.split('\n');
-//     const sigmetText = lines.slice(3).join('\n').trim();
-
-//     return {
-//       ...el,
-//       heading: `${matchedFir} (${firMap[matchedFir!]})`,
-//       filecontent: sigmetText
-//     };
-//   });
-
-
-//       this.filteredList = this.SigmetList;
-//       this.getAirmetTextFiles();
-
-//       console.log("Formatted SIGMETs:", this.SigmetList);
-
-//       this.updateTime(this.SigmetList[0]?.lastmodified);
-//       this.isLoading = false;
-//     });
-// }
-
-
-  // async getAirmetTextFiles() {
-  //   await this.apiService
-  //     .GetSourceTextFolderFiles('gamet')
-  //     .subscribe((Response) => {
-  //       Response.forEach((element: any) => {
-  //         element.Id = element.filecontent.split('\n')[2];
-
-  //         var vwValue = element.filecontent.split('\n')[2];
-  //         element.heading = vwValue;
-  //       });
-
-  //       //Push airmet into the sigmet List
-  //       this.SigmetList.push(Response);
-  //       // this.filteredList.push(Response);
-  //       console.log('Response - airmet  ', this.SigmetList);
-
-       
-  //     }),
-  //     (error: any) => {
-  //       console.error('Error occurred while fetching airmet data: ', error);
-  //       this.isLoading = false;
-  //     };
-  // }
-
 
   filterbySearch(event: Event) {
     let element = document.getElementById('searchValue');

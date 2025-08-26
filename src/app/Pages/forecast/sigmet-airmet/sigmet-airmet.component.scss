@@ -94,3 +94,10 @@
     align-items: flex-end;
     margin-top: 120px;
   }
+ .sigmet-text {
+  font-family: monospace;   /* makes spaces equal */
+  white-space: pre-wrap;    /* keeps spaces & wraps text */
+  line-height: 1.2;         /* tighter line gap */
+  margin: 0;                /* no extra spacing */
+}
+
