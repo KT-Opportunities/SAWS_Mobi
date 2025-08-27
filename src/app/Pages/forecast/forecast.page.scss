@@ -5309,3 +5309,15 @@ label {
   margin: 0 auto; /* Center the label */
   display: block; /* Place the label above each dropdown */
 }
+.taf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space between rows */
+}
+
+.taf-row {
+  display: flex;
+  align-items: center; /* vertically align text + button */
+  justify-content: space-between; /* pushes button to right */
+  gap: 1rem; /* space between taf and button */
+}

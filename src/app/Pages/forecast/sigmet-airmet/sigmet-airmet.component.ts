@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { APIService } from '../../../services/apis.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-// import { textFile } from '../advisories/advisories.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
@@ -12,6 +11,7 @@ import { Platform, ToastController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Keyboard } from '@capacitor/keyboard';
+
 @Component({
   selector: 'app-sigmet-airmet',
   templateUrl: './sigmet-airmet.component.html',
@@ -29,11 +29,11 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
   currentTime: string | undefined;
   intervalId: any;
 
-
   isKeyboardVisible = false;
   private mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
   isMobile: boolean;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -50,9 +50,6 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private elRef: ElementRef,
     private iab: InAppBrowser,
-
-  
-  
     private datePipe: DatePipe
   ) {
     this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
@@ -68,130 +65,113 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
       this.isKeyboardVisible = false;
     });
   }
+
   ngOnInit() {
-
-
     this.loadSigmetAndAirmet();
   }
 
- 
   ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
     this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
-
     Keyboard.removeAllListeners();
   }
-  updateTime(date: string ) {
-    // const now = new Date();
-    this.currentDate =
-      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
+
+  updateTime(date: string) {
+    this.currentDate = this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
     this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
   }
-async loadSigmetAndAirmet() {
-  this.isLoading = true;
 
-  const firMapping: { [key: string]: string } = {
-    'FACA CAPE TOWN FIR': 'FACA (CAPE TOWN FIR)',
-    'FAJO JOHANNESBURG OCEANIC FIR': 'FAJO (JOHANNESBURG OCEANIC FIR)',
-    'FAJA JOHANNESBURG FIR': 'FAJA (JOHANNESBURG FIR)',
-  };
+  async loadSigmetAndAirmet() {
+    this.isLoading = true;
 
-  const sortedFirs = Object.keys(firMapping).sort((a, b) => b.length - a.length);
+    const firMapping: { [key: string]: string } = {
+      'FACA CAPE TOWN FIR': 'FACA (CAPE TOWN FIR)',
+      'FAJO JOHANNESBURG OCEANIC FIR': 'FAJO (JOHANNESBURG OCEANIC FIR)',
+      'FAJA JOHANNESBURG FIR': 'FAJA (JOHANNESBURG FIR)',
+    };
 
-  // Helper to process each response
-  const processResponse = (response: any[]) =>
-    response
-      .map((el: any) => {
-        const fileContent = el.filecontent.toUpperCase();
-        const afterFaor = fileContent.split('FAOR-')[1] || '';
-        const firKey = sortedFirs.find(fir =>
-          new RegExp(`\\b${fir}\\b`).test(afterFaor)
-        );
+    const sortedFirs = Object.keys(firMapping).sort((a, b) => b.length - a.length);
 
-        return {
-          heading: firKey ? firMapping[firKey] : 'Unknown FIR',
-          filecontent: el.filecontent,
-        };
-      })
-      .filter(el => el.heading !== 'Unknown FIR');
+    // Helper to process each response
+    const processResponse = (response: any[]) =>
+      response
+        .map((el: any) => {
+          const fileContent = el.filecontent.toUpperCase();
+          const afterFaor = fileContent.split('FAOR-')[1] || '';
+          const firKey = sortedFirs.find(fir =>
+            new RegExp(`\\b${fir}\\b`).test(afterFaor)
+          );
 
-  // Fetch both requests in parallel
-  this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
-    this.apiService.GetSourceTextFolderFiles('airmet').subscribe((airmets: any[]) => {
-      
-      const sigmetList = processResponse(sigmets);
-      const airmetList = processResponse(airmets);
+          return {
+            heading: firKey ? firMapping[firKey] : 'Unknown FIR',
+            filecontent: el.filecontent,
+          };
+        })
+        .filter(el => el.heading !== 'Unknown FIR');
 
-      // Combine both arrays
-      this.SigmetList = [...sigmetList, ...airmetList];
+    // Fetch both requests in parallel
+    this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
+      this.apiService.GetSourceTextFolderFiles('airmet').subscribe((airmets: any[]) => {
+        const sigmetList = processResponse(sigmets);
+        const airmetList = processResponse(airmets);
 
-      this.SigmetList.sort((a: any, b: any) => {
-  const headingA = a.heading ?? '';
-  const headingB = b.heading ?? '';
-  return headingA.localeCompare(headingB);
-});
+        // Combine both arrays
+        this.SigmetList = [...sigmetList, ...airmetList];
+         this.updateTime(new Date().toISOString());
+        // Custom order
+        const customOrder = ['Search', 'FAJA (JOHANNESBURG FIR)', 'FACA (CAPE TOWN FIR)', 'FAJO (JOHANNESBURG OCEANIC FIR)'];
 
+        // Sort according to custom order
+        this.SigmetList.sort((a: any, b: any) => {
+          const indexA = customOrder.indexOf(a.heading);
+          const indexB = customOrder.indexOf(b.heading);
+          return indexA - indexB;
+        });
 
-      console.log("Combined Data:", this.SigmetList);
-      this.isLoading = false;
+        console.log("Combined Data (sorted):", this.SigmetList);
+        this.isLoading = false;
+      });
     });
-  });
-}
+  }
 
+  formatSigmetForDisplay(content: string): string {
+    if (!content) return '';
 
-formatSigmetForDisplay(content: string): string {
-  if (!content) return '';
+    let cleaned = content
+      .replace(/[\u0000-\u0009\u000B-\u000C\u000E-\u001F]+/g, '')
+      .replace(/\r\r\n|\r\n|\r/g, '\n')
+      .replace(/^\s*\d+\s*$/gm, '')
+      .trim();
 
-  // 1) Clean up control characters and normalize newlines
-  let cleaned = content
-    .replace(/[\u0000-\u0009\u000B-\u000C\u000E-\u001F]+/g, '')
-    .replace(/\r\r\n|\r\n|\r/g, '\n')
-    .replace(/^\s*\d+\s*$/gm, '') // remove lines that are only numbers
-    .trim();
+    const startRegex = /\bFA(?:CA|JA|JO)\s+(?:SIGMET|AIRMET)\b/;
+    const startIdx = cleaned.search(startRegex);
+    cleaned = startIdx >= 0 ? cleaned.slice(startIdx) : cleaned;
 
-  // 2) Find first real message line (FA?? SIGMET/AIRMET)
-  const startRegex = /\bFA(?:CA|JA|JO)\s+(?:SIGMET|AIRMET)\b/;
-  const startIdx = cleaned.search(startRegex);
-  cleaned = startIdx >= 0 ? cleaned.slice(startIdx) : cleaned;
+    const endIdx = cleaned.indexOf('=');
+    let singleMsg = endIdx >= 0 ? cleaned.slice(0, endIdx + 1) : cleaned;
 
-  // 3) Keep until first "=" (end of message)
-  const endIdx = cleaned.indexOf('=');
-  let singleMsg = endIdx >= 0 ? cleaned.slice(0, endIdx + 1) : cleaned;
+    singleMsg = singleMsg.replace(/FAOR-(?!\n)/g, 'FAOR-\n');
+    singleMsg = singleMsg.replace(/\bWI\b(?!\n)/g, 'WI\n');
+    singleMsg = singleMsg.replace(/\n{2,}/g, '\n');
 
-  // 4) Force newline after FAOR-
-  singleMsg = singleMsg.replace(/FAOR-(?!\n)/g, 'FAOR-\n');
+    const lines = singleMsg.split('\n');
+    const formattedLines = lines.map(line => {
+      if (line.match(/[NS]\d{4}\s+[EW]\d{5}/)) {
+        const parts = line.split(/\s*-\s*/);
+        const padded = parts.map(p => p.trim().padEnd(15, ' '));
+        return padded.join(' - ');
+      }
+      return line;
+    });
 
-  // 5) Force newline after WI, but not if already followed by one
-  singleMsg = singleMsg.replace(/\bWI\b(?!\n)/g, 'WI\n');
-
-  // 5b) Collapse multiple newlines into one
-  singleMsg = singleMsg.replace(/\n{2,}/g, '\n');
-
-  // 6) Format coordinate lines neatly (preserve dashes)
-  const lines = singleMsg.split('\n');
-  const formattedLines = lines.map(line => {
-    if (line.match(/[NS]\d{4}\s+[EW]\d{5}/)) {
-      const parts = line.split(/\s*-\s*/);
-
-      // pad each coordinate so they align in columns
-      const padded = parts.map(p => p.trim().padEnd(15, ' '));
-
-      // join back with " - " so dash is preserved
-      return padded.join(' - ');
-    }
-    return line;
-  });
-
-  // 🔑 Return with <br> for HTML display
-  return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
-}
+    return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
+  }
 
   filterbySearch(event: Event) {
-    let element = document.getElementById('searchValue');
-    console.log('value ', element);
-    let filterValue = (element as HTMLInputElement).value;
+    let element = document.getElementById('searchValue') as HTMLInputElement;
+    const filterValue = element?.value || '';
     if (!filterValue) {
       this.SigmetList = this.filteredList;
       return;
@@ -202,15 +182,13 @@ formatSigmetForDisplay(content: string): string {
     );
   }
 
-
   ScrollToTop(value: any) {
-    var element = document.getElementById(value);
+    const element = document.getElementById(value);
     element?.scrollIntoView({ behavior: 'smooth' });
   }
 
   forecastPage() {
     window.history.back();
-    // this.router.navigate(['/forecast']);
   }
 
   forecastPageNavigation() {
