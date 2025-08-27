@@ -75,6 +75,10 @@ this.apiService.GetSourceTextFolderFilesTime('taffc', 72).subscribe(
   (response: FileData[]) => {
     this.TAFArray = [...this.TAFArray, ...response];
 
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
+    }
+
     response.forEach(file => {
       const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
       if (matches) {
@@ -92,11 +96,14 @@ this.apiService.GetSourceTextFolderFilesTime('taffc', 72).subscribe(
     this.spinner.hide();
   }
 );
-
 this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
   (response: FileData[]) => {
     this.TAFArray = [...this.TAFArray, ...response];
 
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
+    }
+
     response.forEach(file => {
       const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
       if (matches) {
@@ -114,6 +121,7 @@ this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
     this.spinner.hide();
   }
 );
+
 
 }
 
