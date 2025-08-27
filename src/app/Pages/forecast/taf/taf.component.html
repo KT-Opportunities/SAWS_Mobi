@@ -90,14 +90,23 @@
 </div>
 
 <!-- Normal View -->
+
 <div *ngIf="viewModes[province] === 'normal'" class="w-layout-grid grid-18">
   <div class="div-block-16">
-    <p class="paragraph-2">
-      <span *ngFor="let taf of groupedTAFs[province]">
-        {{ taf }}<br><br>
-      </span>
-    </p>
+    <div *ngFor="let taf of groupedTAFs[province]" class="taf-row">
+      <h3 class="heading-21 nocolor">{{ taf }}</h3>
+
+      <div class="cct-copy" *ngIf="!taf.startsWith('No data for')">
+        <button
+          class="button-2-copy w-button"
+          *ngIf="taf"
+          (click)="ImageViewer(taf)">
+          View Decoded
+        </button>
+      </div>
+    </div>
   </div>
+
   <div class="div-block-17"></div>
 </div>
   </div>
