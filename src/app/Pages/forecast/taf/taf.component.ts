@@ -34,7 +34,8 @@ export class TafComponent implements OnInit, OnDestroy {
   currentTime?: string;
   objectKeys = Object.keys;
   viewModes: { [province: string]: 'normal' | 'color' } = {};
-    item: any;
+  item: any;
+  highlightStations: string[] = ['FALA', 'FACT', 'FALE', 'FAPM', 'FYKT'];
 
  provinces: { [province: string]: string[] } = {
   'Gauteng': ['FAOR','FALA','FAJB','FAIR','FAWB','FAWK','FAGC','FAGM','FASI','FAVV'],
@@ -202,5 +203,7 @@ toggleView(province: string): void {
       this.loading = false;
     });
   }
-  
+  isHighlighted(taf: string): boolean {
+  return this.highlightStations.some(station => taf.includes(`TAF ${station}`));
+}
 }

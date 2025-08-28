@@ -16,109 +16,85 @@
     </svg>
   </span>
   <h2 style="margin: 33px 0 19px">
-    Decoded TAF for FAOR (O R Tambo International)
+    Decoded TAF for  {{ decodedTAF.station }}
   </h2>
-
-  <table>
+<table>
     <tr>
       <th>Forecast for station</th>
-      <td data-label="Forecast for station">
-        FAOR O R Tambo Intl, South Africa 2609S 0281348E
-      </td>
+      <td data-label="Forecast for station">{{ decodedTAF.station }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.observationTime">
       <th>Observation time</th>
-      <td data-label="Observation time">Day 26 04:00</td>
+      <td data-label="Observation time">{{ decodedTAF.observationTime }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.validFrom">
       <th>Forecast start time</th>
-      <td data-label="Forecast start time">Day 26 06:00</td>
+      <td data-label="Forecast start time">{{ decodedTAF.validFrom }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.validTo">
       <th>Until time</th>
-      <td data-label="Until time">Day 27 12:00</td>
+      <td data-label="Until time">{{ decodedTAF.validTo }}</td>
     </tr>
-    <tr>
-      <th>Wind direction</th>
-      <td data-label="Wind direction">100 degrees</td>
+    <tr *ngIf="decodedTAF.wind">
+      <th>Wind</th>
+      <td data-label="Wind">{{ decodedTAF.wind }}</td>
     </tr>
-    <tr>
-      <th>Wind speed</th>
-      <td data-label="Wind speed">6.7 m/s (13KT)</td>
-    </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.visibility">
       <th>Visibility</th>
-      <td data-label="Visibility">10km or more (CAVOK)</td>
+      <td data-label="Visibility">{{ decodedTAF.visibility }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.clouds">
       <th>Clouds</th>
-      <td data-label="Clouds">No cloud of operational significance</td>
+      <td data-label="Clouds">{{ decodedTAF.clouds }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.weather">
       <th>Weather</th>
-      <td data-label="Weather">No weather of significance to aviation</td>
+      <td data-label="Weather">{{ decodedTAF.weather }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.maxTemp">
       <th>Maximum Temperature</th>
-      <td data-label="Maximum Temperature">18 at Day 26 13:00</td>
+      <td data-label="Maximum Temperature">{{ decodedTAF.maxTemp }}</td>
     </tr>
-    <tr>
+    <tr *ngIf="decodedTAF.minTemp">
       <th>Minimum Temperature</th>
-      <td data-label="Minimum Temperature">5 at Day 27 05:00</td>
+      <td data-label="Minimum Temperature">{{ decodedTAF.minTemp }}</td>
     </tr>
-    <tr>
-      <th>From time</th>
-      <td data-label="From time">Day 26 19:00</td>
-    </tr>
-    <tr>
-      <th>Wind direction (From time)</th>
-      <td data-label="Wind direction (From time)">080 degrees</td>
-    </tr>
-    <tr>
-      <th>Wind speed (From time)</th>
-      <td data-label="Wind speed (From time)">4.1 m/s (8KT)</td>
-    </tr>
-    <tr>
-      <th>Visibility (From time)</th>
-      <td data-label="Visibility (From time)">10km or more (CAVOK)</td>
-    </tr>
-    <tr>
-      <th>Clouds (From time)</th>
-      <td data-label="Clouds (From time)">
-        No cloud of operational significance
-      </td>
-    </tr>
-    <tr>
-      <th>Weather (From time)</th>
-      <td data-label="Weather (From time)">
-        No weather of significance to aviation
-      </td>
-    </tr>
-    <tr>
-      <th>Probability</th>
-      <td data-label="Probability">30%</td>
-    </tr>
-    <tr>
-      <th>Temporary time</th>
-      <td data-label="Temporary time">Day 27 02:00</td>
-    </tr>
-    <tr>
-      <th>Until time (Temporary)</th>
-      <td data-label="Until time (Temporary)">Day 27 06:00</td>
-    </tr>
-    <tr>
-      <th>Horizontal visibility (Temporary)</th>
-      <td data-label="Horizontal visibility (Temporary)">4500 metres</td>
-    </tr>
-    <tr>
-      <th>Weather (Temporary)</th>
-      <td data-label="Weather (Temporary)">Mist</td>
-    </tr>
-    <tr>
-      <th>Clouds (Temporary)</th>
-      <td data-label="Clouds (Temporary)">
-        Broken Clouds (5 to 7 oktas) at 150 metres (500ft)
-      </td>
-    </tr>
+
+    <!-- Loop over all changes (BECMG, FM, TEMPO, PROB) -->
+    <ng-container *ngFor="let change of decodedTAF.changes">
+      <tr>
+        <th>Change Type</th>
+        <td data-label="Change Type">{{ change.type }}</td>
+      </tr>
+      <tr *ngIf="change.from">
+        <th>From time</th>
+        <td data-label="From time">{{ change.from }}</td>
+      </tr>
+      <tr *ngIf="change.to">
+        <th>Until time</th>
+        <td data-label="Until time">{{ change.to }}</td>
+      </tr>
+      <tr *ngIf="change.wind">
+        <th>Wind</th>
+        <td data-label="Wind">{{ change.wind }}</td>
+      </tr>
+      <tr *ngIf="change.visibility">
+        <th>Visibility</th>
+        <td data-label="Visibility">{{ change.visibility }}</td>
+      </tr>
+      <tr *ngIf="change.clouds">
+        <th>Clouds</th>
+        <td data-label="Clouds">{{ change.clouds }}</td>
+      </tr>
+      <tr *ngIf="change.weather">
+        <th>Weather</th>
+        <td data-label="Weather">{{ change.weather }}</td>
+      </tr>
+      <tr *ngIf="change.probability">
+        <th>Probability</th>
+        <td data-label="Probability">{{ change.probability }}</td>
+      </tr>
+      
+    </ng-container>
   </table>
 </mat-dialog-content>

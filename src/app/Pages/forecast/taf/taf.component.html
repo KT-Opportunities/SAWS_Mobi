@@ -79,7 +79,7 @@
   
 <div *ngIf="viewModes[province] === 'color'" class="taf-list">
   <div *ngFor="let taf of groupedTAFs[province]" class="taf-row">
-    <h1 class="heading-21">{{ taf }}</h1>
+    <h1 class="heading-21" [ngStyle]="{ color: isHighlighted(taf) ? '#1111EE' : '' }">{{ taf }}</h1>
     <div class="cct-copy"  *ngIf="!taf.startsWith('No data for')">
       <div class="button-2-copy w-button" *ngIf="taf" (click)="ImageViewer(taf)">View Decoded</div>
     </div>
@@ -94,7 +94,7 @@
 <div *ngIf="viewModes[province] === 'normal'" class="w-layout-grid grid-18">
   <div class="div-block-16">
     <div *ngFor="let taf of groupedTAFs[province]" class="taf-row">
-      <h3 class="heading-21 nocolor">{{ taf }}</h3>
+      <h3 class="heading-21 nocolor" [ngStyle]="{ color: isHighlighted(taf) ? '#1111EE' : '' }">{{ taf }}</h3>
 
       <div class="cct-copy" *ngIf="!taf.startsWith('No data for')">
         <button
