@@ -63,10 +63,13 @@
   <div *ngFor="let province of objectKeys(groupedTAFs)" class="div-block-15" [attr.id]="province">
     <h1 class="heading-22">{{ province }}</h1>
       <div class="div-block-32">
-        <div class="w-layout-grid ccta-grid">
-           <div class="button w-button" (click)="toggleView(province)">
+        <div class="w-layout-grid  ccta-grid ">
+    <div class="cct-copy-copy">
+         <div class="button-2 w-button" (click)="toggleView(province)">
       {{ viewModes[province] === 'normal' ? 'Normal' : 'Color Coded' }}
     </div>
+        
+        </div>
 
           <div class="cct-copy" >
             <div class="button-2 w-button" (click)="ViewColorCodedStyle()">Colour / Style Index</div>

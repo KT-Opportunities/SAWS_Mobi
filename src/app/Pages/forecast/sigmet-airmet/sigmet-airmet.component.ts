@@ -169,18 +169,25 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
   }
 
-  filterbySearch(event: Event) {
-    let element = document.getElementById('searchValue') as HTMLInputElement;
-    const filterValue = element?.value || '';
-    if (!filterValue) {
-      this.SigmetList = this.filteredList;
-      return;
-    }
-
-    this.SigmetList = this.SigmetList.filter((a: any) =>
-      a.filecontent?.toLowerCase().includes(filterValue.toLowerCase())
-    );
+filterbySearch(event?: any) {
+  if (event) {
+    event.preventDefault(); // prevent page reload from <form>
   }
+
+  const query = this.searchQuery.trim().toLowerCase();
+
+  if (!query) {
+    // Nothing typed = hide all results
+    this.SigmetList = [];
+    return;
+  }
+
+  // Filter from your backup (all sigmets)
+  this.SigmetList = this.filteredList.filter((sig: any) =>
+    sig.filecontent?.toLowerCase().includes(query)
+  );
+}
+
 
   ScrollToTop(value: any) {
     const element = document.getElementById(value);
