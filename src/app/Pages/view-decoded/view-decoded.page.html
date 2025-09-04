@@ -15,6 +15,7 @@
       />
     </svg>
   </span>
+  <ng-container *ngIf="decodedTAF">
   <h2 style="margin: 33px 0 19px">
     Decoded TAF for  {{ decodedTAF.station }}
   </h2>
@@ -96,5 +97,75 @@
       </tr>
       
     </ng-container>
+  </table></ng-container>
+<ng-container *ngIf="decodedMETAR">
+  <h2 style="margin: 33px 0 19px">Decoded METAR for {{ decodedMETAR.station }}</h2>
+  <table>
+    <tr>
+      <th>Report for station</th>
+      <td>{{ decodedMETAR.station }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.observationTime">
+      <th>Observation time</th>
+      <td>{{ decodedMETAR.observationTime }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.windSpeed || decodedMETAR.windDirection">
+      <th>Wind Speed</th>
+      <td>
+      {{ decodedMETAR.windSpeed }}
+      </td>
+    </tr>
+    <tr *ngIf="decodedMETAR.windSpeed || decodedMETAR.windDirection">
+      <th>Wind Direction</th>
+      <td>
+         {{ decodedMETAR.windDirection }} 
+      </td>
+    </tr>
+      <tr *ngIf="decodedMETAR.windVariation || decodedMETAR.windGusts">
+      <th>Wind Direction</th>
+      <td>
+        <span *ngIf="decodedMETAR.windVariation">
+          (varied between {{ decodedMETAR.windVariation }})
+        </span>
+        <br *ngIf="decodedMETAR.windGusts" />
+        <span *ngIf="decodedMETAR.windGusts">Gusts: {{ decodedMETAR.windGusts }}</span>
+      </td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.visibility">
+      <th>Visibility</th>
+      <td>{{ decodedMETAR.visibility }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.clouds">
+      <th>Clouds</th>
+      <td>{{ decodedMETAR.clouds }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.weather">
+      <th>Weather</th>
+      <td>{{ decodedMETAR.weather }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.temperature && decodedMETAR.dewPoint">
+      <th>Air Temperature</th>
+      <td>{{ decodedMETAR.temperature }}  <br />Dew-Point:{{ decodedMETAR.dewPoint }}</td>
+    </tr>
+
+
+    <tr *ngIf="decodedMETAR.qnh">
+      <th>Observed QNH</th>
+      <td>{{ decodedMETAR.qnh }}</td>
+    </tr>
+
+    <tr *ngIf="decodedMETAR.trend">
+      <th>Trend</th>
+        <td>{{ decodedMETAR.trend }}</td>
+    </tr>
   </table>
+</ng-container>
+
 </mat-dialog-content>
+

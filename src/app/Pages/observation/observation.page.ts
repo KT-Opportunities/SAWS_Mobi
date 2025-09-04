@@ -56,7 +56,7 @@ export class ObservationPage {
   }
 
   NavigateToMetarRecent(){
-    this.router.navigate (['/observation/metar-history'])
+    this.router.navigate (['/observation/metar-recent'])
   }
 
   NavigateToMetarHistory(){

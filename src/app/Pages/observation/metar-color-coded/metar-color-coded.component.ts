@@ -157,7 +157,25 @@ export class MetarColorCodedComponent implements OnInit {
     FLND: 'Other Regions',
     FAME: 'Other Stations',
   };
-
+  provinceOrder: string[] = [
+  'Gauteng',
+  'Limpopo',
+  'Mpumalanga',
+  'Northwest Province',
+  'Western Cape',
+  'Eastern Cape',
+  'KwaZulu Natal',
+  'Freestate',
+  'Northern Cape',
+  'Lesotho',
+  'Eswatini',
+  'Botswana',
+  'Namibia',
+  'Mozambique',
+  'Zimbabwe',
+  'Other Regions',
+  'Other Stations',
+];
   isKeyboardVisible = false;
   private mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
@@ -327,9 +345,9 @@ groupFilteredReportsByProvince(): void {
 
 
   // Needed to loop over object keys in template
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
-  }
+ objectKeys(obj: any): string[] {
+  return this.provinceOrder.filter(province => obj.hasOwnProperty(province));
+}
 
   parseRawMetarData(rawData: string): string[] {
     const parts = rawData.split(/(?=METAR )/g);

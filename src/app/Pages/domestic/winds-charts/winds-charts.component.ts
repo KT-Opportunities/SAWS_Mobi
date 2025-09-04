@@ -249,14 +249,13 @@ blockWindsWL: any[] = [];
 
     console.log('Image arrays:', ImageArray);
     debugger
-    this.ConvertImagesArray(ImageArray);
+    this.ConvertImagesArray(ImageArray,item.foldername);
   }
-
-  ConvertImagesArray(ImageArray: any[]) {
+  ConvertImagesArray(ImageArray: any[], foldername: any) {
     this.ImageArray = [];
     console.log('IMAGE ARRAY', ImageArray);
     ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile(element.foldername, element.filename).subscribe(
+      this.APIService.GetAviationFile(foldername, element.filename).subscribe(
         (data) => {
           console.log('IMAGE:', data);
           const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly

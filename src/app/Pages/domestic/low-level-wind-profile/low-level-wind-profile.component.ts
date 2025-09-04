@@ -67,12 +67,13 @@ export class LowLevelWindProfileComponent implements OnInit {
     );
   }
 
-  transformFilename(filename: string): string {
-    if (filename.startsWith('up') && filename.endsWith('.png')) {
-      return filename.slice(2, -4);
-    }
-    return filename;
+ transformFilename(filename: string): string {
+  if (filename.startsWith('up') && filename.endsWith('.gif')) {
+    return filename.slice(2, -4); // remove "up" (first 2 chars) and ".gif" (last 4 chars)
   }
+  return filename;
+}
+
 
   get isLoggedIn(): boolean {
     return this.authService.getIsLoggedIn();

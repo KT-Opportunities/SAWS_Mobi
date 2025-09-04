@@ -119,6 +119,11 @@ this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
     });
 
     this.groupTAFsByProvince(allTAFs);
+    this.updateTime(new Date().toISOString());
+
+  setInterval(() => {
+    this.updateTime(new Date().toISOString());
+  }, 1000); // updates every second
     this.spinner.hide();
   }
 );
@@ -142,10 +147,15 @@ this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
     this.searchQuery = this.searchQuery.trim();
   }
 
-  updateTime(date?: string) {
-    this.currentDate = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
-    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') || '';
-  }
+ updateTime(date?: string) {
+  if (!date) return;
+
+  const parsedDate = new Date(date);
+
+  this.currentDate = this.datePipe.transform(parsedDate, 'yyyy-MM-dd') || '';
+  this.currentTime = this.datePipe.transform(parsedDate, 'HH:mm:ss') || '';
+}
+
    forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }

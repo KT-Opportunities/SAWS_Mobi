@@ -4,7 +4,7 @@
   <div id="top"></div>
 
   <app-package-content>
-    <app-package-header>Colour Coded TAFs </app-package-header>
+    <app-package-header>Colour Coded TAFS</app-package-header>
 
     <app-package-sub-header>
       <div
@@ -33,96 +33,75 @@
       >
         <div>
           <!-- <h5 class="heading-9">Query TAF</h5> -->
-          <form
-            action="/search"
-            class="search w-form"
-            (ngSubmit)="onSearch($event)"
-          >
-            <input
-              [(ngModel)]="searchQuery"
-              class="search-input w-input"
-              maxlength="256"
-              name="query"
-              placeholder="Search…"
-              type="search"
-              id="search"
-              required=""
-            /><input
-              (click)="onSearch($event)"
-              type="submit"
-              class="search-button w-button"
-              value="Search"
-            />
-          </form>
+         <form class="search w-form" (ngSubmit)="onSearch($event)">
+  <input
+    [(ngModel)]="searchQuery"
+    name="query"
+    class="search-input w-input"
+    maxlength="256"
+    placeholder="Search…"
+    type="search"
+  />
+  <button type="submit" class="search-button w-button">Search</button>
+</form>
+
         </div>
       </div>
     </app-package-sub-header>
 
-    <app-package-list-items>
-      <div
-        id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea"
-        class="div-block-15"
-      >
-        <h1 class="heading-22">Gauteng</h1>
 
-        <div *ngFor="let taf of filteredTAFArray">
-          <div class="div-block-32">
-            <div class="w-layout-grid ccta-grid">
-              <div
-                id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea"
-                class="cct-copy-copy"
-              >
-                <div class="button w-button" id="Normal">Normal</div>
-              </div>
-              <div
-                id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea"
-                class="cct-copy"
-              >
-                <div class="button-2 w-button">Colour / Style Index</div>
-              </div>
-            </div>
-          </div>
-          <div class="w-layout-grid heading-text">
-            <div
-              id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea"
-              class="cct-copy-copy"
-            >
-              <h1 class="heading-21">
-                {{ extractHeadingContent(taf.filecontent) }}
-              </h1>
-            </div>
-            <div
-              id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea"
-              class="cct-copy"
-            >
-              <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
-                View Decoded
-              </div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div
-              id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c6d-5aa24fea"
-              class="div-block-16"
-            >
-              <p class="paragraph-2">
-                extractHeadingContent
-                {{ extractRemainingContent(taf.filecontent) }}
-              </p>
-            </div>
-            <div
-              id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea"
-              class="div-block-17"
-            ></div>
-          </div>
+ <app-package-list-items>
+ <div *ngFor="let province of objectKeys(filteredGroupedTAFs)" class="div-block-15" [attr.id]="province">
+  <h1 class="heading-22">{{ province }}</h1>
+  <div class="div-block-32">
+    <div class="w-layout-grid  ccta-grid ">
+      <div class="cct-copy-copy">
+        <div class="button-2 w-button" (click)="toggleView(province)">
+          {{ viewModes[province] === 'normal' ? 'Normal' : 'Color Coded' }}
         </div>
       </div>
-    </app-package-list-items>
+      <div class="cct-copy">
+        <div class="button-2 w-button" (click)="ViewColorCodedStyle()">Colour / Style Index</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color Coded View -->
+ <div *ngIf="viewModes[province] === 'color'" class="w-layout-grid grid-18">
+  <div class="div-block-16">
+    <div *ngFor="let taf of filteredGroupedTAFs[province]" class="taf-row">
+      <!-- Use h3 with color formatting inside -->
+      <h3 class="heading-21 nocolor" [innerHTML]="formatTafWithColors(taf)"></h3>
+      <div class="cct-copy" *ngIf="!taf.startsWith('No data for')">
+        <button class="button-2-copy w-button" (click)="ImageViewer(taf)">View Decoded</button>
+      </div>
+    </div>
+  </div>
+  <div class="div-block-17"></div>
+</div>
+
+
+  <!-- Normal View -->
+  <div *ngIf="viewModes[province] === 'normal'" class="w-layout-grid grid-18">
+    <div class="div-block-16">
+      <div *ngFor="let taf of filteredGroupedTAFs[province]" class="taf-row">
+        <h3 class="heading-21 nocolor">{{ taf }}</h3>
+        <div class="cct-copy" *ngIf="!taf.startsWith('No data for')">
+          <button class="button-2-copy w-button" (click)="ImageViewer(taf)">View Decoded</button>
+        </div>
+      </div>
+    </div>
+    <div class="div-block-17"></div>
+  </div>
+</div>
+
+</app-package-list-items>
   </app-package-content>
 </ion-content>
-<app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
-<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
+<app-footer></app-footer>
+
+<div class="footerdiv" id="footerdivid1">
   <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6

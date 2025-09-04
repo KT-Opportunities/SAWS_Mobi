@@ -4,11 +4,14 @@
   <div id="top"></div>
   <app-package-content>
     <app-package-header class="package-header">
-      METAR
+      METAR - Meteorological Aerodrome Report
     </app-package-header>
 
     <app-package-sub-header>
-      <div
+  
+    </app-package-sub-header>
+  <app-package-list-items>
+    <div
         id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
         class="w-layout-grid grid-cct-copy"
       >
@@ -27,8 +30,6 @@
           <h1 class="heading-8">{{ currentTime }}</h1>
         </div>
       </div>
-    </app-package-sub-header>
-    <app-package-list-items>
       <div class="w-layout-grid grid-6" id="layout">
         <div
           id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea"
@@ -39,14 +40,13 @@
             <!-- Form to handle search functionality -->
             <form (submit)="onSearch()" class="search w-form">
               <!-- Bind the search input to the searchQuery property -->
-            
               <input
                 [(ngModel)]="searchQuery"
                 class="search-input w-input"
                 maxlength="256"
                 name="query"
                 placeholder="Search…"
-                type="text"
+                type="search"
                 id="search"
                 required
               />
@@ -58,7 +58,7 @@
             </form>
           </div>
         </div>
-        <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
+     <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
   <div class="div-block-15">
     <!-- Display province heading only once -->
     <h1 class="heading-22">{{ province }}</h1>
@@ -98,6 +98,7 @@
     </div>
   </div>
 </ng-container>
+
       </div>
     </app-package-list-items>
   </app-package-content>
@@ -105,7 +106,7 @@
 <app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
 <div class="footerdiv" *ngIf="!isKeyboardVisible">
-  <div (click)="NavigateToObservation()" class="link-block-5 w-inline-block">
+  <div (click)="navigateToObservation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6
       class="heading-10-copy"

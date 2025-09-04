@@ -5378,3 +5378,20 @@ label {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+/* Color rules for SIGMET keywords */
+.sigmet-text .temporary,
+.sigmet-text .icing {
+  color: #4169E1; /* Blue */
+  font-weight: 600;
+}
+
+.sigmet-text .hazzard,
+.sigmet-text .sigmet {
+  color: #4e9258; /* Green */
+  font-weight: 600;
+}
+
+.sigmet-text .cloud-type {
+  color: #F00; /* Red */
+  font-weight: 600;
+}

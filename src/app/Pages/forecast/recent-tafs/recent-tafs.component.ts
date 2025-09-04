@@ -292,6 +292,13 @@ airportNames: { [code: string]: string } = {
   
   this.loadTAFs();   // 👈 now just call this
   this.loadSigmet();
+   this.updateTime(new Date().toISOString());
+
+  setInterval(() => {
+    this.updateTime(new Date().toISOString());
+  }, 1000); // updates every second
+    this.spinner.hide();
+  
   }
 
   ngOnDestroy() {
@@ -362,10 +369,14 @@ loadTAFs(): void {
 }
 
    
-    updateTime(date?: string) {
-      this.currentDate = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
-      this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') || '';
-    }
+updateTime(date?: string) {
+  if (!date) return;
+
+  const parsedDate = new Date(date);
+
+  this.currentDate = this.datePipe.transform(parsedDate, 'yyyy-MM-dd') || '';
+  this.currentTime = this.datePipe.transform(parsedDate, 'HH:mm:ss') || '';
+}
 
   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
