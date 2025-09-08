@@ -4,7 +4,7 @@
   <div id="top"></div>
   <app-package-content>
     <app-package-header class="package-header">
-      Metar Recent TAFs
+      Recent METAR/TAFs
     </app-package-header>
 
     <app-package-sub-header>
@@ -17,22 +17,17 @@
           class="cct"
         >
           <h1 class="heading-7">Date:</h1>
-          <h1 class="heading-8">2024 -02-05</h1>
+          <h1 class="heading-8">{{ getReportDate(getFirstMetar() ?? '') }}</h1>
         </div>
         <div
           id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
           class="cct"
         >
           <h1 class="heading-7">Time:</h1>
-          <h1 class="heading-8">2024/02/ 12:00Z</h1>
+        <h1 class="heading-8">{{ getReportTime(getFirstMetar() ?? '') }}</h1>
         </div>
       </div>
-
-      <div></div>
-    </app-package-sub-header>
-
-    <app-package-list-items>
-      <div class="image-container">
+    <div class="image-container">
         <div
           id="w-node-a4a2a6b3-fb94-67a5-1e0f-a72ba37feb73-9377a649"
           class="form-block w-form"
@@ -71,26 +66,16 @@
                   </div>
                   <!-- Arrow icon -->
                 </div>
-                <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
-                  <div
-                    class="w-dropdown-link"
-                    (click)="selectOption('', 'dropdown6')"
-                  >
-                    Link 1
-                  </div>
-                  <div
-                    class="w-dropdown-link"
-                    (click)="selectOption('', 'dropdown6')"
-                  >
-                    Link 2
-                  </div>
-                  <div
-                    class="w-dropdown-link"
-                    (click)="selectOption('', 'dropdown6')"
-                  >
-                    Link 3
-                  </div>
-                </nav>
+            
+              <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
+  <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown6')">1 min</a>
+  <a class="w-dropdown-link" (click)="selectOption('2 min', 'dropdown6')">2 Min</a>
+  <a class="w-dropdown-link" (click)="selectOption('3 min', 'dropdown6')">3 min</a>
+  <a class="w-dropdown-link" (click)="selectOption('4 min', 'dropdown6')">4 min</a>
+  <a class="w-dropdown-link" (click)="selectOption('5 min', 'dropdown6')">5 min</a>
+</nav>
+
+
               </div>
             </div>
             <div style="margin-top: 5px">
@@ -108,8 +93,8 @@
                 />
               </div>
               <div class="div-block-14">
-                <h5 class="heading-9">Query TAFs</h5>
-                <form action="/search" class="search w-form">
+                <h5 class="heading-9">Query METARs </h5>
+                <form (submit)="onSearch(); $event.preventDefault()" class="search w-form">
                   <input
                     class="search-input w-input"
                     maxlength="256"
@@ -118,6 +103,7 @@
                     type="search"
                     id="search"
                     required=""
+                     [(ngModel)]="searchQuery"
                   />
                   <input
                     type="submit"
@@ -149,25 +135,19 @@
                 <!-- Arrow icon -->
               </div>
               <nav class="dropdown-list1" *ngIf="isDropdownOpen5">
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown5')"
-                >
-                  Link 1
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown5')"
-                >
-                  Link 2
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown5')"
-                >
-                  Link 3
-                </div>
-              </nav>
+        <a class="w-dropdown-link" (click)="selectOption('Most Recent', 'dropdown5')">Most Recent</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 1 hour', 'dropdown5')">Last 1 hour</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 2 hours', 'dropdown5')">Last 2 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 3 hours', 'dropdown5')">Last 3 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 4 hours', 'dropdown5')">Last 4 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 5 hours', 'dropdown5')">Last 5 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 6 hours', 'dropdown5')">Last 6 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 12 hours', 'dropdown5')">Last 12 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 18 hours', 'dropdown5')">Last 18 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 24 hours', 'dropdown5')">Last 24 hours</a>
+        <a class="w-dropdown-link" (click)="selectOption('Last 36 hours', 'dropdown5')">Last 36 hours</a>
+      </nav>
+
             </div>
 
             <label for="" class="field-label">Refresh page every :</label>
@@ -186,70 +166,90 @@
                 </div>
                 <!-- Arrow icon -->
               </div>
-              <nav class="dropdown-list1" *ngIf="isDropdownOpen11">
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown11')"
-                >
-                  Link 1
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown11')"
-                >
-                  Link 2
-                </div>
-                <div
-                  class="w-dropdown-link"
-                  (click)="selectOption('', 'dropdown11')"
-                >
-                  Link 3
-                </div>
-              </nav>
+                <nav class="dropdown-list1" *ngIf="isDropdownOpen11">
+            <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown11')">1 min</a>
+            <a class="w-dropdown-link" (click)="selectOption('2 min', 'dropdown11')">2 Min</a>
+            <a class="w-dropdown-link" (click)="selectOption('3 min', 'dropdown11')">3 min</a>
+            <a class="w-dropdown-link" (click)="selectOption('4 min', 'dropdown11')">4 min</a>
+            <a class="w-dropdown-link" (click)="selectOption('5 min', 'dropdown11')">5 min</a>
+          </nav>
+
             </div>
           </div>
         </div>
       </div>
+       <div class="checkbox-field">
+  <label class="custom-checkbox">
+    <input
+      type="checkbox"
+    
+      name="includeSigmets"
+    [(ngModel)]="showSigmetSearch"
+      (change)="filterbySearch()"
+    />
+    <span class="checkmark"></span>
+    Include SIGMETs
+  </label>
+</div>
+         <div></div>
+             
+            <div></div>
+    </app-package-sub-header>
 
-      <div *ngFor="let taf of recentTafs">
-        <!-- <h1 class="heading-22">Gauteng</h1> -->
-        <!-- Display the foldername and filename -->
-        <!-- <h1 class="heading-22">{{ taf.foldername }} - {{ taf.filename }}</h1> -->
-
-        <div class="div-block-45">
-          <div class="w-layout-grid ccta-grid" style="margin-bottom: 2px">
-            <div
-              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062c7-9377a649"
-              class="cct-copy-copy"
-            >
-              <div class="button w-button">Normal</div>
-            </div>
-            <div
-              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062ca-9377a649"
-              class="cct-copy"
-            >
-              <div class="button-2 w-button">Colour / Style Index</div>
-            </div>
-          </div>
-
+    <app-package-list-items>
+  
+       <ng-container  *ngIf="searchDone" >
+           <h1 class="heading-21 searched">SIGMETs</h1>
+    <ng-container id="sigmet-list-container">
+   <div
+        id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb43-61ad4633"
+        class="div-block-15"
+      >
+        <div *ngFor="let sigmet of SigmetList">
           <div class="w-layout-grid heading-text">
             <div
-              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062cf-9377a649"
+              id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb50-61ad4633"
               class="cct-copy-copy"
             >
-              <h1 class="heading-21">{{ taf.filecontent }}</h1>
+              <h1 class="heading-21">{{ sigmet.heading }}</h1>
             </div>
+          </div>
+          <div class="w-layout-grid grid-18">
             <div
-              id="w-node-_2138101a-874f-ccf2-cab5-adfa22f062d2-9377a649"
-              class="cct-copy"
+              id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb57-61ad4633"
+              class="div-block-16"
             >
-              <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
-                View Decoded
-              </div>
+              <p class="paragraph-2  sigmet-text" [innerHTML]="formatSigmetForDisplay(sigmet.filecontent)"></p>
+
             </div>
+        
           </div>
         </div>
       </div>
+ </ng-container>
+
+       <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
+  <!-- METARs -->
+  <h1 class="heading-21 searched">METARs</h1>
+  <div *ngFor="let report of groupedReportsByProvince[province]">
+    <div *ngIf="report.filecontent.startsWith('METAR')">
+      <h1 class="heading-21">{{ report.filecontent }}</h1>
+    </div>
+  </div>
+
+  <!-- TAFs -->
+  <h1 class="heading-21 searched">TAFs</h1>
+  <div *ngFor="let report of groupedReportsByProvince[province]">
+    <div *ngIf="report.filecontent.startsWith('TAF')">
+      <h1 class="heading-21">{{ report.filecontent }}</h1>
+    </div>
+  </div>
+</ng-container>
+
+       </ng-container>
+      
+
+
     </app-package-list-items>
   </app-package-content>
 </ion-content>

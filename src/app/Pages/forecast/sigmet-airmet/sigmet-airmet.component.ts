@@ -19,11 +19,9 @@ import { Keyboard } from '@capacitor/keyboard';
 })
 export class SigmetAirmetComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
-  SigmetList: any = [];
-  AirmetList: any = [];
-  GametList: any = [];
-  filteredList: any = ([] = []);
+  SigmetList: any[] = [];
   searchQuery: string = '';
+  allSigmetList: any[] = []; // full backup
 
   currentDate: string | undefined;
   currentTime: string | undefined;
@@ -79,8 +77,8 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
   }
 
   updateTime(date: string) {
-    this.currentDate = this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
-    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
+    this.currentDate = this.datePipe.transform(date, 'yyyy - MM - dd') ?? '';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '';
   }
 
   async loadSigmetAndAirmet() {
@@ -94,43 +92,28 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
 
     const sortedFirs = Object.keys(firMapping).sort((a, b) => b.length - a.length);
 
-    // Helper to process each response
     const processResponse = (response: any[]) =>
       response
-        .map((el: any) => {
+        .map(el => {
           const fileContent = el.filecontent.toUpperCase();
           const afterFaor = fileContent.split('FAOR-')[1] || '';
-          const firKey = sortedFirs.find(fir =>
-            new RegExp(`\\b${fir}\\b`).test(afterFaor)
-          );
-
+          const firKey = sortedFirs.find(fir => new RegExp(`\\b${fir}\\b`).test(afterFaor));
           return {
             heading: firKey ? firMapping[firKey] : 'Unknown FIR',
-            filecontent: el.filecontent,
+            filecontent: el.filecontent
           };
         })
         .filter(el => el.heading !== 'Unknown FIR');
 
-    // Fetch both requests in parallel
-    this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
-      this.apiService.GetSourceTextFolderFiles('airmet').subscribe((airmets: any[]) => {
+    this.apiService.GetSourceTextFolderFiles('sigmet').subscribe(sigmets => {
+      this.apiService.GetSourceTextFolderFiles('airmet').subscribe(airmets => {
         const sigmetList = processResponse(sigmets);
         const airmetList = processResponse(airmets);
 
-        // Combine both arrays
-        this.SigmetList = [...sigmetList, ...airmetList];
-         this.updateTime(new Date().toISOString());
-        // Custom order
-        const customOrder = ['Search', 'FAJA (JOHANNESBURG FIR)', 'FACA (CAPE TOWN FIR)', 'FAJO (JOHANNESBURG OCEANIC FIR)'];
+        this.allSigmetList = [...sigmetList, ...airmetList]; // full backup
+        this.SigmetList = [...this.allSigmetList];
 
-        // Sort according to custom order
-        this.SigmetList.sort((a: any, b: any) => {
-          const indexA = customOrder.indexOf(a.heading);
-          const indexB = customOrder.indexOf(b.heading);
-          return indexA - indexB;
-        });
-
-        console.log("Combined Data (sorted):", this.SigmetList);
+        this.updateTime(new Date().toISOString());
         this.isLoading = false;
       });
     });
@@ -169,33 +152,35 @@ export class SigmetAirmetComponent implements OnInit, OnDestroy {
     return formattedLines.join('\n').trim().replace(/\n/g, '<br>');
   }
 
-filterbySearch(event?: any) {
-  if (event) {
-    event.preventDefault(); // prevent page reload from <form>
+  // --- UPDATED SEARCH FUNCTION ---
+  filterbySearch(event?: any) {
+    if (event) event.preventDefault(); // prevent form submission
+    const query = this.searchQuery?.trim().toLowerCase();
+    if (!query) {
+      this.SigmetList = [...this.allSigmetList]; // show all if empty
+      return;
+    }
+    // Filter only matching items
+    this.SigmetList = this.allSigmetList.filter(sig =>
+      sig.heading?.toLowerCase().includes(query) || sig.filecontent?.toLowerCase().includes(query)
+    );
   }
 
-  const query = this.searchQuery.trim().toLowerCase();
-
-  if (!query) {
-    // Nothing typed = hide all results
-    this.SigmetList = [];
-    return;
+  // Live search as user types
+  onSearchChange() {
+    const query = this.searchQuery?.trim().toLowerCase();
+    if (!query) {
+      this.SigmetList = [...this.allSigmetList];
+      return;
+    }
+    this.SigmetList = this.allSigmetList.filter(sig =>
+      sig.heading?.toLowerCase().includes(query) || sig.filecontent?.toLowerCase().includes(query)
+    );
   }
-
-  // Filter from your backup (all sigmets)
-  this.SigmetList = this.filteredList.filter((sig: any) =>
-    sig.filecontent?.toLowerCase().includes(query)
-  );
-}
-
 
   ScrollToTop(value: any) {
     const element = document.getElementById(value);
     element?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  forecastPage() {
-    window.history.back();
   }
 
   forecastPageNavigation() {

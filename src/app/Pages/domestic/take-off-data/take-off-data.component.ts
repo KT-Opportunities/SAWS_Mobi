@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from 'src/app/services/apis.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { APIService } from 'src/app/services/apis.service';
 import { AuthService } from 'src/app/services/auth.service';
+
 interface ResponseItem {
   foldername: string;
   filename: string;
   lastmodified: string;
   filecontent: string;
-  // Add other properties if needed
+  vermetTableData: any[];
 }
 @Component({
   selector: 'app-take-off-data',
@@ -17,120 +19,142 @@ interface ResponseItem {
   styleUrls: ['./../domestic.page.scss'],
 })
 export class TakeOffDataComponent implements OnInit {
-  selectedAirportCode: string = 'FAPE';
-  loading = false;
-  isLoading: boolean = true;
-  VermetArray: any = [];
-  vermetTableData: {
-    airport: string;
-    time: string;
-    temp: string;
-    qnh: string;
-    qan: string;
-  }[] = [];
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private spinner: NgxSpinnerService,
-    private APIService: APIService,
-    private iab: InAppBrowser
-  ) {}
-
-  ngOnInit() {
-    this.takeoff();
-  }
+   @ViewChild('airportSelect') airportSelect!: ElementRef<HTMLSelectElement>;
+   isLoading = false;
+   selectedAirportCode: string = ''; 
+   VermetArray: ResponseItem[] = [];
+ 
+   constructor(
+     private router: Router,
+     private authService: AuthService,
+     private elRef: ElementRef,
+     private iab: InAppBrowser,
+     private spinner: NgxSpinnerService,
+     private apiService: APIService,
+     private dialog: MatDialog
+   ) {}
+ 
+   ngOnInit() {
+     this.isLoading = true;
+     this.spinner.show();
+ 
+     this.apiService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
+       console.log('📥 Raw API Response:', Response);
+ 
+       if (!Response || Response.length === 0) {
+         this.isLoading = false;
+         this.spinner.hide();
+         console.warn('⚠️ No data returned from API');
+         return;
+       }
+ 
+       // ✅ Step 1: Group by airport and keep only latest file
+       const airportMap = Response.reduce(
+         (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
+           const airportCode = this.getAirportCode(item);
+           if (
+             !acc[airportCode] ||
+             new Date(item.lastmodified) > new Date(acc[airportCode].lastmodified)
+           ) {
+             acc[airportCode] = item;
+           }
+           return acc;
+         },
+         {}
+       );
+ 
+       // ✅ Step 2: Convert back to array and filter TAKE-OFF files
+       this.VermetArray = (Object.values(airportMap) as ResponseItem[]).filter(
+         (item: ResponseItem) => item.filecontent.includes('TAKE-OFF')
+       );
+ 
+       console.log('✈️ Filtered VermetArray:', this.VermetArray);
+ 
+       // ✅ Step 3: Parse filecontent into structured table data
+       this.VermetArray.forEach((item) => {
+         item.vermetTableData = this.extractTableData(item.filecontent);
+         console.log(`📊 Parsed data for ${item.filename}:`, item.vermetTableData);
+       });
+ 
+       this.isLoading = false;
+       this.spinner.hide();
+     });
+   }
+ 
+   /** Dropdown selection change */
+   onAirportCodeChange(code: string) {
+     this.selectedAirportCode = code;
+   }
+ 
+ shouldDisplayItem(item: ResponseItem) {
+   return !this.selectedAirportCode || this.selectedAirportCode === 'ALL' || this.getAirportCode(item) === this.selectedAirportCode;
+ }
+ 
+   /** Parse filecontent into table rows */
+   extractTableData(filecontent: string) {
+     const lines = filecontent
+       .split('\n')
+       .map((l) => l.trim())
+       .filter((l) => l);
+ 
+     // find first TIME header
+     const startIndex = lines.findIndex((l) => l.startsWith('TIME'));
+     if (startIndex === -1) return [];
+ 
+     const headers = lines[startIndex].split(/\s+/);
+ 
+     const rows = [];
+     for (let i = startIndex + 1; i < lines.length; i++) {
+       const line = lines[i];
+       if (line.endsWith('=')) break; // stop at end marker
+ 
+       const cols = line.split(/\s+/);
+       if (cols.length >= 4) {
+         rows.push({
+           time: cols[0] || '',
+           temp: cols[1] || '',
+           qnh: cols[2] || '',
+           qan: cols[3] || '',
+         });
+       }
+     }
+ 
+     // ✅ only keep rows that look valid
+     const cleanRows = rows.filter((r) => r.time.endsWith('Z') || r.time === '----');
+ 
+     return [headers, ...cleanRows];
+   }
+ 
+   /** Extract TAKE-OFF DATA header line */
+   extractTakeOffData(filecontent: string): string {
+     const match = filecontent.match(/TAKE-OFF DATA.*$/im);
+     return match ? match[0].trim() : '';
+   }
+ 
+   /** Extract 4-letter ICAO from ResponseItem */
+   getAirportCode(item: ResponseItem): string {
+     // Simple match: take first 4-letter uppercase code in filecontent
+     const match = item.filecontent.match(/\b[A-Z]{4}\b/);
+     return match ? match[0] : '';
+   }
+ 
+   forecastPageNavigation() {
+     this.router.navigate(['/forecast']);
+   }
+ 
+   ScrollToTop(value: any) {
+     const element = document.getElementById(value);
+     element?.scrollIntoView({ behavior: 'smooth' });
+   }
+ 
+     openDropdown() {
+     // Focus the select element so it opens
+     this.airportSelect.nativeElement.focus();
+     // Optional: open programmatically on some browsers
+     this.airportSelect.nativeElement.click();
+   }
   NavigateToDomestic() {
     this.router.navigate(['/domestic']);
   }
-  onAirportCodeChange(event: any) {
-    this.selectedAirportCode = event.target.value; // Update selectedAirportCode when select value changes
-  }
 
-  // Function to check if item should be displayed based on selectedAirportCode
-  shouldDisplayItem(item: any): boolean {
-    return this.selectedAirportCode === this.getAirportCode(item.filename);
-  }
-
-  getAirportCode(filename: string): string {
-    // Extract airport code (CCCC) from filename
-    const parts = filename.split('-');
-    const airportCode = parts[0].slice(6, 10).toUpperCase();
-    return airportCode;
-  }
-
-  // Inside ForecastPage class
-  extractTakeOffData(filecontent: string): string {
-    // Split the filecontent into lines
-    const lines = filecontent.split('\n');
-
-    // Find the line that contains "TAKE-OFF DATA"
-    const takeOffLine = lines.find((line) => line.includes('TAKE-OFF DATA'));
-
-    // Return the found line
-    return takeOffLine || ''; // Return the line if found, otherwise an empty string
-  }
-  takeoff() {
-    this.isLoading = true;
-    this.spinner.show();
-    this.APIService.GetSourceTextFolderFiles('varmet').subscribe((Response) => {
-      this.VermetArray = Response;
-
-      // Step 1: Group items by airport code and keep only the latest modified item for each airport
-      const airportMap = this.VermetArray.reduce(
-        (acc: { [key: string]: ResponseItem }, item: ResponseItem) => {
-          const airportCode = this.getAirportCode(item.filename);
-
-          // If airportCode already exists in the map, compare lastmodified dates to keep the latest one
-          if (
-            !acc[airportCode] ||
-            new Date(item.lastmodified) >
-              new Date(acc[airportCode].lastmodified)
-          ) {
-            acc[airportCode] = item;
-          }
-
-          return acc;
-        },
-        {}
-      );
-
-      // Step 2: Convert the map values back to an array
-      this.VermetArray = Object.values(airportMap);
-
-      // Optional: Filter based on 'TAKE-OFF' condition
-      this.VermetArray = this.VermetArray.filter((item: ResponseItem) => {
-        return item.filecontent.includes('TAKE-OFF');
-      });
-
-      console.log('Filtered and latest Response ', this.VermetArray);
-
-      this.VermetArray.forEach((item: any) => {
-        const tableData = item.filecontent.split('\n').slice(5, -1); // Extract rows excluding header and footer
-
-        const formattedData = tableData.reduce((acc: any[], row: string) => {
-          const trimmedRow = row.trim();
-
-          // Check if the row is not empty and doesn't start with '----' (separator)
-          if (trimmedRow && !trimmedRow.startsWith('----')) {
-            // Split the row by whitespace
-            const rowValues = trimmedRow.split(/\s+/);
-
-            // Extract specific values (time, temp, qnh, qan)
-            if (rowValues.length >= 4) {
-              const [time, temp, qnh, qan] = rowValues;
-              acc.push({ time, temp, qnh, qan });
-            }
-          }
-
-          return acc;
-        }, []);
-
-        item.vermetTableData = formattedData; // Assign formattedData to a property
-        console.log('Filtered and latest Response Table ', formattedData);
-        this.isLoading = false;
-
-        this.spinner.hide();
-      });
-    });
-  }
 }

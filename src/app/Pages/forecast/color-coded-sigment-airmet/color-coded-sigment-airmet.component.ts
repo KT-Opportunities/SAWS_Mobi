@@ -20,6 +20,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class ColorCodedSigmentAirmetComponent  implements OnDestroy {
   isLoading: boolean = true;
   SigmetList: any = [];
+  allSigmetList: any = []; // <-- Added to fix the error
   AirmetList: any = [];
   GametList: any = [];
   filteredList: any = ([] = []);
@@ -113,27 +114,42 @@ export class ColorCodedSigmentAirmetComponent  implements OnDestroy {
         .filter(el => el.heading !== 'Unknown FIR');
 
     // Fetch both requests in parallel
-    this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
+   this.apiService.GetSourceTextFolderFiles('sigmet').subscribe((sigmets: any[]) => {
 
-        const sigmetList = processResponse(sigmets);
-     
+  const firMapping: { [key: string]: string } = {
+    'FACA CAPE TOWN FIR': 'FACA (CAPE TOWN FIR)',
+    'FAJO JOHANNESBURG OCEANIC FIR': 'FAJO (JOHANNESBURG OCEANIC FIR)',
+    'FAJA JOHANNESBURG FIR': 'FAJA (JOHANNESBURG FIR)',
+  };
 
-        // Combine both arrays
-        this.SigmetList = [...sigmetList];
-         this.updateTime(new Date().toISOString());
-        // Custom order
-        const customOrder = ['Search', 'FAJA (JOHANNESBURG FIR)', 'FACA (CAPE TOWN FIR)', 'FAJO (JOHANNESBURG OCEANIC FIR)'];
+  const sortedFirs = Object.keys(firMapping).sort((a, b) => b.length - a.length);
 
-        // Sort according to custom order
-        this.SigmetList.sort((a: any, b: any) => {
-          const indexA = customOrder.indexOf(a.heading);
-          const indexB = customOrder.indexOf(b.heading);
-          return indexA - indexB;
-        });
+  const processResponse = (response: any[]) =>
+    response
+      .map(el => {
+        const fileContent = el.filecontent.toUpperCase();
+        const afterFaor = fileContent.split('FAOR-')[1] || '';
+        const firKey = sortedFirs.find(fir =>
+          new RegExp(`\\b${fir}\\b`).test(afterFaor)
+        );
 
-        console.log("Combined Data (sorted):", this.SigmetList);
-        this.isLoading = false;
-      });
+        return {
+          heading: firKey ? firMapping[firKey] : 'Unknown FIR',
+          filecontent: el.filecontent,
+        };
+      })
+      .filter(el => el.heading !== 'Unknown FIR');
+
+  const sigmetList = processResponse(sigmets);
+
+  this.allSigmetList = [...sigmetList]; // full backup
+  this.SigmetList = [...this.allSigmetList]; // initial display
+  this.filteredList = [...this.allSigmetList]; // for search filtering
+
+  this.updateTime(new Date().toISOString());
+  this.isLoading = false;
+});
+
 
   }
 
@@ -213,22 +229,21 @@ formatSigmetForDisplay(content: string): SafeHtml {
 
 filterbySearch(event?: any) {
   if (event) {
-    event.preventDefault(); // prevent page reload from <form>
+    event.preventDefault(); // prevent form submit reload
   }
 
-  const query = this.searchQuery.trim().toLowerCase();
-
+  const query = this.searchQuery?.trim().toLowerCase();
   if (!query) {
-    // Nothing typed = hide all results
-    this.SigmetList = [];
+    this.SigmetList = [...this.allSigmetList]; // show all if empty
     return;
   }
 
-  // Filter from your backup (all sigmets)
-  this.SigmetList = this.filteredList.filter((sig: any) =>
+  this.SigmetList = this.allSigmetList.filter((sig:any) =>
+    sig.heading?.toLowerCase().includes(query) || 
     sig.filecontent?.toLowerCase().includes(query)
   );
 }
+
 
 
   ScrollToTop(value: any) {
