@@ -51,7 +51,7 @@ export class MetarRecentComponent implements OnInit {
   selectedOption3: string = 'FAVV';
   selectedOption11: string = 'Select Plot meteogram';
   selectedOption5: string = 'Select saved Template';
-  selectedOption6: string = 'Last Hour';
+  selectedOption6: string = 'Select a saved Template';
   selectedOption7: string = '5 Min';
   selectedOption8: string = '2024-03-20 13:15';
     coded: boolean=true;
