@@ -5668,6 +5668,7 @@ ion-content,
   box-sizing: border-box;
   cursor: pointer;
   margin-left: auto;
+  margin-top: 3px;
 }
 /* Hide default checkbox */
 .custom-checkbox input {
@@ -5818,4 +5819,30 @@ ion-content,
   margin: 20px 0; /* Adds space around */
   border-bottom: 2px solid #007acc; /* Optional underline effect */
   padding-bottom: 10px;
+}
+.dropdown-list1 {
+  position: absolute;
+  bottom: auto; /* don't let it stick to the bottom */
+  z-index: 1000; /* above the footer */
+}
+
+.extra-padding {
+ padding-bottom: 228px !important;
+}
+
+.w-layout-grid.heading-text {
+  display: grid;
+  grid-template-columns: 1fr auto; /* text takes remaining space, button auto width */
+  gap: 10px; /* space between text and button */
+  align-items: center; /* align both top */
+}
+
+.cct-copy-copy {
+  overflow-wrap: break-word; /* wrap long text */
+  word-break: break-word; /* break long words if needed */
+}
+
+.cct-copy .button-2-copy.w-button {
+  white-space: nowrap; /* keep button in one line */
+  align-items: center;
 }

@@ -7,7 +7,7 @@
       Recent METAR/TAFs
     </app-package-header>
 
-    <app-package-sub-header>
+    <app-package-sub-header [ngClass]="{ 'extra-padding': addPadding }" >
       <div
         id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
         class="w-layout-grid grid-cct-copy"
@@ -68,12 +68,8 @@
                 </div>
             
               <nav class="dropdown-list1" *ngIf="isDropdownOpen6">
-  <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown6')">1 min</a>
-  <a class="w-dropdown-link" (click)="selectOption('2 min', 'dropdown6')">2 Min</a>
-  <a class="w-dropdown-link" (click)="selectOption('3 min', 'dropdown6')">3 min</a>
-  <a class="w-dropdown-link" (click)="selectOption('4 min', 'dropdown6')">4 min</a>
-  <a class="w-dropdown-link" (click)="selectOption('5 min', 'dropdown6')">5 min</a>
-</nav>
+                <a class="w-dropdown-link" (click)="selectOption('1 min', 'dropdown6')">Select a saved Template</a>
+              </nav>
 
 
               </div>
@@ -199,8 +195,9 @@
     <app-package-list-items>
   
        <ng-container  *ngIf="searchDone" >
-           <h1 class="heading-21 searched">SIGMETs</h1>
-    <ng-container id="sigmet-list-container">
+           
+    <ng-container id="sigmet-list-container"  *ngIf="searchDone && showSigmetSearch">
+      <h1 class="heading-21 searched">SIGMETs</h1>
    <div
         id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb43-61ad4633"
         class="div-block-15"
@@ -228,23 +225,110 @@
       </div>
  </ng-container>
 
-       <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
-  <!-- METARs -->
-  <h1 class="heading-21 searched">METARs</h1>
+<!-- <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
+
+  <h1 class="heading-21 searched">METARs/TAFs</h1>
+   <div class="div-block-32">
+        <div class="w-layout-grid  ccta-grid ">
+    <div class="cct-copy-copy">
+         <div class="button-2 w-button" (click)="toggleView(province)">
+      {{ viewModes[province] === 'normal' ? 'Normal' : 'Color Coded' }}
+    </div>
+        
+        </div>
+
+          <div class="cct-copy" >
+            <div class="button-2 w-button" (click)="ViewColorCodedStyle()">Colour / Style Index</div>
+          </div>
+        </div>
+      </div>
   <div *ngFor="let report of groupedReportsByProvince[province]">
     <div *ngIf="report.filecontent.startsWith('METAR')">
       <h1 class="heading-21">{{ report.filecontent }}</h1>
     </div>
   </div>
 
-  <!-- TAFs -->
-  <h1 class="heading-21 searched">TAFs</h1>
-  <div *ngFor="let report of groupedReportsByProvince[province]">
-    <div *ngIf="report.filecontent.startsWith('TAF')">
-      <h1 class="heading-21">{{ report.filecontent }}</h1>
+
+</ng-container> -->
+
+     <ng-container *ngFor="let province of objectKeys(groupedReportsByProvince)">
+  <div class="div-block-15">
+    <!-- Display province heading only once -->
+ <h1 class="heading-21 searched">METARs/TAFs</h1>
+<ng-container *ngIf="groupedReportsByProvince[province][0] as firstReport">
+  <ng-container *ngIf="getAirportCode(firstReport.filecontent) as code">
+    <h1 class="heading-22">
+      {{ code }} - {{ airportNames[code] || 'Unknown Airport' }}
+    </h1>
+  </ng-container>
+</ng-container>
+
+    <div class="div-block-32">
+      <div class="w-layout-grid ccta-grid">
+        <div class="cct-copy-copy">
+         <div class="button w-button" id="Normal" (click)="toggleCoded()">
+  {{ coded ? 'Normal' : 'Color Coded' }}
+</div>
+        
+        </div>
+        <div class="cct-copy">
+          <div class="button-2 w-button" (click)="ViewColorCodedStyle()">Colour / Style Index</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loop through each report in the province -->
+    <div *ngFor="let report of groupedReportsByProvince[province]">
+      <div class="w-layout-grid heading-text">
+        <div class="cct-copy-copy">
+         <h1 *ngIf="!coded" class="heading-21" style="white-space: pre-wrap;">
+  {{ report.filecontent }}
+</h1>
+
+<!-- Show color-coded version if coded -->
+<h1 *ngIf="coded" class="heading-21" style="white-space: pre-wrap;" [innerHTML]="parseColorCoded(report.filecontent)">
+</h1>
+        </div>
+        <div class="cct-copy">
+          <div class="button-2-copy w-button" (click)="ImageViewer(report)">
+            View Decoded
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>
+
+
+   <ng-container *ngFor="let province of getFilteredProvinces()">
+  <div class="div-block-15" [attr.id]="province">
+
+    <!-- Loop through each TAF -->
+    <div *ngFor="let taf of (searchDone ? filteredTAFs[province] : groupedTAFs[province])">
+      <div class="w-layout-grid heading-text">
+        <div class="cct-copy-copy">
+          <!-- Normal view -->
+          <h1 *ngIf="!coded" class="heading-21 nocolor" style="white-space: pre-wrap;"
+              [ngStyle]="{ color: isHighlighted(taf) ? '#1111EE' : '' }">
+            {{ taf }}
+          </h1>
+
+          <!-- Color coded view -->
+          <h1 *ngIf="coded" class="heading-21" style="white-space: pre-wrap;"
+              [innerHTML]="parseColorCoded(taf)">
+          </h1>
+        </div>
+
+        <div class="cct-copy" *ngIf="!taf.startsWith('No data for')">
+          <div class="button-2-copy w-button" (click)="ImageViewer(taf)">
+            View Decoded
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
 
        </ng-container>
       
@@ -253,9 +337,9 @@
     </app-package-list-items>
   </app-package-content>
 </ion-content>
-<app-footer></app-footer>
+<app-footer *ngIf="!isKeyboardVisible"></app-footer >
 
-<div class="footerdiv" id="footerdivid1">
+<div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
   <div (click)="navigateToObservation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
     <h6

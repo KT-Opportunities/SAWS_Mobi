@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MetarTafRecentRoutingModule } from './metar-taf-recent-routing.module';
@@ -14,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     MetarTafRecentRoutingModule
   ],
-  declarations: [MetarTafRecentComponent]
+  declarations: [MetarTafRecentComponent],
+   providers: [DatePipe]
 })
 export class MetarTafRecentModule { }

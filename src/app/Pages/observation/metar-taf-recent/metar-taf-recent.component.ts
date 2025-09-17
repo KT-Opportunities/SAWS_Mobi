@@ -13,6 +13,7 @@ import { Keyboard } from '@capacitor/keyboard';
 import { ViewColorCodedStylePage } from '../../Pages/view-color-coded-style/view-color-coded-style.page';
 import { finalize } from 'rxjs';
 import { forkJoin } from 'rxjs';
+import { DatePipe } from '@angular/common';
 export interface Metar {
   raw_text: string;
   color?: string;
@@ -21,6 +22,13 @@ export interface Metar {
 export interface MetarReport {
   filecontent: string;
   filename?: string;
+}
+
+interface FileData {
+  foldername: string;
+  filename: string;
+  lastmodified: string;
+  filecontent: string;
 }
 @Component({
   selector: 'app-metar-taf-recent',
@@ -55,20 +63,50 @@ export class MetarTafRecentComponent implements OnInit {
   selectedOption6: string = 'Select a saved Template';
   selectedOption7: string = '5 Min';
   selectedOption8: string = '2024-03-20 13:15';
-    coded: boolean=true;
+    coded: boolean=false;
     metarReports: MetarReport[] = [];
     filteredReports: MetarReport[] = [];
     groupedReportsByProvince: { [province: string]: MetarReport[] } = {};
+    filteredTAFs: { [province: string]: string[] } = {};
+
     searchQuery: string = '';
     currentDate: string | undefined;
     currentTime: string | undefined;
     selectedProvince: string = 'Gauteng';
   searchDone = false;
+  addPadding = false;
    SigmetList: any = [];
   AirmetList: any = [];
   GametList: any = [];
   filteredList: any = ([] = []);
     showSigmetSearch = false;
+  
+  TAFArray: FileData[] = [];
+  groupedTAFs: { [province: string]: string[] } = {};
+
+
+  viewModes: { [province: string]: 'normal' | 'color' } = {};
+  highlightStations: string[] = ['FALA', 'FACT', 'FALE', 'FAPM', 'FYKT'];
+
+ provinces: { [province: string]: string[] } = {
+  'Gauteng': ['FAOR','FALA','FAJB','FAIR','FAWB','FAWK','FAGC','FAGM','FASI','FAVV'],
+  'Limpopo': ['FAPP','FALM','FAHS','FATH','FATV','FAER','FATZ','FATI','FAVM'],
+  'Mpumalanga': ['FAKN','FANS','FAEO','FASR','FAWI','FAKP','FASZ'],
+  'Northwest Province': ['FAMM','FALI','FAKD','FARG','FAPN','FAPS','FAMK'],
+  'Western Cape': ['FACT','FAGG','FALW','FAOB','FABY','FAPG','FAYP','FAOH'],
+  'Eastern Cape': ['FAPE','FAEL','FAUT','FABE'],
+  'KwaZulu Natal': ['FALE','FAPM','FARB','FAMG','FAVG','FAGY','FAUL','FALY','FANC','FAMX'],
+  'Freestate': ['FABL','FABM','FAWM','FAHV','FAKS','FAFB'],
+  'Northern Cape': ['FAUP','FAKM','FADY','FACV','FASB','FAAB','FASS'],
+  'Lesotho': ['FXMM'],
+  'Eswatini': ['FDMS','FDSK'],
+  'Botswana': ['FBSK','FBMN','FBFT','FBGZ','FBJW','FBKE','FBMP','FBPA','FBTE','FBTS','FBSN','FBSP','FBSW','FBLT'],
+  'Namibia': ['FYWH','FYWE','FYKM','FYKT','FYWB','FYGF','FYLZ','FYOA','FYOG','FYRU'],
+  'Mozambique': ['FQMA','FQBR','FQNP','FQIN','FQLC','FQPB','FQQL','FQTE','FQTT','FQVL'],
+  'Zimbabwe': ['FVRG','FVJN','FVKB','FVFA','FVCZ','FVTL','FVWN'],
+  'Other Regions': ['FWKI','FWCL','FLKK','FLSK','FNLU','FLHN','FLND'],
+  'Other Stations': ['FAME']
+};
     airportProvinceMapping: { [key: string]: string } = {
       FAOR: 'Gauteng',
       FALA: 'Gauteng',
@@ -380,7 +418,8 @@ airportNames: { [code: string]: string } = {
     private renderer: Renderer2,
     private toastController: ToastController,
     private platform: Platform,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private datePipe: DatePipe
   ) {
     this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
@@ -410,10 +449,7 @@ airportNames: { [code: string]: string } = {
   }
 
     
-  ngOnDestroy() {
-    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
-    Keyboard.removeAllListeners();
-  }
+
    ngOnInit() {
     this.getFirstMetar();
       this.fetchSigmetReports();
@@ -422,6 +458,65 @@ airportNames: { [code: string]: string } = {
       setInterval(() => {
         this.updateDateTime();
       }, 1000);
+
+      this.TAFArray = [];
+const allTAFs: { [icao: string]: string } = {};
+
+this.apiService.GetSourceTextFolderFilesTime('taffc', 72).subscribe(
+  (response: FileData[]) => {
+    this.TAFArray = [...this.TAFArray, ...response];
+
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
+    }
+
+    response.forEach(file => {
+      const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
+      if (matches) {
+        matches.forEach(entry => {
+          const match = entry.match(/TAF\s+([A-Z]{4})/);
+          const icao = match?.[1];
+          if (icao) {
+            allTAFs[icao] = entry.trim();
+          }
+        });
+      }
+    });
+
+    this.groupTAFsByProvince(allTAFs);
+    this.spinner.hide();
+  }
+);
+this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
+  (response: FileData[]) => {
+    this.TAFArray = [...this.TAFArray, ...response];
+
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
+    }
+
+    response.forEach(file => {
+      const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
+      if (matches) {
+        matches.forEach(entry => {
+          const match = entry.match(/TAF\s+([A-Z]{4})/);
+          const icao = match?.[1];
+          if (icao) {
+            allTAFs[icao] = entry.trim();
+          }
+        });
+      }
+    });
+
+    this.groupTAFsByProvince(allTAFs);
+    this.updateTime(new Date().toISOString());
+
+  setInterval(() => {
+    this.updateTime(new Date().toISOString());
+  }, 1000); // updates every second
+    this.spinner.hide();
+  }
+);
     }
 
   NavigateToObservation() {
@@ -509,6 +604,7 @@ refreshPage() {
       this.isDropdownOpen11 = !this.isDropdownOpen11;
       this.isDropdownOpen5 = false;
     }
+     this.addPadding = this.isDropdownOpen6 || this.isDropdownOpen5 || this.isDropdownOpen11;
   }
   isLoading: boolean = true;
   item: any;
@@ -544,20 +640,28 @@ onSearch(): void {
   const query = this.searchQuery?.trim();
 
   if (!query) {
-    // If no search query, clear filtered reports and SIGMETs
+    // Reset filters if search is empty
     this.filteredReports = [];
     this.SigmetList = [];
+    this.filteredTAFs = {};   // 👈 clear TAF search results
     this.searchDone = false;
     this.groupedReportsByProvince = {};
     return;
   }
 
-  // Filter METARs by search query
+  // Filter METARs
   this.filteredReports = this.metarReports.filter(report =>
     report.filecontent.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Handle SIGMET checkbox
+  // Filter TAFs by ICAO or text
+  Object.keys(this.groupedTAFs).forEach(province => {
+    this.filteredTAFs[province] = this.groupedTAFs[province].filter(taf =>
+      taf.toLowerCase().includes(query.toLowerCase())
+    );
+  });
+
+  // SIGMET logic
   if (!this.showSigmetSearch) {
     this.SigmetList = [];
   } else {
@@ -569,6 +673,7 @@ onSearch(): void {
 }
 
 
+
   
 
 
@@ -577,7 +682,7 @@ fetchMetarReports(): void {
   this.spinner.show();
 
   forkJoin({
-    metar: this.apiService.getMetarReports('metar', 3000),
+    metar: this.apiService.getMetarReports('metar', 6),
     tafft: this.apiService.getMetarReports('tafft', 6),
     taffc: this.apiService.getMetarReports('taffc', 6),
   }).pipe(
@@ -603,6 +708,7 @@ fetchMetarReports(): void {
         this.groupFilteredReportsByProvince();
 
         console.log('✅ Combined Reports:', this.metarReports);
+        debugger
       } catch (e) {
         console.error('Processing error (METAR/TAF):', e);
       }
@@ -1046,6 +1152,102 @@ async fetchSigmetReports(): Promise<void> {
     }
   });
 }
+
+
+  ngOnDestroy() {
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+    Keyboard.removeAllListeners();
+  }
+
+
+
+
+
+ updateTime(date?: string) {
+  if (!date) return;
+
+  const parsedDate = new Date(date);
+
+  this.currentDate = this.datePipe.transform(parsedDate, 'yyyy-MM-dd') || '';
+  this.currentTime = this.datePipe.transform(parsedDate, 'HH:mm:ss') || '';
+}
+
+   forecastPageNavigation() {
+    this.router.navigate(['/forecast']);
+  }
+    ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
+ extractHeadingContent(filecontent: string): string {
+    const match = filecontent.match(/TAF[\s\S]*?(?=TEMPO|$)/);
+    return match ? match[0] : '';
+  }
+
+   extractRemainingContent(filecontent: string): string {
+    const index = filecontent.indexOf('TEMPO');
+    return index >= 0 ? filecontent.substring(index + 5) : '';
+  }
+
+groupTAFsByProvince(allTAFs: { [icao: string]: string }) {
+  const grouped: { [province: string]: string[] } = {};
+
+  for (const province in this.provinces) {
+    grouped[province] = [];
+
+    this.provinces[province].forEach(station => {
+      if (allTAFs[station]) {
+        grouped[province].push(allTAFs[station]);
+      } else {
+        grouped[province].push(`No data for ${station}`);
+      }
+    });
+
+    // Default view mode
+    this.viewModes[province] = 'normal';
+  }
+
+  this.groupedTAFs = grouped;
+}
+
+// toggleView(province: string): void {
+//   this.viewModes[province] =
+//     this.viewModes[province] === 'normal' ? 'color' : 'normal';
+// }
+
+  isHighlighted(taf: string): boolean {
+  return this.highlightStations.some(station => taf.includes(`TAF ${station}`));
+}
+getFilteredProvinces(): string[] {
+  // If no search, return all provinces
+  if (!this.searchDone) {
+    return Object.keys(this.groupedTAFs);
+  }
+
+  // When searching, return only provinces that have matches
+  return Object.keys(this.groupedTAFs).filter(province => {
+    const hasMetars = this.groupedReportsByProvince[province]?.some(r =>
+      r.filecontent.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+
+    const hasTafs = this.filteredTAFs[province] && this.filteredTAFs[province].length > 0;
+
+    return hasMetars || hasTafs;
+  });
+}
+
+// Helper: extract timestamp from SIGMET string (returns Date)
+extractSigmetTimestamp(sigmet: string): Date {
+  const match = sigmet.match(/VALID\s+(\d{2})(\d{2})(\d{2})/);
+  if (!match) return new Date(0); // fallback to old date
+  const day = parseInt(match[1], 10);
+  const hour = parseInt(match[2], 10);
+  const minute = parseInt(match[3], 10);
+
+  const now = new Date();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), day, hour, minute));
+}
+
 
 }
 

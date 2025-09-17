@@ -63,6 +63,7 @@ export class MetarRecentComponent implements OnInit {
     currentTime: string | undefined;
     selectedProvince: string = 'Gauteng';
   searchDone = false;
+  addPadding = false;
    SigmetList: any = [];
   AirmetList: any = [];
   GametList: any = [];
@@ -456,6 +457,7 @@ airportNames: { [code: string]: string } = {
   }
 
  selectOption(option: string, dropdown: string) {
+
   if (dropdown === 'dropdown11') {
     this.selectedOption11 = option;
     this.isDropdownOpen11 = false;
@@ -508,6 +510,7 @@ refreshPage() {
       this.isDropdownOpen11 = !this.isDropdownOpen11;
       this.isDropdownOpen5 = false;
     }
+      this.addPadding = this.isDropdownOpen6 || this.isDropdownOpen5 || this.isDropdownOpen11;
   }
   isLoading: boolean = true;
   item: any;
@@ -564,6 +567,7 @@ onSearch(): void {
   }
 
   this.searchDone = true;
+  this.addPadding = false;
   this.groupFilteredReportsByProvince();
 }
 

@@ -147,6 +147,12 @@
 
   align-content: center;
 }
+.login-for.keyboard-open {
+
+  margin-bottom: 0px; /* or a dynamic value based on keyboard height */
+}
+
+
 element {
 }
 .w-layout-grid {
