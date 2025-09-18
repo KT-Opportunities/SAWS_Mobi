@@ -1,233 +1,290 @@
 <ion-content>
-  <app-loading *ngIf="loading"></app-loading>
+  <app-loading *ngIf="isLoading"></app-loading>
 
   <div id="top"></div>
+
   <app-package-content>
-    <app-package-header>Take - Off Parameters</app-package-header>
+    <app-package-header> Take - Off Data </app-package-header>
 
-    <app-package-sub-header> </app-package-sub-header>
+    <app-package-sub-header>
+      <div
+        id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408"
+        class="w-layout-grid grid-take-off"
+        id="take"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 100%;
+          gap: 10px;
+          margin-top: 50px;
+        "
+      >
+    <div
+  id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
+  class="div-off"
+  style="
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+  "
+>
+  <a href="https://aviation.weathersa.co.za/Docs/TakeOff.pdf" target="_blank" style="text-decoration: none; width: 100%;">
+    <div
+      class="button-2-copy w-button"
+      style="
+        font-size: 14px;
+        height: 4vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+      "
+    >
+      Document
+    </div>
+  </a>
+</div>
 
-    <app-package-list-items>
-      <div>
+         <div
+  id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
+  class="div-off"
+  style="
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+  "
+>
+  <div
+    class="w-form"
+    style="
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0px !important;
+      padding: 3px;
+    "
+  >
+    <select
+      id="field-2"
+      name="field-2"
+      class="selection w-select"
+      [(ngModel)]="selectedAirportCode"
+      (ngModelChange)="onAirportCodeChange($event)"
+      style="
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        cursor: pointer;
+      "
+    >
+      <option value="" disabled>Select Airport</option>
+      <option value="ALL">All Airports</option>
+      <option *ngFor="let code of ['FAPE','FABL','FACT','FALE','FALA','FAOR']" [value]="code">{{ code }}</option>
+    </select>
+  </div>
+</div>
+
         <div
-          id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd610f-a17d1408"
-          class="w-layout-grid grid-take-off"
-          id="take"
+          id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
+          class="div-off"
+          style="
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100%;
+          "
         >
           <div
-            id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
-            class="div-off"
+            class="button-2-copy w-button"
+            style="
+              font-size: 14px;
+              height: 4vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0;
+            "
           >
-            <div class="button-2-copy w-button leftbtn">Document</div>
-          </div>
-          <div
-            id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
-            class="div-off"
-          >
-            <form
-              id="email-form-2"
-              name="email-form-2"
-              data-name="Email Form 2"
-              method="get"
-              data-wf-page-id="65c08511e6e9943ba17d1408"
-              data-wf-element-id="0890f4e6-efeb-3cd1-742e-9e36574c2616"
-            >
-              <select
-                id="field-2"
-                name="field-2"
-                data-name="Field 2"
-                class="selection w-select"
-                (change)="onAirportCodeChange($event)"
-                [(ngModel)]="selectedAirportCode"
-              >
-                <option value="FAPE">FAPE</option>
-                <option value="FABL">FABL</option>
-                <option value="FACT">FACT</option>
-                <option value="FALE">FALE</option>
-                <option value="FALA">FALA</option>
-                <option value="FAOR">FAOR</option>
-              </select>
-            </form>
-          </div>
-          <div
-            id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
-            class="div-off"
-          >
-            <div class="button-2-copy w-button rightbtn">Reload</div>
+            Reload
           </div>
         </div>
       </div>
+    </app-package-sub-header>
 
-      <div class="tafs-div" style="overflow-y: auto; height: 32em">
-        <div class="w-layout-grid1 grid-6">
+    <app-package-list-items *ngIf="selectedAirportCode">
+      <div
+        id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
+        class="div-block-15"
+        *ngFor="let item of VermetArray"
+      >
+        <div *ngIf="shouldDisplayItem(item)">
           <div
-            id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
-            class="div-block-15"
-            *ngFor="let item of VermetArray"
+            class="div-block-14"
+            style="display: flex; justify-content: space-between"
           >
-            <div *ngIf="shouldDisplayItem(item)">
+            <div
+              class="w-layout-grid1"
+              style="display: flex; flex: 1; gap: 10px; width: 100%"
+            >
               <div
-                class="div-block-14"
-                style="display: flex; justify-content: space-between"
+                id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
+                class="div-block-34"
+                style="flex: 1; text-align: center"
               >
-                <div
-                  class="w-layout-grid1"
-                  style="display: flex; flex: 1; gap: 10px; width: 100%"
-                >
-                  <div
-                    id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e26b-a17d1408"
-                    class="div-block-34"
-                    style="flex: 1; text-align: center"
-                  >
-                    <h1 class="heading-23" style="margin: 0">CCCC:</h1>
-                    <h1 class="heading-23-copy" id="fact" style="margin: 0">
-                      {{ getAirportCode(item.filename) }}
-                    </h1>
-                  </div>
-                  <div
-                    id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
-                    class="div-block-34"
-                    style="flex: 1; text-align: center"
-                  >
-                    <h1 class="heading-23" style="margin: 0">Issued at:</h1>
-                    <h1 class="heading-23-copy" id="fact" style="margin: 0">
-                      {{ item.lastmodified | date : "yyyy/MM/dd HH:mm" }}
-                    </h1>
-                  </div>
-                </div>
+                <h1 class="heading-23" style="margin: 0">CCCC:</h1>
+                <h1 class="heading-23-copy" id="fact" style="margin: 0">
+                  {{ getAirportCode(item) }}
+                </h1>
               </div>
+              <div
+                id="w-node-_0e17e5a4-8d80-a74e-9a4d-6f67cbe3e270-a17d1408"
+                class="div-block-34"
+                style="flex: 1; text-align: center"
+              >
+                <h1 class="heading-23" style="margin: 0">Issued at:</h1>
+                <h1 class="heading-23-copy" id="fact" style="margin: 0">
+                  {{ item.lastmodified | date : "yyyy/MM/dd HH:mm" }}
+                </h1>
+              </div>
+            </div>
+          </div>
 
-              <h1
-                class="datacape"
+          <h1
+            class="datacape"
+            style="color: #00386c; font-size: 12px; font-weight: 387 !important"
+          >
+            <p class="">{{ extractTakeOffData(item.filecontent) }}</p>
+          </h1>
+          <div class="w-layout-grid1 grid-20" id="grid20">
+            <!-- Headings -->
+            <div
+              id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
+              class="div-block-35"
+            >
+              <div
+                class="w-layout-grid1 grid-21-copy"
                 style="
-                  color: #00386c;
-                  font-size: 12px;
-                  font-weight: 387 !important;
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  text-align: center;
                 "
               >
-                <p class="">{{ extractTakeOffData(item.filecontent) }}T</p>
-              </h1>
-              <div class="w-layout-grid1 grid-20" id="grid20">
-                <!-- Headings -->
                 <div
-                  id="w-node-_0f4cf57b-54fd-cef3-5784-79020a3fc876-a17d1408"
-                  class="div-block-35"
+                  class="div-block-36"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
                 >
-                  <div
-                    class="w-layout-grid1 grid-21-copy"
-                    style="
-                      display: grid;
-                      grid-template-columns: repeat(4, 1fr);
-                      text-align: center;
-                    "
-                  >
-                    <div
-                      class="div-block-36"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-24" style="margin: 0">Time</h4>
-                    </div>
-                    <div
-                      class="div-block-36"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-24" style="margin: 0">Temp</h4>
-                    </div>
-                    <div
-                      class="div-block-36"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-24" style="margin: 0">QNH</h4>
-                    </div>
-                    <div
-                      class="div-block-36"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-24" style="margin: 0">QAN</h4>
-                    </div>
-                  </div>
+                  <h4 class="heading-24" style="margin: 0">Time</h4>
                 </div>
+                <div
+                  class="div-block-36"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-24" style="margin: 0">Temp</h4>
+                </div>
+                <div
+                  class="div-block-36"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-24" style="margin: 0">QNH</h4>
+                </div>
+                <div
+                  class="div-block-36"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-24" style="margin: 0">QAN</h4>
+                </div>
+              </div>
+            </div>
 
-                <!-- Content -->
-                <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
-                  <div
-                    *ngFor="
-                      let airportData of item.vermetTableData.slice(1);
-                      let i = index
-                    "
-                    class="w-layout-grid1 grid-22-copy"
-                    [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
-                    style="
-                      display: grid;
-                      grid-template-columns: repeat(4, 1fr);
-                      text-align: center;
-                    "
-                  >
-                    <div
-                      class="div-block-37"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-25" style="margin: 0">
-                        {{ airportData.time }}
-                      </h4>
-                    </div>
-                    <div
-                      class="div-block-37"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-25" style="margin: 0">
-                        {{ airportData.temp }}
-                      </h4>
-                    </div>
-                    <div
-                      class="div-block-37"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-25" style="margin: 0">
-                        {{ airportData.qnh }}
-                      </h4>
-                    </div>
-                    <div
-                      class="div-block-37"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <h4 class="heading-25" style="margin: 0">
-                        {{ airportData.qan }}
-                      </h4>
-                    </div>
-                  </div>
+            <!-- Content -->
+            <div id="w-node-_87e21b55-c8fb-4630-3be2-2b7e8aef64dc-a17d1408">
+              <div
+                *ngFor="
+                  let airportData of item.vermetTableData.slice(1);
+                  let i = index
+                "
+                class="w-layout-grid1 grid-22-copy"
+                [ngClass]="i % 2 === 0 ? 'div-block-37' : 'div-block-38'"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  text-align: center;
+                "
+              >
+                <div
+                  class="div-block-37"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.time }}
+                  </h4>
+                </div>
+                <div
+                  class="div-block-37"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.temp }}
+                  </h4>
+                </div>
+                <div
+                  class="div-block-37"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.qnh }}
+                  </h4>
+                </div>
+                <div
+                  class="div-block-37"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <h4 class="heading-25" style="margin: 0">
+                    {{ airportData.qan }}
+                  </h4>
                 </div>
               </div>
             </div>

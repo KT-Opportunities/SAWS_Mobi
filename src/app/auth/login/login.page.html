@@ -15,10 +15,10 @@
     <!-- <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div> -->
 
     <app-auth-form>
-      <div class="login-for">
+      <div #userFormRef class="login-for" [ngStyle]="{'margin-top.px': isKeyboardVisible ? 30 : -18}">
         <h2 class="login">LOGIN</h2>
 
-        <div class="w-form" #content>
+        <div class="w-form" #content >
           <form
             #userFormRef
             [formGroup]="loginForm"

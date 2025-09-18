@@ -5801,3 +5801,25 @@ ion-content {
   align-items: center;
   justify-content: center;
 }
+.search.w-form {
+  display: flex;
+  align-items: center;   /* vertical alignment */
+  gap: 8px;              /* spacing between input and button */
+}
+
+.search-input {
+  flex: 1;               /* take all available width */
+  min-width: 0;          /* prevents flex overflow */
+}
+
+.search-button {
+  flex-shrink: 0;        /* button stays its natural size */
+  padding: 0.5rem 1rem;  /* optional: make button taller */
+  height: 100%;          /* match input height */
+}
+@media screen and (max-width: 479px) {
+    .search-button {
+        margin-top: 6px;
+        margin-bottom: 0;
+    }
+}

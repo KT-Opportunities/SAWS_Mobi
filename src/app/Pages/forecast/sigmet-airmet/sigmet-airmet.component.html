@@ -29,24 +29,26 @@
 
       <div>
         <!-- <h5 class="heading-9" id="searchHeader">Query sigmet</h5> -->
-        <form action="/search" class="search w-form">
-          <input
-            class="search-input w-input"
-            maxlength="256"
-            name="query"
-            placeholder="Search…"
-            type="text"
-            [(ngModel)]="searchQuery"
-            (ngModelChange)="filterbySearch($event)"
-            id="searchValue"
-          /><button
-            type="submit"
-            class="search-button w-button"
-            (click)="filterbySearch($event)"
-          >
-            Search
-          </button>
-        </form>
+     <form (submit)="filterbySearch($event)" class="search w-form">
+  <input
+    class="search-input w-input"
+    maxlength="256"
+    name="query"
+    placeholder="Search…"
+    type="search"
+    id="search"
+    required
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange()"
+  />
+  <input
+    type="submit"
+    class="search-button w-button"
+    value="Search"
+  />
+</form>
+
+
       </div>
     </app-package-sub-header>
 
@@ -69,12 +71,10 @@
               id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb57-61ad4633"
               class="div-block-16"
             >
-              <p class="paragraph-2">{{ sigmet.filecontent }}</p>
+              <p class="paragraph-2  sigmet-text" [innerHTML]="formatSigmetForDisplay(sigmet.filecontent)"></p>
+
             </div>
-            <div
-              id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb63-61ad4633"
-              class="div-block-17"
-            ></div>
+        
           </div>
         </div>
       </div>

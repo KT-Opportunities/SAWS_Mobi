@@ -231,8 +231,8 @@ const routes: Routes = [
   {
     path: 'observation/metar-recent',
     loadChildren: () =>
-      import('./Pages/observation/web-cam/web-cam.module').then(
-        (m) => m.WebCamPageModule
+      import('./Pages/observation/metar-recent/metar-recent.module').then(
+        (m) => m.MetarRecentModule
       ),
   },
   {
@@ -631,6 +631,11 @@ const routes: Routes = [
     path: 'image-modal',
     loadChildren: () => import('./Pages/image-modal/image-modal.module').then( m => m.ImageModalPageModule)
   },
+  {
+    path: 'view-color-coded-style',
+    loadChildren: () => import('./Pages/Pages/view-color-coded-style/view-color-coded-style.module').then( m => m.ViewColorCodedStylePageModule)
+  },
+
 
 ];
 

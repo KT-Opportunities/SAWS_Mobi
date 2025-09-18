@@ -5309,3 +5309,89 @@ label {
   margin: 0 auto; /* Center the label */
   display: block; /* Place the label above each dropdown */
 }
+.taf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space between rows */
+}
+
+.taf-row {
+  display: flex;
+  align-items: center; /* vertically align text + button */
+  justify-content: space-between; /* pushes button to right */
+  gap: 1rem; /* space between taf and button */
+}
+.nocolor{color:black}
+/* keep checkbox + text on one line and vertically centered */
+.checkbox-field {
+  display: inline-flex;        /* or flex if you want full-width */
+  align-items: center;
+  gap: 8px;                    /* space between box and text */
+}
+
+/* override Webflow's block input */
+.checkbox-field input[type="checkbox"] {
+  display: inline-block !important;
+  margin: 0;                   /* remove weird offsets */
+  vertical-align: middle;
+}
+.searched {
+  font-size: 3.5rem; /* Bigger size */
+  font-weight: 700;  /* Bold */
+  text-transform: uppercase; /* Makes it strong */
+  text-align: center; /* Optional: center align */
+  letter-spacing: 2px; /* Adds space between letters */
+  margin: 20px 0; /* Adds space around */
+  border-bottom: 2px solid #007acc; /* Optional underline effect */
+  padding-bottom: 10px;
+}
+
+/* Hide default checkbox */
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create custom box */
+.custom-checkbox .checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+    border: 1px solid #00386c;;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+/* Show tick when checked */
+.custom-checkbox input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: 1px solid #00386c;;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+/* Color rules for SIGMET keywords */
+.sigmet-text .temporary,
+.sigmet-text .icing {
+  color: #4169E1; /* Blue */
+  font-weight: 600;
+}
+
+.sigmet-text .hazzard,
+.sigmet-text .sigmet {
+  color: #4e9258; /* Green */
+  font-weight: 600;
+}
+
+.sigmet-text .cloud-type {
+  color: #F00; /* Red */
+  font-weight: 600;
+}

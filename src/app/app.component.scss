@@ -2666,3 +2666,22 @@ ion-menu-button {
 //     margin-left: 10px;
 //   }
 // }
+
+@media screen and (max-width: 320px) {
+    .menu-button-container {
+        position: absolute;
+        top: 0px;
+        left: -23px;
+    }
+
+        .round-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: white;
+        margin-top: -118px;
+        margin-left: -241px;
+        margin-bottom: 98px;
+    }
+}

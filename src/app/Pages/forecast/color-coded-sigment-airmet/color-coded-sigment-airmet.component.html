@@ -1,224 +1,104 @@
 <ion-content>
-  <app-loading *ngIf="loading"></app-loading>
+  <app-loading *ngIf="isLoading"></app-loading>
 
   <div id="top"></div>
-  <app-package-content>
 
-    <app-package-header>
-      Colour Coded Sigmet / Airmet
-    </app-package-header>
+  <app-package-content>
+    <app-package-header> SIGMET/AIRMET/GAMET </app-package-header>
 
     <app-package-sub-header>
-      <div id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea" class="w-layout-grid grid-cct-copy">
-        <div id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea" class="cct">
-          <h1 class="heading-7">Date: </h1>
-          <h1 class="heading-8">{{ currentDate }}</h1>
+      <div
+        id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
+        class="w-layout-grid grid-cct-copy"
+      >
+        <div
+          id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Date:</h1>
+          <h1 class="heading-7">{{ currentDate }}</h1>
         </div>
-        <div id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea" class="cct">
-          <h1 class="heading-7">Time: </h1>
-          <h1 class="heading-8">{{ currentTime }}</h1>
+        <div
+          id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Time:</h1>
+          <h1 class="heading-7">{{ currentTime }}</h1>
         </div>
       </div>
 
-      <div id="w-node-f5bb06e8-f72c-b502-4775-b999902099d0-5aa24fea" class="div-block-14-copy">
-        <div>
-          <!-- <h5 class="heading-9">Query Sigment/Airmet</h5> -->
-          <form action="/search" class="search w-form">
-            <input class="search-input w-input" maxlength="256" name="query" placeholder="Search…" type="search"
-              id="search" required="" /><input type="submit" class="search-button w-button" value="Search" />
-          </form>
-        </div>
-      </div>
+      <div>
+        <!-- <h5 class="heading-9" id="searchHeader">Query sigmet</h5> -->
+     <form (submit)="filterbySearch($event)" class="search w-form">
+  <input
+    class="search-input w-input"
+    maxlength="256"
+    name="query"
+    placeholder="Search…"
+    type="text"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="filterbySearch()"
+    id="searchValue"
+  />
+  <button
+    type="submit"
+    class="search-button w-button"
+  >
+    Search
+  </button>
+</form>
 
+      </div>
     </app-package-sub-header>
 
     <app-package-list-items>
-      <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
-        <h1 class="heading-22">Gauteng</h1>
-        <div class="div-block-32">
-          <div class="w-layout-grid ccta-grid">
-            <div id="w-node-_57550a27-1ac8-4e06-fec5-4615467d2d92-5aa24fea" class="cct-copy-copy">
-              <a class="button w-button" id="Normal">Normal</a>
-            </div>
-            <div id="w-node-dca3828b-c7c5-dc10-2800-1d3f80dab2ac-5aa24fea" class="cct-copy">
-              <a class="button-2 w-button">Colour / Style Index</a>
+      <div
+        id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb43-61ad4633"
+        class="div-block-15"
+      >
+        <div *ngFor="let sigmet of SigmetList">
+          <div class="w-layout-grid heading-text">
+            <div
+              id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb50-61ad4633"
+              class="cct-copy-copy"
+            >
+              <h1 class="heading-21">{{ sigmet.heading }}</h1>
             </div>
           </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469a-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-a834d5f5-d929-0d29-d8b5-fea245e1469f-5aa24fea" class="cct-copy">
+          <div class="w-layout-grid grid-18">
+            <div
+              id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb57-61ad4633"
+              class="div-block-16"
+            >
+              <p class="paragraph-2  sigmet-text" [innerHTML]="formatSigmetForDisplay(sigmet.filecontent)"></p>
 
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
             </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c6d-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-deccbcce-e2a3-809c-2b63-5e2db6329c70-5aa24fea" class="div-block-17"></div>
-          </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32135-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32138-5aa24fea" class="cct-copy">
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb3213c-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-_119b902f-f2e9-e7f8-ff03-97df0eb32148-5aa24fea" class="div-block-17"></div>
-          </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d2053fd-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205400-5aa24fea" class="cct-copy">
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205404-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-_1511af9d-a613-35a7-2eb5-86bd8d205410-5aa24fea" class="div-block-17"></div>
+        
           </div>
         </div>
       </div>
-
-      <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a02-5aa24fea" class="div-block-15">
-        <h1 class="heading-22">Limpopo</h1>
-        <div class="div-block-32">
-          <div class="w-layout-grid ccta-grid">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a07-5aa24fea" class="cct-copy-copy">
-              <div class="button w-button" id="Normal">Normal</div>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0a-5aa24fea" class="cct-copy">
-              <div class="button-2 w-button">Colour / Style Index</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a0f-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a12-5aa24fea" class="cct-copy">
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a16-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a22-5aa24fea" class="div-block-17"></div>
-          </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a25-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a28-5aa24fea" class="cct-copy">
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a2c-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a38-5aa24fea" class="div-block-17"></div>
-          </div>
-        </div>
-        <div>
-          <div class="w-layout-grid heading-text">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3b-5aa24fea" class="cct-copy-copy">
-              <h1 class="heading-21">
-                TAF AMD FAOR 221033Z 2212/2318 VRB03KT 9999 SCT040
-              </h1>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a3e-5aa24fea" class="cct-copy">
-              <div class="button-2-copy w-button" (click)="ImageViewer(item)">View Decoded</div>
-            </div>
-          </div>
-          <div class="w-layout-grid grid-18">
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a42-5aa24fea" class="div-block-16">
-              <p class="paragraph-2">
-                TX26/0213Z TN16/0303Z BECMG 0209/0211 15010KT
-                <em>PROB30</em> TEMPO 0214/0220 -<strong>TSRA</strong>
-                FEW030<strong>CB</strong>BECMG 0217/0219 VRB03KT BECMG
-                0300/0302 35010KT=
-              </p>
-            </div>
-            <div id="w-node-baf2c695-dc7d-239a-214f-78aae7ec4a4e-5aa24fea" class="div-block-17"></div>
-          </div>
-        </div>
-      </div>
-
     </app-package-list-items>
-
   </app-package-content>
-
-
 </ion-content>
 
 <app-footer *ngIf="!isKeyboardVisible"></app-footer>
 
 <div class="footerdiv" id="footerdivid1" *ngIf="!isKeyboardVisible">
-  <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
+  <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-    <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-         margin-top: 10px;
-         margin-bottom: 0;
-         font-family: Montserrat, sans-serif;
-         text-decoration: none;
-         font-size: 12px;
-         margin-top: 4px;">
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
       Forecast
     </h6>
   </div>

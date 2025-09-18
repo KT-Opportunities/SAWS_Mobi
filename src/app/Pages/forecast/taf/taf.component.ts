@@ -10,6 +10,8 @@ import { DatePipe } from '@angular/common';
 import { Platform } from '@ionic/angular';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Keyboard } from '@capacitor/keyboard';
+import { ViewColorCodedStylePage } from '../../Pages/view-color-coded-style/view-color-coded-style.page';
+
 
 interface FileData {
   foldername: string;
@@ -21,180 +23,197 @@ interface FileData {
 @Component({
   selector: 'app-taf',
   templateUrl: './taf.component.html',
-  // styleUrls: ['./taf.component.scss'],
   styleUrls: ['./../forecast.page.scss'],
 })
 export class TafComponent implements OnInit, OnDestroy {
   loading = false;
-  isLogged: boolean = false;
-
   TAFArray: FileData[] = [];
-  isLoading: boolean = true;
-  searchQuery: string = ''; // Variable to hold the search query
+  groupedTAFs: { [province: string]: string[] } = {};
+  searchQuery: string = '';
+  currentDate?: string;
+  currentTime?: string;
+  objectKeys = Object.keys;
+  viewModes: { [province: string]: 'normal' | 'color' } = {};
+  item: any;
+  highlightStations: string[] = ['FALA', 'FACT', 'FALE', 'FAPM', 'FYKT'];
 
-  currentDate: string | undefined;
-  currentTime: string | undefined;
-  intervalId: any;
+ provinces: { [province: string]: string[] } = {
+  'Gauteng': ['FAOR','FALA','FAJB','FAIR','FAWB','FAWK','FAGC','FAGM','FASI','FAVV'],
+  'Limpopo': ['FAPP','FALM','FAHS','FATH','FATV','FAER','FATZ','FATI','FAVM'],
+  'Mpumalanga': ['FAKN','FANS','FAEO','FASR','FAWI','FAKP','FASZ'],
+  'Northwest Province': ['FAMM','FALI','FAKD','FARG','FAPN','FAPS','FAMK'],
+  'Western Cape': ['FACT','FAGG','FALW','FAOB','FABY','FAPG','FAYP','FAOH'],
+  'Eastern Cape': ['FAPE','FAEL','FAUT','FABE'],
+  'KwaZulu Natal': ['FALE','FAPM','FARB','FAMG','FAVG','FAGY','FAUL','FALY','FANC','FAMX'],
+  'Freestate': ['FABL','FABM','FAWM','FAHV','FAKS','FAFB'],
+  'Northern Cape': ['FAUP','FAKM','FADY','FACV','FASB','FAAB','FASS'],
+  'Lesotho': ['FXMM'],
+  'Eswatini': ['FDMS','FDSK'],
+  'Botswana': ['FBSK','FBMN','FBFT','FBGZ','FBJW','FBKE','FBMP','FBPA','FBTE','FBTS','FBSN','FBSP','FBSW','FBLT'],
+  'Namibia': ['FYWH','FYWE','FYKM','FYKT','FYWB','FYGF','FYLZ','FYOA','FYOG','FYRU'],
+  'Mozambique': ['FQMA','FQBR','FQNP','FQIN','FQLC','FQPB','FQQL','FQTE','FQTT','FQVL'],
+  'Zimbabwe': ['FVRG','FVJN','FVKB','FVFA','FVCZ','FVTL','FVWN'],
+  'Other Regions': ['FWKI','FWCL','FLKK','FLSK','FNLU','FLHN','FLND'],
+  'Other Stations': ['FAME']
+};
 
 
-
-  isKeyboardVisible = false;
-  private mobileQuery: MediaQueryList;
-  isMobile: boolean;
-  
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private elRef: ElementRef,
-    private iab: InAppBrowser,
-    private spinner: NgxSpinnerService,
     private apiService: APIService,
+    private spinner: NgxSpinnerService,
     private dialog: MatDialog,
-    private datePipe: DatePipe,
+    private datePipe: DatePipe
+  ) {}
 
-    private mediaMatcher: MediaMatcher,
-    private platform: Platform
-  ) {
-    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
-    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
-    this.isMobile = this.mobileQuery.matches;
+ ngOnInit(): void {
+  this.spinner.show();
+ // Start with an empty combined array and taf map
+this.TAFArray = [];
+const allTAFs: { [icao: string]: string } = {};
 
-    Keyboard.addListener('keyboardWillShow', () => {
-      this.isKeyboardVisible = true;
-    });
+this.apiService.GetSourceTextFolderFilesTime('taffc', 72).subscribe(
+  (response: FileData[]) => {
+    this.TAFArray = [...this.TAFArray, ...response];
 
-    Keyboard.addListener('keyboardWillHide', () => {
-      this.isKeyboardVisible = false;
-    });
-  }
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
+    }
 
-  ngOnInit() {
-    this.spinner.show();
-    this.loading = true;
-
-    // this.updateTime();
-    // this.intervalId = setInterval(() => {
-    //   this.updateTime();
-    // }, 1000);
-    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
-    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
-    this.isMobile = this.mobileQuery.matches;
-
-    Keyboard.addListener('keyboardWillShow', () => {
-      this.isKeyboardVisible = true;
-    });
-
-    Keyboard.addListener('keyboardWillHide', () => {
-      this.isKeyboardVisible = false;
-    });
-    this.apiService.GetSourceTextFolderFilesTime('taffc', 6).subscribe(
-      (Response: FileData[]) => {
-        this.TAFArray = Response.slice(0, 20).map((item: FileData) => {
-          const parts = item.filename.split('/');
-          if (parts.length > 1) {
-            const newFilename = parts.slice(1).join('/');
-            return {
-              ...item,
-              filename: newFilename,
-            };
-          } else {
-            return item;
+    response.forEach(file => {
+      const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
+      if (matches) {
+        matches.forEach(entry => {
+          const match = entry.match(/TAF\s+([A-Z]{4})/);
+          const icao = match?.[1];
+          if (icao) {
+            allTAFs[icao] = entry.trim();
           }
         });
-        // this.searchQuery = this.searchQuery;
-        this.loading = false;
-        this.spinner.hide();
-        // Handle response data
-
-        this.updateTime(this.TAFArray[0]?.lastmodified);
-      },
-      (error) => {
-        console.error('API Error:', error);
-        this.loading = false; // Make sure to handle loading state in case of error
-        this.spinner.hide(); // Ensure spinner is hidden on error
       }
-    );
-  }
-  private mobileQueryListener: () => void;
+    });
 
-  ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+    this.groupTAFsByProvince(allTAFs);
+    this.spinner.hide();
+  }
+);
+this.apiService.GetSourceTextFolderFilesTime('tafft', 72).subscribe(
+  (response: FileData[]) => {
+    this.TAFArray = [...this.TAFArray, ...response];
+
+    if (response.length > 0) {
+      this.updateTime(response[0].lastmodified); // 👈 set currentDate & currentTime
     }
-    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
 
-    Keyboard.removeAllListeners();
+    response.forEach(file => {
+      const matches = file.filecontent.match(/TAF\s+[A-Z]{4}[\s\S]*?=/g);
+      if (matches) {
+        matches.forEach(entry => {
+          const match = entry.match(/TAF\s+([A-Z]{4})/);
+          const icao = match?.[1];
+          if (icao) {
+            allTAFs[icao] = entry.trim();
+          }
+        });
+      }
+    });
+
+    this.groupTAFsByProvince(allTAFs);
+    this.updateTime(new Date().toISOString());
+
+  setInterval(() => {
+    this.updateTime(new Date().toISOString());
+  }, 1000); // updates every second
+    this.spinner.hide();
   }
-  updateTime(date: string) {
-    // const now = new Date();
-    this.currentDate =
-      this.datePipe.transform(date, 'yyyy - MM - dd') ?? '2024 - 01 - 22';
-    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '13:15:45';
+);
+
+
+}
+
+  ngOnDestroy(): void {}
+
+ 
+  ImageViewer(item: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    dialogConfig.data = { item };
+    this.dialog.open(ViewDecodedPage, dialogConfig);
   }
 
-  forecastPageNavigation() {
+  onSearch(event: Event) {
+    event.preventDefault();
+    this.searchQuery = this.searchQuery.trim();
+  }
+
+ updateTime(date?: string) {
+  if (!date) return;
+
+  const parsedDate = new Date(date);
+
+  this.currentDate = this.datePipe.transform(parsedDate, 'yyyy-MM-dd') || '';
+  this.currentTime = this.datePipe.transform(parsedDate, 'HH:mm:ss') || '';
+}
+
+   forecastPageNavigation() {
     this.router.navigate(['/forecast']);
   }
-  // Method to handle search form submission
-  onSearch(event: Event) {
-    event.preventDefault(); // Prevent default form submission behavior
-    this.searchQuery = this.searchQuery.trim().toLowerCase();
+    ScrollToTop(value: any) {
+    var element = document.getElementById(value);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
+ extractHeadingContent(filecontent: string): string {
+    const match = filecontent.match(/TAF[\s\S]*?(?=TEMPO|$)/);
+    return match ? match[0] : '';
   }
 
-  // Method to filter TAFArray based on search query
-  get filteredTAFArray(): FileData[] {
-    if (!this.searchQuery) {
-      return this.TAFArray;
-    }
-    return this.TAFArray.filter((item) =>
-      item.filecontent.toLowerCase().includes(this.searchQuery)
-    );
+   extractRemainingContent(filecontent: string): string {
+    const index = filecontent.indexOf('TEMPO');
+    return index >= 0 ? filecontent.substring(index + 5) : '';
   }
 
-  extractHeadingContent(filecontent: string): string | null {
-    // Use a regular expression to find the content starting with 'TAF'
-    const regex = /TAF[\s\S]*?(?=TEMPO|$)/; // Matches from 'TAF' to 'TEMPO' or end of string
+groupTAFsByProvince(allTAFs: { [icao: string]: string }) {
+  const grouped: { [province: string]: string[] } = {};
 
-    const match = filecontent.match(regex);
+  for (const province in this.provinces) {
+    grouped[province] = [];
 
-    if (match) {
-      return match[0]; // Return the matched content
-    } else {
-      return null; // Return null if no match found
-    }
+    this.provinces[province].forEach(station => {
+      if (allTAFs[station]) {
+        grouped[province].push(allTAFs[station]);
+      } else {
+        grouped[province].push(`No data for ${station}`);
+      }
+    });
+
+    // Default view mode
+    this.viewModes[province] = 'normal';
   }
 
-  extractRemainingContent(filecontent: string): string {
-    // Extract remaining content after the content used for <h1> (e.g., using regex or string manipulation)
-    // Return the extracted content
-    return filecontent.substring(filecontent.indexOf('TEMPO') + 5);
-  }
-  ImageViewer(item: any) {
-    console.log('file Name:', item);
-    const folderName = 'sigw';
-    const fileName = item;
-    this.isLoading = true;
+  this.groupedTAFs = grouped;
+}
 
-    this.isLoading = false;
+toggleView(province: string): void {
+  this.viewModes[province] =
+    this.viewModes[province] === 'normal' ? 'color' : 'normal';
+}
 
+  ViewColorCodedStyle() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = '80%';
     dialogConfig.height = '80%';
-    dialogConfig.data = { item };
 
-    const dialogRef = this.dialog.open(ViewDecodedPage, dialogConfig);
+
+    const dialogRef = this.dialog.open(ViewColorCodedStylePage, dialogConfig);
 
     dialogRef.afterClosed().subscribe(() => {
-      this.isLoading = false;
+      this.loading = false;
     });
   }
-
-  ScrollToTop(value: any) {
-    var element = document.getElementById(value);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  }
+  isHighlighted(taf: string): boolean {
+  return this.highlightStations.some(station => taf.includes(`TAF ${station}`));
+}
 }

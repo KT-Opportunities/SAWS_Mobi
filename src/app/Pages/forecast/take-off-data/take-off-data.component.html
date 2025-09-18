@@ -20,83 +20,79 @@
           margin-top: 50px;
         "
       >
-        <div
-          id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
-          class="div-off"
-          style="
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            height: 100%;
-          "
-        >
-          <div
-            class="button-2-copy w-button"
-            style="
-              font-size: 14px;
-              height: 4vh;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              margin: 0;
-            "
-          >
-            Document
-          </div>
-        </div>
-        <div
-          id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
-          class="div-off"
-          style="
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            height: 100%;
-          "
-        >
-          <div
-            class="w-form"
-            style="
-              width: 100%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              margin-top: 0px !important;
-              padding: 10px;
-            "
-          >
-            <form
-              style="width: 100%; font-size: 14px; margin: 0; height: 4vh"
-              id="email-form-2"
-              name="email-form-2"
-              data-name="Email Form 2"
-              method="get"
-              data-wf-page-id="65c08511e6e9943ba17d1408"
-              data-wf-element-id="0890f4e6-efeb-3cd1-742e-9e36574c2616"
-            >
-              <select
-                id="field-2"
-                name="field-2"
-                data-name="Field 2"
-                class="selection w-select"
-                (change)="onAirportCodeChange($event)"
-                [(ngModel)]="selectedAirportCode"
-                style="font-size: 14px; height: 100%; margin: 0"
-              >
-                <option value="FAPE">FAPE</option>
-                <option value="FABL">FABL</option>
-                <option value="FACT">FACT</option>
-                <option value="FALE">FALE</option>
-                <option value="FALA">FALA</option>
-                <option value="FAOR">FAOR</option>
-              </select>
-            </form>
-          </div>
-        </div>
+    <div
+  id="w-node-_92e5dcae-a754-8f06-8507-a2c2f6346ac9-a17d1408"
+  class="div-off"
+  style="
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+  "
+>
+  <a href="https://aviation.weathersa.co.za/Docs/TakeOff.pdf" target="_blank" style="text-decoration: none; width: 100%;">
+    <div
+      class="button-2-copy w-button"
+      style="
+        font-size: 14px;
+        height: 4vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+      "
+    >
+      Document
+    </div>
+  </a>
+</div>
+
+         <div
+  id="w-node-_9c86584d-c6c2-a4bd-db1c-e68913d7c788-a17d1408"
+  class="div-off"
+  style="
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+  "
+>
+  <div
+    class="w-form"
+    style="
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0px !important;
+      padding: 3px;
+    "
+  >
+    <select
+      id="field-2"
+      name="field-2"
+      class="selection w-select"
+      [(ngModel)]="selectedAirportCode"
+      (ngModelChange)="onAirportCodeChange($event)"
+      style="
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        cursor: pointer;
+      "
+    >
+      <option value="" disabled>Select Airport</option>
+      <option value="ALL">All Airports</option>
+      <option *ngFor="let code of ['FAPE','FABL','FACT','FALE','FALA','FAOR']" [value]="code">{{ code }}</option>
+    </select>
+  </div>
+</div>
+
         <div
           id="w-node-_89e35c67-8544-644a-5d2f-ff5abcbff190-a17d1408"
           class="div-off"
@@ -126,7 +122,7 @@
       </div>
     </app-package-sub-header>
 
-    <app-package-list-items>
+    <app-package-list-items *ngIf="selectedAirportCode">
       <div
         id="w-node-_0f44ecd9-3a04-970b-a96b-ac40dadd6120-a17d1408"
         class="div-block-15"
@@ -148,7 +144,7 @@
               >
                 <h1 class="heading-23" style="margin: 0">CCCC:</h1>
                 <h1 class="heading-23-copy" id="fact" style="margin: 0">
-                  {{ getAirportCode(item.filename) }}
+                  {{ getAirportCode(item) }}
                 </h1>
               </div>
               <div
