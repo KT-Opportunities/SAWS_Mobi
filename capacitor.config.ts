@@ -9,11 +9,19 @@ const config: CapacitorConfig = {
     androidScheme: 'http',
     cleartext: true,
   },
-   plugins: {
-    Keyboard: {
-       resize: KeyboardResize.Ionic,
+
+  plugins: {
+     Keyboard: {
+      resize: KeyboardResize.Ionic,
     },
-  },
+    SplashScreen: {
+      launchShowDuration: 0,
+      launchAutoHide: true,
+      androidSplashResourceName: "splash",
+      iosSplashResourceName: "splash"
+        }
+      }
+    
 };
 
 export default config;
