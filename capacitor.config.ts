@@ -19,7 +19,10 @@ const config: CapacitorConfig = {
       launchAutoHide: true,
       androidSplashResourceName: "splash",
       iosSplashResourceName: "splash"
-        }
+        },
+         StatusBar: {
+      overlaysWebView: false, 
+    },
       }
     
 };
