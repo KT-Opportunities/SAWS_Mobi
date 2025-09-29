@@ -12,6 +12,8 @@ import { Platform, ToastController } from '@ionic/angular';
 // import { MatButtonModule } from '@angular/material/button';
 // import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { register } from 'swiper/element/bundle';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar, Style } from '@capacitor/status-bar';
 register();
 
 @Component({
@@ -53,6 +55,7 @@ export class AppComponent {
   ngOnInit() {
     this.initializeApp();
     this.fetchUserData();
+    
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom', message: string, color: string, icon: string) {
@@ -89,6 +92,7 @@ export class AppComponent {
       // Override system dark mode
       document.body.classList.toggle('light-theme', true);
     });
+    
   }
 
   fetchUserData() {
@@ -171,4 +175,19 @@ export class AppComponent {
       currentRoute.includes('/provide-feedback')
     );
   }
+ async initializeStatusBar() {
+  if (Capacitor.getPlatform() === 'ios') {
+    // iOS: background color is ignored, only text color changes
+    await StatusBar.setStyle({ style: Style.Light }); // white text/icons
+    await StatusBar.show();
+  } else if (Capacitor.getPlatform() === 'android') {
+    // Android: supports both background + text color
+    await StatusBar.setBackgroundColor({ color: '#002f5a' }); // your blue
+    await StatusBar.setStyle({ style: Style.Light }); // white text/icons
+    await StatusBar.show();
+  }
+}
+
+
+
 }
