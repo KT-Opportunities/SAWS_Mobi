@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content  [scrollY]="false">
   <app-loading *ngIf="loading"></app-loading>
 
   <app-auth-content>
@@ -15,7 +15,7 @@
     <div [ngClass]="{'keyboardopen': isKeyboardVisible}"></div>
 
     <app-auth-form>
-      <div #userFormRef class="login-for" [ngStyle]="{'margin-top.px': isKeyboardVisible ? 30 : 30}">
+      <div #userFormRef class="login-for" [ngStyle]="{'margin-top.px': isKeyboardVisible ? 10 : -18}">
         <h2 class="login">LOGIN</h2>
 
         <div class="w-form" #content >
