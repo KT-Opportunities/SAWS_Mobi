@@ -886,7 +886,7 @@ ion-menu-button {
     margin-left: -173px;
   }
   .image {
-   margin-top: 39px;
+   margin-top: 41px;
     padding-top: 0;
   }
 
@@ -2694,13 +2694,13 @@ ion-content {
 
 
 .blue-block {
-  background-color: #0c2649; 
+  background-color: #0c264a; 
   width: 100%;
-  height: 30%; 
-  position: absolute;
-  top: -213%;
+  height: 120px; 
+  position: fixed;
+  top: -61px;
   left: 0;
-
+  z-index:-2;
 }
 
 .blue-block2 {

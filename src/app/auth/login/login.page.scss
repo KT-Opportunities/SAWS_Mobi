@@ -208,69 +208,26 @@ element {
  
 }
 
-/* Example */
-.w-layout-grid {
-  // max-height: 260px;
-  // overflow-y: auto;
-}
-
-// .toggle-password {
-//   position: relative;
-//   right: -284px;
-//   top: -22% !important;
-//   transform: translateY(-50%);
-//   cursor: pointer;
-// }
-.registerfield {
-  width: 100%;
-}
-
-// .fas {
-//   position: absolute;
-//   right: -253px;
-//   transform: translateY(-183%);
-//   cursor: pointer;
-//   z-index: 2;
-//   padding-bottom: -20px;
-// }
-.fas {
-  position: absolute;
-  right: 14px;
-  margin-top: 3px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
 
 .bottomdiv2 {
   position: fixed;
   margin-top: 150%;
 }
 
-.div-block {
-  margin-top: -35px;
-}
+// .div-block {
+//   margin-top: -35px;
+// }
 
 .login-for {
   margin-top: -18px;
 }
 
-.ion-padding {
-  height: 50%;
-  overflow-y: hidden;
-}
-
-// .form-container {
-//   max-height: 300px; /* Adjust height as needed */
-//   overflow-y: auto; /* Enable vertical scrolling */
+// .ion-padding {
+//   height: 50%;
+//   overflow-y: hidden;
 // }
-.login-for {
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-left: 20px;
-  padding-right: 11px;
 
-  width: 80vw;
-}
+
 
 .input-container {
   position: relative;
@@ -325,4 +282,13 @@ element {
 }
 .w-button {
   width: 100%;
+}
+ion-content.keyboard-open {
+  overflow: hidden; 
+}
+app-auth-form{
+  overflow-y: hidden;
+}
+ion-content.keyboard-open {
+  overflow: hidden !important;
 }
