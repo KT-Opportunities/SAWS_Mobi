@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChatPageRoutingModule } from './chat-routing.module';
 
 import { ChatPage } from './chat.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ChatPage } from './chat.page';
     IonicModule,
     ChatPageRoutingModule,
     ReactiveFormsModule,
+     SharedModule
   ],
   declarations: [ChatPage],
 })

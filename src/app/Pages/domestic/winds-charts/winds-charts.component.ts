@@ -148,6 +148,7 @@ blockWindsWL: any[] = [];
           //   };
           // });
           this.chartsArray = data;
+          
           console.log('Charts Array:', this.chartsArray);
           debugger
         } else {
