@@ -15,6 +15,7 @@ import { ToastController } from '@ionic/angular';
 import { APIService } from 'src/app/services/apis.service';
 import { Keyboard } from '@capacitor/keyboard';
 import { Platform } from '@ionic/angular';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private renderer: Renderer2,
     private toastController: ToastController,
-    private platform: Platform
+    private platform: Platform,
+     private zone: NgZone
   ) {
     this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => (this.isMobile = this.mobileQuery.matches);
@@ -62,6 +64,19 @@ export class LoginPage implements OnInit, OnDestroy {
     // Keyboard listeners
     Keyboard.addListener('keyboardWillShow', () => this.isKeyboardVisible = true);
     Keyboard.addListener('keyboardWillHide', () => this.isKeyboardVisible = false);
+    // In constructor or ngOnInit
+Keyboard.addListener('keyboardDidShow', () => {
+  this.zone.run(() => {
+    this.isKeyboardVisible = true;
+  });
+});
+
+Keyboard.addListener('keyboardDidHide', () => {
+  this.zone.run(() => {
+    this.isKeyboardVisible = false;
+  });
+});
+
   }
 
   ngOnInit() {

@@ -292,3 +292,12 @@ app-auth-form{
 ion-content.keyboard-open {
   overflow: hidden !important;
 }
+.footerdiv, app-footer {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.footerdiv.ng-animating, app-footer.ng-animating {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
