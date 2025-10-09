@@ -5,17 +5,23 @@ import {
   ElementRef,
   OnInit,
 } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
-import { ImageViewrPage } from '../../image-viewr/image-viewr.page';
-import { ViewSymbolPage } from '../../view-symbol/view-symbol.page';
-import { ViewDecodedPage } from '../../view-decoded/view-decoded.page';
 import { ImageModalPage } from '../../image-modal/image-modal.page';
 import { ModalController } from '@ionic/angular';
+import { ViewSymbolPage } from '../../view-symbol/view-symbol.page';
+
+interface SigwxChart {
+  title: string;
+  level: string;
+  times: string[];
+  images: { [time: string]: SafeResourceUrl };
+  currentImage?: SafeResourceUrl;
+}
 
 @Component({
   selector: 'app-sigwx-charts',
@@ -23,266 +29,225 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./../domestic.page.scss'],
 })
 export class SigwxChartsComponent implements OnInit {
-  imageUrl: string | null = null;
-  isLogged: boolean = false;
   loading: boolean = true;
-  Sigwx: any = [];
-  Sigwxh: any = [];
-  Sigwxm: any = [];
-  Sigwxl: any = [];
-  fileBaseUrl: SafeResourceUrl;
-  ImageArray: any = [];
+    item: any;
+
+  Sigwxh: any[] = []; // High level
+  Sigwxm: any[] = []; // Additional Low
+  Sigwxl: any[] = []; // Low level
+
+  imageTimes = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
+  currentImages: { [level: string]: SafeResourceUrl } = {};
+   ImageArray: any = [];
+  fileBaseUrl: SafeResourceUrl | undefined;
+  fileBaseUrlNext: SafeResourceUrl;
+  fileBaseUrlPrevious: SafeResourceUrl;
+  fileBaseUrlSynoptic: SafeResourceUrl;
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
-    private elRef: ElementRef,
-    private spinner: NgxSpinnerService,
-    private http: HttpClient,
     private APIService: APIService,
-    private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef,
-    private moodalCtrl: ModalController
+    private modalCtrl: ModalController,
+     private router: Router,
+     private dialog: MatDialog
   ) {
-    this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
+      this.fileBaseUrlNext = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlPrevious =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.fileBaseUrlSynoptic =
+      this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
   ngOnInit() {
-    if (!this.authService.getIsLoggedIn()) {
-      this.router.navigate(['/login']);
-    } else {
-      this.loadSynopticData();
-    }
+    this.loadSynopticData();
   }
 
- getTimeFromFilenamexh(item: any) {
-  const filename = item.filename;
+  loadSynopticData() {
+    this.loading = true;
+    this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
+      (data) => {
+        console.log("SIGXT:",data)
+        data.forEach((item: any) => {
+          const fname = item.filename.toLowerCase();
+          if (fname.startsWith('sigwxh')) this.Sigwxh.push(item);
+          else if (fname.startsWith('sigwxm')) this.Sigwxm.push(item);
+          else if (fname.startsWith('sigwxl')) this.Sigwxl.push(item);
+        });
+        this.Sigwxh = this.sortImages(this.Sigwxh, 'sigwxh');
+this.Sigwxm = this.sortImages(this.Sigwxm, 'sigwxm');
+this.Sigwxl = this.sortImages(this.Sigwxl, 'sigwxl');
 
-  if (
-    filename.startsWith('sigw_aaxx') ||
-    filename.startsWith('sigw_egrr_aaxx')
-  ) {
-    const timeString = filename.slice(6, -4);
-    if (timeString) {
-      const hour = parseInt(timeString, 10);
-      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
-    } else {
-      return 'most recent';
-    }
-  }
-  return null;
-}
+        console.log("sigwxh:",this.Sigwxh)
+        console.log("sigwxm:",this.Sigwxm)
+        console.log("sigwxl:",this.Sigwxl);
+        // Set most recent images by default
+        if (this.Sigwxh.length) this.setMostRecentImage('high', this.Sigwxh);
+        if (this.Sigwxm.length) this.setMostRecentImage('additionalLow', this.Sigwxm);
+        if (this.Sigwxl.length) this.setMostRecentImage('low', this.Sigwxl);
 
-getTimeFromFilenamexm(item: any) {
-  const filename = item.filename;
-
-  if (
-    filename.startsWith('sigw_afxx') ||
-    filename.startsWith('sigw_egrr_afxx')
-  ) {
-    const timeString = filename.slice(6, -4);
-    if (timeString) {
-      const hour = parseInt(timeString, 10);
-      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
-    } else {
-      return 'most recent';
-    }
-  }
-  return null;
-}
-
-getTimeFromFilenamexl(item: any) {
-  const filename = item.filename;
-
-  if (
-    filename.startsWith('sigw_egrr_euxx') ||
-    filename.startsWith('sigw_egrr_fexx') ||
-    filename.startsWith('sigw_egrr_mexx') ||
-    filename.startsWith('sigw_egrr_naxx') ||
-    filename.startsWith('sigw_egrr_saxx') ||
-    filename.startsWith('sigw_euxx') ||
-    filename.startsWith('sigw_fexx') ||
-    filename.startsWith('sigw_mexx') ||
-    filename.startsWith('sigw_naxx') ||
-    filename.startsWith('sigw_saxx')
-  ) {
-    const timeString = filename.slice(6, -4);
-    if (timeString) {
-      const hour = parseInt(timeString, 10);
-      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
-    } else {
-      return 'most recent';
-    }
-  }
-  return null;
-}
-
-getTimeFromFilenamexUnknown(item: any) {
-  const filename = item.filename;
-
-  if (
-    filename.includes('ssxx') ||
-    filename.includes('unknown')
-  ) {
-    const timeString = filename.slice(6, -4);
-    if (timeString) {
-      const hour = parseInt(timeString, 10);
-      return !isNaN(hour) ? (hour < 10 ? `0${hour}:00` : `${hour}:00`) : 'most recent';
-    } else {
-      return 'most recent';
-    }
-  }
-  return null;
-}
-
-loadSynopticData() {
-  this.loading = true;
-  this.Sigwxh = [];
-  this.Sigwxm = [];
-  this.Sigwxl = [];
-  this.Sigwx = [];
-
-  this.APIService.GetSourceAviationFolderFilesList('sigw').subscribe(
-    (data) => {
-      console.log('SIGWX', data);
-     
-      data.forEach((item: any) => {
-        const filename = item.filename.toLowerCase();
-
-        if (filename.includes('aaxx')) {
-          this.Sigwxh.push(item);
-        } else if (filename.includes('afxx')) {
-          this.Sigwxm.push(item);
-        } else if (filename.includes('euxx') || filename.includes('fexx')) {
-          this.Sigwxl.push(item);
-        } else if (filename.includes('ssxx') || filename.includes('unknownxx')) {
-          this.Sigwx.push(item);
-        } else {
-          // Fallback or miscellaneous
-          console.log('Uncategorized file:', filename);
-        }
-      });
-
-    this.loading = false;
-       this.spinner.hide();
-      console.log('SIGWXH (AAXX)', this.Sigwxh);
-      console.log('SIGWXM (AFXX)', this.Sigwxm);
-      console.log('SIGWXL (EUXX/FEXX)', this.Sigwxl);
-      console.log('SSIGW (SSXX/UNKNOWN)', this.Sigwx);
-    },
-    (error) => {
-      console.error('Error fetching SIGW data:', error);
-      this.loading = false;
-      this.spinner.hide(); 
-    }
-  );
-}
-
-
-  openImageViewerSymbol(item: any) {
-    console.log('File Name:', item);
-    
-    // Define the folder name
-    const folderName = 'sigw';
-    const fileName = item;
-    console.log('Folder Name:', folderName);
-  
-    // Create the array to hold folderName and fileName
-    const type = [
-      { folderName: folderName, filename: fileName },
-      // Add more entries if needed
-    ];
-  
-    // Call the ImagesArray method with item and the type array
-    this.ImagesArray(item, type);
-  
-  
-  }
-  item: any;
-
-
-  fetchSecondAPI(folderName: string, fileName: string): Promise<string> {
-    // Return a promise that resolves with filecontent
-    return new Promise<string>((resolve, reject) => {
-      this.APIService.GetAviationFile(folderName, fileName).subscribe(
-        (response) => {
-          // Assuming filecontent is obtained from the response
-          const filecontent = response.filecontent;
-          // Log filecontent to verify
-          console.log('File Text Content:', filecontent);
-          // Resolve the promise with filecontent
-          resolve(filecontent);
-        },
-        (error) => {
-          // Reject the promise if there's an error
-          reject(error);
-        }
-      );
-    });
-  }
-
-  get isLoggedIn(): boolean {
-    return this.authService.getIsLoggedIn();
-  }
-
-  NavigateToDomestic() {
-    this.router.navigate(['/domestic']);
-  }
-
-  async ImageViewer(imgs: any) {
-    console.log('The img:', imgs);
-
-    const modal = await this.moodalCtrl.create({
-      component: ImageModalPage,
-      componentProps: {
-        imgs, // image link passed on click event
+        this.loading = false;
       },
+      (error) => {
+        console.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  setMostRecentImage(level: string, items: any[]) {
+    const lastItem = items[items.length - 1];
+    const base64 = 'data:image/png;base64,' + lastItem.filecontent;
+    this.currentImages[level] = this.sanitizer.bypassSecurityTrustResourceUrl(base64);
+  }
+
+  getTimeFromFilenamexh(item: any) {
+    return this.extractTime(item, 'sigwxh');
+  }
+  getTimeFromFilenamexm(item: any) {
+    return this.extractTime(item, 'sigwxm');
+  }
+  getTimeFromFilenamexl(item: any) {
+    return this.extractTime(item, 'sigwxl');
+  }
+
+extractTime(item: any, prefix: string): string | null {
+  const fname = item.filename.toLowerCase();
+
+  if (fname.startsWith(prefix)) {
+    // Check for A4-size
+    if (fname.endsWith('xx.png')) {
+      return 'A4-size images';
+    }
+
+    // Extract hour for normal images
+    const hourStr = fname.slice(prefix.length, -4);
+    const hour = parseInt(hourStr, 10);
+    if (!isNaN(hour)) {
+      return hour < 10 ? `0${hour}:00` : `${hour}:00`;
+    } else {
+      return 'most recent';
+    }
+  }
+
+  return null;
+}
+
+
+
+
+
+  async openImageViewer(imgs: any[]) {
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      componentProps: { imgs },
       cssClass: 'transparent-modal',
     });
-    modal.present();
+    await modal.present();
   }
-
-  ImagesArray(item: any, type: any[]) {
-    console.log('ITEM:', item, ' TYPE:', type);
-
-    // Ensure you are checking the filename property of each object
-    let ImageArray = type.filter((x) => x.filename.includes(item.filename));
-
-    console.log('Image arrays:', ImageArray);
-    this.ConvertImagesArray(ImageArray);
+    NavigateToDomestic() {
+    this.router.navigate(['/domestic']);
   }
+  openImageViewerSymbol(item: any) {
+  console.log('File Name:', item);
+  
+  // Define the folder name
+  const folderName = '';
+  const fileName = item;
+  console.log('Folder Name:', folderName);
 
-  ConvertImagesArray(ImageArray: any[]) {
-    this.ImageArray = [];
-    console.log('IMAGE ARRAY', ImageArray);
-    ImageArray.forEach((element) => {
-      this.APIService.GetAviationFile('sigw', element.filename).subscribe(
+  // Create the array to hold folderName and fileName
+  const type = [
+    { folderName: folderName, filename: fileName },
+    // Add more entries if needed
+  ];
+
+  // Call the ImagesArray method with item and the type array
+  this.ImagesArray(item, type);
+}
+// Called when a View button is clicked
+ImagesArray(item: any, type: any[]) {
+  console.log('ITYEM:', item, ' TYPE:', type);
+  let ImageArray = type.filter((x) => x.filename.includes(item));
+  console.log('Image arrays:', ImageArray);
+  this.ConvertImagesArray(ImageArray);
+}
+
+
+async ImageViewer(imgs: string[]) {
+  const modal = await this.modalCtrl.create({
+    component: ImageModalPage,
+    componentProps: { imgs }, // pass the array
+    cssClass: 'transparent-modal',
+  });
+
+  modal.onWillDismiss().then(() => {
+    this.loading = false;
+  });
+
+  await modal.present();
+}
+ConvertImagesArray(ImageArray: any[]) {
+  this.loading = true;
+  this.ImageArray = [];
+
+  console.log('IMAGE ARRAY:', ImageArray);
+
+  if (ImageArray.length > 0) {
+    const firstImage = ImageArray[0];
+
+    // Pass foldername and filename to the API
+    this.APIService.GetAviationFile(firstImage.foldername, firstImage.filename)
+      .subscribe(
         (data) => {
           console.log('IMAGE:', data);
-          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+          const imageUrl = 'data:image/png;base64,' + data.filecontent;
 
-          this.fileBaseUrl =
-            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-
+          this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
           this.ImageArray.push(imageUrl);
+
+          this.ImageViewer(this.ImageArray[0]);
         },
         (error) => {
-          console.log('Error fetching JSON data:', error);
+          console.error('Error fetching JSON data:', error);
           this.loading = false;
         }
       );
-    });
-    setTimeout(() => {
-      console.log('this.ImageArray:', this.ImageArray.length);
-      this.ImageViewer(this.ImageArray);
-    }, 1000);
-  }
-
-  viewFilter(item: any[], filter: string) {
-    return item.filter((x) => x.includes(filter));
-  }
-  viewFilters(items: any[], filter: string) {
-    return items.filter((x) => x.filename.includes(filter));
   }
 }
+
+sortImages(items: any[], prefix: string): any[] {
+  const order = [
+    'most recent',
+    'A4-size images',
+    '00:00',
+    '03:00',
+    '06:00',
+    '09:00',
+    '12:00',
+    '15:00',
+    '18:00',
+    '21:00'
+  ];
+
+  return items
+    .map(item => ({
+      ...item,
+      timeLabel: this.extractTime(item, prefix)
+    }))
+    .filter(item => item.timeLabel !== null)
+    .sort((a, b) => order.indexOf(a.timeLabel!) - order.indexOf(b.timeLabel!));
+}
+async openImageViewerSymbol2() {
+  const modal = await this.modalCtrl.create({
+    component: ViewSymbolPage,
+    componentProps: {
+      imgs: ['../../assets/sxwg.gif'] // can be single image or array
+    },
+    cssClass: 'transparent-modal'
+  });
+  await modal.present();
+}
+
+}
+
+

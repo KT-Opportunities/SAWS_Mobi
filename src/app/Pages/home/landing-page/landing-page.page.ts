@@ -202,22 +202,24 @@ export class LandingPage implements OnInit {
     }
   }
 
-  domesticPage() {
-    if (this.isLoggedIn && !this.isFreeSubscription) {
-      this.router.navigate(['/domestic']);
-    } else if (this.isLoggedIn && this.isFreeSubscription) {
-      this.presentToast(
-        'top',
-        'Subscription is required to access Service!',
-        'danger',
-        'close'
-      );
-    } else {
-      this.authService.setRedirectUrl('/domestic');
-      this.router.navigate(['/login']);
-    }
-  }
-
+  // domesticPage() {
+  //   if (this.isLoggedIn && !this.isFreeSubscription) {
+  //     this.router.navigate(['/domestic']);
+  //   } else if (this.isLoggedIn && this.isFreeSubscription) {
+  //     this.presentToast(
+  //       'top',
+  //       'Subscription is required to access Service!',
+  //       'danger',
+  //       'close'
+  //     );
+  //   } else {
+  //     this.authService.setRedirectUrl('/domestic');
+  //     this.router.navigate(['/login']);
+  //   }
+  // }
+domesticPage() {
+ this.router.navigate(['/domestic']);
+}
   goBack() {
     if (this.swiper) {
       this.swiper.slidePrev();
