@@ -76,8 +76,8 @@ export class AeroSportPage implements OnInit {
         try {
           this.TsProbability = data.filter(
             (item: any) =>
-              item.filename === 'tsprob_d1.gif' ||
-              item.filename === 'tsprob_d2.gif'
+              item.filename === 'tsprob_tod.gif' ||
+              item.filename === 'tsprob_tom.gif'
           );
           console.log('FILES', this.TsProbability);
           if (this.TsProbability.length > 0) {
