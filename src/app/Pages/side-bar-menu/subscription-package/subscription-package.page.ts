@@ -291,19 +291,20 @@ export class SubscriptionPackagePage implements OnInit {
 
         this.subsArray = response.detailDescription.subscription;
 
-        if (this.subsArray.package_id == 2 || this.subsArray.package_id == 9) {
-          this.isSubscribedPremiumMonthly = true;
-          this.premiumMontlySubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 3 || this.subsArray.package_id == 7) {
-          this.isSubscriberRegulatedMonthly = true;
-          this.regulateMonthlydSubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 4 || this.subsArray.package_id == 10) {
-          this.isSubscribedPremiumAnnually = true;
-          this.premiumAnnuallySubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 5 || this.subsArray.package_id == 8) {
-          this.isSubscriberRegulatedAnnually = true;
-          this.regulateAnnuallydSubscribedId = this.subsArray.subscriptionId;
-        }
+      if (this.subsArray.package_id == 2 || this.subsArray.package_id == 9) {
+  this.isSubscribedPremiumMonthly = true;
+  this.premiumMontlySubscribedId = this.subsArray.subscriptionId;
+} else if (this.subsArray.package_id == 3 || this.subsArray.package_id == 7) {
+  this.isSubscriberRegulatedMonthly = true;
+  this.regulateMonthlydSubscribedId = this.subsArray.subscriptionId;
+} else if (this.subsArray.package_id == 4 || this.subsArray.package_id == 10 || this.subsArray.package_id == 5) {
+  this.isSubscribedPremiumAnnually = true;
+  this.premiumAnnuallySubscribedId = this.subsArray.subscriptionId;
+} else if (this.subsArray.package_id == 6 || this.subsArray.package_id == 8) {
+  this.isSubscriberRegulatedAnnually = true;
+  this.regulateAnnuallydSubscribedId = this.subsArray.subscriptionId;
+}
+
 
       },
       (err) => {
@@ -776,6 +777,7 @@ export class SubscriptionPackagePage implements OnInit {
       this.premiumSubscriptionId = 5;
       this.regulatedSubscriptionId = 6;
     }
+    
   }
 
   displayIcon(): boolean {
@@ -835,4 +837,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.router.navigate(['/landing-page']);
     this.authService.setIsFromSubscription(false);
   }
+  
+
+
 }

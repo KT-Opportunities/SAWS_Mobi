@@ -1959,3 +1959,59 @@ app-package-sub-header,
 .checkbox-label-2-copy {
   margin: 0;
 }
+ion-header {
+  --background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  font-weight: 600;
+  color: #0a2242;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 10px;
+  color: #333;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+
+  h2,
+  h3 {
+    margin-bottom: 0.5rem;
+    color: #0a2242;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.link {
+  color: #0078d4;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #004a8f;
+    text-decoration: underline;
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
