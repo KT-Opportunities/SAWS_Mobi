@@ -287,5 +287,14 @@ export class SportGraphMapComponent implements OnInit {
     return items.filter((x) => x.filename.includes(filter));
   }
   
+  hasData(): boolean {
+  return (
+    (this.xlFAItems && this.xlFAItems.length > 0) ||
+    (this.noHyphenAfterXL && this.noHyphenAfterXL.length > 0) ||
+    (this.TsProbability && this.TsProbability.length > 0) ||
+    (this.Synoptic && this.Synoptic.length > 0)
+  );
+}
+
 }
 

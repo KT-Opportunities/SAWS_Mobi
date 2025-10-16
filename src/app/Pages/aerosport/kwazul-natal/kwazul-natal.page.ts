@@ -382,4 +382,14 @@ export class KwazulNatalPage implements OnInit {
   viewFilter(item: any[], filter: string) {
     return item.filter((x) => x.includes(filter));
   }
+
+   hasData(): boolean {
+  return (
+    (this.getFilteredItems() && this.getFilteredItems().length > 0) ||
+    (this.ConvectiveCloudBase && this.ConvectiveCloudBase.length > 0) ||
+    (this.getFilteredItemsWind() && this.getFilteredItemsWind().length > 0) ||
+    (this.ThermalArray && this.ThermalArray.length > 0) ||
+    (this.getFilteredItemsThermal() && this.getFilteredItemsThermal().length > 0)
+  );
+}
 }

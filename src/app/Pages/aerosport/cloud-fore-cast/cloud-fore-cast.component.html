@@ -3,11 +3,12 @@
 
   <div id="top"></div>
   <app-package-content>
-    <app-package-header> SAWS Satellite </app-package-header>
+    <app-package-header> Cloud Cover</app-package-header>
 
     <app-package-sub-header> </app-package-sub-header>
 
     <div class="aerosport">
+      <ng-container *ngIf="hasData(); else noDataTemplate">
       <div class="div-block-464">
         <div class="image-container">
           <div
@@ -178,6 +179,12 @@
           </div>
         </div>
       </div>
+      </ng-container>
+       <ng-template #noDataTemplate>
+        <div class="no-data-message">
+          <h2>Currently there is no data to display.</h2>
+        </div>
+      </ng-template>
     </div>
   </app-package-content>
 </ion-content>

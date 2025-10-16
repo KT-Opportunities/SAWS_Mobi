@@ -290,20 +290,21 @@ export class SubscriptionPackagePage implements OnInit {
       (response: any) => {
 
         this.subsArray = response.detailDescription.subscription;
-
-      if (this.subsArray.package_id == 2 || this.subsArray.package_id == 9) {
-  this.isSubscribedPremiumMonthly = true;
-  this.premiumMontlySubscribedId = this.subsArray.subscriptionId;
-} else if (this.subsArray.package_id == 3 || this.subsArray.package_id == 7) {
-  this.isSubscriberRegulatedMonthly = true;
-  this.regulateMonthlydSubscribedId = this.subsArray.subscriptionId;
-} else if (this.subsArray.package_id == 4 || this.subsArray.package_id == 10 || this.subsArray.package_id == 5) {
-  this.isSubscribedPremiumAnnually = true;
-  this.premiumAnnuallySubscribedId = this.subsArray.subscriptionId;
-} else if (this.subsArray.package_id == 6 || this.subsArray.package_id == 8) {
-  this.isSubscriberRegulatedAnnually = true;
-  this.regulateAnnuallydSubscribedId = this.subsArray.subscriptionId;
+switch (this.subsArray.package_id) {
+  case 2: case 9:
+    this.isSubscribedPremiumMonthly = true;
+    break;
+  case 3: case 7:
+    this.isSubscriberRegulatedMonthly = true;
+    break;
+  case 4: case 5: case 10:
+    this.isSubscribedPremiumAnnually = true;
+    break;
+  case 6: case 8:
+    this.isSubscriberRegulatedAnnually = true;
+    break;
 }
+
 
 
       },
