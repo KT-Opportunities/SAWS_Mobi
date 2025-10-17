@@ -7,7 +7,12 @@ const config: CapacitorConfig = {
   webDir: 'www',
   server: {
     androidScheme: 'http',
+    iosScheme: 'ionic',
     cleartext: true,
+    allowNavigation: [
+      'qa.j-cred.co.za',
+      '*.j-cred.co.za'
+    ]
   },
 
   plugins: {
