@@ -243,6 +243,7 @@ export class SportGraphMapComponent implements OnInit {
   }
 
   ImagesArray(item: any, type: any[]) {
+    this.loading = true;
     console.log('ITEM:', item, ' TYPE:', type);
     let name = item.split('_')[0];
     console.log('NAME:', name);
@@ -277,6 +278,7 @@ export class SportGraphMapComponent implements OnInit {
     setTimeout(() => {
       console.log('this.ImageArray:', this.ImageArray.length);
       this.ImageViewer(this.ImageArray);
+      this.loading = false;
     }, 1000);
   }
 

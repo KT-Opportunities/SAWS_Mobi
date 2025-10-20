@@ -128,6 +128,7 @@ export class KwazulNatalPage implements OnInit {
             /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d1\.gif$/i.test(item.filename) ||
           /^[lmhLMH](([0-9]{1,2})|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match "l", "m", "h" followed by one or two digits or "tm"
         ).map((item: { filename: string }) => item.filename);
+        this.CloudCover = this.sortByTime(this.CloudCover, 'cloud');
 
         console.log('CloudCover:', this.CloudCover);
 
@@ -136,6 +137,7 @@ export class KwazulNatalPage implements OnInit {
             /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename) ||
           /^cb(([01]?[0-9]|2[0-3])|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match "cb" followed by valid hour (0-23) or "tm", then "_kzn_d1.gif" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
+        this.ConvectiveCloudBase = this.sortByTime(this.ConvectiveCloudBase, 'cb');
 
         console.log('ConvectiveCloudBase:', this.ConvectiveCloudBase);
         this.WindArray = this.KwazulNatal.filter(
@@ -143,6 +145,7 @@ export class KwazulNatalPage implements OnInit {
             /^[s6810121416].*kzn_d1\.gif$/i.test(item.filename) ||
           /^[s6810121416].*kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "s", "6", "8", "10", "12", "14", or "16" (case insensitive)
         ).map((item: { filename: string }) => item.filename);
+        this.WindArray = this.sortByTime(this.WindArray, 'wind');
 
         console.log('WindArray:', this.WindArray);
         this.ThermalArray = this.KwazulNatal.filter(
@@ -150,6 +153,7 @@ export class KwazulNatalPage implements OnInit {
             /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d1\.gif$/i.test(item.filename)||
           /^lf(([01]?[0-9]|2[0-3])|tm)_kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "lf" (case insensitive), followed by valid hour (0-23) or "tm", then "_kzn_d1.gif"
         ).map((item: { filename: string }) => item.filename);
+        this.ThermalArray = this.sortByTime(this.ThermalArray, 'lf');
 
         console.log('ThermalArray:', this.ThermalArray);
         this.TemperatureArray = this.KwazulNatal.filter(
@@ -157,6 +161,7 @@ export class KwazulNatalPage implements OnInit {
             /^[td][^c].*kzn_d1\.gif$/i.test(item.filename) ||
           /^[td][^c].*kzn_d2\.gif$/i.test(item.filename) // Regex pattern to match filenames starting with "t" or "d" (case insensitive) but not followed by "c"
         ).map((item: { filename: string }) => item.filename);
+        this.TemperatureArray = this.sortByTime(this.TemperatureArray, 'temp');
 
         console.log('TemperatureArray:', this.TemperatureArray);
 
@@ -345,6 +350,7 @@ export class KwazulNatalPage implements OnInit {
   }
 
   ImagesArray(item: any, type: any[]) {
+    this.loading = true;
     console.log('ITYEM:', item, ' TYPE:', type);
     let name = item.split('_')[0];
     console.log('NAME:', name);
@@ -376,6 +382,7 @@ export class KwazulNatalPage implements OnInit {
     setTimeout(() => {
       console.log('this.ImageArray:', this.ImageArray.length);
       this.ImageViewer(this.ImageArray);
+      this.loading = false;
     }, 1000);
   }
 
@@ -392,4 +399,37 @@ export class KwazulNatalPage implements OnInit {
     (this.getFilteredItemsThermal() && this.getFilteredItemsThermal().length > 0)
   );
 }
+sortByTime(array: string[], type: string): string[] {
+  return array.sort((a, b) => {
+    const getTime = (filename: string): number => {
+      let timePart = '';
+
+      // Handle based on the type of file pattern
+      if (type === 'cb') {
+        // Convective Cloud Base: starts with 'cb'
+        timePart = filename.split('_')[0].substring(2);
+      } else if (type === 'lf') {
+        // Thermal files: start with 'lf'
+        timePart = filename.split('_')[0].substring(2);
+      } else if (type === 'wind') {
+        // Wind files: start with 's', '6', '8', '10', '12', '14', '16'
+        const prefix = filename.split('_')[0];
+        if (prefix.startsWith('s')) timePart = prefix.substring(1);
+        else if (prefix.startsWith('10') || prefix.startsWith('12') || prefix.startsWith('14') || prefix.startsWith('16'))
+          timePart = prefix.substring(2);
+        else timePart = prefix.substring(1);
+      } else {
+        // Default for CloudCover, Temperature, etc.
+        timePart = filename.split('_')[0].substring(1);
+      }
+
+      if (timePart === 'tm') return 9999; // move 'tm' or 'outlook' to end
+      const num = parseInt(timePart, 10);
+      return isNaN(num) ? 9999 : num;
+    };
+
+    return getTime(a) - getTime(b);
+  });
+}
+
 }
