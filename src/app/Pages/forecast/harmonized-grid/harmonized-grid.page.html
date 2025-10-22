@@ -5,107 +5,70 @@
   <app-package-content>
     <app-package-header>WAFS Harmonized Grid</app-package-header>
     <app-package-list-items>
+
       <!-- Turbulence severity -->
       <div class="w-layout-grid wafs-grid">
         <h1 class="heading-22">Turbulence severity</h1>
         <div class="w-layout-grid grid-20">
-          <div
-            class="w-layout-grid grid-21-copy"
-            style="background-color: #00386c"
-          >
-            <div
-              class="div-block-36"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
+          <div class="w-layout-grid grid-21-copy" style="background-color: #00386c">
+            <div class="div-block-36" *ngFor="let time of timesToDisplay">
               <h4 class="heading-24">{{ time }}</h4>
             </div>
           </div>
           <div class="w-layout-grid grid-22-copy">
-            <div
-              class="div-block-37"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
-              <div *ngFor="let item of WAF2">
-                <h4
-                  class="heading-25"
-                  *ngIf="getTimeSubstring(item.filename) === time"
-                  (click)="ImagesArray(item.filename, WAF2)"
-                >
-                  {{ displayHeading(item.filename) }}
-                </h4>
-              </div>
+            <div class="div-block-37" *ngFor="let time of timesToDisplay">
+              <h4 class="heading-25"
+                  *ngFor="let item of getLatestByTime(turbulenceFiles, time)"
+                  (click)="ImagesArray(item.filename, turbulenceFiles)">
+                {{ displayHeading(item.filename) }}
+              </h4>
             </div>
           </div>
         </div>
       </div>
-      <!--Icing severity-->
 
+      <!-- Icing severity -->
       <div class="w-layout-grid wafs-grid">
         <h1 class="heading-22">Icing severity</h1>
         <div class="w-layout-grid grid-20">
-          <div
-            class="w-layout-grid grid-21-copy"
-            style="background-color: #00386c"
-          >
-            <div
-              class="div-block-36"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
+          <div class="w-layout-grid grid-21-copy" style="background-color: #00386c">
+            <div class="div-block-36" *ngFor="let time of timesToDisplay">
               <h4 class="heading-24">{{ time }}</h4>
             </div>
           </div>
           <div class="w-layout-grid grid-22-copy">
-            <div
-              class="div-block-37"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
-              <div *ngFor="let item of WAF3">
-                <h4
-                  class="heading-25"
-                  *ngIf="getTimeSubstring(item.filename) === time"
-                  (click)="ImagesArray(item.filename, WAF3)"
-                >
-                  {{ displayHeading(item.filename) }}
-                </h4>
-              </div>
+            <div class="div-block-37" *ngFor="let time of timesToDisplay">
+              <h4 class="heading-25"
+                  *ngFor="let item of getLatestByTime(icingFiles, time)"
+                  (click)="ImagesArray(item.filename, icingFiles)">
+                {{ displayHeading(item.filename) }}
+              </h4>
             </div>
           </div>
         </div>
       </div>
 
-      <!--CB Coverage -->
+      <!-- CB Coverage -->
       <div class="w-layout-grid wafs-grid">
         <h1 class="heading-22">CB Coverage</h1>
         <div class="w-layout-grid grid-20">
-          <div
-            class="w-layout-grid grid-21-copy"
-            style="background-color: #00386c"
-          >
-            <div
-              class="div-block-36"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
+          <div class="w-layout-grid grid-21-copy" style="background-color: #00386c">
+            <div class="div-block-36" *ngFor="let time of timesToDisplay">
               <h4 class="heading-24">{{ time }}</h4>
             </div>
           </div>
           <div class="w-layout-grid grid-22-copy">
-            <div
-              class="div-block-37"
-              *ngFor="let time of ['0600', '0000', '1800']"
-            >
-              <div *ngFor="let item of WAF1">
-                <h4
-                  class="heading-25"
-                  *ngIf="getTimeSubstring(item.filename) === time"
-                  (click)="ImagesArray(item.filename, WAF1)"
-                >
-                  {{ displayHeadingWAF1(item.filename) }}
-                </h4>
-              </div>
+            <div class="div-block-37" *ngFor="let time of timesToDisplay">
+              <h4 class="heading-25"
+                  *ngFor="let item of getLatestByTime(cbCoverageFiles, time)"
+                  (click)="ImagesArray(item.filename, cbCoverageFiles)">
+                {{ displayHeadingWAF1() }}
+              </h4>
             </div>
           </div>
         </div>
       </div>
+
     </app-package-list-items>
   </app-package-content>
 </ion-content>
@@ -113,26 +76,10 @@
 <app-footer></app-footer>
 
 <div class="footerdiv" id="footerdivid1">
-  <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
+  <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-    <h6
-      class="heading-10-copy"
-      id="styleh6"
-      style="
-        color: #fff;
-        margin-top: 10px;
-        margin-bottom: 0;
-        font-family: Montserrat, sans-serif;
-        text-decoration: none;
-        font-size: 12px;
-        margin-top: 4px;
-      "
-    >
-      Forecast
-    </h6>
+    <h6 class="heading-10-copy" style="color:#fff; font-size:12px; margin-top:4px;">Forecast</h6>
   </div>
 </div>
 
-<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">
-  Top
-</button>
+<button (click)="ScrollToTop('top')" id="btntotop" title="Go to top">Top</button>

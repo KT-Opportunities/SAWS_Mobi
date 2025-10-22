@@ -38,7 +38,7 @@ export class AdvisoriesComponent implements OnInit {
     var Volcanos: any = [];
     var Cyclones: any = [];
     var SWX: any = [];
-    this.api.GetSourceTextFolderFiles('alerts').subscribe((Response) => {
+    this.api.GetSourceTextFolderFiles('advisories').subscribe((Response) => {
       Response.forEach((element: any) => {
         element.Id = element.filecontent.split('\n')[2];
         if (element.Id.split(' ')[0] == 'VA') {
