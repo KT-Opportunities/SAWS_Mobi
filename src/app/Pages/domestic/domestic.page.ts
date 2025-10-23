@@ -100,7 +100,7 @@ export class DomesticPage {
     this.APIService.GetSourceAviationFolderFilesListNull().subscribe(
       (data) => {
         this.MetarMaps = data.filter(
-          (item: any) => item.filename === 'synoptic.png'
+          (item: any) => item.filename === 'qnhC00.gif'
         );
         console.log('METARMAPS', this.MetarMaps);
         if (this.MetarMaps.length > 0) {

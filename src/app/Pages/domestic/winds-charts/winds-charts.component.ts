@@ -23,6 +23,7 @@ export class WindsChartsComponent implements OnInit {
   BlockWinds: any[] = [];
   blockWindsWH: any[] = [];
 blockWindsWL: any[] = [];
+ blockWindsZFL: any[] = [];
   sevenDigitNumbers: number[] = []; // Explicitly declare the type of this array
   fileBaseUrl: SafeResourceUrl;
   ImageArray: any = [];
@@ -99,6 +100,7 @@ blockWindsWL: any[] = [];
           console.log('Charts Array:', this.BlockWinds);
           this.blockWindsWH = this.BlockWinds.filter(item => item.filename.includes('WH'));
           this.blockWindsWL = this.BlockWinds.filter(item => item.filename.includes('WL'));
+         
           debugger
         } else {
           console.warn('No valid data found in API response.');
@@ -127,33 +129,13 @@ blockWindsWL: any[] = [];
 
         console.log('Seven Digit Numbers:', this.sevenDigitNumbers);
 
-        if (data && data.length > 0) {
-          // Check if 'filename' exists and contains expected substrings
-          const filteredData = data.filter(item => item.filename );
-          console.log('Filtered Data:', filteredData);
-
-          const limitedData = filteredData.slice(0, 7);
-          console.log('Limited Data:', limitedData);
-
-          // Ensure that each item in filteredData gets a sevenDigitNumber
-          // this.chartsArray = limitedData.map((item, index) => {
-          //   const format = this.getChartFormat(item.filename);
-          //   // Use modulus operator to handle cases where index >= sevenDigitNumbers.length
-          //   const sevenDigitNumber = this.sevenDigitNumbers[index % this.sevenDigitNumbers.length] || 'N/A';
-          //   console.log('Mapping item:', item, 'Format:', format, 'Seven Digit Number:', sevenDigitNumber);
-          //   return {
-          //     format: format,
-          //     filename: item.filename,
-          //     sevenDigitNumber: sevenDigitNumber
-          //   };
-          // });
+     
           this.chartsArray = data;
+         this.blockWindsZFL = this.BlockWinds.filter(item => item.filename.includes('ZFL'));
+
           
-          console.log('Charts Array:', this.chartsArray);
-          debugger
-        } else {
-          console.warn('No valid data found in API response.');
-        }
+          console.log('Charts Array:', this.blockWindsZFL);
+      
 
         this.loading = false;
       },
@@ -278,10 +260,50 @@ blockWindsWL: any[] = [];
     }, 1000);
   }
 
-  viewFilter(item: any[], filter: string) {
-    return item.filter((x) => x.includes(filter));
-  }
+  viewFilter(items: any[], filter: string) {
+  return items.filter((x) => typeof x.filename === 'string' && x.filename.includes(filter));
+}
+
   viewFilters(items: any[], filter: string) {
     return items.filter((x) => x.filename.includes(filter));
   }
+
+  ImagesArray2(item: any, type: any[]) {
+    this.loading = true;
+    console.log('ITYEM:', item, ' TYPE:', type);
+    let name = item.split('_')[0];
+    console.log('NAME:', name);
+    let ImageArray = type.filter((x) => x.includes(name));
+    console.log('Image arrays:', ImageArray);
+    this.ConvertImagesArray2(ImageArray);
+  }
+
+  ConvertImagesArray2(ImageArray: any[]) {
+    this.ImageArray = [];
+    console.log('IMAGE ARRAY', ImageArray);
+    ImageArray.forEach((element) => {
+      this.APIService.GetAviationFile('winds/vectorwinds', element).subscribe(
+        (data) => {
+          console.log('IMAGE:', data);
+          const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+
+          this.fileBaseUrl =
+            this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
+
+          this.ImageArray.push(imageUrl);
+        },
+        (error) => {
+          console.log('Error fetching JSON data:', error);
+          this.loading = false;
+        }
+      );
+    });
+    setTimeout(() => {
+      console.log('this.ImageArray:', this.ImageArray.length);
+      this.ImageViewer(this.ImageArray);
+      this.loading = false;
+    }, 1000);
+  }
+
+
 }

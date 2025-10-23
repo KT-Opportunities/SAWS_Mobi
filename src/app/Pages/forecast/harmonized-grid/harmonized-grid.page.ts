@@ -44,16 +44,19 @@ cbCoverageFiles: WAFItem[] = [];
   ngOnInit() {
     this.APIService.GetSourceAviationFolderFilesList('wafs').subscribe(
       (data) => {
-        this.WAF = this.filterLatestEntries(data);
-
+        this.WAF =data
+console.log("DATA:",this.WAF);
+console.log('All WAF count:', data.length);
+console.log('After filtering:', this.WAF.length);
+console.log('QLRI files:', this.WAF.filter(f => f.filename.includes('QLRI')).length);
 // Turbulence severity
 this.turbulenceFiles = this.WAF.filter(item =>
-  item.filename.includes('QLRI') || item.filename.includes('QLRG') || item.filename.includes('QLRE')||item.filename.includes('QIRE')
+   item.filename.includes('QLRI')
 );
 
 // Icing severity
 this.icingFiles = this.WAF.filter(item =>
-  item.filename.includes('QIRI') || item.filename.includes('QIRG') || item.filename.includes('QIRE')
+ item.filename.includes('QIRE')
 );
 
 // Horizontal Extent / CB Coverage
@@ -72,36 +75,6 @@ this.cbCoverageFiles = this.WAF.filter(item =>
     );
   }
 
-filterLatestEntries(data: WAFItem[]): WAFItem[] {
-  const grouped = new Map<string, Map<string, WAFItem>>();
-
-  data.forEach((item) => {
-    const time = this.getForecastTime(item.filename);
-    if (time === 'unknown') return;
-
-    // Extract level from filename: last 2 digits after Q[I|L]R[?]
-    const levelMatch = item.filename.match(/Q(?:B|I|L)RE?(\d{2,3})/);
-    const level = levelMatch ? levelMatch[1] : 'unknown';
-    if (!level) return;
-
-    if (!grouped.has(time)) grouped.set(time, new Map());
-    const timeMap = grouped.get(time)!;
-
-    // Pick latest modified for each level
-    if (!timeMap.has(level) || new Date(item.lastmodified) > new Date(timeMap.get(level)!.lastmodified)) {
-      timeMap.set(level, item);
-    }
-  });
-
-  // Flatten grouped map into array
-  const result: WAFItem[] = [];
-  grouped.forEach((timeMap) => timeMap.forEach((item) => result.push(item)));
-
-  // Sort by filename (optional: or by level)
-  return result.sort((a, b) => a.filename.localeCompare(b.filename));
-}
-
-
 
 getForecastTime(filename: string): string {
   const match = filename.match(/(\d{6})\.png$/);
@@ -119,9 +92,22 @@ getForecastTime(filename: string): string {
   }
 }
 
+  filterLatestEntries(data: WAFItem[]): WAFItem[] {
+    const latestEntries = new Map<string, WAFItem>();
 
+    data.forEach((item) => {
+      const filename = item.filename;
+      if (
+        !latestEntries.has(filename) ||
+        new Date(item.lastmodified) >
+          new Date(latestEntries.get(filename)!.lastmodified)
+      ) {
+        latestEntries.set(filename, item);
+      }
+    });
 
-
+    return Array.from(latestEntries.values());
+  }
 getLatestByTime(arr: WAFItem[], time: string): WAFItem[] {
   const itemsAtTime = arr.filter(i => this.getForecastTime(i.filename) === time);
 
@@ -186,4 +172,12 @@ getLatestByTime(arr: WAFItem[], time: string): WAFItem[] {
 
   forecastPageNavigation() { this.router.navigate(['/forecast']); }
   ScrollToTop(value: string) { document.getElementById(value)?.scrollIntoView({ behavior: 'smooth' }); }
+
+  filterFiles(type: 'QLRI' | 'QIRE' | 'QBRE', time?: string): WAFItem[] {
+  return this.WAF.filter(item =>
+    item.filename.includes(type) &&
+    (!time || this.getForecastTime(item.filename) === time)
+  );
+}
+
 }

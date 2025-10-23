@@ -12,65 +12,116 @@
       <div class="advisoires-main-div">
         <div class="div-blue" id="filters">
           <div class="w-layout-grid grid-31">
+            
+            <!-- Volcano Dropdown -->
             <div>
               <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
-                  data-wf-page-id="65c9da2a037d4dc4642a39ea" data-wf-element-id="e0b19718-0678-64c8-b782-9d993cb1a88c">
+                <form>
                   <div>
-                    <label for="field-2" class="adv-text-f">Volcanos</label><select id="field-2" name="field-2"
-                      data-name="Field 2" class="text-field-copy w-select" [(ngModel)]="filter"
-                      (change)="ScrollToFilter($event)">
-                      <option disabled>volcano</option>
-                      <option *ngFor="let volcano of VolcanoList" [value]="volcano.value">{{volcano.viewValue}}
+                    <label for="volcano-select" class="adv-text-f">Volcanos</label>
+                    <select id="volcano-select" name="volcano-select"
+                            class="text-field-copy w-select"
+                            [(ngModel)]="filter"
+                            (change)="ScrollToFilter($event, 'volcano')">
+                      <option value="all" selected>All Volcanoes</option>
+                      <option *ngFor="let volcano of VolcanoList" 
+                              [value]="volcano.name">
+                        {{ volcano.text }}
                       </option>
                     </select>
                   </div>
                 </form>
               </div>
             </div>
+
+            <!-- Cyclone Dropdown -->
             <div>
               <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
-                  data-wf-page-id="65c9da2a037d4dc4642a39ea" data-wf-element-id="a090cc6e-1de4-51e9-48c9-85380b9034b0">
+                <form>
                   <div>
-                    <label for="field-3" class="adv-text-f">Cyclone</label><select id="field-2" name="field-2"
-                      data-name="Field 2" class="text-field-copy w-select" [(ngModel)]="filter2"
-                      (change)="ScrollToFilter($event)">
-                      <option *ngFor="let cyclone of CycloneList" [value]="cyclone.value">{{cyclone.viewValue}}
+                    <label for="cyclone-select" class="adv-text-f">Cyclone</label>
+                    <select id="cyclone-select" name="cyclone-select"
+                            class="text-field-copy w-select"
+                            [(ngModel)]="filter2"
+                            (change)="ScrollToFilter($event, 'cyclone')">
+                      <option value="all" selected>All Cyclones</option>
+                      <option *ngFor="let cyclone of CycloneList" 
+                              [value]="cyclone.name">
+                        {{ cyclone.text }}
                       </option>
                     </select>
                   </div>
                 </form>
               </div>
             </div>
+
+            <!-- SWX Dropdown (no change) -->
             <div>
               <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
-                  data-wf-page-id="65c9da2a037d4dc4642a39ea" data-wf-element-id="104b6498-cff7-78e0-c9d3-3cdee0c139e7">
+                <form>
                   <div>
-                    <label for="field-3" class="adv-text-f">SWX</label><select id="field-2" name="field-2"
-                      data-name="Field 2" class="text-field-copy w-select">
+                    <label for="swx-select" class="adv-text-f">SWX</label>
+                    <select id="swx-select" name="swx-select"
+                            class="text-field-copy w-select">
                       <option value>Select one...</option>
                     </select>
                   </div>
                 </form>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </app-package-sub-header>
 
-
     <app-package-list-items>
-      <div *ngFor="let text of AdvisoriesList">
-        <h1 class="heading-6" id="{{text.Id}}">{{text.heading}}</h1>
-        <h1 class="heading-6">{{text.lastmodified | date:
-          "yyyy/MM/dd HH:mm"}}</h1>
-        <span style="white-space: pre-line;color: #000;">
-          {{text.filecontent}}
-        </span>
-        <hr>
+      <div class="div-block-15">
+
+        <h1 class="heading"  style="text-align: center;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;">Cyclones</h1>
+        <div *ngFor="let text of AdvisoriesList1" 
+             class="w-layout-grid heading-text"
+             style="flex-direction: column !important; margin-bottom:3px; justify-content: flex-start;">
+          <div class="cct-copy-copy">
+            <h1 class="heading-21" id="{{text.Id}}">{{ text.heading }}</h1>
+            <h1 class="heading-21">{{ text.lastmodified | date: 'yyyy/MM/dd HH:mm' }}</h1>
+          </div>
+          <div class="w-layout-grid grid-18">
+            <div class="div-block-16">
+              <p class="paragraph-2 sigmet-text" style="white-space: pre-line; color: #000;">
+                {{ text.filecontent }}
+              </p>
+              <hr>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="heading" style="text-align: center;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;">Volcanos</h1>
+        <div *ngFor="let text of AdvisoriesList" 
+             class="w-layout-grid heading-text"
+             style="flex-direction: column !important; margin-bottom:3px; justify-content: flex-start;">
+          <div class="cct-copy-copy">
+            <h1 class="heading-21" id="{{text.Id}}">{{ text.heading }}</h1>
+            <h1 class="heading-21">{{ text.lastmodified | date: 'yyyy/MM/dd HH:mm' }}</h1>
+          </div>
+          <div class="w-layout-grid grid-18">
+            <div class="div-block-16">
+              <p class="paragraph-2 sigmet-text" style="white-space: pre-line; color: #000;">
+                {{ text.filecontent }}
+              </p>
+              <hr>
+            </div>
+          </div>
+        </div>
+
       </div>
     </app-package-list-items>
 
@@ -81,15 +132,9 @@
 <app-footer></app-footer>
 
 <div class="footerdiv" id="footerdivid1">
-  <div (click)=" forecastPageNavigation()" class="link-block-5 w-inline-block">
+  <div (click)="forecastPageNavigation()" class="link-block-5 w-inline-block">
     <img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-    <h6 class="heading-10-copy" id="styleh6" style="color: #fff;
-         margin-top: 10px;
-         margin-bottom: 0;
-         font-family: Montserrat, sans-serif;
-         text-decoration: none;
-         font-size: 12px;
-         margin-top: 4px;">
+    <h6 class="heading-10-copy" style="color: #fff; margin-top: 4px; font-family: Montserrat, sans-serif; font-size: 12px;">
       Forecast
     </h6>
   </div>

@@ -6,17 +6,21 @@
 
     <app-service-list-items  *ngIf="isLoggedIn && !isFreeSubscription">
       <app-service-list-items-grid>
+        <app-service-list-item (click)="NavigateToColorCoded()">
+          METAR: Color Coded
+        </app-service-list-item>
         <app-service-list-item (click)="NavigateToMetar()">
           Metar
+        </app-service-list-item>
+         <app-service-list-item (click)="NavigateToMetarTafRecent()">
+          METAR/TAF: Recent
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToWebCam()">
           Webcams
         </app-service-list-item>
-        <app-service-list-item (click)="NavigateToColorCoded()">
-          METAR: Color Coded
-        </app-service-list-item>
+        
         <app-service-list-item (click)="NavigateToMetarRecent()">
-          METAR: Recent
+          Recent METARs
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToMetarHistory()">
           METAR: History
@@ -24,9 +28,7 @@
         <app-service-list-item (click)="NavigateToSpeci()">
           SPECI
         </app-service-list-item>
-        <app-service-list-item (click)="NavigateToMetarTafRecent()">
-          METAR/TAF: Recent
-        </app-service-list-item>
+       
         <app-service-list-item (click)="NavigateToRadar()">
           Radar
         </app-service-list-item>
