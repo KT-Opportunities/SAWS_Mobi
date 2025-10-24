@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -24,7 +25,8 @@ export class WarningsComponent  implements OnInit {
     loading = false;
     isLogged: boolean = false;
     WarningList: FileData[] = [];
-
+      currentDate: string | undefined;
+    currentTime: string | undefined;
     constructor(
         private router: Router,
         private authService: AuthService,
@@ -32,11 +34,13 @@ export class WarningsComponent  implements OnInit {
         private iab: InAppBrowser,
         private spinner: NgxSpinnerService,
         private apiService: APIService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+         private datePipe: DatePipe
     ) { }
 
     ngOnInit() {
         this.spinner.show();
+         this.updateTime(new Date().toISOString());
         this.apiService.GetSourceTextFolderFiles('warnings').subscribe((response) => {
             this.WarningList = response
                 .map((file: FileData) => {
@@ -49,6 +53,10 @@ export class WarningsComponent  implements OnInit {
             this.spinner.hide();
         });
     }
+      updateTime(date: string) {
+    this.currentDate = this.datePipe.transform(date, 'yyyy - MM - dd') ?? '';
+    this.currentTime = this.datePipe.transform(date, 'HH:mm:ss') ?? '';
+  }
 formatWarning(file: FileData): { formatted: string; heading: string } | null {
     if (!file.filecontent) return null;
     if (!file.filecontent.includes('WOZA')) return null; 

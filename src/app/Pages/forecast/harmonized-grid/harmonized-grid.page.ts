@@ -41,39 +41,38 @@ cbCoverageFiles: WAFItem[] = [];
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
 
-  ngOnInit() {
-    this.APIService.GetSourceAviationFolderFilesList('wafs').subscribe(
-      (data) => {
-        this.WAF =data
-console.log("DATA:",this.WAF);
-console.log('All WAF count:', data.length);
-console.log('After filtering:', this.WAF.length);
-console.log('QLRI files:', this.WAF.filter(f => f.filename.includes('QLRI')).length);
-// Turbulence severity
-this.turbulenceFiles = this.WAF.filter(item =>
-   item.filename.includes('QLRI')
-);
+ ngOnInit() {
+  this.APIService.GetSourceAviationFolderFilesList('wafs').subscribe(
+    (data) => {
+      this.WAF = this.filterLatestEntries(data); // ✅ Keep only latest per file
+      console.log('Filtered latest WAF count:', this.WAF.length);
 
-// Icing severity
-this.icingFiles = this.WAF.filter(item =>
- item.filename.includes('QIRE')
-);
+      // Turbulence severity
+      this.turbulenceFiles = this.filterLatestEntries(
+        this.WAF.filter(item => item.filename.includes('QLRI'))
+      );
 
-// Horizontal Extent / CB Coverage
-this.cbCoverageFiles = this.WAF.filter(item =>
-  item.filename.includes('QBRI')||item.filename.includes('QBRE')
-);
+      // Icing severity
+      this.icingFiles = this.filterLatestEntries(
+        this.WAF.filter(item => item.filename.includes('QIRE'))
+      );
 
+      // Horizontal Extent / CB Coverage
+      this.cbCoverageFiles = this.filterLatestEntries(
+        this.WAF.filter(item =>
+          item.filename.includes('QBRI') 
+        )
+      );
 
+      this.isLoading = false;
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+      this.isLoading = false;
+    }
+  );
+}
 
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-        this.isLoading = false;
-      }
-    );
-  }
 
 
 getForecastTime(filename: string): string {
@@ -92,22 +91,31 @@ getForecastTime(filename: string): string {
   }
 }
 
-  filterLatestEntries(data: WAFItem[]): WAFItem[] {
-    const latestEntries = new Map<string, WAFItem>();
+filterLatestEntries(data: WAFItem[]): WAFItem[] {
+  const latestEntries = new Map<string, WAFItem>();
 
-    data.forEach((item) => {
-      const filename = item.filename;
-      if (
-        !latestEntries.has(filename) ||
-        new Date(item.lastmodified) >
-          new Date(latestEntries.get(filename)!.lastmodified)
-      ) {
-        latestEntries.set(filename, item);
-      }
-    });
+  data.forEach((item) => {
+    const forecastTime = this.getForecastTime(item.filename); // 0000 / 0012 / 0018
+    const match = item.filename.match(/(QLRI|QIRE|QBRE|QBRI)(\d{2,3})/);
+    const type = match?.[1] || 'UNKNOWN';
+    const level = match?.[2] || '000';
 
-    return Array.from(latestEntries.values());
-  }
+    // Group by type + level + forecast time
+    const key = `${type}_${level}_${forecastTime}`;
+
+    if (
+      !latestEntries.has(key) ||
+      new Date(item.lastmodified) >
+        new Date(latestEntries.get(key)!.lastmodified)
+    ) {
+      latestEntries.set(key, item);
+    }
+  });
+
+  return Array.from(latestEntries.values());
+}
+
+
 getLatestByTime(arr: WAFItem[], time: string): WAFItem[] {
   const itemsAtTime = arr.filter(i => this.getForecastTime(i.filename) === time);
 

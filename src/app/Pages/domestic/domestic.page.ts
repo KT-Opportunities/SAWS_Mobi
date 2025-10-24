@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { APIService } from 'src/app/services/apis.service';
 import { ImageModalPage } from '../image-modal/image-modal.page';
@@ -27,7 +27,8 @@ export class DomesticPage {
     private cdr: ChangeDetectorRef,
     private moodalCtrl: ModalController,
     private APIService: APIService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+     private alertCtrl: AlertController
   ) {
     this.fileBaseUrl = this.sanitizer.bypassSecurityTrustResourceUrl('');
   }
@@ -85,7 +86,12 @@ export class DomesticPage {
         );
         if (this.MetarMaps.length > 0) {
           this.ImagesArray(this.MetarMaps[0].filename, this.MetarMaps);
+        }else{
+           this.loading = false; // No files found
+            this.showNoImagesAlert();
         }
+
+   
         this.loading = false; // Stop loading after processing
       },
       (error) => {
@@ -190,4 +196,13 @@ export class DomesticPage {
     NaviagateToAdvisories() {
     this.router.navigate(['/forecast/advisories']);
   }
+   async showNoImagesAlert() {
+  const alert = await this.alertCtrl.create({
+    header: 'No Images Available',
+    message: 'There are no images to display at the moment.',
+    buttons: ['OK'],
+  });
+
+  await alert.present();
+}
 }
