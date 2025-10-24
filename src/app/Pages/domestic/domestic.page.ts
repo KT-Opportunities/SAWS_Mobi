@@ -187,4 +187,7 @@ export class DomesticPage {
   viewFilters(items: any[], filter: string) {
     return items.filter((x) => x.filename.includes(filter));
   }
+    NaviagateToAdvisories() {
+    this.router.navigate(['/forecast/advisories']);
+  }
 }
