@@ -13,53 +13,57 @@
            <ng-container *ngIf="hasData(); else noDataTemplate">
           <div class="div-block-464">
             <h1 class="sub-headings">Cloud Cover</h1>
-            <div class="w-form">
-              <form
-                id="email-form-3"
-                name="email-form-3"
-                data-name="Email Form 3"
-                method="get"
-                class="form-3"
-                data-wf-page-id="65ef0e606bbd1609bb9b1d15"
-                data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
-              >
-                <div>
-                  <div
-                    data-hover="false"
-                    data-delay="0"
-                    class="text-field-blue w-dropdown"
-                    (click)="toggleDropdown('dropdown1')"
-                  >
-                    <div class="w-dropdown-toggle">
-                      <div class="text-block">
-                        {{ selectedOption }}
-                        <div class="icon-2 w-icon-dropdown-toggle2"></div>
-                      </div>
-                    </div>
-                    <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('Low', 'dropdown1')"
-                      >
-                        Low
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('Middle', 'dropdown1')"
-                      >
-                        Middle
-                      </div>
-                      <div
-                        class="w-dropdown-link"
-                        (click)="selectOption('High', 'dropdown1')"
-                      >
-                        High
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </form>
+           <div class="w-form">
+  <form
+    id="email-form-3"
+    name="email-form-3"
+    data-name="Email Form 3"
+    method="get"
+    class="form-3"
+    data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+    data-wf-element-id="5127f7e5-929e-7445-9e38-c3d8c5b5c252"
+  >
+    <div class="w-layout-grid grid-25">
+      <div id="w-node-_5127f7e5-929e-7445-9e38-c3d8c5b5c252-bb9b1d15">
+        <label for="" class="field-label">Select Level</label>
+
+        <div
+          data-hover="false"
+          data-delay="0"
+          class="text-field-blue w-dropdown"
+          (click)="toggleDropdown('dropdown1')"
+        >
+          <div class="w-dropdown-toggle">
+            <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+            <div class="text-block">{{ selectedOption }}</div>
+          </div>
+
+          <nav class="dropdown-list1" *ngIf="isDropdownOpen1">
+            <div
+              class="w-dropdown-link"
+              (click)="selectOption('Low', 'dropdown1')"
+            >
+              Low
             </div>
+            <div
+              class="w-dropdown-link"
+              (click)="selectOption('Middle', 'dropdown1')"
+            >
+              Middle
+            </div>
+            <div
+              class="w-dropdown-link"
+              (click)="selectOption('High', 'dropdown1')"
+            >
+              High
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
 
             <div class="grid-div">
               <div class="w-layout-grid central-grid">
