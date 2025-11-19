@@ -107,6 +107,8 @@ export class LandingPage implements OnInit {
               this.authService.setSubscriptionStatus(
                 data.detailDescription.subscription.package_name
               );
+              
+               console.log('Subscription package stored in AuthService:',  data.detailDescription.subscription.package_name);
             } else {
               this.authService.setSubscriptionStatus('');
             }

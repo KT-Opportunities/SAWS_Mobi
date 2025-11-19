@@ -243,6 +243,7 @@ export class SportGraphMapComponent implements OnInit {
   }
 
   ImagesArray(item: any, type: any[]) {
+    this.loading = true;
     console.log('ITEM:', item, ' TYPE:', type);
     let name = item.split('_')[0];
     console.log('NAME:', name);
@@ -277,6 +278,7 @@ export class SportGraphMapComponent implements OnInit {
     setTimeout(() => {
       console.log('this.ImageArray:', this.ImageArray.length);
       this.ImageViewer(this.ImageArray);
+      this.loading = false;
     }, 1000);
   }
 
@@ -287,5 +289,14 @@ export class SportGraphMapComponent implements OnInit {
     return items.filter((x) => x.filename.includes(filter));
   }
   
+  hasData(): boolean {
+  return (
+    (this.xlFAItems && this.xlFAItems.length > 0) ||
+    (this.noHyphenAfterXL && this.noHyphenAfterXL.length > 0) ||
+    (this.TsProbability && this.TsProbability.length > 0) ||
+    (this.Synoptic && this.Synoptic.length > 0)
+  );
+}
+
 }
 

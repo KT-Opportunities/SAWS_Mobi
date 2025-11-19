@@ -3,7 +3,7 @@
 
   <div id="top"></div>
   <app-package-content>
-    <app-package-header> Grid wind charts </app-package-header>
+    <app-package-header>ICAO Location Indicators </app-package-header>
 
     <app-package-sub-header>
       <div class="div-block-481" id="wind">
@@ -61,82 +61,27 @@
               ></div>
             </div>
           </div>
+       
           <div
             id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a"
-            class="div-block-452"
+           *ngFor="let airport of icaoLocations ; let i = index"   [ngClass]="i % 2 === 0 ? 'div-block-452' : 'div-block-38'"
           >
             <div class="w-layout-grid grid-22">
               <div
                 id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a"
                 class="div-block-37"
               >
-                <h4 class="heading-25">Alexander Bay Airpor/Alexander Bay</h4>
+                <h4 class="heading-25">{{ airport.name }}</h4>
               </div>
               <div
                 id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a"
                 class="div-block-37"
               >
-                <div class="button-2-copy w-button" id="view">FAAB</div>
+                <div class="button-2-copy w-button" id="view"(click)="openModal(airport)">{{ airport.icao }}</div>
               </div>
             </div>
           </div>
-          <div
-            id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a"
-            class="div-block-38"
-          >
-            <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">Andrews Field Airpor / Andrews Field</h4>
-              </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a"
-                class="div-block-37"
-              >
-                <div class="button-2-copy w-button" id="view">FAAF</div>
-              </div>
-            </div>
-          </div>
-          <div
-            id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a"
-            class="div-block-452"
-          >
-            <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">Andrews Field Airpor / Andrews Field</h4>
-              </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a"
-                class="div-block-37"
-              >
-                <div class="button-2-copy w-button" id="view">FAAB</div>
-              </div>
-            </div>
-          </div>
-          <div
-            id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd602-4a376e8a"
-            class="div-block-38"
-          >
-            <div class="w-layout-grid grid-22">
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd604-4a376e8a"
-                class="div-block-37"
-              >
-                <h4 class="heading-25">Andrews Field Airpor / Andrews Field</h4>
-              </div>
-              <div
-                id="w-node-_7ec0f248-8c49-e79b-077c-3294a36bd607-4a376e8a"
-                class="div-block-37"
-              >
-                <div class="button-2-copy w-button" id="view">FAAF</div>
-              </div>
-            </div>
-          </div>
+        
         </div>
       </div>
     </app-package-list-items>

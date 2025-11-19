@@ -4041,6 +4041,7 @@ ion-toast.custom-toast::part(button) {
   .paragraph-2 {
     font-family: Montserrat, sans-serif;
     font-size: 10px;
+    color: black;
   }
 
   .link-block-5 {
@@ -4774,3 +4775,5 @@ ion-content {
 body, ion-router-outlet {
   padding-top: var(--ion-safe-area-top);
 }
+app-package-header{margin-top:14px !important;}
+app-package-sub-header{margin-top:14px !important;}

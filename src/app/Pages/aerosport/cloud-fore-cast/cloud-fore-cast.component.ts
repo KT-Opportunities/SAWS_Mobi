@@ -316,6 +316,10 @@ export class CloudForeCastComponent implements OnInit {
     });
     modal.present();
   }
+  hasData(): boolean {
+  return this.frameArray && this.frameArray.length > 0;
+}
+
 
   
 }

@@ -4,20 +4,68 @@
   <app-package-content>
 
     <app-package-header>
-      Warnings
+      Aerodrome Warning
     </app-package-header>
 
     <app-package-sub-header>
-      <h1 class="heading-6" id="colorcoded">Aerodrome Warning</h1>
+        <div
+        id="w-node-e7ec9294-4182-a125-c428-84c8c81f6e70-5aa24fea"
+        class="w-layout-grid grid-cct-copy"
+      >
+        <div
+          id="w-node-_211f6e7f-4ab3-965d-1518-9c1f84dfceec-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Date:</h1>
+          <h1 class="heading-7">{{ currentDate }}</h1>
+        </div>
+        <div
+          id="w-node-_2ef88a37-3b9e-7fec-658a-a6f84d594d57-5aa24fea"
+          class="cct"
+        >
+          <h1 class="heading-7">Time:</h1>
+          <h1 class="heading-7">{{ currentTime }}</h1>
+        </div>
+      </div>
+     
     </app-package-sub-header>
 
-    <app-package-list-items>
-        <div>
-          <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
-            <h1 class="heading-7">No valid warnings were found.</h1>
+   <app-package-list-items>
+  <!-- If there are warnings -->
+  <ng-container *ngIf="WarningList && WarningList.length > 0; else noWarnings">
+    <div
+      id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb43-61ad4633"
+      class="div-block-15"
+    >
+      <div *ngFor="let warning of WarningList">
+        <div class="w-layout-grid heading-text">
+          <div
+            id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb50-61ad4633"
+            class="cct-copy-copy"
+          >
+            <h1 class="heading-21">{{ warning.heading }}</h1>
           </div>
         </div>
-    </app-package-list-items>
+        <div class="w-layout-grid grid-18">
+          <div
+            id="w-node-_5f88f6f6-8fce-d572-7c6f-63acb9f1cb57-61ad4633"
+            class="div-block-16"
+          >
+            <p class="paragraph-2 sigmet-text">{{ warning.formatted }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- If no warnings -->
+  <ng-template #noWarnings>
+    <div id="w-node-d555042c-2103-3281-e838-d1322ba47d6d-5aa24fea" class="div-block-15">
+      <h1 class="heading-7">No valid warnings were found.</h1>
+    </div>
+  </ng-template>
+</app-package-list-items>
+
 
   </app-package-content>
 

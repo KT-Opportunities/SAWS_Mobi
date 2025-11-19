@@ -86,7 +86,8 @@ export class AuthService {
   }
 
   setSubscriptionStatus(status: string): void {
-    if(status == '' || status == 'monthly Free' || status == 'annually Free') {
+    //  if(status == '' || status == 'monthly Free' || status == 'annually Free') 
+    if(status == '' || status == 'monthly Free' ) {
       this.isFreeSubscription = true;
     } else {
       this.isFreeSubscription = false;

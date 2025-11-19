@@ -61,7 +61,7 @@
   margin-left: -47px !important;
 }
 #icon3 {
-  padding-right: 30px;
+ // padding-right: 30px;
 }
 .w-dropdown1 {
   display: inline-block;
@@ -164,7 +164,7 @@
 .icon-2 {
   color: #fff;
   margin-top: 5.4907px;
-  margin-right: -182px;
+ margin-right: 56px;
 }
 
 .w-icon-dropdown-toggle {
@@ -6857,7 +6857,7 @@ textarea.w-select {
   clear: both;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   tap-highlight-color: rgba(0, 0, 0, 0);
-  margin-left: 8px;
+ // margin-left: 8px;
 }
 
 .w-slider-mask {
@@ -14613,7 +14613,7 @@ textarea.w-select {
   .icon-2 {
     color: #fff;
     margin-top: 10.491px;
-    margin-right: -202px;
+    margin-right: 56px
   }
   .text-field-copy {
     width: 56vw;
@@ -15014,4 +15014,36 @@ textarea.w-select {
   background-repeat: no-repeat;
   display: inline-block;
   margin-left: 78vw;
+}
+.no-data-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #666;
+}
+/* Ensure dropdowns appear above everything */
+.text-field-blue .dropdown-list1 {
+            /* Match the width of dropdown toggle */
+  max-height: 200px;       /* Show max ~5 items, adjust as needed */
+  overflow-y: auto;        /* Scroll if content exceeds max height */
+  z-index: 9999 !important; 
+  margin-left: -4px;        
+
+}
+
+/* Style each dropdown item */
+.text-field-blue .dropdown-list1 .w-dropdown-link {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Hover effect for clarity */
+.text-field-blue .dropdown-list1 .w-dropdown-link:hover {
+  background-color: #f0f0f0;
+}
+
+/* Optional: Prevent wrapping issues */
+.text-field-blue {
+  position: relative;      /* Needed for absolute dropdown positioning */
 }
