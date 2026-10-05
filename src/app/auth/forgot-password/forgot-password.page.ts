@@ -104,51 +104,66 @@ export class ForgotPasswordPage implements OnInit {
     await toast.present();
   }
 
-  onSubmit() {
-    this.loading = true;
-    this.submitted = true;
+ onSubmit() {
+  this.loading = true;
+  this.submitted = true;
 
-    const emailValue = this.userForm.controls['Email'].value;
+  const emailValue = this.userForm.controls['Email'].value;
 
-    const body = {
-      email: emailValue, // lowercase to match backend DTO
-    };
+  const body = {
+    email: emailValue,
+  };
 
-    if (this.userForm.invalid) {
-      this.presentToast('top', 'Please enter a valid email', 'danger', 'close');
-      this.loading = false;
-      return;
-    }
-
-    // CHANGED: Call new OTP API
-    this.api.RequestPasswordResetOTP(body).subscribe(
-      (data: any) => {
-        this.loading = false;
-
-        if(data.success){
-          // FOR TESTING: Remove this in production
-          if(data.data?.otp){
-            console.log('OTP for testing:', data.data.otp);
-            this.presentToast('top', `OTP: ${data.data.otp}`, 'warning', 'key');
-          } else {
-            this.presentToast('top', 'OTP sent! Please check your email', 'success', 'mail');
-          }
-
-          this.onReset();
-
-          // Redirect to Reset Password page and pass email
-          setTimeout(() => {
-            this.router.navigate(['/reset-password'], { queryParams: { email: emailValue } });
-          }, 1000);
-        }
-      },
-      (error) => {
-        this.loading = false;
-        const errMsg = error.error?.errorMessage || 'Something went wrong';
-        this.presentToast('top', errMsg, 'danger', 'close');
-      }
+  if (this.userForm.invalid) {
+    this.presentToast(
+      'top',
+      'Please enter a valid email',
+      'danger',
+      'close'
     );
+
+    this.loading = false;
+    return;
   }
+
+  this.api.RequestPasswordResetOTP(body).subscribe(
+    (data: any) => {
+      this.loading = false;
+
+      if (data.success) {
+        // Do NOT display the OTP.
+        this.presentToast(
+          'top',
+          'OTP sent! Please check your email',
+          'success',
+          'mail'
+        );
+
+        this.onReset();
+
+        // Redirect to Reset Password page and pass email
+        setTimeout(() => {
+          this.router.navigate(['/reset-password'], {
+            queryParams: { email: emailValue }
+          });
+        }, 1000);
+      }
+    },
+    (error) => {
+      this.loading = false;
+
+      const errMsg =
+        error.error?.errorMessage || 'Something went wrong';
+
+      this.presentToast(
+        'top',
+        errMsg,
+        'danger',
+        'close'
+      );
+    }
+  );
+}
 
   login() {
     this.router.navigate(['/login']);
