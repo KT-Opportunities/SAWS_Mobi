@@ -3314,7 +3314,7 @@ ion-toast.custom-toast::part(button) {
   }
 
   .forgot-password-field {
-    width: 56vw;
+    width: 70vw;
   }
   .bottomdiv {
     position: fixed;
@@ -4041,6 +4041,7 @@ ion-toast.custom-toast::part(button) {
   .paragraph-2 {
     font-family: Montserrat, sans-serif;
     font-size: 10px;
+    color: black;
   }
 
   .link-block-5 {
@@ -4049,7 +4050,7 @@ ion-toast.custom-toast::part(button) {
     align-items: center;
     text-decoration: none;
     display: flex;
-    margin-top: -137px;
+            margin-top: -115px;
   }
 
   .heading-10 {
@@ -4773,4 +4774,15 @@ ion-content {
 
 body, ion-router-outlet {
   padding-top: var(--ion-safe-area-top);
+}
+app-package-header{margin-top:14px !important;}
+app-package-sub-header{margin-top:14px !important;}
+.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50 !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336 !important;
+  --mdc-snackbar-supporting-text-color: #ffffff !important;
 }

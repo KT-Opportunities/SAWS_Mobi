@@ -67,8 +67,8 @@ export class TSProbabilityComponent implements OnInit {
         try {
           this.TsProbability = data.filter(
             (item: any) =>
-              item.filename === 'tsprob_d1.gif' ||
-              item.filename === 'tsprob_d2.gif'
+              item.filename === 'tsprob_tod.gif' ||
+              item.filename === 'tsprob_tom.gif'
           );
 
           if (this.TsProbability.length > 0) {
@@ -102,21 +102,27 @@ export class TSProbabilityComponent implements OnInit {
     }
   }
 
-  loadImage(index: number, target: 'fileBaseUrlPrevious' | 'fileBaseUrlNext') {
-    this.APIService.GetAviationFile(
-      this.TsProbability[index].foldername,
-      this.TsProbability[index].filename
-    ).subscribe(
-      (data) => {
-        const imageUrl = 'data:image/gif;base64,' + data.filecontent; // Adjust the MIME type accordingly
+loadImage(index: number, target: 'fileBaseUrlPrevious' | 'fileBaseUrlNext') {
+  this.APIService.GetAviationFile(
+    this.TsProbability[index].foldername,
+    this.TsProbability[index].filename
+  ).subscribe(
+    (data) => {
+      console.log('Image response:', data); // 👈 Check what comes from backend
+      if (data?.filecontent) {
+        const imageUrl = 'data:image/gif;base64,' + data.filecontent;
         this[target] = this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
-      },
-      (error) => {
-        console.log('Error fetching JSON data:', error);
-        this.loading = false;
+      } else {
+        console.error('No file content found for', this.TsProbability[index]);
       }
-    );
-  }
+    },
+    (error) => {
+      console.log('Error fetching image:', error);
+      this.loading = false;
+    }
+  );
+}
+
 
   previousDay() {
     if (this.currentImageIndex > 0) {

@@ -292,7 +292,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   GetSubscriptions() {
-    debugger;
+  
     var user: any = this.authService.getCurrentUser();
     const userLoginDetails = JSON.parse(user);
 
@@ -302,20 +302,22 @@ export class SubscriptionPackagePage implements OnInit {
       (response: any) => {
 
         this.subsArray = response.detailDescription.subscription;
+switch (this.subsArray.package_id) {
+  case 2: case 9:
+    this.isSubscribedPremiumMonthly = true;
+    break;
+  case 3: case 7:
+    this.isSubscriberRegulatedMonthly = true;
+    break;
+  case 4: case 5: case 10:
+    this.isSubscribedPremiumAnnually = true;
+    break;
+  case 6: case 8:
+    this.isSubscriberRegulatedAnnually = true;
+    break;
+}
 
-        if (this.subsArray.package_id == 2 || this.subsArray.package_id == 9) {
-          this.isSubscribedPremiumMonthly = true;
-          this.premiumMontlySubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 3 || this.subsArray.package_id == 7) {
-          this.isSubscriberRegulatedMonthly = true;
-          this.regulateMonthlydSubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 4 || this.subsArray.package_id == 10) {
-          this.isSubscribedPremiumAnnually = true;
-          this.premiumAnnuallySubscribedId = this.subsArray.subscriptionId;
-        } else if (this.subsArray.package_id == 5 || this.subsArray.package_id == 8) {
-          this.isSubscriberRegulatedAnnually = true;
-          this.regulateAnnuallydSubscribedId = this.subsArray.subscriptionId;
-        }
+
 
       },
       (err) => {
@@ -341,7 +343,7 @@ export class SubscriptionPackagePage implements OnInit {
           }
         // });
 
-        debugger
+      
 
         if (packageExists) {
           this.presentToast(
@@ -403,7 +405,7 @@ export class SubscriptionPackagePage implements OnInit {
 
     // PayFast may append query params, so avoid strict equality.
     if (returnUrl && url.startsWith(returnUrl)) {
-      debugger;
+
       this.authService.setIsToReturnToSub(true);
       this.browser.close();
       // this.saveSub();
@@ -471,7 +473,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.subsObj.subscription_type = this.subscriptionType;
 
     console.log('subO: ', this.subsObj);
-    debugger;
+
 
     this.APIService.paySubscription(this.subsObj).subscribe(
       (payRes: any) => {
@@ -491,7 +493,7 @@ export class SubscriptionPackagePage implements OnInit {
   }
 
   provideFeedback(subscriptionPackageId: number, amount?: number) {
-    debugger
+
     console.log("subscriptionPackageId", subscriptionPackageId)
     if (!this.authService.getIsLoggedIn()) {
       const redirectUrl = `/subscription-package?id=${subscriptionPackageId}`;
@@ -575,11 +577,11 @@ export class SubscriptionPackagePage implements OnInit {
 
     this.updateSub.userprofileid = userLoginDetails?.userProfileId;
 
-    debugger;
+  
 
     console.log('updateSub', this.updateSub);
 
-    debugger;
+
     this.APIService.PostInsertSubscription(this.updateSub).subscribe(
       (data: any) => {
         console.log('postSub: ', data);
@@ -620,7 +622,7 @@ export class SubscriptionPackagePage implements OnInit {
 
     console.log(this.subsArray)
 
-    debugger
+
 
     this.APIService.CancelSubscription(
       this.subsArray.subscriptionId
@@ -793,6 +795,7 @@ export class SubscriptionPackagePage implements OnInit {
       this.premiumSubscriptionId = 5;
       this.regulatedSubscriptionId = 6;
     }
+    
   }
 
   displayIcon(): boolean {
@@ -852,4 +855,7 @@ export class SubscriptionPackagePage implements OnInit {
     this.router.navigate(['/landing-page']);
     this.authService.setIsFromSubscription(false);
   }
+  
+
+
 }

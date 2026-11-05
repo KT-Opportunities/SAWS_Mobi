@@ -4128,7 +4128,7 @@
 
   .heading-6 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 29px;
     margin-bottom: 10px;
     font-size: 20px;
     line-height: 30px;
@@ -5408,4 +5408,8 @@
 
   margin-top: 19px;
   margin-bottom: -24px;
+}
+.link-block-5 {
+  position: relative; /* create stacking context */
+  z-index: 1000;      /* higher than the footer’s */
 }

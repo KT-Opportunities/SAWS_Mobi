@@ -12,7 +12,7 @@
         <div
           class="button-2-copy w-button"
           id="symbol"
-          (click)="openImageViewerSymbol(item)"
+          (click)="openImageViewerSymbol2()"
         >
           Symbols
         </div>
@@ -78,7 +78,7 @@
                 <div
                   class="button-2-copy w-button"
                   id="view"
-                  (click)="ImagesArray(item, Sigwxm)"
+                 (click)="ImagesArray(item.filename, Sigwxm)"
                 >
                   View
                 </div>
@@ -148,7 +148,7 @@
                 <div
                   class="button-2-copy w-button"
                   id="view"
-                  (click)="ImagesArray(item, Sigwxh)"
+                  (click)="ImagesArray(item.filename, Sigwxh)"
                 >
                   View
                 </div>
@@ -217,7 +217,7 @@
                 <div
                   class="button-2-copy w-button"
                   id="view"
-                  (click)="ImagesArray(item, Sigwxl)"
+                  (click)="ImagesArray(item.filename, Sigwxl)"
                 >
                   View
                 </div>

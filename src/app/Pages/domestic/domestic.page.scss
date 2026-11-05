@@ -887,7 +887,7 @@ p {
   }
 
   #Serch1 {
-    margin-top: -4px;
+    margin-top: 6px;
     margin-bottom: 14px;
     margin-left: -29px;
   }
@@ -1038,7 +1038,7 @@ p {
     width: 100%;
   }
   #Serch1 {
-    margin-top: -4px;
+    margin-top: 6px;
     margin-bottom: 14px;
     margin-left: -29px;
   }
@@ -1187,7 +1187,7 @@ p {
     width: 100%;
   }
   #Serch1 {
-    margin-top: -4px;
+    margin-top: 6px;
     margin-bottom: 14px;
     margin-left: -29px;
   }
@@ -1305,7 +1305,7 @@ p {
     margin-top: 14px;
   }
   #Serch1 {
-    margin-top: -4px;
+    margin-top: 6px;
     margin-bottom: 8px;
     margin-left: -29px;
   }
@@ -1722,7 +1722,7 @@ app-package-sub-header,
   background-image: linear-gradient(rgb(0, 56, 108), rgb(0, 56, 108));
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 96vw;
+  width: 92vw;
   color: white;
   padding: 1px 16px;
 }
@@ -1958,4 +1958,156 @@ app-package-sub-header,
 
 .checkbox-label-2-copy {
   margin: 0;
+}
+ion-header {
+  --background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  font-weight: 600;
+  color: #0a2242;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 10px;
+  color: #333;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+
+  h2,
+  h3 {
+    margin-bottom: 0.5rem;
+    color: #0a2242;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.link {
+  color: #0078d4;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #004a8f;
+    text-decoration: underline;
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.saws-header {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.saws-header hr {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid #000;
+}
+
+.report-title {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.content-table td {
+  padding: 3px 10px;
+  font-family: monospace;
+}
+
+.content-table td:first-child {
+  font-weight: bold;
+  width: 120px;
+}
+
+pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 11px;
+}
+
+.report-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.report-viewer {
+  background: #fff;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.report-page {
+  page-break-after: always;
+  margin-bottom: 40px;
+}
+
+.saws-header {
+  font-size: 11px;
+  text-align: center;
+}
+
+.content-table td {
+  font-family: monospace;
+  padding: 2px 8px;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 11px;
+  white-space: pre-wrap;
+}
+.report-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+.province-heading {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.province-block pre {
+  margin: 5px 0 15px 0;
+  white-space: pre-wrap;
 }

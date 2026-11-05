@@ -1,0 +1,32 @@
+<mat-dialog-content class="custom-popup">
+  <!-- Close icon -->
+  <span class="cancel-icon" (click)="closeImageDialog()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+      <path
+        d="M18,3A15,15,0,1,0,33,18,14.986,14.986,0,0,0,18,3Zm7.5,20.385L23.385,25.5,18,20.115,12.615,25.5,10.5,23.385,15.885,18,10.5,12.615,12.615,10.5,18,15.885,23.385,10.5,25.5,12.615,20.115,18Z"
+        fill="#e03c32"
+      />
+    </svg>
+  </span>
+ <!-- Title -->
+  <h2 class="modal-title">FAAB - Alexander Bay</h2>
+
+  <!-- Subtitle -->
+  <h4 class="subtitle">METAR</h4>
+  <p class="metar-text">FAAB 131100Z AUTO 27011KT ///// // ////// 22/12 Q1016</p>
+
+  <!-- Meteograms Section -->
+  <h4 class="subtitle">Meteograms</h4>
+  <div class="links-grid">
+    <a href="#">Pressure last 24 hours</a>
+    <a href="#">Pressure last week</a>
+    <a href="#">Temperature last 24 hours</a>
+    <a href="#">Temperature last week</a>
+    <a href="#">Dewpoint last 24 hours</a>
+    <a href="#">Dewpoint last week</a>
+    <a href="#">Windspeed last 24 hours</a>
+    <a href="#">Wind speed last week</a>
+    <a href="#">Visibility last 24 hours</a>
+    <a href="#">Visibility last week</a>
+  </div>
+</mat-dialog-content>

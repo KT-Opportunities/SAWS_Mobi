@@ -39,12 +39,16 @@ export class ImageModalPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (Array.isArray(this.imgs)) {
-      this.img = this.imgs[this.currentIndex]; // Set initial image
-      this.imgsIsArray = true;
-    } else {
-      this.img = this.imgs; // Set img directly if it's a single image
-    }
+   if (Array.isArray(this.imgs) && this.imgs.length > 0) {
+    this.img = this.imgs[this.currentIndex]; // Set initial image
+    this.imgsIsArray = true;
+  } else if (this.imgs) {
+    // Single image provided
+    this.img = this.imgs;
+  } else {
+    // No images available, show default "no data" image
+    this.img = 'assets/nodata.png';
+  }
     this.rotateImage(); // Apply the current rotation to the initial image
   }
 

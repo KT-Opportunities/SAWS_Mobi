@@ -6,17 +6,21 @@
 
     <app-service-list-items  *ngIf="isLoggedIn && !isFreeSubscription">
       <app-service-list-items-grid>
+        <app-service-list-item (click)="NavigateToColorCoded()">
+          METAR: Color Coded
+        </app-service-list-item>
         <app-service-list-item (click)="NavigateToMetar()">
           Metar
+        </app-service-list-item>
+         <app-service-list-item (click)="NavigateToMetarTafRecent()">
+          METAR/TAF: Recent
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToWebCam()">
           Webcams
         </app-service-list-item>
-        <app-service-list-item (click)="NavigateToColorCoded()">
-          METAR: Color Coded
-        </app-service-list-item>
+        
         <app-service-list-item (click)="NavigateToMetarRecent()">
-          METAR: Recent
+          Recent METARs
         </app-service-list-item>
         <app-service-list-item (click)="NavigateToMetarHistory()">
           METAR: History
@@ -24,9 +28,7 @@
         <app-service-list-item (click)="NavigateToSpeci()">
           SPECI
         </app-service-list-item>
-        <app-service-list-item (click)="NavigateToMetarTafRecent()">
-          METAR/TAF: Recent
-        </app-service-list-item>
+       
         <app-service-list-item (click)="NavigateToRadar()">
           Radar
         </app-service-list-item>
@@ -67,7 +69,7 @@
 <app-footer></app-footer>
 
 <div class="footerdiv">
-  <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block" style="position: relative; top: -11px"><img
+  <a (click)="NavigateToLandingPage()" class="link-block-5 w-inline-block" ><img
       src="../../assets/Group-3489.svg" loading="lazy" alt="" />
     <h6 class="heading-10-copy"
       style="color: #fff; font-size: 12px; margin-top: 4px"></h6>

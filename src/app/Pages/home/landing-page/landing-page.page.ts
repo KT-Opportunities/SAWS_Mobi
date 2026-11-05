@@ -107,6 +107,8 @@ export class LandingPage implements OnInit {
               this.authService.setSubscriptionStatus(
                 data.detailDescription.subscription.package_name
               );
+              
+               console.log('Subscription package stored in AuthService:',  data.detailDescription.subscription.package_name);
             } else {
               this.authService.setSubscriptionStatus('');
             }
@@ -229,8 +231,13 @@ export class LandingPage implements OnInit {
       this.swiper.slideNext();
     }
   }
-
+//  GetPagedAllAdverts(pageNumber: any, pageSize: any) {
+//     return this.http.get<any>(
+//       environment.serverAPI + `v1/Adverts/GetPagedAllAdverts?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+//     );
+//   }
   loadAllAdvertisements() {
+ 
     this.apiService.getAllAdverts().subscribe(
       (data: any[]) => {
         this.advertisements = data.map((ad) => {

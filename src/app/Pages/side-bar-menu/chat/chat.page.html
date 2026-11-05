@@ -465,35 +465,29 @@
         </div>
       </div>
     </div>
-    <div class="bottomdiv">
-      <img
-        src="../../assets/Path-3447.svg"
-        loading="lazy"
-        width="1216"
-        alt=""
-        class="image"
-      />
 
-      <div class="footerdiv" id="footerdivid">
-        <a (click)="BacktoMessagelist()" class="link-block-5 w-inline-block"
-          ><img src="../../assets/Group-4522.svg" loading="lazy" alt="" />
-          <h6
-            class="heading-10-copy"
-            style="
-              color: #fff;
-              margin-top: 10px;
-              margin-bottom: 0;
-              font-family: Verdana, Geneva, Tahoma, sans-serif;
-              text-decoration: none;
-              font-size: 10px;
-              margin-top: -4px;
-              margin-left: 8px;
-            "
-          >
-            Message
-          </h6></a
-        >
-      </div>
-    </div>
   </section>
 </ion-content>
+
+<app-footer ></app-footer>
+
+<div class="footerdiv" id="footerdivid1" >
+  <div (click)="BacktoMessagelist()" class="link-block-5 w-inline-block">
+    <img  src="../../assets/Group-4522.svg" loading="lazy" alt="" />
+    <h6
+      class="heading-10-copy"
+      id="styleh6"
+      style="
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        font-size: 12px;
+        margin-top: 4px;
+      "
+    >
+     Message
+    </h6>
+  </div>
+</div>

@@ -23,7 +23,7 @@ export class APIService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+  
     }),
   };
 
@@ -105,7 +105,11 @@ export class APIService {
       environment.serverAPI + `v1/Adverts/GetAllAdverts`
     );
   }
-
+  GetPagedAllAdverts(pageNumber: any, pageSize: any) {
+    return this.http.get<any>(
+      environment.serverAPI + `v1/Adverts/GetPagedAllAdverts?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    );
+  }
   getDocAdvertFileById(id: any) {
     return this.http.get(
       environment.serverAPI + `v1/FileManager/GetDocAdvertFileById?Id=${id}`,
@@ -265,12 +269,11 @@ export class APIService {
     );
   }
 
-  GetActiveSubscriptionByUserProfileId(Id: number) {
-    return this.http.get<any>(
-      environment.serverAPI +
-        `v1/Subscriptions/GetActiveSubscriptionByUserProfileId?Id=${Id}`
-    );
-  }
+ GetActiveSubscriptionByUserProfileId(id: number) {
+  return this.http.get<any>(
+    environment.serverAPI + `v1/Subscriptions/GetActiveSubscriptionByUserProfileId?Id=${id}`
+  );
+}
 
   getSpeciReport(): Observable<any> {
     return this.http.get<any>(
@@ -324,4 +327,70 @@ export class APIService {
     };
     return this.http.get<any[]>(apiUrl, { params: queryParams });
   }
+
+  getFlightTemplates() {
+  return this.http.get<any>(
+    environment.serverAPI + 'v1/FlightTemplate'
+  );
+}
+
+createFlightTemplate(body: any) {
+  return this.http.post<any>(
+    environment.serverAPI + 'v1/FlightTemplate',
+    body
+  );
+}
+
+deleteFlightTemplate(id: number) {
+  return this.http.delete<any>(
+    environment.serverAPI + `v1/FlightTemplate/${id}`
+  );
+}
+
+
+  
+  saveOperationalSettings(data: any) {
+  return this.http.post(
+    environment.serverAPI + 'v1/OperationalSettings',
+    data
+  );
+}
+
+getOperationalSettings() {
+  return this.http.get(
+    environment.serverAPI + `v1/OperationalSettings`,
+  );
+  }
+  
+  // 1. Request OTP - sends OTP to email
+RequestPasswordResetOTP(body: { email: string }) {
+  return this.http
+    .post<any>(
+      environment.serverAPI + 'v1/Authenticate/RequestPasswordResetOTP',
+      body,
+      this.httpOptions
+    )
+    .pipe(
+      catchError((error) => {
+        console.error('Request OTP Error:', error);
+        throw error;
+      })
+    );
+}
+
+// 2. Verify OTP + Reset Password
+VerifyOTPAndResetPassword(body: { email: string; otp: string; newPassword: string }) {
+  return this.http
+    .post<any>(
+      environment.serverAPI + 'v1/Authenticate/VerifyOTPAndResetPassword',
+      body,
+      this.httpOptions
+    )
+    .pipe(
+      catchError((error) => {
+        console.error('Verify OTP Error:', error);
+        throw error;
+      })
+    );
+}
 }

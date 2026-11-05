@@ -2,7 +2,7 @@ ion-content {
   --background: transparent;
 }
 ion-footer {
-  margin-bottom: 10px;
+  margin-bottom: 39px;
 }
 swiper-container {
   height: 100%;
@@ -15,7 +15,7 @@ swiper-container {
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 8%;
+  bottom: 13%;
   width: 100%;
 }
 
@@ -28,3 +28,11 @@ swiper-container {
   --ion-button-background-color: #007bff;
   --ion-button-shape: round;
 }
+ion-footer ion-button::part(native) {
+  color: #fff; /* makes button text white */
+}
+
+ion-footer ion-icon {
+  color: #fff; /* makes icons white */
+}
+

@@ -3,11 +3,12 @@
 
   <div id="top"></div>
   <app-package-content>
-    <app-package-header> SAWS Satellite </app-package-header>
+    <app-package-header> Cloud Cover</app-package-header>
 
     <app-package-sub-header> </app-package-sub-header>
-
-    <div class="aerosport">
+ <app-package-list-items>
+   <div class="aerosport" style="padding: 16px 16px 16px 24px;">
+      <ng-container *ngIf="hasData(); else noDataTemplate">
       <div class="div-block-464">
         <div class="image-container">
           <div
@@ -29,87 +30,113 @@
                   <label for="" class="field-label"> Select Product: </label>
                 </div>
 
-                <div
-                  data-hover="false"
-                  data-delay="0"
-                  class="text-field-blue w-dropdown"
-                  (click)="cloudCoverDropdownProductOpen()"
-                >
-                  <div class="w-dropdown-toggle">
-                    <div class="text-block">
-                      {{ selectedOptionProduct }}
-                    </div>
-                    <div class="icon-2 w-icon-dropdown-toggle2" id="icon2"></div>
-                  </div>
+                <div class="w-form">
+  <form
+    id="email-form-3"
+    name="email-form-3"
+    data-name="Email Form 3"
+    method="get"
+    class="form-3"
+    data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+    data-wf-element-id="cloud-cover-dropdown"
+  >
+    <div class="w-layout-grid grid-25">
+      <div id="w-node-cloud-cover-dropdown-bb9b1d15">
+        <label for="" class="field-label">Select Cloud Cover</label>
 
-                  <nav class="dropdown-list1" *ngIf="isDropdownProductOpen">
-                    <div
-                      class="w-dropdown-link"
-                      (click)="
-                        selectDropdownProduct('Total cloud', 'dropdown1', 'tc')
-                      "
-                    >
-                      Total cloud
-                    </div>
+        <div
+          data-hover="false"
+          data-delay="0"
+          class="text-field-blue w-dropdown"
+          (click)="cloudCoverDropdownProductOpen()"
+        >
+          <div class="w-dropdown-toggle">
+            <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+            <div class="text-block">{{ selectedOptionProduct }}</div>
+          </div>
 
-                    <div
-                      class="w-dropdown-link"
-                      (click)="
-                        selectDropdownProduct('Low level', 'dropdown2', 'l')
-                      "
-                    >
-                      Low level
-                    </div>
+          <nav class="dropdown-list1" style="z-index:99999px" *ngIf="isDropdownProductOpen">
+            <div
+              class="w-dropdown-link"
+              (click)="selectDropdownProduct('Total cloud', 'dropdown1', 'tc')"
+            >
+              Total cloud
+            </div>
 
-                    <div
-                      class="w-dropdown-link"
-                      (click)="
-                        selectDropdownProduct('Medium level', 'dropdown3', 'm')
-                      "
-                    >
-                      Medium level
-                    </div>
+            <div
+              class="w-dropdown-link"
+              (click)="selectDropdownProduct('Low level', 'dropdown2', 'l')"
+            >
+              Low level
+            </div>
 
-                    <div
-                      class="w-dropdown-link"
-                      (click)="
-                        selectDropdownProduct('High level', 'dropdown4', 'h')
-                      "
-                    >
-                      High level
-                    </div>
-                  </nav>
-                </div>
+            <div
+              class="w-dropdown-link"
+              (click)="selectDropdownProduct('Medium level', 'dropdown3', 'm')"
+            >
+              Medium level
+            </div>
+
+            <div
+              class="w-dropdown-link"
+              (click)="selectDropdownProduct('High level', 'dropdown4', 'h')"
+            >
+              High level
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </form>
+              </div>
+
 
                 <div id="w-node-_81fe7d7e-9d98-6d05-8ae3-2b550ca5db2b-7830bece">
                   <label for="" class="field-label"> Current Frame: </label>
                 </div>
 
-                <div
-                  data-hover="false"
-                  data-delay="0"
-                  class="text-field-blue w-dropdown"
-                  (click)="cloudCoverDropdownFrameOpen()"
-                >
-                  <div class="w-dropdown-toggle">
-                    <div class="text-block">
-                      {{ formatTimestamp(selectedOptionFrame) }}
-                    </div>
-                    <div class="icon-2 w-icon-dropdown-toggle" id="icon4"></div>
-                  </div>
+               <div class="w-form">
+  <form
+    id="email-form-3"
+    name="email-form-3"
+    data-name="Email Form 3"
+    method="get"
+    class="form-3"
+    data-wf-page-id="65ef0e606bbd1609bb9b1d15"
+    data-wf-element-id="cloud-cover-frame-dropdown"
+  >
+    <div class="w-layout-grid grid-25">
+      <div id="w-node-cloud-cover-frame-dropdown-bb9b1d15">
+        <label for="" class="field-label">Select Frame</label>
 
-                  <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
-                    <div
-                      *ngFor="let item of frameArray"
-                      class="w-dropdown-link"
-                      (click)="
-                        selectDropdownFrame(item.lastmodified, item.filename)
-                      "
-                    >
-                      {{ formatTimestamp(item.lastmodified) }}
-                    </div>
-                  </nav>
-                </div>
+        <div
+          data-hover="false"
+          data-delay="0"
+          class="text-field-blue w-dropdown"
+          (click)="cloudCoverDropdownFrameOpen()"
+        >
+          <div class="w-dropdown-toggle">
+            <div class="icon-2 w-icon-dropdown-toggle" id="icon3"></div>
+            <div class="text-block">
+              {{ formatTimestamp(selectedOptionFrame) }}
+            </div>
+          </div>
+
+          <nav class="dropdown-list1" *ngIf="isDropdownFrameOpen">
+            <div
+              *ngFor="let item of frameArray"
+              class="w-dropdown-link"
+              (click)="selectDropdownFrame(item.lastmodified, item.filename)"
+            >
+              {{ formatTimestamp(item.lastmodified) }}
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </form>
+              </div>
+
 
                 <div class="w-form-done">
                   <div></div>
@@ -178,7 +205,15 @@
           </div>
         </div>
       </div>
+      </ng-container>
+       <ng-template #noDataTemplate>
+        <div class="no-data-message">
+          <h2>Currently there is no data to display.</h2>
+        </div>
+      </ng-template>
     </div>
+ </app-package-list-items>
+   
   </app-package-content>
 </ion-content>
 

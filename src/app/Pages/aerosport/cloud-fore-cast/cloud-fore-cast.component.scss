@@ -196,3 +196,8 @@
   --background-hover: #36b55b; /* Lighter green on hover */
 }
 
+.aerosport {
+  padding: 16px; /* Adds padding on all sides */
+  padding-left: 24px; /* Extra left padding if needed */
+  box-sizing: border-box; /* Ensures padding doesn't overflow container */
+}
