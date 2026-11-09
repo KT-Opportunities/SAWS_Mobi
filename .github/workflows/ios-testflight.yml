@@ -1,0 +1,155 @@
+name: iOS TestFlight Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: App Store version, for example 2.4.0
+        required: true
+        type: string
+      changelog:
+        description: What to Test text for TestFlight
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-testflight
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    if: github.ref == 'refs/heads/ios_pub'
+    environment: app-store
+    runs-on: macos-26
+    timeout-minutes: 45
+    env:
+      IOS_DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.IOS_DISTRIBUTION_CERTIFICATE_BASE64 }}
+      IOS_DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.IOS_DISTRIBUTION_CERTIFICATE_PASSWORD }}
+      IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY_BASE64 }}
+      RELEASE_VERSION: ${{ inputs.version }}
+      TESTFLIGHT_CHANGELOG: ${{ inputs.changelog }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Verify the Apple build SDK
+        run: |
+          xcodebuild -version
+          sdk_version="$(xcrun --sdk iphoneos --show-sdk-version)"
+          test "${sdk_version%%.*}" -ge 26
+
+      - name: Validate release credentials
+        run: |
+          required_secrets=(
+            IOS_DISTRIBUTION_CERTIFICATE_BASE64
+            IOS_DISTRIBUTION_CERTIFICATE_PASSWORD
+            IOS_PROVISIONING_PROFILE_BASE64
+            APP_STORE_CONNECT_KEY_ID
+            APP_STORE_CONNECT_ISSUER_ID
+            APP_STORE_CONNECT_PRIVATE_KEY_BASE64
+          )
+
+          for secret_name in "${required_secrets[@]}"; do
+            test -n "${!secret_name}" || {
+              echo "Missing required app-store environment secret: ${secret_name}"
+              exit 1
+            }
+          done
+
+      - name: Install release signing assets
+        run: |
+          certificate_path="${RUNNER_TEMP}/distribution.p12"
+          profile_path="${RUNNER_TEMP}/AppStore.mobileprovision"
+          keychain_path="${RUNNER_TEMP}/app-signing.keychain-db"
+          keychain_password="$(openssl rand -base64 32)"
+
+          echo "$IOS_DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode > "$certificate_path"
+          echo "$IOS_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$profile_path"
+
+          security create-keychain -p "$keychain_password" "$keychain_path"
+          security set-keychain-settings -lut 21600 "$keychain_path"
+          security unlock-keychain -p "$keychain_password" "$keychain_path"
+          security import "$certificate_path" -P "$IOS_DISTRIBUTION_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$keychain_path"
+          security list-keychain -d user -s "$keychain_path"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$keychain_password" "$keychain_path"
+
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          security cms -D -i "$profile_path" > "${RUNNER_TEMP}/profile.plist"
+          profile_uuid="$(/usr/libexec/PlistBuddy -c 'Print :UUID' "${RUNNER_TEMP}/profile.plist")"
+          cp "$profile_path" "$HOME/Library/MobileDevice/Provisioning Profiles/${profile_uuid}.mobileprovision"
+
+      - name: Install web dependencies
+        run: npm ci
+
+      - name: Build release web assets
+        run: npx ng build --configuration production --source-map=false
+
+      - name: Sync the iOS project
+        run: npx cap sync ios
+
+      - name: Archive the signed app
+        run: >-
+          xcodebuild
+          -workspace ios/App/App.xcworkspace
+          -scheme App
+          -configuration Release
+          -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          -archivePath "$RUNNER_TEMP/SAWS.xcarchive"
+          MARKETING_VERSION="$RELEASE_VERSION"
+          CURRENT_PROJECT_VERSION='${{ github.run_number }}'
+          archive
+
+      - name: Export the App Store IPA
+        run: |
+          cat > "${RUNNER_TEMP}/ExportOptions.plist" <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>app-store-connect</string>
+            <key>signingStyle</key>
+            <string>automatic</string>
+            <key>teamID</key>
+            <string>QN459DSJYF</string>
+          </dict>
+          </plist>
+          EOF
+
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/SAWS.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/export"
+
+      - name: Upload to TestFlight
+        run: |
+          api_key_path="${RUNNER_TEMP}/app-store-connect-key.json"
+          private_key_path="${RUNNER_TEMP}/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8"
+          echo "$APP_STORE_CONNECT_PRIVATE_KEY_BASE64" | base64 --decode > "$private_key_path"
+
+          jq -n \
+            --arg key_id "$APP_STORE_CONNECT_KEY_ID" \
+            --arg issuer_id "$APP_STORE_CONNECT_ISSUER_ID" \
+            --arg key_filepath "$private_key_path" \
+            '{key_id: $key_id, issuer_id: $issuer_id, key_filepath: $key_filepath, in_house: false}' \
+            > "$api_key_path"
+
+          fastlane pilot upload \
+            --ipa "$RUNNER_TEMP/export/App.ipa" \
+            --api_key_path "$api_key_path" \
+            --changelog "$TESTFLIGHT_CHANGELOG" \
+            --skip_waiting_for_build_processing true
