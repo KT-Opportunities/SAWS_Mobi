@@ -2,7 +2,11 @@ name: iOS CI
 
 on:
   pull_request:
+    branches:
+      - ios_pub
   push:
+    branches:
+      - ios_pub
   workflow_dispatch:
 
 permissions:
