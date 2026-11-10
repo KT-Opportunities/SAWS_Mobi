@@ -124,10 +124,7 @@ jobs:
           -archivePath "$RUNNER_TEMP/SAWS.xcarchive"
           MARKETING_VERSION="$RELEASE_VERSION"
           CURRENT_PROJECT_VERSION='${{ github.run_number }}'
-          CODE_SIGN_STYLE=Manual
-          DEVELOPMENT_TEAM=QN459DSJYF
-          CODE_SIGN_IDENTITY='Apple Distribution'
-          PROVISIONING_PROFILE_SPECIFIER="$IOS_PROFILE_UUID"
+          IOS_PROFILE_UUID="$IOS_PROFILE_UUID"
           archive
 
       - name: Export the App Store IPA
