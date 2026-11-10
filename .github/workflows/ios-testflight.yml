@@ -165,8 +165,8 @@ jobs:
           jq -n \
             --arg key_id "$APP_STORE_CONNECT_KEY_ID" \
             --arg issuer_id "$APP_STORE_CONNECT_ISSUER_ID" \
-            --arg key_filepath "$private_key_path" \
-            '{key_id: $key_id, issuer_id: $issuer_id, key_filepath: $key_filepath, in_house: false}' \
+            --rawfile key "$private_key_path" \
+            '{key_id: $key_id, issuer_id: $issuer_id, key: $key, in_house: false}' \
             > "$api_key_path"
 
           fastlane pilot upload \
